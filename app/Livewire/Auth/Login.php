@@ -33,7 +33,7 @@ class Login extends Component
             if ($user->is_admin) {
                 return redirect()->to('/admin/dashboard');
             } else {
-                return redirect()->to('/home');
+                return redirect()->to('/');
             }
         } else {
             $this->message = 'Invalid email or password.';
