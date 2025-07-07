@@ -4,7 +4,6 @@ namespace App\Livewire\Auth;
 
 use Livewire\Attributes\Layout;
 use Livewire\Component;
-use App\Http\Controllers\Auth\RegistrationController;
 use Illuminate\Support\Facades\Log;
 use App\Models\User;
 
@@ -35,32 +34,24 @@ class Register extends Component
             'phone_no' => $this->phone_no,
         ]));
 
-        $controller = new RegistrationController();
-        $request = new \Illuminate\Http\Request([
-            'name' => $this->name,
-            'email' => $this->email,
-            'password' => $this->password,
-            'password_confirmation' => $this->password_confirmation,
-            'phone_no' => $this->phone_no,
-        ]);
-        $response = $controller->register($request);
+        try {
+            $user = User::create([
+                'name' => $this->name,
+                'email' => $this->email,
+                'password' => bcrypt($this->password),
+                'phone_no' => $this->phone_no,
+            ]);
 
-        if ($response->getStatusCode() === 200) {
-            $data = json_decode($response->getContent(), true);
-            $user = User::where('email', $this->email)->first();
-            if ($user) {
-                auth()->login($user);
+            auth()->login($user);
 
-                if ($user->is_admin) {
-                    return redirect()->to('/admin/dashboard');
-                } else {
-                    return redirect()->to('/home');
-                }
+            if ($user->is_admin) {
+                return redirect()->to('/admin/dashboard');
             } else {
-                $this->message = 'User not found after registration.';
+                return redirect()->to('/home');
             }
-        } else {
-            $this->message = 'Registration failed: ' . json_decode($response->getContent(), true)['message'] ?? 'Unknown error';
+        } catch (\Exception $e) {
+            Log::error('Registration failed: ' . $e->getMessage());
+            $this->message = 'Registration failed: ' . $e->getMessage();
         }
     }
 

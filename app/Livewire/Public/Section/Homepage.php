@@ -3,6 +3,7 @@
 namespace App\Livewire\Public\Section;
 
 use Livewire\Component;
+use App\Models\Category; 
 
 class Homepage extends Component
 {
@@ -29,6 +30,13 @@ class Homepage extends Component
             'category' => 'Business'
         ]
     ];
+
+    public $categories = [];
+
+    public function mount()
+    {
+        $this->categories = Category::all();
+    }
 
     public function render()
     {
