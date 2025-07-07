@@ -29,8 +29,7 @@ class Login extends Component
 
         if (Auth::attempt(['email' => $this->email, 'password' => $this->password])) {
             $user = Auth::user();
-            $token = $user->createToken('auth_token')->plainTextToken;
-
+            
             if ($user->is_admin) {
                 return redirect()->to('/admin/dashboard');
             } else {
