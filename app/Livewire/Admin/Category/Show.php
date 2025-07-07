@@ -22,35 +22,18 @@ class Show extends Component
         $this->categories = Category::latest()->get();
     }
 
-    // In your Livewire component class
-    public $showDeleteModal = false;
-    public $categoryIdToDelete;
-
-    public function confirmDelete($categoryId)
+    public function alertConfirm($id)
     {
-        $this->showDeleteModal = true;
-        $this->categoryIdToDelete = $categoryId;
-    }
+        $this->dispatch( 'swal:confirm', type: 'warning', message: 'Are you sure?', text: 'If deleted, you will not be able to recover this', categoryId: $id);
 
-    public function deleteCategory()
+    }
+    
+    public function delete($id)
     {
-        // Perform the deletion
-        Category::find($this->categoryIdToDelete)->delete();
-
-        // Close modal and reset
-        $this->showDeleteModal = false;
-        $this->categoryIdToDelete = null;
-
-        // Optional: Show success message
-        session()->flash('message', 'Category deleted successfully');
+        Category::find($id)->delete();
+        $this->dispatch('success', __('Category deleted successfully.'));
     }
-
-    public function cancelDelete()
-    {
-        $this->showDeleteModal = false;
-        $this->categoryIdToDelete = null;
-    }
-
+    
     #[Layout('components.layouts.admin')]
     public function render()
     {

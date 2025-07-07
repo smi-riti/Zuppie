@@ -7,6 +7,7 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/lightgallery/2.7.1/css/lightgallery.min.css" />
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <title>Admin | {{ $title ?? 'Page Title' }}</title>
     @livewireStyles
 </head>
