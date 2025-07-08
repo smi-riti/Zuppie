@@ -1,10 +1,10 @@
-<div class="p-5">
+<div class="p-5 bg-gradient-to-br from-purple-100 via-pink-100 to-white min-h-screen">
     <div class="container mx-auto px-4 py-8">
-        <div class="bg-white shadow-md rounded px-8 pt-6 pb-8">
+        <div class="bg-white shadow-xl rounded-xl px-8 pt-6 pb-8 border border-purple-200">
             <div class="flex justify-between items-center mb-6">
-                <h2 class="text-xl font-semibold">Categories List ({{ count($categories) }})</h2>
+                <h2 class="text-2xl font-bold text-purple-700">Categories List ({{ count($categories) }})</h2>
                 <button wire:click="$dispatch('open-create-modal')"
-                    class="bg-teal-500 hover:bg-teal-700 text-white font-bold py-2 px-4 rounded flex items-center">
+                    class="bg-gradient-to-r from-pink-500 to-purple-600 hover:from-purple-600 hover:to-pink-500 text-white font-bold py-2 px-4 rounded-lg flex items-center shadow-lg transition">
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" viewBox="0 0 20 20"
                         fill="currentColor">
                         <path fill-rule="evenodd"
@@ -16,31 +16,40 @@
             </div>
 
             @if($categories->isEmpty())
-                <p class="text-gray-600">No categories found.</p>
+                <p class="text-pink-600">No categories found.</p>
             @else
-                <div class="overflow-x-auto">
-                    <table class="min-w-full bg-white">
-                        <thead class="bg-gray-50">
+                <div class="overflow-x-auto rounded-lg border border-pink-200">
+                    <table class="min-w-full bg-white rounded-lg">
+                        <thead class="bg-gradient-to-r from-purple-200 to-pink-200">
                             <tr>
-                                <th class="py-3 px-6 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                <th class="py-3 px-6 text-left text-xs font-semibold text-purple-800 uppercase tracking-wider">
+                                    Image</th>
+                                <th class="py-3 px-6 text-left text-xs font-semibold text-purple-800 uppercase tracking-wider">
                                     Name</th>
-                                <th class="py-3 px-6 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                <th class="py-3 px-6 text-left text-xs font-semibold text-purple-800 uppercase tracking-wider">
                                     Slug</th>
-                                <th class="py-3 px-6 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                <th class="py-3 px-6 text-left text-xs font-semibold text-purple-800 uppercase tracking-wider">
                                     Description</th>
-                                <th class="py-3 px-6 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                <th class="py-3 px-6 text-left text-xs font-semibold text-purple-800 uppercase tracking-wider">
                                     Actions</th>
                             </tr>
                         </thead>
-                        <tbody class="divide-y divide-gray-200">
+                        <tbody class="divide-y divide-pink-100">
                             @foreach($categories as $category)
-                                <tr class="hover:bg-gray-50">
-                                    <td class="py-4 px-6 whitespace-nowrap">{{ $category->name }}</td>
-                                    <td class="py-4 px-6 whitespace-nowrap">{{ $category->slug }}</td>
-                                    <td class="py-4 px-6 whitespace-nowrap">{{ $category->description ?? '-' }}</td>
+                                <tr class="hover:bg-pink-50 transition" wire:key="category-{{ $category->id }}">
+                                    <td class="py-4 px-6 whitespace-nowrap">
+                                        @if($category->image)
+                                            <img src="{{ $category->image }}" alt="Image" class="h-12 w-12 object-cover rounded-full border-2 border-purple-300 shadow">
+                                        @else
+                                            <span class="text-xs text-gray-400">No Image</span>
+                                        @endif
+                                    </td>
+                                    <td class="py-4 px-6 whitespace-nowrap text-purple-900 font-medium">{{ $category->name }}</td>
+                                    <td class="py-4 px-6 whitespace-nowrap text-pink-700">{{ $category->slug }}</td>
+                                    <td class="py-4 px-6 whitespace-nowrap text-gray-700">{{ $category->description ?? '-' }}</td>
                                     <td class="py-4 px-6 whitespace-nowrap">
                                         <button wire:click="$dispatch('open-create-modal', { editId: {{ $category->id }}})"
-                                            class="text-blue-600 hover:text-blue-900 mr-3">
+                                            class="text-purple-600 hover:text-pink-600 font-semibold mr-3 transition">
                                             <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 inline mr-1"
                                                 viewBox="0 0 20 20" fill="currentColor">
                                                 <path
@@ -48,10 +57,50 @@
                                             </svg>
                                             Edit
                                         </button>
-                                        <button class="btn btn-sm btn-outline-danger"
-                                            wire:click="alertConfirm({{ $category->id }})">
+                                        <button wire:click="confirmDelete({{ $category->id }})"
+                                            class="text-pink-600 hover:text-purple-700 font-semibold transition">
+                                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 inline mr-1"
+                                                viewBox="0 0 20 20" fill="currentColor">
+                                                <path fill-rule="evenodd"
+                                                    d="M9 2a1 1 0 00-.894.553L7.382 4H4a1 1 0 000 2v10a2 2 0 002 2h8a2 2 0 002-2V6a1 1 0 100-2h-3.382l-.724-1.447A1 1 0 0011 2H9zM7 8a1 1 0 012 0v6a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v6a1 1 0 102 0V8a1 1 0 00-1-1z"
+                                                    clip-rule="evenodd" />
+                                            </svg>
                                             Delete
                                         </button>
+                                        <!-- Confirmation Modal -->
+                                        @if($confirmingDeletion && $categoryToDelete === $category->id)
+                                            <div
+                                                class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
+                                                <div class="bg-white rounded-lg shadow-xl max-w-md w-full p-6 border-2 border-pink-300">
+                                                    <div class="text-center">
+                                                        <h3 class="text-lg font-bold text-pink-700 mb-4">Are you sure you want to
+                                                            delete this Category?</h3>
+                                                        <div class="flex justify-center space-x-4 mt-6">
+                                                            <button wire:click="deleteCategory" wire:loading.attr="disabled"
+                                                                class="px-4 py-2 bg-gradient-to-r from-pink-500 to-purple-600 text-white rounded hover:from-purple-600 hover:to-pink-500 focus:outline-none focus:ring-2 focus:ring-pink-400 disabled:opacity-50">
+                                                                <span wire:loading.remove>Delete</span>
+                                                                <span wire:loading>
+                                                                    <svg class="animate-spin -ml-1 mr-2 h-4 w-4 text-white inline"
+                                                                        xmlns="http://www.w3.org/2000/svg" fill="none"
+                                                                        viewBox="0 0 24 24">
+                                                                        <circle class="opacity-25" cx="12" cy="12" r="10"
+                                                                            stroke="currentColor" stroke-width="4"></circle>
+                                                                        <path class="opacity-75" fill="currentColor"
+                                                                            d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z">
+                                                                        </path>
+                                                                    </svg>
+                                                                    Deleting...
+                                                                </span>
+                                                            </button>
+                                                            <button wire:click="cancelDelete" type="button"
+                                                                class="px-4 py-2 bg-white border border-gray-300 text-gray-700 rounded hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-purple-400">
+                                                                Cancel
+                                                            </button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        @endif
                                     </td>
                                 </tr>
                             @endforeach
@@ -63,23 +112,4 @@
     </div>
     <!-- livewire modals -->
     <livewire:admin.category.create />
-    @script
-    <script>
-        window.addEventListener('swal:confirm', event => {
-            Swal.fire({
-                title: event.detail.message,
-                text: event.detail.text,
-                icon: event.detail.type,
-                showCancelButton: true,
-                confirmButtonColor: '#3085d6',
-                cancelButtonColor: '#d33',
-                confirmButtonText: 'Yes, delete it!'
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    @this.call('delete', event.detail.categoryId)
-                }
-            })
-        });
-    </script>
-    @endscript
 </div>

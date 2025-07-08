@@ -49,9 +49,12 @@ class Create extends Component
                 'name' => $category->name,
                 'description' => $category->description,
                 'parent_id' => $category->parent_id,
-                'is_special' => (bool) $category->is_special, // Add this line
+                'is_special' => (bool) $category->is_special,
             ];
+            $this->image = $category->image; // <-- Add this line
             $this->rules['form.name'] = 'required|string|max:255|unique:categories,name,' . $editId;
+        } else {
+            $this->image = null; // Reset image on create
         }
 
         $this->showModal = true;
