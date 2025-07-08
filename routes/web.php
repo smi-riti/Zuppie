@@ -1,5 +1,6 @@
 <?php
 
+use App\Livewire\Admin\Category\Show;
 use App\Livewire\Auth\Login;
 use App\Livewire\Auth\Register;
 use App\Livewire\Public\Section\Homepage;
@@ -16,4 +17,4 @@ Route::get('/login', Login::class)->name('login');
 Route::get('/admin/dashboard', function () {
     return view('livewire.admin.dashboard'); // Create this view
 })->middleware('auth')->name('admin.dashboard');
-Route::get('/admin/category/manage-category', ManageCategories::class)->name('admin.manage-category');
+Route::get('/admin/category/show', Show::class)->name('admin.category.show');
