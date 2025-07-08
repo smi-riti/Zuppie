@@ -7,10 +7,10 @@ use App\Livewire\Public\Section\Homepage;
 use App\Livewire\Admin\Category\ManageCategories;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', function () {
-    return view('welcome');
-});
-Route::get('/home', Homepage::class)->name('home');
+// Route::get('/', function () {
+//     return view('welcome');
+// });
+Route::get('/', Homepage::class)->name('home');
 Route::get('/register', Register::class)->name('register');
 Route::get('/login', Login::class)->name('login');
 

@@ -1,5 +1,13 @@
 <div class="font-sans antialiased  text-gray-900 overflow-x-hidden">
     <!-- ===== 1. Supercharged Hero Section ===== -->
+<div class="mt-16">
+    <div class="flex flex-wrap gap-4 p-6 justify-center ">
+        @foreach($categories as $category)
+            <div class="font-semibold text-pink-700 text-lg">{{ $category->name }}</div>
+            
+        @endforeach
+    </div>
+</div>
     <section class="relative h-screen flex items-center justify-center overflow-hidden bg-gradient-to-br from-purple-900 via-pink-800 to-indigo-900">
         <!-- Animated Particles Background -->
         <div class="absolute inset-0 particle-container">
