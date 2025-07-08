@@ -3,8 +3,7 @@
 <div class="mt-16">
     <div class="flex flex-wrap gap-4 p-6 justify-center ">
         @foreach($categories as $category)
-            <div class="font-semibold text-pink-700 text-lg">{{ $category->name }}</div>
-            
+            <div class="font-semibold text-pink-700 text-lg">{{ $category->name }}</div>  
         @endforeach
     </div>
 </div>
