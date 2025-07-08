@@ -10,7 +10,13 @@
 </head>
 
 <body>
-    {{ $slot }}
+    <x-admin.header />
+    <div class="flex-1 flex">
+            <x-admin.sidebar />
+            <main class="flex-1 p-4">
+                {{ $slot }}
+            </main>
+        </div>
     @livewireScripts
 </body>
 
