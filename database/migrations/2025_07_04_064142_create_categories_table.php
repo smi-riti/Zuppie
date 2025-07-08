@@ -16,7 +16,7 @@ return new class extends Migration {
             $table->string('slug')->unique();
             $table->text('description')->nullable();
             $table->string('image')->nullable(); // Can store image URL or path
-            $table->unsignedBigInteger('image_file_id')->nullable(); // Optional, if using separate file table
+            $table->string('image_file_id')->nullable(); // Optional, if using separate file table
             $table->boolean('is_special')->default(false);
             $table->unsignedBigInteger('parent_id')->nullable(); // Self-referencing for parent-child
 

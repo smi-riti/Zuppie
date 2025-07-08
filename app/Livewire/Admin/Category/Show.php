@@ -10,6 +10,8 @@ use Livewire\Component;
 #[Title('Show')]
 class Show extends Component
 {
+    public $confirmingDeletion = false;
+    public $categoryToDelete = null;
     public $categories;
 
     public function mount()
@@ -22,16 +24,25 @@ class Show extends Component
         $this->categories = Category::latest()->get();
     }
 
-    public function alertConfirm($id)
+     public function confirmDelete($categoryId)
     {
-        $this->dispatch( 'swal:confirm', type: 'warning', message: 'Are you sure?', text: 'If deleted, you will not be able to recover this', categoryId: $id);
-
+        $this->confirmingDeletion = true;
+        $this->categoryToDelete = $categoryId;
     }
-    
-    public function delete($id)
+
+    public function deleteCategory()
     {
-        Category::find($id)->delete();
-        $this->dispatch('success', __('Category deleted successfully.'));
+        Category::find($this->categoryToDelete)->delete();
+
+        $this->confirmingDeletion = false;
+        $this->categoryToDelete = null;
+        $this->loadCategories();
+    }
+
+    public function cancelDelete()
+    {
+        $this->confirmingDeletion = false;
+        $this->categoryToDelete = null;
     }
     
     #[Layout('components.layouts.admin')]
