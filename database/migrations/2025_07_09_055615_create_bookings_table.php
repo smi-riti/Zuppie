@@ -19,15 +19,11 @@ return new class extends Migration
             $table->dateTime('booking_date');
             $table->dateTime('event_date');
             $table->dateTime('event_end_date')->nullable();
-            $table->integer('guest_count');
+            $table->integer('guest_count')->default(0);
             $table->string('location');
             $table->text('special_requests')->nullable();
-            $table->string('status')->default('pending');
-            $table->decimal('total_price', 8, 2);
-            $table->string('payment_status')->default('unpaid');
-            $table->string('payment_method')->nullable();
-            $table->string('transaction_id')->nullable();
-            $table->text('setup_requirements')->nullable();
+            $table->enum('status', ['pending', 'confirmed', 'cancelled'])->default('pending');
+            $table->decimal('total_price', 10, 2)->default(0.00);
             $table->timestamps();
         });
     }
