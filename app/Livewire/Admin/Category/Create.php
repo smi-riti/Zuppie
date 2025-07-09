@@ -17,7 +17,7 @@ class Create extends Component
         'name' => '',
         'description' => '',
         'parent_id' => null,
-        'is_special' => false, // Add this line
+        'is_special' => false, 
     ];
     public $editingId = null;
     public $showModal = false;
@@ -25,7 +25,7 @@ class Create extends Component
         'form.name' => 'required|string|max:255|unique:categories,name',
         'form.description' => 'nullable|string',
         'form.parent_id' => 'nullable|exists:categories,id',
-        'form.is_special' => 'boolean', // Add this line
+        'form.is_special' => 'boolean', 
     ];
 
     protected $messages = [
@@ -155,8 +155,12 @@ class Create extends Component
     }
     public function render()
     {
-        return view('livewire.admin.category.create',[
-            'parentCategories' => Category::all()
+        $parentCategories = Category::when($this->editingId, function ($query) {
+            $query->where('id', '!=', $this->editingId);
+        })->get();
+
+        return view('livewire.admin.category.create', [
+            'parentCategories' => $parentCategories
         ]);
     }
 }

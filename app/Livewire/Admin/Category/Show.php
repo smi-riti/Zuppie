@@ -13,6 +13,7 @@ class Show extends Component
     public $confirmingDeletion = false;
     public $categoryToDelete = null;
     public $categories;
+    public $search = '';
 
     public function mount()
     {
@@ -21,7 +22,14 @@ class Show extends Component
 
     public function loadCategories()
     {
-        $this->categories = Category::latest()->get();
+        $this->categories = Category::when($this->search, function ($query) {
+            $query->where('name', 'like', '%' . $this->search . '%');
+        })->latest()->get();
+    }
+
+    public function updatedSearch()
+    {
+        $this->loadCategories();
     }
 
      public function confirmDelete($categoryId)
@@ -32,7 +40,12 @@ class Show extends Component
 
     public function deleteCategory()
     {
-        Category::find($this->categoryToDelete)->delete();
+        if ($this->categoryToDelete) {
+            $category = Category::find($this->categoryToDelete);
+            if ($category) {
+                $category->delete();
+            }
+        }
 
         $this->confirmingDeletion = false;
         $this->categoryToDelete = null;
