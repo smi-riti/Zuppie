@@ -1,41 +1,98 @@
-<div class="p-5 bg-gradient-to-br from-purple-100 via-pink-100 to-white min-h-screen">
-    <div class="container mx-auto px-4 py-8">
-        <div class="bg-white shadow-xl rounded-xl px-8 pt-6 pb-8 border border-purple-200">
-            <div class="flex justify-between items-center mb-6">
-                <h2 class="text-2xl font-bold text-purple-700">Categories List ({{ count($categories) }})</h2>
-                <button wire:click="$dispatch('open-create-modal')"
-                    class="bg-gradient-to-r from-pink-500 to-purple-600 hover:from-purple-600 hover:to-pink-500 text-white font-bold py-2 px-4 rounded-lg flex items-center shadow-lg transition">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" viewBox="0 0 20 20"
-                        fill="currentColor">
-                        <path fill-rule="evenodd"
-                            d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z"
-                            clip-rule="evenodd" />
-                    </svg>
-                    Add Category
-                </button>
-            </div>
+<div class="bg-gradient-to-br from-purple-100 via-pink-100 to-white min-h-screen">
+    <!-- Mobile Full Screen View (shown only on mobile) -->
+    <div class="block sm:hidden fixed inset-0 bg-white z-10 overflow-y-auto pb-20">
+        <!-- Mobile Header -->
+        <div class="sticky top-0 bg-white shadow-sm p-4 flex justify-between items-center border-b border-purple-200 z-20">
+            <h2 class="text-xl font-bold text-purple-700">Categories ({{ count($categories) }})</h2>
+            <button wire:click="$dispatch('open-create-modal')"
+                class="bg-gradient-to-r from-pink-500 to-purple-600 text-white p-2 rounded-full shadow-lg">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                    <path fill-rule="evenodd" d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z" clip-rule="evenodd"/>
+                </svg>
+            </button>
+        </div>
 
+        <!-- Mobile Categories List -->
+        <div class="p-4 space-y-4">
             @if($categories->isEmpty())
-                <p class="text-pink-600">No categories found.</p>
+                <div class="text-center py-16">
+                    <div class="mx-auto w-24 h-24 mb-4 text-purple-300">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"/>
+                        </svg>
+                    </div>
+                    <h3 class="text-lg font-medium text-purple-700">No categories found</h3>
+                    <button wire:click="$dispatch('open-create-modal')"
+                        class="mt-4 bg-gradient-to-r from-pink-500 to-purple-600 text-white font-medium py-2 px-6 rounded-lg inline-flex items-center shadow-md">
+                        Add First Category
+                    </button>
+                </div>
             @else
-                <div class="overflow-x-auto rounded-lg border border-pink-200">
-                    <table class="min-w-full bg-white rounded-lg">
-                        <thead class="bg-gradient-to-r from-purple-200 to-pink-200">
-                            <tr>
-                                <th class="py-3 px-6 text-left text-xs font-semibold text-purple-800 uppercase tracking-wider">
-                                    Image</th>
-                                <th class="py-3 px-6 text-left text-xs font-semibold text-purple-800 uppercase tracking-wider">
-                                    Name</th>
-                                <th class="py-3 px-6 text-left text-xs font-semibold text-purple-800 uppercase tracking-wider">
-                                    Slug</th>
-                                <th class="py-3 px-6 text-left text-xs font-semibold text-purple-800 uppercase tracking-wider">
-                                    Description</th>
-                                <th class="py-3 px-6 text-left text-xs font-semibold text-purple-800 uppercase tracking-wider">
-                                    Actions</th>
-                            </tr>
-                        </thead>
-                        <tbody class="divide-y divide-pink-100">
-                            @foreach($categories as $category)
+                @foreach($categories as $category)
+                <div class="bg-white rounded-xl shadow-md p-5 border border-purple-100" wire:key="category-mobile-{{ $category->id }}">
+                    <div class="flex items-start gap-4">
+                        @if($category->image)
+                            <div class="flex-shrink-0">
+                                <img src="{{ $category->image }}" alt="Image" class="h-16 w-16 object-cover rounded-lg border-2 border-purple-200">
+                            </div>
+                        @endif
+                        <div class="flex-1">
+                            <h3 class="font-bold text-lg text-purple-900">{{ $category->name }}</h3>
+                            <p class="text-sm text-pink-600 bg-pink-50 rounded-full px-3 py-1 inline-block mt-1">{{ $category->slug }}</p>
+                            <p class="text-gray-600 mt-2">{{ $category->description ?? 'No description' }}</p>
+                        </div>
+                    </div>
+                    <div class="flex justify-end mt-4 space-x-3">
+                        <button wire:click="$dispatch('open-create-modal', { editId: {{ $category->id }}})"
+                            class="text-purple-600 hover:text-pink-600 p-2 rounded-full hover:bg-pink-50 transition">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                                <path d="M13.586 3.586a2 2 0 112.828 2.828l-.793.793-2.828-2.828.793-.793zM11.379 5.793L3 14.172V17h2.828l8.38-8.379-2.83-2.828z"/>
+                            </svg>
+                        </button>
+                        <button wire:click="confirmDelete({{ $category->id }})"
+                            class="text-pink-600 hover:text-purple-700 p-2 rounded-full hover:bg-pink-50 transition">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                                <path fill-rule="evenodd" d="M9 2a1 1 0 00-.894.553L7.382 4H4a1 1 0 000 2v10a2 2 0 002 2h8a2 2 0 002-2V6a1 1 0 100-2h-3.382l-.724-1.447A1 1 0 0011 2H9zM7 8a1 1 0 012 0v6a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v6a1 1 0 102 0V8a1 1 0 00-1-1z" clip-rule="evenodd"/>
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+                @endforeach
+            @endif
+        </div>
+    </div>
+
+    <!-- Desktop View (shown only on desktop) -->
+    <div class="hidden sm:block p-6">
+        <div class="container mx-auto">
+            <div class="bg-white shadow-xl rounded-xl px-8 pt-6 pb-8 border border-purple-200">
+                <div class="flex justify-between items-center mb-6">
+                    <h2 class="text-2xl font-bold text-purple-700">Categories List ({{ count($categories) }})</h2>
+                    <button wire:click="$dispatch('open-create-modal')"
+                        class="bg-gradient-to-r from-pink-500 to-purple-600 hover:from-purple-600 hover:to-pink-500 text-white font-bold py-2 px-4 rounded-lg flex items-center shadow-lg transition">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" viewBox="0 0 20 20" fill="currentColor">
+                            <path fill-rule="evenodd" d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z" clip-rule="evenodd"/>
+                        </svg>
+                        Add Category
+                    </button>
+                </div>
+
+                @if($categories->isEmpty())
+                    <p class="text-pink-600 text-center py-8">No categories found.</p>
+                @else
+                    <div class="overflow-x-auto rounded-lg border border-pink-200">
+                        <table class="min-w-full bg-white rounded-lg">
+                            <thead class="bg-gradient-to-r from-purple-200 to-pink-200">
+                                <tr>
+                                    <th class="py-3 px-6 text-left text-xs font-semibold text-purple-800 uppercase tracking-wider">Image</th>
+                                    <th class="py-3 px-6 text-left text-xs font-semibold text-purple-800 uppercase tracking-wider">Name</th>
+                                    <th class="py-3 px-6 text-left text-xs font-semibold text-purple-800 uppercase tracking-wider">Slug</th>
+                                    <th class="py-3 px-6 text-left text-xs font-semibold text-purple-800 uppercase tracking-wider">Description</th>
+                                    <th class="py-3 px-6 text-left text-xs font-semibold text-purple-800 uppercase tracking-wider">Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody class="divide-y divide-pink-100">
+                                @foreach($categories as $category)
                                 <tr class="hover:bg-pink-50 transition" wire:key="category-{{ $category->id }}">
                                     <td class="py-4 px-6 whitespace-nowrap">
                                         @if($category->image)
@@ -50,66 +107,56 @@
                                     <td class="py-4 px-6 whitespace-nowrap">
                                         <button wire:click="$dispatch('open-create-modal', { editId: {{ $category->id }}})"
                                             class="text-purple-600 hover:text-pink-600 font-semibold mr-3 transition">
-                                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 inline mr-1"
-                                                viewBox="0 0 20 20" fill="currentColor">
-                                                <path
-                                                    d="M13.586 3.586a2 2 0 112.828 2.828l-.793.793-2.828-2.828.793-.793zM11.379 5.793L3 14.172V17h2.828l8.38-8.379-2.83-2.828z" />
-                                            </svg>
                                             Edit
                                         </button>
                                         <button wire:click="confirmDelete({{ $category->id }})"
                                             class="text-pink-600 hover:text-purple-700 font-semibold transition">
-                                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 inline mr-1"
-                                                viewBox="0 0 20 20" fill="currentColor">
-                                                <path fill-rule="evenodd"
-                                                    d="M9 2a1 1 0 00-.894.553L7.382 4H4a1 1 0 000 2v10a2 2 0 002 2h8a2 2 0 002-2V6a1 1 0 100-2h-3.382l-.724-1.447A1 1 0 0011 2H9zM7 8a1 1 0 012 0v6a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v6a1 1 0 102 0V8a1 1 0 00-1-1z"
-                                                    clip-rule="evenodd" />
-                                            </svg>
                                             Delete
                                         </button>
-                                        <!-- Confirmation Modal -->
-                                        @if($confirmingDeletion && $categoryToDelete === $category->id)
-                                            <div
-                                                class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
-                                                <div class="bg-white rounded-lg shadow-xl max-w-md w-full p-6 border-2 border-pink-300">
-                                                    <div class="text-center">
-                                                        <h3 class="text-lg font-bold text-pink-700 mb-4">Are you sure you want to
-                                                            delete this Category?</h3>
-                                                        <div class="flex justify-center space-x-4 mt-6">
-                                                            <button wire:click="deleteCategory" wire:loading.attr="disabled"
-                                                                class="px-4 py-2 bg-gradient-to-r from-pink-500 to-purple-600 text-white rounded hover:from-purple-600 hover:to-pink-500 focus:outline-none focus:ring-2 focus:ring-pink-400 disabled:opacity-50">
-                                                                <span wire:loading.remove>Delete</span>
-                                                                <span wire:loading>
-                                                                    <svg class="animate-spin -ml-1 mr-2 h-4 w-4 text-white inline"
-                                                                        xmlns="http://www.w3.org/2000/svg" fill="none"
-                                                                        viewBox="0 0 24 24">
-                                                                        <circle class="opacity-25" cx="12" cy="12" r="10"
-                                                                            stroke="currentColor" stroke-width="4"></circle>
-                                                                        <path class="opacity-75" fill="currentColor"
-                                                                            d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z">
-                                                                        </path>
-                                                                    </svg>
-                                                                    Deleting...
-                                                                </span>
-                                                            </button>
-                                                            <button wire:click="cancelDelete" type="button"
-                                                                class="px-4 py-2 bg-white border border-gray-300 text-gray-700 rounded hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-purple-400">
-                                                                Cancel
-                                                            </button>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        @endif
                                     </td>
                                 </tr>
-                            @endforeach
-                        </tbody>
-                    </table>
-                </div>
-            @endif
+                                @endforeach
+                            </tbody>
+                        </table>
+                    </div>
+                @endif
+            </div>
         </div>
     </div>
+
+    <!-- Delete Confirmation Modal (works for both views) -->
+    @if($confirmingDeletion)
+        <div class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
+            <div class="bg-white rounded-lg shadow-xl max-w-md w-full p-6 border-2 border-pink-300">
+                <div class="text-center">
+                    <h3 class="text-lg font-bold text-pink-700 mb-4">Are you sure you want to delete this Category?</h3>
+                    <div class="flex flex-col sm:flex-row justify-center gap-2 sm:gap-4 mt-6">
+                        <button wire:click="deleteCategory" wire:loading.attr="disabled"
+                            class="px-4 py-2 bg-gradient-to-r from-pink-500 to-purple-600 text-white rounded hover:from-purple-600 hover:to-pink-500 focus:outline-none focus:ring-2 focus:ring-pink-400 disabled:opacity-50">
+                            <span wire:loading.remove>Delete</span>
+                            <span wire:loading>
+                                <svg class="animate-spin -ml-1 mr-2 h-4 w-4 text-white inline"
+                                    xmlns="http://www.w3.org/2000/svg" fill="none"
+                                    viewBox="0 0 24 24">
+                                    <circle class="opacity-25" cx="12" cy="12" r="10"
+                                        stroke="currentColor" stroke-width="4"></circle>
+                                    <path class="opacity-75" fill="currentColor"
+                                        d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z">
+                                    </path>
+                                </svg>
+                                Deleting...
+                            </span>
+                        </button>
+                        <button wire:click="cancelDelete" type="button"
+                            class="px-4 py-2 bg-white border border-gray-300 text-gray-700 rounded hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-purple-400">
+                            Cancel
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    @endif
+
     <!-- livewire modals -->
     <livewire:admin.category.create />
 </div>
