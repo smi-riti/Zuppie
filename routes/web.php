@@ -1,6 +1,7 @@
 <?php
 
 use App\Livewire\Admin\Category\Show;
+use App\Livewire\Admin\EventPackage\ListPackage;
 use App\Livewire\Auth\Login;
 use App\Livewire\Auth\Register;
 use App\Livewire\Public\Section\Homepage;
@@ -18,3 +19,6 @@ Route::get('/admin/dashboard', function () {
     return view('livewire.admin.dashboard'); // Create this view
 })->middleware('auth')->name('admin.dashboard');
 Route::get('/admin/category/show', Show::class)->name('admin.category.show');
+Route::get('/admin/event-packages', ListPackage::class)
+    ->middleware('auth')
+    ->name('admin.event-packages');

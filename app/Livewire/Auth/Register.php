@@ -47,7 +47,7 @@ class Register extends Component
             if ($user->is_admin) {
                 return redirect()->to('/admin/dashboard');
             } else {
-                return redirect()->to('/home');
+                return redirect()->to('/');
             }
         } catch (\Exception $e) {
             Log::error('Registration failed: ' . $e->getMessage());
