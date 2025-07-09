@@ -4,8 +4,9 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin Dashboard</title>
-    <script src="https://cdn.tailwindcss.com"></script>
+    <title>{{ $title ?? 'Admin Dashboard' }}</title>
+    @vite('resources/css/app.css')
+
     <script>
         tailwind.config = {
             theme: {
