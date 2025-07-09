@@ -3,16 +3,27 @@
         <div class="bg-white shadow-xl rounded-xl px-8 pt-6 pb-8 border border-purple-200">
             <div class="flex justify-between items-center mb-6">
                 <h2 class="text-2xl font-bold text-purple-700">Categories List ({{ count($categories) }})</h2>
-                <button wire:click="$dispatch('open-create-modal')"
-                    class="bg-gradient-to-r from-pink-500 to-purple-600 hover:from-purple-600 hover:to-pink-500 text-white font-bold py-2 px-4 rounded-lg flex items-center shadow-lg transition">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" viewBox="0 0 20 20"
-                        fill="currentColor">
-                        <path fill-rule="evenodd"
-                            d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z"
-                            clip-rule="evenodd" />
-                    </svg>
-                    Add Category
-                </button>
+                <div class="flex gap-2 items-center">
+                    
+                    <div class="mb- flex justify-end">
+                        <input
+                            type="text"
+                            wire:model.live.debounce.100ms="search"
+                            placeholder="Search categories..."
+                            class="px-4 py-2 border border-purple-200 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-pink-200 focus:border-purple-300 bg-white text-purple-900"
+                        />
+                    </div>
+                    <button wire:click="$dispatch('open-create-modal')"
+                        class="bg-gradient-to-r from-pink-500 to-purple-600 hover:from-purple-600 hover:to-pink-500 text-white font-bold py-2 px-4 rounded-lg flex items-center shadow-lg transition">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" viewBox="0 0 20 20"
+                            fill="currentColor">
+                            <path fill-rule="evenodd"
+                                d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z"
+                                clip-rule="evenodd" />
+                        </svg>
+                        Add Category
+                    </button>
+                </div>
             </div>
 
             @if($categories->isEmpty())
