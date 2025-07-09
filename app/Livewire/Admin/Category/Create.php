@@ -139,6 +139,7 @@ class Create extends Component
 
         $this->showModal = false;
         $this->resetForm();
+        return redirect()->route('admin.category.show');
         session()->flash('status', $message);
     }
     public function resetForm()
