@@ -14,8 +14,8 @@ class CategorySeeder extends Seeder
     {
         // Example parent category
         $parent = Category::create([
-            'name' => 'Electronics',
-            'description' => 'All kinds of electronic items',
+            'name' => 'Birthday Party',
+            'description' => 'All kinds of birthday party items',
             'is_special' => true,
             'image' => 'https://ik.imagekit.io/demo/electronics.jpg',
             'image_file_id' => 'demo_file_id_1',
@@ -23,8 +23,8 @@ class CategorySeeder extends Seeder
 
         // Example child category
         Category::create([
-            'name' => 'Mobile Phones',
-            'description' => 'Smartphones and accessories',
+            'name' => 'Marriage Party',
+            'description' => 'All kinds of marriage items',
             'parent_id' => $parent->id,
             'is_special' => false,
             'image' => 'https://ik.imagekit.io/demo/mobiles.jpg',
@@ -33,8 +33,8 @@ class CategorySeeder extends Seeder
 
         // Add more categories as needed
         Category::create([
-            'name' => 'Laptops',
-            'description' => 'Laptops and notebooks',
+            'name' => 'Kitti Party',
+            'description' => 'All kinds of kitty party items',
             'parent_id' => $parent->id,
             'is_special' => false,
             'image' => 'https://ik.imagekit.io/demo/laptops.jpg',

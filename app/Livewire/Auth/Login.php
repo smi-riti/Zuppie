@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Log;
 #[Layout("components.layouts.app")]
 class Login extends Component
 {
-    public $email = '';
+        public $email = '';
     public $password = '';
     public $message = '';
 
@@ -23,21 +23,18 @@ class Login extends Component
     {
         $this->validate();
 
-        Log::info('Login attempt: ' . json_encode([
-            'email' => $this->email,
-        ]));
-
         if (Auth::attempt(['email' => $this->email, 'password' => $this->password])) {
             $user = Auth::user();
             
+            // Check if user is admin
             if ($user->is_admin) {
-                return redirect()->to('/admin/dashboard');
-            } else {
-                return redirect()->to('/');
+                return redirect()->route('admin.dashboard');
             }
-        } else {
-            $this->message = 'Invalid email or password.';
+            
+            return redirect()->route('home');
         }
+
+        $this->message = 'Invalid email or password.';
     }
 
     public function render()
