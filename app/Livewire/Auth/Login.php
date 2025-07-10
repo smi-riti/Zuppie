@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Log;
 #[Layout("components.layouts.app")]
 class Login extends Component
 {
-        public $email = '';
+    public $email = '';
     public $password = '';
     public $message = '';
 
