@@ -15,7 +15,7 @@
             <div class="mt-2 h-1 bg-gradient-to-r from-purple-300 to-pink-300 rounded-full"></div>
         </div>
 
-        <!-- Baby Showers Card -->
+        <!-- Baby Showers Card -->n
         <div class="bg-white rounded-xl shadow-sm p-6 border-t-4 border-pink-300 hover:shadow-md transition">
             <div class="text-3xl font-bold text-purple-700">6</div>
             <div class="text-sm text-purple-500">Baby Showers</div>
@@ -197,4 +197,4 @@
             </div>
         </div>
     </div>
-</div>
+</div>  zxcvbnsdfghj
