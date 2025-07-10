@@ -41,9 +41,9 @@ class Booking extends Model
         return $this->belongsTo(Category::class);
     }
 
-    public function eventPackage(): BelongsTo
+    public function eventPackage()
     {
-        return $this->belongsTo(EventPackage::class);
+        return $this->belongsTo(EventPackage::class, 'event_package_id');
     }
 
     public function payments(): HasMany

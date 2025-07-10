@@ -117,7 +117,10 @@
 @endif
 
 <!-- livewire modals -->
-<livewire:admin.category.create />
+<div x-data="{ show: @entangle('showModal') }" x-show="show">
+    <livewire:admin.category.create />
+</div>
+
 </div>
 
 

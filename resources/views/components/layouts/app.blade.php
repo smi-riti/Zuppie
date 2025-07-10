@@ -12,7 +12,7 @@
 <body class="bg-gray-50 min-h-screen font-sans flex flex-col">
     <livewire:public.section.header />
     
-     <main class="flex-grow">
+     <main class="flex-grow p-10">
         {{ $slot }}
     </main>
         <livewire:public.section.footer />
