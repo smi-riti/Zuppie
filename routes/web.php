@@ -5,6 +5,7 @@ use App\Livewire\Admin\EventPackage\ListPackage;
 use App\Livewire\Auth\Login;
 use App\Livewire\Auth\Register;
 use App\Livewire\Public\Section\Homepage;
+use App\Livewire\Public\Bookingform;
 use App\Livewire\Admin\Category\ManageCategories;
 use Illuminate\Support\Facades\Route;
 
@@ -14,6 +15,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', Homepage::class)->name('home');
 Route::get('/register', Register::class)->name('register');
 Route::get('/login', Login::class)->name('login');
+Route::get('/booking',Bookingform::class)->name('booking');
 
 Route::get('/admin/dashboard', function () {
     return view('livewire.admin.dashboard'); // Create this view

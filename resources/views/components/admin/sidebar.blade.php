@@ -49,11 +49,11 @@
           Category
         </a>
         
-        <a href="/admin/products" class="flex items-center px-3 py-2 text-sm font-medium rounded-md group transition-all duration-200 text-gray-700 hover:bg-white hover:text-pink-700 hover:shadow-sm">
+        <a href="{{ route('admin.event-packages')}}" class="flex items-center px-3 py-2 text-sm font-medium rounded-md group transition-all duration-200 text-gray-700 hover:bg-white hover:text-pink-700 hover:shadow-sm">
           <svg class="w-5 h-5 mr-3 text-gray-500 group-hover:text-pink-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"></path>
           </svg>
-          Products
+          Packages
         </a>
         
         <a href="/admin/orders" class="flex items-center px-3 py-2 text-sm font-medium rounded-md group transition-all duration-200 text-gray-700 hover:bg-white hover:text-pink-700 hover:shadow-sm">
