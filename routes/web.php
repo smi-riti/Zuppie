@@ -7,6 +7,7 @@ use App\Livewire\Auth\Register;
 use App\Livewire\Public\Section\Homepage;
 use App\Livewire\Public\Bookingform;
 use App\Livewire\Admin\Category\ManageCategories;
+use App\Livewire\Admin\Dashboard;
 use Illuminate\Support\Facades\Route;
 
 // Route::get('/', function () {
@@ -17,10 +18,8 @@ Route::get('/register', Register::class)->name('register');
 Route::get('/login', Login::class)->name('login');
 Route::get('/booking',Bookingform::class)->name('booking');
 
-Route::get('/admin/dashboard', function () {
-    return view('livewire.admin.dashboard'); // Create this view
-})->middleware('auth')->name('admin.dashboard');
-Route::get('/admin/category/show', Show::class)->name('admin.category.show');
-Route::get('/admin/event-packages', ListPackage::class)
-    ->middleware('auth')
-    ->name('admin.event-packages');
+Route::middleware(['auth', 'admin'])->group(function () {
+    Route::get('/admin/dashboard', Dashboard::class)->name('admin.dashboard');
+    Route::get('/admin/category/show', Show::class)->name('admin.category.show');
+    Route::get('/admin/event-packages', ListPackage::class)->name('admin.event-packages');
+});
