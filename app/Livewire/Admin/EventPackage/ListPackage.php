@@ -6,6 +6,8 @@ namespace App\Livewire\Admin\EventPackage;
 use App\Models\EventPackage;
 use Livewire\Component;
 use Livewire\WithPagination;
+use Livewire\Attributes\Layout;
+
 
 class ListPackage extends Component
 {
@@ -57,6 +59,7 @@ class ListPackage extends Component
         $this->showDeleteModal = false;
         session()->flash('message', 'Package deleted successfully!');
     }
+    #[Layout('components.layouts.admin')]
 
     public function render()
     {

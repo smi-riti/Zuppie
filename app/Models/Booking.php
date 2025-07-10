@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 use App\Models\User;
 use App\Models\Category;
 use App\Models\EventPackage;
+use App\Models\Payment;
 class Booking extends Model
 {
     protected $fillable = [
