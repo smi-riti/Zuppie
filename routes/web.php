@@ -19,10 +19,12 @@ Route::get('/', Homepage::class)->name('home');
 Route::get('/register', Register::class)->name('register');
 Route::get('/login', Login::class)->name('login');
 Route::get('/booking',Bookingform::class)->name('booking');
+Route::get('/reviews/add', Add::class)->name('reviews.add');
+
 
 Route::middleware(['auth', 'admin'])->group(function () {
     Route::get('/admin/dashboard', Dashboard::class)->name('admin.dashboard');
     Route::get('/admin/category/show', Show::class)->name('admin.category.show');
     Route::get('/admin/event-packages', ListPackage::class)->name('admin.event-packages');
-    Route::get('/reviews/add', Add::class)->name('reviews.add');
+    Route::get('/admin/reviews/show', All::class)->name('admin.reviews.show');
 });
