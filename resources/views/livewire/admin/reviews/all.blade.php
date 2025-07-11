@@ -1,45 +1,107 @@
-<div>
-    <div class="flex flex-col">
-        <div class="overflow-x-auto sm:-mx-6 lg:-mx-8">
-            <div class="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">
-                <div class="overflow-hidden">
-                    <table class="min-w-full text-left text-sm font-light">
-                        <thead class="border-b font-medium dark:border-neutral-500">
-                            <tr>
-                                <th scope="col" class="px-6 py-4">ID</th>
-                                <th scope="col" class="px-6 py-4">User</th>
-                                <th scope="col" class="px-6 py-4">Event Package Name</th>
-                                <th scope="col" class="px-6 py-4">Rating</th>
-                                <th scope="col" class="px-6 py-4">Comment</th>
-                                <th scope="col" class="px-6 py-4">Actions</th>
+<div x-data="{ activeTab: 'All Reviews' }" class="bg-white p-6 rounded-xl shadow-lg max-w-6xl mx-auto">
+    <!-- Tabs Navigation -->
+    <div class="flex border-b border-gray-200 mb-6">
+        <template x-for="tab in ['All Reviews', 'Approved', 'Denied']" :key="tab">
+            <button @click="activeTab = tab"
+                class="px-6 py-3 font-semibold text-sm focus:outline-none transition-all duration-150" :class="{
+                    'text-purple-700 border-b-4 border-pink-400 bg-purple-50': activeTab === tab,
+                    'text-gray-500 hover:text-purple-700': activeTab !== tab
+                }" x-text="tab">
+            </button>
+        </template>
+    </div>
+
+    <!-- Tab Content -->
+    <div class="p-2">
+        <!-- All Reviews Tab -->
+        <template x-if="activeTab === 'All Reviews'">
+            <div>
+                <table class="min-w-full text-left text-sm font-light rounded-lg overflow-hidden">
+                   
+                    <thead class="bg-purple-100 text-purple-700">
+                        <tr>
+                            <th class="px-6 py-3">ID</th>
+                            <th class="px-6 py-3">User</th>
+                            <th class="px-6 py-3">Event Package Name</th>
+                            <th class="px-6 py-3">Rating</th>
+                            <th class="px-6 py-3">Comment</th>
+                            <th class="px-6 py-3">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @forelse($reviews as $review)
+                            <tr class="even:bg-gray-50 hover:bg-pink-50 transition">
+                                <td class="px-6 py-4">{{ $review->id }}</td>
+                                <td class="px-6 py-4">{{ $review->user->name }}</td>
+                                <td class="px-6 py-4">
+                                    {{ optional($review->booking->eventPackage)->name ?? '-' }}
+                                </td>
+                                <td class="px-6 py-4">
+                                    <span class="text-yellow-500 font-bold">{{ $review->rating }} &#9733;</span>
+                                </td>
+                                <td class="px-6 py-4">{{ $review->comment }}</td>
+                                <td class="px-6 py-4 flex gap-2">
+                                    <button type="button"
+                                        class="bg-green-500 text-white px-3 py-1 rounded hover:bg-green-600 transition shadow"
+                                        wire:click="approving({{ $review->id }})">Approve</button>
+                                    <button
+                                        class="bg-red-500 text-white px-3 py-1 rounded hover:bg-red-600 transition shadow"
+                                        >Deny</button>
+                                </td>
                             </tr>
-                        </thead>
-                        <tbody>
-                            @foreach($reviews as $review)
-                                <tr class="border-b dark:border-neutral-500">
-                                    <td class="px-6 py-4">{{ $review->id }}</td>
-                                    <td class="px-6 py-4">aman</td>
-                                    <td class="px-6 py-4">
-                                        {{ optional($review->booking->eventPackage)->name ?? '-' }}
-                                    </td>
-                                    <td class="px-6 py-4">{{ $review->rating }}</td>
-                                    <td class="px-6 py-4">{{ $review->comment }}</td>
-                                    <td class="px-6 py-4">
-                                        <button class="bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600"
-                                                wire:click="">
-                                            Approve
-                                        </button>
-                                        <button class="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600"
-                                                wire:click="">
-                                            Denied
-                                        </button>
-                                    </td>
-                                </tr>
-                            @endforeach
-                        </tbody>
-                    </table>
-                </div>
+                        @empty
+                            <tr>
+                                <td colspan="6" class="px-6 py-4 text-center text-gray-400">No reviews found.</td>
+                            </tr>
+                        @endforelse
+                    </tbody>
+                </table>
             </div>
-        </div>
+        </template>
+
+        <!-- Approved Tab -->
+        <template x-if="activeTab === 'Approved'">
+            <div>
+                <table class="min-w-full text-left text-sm font-light rounded-lg overflow-hidden">
+                    <thead class="bg-green-100 text-green-700">
+                        <tr>
+                            <th class="px-6 py-3">ID</th>
+                            <th class="px-6 py-3">User</th>
+                            <th class="px-6 py-3">Event Package Name</th>
+                            <th class="px-6 py-3">Rating</th>
+                            <th class="px-6 py-3">Comment</th>
+                            <th class="px-6 py-3">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @forelse($approvedReviews as $apvr)
+                            <tr class="even:bg-gray-50 hover:bg-green-50 transition">
+                                <td class="px-6 py-4">{{ $apvr->id }}</td>
+                                <td class="px-6 py-4">{{ $apvr->user->name }}</td>
+                                <td class="px-6 py-4">
+                                    {{ optional($apvr->booking->eventPackage)->name ?? '-' }}
+                                </td>
+                                <td class="px-6 py-4">
+                                    <span class="text-yellow-500 font-bold">{{ $apvr->rating }} &#9733;</span>
+                                </td>
+                                <td class="px-6 py-4">{{ $apvr->comment }}</td>
+                                <td class="px-6 py-4 flex gap-2">
+                                    <button
+                                        class="bg-green-500 text-white px-3 py-1 rounded hover:bg-green-600 transition shadow"
+                                        wire:click="">Something</button>
+                                  
+                                </td>
+                            </tr>
+                        @empty
+                            <tr>
+                                <td colspan="6" class="px-6 py-4 text-center text-gray-400">No approved reviews.</td>
+                            </tr>
+                        @endforelse
+                    </tbody>
+                </table>
+            </div>
+        </template>
+
+        
     </div>
 </div>
