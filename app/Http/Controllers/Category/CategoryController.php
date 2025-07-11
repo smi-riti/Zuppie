@@ -26,7 +26,11 @@ class CategoryController extends Controller
     {
         $validated = $request->validate([
             'name' => 'required|string|max:255|unique:categories,name',
-            'description' => 'nullable|string'
+            'description' => 'nullable|string',
+            'parent_id' => 'nullable|exists:categories,id',
+            'is_special' => 'boolean',
+            'image' => 'nullable|string', // URL or path
+            'image_file_id' => 'nullable|string',
         ]);
 
         $category = Category::create($validated);
@@ -43,7 +47,7 @@ class CategoryController extends Controller
      */
     public function show(Category $category)
     {
-         return response()->json([
+        return response()->json([
             'success' => true,
             'data' => $category
         ]);
@@ -54,9 +58,13 @@ class CategoryController extends Controller
      */
     public function update(Request $request, Category $category)
     {
-         $validated = $request->validate([
+        $validated = $request->validate([
             'name' => 'required|string|max:255|unique:categories,name,'.$category->id,
-            'description' => 'nullable|string'
+            'description' => 'nullable|string',
+            'parent_id' => 'nullable|exists:categories,id',
+            'is_special' => 'boolean',
+            'image' => 'nullable|string',
+            'image_file_id' => 'nullable|string',
         ]);
 
         $category->update($validated);
@@ -73,7 +81,7 @@ class CategoryController extends Controller
      */
     public function destroy(Category $category)
     {
-         $category->delete();
+        $category->delete();
 
         return response()->json([
             'success' => true,
