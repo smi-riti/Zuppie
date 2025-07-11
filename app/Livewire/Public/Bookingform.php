@@ -33,7 +33,7 @@ class Bookingform extends Component
     protected $rules = [
         'name' => 'required|string|max:255',
         'email' => 'required|email|unique:users,email',
-        'phone_no' => 'required|string|max:20|unique:users,phone_no',
+        'phone_no' => 'required|digits:10|unique:users,phone_no',
         'category_id' => 'required|exists:categories,id',
         'event_package_id' => 'required|exists:event_packages,id',
         'booking_date' => 'required|date',
