@@ -4,12 +4,18 @@ namespace App\Livewire\Admin\EventPackage;
 use App\Models\EventPackage;
 use Livewire\Component;
 use App\Models\Category;
-
-
+use Livewire\WithFileUploads;
+use App\Helpers\ImageKitHelper;
 class CreatePackage extends Component
 {
-    public $category_id, $name, $price, $discount_type, $discount_value, $description, $images = [], $is_active = true, $is_special = false, $duration;
+  
+    use WithFileUploads;
+
+    public $category_id, $name, $price, $discount_type, $discount_value, $description, $is_active = true, $is_special = false;
+    public $duration_hours = 0;
+    public $duration_minutes = 0;
     public $categories = [];
+    public $newImages = [];
 
     protected function rules()
     {
@@ -20,10 +26,20 @@ class CreatePackage extends Component
             'discount_type' => 'nullable|in:percentage,fixed',
             'discount_value' => 'nullable|numeric|min:0|required_if:discount_type,percentage,fixed',
             'description' => 'nullable|string',
-            'images' => 'nullable|array',
+            'newImages.*' => 'nullable|image|max:2048',
             'is_active' => 'boolean',
             'is_special' => 'boolean',
-            'duration' => 'nullable|integer|min:1',
+            'duration_hours' => 'nullable|integer|min:0',
+            'duration_minutes' => 'nullable|integer|min:0|max:59',
+        ];
+    }
+    
+    protected function messages()
+    {
+        return [
+            'newImages.*.image' => 'Each upload must be a valid image file.',
+            'newImages.*.max' => 'Each image must not exceed 2MB in size.',
+            'duration_minutes.max' => 'Minutes cannot exceed 59.',
         ];
     }
 
@@ -43,18 +59,40 @@ class CreatePackage extends Component
     {
         $this->validate();
 
-        EventPackage::create([
+        // Convert hours and minutes to milliseconds
+        $durationInMilliseconds = null;
+        if ($this->duration_hours > 0 || $this->duration_minutes > 0) {
+            // Convert to milliseconds: (hours * 60 + minutes) * 60 * 1000
+            $durationInMilliseconds = ((int)$this->duration_hours * 60 + (int)$this->duration_minutes) * 60 * 1000;
+        }
+
+        // Create the package first
+        $package = EventPackage::create([
             'category_id' => $this->category_id ?: null,
             'name' => $this->name,
             'price' => $this->price,
             'discount_type' => $this->discount_type ?: null,
             'discount_value' => $this->discount_type ? $this->discount_value : null,
             'description' => $this->description,
-            'images' => $this->images,
             'is_active' => $this->is_active,
             'is_special' => $this->is_special,
-            'duration' => $this->duration,
+            'duration' => $durationInMilliseconds,
         ]);
+
+        // Now upload and store images if any
+        if ($this->newImages) {
+            foreach ($this->newImages as $image) {
+                if ($image) {
+                    $upload = ImageKitHelper::uploadImage($image, '/Zuppie/PackageImages');
+                    if ($upload) {
+                        $package->images()->create([
+                            'image_url' => $upload['url'],
+                            'image_file_id' => $upload['fileId'],
+                        ]);
+                    }
+                }
+            }
+        }
 
         $this->reset();
         $this->dispatch('packageCreated');
@@ -62,7 +100,8 @@ class CreatePackage extends Component
         session()->flash('message', 'Package created successfully!');
     }
 
-    public function render()
+   
+  public function render()
     {
         return view('livewire.admin.event-package.create-package', [
             'categories' => $this->categories,
