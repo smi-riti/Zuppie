@@ -13,10 +13,9 @@ use Illuminate\Support\Str;
 
 class Bookingform extends Component
 {
-     public $name;
+    public $name;
     public $email;
     public $phone_no;
-    public $category_id;
     public $event_package_id;
     public $booking_date;
     public $event_date;
@@ -34,7 +33,6 @@ class Bookingform extends Component
         'name' => 'required|string|max:255',
         'email' => 'required|email|unique:users,email',
         'phone_no' => 'required|digits:10|unique:users,phone_no',
-        'category_id' => 'required|exists:categories,id',
         'event_package_id' => 'required|exists:event_packages,id',
         'booking_date' => 'required|date',
         'event_date' => 'required|date|after_or_equal:booking_date',
@@ -46,17 +44,7 @@ class Bookingform extends Component
 
     public function mount()
     {
-        $this->categories = Category::all();
         $this->packages = EventPackage::all();
-    }
-
-    public function updatedCategoryId($value)
-    {
-        $this->reset(['event_package_id', 'total_price', 'selected_package_price']);
-        
-        $this->packages = $value 
-            ? EventPackage::where('category_id', $value)->get()
-            : collect();
     }
 
     public function updatedEventPackageId($value)
@@ -98,7 +86,6 @@ class Bookingform extends Component
             // Create booking
             Booking::create([
                 'user_id' => $user->id,
-                'category_id' => $this->category_id,
                 'event_package_id' => $this->event_package_id,
                 'booking_date' => $this->booking_date,
                 'event_date' => $this->event_date,
