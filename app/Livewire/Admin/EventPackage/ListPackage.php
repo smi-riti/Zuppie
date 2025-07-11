@@ -7,6 +7,8 @@ use App\Models\EventPackage;
 use App\Models\Category;
 use Livewire\Component;
 use Livewire\WithPagination;
+use Livewire\Attributes\Layout;
+
 use App\Helpers\ImageKitHelper;
 
 class ListPackage extends Component
@@ -119,7 +121,7 @@ class ListPackage extends Component
     {
         $this->categories = Category::orderBy('name')->get();
     }
-    
+    #[Layout('components.layouts.admin')]
     public function render()
     {
         $query = EventPackage::query()
