@@ -24,5 +24,10 @@ class DatabaseSeeder extends Seeder
         ]);
         
        
+        
+        // Seed event packages
+        $this->call([
+            EventPackageSeeder::class,
+        ]);
     }
 }
