@@ -109,8 +109,7 @@ class Bookingform extends Component
                 'status' => 'pending',
                 'total_price' => $this->total_price,
             ]);
-
-        session()->flash('message', 'Booking created successfully!');
+             session()->flash('message', 'Booking created successfully!');
             $this->resetExcept(['categories']);
             $this->packages = collect();
 

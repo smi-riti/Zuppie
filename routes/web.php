@@ -5,6 +5,7 @@ use App\Livewire\Admin\EventPackage\ListPackage;
 use App\Livewire\Admin\Reviews\All;
 use App\Livewire\Auth\Login;
 use App\Livewire\Auth\Register;
+use App\Livewire\Auth\Logout;
 use App\Livewire\Public\Reviews\Add;
 use App\Livewire\Public\Section\Homepage;
 use App\Livewire\Public\Bookingform;
@@ -20,6 +21,10 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', Homepage::class)->name('home');
 Route::get('/register', Register::class)->name('register');
 Route::get('/login', Login::class)->name('login');
+Route::post('/logout', function () {
+    Auth::logout();
+    return redirect('/');
+})->name('logout');
 Route::get('/booking',Bookingform::class)->name('booking');
 Route::get('/reviews/add', Add::class)->name('reviews.add');
 
