@@ -8,7 +8,9 @@ use App\Livewire\Auth\Register;
 use App\Livewire\Public\Reviews\Add;
 use App\Livewire\Public\Section\Homepage;
 use App\Livewire\Public\Bookingform;
+use App\Livewire\Admin\Booking\ManageBooking;
 use App\Livewire\Admin\Category\ManageCategories;
+use App\Livewire\Admin\User\ManageUser;
 use App\Livewire\Admin\Dashboard;
 use Illuminate\Support\Facades\Route;
 
@@ -26,6 +28,7 @@ Route::prefix('admin')->middleware(['auth', 'admin'])->group(function () {
     Route::get('/category/show', Show::class)->name('admin.category.show');
     Route::get('/event-packages', ListPackage::class)->name('admin.event-packages');
     Route::get('/reviews/show', All::class)->name('admin.reviews.show');
-    
-   
+    Route::get('/booking/manage', ManageBooking::class)->name('admin.booking.manage');
+    Route::get('/users/manage', ManageUser::class)->name('admin.users.manage');
+
 });
