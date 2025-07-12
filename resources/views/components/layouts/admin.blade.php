@@ -26,7 +26,6 @@
             display: none !important;
         }
     </style>
-    <script src="//unpkg.com/alpinejs" defer></script>
 </head>
 
 <body class="bg-gray-50 font-sans antialiased min-h-screen">
@@ -37,7 +36,7 @@
 
         <!-- Main Content Area -->
         <div class="flex-1 flex flex-col overflow-hidden p-4">
-            <div class="bg-white rounded-lg shadow-sm p-6 md:p-6">
+            <div class="bg-white overflow-y-scroll rounded-lg shadow-sm p-6 md:p-6">
                 {{ $slot }}
             </div>
         </div>
