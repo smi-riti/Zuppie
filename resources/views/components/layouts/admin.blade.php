@@ -36,7 +36,7 @@
 
         <!-- Main Content Area -->
         <div class="flex-1 flex flex-col overflow-hidden p-4">
-            <div class="bg-white overflow-y-scroll rounded-lg shadow-sm p-6 md:p-6">
+            <div class="bg-white overflow-y-scroll rounded-lg shadow-sm p-2 ">
                 {{ $slot }}
             </div>
         </div>

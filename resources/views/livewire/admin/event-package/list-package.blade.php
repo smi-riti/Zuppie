@@ -1,166 +1,173 @@
-<div class="container mx-auto p-6">
-    <div class="flex justify-between items-center mb-6">
-        <div>
-            <h2 class="text-3xl font-bold text-gray-800">Event Packages</h2>
-            <p class="text-sm text-gray-500 mt-1">Manage all your event packages</p>
-        </div>
-        <button wire:click="openCreateModal" class="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition flex items-center shadow-md">
-            <svg class="w-5 h-5 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path>
-            </svg>
-            Create New Package
-        </button>
-    </div>
-    
-    @if (session()->has('message'))
-        <div class="mb-4 p-3 bg-green-100 text-green-700 rounded-lg flex items-center">
-            <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
-            {{ session('message') }}
-        </div>
-    @endif
-    
-    <!-- Search and Filter Bar -->
-    <div class="mb-6 grid grid-cols-1 md:grid-cols-2 gap-4">
-        <div class="relative">
-            <input wire:model.live.debounce.300ms="search" type="text" placeholder="Search packages..." 
-                   class="pl-10 pr-4 py-2 w-full border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500">
-            <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                <svg class="w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
-                </svg>
+<div class="p-2 bg-gradient-to-br from-purple-50 to-pink-50 min-h-screen">
+    <div class="">
+        <div class="flex justify-between items-center mb-8">
+            <div>
+                <h2 class="text-3xl font-bold text-purple-800">Event Packages</h2>
+                <p class="text-sm text-purple-600 mt-1">Manage all your event packages</p>
             </div>
+            <button wire:click="openCreateModal" class="px-4 py-2 bg-gradient-to-r from-purple-500 to-pink-500 text-white rounded-lg hover:from-purple-600 hover:to-pink-600 transition flex items-center shadow-lg">
+                <svg class="w-5 h-5 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path>
+                </svg>
+                Create New Package
+            </button>
         </div>
         
-        <div class="relative">
-            <select wire:model="categoryFilter" class="pl-10 pr-4 py-2 w-full border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500">
-                <option value="">All Categories</option>
-                @foreach($categories as $category)
-                    <option value="{{ $category->id }}">{{ $category->name }}</option>
-                @endforeach
-            </select>
-            <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                <svg class="w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h7"></path>
+        @if (session()->has('message'))
+            <div class="mb-6 p-4 bg-green-100 border-l-4 border-green-500 text-green-700 rounded-lg flex items-center shadow-sm">
+                <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
                 </svg>
+                {{ session('message') }}
             </div>
-        </div>
-    </div>
-    
-    <div class="overflow-x-auto bg-white rounded-xl shadow-lg border border-gray-200">
-        <div class="p-3 border-b border-gray-200 bg-gray-50">
-            <div class="flex items-center justify-between">
-                <div class="text-sm text-gray-600">
-                    <span class="font-medium">{{ $packages->total() }}</span> packages found
-                    @if(!empty($search) || !empty($categoryFilter))
-                        <span class="ml-1">
-                            with current filters
-                            <button wire:click="$set('search', ''); $set('categoryFilter', '');" class="ml-2 text-blue-600 hover:text-blue-800 underline text-xs focus:outline-none">
-                                Clear filters
-                            </button>
-                        </span>
-                    @endif
+        @endif
+        
+        <!-- Search and Filter Bar -->
+        <div class="mb-8 grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div class="relative">
+                <input wire:model.live.debounce.300ms="search" type="text" placeholder="Search packages..." 
+                       class="pl-10 pr-4 py-2 w-full border border-purple-200 rounded-lg focus:ring-2 focus:ring-purple-300 focus:border-purple-400 bg-white shadow-sm transition">
+                <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                    <svg class="w-5 h-5 text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+                    </svg>
+                </div>
+            </div>
+            
+            <div class="relative">
+                <select wire:model="categoryFilter" class="pl-10 pr-4 py-2 w-full border border-purple-200 rounded-lg focus:ring-2 focus:ring-purple-300 focus:border-purple-400 bg-white shadow-sm transition">
+                    <option value="">All Categories</option>
+                    @foreach($categories as $category)
+                        <option value="{{ $category->id }}">{{ $category->name }}</option>
+                    @endforeach
+                </select>
+                <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                    <svg class="w-5 h-5 text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h7"></path>
+                    </svg>
                 </div>
             </div>
         </div>
         
-        <table class="min-w-full divide-y divide-gray-200">
-            <thead class="bg-gray-50">
-                <tr>
-                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Name</th>
-                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Category</th>
-                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Price</th>
-                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Discounted Price</th>
-                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Duration</th>
-                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Images</th>
-                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Active</th>
-                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Special</th>
-                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Actions</th>
-                </tr>
-            </thead>
-            <tbody class="bg-white divide-y divide-gray-200">
-                @foreach($packages as $package)
-                    <tr class="hover:bg-gray-50">
-                        <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{{ $package->name }}</td>
-                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{{ $package->category->name ?? 'None' }}</td>
-                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">₹{{ number_format($package->price, 2) }}</td>
-                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">₹{{ number_format($package->discounted_price, 2) }}</td>
-                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{{ $package->formatted_duration }}</td>
-                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                            @if (count($package->images) > 0)
-                                <div class="flex space-x-2">
-                                    <div class="relative">
-                                        <img src="{{ $package->images->first()->image_url }}" alt="Package Image" class="h-14 w-14 object-cover rounded-lg shadow-sm border border-gray-200">
-                                    </div>
-                                    @if (count($package->images) > 1)
-                                        <div class="relative">
-                                            <img src="{{ $package->images[1]->image_url }}" alt="Package Image" class="h-14 w-14 object-cover rounded-lg shadow-sm border border-gray-200">
-                                            @if (count($package->images) > 2)
-                                                <div class="absolute -top-2 -right-2 h-6 w-6 bg-blue-500 text-white rounded-full flex items-center justify-center text-xs font-semibold shadow">
-                                                    +{{ count($package->images) - 2 }}
-                                                </div>
-                                            @endif
-                                        </div>
-                                    @endif
-                                </div>
-                            @else
-                                <span class="text-gray-400 italic">No images</span>
-                            @endif
-                        </td>
-                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                            <label class="flex items-center cursor-pointer" wire:click.prevent="toggleActive({{ $package->id }})" wire:loading.class="opacity-50" wire:target="toggleActive({{ $package->id }})">
-                                <div class="relative inline-block w-10 mr-2 align-middle select-none transition duration-200 ease-in">
-                                    <div class="block w-10 h-6 bg-gray-200 rounded-full shadow-inner {{ $package->is_active ? 'bg-green-400' : 'bg-gray-300' }}"></div>
-                                    <div class="absolute inset-y-0 left-0 w-6 h-6 bg-white rounded-full shadow transform transition-transform duration-200 ease-in-out {{ $package->is_active ? 'translate-x-full' : '' }}"></div>
-                                </div>
-                                <span class="text-xs {{ $package->is_active ? 'text-green-600 font-medium' : 'text-gray-500' }}">
-                                    {{ $package->is_active ? 'Active' : 'Inactive' }}
-                                </span>
-                            </label>
-                        </td>
-                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                            <label class="flex items-center cursor-pointer" wire:click.prevent="toggleSpecial({{ $package->id }})" wire:loading.class="opacity-50" wire:target="toggleSpecial({{ $package->id }})">
-                                <div class="relative inline-block w-10 mr-2 align-middle select-none transition duration-200 ease-in">
-                                    <div class="block w-10 h-6 bg-gray-200 rounded-full shadow-inner {{ $package->is_special ? 'bg-purple-400' : 'bg-gray-300' }}"></div>
-                                    <div class="absolute inset-y-0 left-0 w-6 h-6 bg-white rounded-full shadow transform transition-transform duration-200 ease-in-out {{ $package->is_special ? 'translate-x-full' : '' }}"></div>
-                                </div>
-                                <span class="text-xs {{ $package->is_special ? 'text-purple-600 font-medium' : 'text-gray-500' }}">
-                                    {{ $package->is_special ? 'Special' : 'Regular' }}
-                                </span>
-                            </label>
-                        </td>
-                        <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
-                            <div class="flex space-x-2">
-                                <button wire:click="openViewModal({{ $package->id }})" class="px-3 py-1.5 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition shadow-sm flex items-center">
-                                    <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path>
-                                    </svg>
-                                    View
+        <div class="overflow-x-auto bg-white rounded-2xl shadow-xl border border-purple-100">
+            <div class="p-4 border-b border-purple-100 bg-gradient-to-r from-purple-50 to-pink-50">
+                <div class="flex items-center justify-between">
+                    <div class="text-sm text-purple-700">
+                        <span class="font-medium">{{ $packages->total() }}</span> packages found
+                        @if(!empty($search) || !empty($categoryFilter))
+                            <span class="ml-1">
+                                with current filters
+                                <button wire:click="$set('search', ''); $set('categoryFilter', '');" class="ml-2 text-purple-600 hover:text-purple-800 underline text-xs focus:outline-none">
+                                    Clear filters
                                 </button>
-                                <button wire:click="openUpdateModal({{ $package->id }})" class="px-3 py-1.5 bg-yellow-500 text-white rounded-lg hover:bg-yellow-600 transition shadow-sm flex items-center">
-                                    <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path>
-                                    </svg>
-                                    Edit
-                                </button>
-                                <button wire:click="openDeleteModal({{ $package->id }})" class="px-3 py-1.5 bg-red-500 text-white rounded-lg hover:bg-red-600 transition shadow-sm flex items-center">
-                                    <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path>
-                                    </svg>
-                                    Delete
-                                </button>
-                            </div>
-                        </td>
+                            </span>
+                        @endif
+                    </div>
+                </div>
+            </div>
+            
+            <table class="min-w-full divide-y divide-purple-100">
+                <thead class="bg-purple-50">
+                    <tr>
+                        <th class="px-6 py-3 text-left text-xs font-medium text-purple-700 uppercase tracking-wider">Name</th>
+                        <th class="px-6 py-3 text-left text-xs font-medium text-purple-700 uppercase tracking-wider">Category</th>
+                        <th class="px-6 py-3 text-left text-xs font-medium text-purple-700 uppercase tracking-wider">Price</th>
+                        <th class="px-6 py-3 text-left text-xs font-medium text-purple-700 uppercase tracking-wider">Discounted Price</th>
+                        <th class="px-6 py-3 text-left text-xs font-medium text-purple-700 uppercase tracking-wider">Duration</th>
+                        <th class="px-6 py-3 text-left text-xs font-medium text-purple-700 uppercase tracking-wider">Images</th>
+                        <th class="px-6 py-3 text-left text-xs font-medium text-purple-700 uppercase tracking-wider">Status</th>
+                        <th class="px-6 py-3 text-left text-xs font-medium text-purple-700 uppercase tracking-wider">Actions</th>
                     </tr>
-                @endforeach
-            </tbody>
-        </table>
-        <div class="px-6 py-4 border-t border-gray-200">
-            {{ $packages->links() }}
+                </thead>
+                <tbody class="bg-white divide-y divide-purple-50">
+                    @foreach($packages as $package)
+                        <tr class="hover:bg-purple-50 transition-colors duration-150">
+                            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-purple-900">{{ $package->name }}</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-purple-700">{{ $package->category->name ?? 'None' }}</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-purple-700">₹{{ number_format($package->price, 2) }}</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-purple-700">₹{{ number_format($package->discounted_price, 2) }}</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-purple-700">{{ $package->formatted_duration }}</td>
+                            <td class="px-6 py-4 whitespace-nowrap">
+                                @if (count($package->images) > 0)
+                                    <div class="flex space-x-2">
+                                        <div class="relative">
+                                            <img src="{{ $package->images->first()->image_url }}" alt="Package Image" class="h-14 w-14 object-cover rounded-lg shadow-sm border border-purple-200">
+                                        </div>
+                                        @if (count($package->images) > 1)
+                                            <div class="relative">
+                                                <img src="{{ $package->images[1]->image_url }}" alt="Package Image" class="h-14 w-14 object-cover rounded-lg shadow-sm border border-purple-200">
+                                                @if (count($package->images) > 2)
+                                                    <div class="absolute -top-2 -right-2 h-6 w-6 bg-purple-500 text-white rounded-full flex items-center justify-center text-xs font-semibold shadow">
+                                                        +{{ count($package->images) - 2 }}
+                                                    </div>
+                                                @endif
+                                            </div>
+                                        @endif
+                                    </div>
+                                @else
+                                    <span class="text-purple-300 italic">No images</span>
+                                @endif
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap">
+                                <div class="flex items-center space-x-4">
+                                    <div>
+                                        <label class="flex items-center cursor-pointer" wire:click.prevent="toggleActive({{ $package->id }})" wire:loading.class="opacity-50" wire:target="toggleActive({{ $package->id }})">
+                                            <div class="relative inline-block w-10 mr-2 align-middle select-none transition duration-200 ease-in">
+                                                <div class="block w-10 h-6 rounded-full shadow-inner {{ $package->is_active ? 'bg-purple-400' : 'bg-purple-200' }}"></div>
+                                                <div class="absolute inset-y-0 left-0 w-6 h-6 bg-white rounded-full shadow transform transition-transform duration-200 ease-in-out {{ $package->is_active ? 'translate-x-full' : '' }}"></div>
+                                            </div>
+                                            <span class="text-xs {{ $package->is_active ? 'text-purple-700 font-medium' : 'text-purple-500' }}">
+                                                {{ $package->is_active ? 'Active' : 'Inactive' }}
+                                            </span>
+                                        </label>
+                                    </div>
+                                    <div>
+                                        <label class="flex items-center cursor-pointer" wire:click.prevent="toggleSpecial({{ $package->id }})" wire:loading.class="opacity-50" wire:target="toggleSpecial({{ $package->id }})">
+                                            <div class="relative inline-block w-10 mr-2 align-middle select-none transition duration-200 ease-in">
+                                                <div class="block w-10 h-6 rounded-full shadow-inner {{ $package->is_special ? 'bg-pink-400' : 'bg-pink-200' }}"></div>
+                                                <div class="absolute inset-y-0 left-0 w-6 h-6 bg-white rounded-full shadow transform transition-transform duration-200 ease-in-out {{ $package->is_special ? 'translate-x-full' : '' }}"></div>
+                                            </div>
+                                            <span class="text-xs {{ $package->is_special ? 'text-pink-700 font-medium' : 'text-pink-500' }}">
+                                                {{ $package->is_special ? 'Special' : 'Regular' }}
+                                            </span>
+                                        </label>
+                                    </div>
+                                </div>
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
+                                <div class="flex space-x-2">
+                                    <button wire:click="openViewModal({{ $package->id }})" class="px-3 py-1.5 bg-purple-100 text-purple-700 rounded-lg hover:bg-purple-200 transition shadow-sm flex items-center">
+                                        <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path>
+                                        </svg>
+                                        View
+                                    </button>
+                                    <button wire:click="openUpdateModal({{ $package->id }})" class="px-3 py-1.5 bg-pink-100 text-pink-700 rounded-lg hover:bg-pink-200 transition shadow-sm flex items-center">
+                                        <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path>
+                                        </svg>
+                                        Edit
+                                    </button>
+                                    <button wire:click="openDeleteModal({{ $package->id }})" class="px-3 py-1.5 bg-red-100 text-red-700 rounded-lg hover:bg-red-200 transition shadow-sm flex items-center">
+                                        <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path>
+                                        </svg>
+                                        Delete
+                                    </button>
+                                </div>
+                            </td>
+                        </tr>
+                    @endforeach
+                </tbody>
+            </table>
+            <div class="px-6 py-4 border-t border-purple-100 bg-gradient-to-r from-purple-50 to-pink-50">
+                {{ $packages->links() }}
+            </div>
         </div>
     </div>
     
-    
+    <!-- Modals remain the same -->
     @if($showCreateModal)
         <livewire:admin.event-package.create-package />
     @endif

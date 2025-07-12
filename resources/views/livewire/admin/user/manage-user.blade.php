@@ -1,5 +1,5 @@
 <div class="min-h-screen bg-gradient-to-br from-purple-50 to-pink-50 p-4 sm:p-6">
-    <div class="max-w-7xl mx-auto">
+    <div class="">
         <!-- Header -->
         <div class="mb-8">
             <h1 class="text-3xl font-bold text-purple-800">User Management</h1>

@@ -1,4 +1,4 @@
-<div x-data="{ activeTab: 'All Reviews' }" class="bg-white p-6 rounded-xl shadow-lg max-w-6xl mx-auto">
+<div x-data="{ activeTab: 'All Reviews' }" class="">
     <!-- Tabs Navigation -->
     <div class="flex border-b border-gray-200 mb-6">
         <template x-for="tab in ['All Reviews', 'Approved', 'Denied']" :key="tab">
