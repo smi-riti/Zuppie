@@ -5,57 +5,77 @@ namespace App\Livewire\Admin\Booking;
 use Livewire\Component;
 use Livewire\Attributes\Layout;
 use App\Models\Booking;
-use App\Models\Category;
 use App\Models\User;
 use App\Models\EventPackage;
-use Livewire\WithPagination; 
+use Livewire\WithPagination;
+
 class ManageBooking extends Component
 {
     use WithPagination;
 
-    public $showViewModal = false;
-    public $showDeleteModal = false;
-    public $bookingToDelete;
-    public $bookingIdToView;
-    
+    // Modal control properties
+    public $showCreateModal = false;
+    public $showUpdateModal = false;
+    public $confirmingDeletion = false;
+    public $bookingIdToUpdate;
+    public $bookingIdToDelete;
+
     // Search and filter properties
     public $search = '';
     public $statusFilter = '';
     public $userFilter = '';
     public $packageFilter = '';
     
-    // For toggling status
-    public $updatingStatus = false;
-
     protected $listeners = [
-        'bookingUpdated' => '$refresh',
-        'closeViewModal' => 'closeViewModal',
+        'bookingCreated' => 'handleBookingCreated',
+        'bookingUpdated' => 'handleBookingUpdated',
+        'closeModal' => 'closeModals',
     ];
 
-    public function openViewModal($bookingId)
+    public function openCreateModal()
     {
-        $this->bookingIdToView = $bookingId;
-        $this->showViewModal = true;
+        $this->showCreateModal = true;
     }
 
-    public function openDeleteModal($bookingId)
+    public function openUpdateModal($bookingId)
     {
-        $this->bookingToDelete = $bookingId;
-        $this->showDeleteModal = true;
+        $this->bookingIdToUpdate = $bookingId;
+        $this->showUpdateModal = true;
     }
-    
-    public function closeViewModal()
+
+    public function confirmDelete($bookingId)
     {
-        $this->showViewModal = false;
+        $this->bookingIdToDelete = $bookingId;
+        $this->confirmingDeletion = true;
     }
 
     public function deleteBooking()
     {
-        $booking = Booking::findOrFail($this->bookingToDelete);
-        $booking->delete();
+        Booking::findOrFail($this->bookingIdToDelete)->delete();
         
-        $this->showDeleteModal = false;
+        $this->confirmingDeletion = false;
+        $this->bookingIdToDelete = null;
+        
         session()->flash('message', 'Booking deleted successfully!');
+    }
+
+    public function handleBookingCreated()
+    {
+        $this->showCreateModal = false;
+        session()->flash('message', 'Booking created successfully!');
+    }
+
+    public function handleBookingUpdated()
+    {
+        $this->showUpdateModal = false;
+        session()->flash('message', 'Booking updated successfully!');
+    }
+
+    public function closeModals()
+    {
+        $this->showCreateModal = false;
+        $this->showUpdateModal = false;
+        $this->confirmingDeletion = false;
     }
 
     // Reset pagination when filters change
@@ -82,17 +102,14 @@ class ManageBooking extends Component
     // Update booking status
     public function updateStatus($bookingId, $status)
     {
-        $this->updatingStatus = true;
         $booking = Booking::findOrFail($bookingId);
         
         if (!in_array($status, ['pending', 'confirmed', 'cancelled'])) {
-            $this->updatingStatus = false;
             return;
         }
         
         $booking->status = $status;
         $booking->save();
-        $this->updatingStatus = false;
     }
     
     #[Layout('components.layouts.admin')]
@@ -100,7 +117,6 @@ class ManageBooking extends Component
     {
         $query = Booking::query()
             ->with(['user', 'eventPackage.category']);
-            
             
         // Apply search filter
         if (!empty($this->search)) {
@@ -133,16 +149,13 @@ class ManageBooking extends Component
             $query->where('event_package_id', $this->packageFilter);
         }
         
-        $perPage = 5;
+        $bookings = $query->orderBy('event_date', 'desc')->paginate(6);
         
         return view('livewire.admin.booking.manage-booking', [
-            'bookings' => $query->orderBy('event_date', 'desc')->paginate($perPage),
+            'bookings' => $bookings,
             'users' => User::where('is_admin', false)->orderBy('name')->get(),
             'packages' => EventPackage::orderBy('name')->get(),
             'statusOptions' => ['pending', 'confirmed', 'cancelled'],
         ]);
     }
 }
-
-
-

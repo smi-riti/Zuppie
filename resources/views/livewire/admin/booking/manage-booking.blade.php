@@ -6,6 +6,13 @@
                 <h1 class="text-3xl font-bold text-purple-800">Manage Bookings</h1>
                 <p class="text-purple-600">View and manage all event bookings</p>
             </div>
+            <button wire:click="openCreateModal" 
+                    class="flex items-center px-4 py-2 bg-gradient-to-r from-purple-600 to-pink-500 text-white rounded-lg shadow-md hover:from-purple-700 hover:to-pink-600 transition-all">
+                <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path>
+                </svg>
+                Create Booking
+            </button>
         </div>
 
         @if (session()->has('message'))
@@ -109,27 +116,13 @@
                 <table class="min-w-full divide-y divide-purple-200">
                     <thead class="bg-purple-50">
                         <tr>
-                            <th
-                                class="px-6 py-3 text-left text-xs font-medium text-purple-700 uppercase tracking-wider">
-                                Customer</th>
-                            <th
-                                class="px-6 py-3 text-left text-xs font-medium text-purple-700 uppercase tracking-wider">
-                                Event Details</th>
-                            <th
-                                class="px-6 py-3 text-left text-xs font-medium text-purple-700 uppercase tracking-wider">
-                                Date & Time</th>
-                            <th
-                                class="px-6 py-3 text-left text-xs font-medium text-purple-700 uppercase tracking-wider">
-                                Location/Pincode</th>
-                            <th
-                                class="px-6 py-3 text-left text-xs font-medium text-purple-700 uppercase tracking-wider">
-                                Status</th>
-                            <th
-                                class="px-6 py-3 text-left text-xs font-medium text-purple-700 uppercase tracking-wider">
-                                Amount</th>
-                            <th
-                                class="px-6 py-3 text-left text-xs font-medium text-purple-700 uppercase tracking-wider">
-                                Actions</th>
+                            <th class="px-6 py-3 text-left text-xs font-medium text-purple-700 uppercase tracking-wider">Customer</th>
+                            <th class="px-6 py-3 text-left text-xs font-medium text-purple-700 uppercase tracking-wider">Event Details</th>
+                            <th class="px-6 py-3 text-left text-xs font-medium text-purple-700 uppercase tracking-wider">Date & Time</th>
+                            <th class="px-6 py-3 text-left text-xs font-medium text-purple-700 uppercase tracking-wider">Location/Pincode</th>
+                            <th class="px-6 py-3 text-left text-xs font-medium text-purple-700 uppercase tracking-wider">Status</th>
+                            <th class="px-6 py-3 text-left text-xs font-medium text-purple-700 uppercase tracking-wider">Amount</th>
+                            <th class="px-6 py-3 text-left text-xs font-medium text-purple-700 uppercase tracking-wider">Actions</th>
                         </tr>
                     </thead>
                     <tbody class="bg-white divide-y divide-purple-200">
@@ -138,13 +131,11 @@
                                 <!-- Customer Column -->
                                 <td class="px-6 py-4 whitespace-nowrap">
                                     <div class="flex items-center">
-                                        <div
-                                            class="flex-shrink-0 h-10 w-10 rounded-full bg-gradient-to-r from-purple-400 to-pink-400 flex items-center justify-center text-white font-bold">
+                                        <div class="flex-shrink-0 h-10 w-10 rounded-full bg-gradient-to-r from-purple-400 to-pink-400 flex items-center justify-center text-white font-bold">
                                             {{ strtoupper(substr($booking->user->name, 0, 1)) }}
                                         </div>
                                         <div class="ml-4">
-                                            <div class="text-sm font-medium text-purple-900">{{ $booking->user->name }}
-                                            </div>
+                                            <div class="text-sm font-medium text-purple-900">{{ $booking->user->name }}</div>
                                             <div class="text-sm text-purple-600">{{ $booking->user->email }}</div>
                                             <div class="text-xs text-purple-500">{{ $booking->user->phone_no }}</div>
                                         </div>
@@ -167,8 +158,7 @@
                                 <td class="px-6 py-4 whitespace-nowrap">
                                     <div class="text-sm font-medium text-purple-900">
                                         {{ $booking->event_date->format('M d, Y') }}</div>
-                                    <div class="text-sm text-purple-600">{{ $booking->event_date->format('h:i A') }}
-                                    </div>
+                                    <div class="text-sm text-purple-600">{{ $booking->event_date->format('h:i A') }}</div>
                                 </td>
 
                                 <!-- Location/Pincode Column -->
@@ -188,44 +178,27 @@
                                                 {{ $booking->status === 'cancelled' ? 'bg-red-100 text-red-800 hover:bg-red-200' : '' }}
                                                 transition cursor-pointer flex items-center">
                                             {{ ucfirst($booking->status) }}
-                                            <svg class="w-3 h-3 ml-1" fill="none" stroke="currentColor"
-                                                viewBox="0 0 24 24">
-                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                                    d="M19 9l-7 7-7-7"></path>
+                                            <svg class="w-3 h-3 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
                                             </svg>
                                         </button>
 
                                         <!-- Status Change Modal -->
-                                        <div x-show="showStatusChangeModal"
-                                            @click.away="showStatusChangeModal = false"
+                                        <div x-show="showStatusChangeModal" @click.away="showStatusChangeModal = false"
                                             class="absolute z-10 mt-1 w-48 bg-white rounded-md shadow-lg border border-gray-200 py-1">
                                             <div class="px-3 py-2 text-xs text-gray-500 border-b">
                                                 Change Status
                                             </div>
 
-                                            <!-- Condition 1: Only allow specific status changes -->
                                             @foreach ($statusOptions as $status)
                                                 @if ($status !== $booking->status)
-                                                    <!-- Condition 2: For certain status changes, require admin approval -->
-                                                    @if (
-                                                        ($booking->status === 'confirmed' && $status === 'cancelled') ||
-                                                            ($booking->status === 'pending' && $status === 'confirmed'))
-                                                        <button
-                                                            @click="
-                                                                if(confirm('Are you sure you want to change status to {{ $status }}? This action requires admin approval.')) {
-                                                                    $wire.updateStatus({{ $booking->id }}, '{{ $status }}');
-                                                                    showStatusChangeModal = false;
-                                                                }
-                                                            "
+                                                    @if (($booking->status === 'confirmed' && $status === 'cancelled') || ($booking->status === 'pending' && $status === 'confirmed'))
+                                                        <button @click="if(confirm('Are you sure you want to change status to {{ $status }}? This action requires admin approval.')) { $wire.updateStatus({{ $booking->id }}, '{{ $status }}'); showStatusChangeModal = false; }"
                                                             class="block w-full text-left px-4 py-2 text-xs hover:bg-gray-100">
                                                             {{ ucfirst($status) }}
                                                         </button>
                                                     @else
-                                                        <button
-                                                            @click="
-                                                                $wire.updateStatus({{ $booking->id }}, '{{ $status }}');
-                                                                showStatusChangeModal = false;
-                                                            "
+                                                        <button @click="$wire.updateStatus({{ $booking->id }}, '{{ $status }}'); showStatusChangeModal = false;"
                                                             class="block w-full text-left px-4 py-2 text-xs hover:bg-gray-100">
                                                             {{ ucfirst($status) }}
                                                         </button>
@@ -243,29 +216,29 @@
 
                                 <!-- Actions Column -->
                                 <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                                    <div class="flex space-x-2">
-                                        <button wire:click="openViewModal({{ $booking->id }})"
-                                            class="p-2 bg-purple-100 text-purple-600 rounded-lg hover:bg-purple-200 transition shadow-sm">
-                                            <svg class="w-4 h-4" fill="none" stroke="currentColor"
-                                                viewBox="0 0 24 24">
-                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                                    d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
-                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                                    d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z">
-                                                </path>
-                                            </svg>
-                                        </button>
-                                        <button wire:click="openDeleteModal({{ $booking->id }})"
-                                            class="p-2 bg-pink-100 text-pink-600 rounded-lg hover:bg-pink-200 transition shadow-sm">
-                                            <svg class="w-4 h-4" fill="none" stroke="currentColor"
-                                                viewBox="0 0 24 24">
-                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                                    d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16">
-                                                </path>
-                                            </svg>
-                                        </button>
-                                    </div>
-                                </td>
+                        <div class="flex space-x-2">
+                            <!-- Edit Button -->
+                            <button wire:click="openUpdateModal({{ $booking->id }})"
+                                class="p-2 bg-purple-100 text-purple-600 rounded-lg hover:bg-purple-200 transition shadow-sm">
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15.414 9 16l.586-2.828L18.414 4.586z">
+                                    </path>
+                                </svg>
+                            </button>
+                            
+                            <!-- Delete Button -->
+                            <button wire:click="confirmDelete({{ $booking->id }})" 
+                                class="p-2 bg-pink-100 text-pink-600 rounded-lg hover:bg-pink-200 transition shadow-sm">
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16">
+                                    </path>
+                                </svg>
+                            </button>
+                        </div>
+                    </td>
+
                             </tr>
                         @empty
                             <tr>
@@ -286,64 +259,41 @@
     </div>
 
     <!-- View Modal -->
-    @if ($showViewModal)
-        <livewire:admin.booking.view-booking :bookingId="$bookingIdToView" />
-    @endif
+    @if ($showCreateModal)
+    <livewire:admin.booking.create-booking :key="'create-booking-'.now()" />
+@endif
+
+<!-- Update Booking Modal -->
+@if ($showUpdateModal)
+    <livewire:admin.booking.update-booking 
+        :bookingId="$bookingIdToUpdate" 
+        :key="'update-booking-'.$bookingIdToUpdate" />
+@endif
+
 
     <!-- Delete Confirmation Modal -->
-    @if ($showDeleteModal)
-        <div class="fixed inset-0 bg-gray-900 bg-opacity-50 backdrop-blur-sm flex items-center justify-center z-50"
-            x-data="{ show: true }" x-show="show" x-transition wire:ignore.self>
-            <div
-                class="relative bg-white rounded-xl shadow-2xl w-full max-w-md p-6 transform transition-all animate-fade-in">
-                <div class="flex items-center mb-6 pb-3 border-b border-gray-200">
-                    <div class="bg-red-100 p-2 rounded-lg mr-3">
-                        <svg class="w-6 h-6 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16">
-                            </path>
-                        </svg>
-                    </div>
-                    <h3 class="text-xl font-semibold text-gray-800">Confirm Delete</h3>
-                </div>
-
-                <div class="p-4 mb-5 bg-yellow-50 text-yellow-800 rounded-lg border border-yellow-200">
-                    <p class="flex items-center">
-                        <svg class="w-5 h-5 mr-2 text-yellow-600" fill="none" stroke="currentColor"
-                            viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-                        </svg>
-                        Are you sure you want to delete this booking? This action cannot be undone.
-                    </p>
-                </div>
-
-                <div class="flex justify-end space-x-3">
-                    <button wire:click="$set('showDeleteModal', false)"
-                        class="px-4 py-2 bg-gray-200 text-gray-700 rounded-lg hover:bg-gray-300 transition flex items-center">
-                        <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M6 18L18 6M6 6l12 12"></path>
-                        </svg>
-                        Cancel
-                    </button>
-                    <button wire:click="deleteBooking"
-                        class="px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 transition flex items-center">
-                        <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16">
-                            </path>
-                        </svg>
-                        Delete
-                    </button>
-                </div>
-                <!-- Add this right after your table, inside the white rounded-xl div -->
-                @if ($bookings->hasPages())
-                    <div class="px-6 py-4 border-t border-gray-200">
-                        {{ $bookings->links() }}
-                    </div>
-                @endif
+    @if ($confirmingDeletion)
+    <div class="fixed inset-0 bg-gray-900 bg-opacity-50 flex items-center justify-center z-50">
+        <div class="bg-white rounded-lg p-6 max-w-md w-full">
+            <div class="flex items-center mb-4">
+                <svg class="w-6 h-6 text-red-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+                </svg>
+                <h3 class="text-lg font-medium">Confirm Deletion</h3>
+            </div>
+            <p class="mb-4">Are you sure you want to delete this booking? This action cannot be undone.</p>
+            <div class="flex justify-end space-x-3">
+                <button wire:click="closeModals" class="px-4 py-2 bg-gray-200 rounded-lg hover:bg-gray-300">
+                    Cancel
+                </button>
+                <button wire:click="deleteBooking"
+                    class="px-4 py-2 bg-red-500 text-white rounded-lg hover:bg-red-600">
+                    Delete
+                </button>
             </div>
         </div>
+    </div>
     @endif
+
 </div>
