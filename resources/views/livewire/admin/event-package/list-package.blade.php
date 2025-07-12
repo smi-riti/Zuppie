@@ -1,4 +1,4 @@
-<div class="container mx-auto p-6">
+<div class="p-1">
     <div class="flex justify-between items-center mb-6">
         <div>
             <h2 class="text-3xl font-bold text-gray-800">Event Packages</h2>

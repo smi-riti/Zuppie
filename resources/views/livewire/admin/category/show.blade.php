@@ -1,6 +1,6 @@
 <div>
     <div class="p-5 bg-gradient-to-br from-purple-100 via-pink-100 to-white min-h-screen">
-        <div class="container mx-auto px-4 py-8">
+        <div class="">
             <div class="bg-white shadow-xl rounded-xl px-8 pt-6 pb-8 border border-purple-200">
                 <div class="flex justify-between items-center mb-6">
                     <h2 class="text-2xl font-bold text-purple-700">Categories List ({{ count($categories) }})</h2>
