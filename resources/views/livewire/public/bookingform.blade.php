@@ -53,18 +53,6 @@
             <h3 class="text-xl font-semibold text-purple-800 border-b-2 border-purple-100 pb-2">Event Details</h3>
             
             <div class="grid grid-cols-1 gap-6 md:grid-cols-2">
-              <!-- Category -->
-              <div>
-                <label class="block text-sm font-medium text-purple-700 mb-1">Event Category</label>
-                <select wire:model="category_id" 
-                        class="w-full px-4 py-2 rounded-lg border border-purple-200 focus:ring-2 focus:ring-purple-300 focus:border-purple-400 transition">
-                  <option value="">Select Category</option>
-                  @foreach($categories as $category)
-                    <option value="{{ $category->id }}">{{ $category->name }}</option>
-                  @endforeach
-                </select>
-                @error('category_id') <span class="text-sm text-pink-600">{{ $message }}</span> @enderror
-              </div>
               
               <!-- Package -->
               <div>

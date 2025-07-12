@@ -1,23 +1,25 @@
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-           @vite('resources/css/app.css')
 
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/lightgallery/2.7.1/css/lightgallery.min.css"/>
-        <title>{{ $title ?? 'Page Title' }}</title>
-    </head>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    @vite('resources/css/app.css')
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/lightgallery/2.7.1/css/lightgallery.min.css" />
+    <title>{{ $title ?? 'Page Title' }}</title>
+</head>
+
 <body class="bg-gray-50 min-h-screen font-sans flex flex-col">
     <livewire:public.section.header />
-    
-     <main class="flex-grow p-10">
+
+    <main class="flex-grow p-10">
         {{ $slot }}
     </main>
-        <livewire:public.section.footer />
+    <livewire:public.section.footer />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/lightgallery/2.7.1/lightgallery.min.js"></script>
 
-    </body>
+</body>
 
 </html>

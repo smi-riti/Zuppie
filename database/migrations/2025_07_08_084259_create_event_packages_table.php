@@ -19,11 +19,11 @@ return new class extends Migration
             $table->enum('discount_type', ['percentage', 'fixed'])->nullable();
             $table->decimal('discount_value', 8, 2)->nullable();
             $table->text('description')->nullable();
-            $table->json('images')->nullable();
             $table->boolean('is_active')->default(true);
             $table->boolean('is_special')->default(false);
-            $table->integer('duration')->nullable();
+            $table->bigInteger('duration')->nullable()->comment('Duration in milliseconds');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 
