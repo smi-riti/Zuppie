@@ -36,10 +36,8 @@
         <x-admin.sidebar />
 
         <!-- Main Content Area -->
-        <div class="flex-1 flex flex-col overflow-hidden p-4">
-            <div class="bg-white rounded-lg shadow-sm p-6 md:p-6">
-                {{ $slot }}
-            </div>
+        <div class="flex-1 flex flex-col overflow-hidden p-1">
+             {{ $slot }}
         </div>
     </div>
 </body>

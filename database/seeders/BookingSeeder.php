@@ -107,7 +107,7 @@ class BookingSeeder extends Seeder
         }
 
         // Create sample bookings
-        $statuses = ['pending', 'confirmed', 'cancelled']; // Matches your migration enum
+        $statuses = ['pending', 'confirmed', 'cancelled'];
         $locations = [
             'Grand Ballroom, Hotel Taj',
             'Convention Center, Downtown',
@@ -123,6 +123,15 @@ class BookingSeeder extends Seeder
             'Special cake at midnight',
             null
         ];
+        
+        // Add pin codes corresponding to locations
+        $pinCodes = [
+            '400001', // Mumbai
+            '110001', // Delhi
+            '600001', // Chennai
+            '700001', // Kolkata
+            '560001'  // Bangalore
+        ];
 
         for ($i = 0; $i < 50; $i++) {
             $user = User::where('is_admin', false)->inRandomOrder()->first();
@@ -130,6 +139,11 @@ class BookingSeeder extends Seeder
             
             $eventDate = Carbon::now()->addDays(rand(1, 90));
             $bookingDate = $eventDate->copy()->subDays(rand(1, 30));
+            
+            // Get random location and matching pin code
+            $locationIndex = array_rand($locations);
+            $location = $locations[$locationIndex];
+            $pinCode = $pinCodes[$locationIndex];
 
             Booking::create([
                 'user_id' => $user->id,
@@ -138,7 +152,8 @@ class BookingSeeder extends Seeder
                 'event_date' => $eventDate,
                 'event_end_date' => $eventDate->copy()->addHours($package->duration),
                 'guest_count' => rand(10, 200),
-                'location' => $locations[array_rand($locations)],
+                'location' => $location,
+                'pin_code' => $pinCode,
                 'special_requests' => $specialRequests[array_rand($specialRequests)],
                 'status' => $statuses[array_rand($statuses)],
                 'total_price' => $package->price * $this->calculateGuestMultiplier(rand(10, 200)),

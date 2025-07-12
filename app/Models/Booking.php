@@ -23,6 +23,7 @@ class Booking extends Model
         'special_requests',
         'status', 
         'total_price',
+        'pin_code',
     ];
 
     protected $casts = [
