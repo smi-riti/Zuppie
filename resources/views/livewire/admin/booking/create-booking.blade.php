@@ -1,4 +1,5 @@
-<div class="fixed inset-0 bg-gray-900 bg-opacity-50 flex items-center justify-center z-50 p-4">
+<div class="fixed inset-0 backdrop-blur-sm bg-black/30 transition-opacity duration-300 flex items-center justify-center z-50 p-4">
+
     <div class="bg-white rounded-2xl shadow-xl overflow-hidden w-full max-w-4xl max-h-[90vh] overflow-y-auto">
         <!-- Gradient Header -->
         <div class="bg-gradient-to-r from-purple-400 to-pink-400 p-8 text-white">
