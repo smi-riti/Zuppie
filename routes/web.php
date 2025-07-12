@@ -35,7 +35,7 @@ Route::prefix('admin')->middleware(['auth', 'admin'])->group(function () {
     Route::get('/category/show', Show::class)->name('admin.category.show');
     Route::get('/event-packages', ListPackage::class)->name('admin.event-packages');
     Route::get('/reviews/show', All::class)->name('admin.reviews.show');
-    Route::get('/offers/all', ShowAll::class)->name('admin.offers.show');
+    Route::get('/offers/all', AllOffers::class)->name('admin.offers.show');
     Route::get('/booking/manage', ManageBooking::class)->name('admin.booking.manage');
     Route::get('/users/manage', ManageUser::class)->name('admin.users.manage');
 
