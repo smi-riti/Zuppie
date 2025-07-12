@@ -139,7 +139,7 @@ class ListPackage extends Component
         }
         
         // Make sure we're using an integer for pagination
-        $perPage = 10;
+        $perPage = 5;
         
         return view('livewire.admin.event-package.list-package', [
             'packages' => $query->orderBy('created_at', 'desc')->paginate($perPage),
