@@ -20,7 +20,15 @@ class AdminMiddleware
             return $next($request); // Allow access
         }
 
-        // Redirect non-admin users
+        // Return JSON response for API routes, redirect for web routes
+        if ($request->expectsJson() || $request->is('api/*')) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Unauthorized. Admin access required.'
+            ], 403);
+        }
+
+        // Redirect non-admin users for web routes
         return redirect('/')->with('error', 'You do not have admin access.');
     }
 
