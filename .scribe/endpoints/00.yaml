@@ -1,0 +1,1815 @@
+name: Endpoints
+description: ''
+endpoints:
+  -
+    httpMethods:
+      - POST
+    uri: api/register
+    metadata:
+      groupName: Endpoints
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: ''
+      description: ''
+      authenticated: false
+      custom: []
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters: []
+    cleanUrlParameters: []
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters:
+      name:
+        name: name
+        description: 'Must not be greater than 255 characters.'
+        required: true
+        example: vmqeopfuudtdsufvyvddq
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        custom: []
+      email:
+        name: email
+        description: 'Must be a valid email address. Must not be greater than 255 characters.'
+        required: true
+        example: kunde.eloisa@example.com
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        custom: []
+      password:
+        name: password
+        description: 'The value and <code>password_confirmation</code> must match. Must be at least 8 characters.'
+        required: true
+        example: '4[*UyPJ"}6'
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        custom: []
+      phone_no:
+        name: phone_no
+        description: 'Must not be greater than 20 characters.'
+        required: true
+        example: hdtqtqxbajwbpilpm
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        custom: []
+    cleanBodyParameters:
+      name: vmqeopfuudtdsufvyvddq
+      email: kunde.eloisa@example.com
+      password: '4[*UyPJ"}6'
+      phone_no: hdtqtqxbajwbpilpm
+    fileParameters: []
+    responses: []
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+    custom: []
+  -
+    httpMethods:
+      - POST
+    uri: api/login
+    metadata:
+      groupName: Endpoints
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: ''
+      description: ''
+      authenticated: false
+      custom: []
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters: []
+    cleanUrlParameters: []
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters:
+      email:
+        name: email
+        description: 'Must be a valid email address.'
+        required: true
+        example: qkunze@example.com
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        custom: []
+      password:
+        name: password
+        description: ''
+        required: true
+        example: consequatur
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        custom: []
+    cleanBodyParameters:
+      email: qkunze@example.com
+      password: consequatur
+    fileParameters: []
+    responses: []
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+    custom: []
+  -
+    httpMethods:
+      - GET
+    uri: api/categories
+    metadata:
+      groupName: Endpoints
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'Display a listing of categories'
+      description: ''
+      authenticated: false
+      custom: []
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters: []
+    cleanUrlParameters: []
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses:
+      -
+        status: 200
+        content: '{"success":true,"data":[{"id":1,"name":"Birthday Party","slug":"birthday-party","description":"All kinds of birthday party items","image":"https:\/\/ik.imagekit.io\/demo\/electronics.jpg","image_file_id":"demo_file_id_1","is_special":1,"parent_id":null,"created_at":"2025-07-12T09:38:28.000000Z","updated_at":"2025-07-12T09:38:28.000000Z"},{"id":2,"name":"Marriage Party","slug":"marriage-party","description":"All kinds of marriage items","image":"https:\/\/ik.imagekit.io\/demo\/mobiles.jpg","image_file_id":"demo_file_id_2","is_special":0,"parent_id":1,"created_at":"2025-07-12T09:38:28.000000Z","updated_at":"2025-07-12T09:38:28.000000Z"},{"id":3,"name":"Kitti Party","slug":"kitti-party","description":"All kinds of kitty party items","image":"https:\/\/ik.imagekit.io\/demo\/laptops.jpg","image_file_id":"demo_file_id_3","is_special":0,"parent_id":1,"created_at":"2025-07-12T09:38:28.000000Z","updated_at":"2025-07-12T09:38:28.000000Z"},{"id":4,"name":"Wedding","slug":"wedding","description":"Wedding events and ceremonies","image":null,"image_file_id":null,"is_special":0,"parent_id":null,"created_at":"2025-07-12T09:38:28.000000Z","updated_at":"2025-07-12T09:38:28.000000Z"},{"id":5,"name":"Birthday","slug":"birthday","description":"Birthday parties and celebrations","image":null,"image_file_id":null,"is_special":0,"parent_id":null,"created_at":"2025-07-12T09:38:28.000000Z","updated_at":"2025-07-12T09:38:28.000000Z"},{"id":6,"name":"Corporate","slug":"corporate","description":"Corporate events and meetings","image":null,"image_file_id":null,"is_special":0,"parent_id":null,"created_at":"2025-07-12T09:38:28.000000Z","updated_at":"2025-07-12T09:38:28.000000Z"},{"id":7,"name":"Conference","slug":"conference","description":"Conferences and seminars","image":null,"image_file_id":null,"is_special":0,"parent_id":null,"created_at":"2025-07-12T09:38:28.000000Z","updated_at":"2025-07-12T09:38:28.000000Z"},{"id":8,"name":"new category with image","slug":"new-category-with-image","description":"description","image":"https:\/\/ik.imagekit.io\/myImageKit\/Zuppie\/CategoryImages\/Screenshot_2025-07-12_085301_qFOcQ_Cd9.png","image_file_id":"6874bfd05c7cd75eb851e547","is_special":0,"parent_id":2,"created_at":"2025-07-14T08:28:22.000000Z","updated_at":"2025-07-14T08:28:59.000000Z"}]}'
+        headers:
+          cache-control: 'no-cache, private'
+          content-type: application/json
+          access-control-allow-origin: '*'
+        description: null
+        custom: []
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+    custom: []
+  -
+    httpMethods:
+      - GET
+    uri: 'api/categories/{category_id}'
+    metadata:
+      groupName: Endpoints
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'Display a specific category'
+      description: ''
+      authenticated: false
+      custom: []
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters:
+      category_id:
+        name: category_id
+        description: 'The ID of the category.'
+        required: true
+        example: 1
+        type: integer
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        custom: []
+    cleanUrlParameters:
+      category_id: 1
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses:
+      -
+        status: 200
+        content: '{"success":true,"data":{"id":1,"name":"Birthday Party","slug":"birthday-party","description":"All kinds of birthday party items","image":"https:\/\/ik.imagekit.io\/demo\/electronics.jpg","image_file_id":"demo_file_id_1","is_special":1,"parent_id":null,"created_at":"2025-07-12T09:38:28.000000Z","updated_at":"2025-07-12T09:38:28.000000Z"}}'
+        headers:
+          cache-control: 'no-cache, private'
+          content-type: application/json
+          access-control-allow-origin: '*'
+        description: null
+        custom: []
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+    custom: []
+  -
+    httpMethods:
+      - GET
+    uri: api/event-packages
+    metadata:
+      groupName: Endpoints
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'Display a listing of event packages'
+      description: ''
+      authenticated: false
+      custom: []
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters: []
+    cleanUrlParameters: []
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses:
+      -
+        status: 200
+        content: '{"success":true,"data":[{"id":1,"category_id":4,"name":"Premium Wedding Package","price":"2999.99","discount_type":null,"discount_value":null,"description":"Complete wedding package with premium services","is_active":true,"is_special":true,"duration":8,"created_at":"2025-07-12T09:38:28.000000Z","updated_at":"2025-07-12T09:38:28.000000Z","deleted_at":null,"category":{"id":4,"name":"Wedding","slug":"wedding","description":"Wedding events and ceremonies","image":null,"image_file_id":null,"is_special":0,"parent_id":null,"created_at":"2025-07-12T09:38:28.000000Z","updated_at":"2025-07-12T09:38:28.000000Z"},"images":[]},{"id":2,"category_id":5,"name":"Standard Birthday Package","price":"999.99","discount_type":null,"discount_value":null,"description":"Standard birthday celebration package","is_active":true,"is_special":false,"duration":4,"created_at":"2025-07-12T09:38:28.000000Z","updated_at":"2025-07-12T09:38:28.000000Z","deleted_at":null,"category":{"id":5,"name":"Birthday","slug":"birthday","description":"Birthday parties and celebrations","image":null,"image_file_id":null,"is_special":0,"parent_id":null,"created_at":"2025-07-12T09:38:28.000000Z","updated_at":"2025-07-12T09:38:28.000000Z"},"images":[]},{"id":3,"category_id":6,"name":"Corporate Event Basic","price":"1999.99","discount_type":null,"discount_value":null,"description":"Basic package for corporate events","is_active":true,"is_special":false,"duration":6,"created_at":"2025-07-12T09:38:28.000000Z","updated_at":"2025-07-12T09:38:28.000000Z","deleted_at":null,"category":{"id":6,"name":"Corporate","slug":"corporate","description":"Corporate events and meetings","image":null,"image_file_id":null,"is_special":0,"parent_id":null,"created_at":"2025-07-12T09:38:28.000000Z","updated_at":"2025-07-12T09:38:28.000000Z"},"images":[]},{"id":4,"category_id":7,"name":"Conference Deluxe","price":"3999.99","discount_type":null,"discount_value":null,"description":"Deluxe conference package with all amenities","is_active":true,"is_special":true,"duration":8,"created_at":"2025-07-12T09:38:28.000000Z","updated_at":"2025-07-12T09:38:28.000000Z","deleted_at":null,"category":{"id":7,"name":"Conference","slug":"conference","description":"Conferences and seminars","image":null,"image_file_id":null,"is_special":0,"parent_id":null,"created_at":"2025-07-12T09:38:28.000000Z","updated_at":"2025-07-12T09:38:28.000000Z"},"images":[]},{"id":5,"category_id":4,"name":"Premium Wedding Package","price":"2999.99","discount_type":"percentage","discount_value":"10.00","description":"Our premium wedding package includes:\n- Professional photography\n- Gourmet catering\n- Venue decoration\n- DJ and entertainment\n- Wedding coordinator\n- Floral arrangements","is_active":true,"is_special":true,"duration":28800000,"created_at":"2025-07-12T09:38:30.000000Z","updated_at":"2025-07-14T06:48:06.000000Z","deleted_at":null,"category":{"id":4,"name":"Wedding","slug":"wedding","description":"Wedding events and ceremonies","image":null,"image_file_id":null,"is_special":0,"parent_id":null,"created_at":"2025-07-12T09:38:28.000000Z","updated_at":"2025-07-12T09:38:28.000000Z"},"images":[{"id":1,"event_package_id":5,"image_url":"https:\/\/ik.imagekit.io\/demo\/sample-image1.jpg","image_file_id":"seed_68722d16aab73","created_at":"2025-07-12T09:38:30.000000Z","updated_at":"2025-07-12T09:38:30.000000Z","deleted_at":null},{"id":2,"event_package_id":5,"image_url":"https:\/\/ik.imagekit.io\/demo\/sample-image2.jpg","image_file_id":"seed_68722d16ad046","created_at":"2025-07-12T09:38:30.000000Z","updated_at":"2025-07-12T09:38:30.000000Z","deleted_at":null},{"id":3,"event_package_id":5,"image_url":"https:\/\/ik.imagekit.io\/demo\/sample-image3.jpg","image_file_id":"seed_68722d16aebd7","created_at":"2025-07-12T09:38:30.000000Z","updated_at":"2025-07-12T09:38:30.000000Z","deleted_at":null}]},{"id":6,"category_id":5,"name":"Basic Birthday Party","price":"599.99","discount_type":"fixed","discount_value":"50.00","description":"Perfect for children''s birthday parties:\n- Themed decorations\n- Birthday cake\n- Party games\n- Party favors\n- Basic catering","is_active":true,"is_special":true,"duration":180,"created_at":"2025-07-12T09:38:30.000000Z","updated_at":"2025-07-12T09:40:38.000000Z","deleted_at":null,"category":{"id":5,"name":"Birthday","slug":"birthday","description":"Birthday parties and celebrations","image":null,"image_file_id":null,"is_special":0,"parent_id":null,"created_at":"2025-07-12T09:38:28.000000Z","updated_at":"2025-07-12T09:38:28.000000Z"},"images":[{"id":4,"event_package_id":6,"image_url":"https:\/\/ik.imagekit.io\/demo\/sample-birthday1.jpg","image_file_id":"seed_68722d16b252a","created_at":"2025-07-12T09:38:30.000000Z","updated_at":"2025-07-12T09:38:30.000000Z","deleted_at":null},{"id":5,"event_package_id":6,"image_url":"https:\/\/ik.imagekit.io\/demo\/sample-birthday2.jpg","image_file_id":"seed_68722d16b6d9a","created_at":"2025-07-12T09:38:30.000000Z","updated_at":"2025-07-12T09:38:30.000000Z","deleted_at":null}]},{"id":7,"category_id":null,"name":"Corporate Conference","price":"4999.99","discount_type":null,"discount_value":null,"description":"Professional corporate event solution:\n- Conference room setup\n- Audio\/visual equipment\n- Professional staff\n- Catering options\n- Networking area\n- Registration services","is_active":true,"is_special":false,"duration":480,"created_at":"2025-07-12T09:38:30.000000Z","updated_at":"2025-07-12T09:38:30.000000Z","deleted_at":null,"category":null,"images":[{"id":6,"event_package_id":7,"image_url":"https:\/\/ik.imagekit.io\/demo\/sample-corporate1.jpg","image_file_id":"seed_68722d16ba462","created_at":"2025-07-12T09:38:30.000000Z","updated_at":"2025-07-12T09:38:30.000000Z","deleted_at":null}]},{"id":8,"category_id":null,"name":"Silver Anniversary","price":"1499.99","discount_type":"percentage","discount_value":"5.00","description":"Celebrate your special milestone:\n- Elegant decorations\n- Anniversary cake\n- Professional photography\n- Dinner service\n- Champagne toast","is_active":true,"is_special":true,"duration":300,"created_at":"2025-07-12T09:38:30.000000Z","updated_at":"2025-07-12T09:38:30.000000Z","deleted_at":null,"category":null,"images":[{"id":7,"event_package_id":8,"image_url":"https:\/\/ik.imagekit.io\/demo\/sample-anniversary1.jpg","image_file_id":"seed_68722d16bda10","created_at":"2025-07-12T09:38:30.000000Z","updated_at":"2025-07-12T09:38:30.000000Z","deleted_at":null},{"id":8,"event_package_id":8,"image_url":"https:\/\/ik.imagekit.io\/demo\/sample-anniversary2.jpg","image_file_id":"seed_68722d16bf9ad","created_at":"2025-07-12T09:38:30.000000Z","updated_at":"2025-07-12T09:38:30.000000Z","deleted_at":null}]},{"id":9,"category_id":null,"name":"Deluxe Baby Shower","price":"899.99","discount_type":"fixed","discount_value":"100.00","description":"Welcome the new arrival in style:\n- Custom theme decorations\n- Catering and refreshments\n- Baby shower games\n- Party favors\n- Professional photography","is_active":true,"is_special":false,"duration":240,"created_at":"2025-07-12T09:38:30.000000Z","updated_at":"2025-07-12T09:38:30.000000Z","deleted_at":null,"category":null,"images":[{"id":9,"event_package_id":9,"image_url":"https:\/\/ik.imagekit.io\/demo\/sample-babyshower1.jpg","image_file_id":"seed_68722d16c30ec","created_at":"2025-07-12T09:38:30.000000Z","updated_at":"2025-07-12T09:38:30.000000Z","deleted_at":null}]},{"id":10,"category_id":4,"name":"Elite Wedding Experience","price":"8999.99","discount_type":null,"discount_value":null,"description":"The ultimate wedding experience:\n- Luxury venue\n- Gourmet multi-course meal\n- Premium open bar\n- Live band and DJ\n- Professional photography and videography\n- Wedding planner\n- Luxury transportation","is_active":true,"is_special":true,"duration":720,"created_at":"2025-07-12T09:38:30.000000Z","updated_at":"2025-07-12T09:38:30.000000Z","deleted_at":null,"category":{"id":4,"name":"Wedding","slug":"wedding","description":"Wedding events and ceremonies","image":null,"image_file_id":null,"is_special":0,"parent_id":null,"created_at":"2025-07-12T09:38:28.000000Z","updated_at":"2025-07-12T09:38:28.000000Z"},"images":[{"id":10,"event_package_id":10,"image_url":"https:\/\/ik.imagekit.io\/demo\/sample-elite-wedding1.jpg","image_file_id":"seed_68722d16c5ea2","created_at":"2025-07-12T09:38:30.000000Z","updated_at":"2025-07-12T09:38:30.000000Z","deleted_at":null},{"id":11,"event_package_id":10,"image_url":"https:\/\/ik.imagekit.io\/demo\/sample-elite-wedding2.jpg","image_file_id":"seed_68722d16c7aa5","created_at":"2025-07-12T09:38:30.000000Z","updated_at":"2025-07-12T09:38:30.000000Z","deleted_at":null}]},{"id":11,"category_id":5,"name":"VIP Birthday Experience","price":"1999.99","discount_type":"percentage","discount_value":"15.00","description":"Celebrate in VIP style:\n- Private venue\n- Custom decorations\n- Premium catering\n- Open bar\n- Entertainment options\n- Red carpet entrance","is_active":false,"is_special":true,"duration":360,"created_at":"2025-07-12T09:38:30.000000Z","updated_at":"2025-07-12T09:40:32.000000Z","deleted_at":null,"category":{"id":5,"name":"Birthday","slug":"birthday","description":"Birthday parties and celebrations","image":null,"image_file_id":null,"is_special":0,"parent_id":null,"created_at":"2025-07-12T09:38:28.000000Z","updated_at":"2025-07-12T09:38:28.000000Z"},"images":[{"id":12,"event_package_id":11,"image_url":"https:\/\/ik.imagekit.io\/demo\/sample-vip-birthday1.jpg","image_file_id":"seed_68722d16cb398","created_at":"2025-07-12T09:38:30.000000Z","updated_at":"2025-07-12T09:38:30.000000Z","deleted_at":null}]}]}'
+        headers:
+          cache-control: 'no-cache, private'
+          content-type: application/json
+          access-control-allow-origin: '*'
+        description: null
+        custom: []
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+    custom: []
+  -
+    httpMethods:
+      - GET
+    uri: 'api/event-packages/{eventPackage_id}'
+    metadata:
+      groupName: Endpoints
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'Display the specified event package'
+      description: ''
+      authenticated: false
+      custom: []
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters:
+      eventPackage_id:
+        name: eventPackage_id
+        description: 'The ID of the eventPackage.'
+        required: true
+        example: 1
+        type: integer
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        custom: []
+    cleanUrlParameters:
+      eventPackage_id: 1
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses:
+      -
+        status: 200
+        content: '{"success":true,"data":{"id":1,"category_id":4,"name":"Premium Wedding Package","price":"2999.99","discount_type":null,"discount_value":null,"description":"Complete wedding package with premium services","is_active":true,"is_special":true,"duration":8,"created_at":"2025-07-12T09:38:28.000000Z","updated_at":"2025-07-12T09:38:28.000000Z","deleted_at":null,"category":{"id":4,"name":"Wedding","slug":"wedding","description":"Wedding events and ceremonies","image":null,"image_file_id":null,"is_special":0,"parent_id":null,"created_at":"2025-07-12T09:38:28.000000Z","updated_at":"2025-07-12T09:38:28.000000Z"},"images":[]}}'
+        headers:
+          cache-control: 'no-cache, private'
+          content-type: application/json
+          access-control-allow-origin: '*'
+        description: null
+        custom: []
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+    custom: []
+  -
+    httpMethods:
+      - GET
+    uri: api/offers
+    metadata:
+      groupName: Endpoints
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'Display a listing of active offers'
+      description: ''
+      authenticated: false
+      custom: []
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters: []
+    cleanUrlParameters: []
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses:
+      -
+        status: 200
+        content: '{"success":true,"data":[{"id":1,"event_package_id":1,"title":"New Offer updated","offer_code":"OFFER100","image":"https:\/\/ik.imagekit.io\/myImageKit\/offers\/68722e0eb9e46_Qa9GyTiyZU.jpeg","description":"New Offer updated again","discount_type":"flat","discount_value":"100.00","start_date":"2025-07-12 00:00:00","end_date":"2025-07-19 00:00:00","is_active":1,"created_at":"2025-07-12T09:42:56.000000Z","updated_at":"2025-07-14T09:57:44.000000Z","image_file_id":"68722e225c7cd75eb84122ba"}]}'
+        headers:
+          cache-control: 'no-cache, private'
+          content-type: application/json
+          access-control-allow-origin: '*'
+        description: null
+        custom: []
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+    custom: []
+  -
+    httpMethods:
+      - GET
+    uri: 'api/offers/{offer_id}'
+    metadata:
+      groupName: Endpoints
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'Display the specified offer'
+      description: ''
+      authenticated: false
+      custom: []
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters:
+      offer_id:
+        name: offer_id
+        description: 'The ID of the offer.'
+        required: true
+        example: 1
+        type: integer
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        custom: []
+    cleanUrlParameters:
+      offer_id: 1
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses:
+      -
+        status: 200
+        content: '{"success":true,"data":{"id":1,"event_package_id":1,"title":"New Offer updated","offer_code":"OFFER100","image":"https:\/\/ik.imagekit.io\/myImageKit\/offers\/68722e0eb9e46_Qa9GyTiyZU.jpeg","description":"New Offer updated again","discount_type":"flat","discount_value":"100.00","start_date":"2025-07-12 00:00:00","end_date":"2025-07-19 00:00:00","is_active":1,"created_at":"2025-07-12T09:42:56.000000Z","updated_at":"2025-07-14T09:57:44.000000Z","image_file_id":"68722e225c7cd75eb84122ba"}}'
+        headers:
+          cache-control: 'no-cache, private'
+          content-type: application/json
+          access-control-allow-origin: '*'
+        description: null
+        custom: []
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+    custom: []
+  -
+    httpMethods:
+      - GET
+    uri: api/reviews
+    metadata:
+      groupName: Endpoints
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'Display a listing of the resource.'
+      description: ''
+      authenticated: false
+      custom: []
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters: []
+    cleanUrlParameters: []
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses:
+      -
+        status: 200
+        content: '{"success":true,"data":[{"id":1,"booking_id":1,"user_id":1,"rating":3,"comment":"3 Star Rating","approved":0,"created_at":"2025-07-14T06:50:08.000000Z","updated_at":"2025-07-14T06:50:08.000000Z"}]}'
+        headers:
+          cache-control: 'no-cache, private'
+          content-type: application/json
+          access-control-allow-origin: '*'
+        description: null
+        custom: []
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+    custom: []
+  -
+    httpMethods:
+      - GET
+    uri: api/user
+    metadata:
+      groupName: Endpoints
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: ''
+      description: ''
+      authenticated: false
+      custom: []
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters: []
+    cleanUrlParameters: []
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses:
+      -
+        status: 401
+        content: '{"message":"Unauthenticated."}'
+        headers:
+          cache-control: 'no-cache, private'
+          content-type: application/json
+          access-control-allow-origin: '*'
+        description: null
+        custom: []
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+    custom: []
+  -
+    httpMethods:
+      - POST
+    uri: api/logout
+    metadata:
+      groupName: Endpoints
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: ''
+      description: ''
+      authenticated: false
+      custom: []
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters: []
+    cleanUrlParameters: []
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses: []
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+    custom: []
+  -
+    httpMethods:
+      - POST
+    uri: api/reviews
+    metadata:
+      groupName: Endpoints
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'Store a newly created resource in storage.'
+      description: ''
+      authenticated: false
+      custom: []
+    headers:
+      Content-Type: multipart/form-data
+      Accept: application/json
+    urlParameters: []
+    cleanUrlParameters: []
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters:
+      rating:
+        name: rating
+        description: 'Must be at least 1. Must not be greater than 5.'
+        required: true
+        example: 5
+        type: integer
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        custom: []
+      comment:
+        name: comment
+        description: 'Must not be greater than 1000 characters.'
+        required: false
+        example: mqeopfuudtdsufvyvddqa
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: true
+        custom: []
+      images:
+        name: images
+        description: 'Must be an image. Must not be greater than 2048 kilobytes.'
+        required: false
+        example:
+          - null
+        type: 'file[]'
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: true
+        custom: []
+    cleanBodyParameters:
+      rating: 5
+      comment: mqeopfuudtdsufvyvddqa
+    fileParameters:
+      images:
+        - null
+    responses: []
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+    custom: []
+  -
+    httpMethods:
+      - GET
+    uri: api/bookings
+    metadata:
+      groupName: Endpoints
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'Display a listing of bookings'
+      description: ''
+      authenticated: false
+      custom: []
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters: []
+    cleanUrlParameters: []
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses:
+      -
+        status: 401
+        content: '{"message":"Unauthenticated."}'
+        headers:
+          cache-control: 'no-cache, private'
+          content-type: application/json
+          access-control-allow-origin: '*'
+        description: null
+        custom: []
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+    custom: []
+  -
+    httpMethods:
+      - POST
+    uri: api/bookings
+    metadata:
+      groupName: Endpoints
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'Store a newly created booking'
+      description: ''
+      authenticated: false
+      custom: []
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters: []
+    cleanUrlParameters: []
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters:
+      event_package_id:
+        name: event_package_id
+        description: 'The <code>id</code> of an existing record in the event_packages table.'
+        required: true
+        example: consequatur
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        custom: []
+      event_date:
+        name: event_date
+        description: 'Must be a valid date. Must be a date after <code>today</code>.'
+        required: true
+        example: '2106-08-12'
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        custom: []
+      guest_count:
+        name: guest_count
+        description: 'Must be at least 1.'
+        required: true
+        example: 45
+        type: integer
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        custom: []
+      special_requests:
+        name: special_requests
+        description: 'Must not be greater than 1000 characters.'
+        required: false
+        example: qeopfuudtdsufvyvddqam
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: true
+        custom: []
+      contact_phone:
+        name: contact_phone
+        description: 'Must not be greater than 20 characters.'
+        required: true
+        example: niihfqcoynlazghdt
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        custom: []
+      contact_email:
+        name: contact_email
+        description: 'Must be a valid email address.'
+        required: true
+        example: lola88@example.com
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        custom: []
+    cleanBodyParameters:
+      event_package_id: consequatur
+      event_date: '2106-08-12'
+      guest_count: 45
+      special_requests: qeopfuudtdsufvyvddqam
+      contact_phone: niihfqcoynlazghdt
+      contact_email: lola88@example.com
+    fileParameters: []
+    responses: []
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+    custom: []
+  -
+    httpMethods:
+      - GET
+    uri: 'api/bookings/{id}'
+    metadata:
+      groupName: Endpoints
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'Display the specified booking'
+      description: ''
+      authenticated: false
+      custom: []
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters:
+      id:
+        name: id
+        description: 'The ID of the booking.'
+        required: true
+        example: 1
+        type: integer
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        custom: []
+    cleanUrlParameters:
+      id: 1
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses:
+      -
+        status: 401
+        content: '{"message":"Unauthenticated."}'
+        headers:
+          cache-control: 'no-cache, private'
+          content-type: application/json
+          access-control-allow-origin: '*'
+        description: null
+        custom: []
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+    custom: []
+  -
+    httpMethods:
+      - PUT
+      - PATCH
+    uri: 'api/bookings/{id}'
+    metadata:
+      groupName: Endpoints
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'Update the specified booking'
+      description: ''
+      authenticated: false
+      custom: []
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters:
+      id:
+        name: id
+        description: 'The ID of the booking.'
+        required: true
+        example: 1
+        type: integer
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        custom: []
+    cleanUrlParameters:
+      id: 1
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters:
+      event_date:
+        name: event_date
+        description: 'Must be a valid date. Must be a date after <code>today</code>.'
+        required: false
+        example: '2106-08-12'
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        custom: []
+      guest_count:
+        name: guest_count
+        description: 'Must be at least 1.'
+        required: false
+        example: 45
+        type: integer
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        custom: []
+      special_requests:
+        name: special_requests
+        description: 'Must not be greater than 1000 characters.'
+        required: false
+        example: qeopfuudtdsufvyvddqam
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: true
+        custom: []
+      contact_phone:
+        name: contact_phone
+        description: 'Must not be greater than 20 characters.'
+        required: false
+        example: niihfqcoynlazghdt
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        custom: []
+      contact_email:
+        name: contact_email
+        description: 'Must be a valid email address.'
+        required: false
+        example: lola88@example.com
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        custom: []
+      booking_status:
+        name: booking_status
+        description: ''
+        required: false
+        example: confirmed
+        type: string
+        enumValues:
+          - pending
+          - confirmed
+          - cancelled
+          - completed
+        exampleWasSpecified: false
+        nullable: false
+        custom: []
+    cleanBodyParameters:
+      event_date: '2106-08-12'
+      guest_count: 45
+      special_requests: qeopfuudtdsufvyvddqam
+      contact_phone: niihfqcoynlazghdt
+      contact_email: lola88@example.com
+      booking_status: confirmed
+    fileParameters: []
+    responses: []
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+    custom: []
+  -
+    httpMethods:
+      - DELETE
+    uri: 'api/bookings/{id}'
+    metadata:
+      groupName: Endpoints
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'Cancel the specified booking'
+      description: ''
+      authenticated: false
+      custom: []
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters:
+      id:
+        name: id
+        description: 'The ID of the booking.'
+        required: true
+        example: 1
+        type: integer
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        custom: []
+    cleanUrlParameters:
+      id: 1
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses: []
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+    custom: []
+  -
+    httpMethods:
+      - POST
+    uri: api/categories
+    metadata:
+      groupName: Endpoints
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'Create a new category'
+      description: ''
+      authenticated: false
+      custom: []
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters: []
+    cleanUrlParameters: []
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters:
+      name:
+        name: name
+        description: 'Must not be greater than 255 characters.'
+        required: true
+        example: vmqeopfuudtdsufvyvddq
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        custom: []
+      description:
+        name: description
+        description: ''
+        required: false
+        example: 'Dolores dolorum amet iste laborum eius est dolor.'
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: true
+        custom: []
+      parent_id:
+        name: parent_id
+        description: 'The <code>id</code> of an existing record in the categories table.'
+        required: false
+        example: null
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: true
+        custom: []
+      is_special:
+        name: is_special
+        description: ''
+        required: false
+        example: false
+        type: boolean
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        custom: []
+      image:
+        name: image
+        description: ''
+        required: false
+        example: consequatur
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: true
+        custom: []
+      image_file_id:
+        name: image_file_id
+        description: ''
+        required: false
+        example: consequatur
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: true
+        custom: []
+    cleanBodyParameters:
+      name: vmqeopfuudtdsufvyvddq
+      description: 'Dolores dolorum amet iste laborum eius est dolor.'
+      is_special: false
+      image: consequatur
+      image_file_id: consequatur
+    fileParameters: []
+    responses: []
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+    custom: []
+  -
+    httpMethods:
+      - PUT
+      - PATCH
+    uri: 'api/categories/{id}'
+    metadata:
+      groupName: Endpoints
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'Update a category'
+      description: ''
+      authenticated: false
+      custom: []
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters:
+      id:
+        name: id
+        description: 'The ID of the category.'
+        required: true
+        example: 1
+        type: integer
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        custom: []
+    cleanUrlParameters:
+      id: 1
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters:
+      name:
+        name: name
+        description: ''
+        required: false
+        example: null
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        custom: []
+      description:
+        name: description
+        description: ''
+        required: false
+        example: 'Dolores dolorum amet iste laborum eius est dolor.'
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: true
+        custom: []
+      parent_id:
+        name: parent_id
+        description: 'The <code>id</code> of an existing record in the categories table.'
+        required: false
+        example: null
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: true
+        custom: []
+      is_special:
+        name: is_special
+        description: ''
+        required: false
+        example: true
+        type: boolean
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        custom: []
+      image:
+        name: image
+        description: ''
+        required: false
+        example: consequatur
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: true
+        custom: []
+      image_file_id:
+        name: image_file_id
+        description: ''
+        required: false
+        example: consequatur
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: true
+        custom: []
+    cleanBodyParameters:
+      description: 'Dolores dolorum amet iste laborum eius est dolor.'
+      is_special: true
+      image: consequatur
+      image_file_id: consequatur
+    fileParameters: []
+    responses: []
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+    custom: []
+  -
+    httpMethods:
+      - DELETE
+    uri: 'api/categories/{id}'
+    metadata:
+      groupName: Endpoints
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'Delete a category'
+      description: ''
+      authenticated: false
+      custom: []
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters:
+      id:
+        name: id
+        description: 'The ID of the category.'
+        required: true
+        example: 1
+        type: integer
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        custom: []
+    cleanUrlParameters:
+      id: 1
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses: []
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+    custom: []
+  -
+    httpMethods:
+      - POST
+    uri: api/event-packages
+    metadata:
+      groupName: Endpoints
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'Store a newly created event package'
+      description: ''
+      authenticated: false
+      custom: []
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters: []
+    cleanUrlParameters: []
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters:
+      name:
+        name: name
+        description: 'Must not be greater than 255 characters.'
+        required: true
+        example: vmqeopfuudtdsufvyvddq
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        custom: []
+      description:
+        name: description
+        description: ''
+        required: true
+        example: 'Dolores dolorum amet iste laborum eius est dolor.'
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        custom: []
+      price:
+        name: price
+        description: 'Must be at least 0.'
+        required: true
+        example: 12
+        type: number
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        custom: []
+      category_id:
+        name: category_id
+        description: 'The <code>id</code> of an existing record in the categories table.'
+        required: true
+        example: consequatur
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        custom: []
+      duration_hours:
+        name: duration_hours
+        description: 'Must be at least 1.'
+        required: false
+        example: 45
+        type: integer
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: true
+        custom: []
+      max_guests:
+        name: max_guests
+        description: 'Must be at least 1.'
+        required: false
+        example: 56
+        type: integer
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: true
+        custom: []
+      is_active:
+        name: is_active
+        description: ''
+        required: false
+        example: true
+        type: boolean
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        custom: []
+    cleanBodyParameters:
+      name: vmqeopfuudtdsufvyvddq
+      description: 'Dolores dolorum amet iste laborum eius est dolor.'
+      price: 12
+      category_id: consequatur
+      duration_hours: 45
+      max_guests: 56
+      is_active: true
+    fileParameters: []
+    responses: []
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+    custom: []
+  -
+    httpMethods:
+      - PUT
+      - PATCH
+    uri: 'api/event-packages/{id}'
+    metadata:
+      groupName: Endpoints
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'Update the specified event package'
+      description: ''
+      authenticated: false
+      custom: []
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters:
+      id:
+        name: id
+        description: 'The ID of the event package.'
+        required: true
+        example: 1
+        type: integer
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        custom: []
+    cleanUrlParameters:
+      id: 1
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters:
+      name:
+        name: name
+        description: 'Must not be greater than 255 characters.'
+        required: false
+        example: vmqeopfuudtdsufvyvddq
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        custom: []
+      description:
+        name: description
+        description: ''
+        required: false
+        example: 'Dolores dolorum amet iste laborum eius est dolor.'
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        custom: []
+      price:
+        name: price
+        description: 'Must be at least 0.'
+        required: false
+        example: 12
+        type: number
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        custom: []
+      category_id:
+        name: category_id
+        description: 'The <code>id</code> of an existing record in the categories table.'
+        required: false
+        example: null
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        custom: []
+      duration_hours:
+        name: duration_hours
+        description: 'Must be at least 1.'
+        required: false
+        example: 66
+        type: integer
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: true
+        custom: []
+      max_guests:
+        name: max_guests
+        description: 'Must be at least 1.'
+        required: false
+        example: 14
+        type: integer
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: true
+        custom: []
+      is_active:
+        name: is_active
+        description: ''
+        required: false
+        example: false
+        type: boolean
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        custom: []
+    cleanBodyParameters:
+      name: vmqeopfuudtdsufvyvddq
+      description: 'Dolores dolorum amet iste laborum eius est dolor.'
+      price: 12
+      duration_hours: 66
+      max_guests: 14
+      is_active: false
+    fileParameters: []
+    responses: []
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+    custom: []
+  -
+    httpMethods:
+      - DELETE
+    uri: 'api/event-packages/{id}'
+    metadata:
+      groupName: Endpoints
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'Remove the specified event package'
+      description: ''
+      authenticated: false
+      custom: []
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters:
+      id:
+        name: id
+        description: 'The ID of the event package.'
+        required: true
+        example: 1
+        type: integer
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        custom: []
+    cleanUrlParameters:
+      id: 1
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses: []
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+    custom: []
+  -
+    httpMethods:
+      - POST
+    uri: api/offers
+    metadata:
+      groupName: Endpoints
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'Store a newly created offer'
+      description: ''
+      authenticated: false
+      custom: []
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters: []
+    cleanUrlParameters: []
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters:
+      title:
+        name: title
+        description: 'Must not be greater than 255 characters.'
+        required: true
+        example: vmqeopfuudtdsufvyvddq
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        custom: []
+      description:
+        name: description
+        description: ''
+        required: true
+        example: 'Dolores dolorum amet iste laborum eius est dolor.'
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        custom: []
+      discount_percentage:
+        name: discount_percentage
+        description: 'Must be at least 0. Must not be greater than 100.'
+        required: true
+        example: 4
+        type: number
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        custom: []
+      start_date:
+        name: start_date
+        description: 'Must be a valid date.'
+        required: true
+        example: '2025-07-14T10:40:27'
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        custom: []
+      end_date:
+        name: end_date
+        description: 'Must be a valid date. Must be a date after <code>start_date</code>.'
+        required: true
+        example: '2106-08-12'
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        custom: []
+      is_active:
+        name: is_active
+        description: ''
+        required: false
+        example: true
+        type: boolean
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        custom: []
+      terms_conditions:
+        name: terms_conditions
+        description: ''
+        required: false
+        example: consequatur
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: true
+        custom: []
+    cleanBodyParameters:
+      title: vmqeopfuudtdsufvyvddq
+      description: 'Dolores dolorum amet iste laborum eius est dolor.'
+      discount_percentage: 4
+      start_date: '2025-07-14T10:40:27'
+      end_date: '2106-08-12'
+      is_active: true
+      terms_conditions: consequatur
+    fileParameters: []
+    responses: []
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+    custom: []
+  -
+    httpMethods:
+      - PUT
+      - PATCH
+    uri: 'api/offers/{id}'
+    metadata:
+      groupName: Endpoints
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'Update the specified offer'
+      description: ''
+      authenticated: false
+      custom: []
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters:
+      id:
+        name: id
+        description: 'The ID of the offer.'
+        required: true
+        example: 1
+        type: integer
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        custom: []
+    cleanUrlParameters:
+      id: 1
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters:
+      title:
+        name: title
+        description: 'Must not be greater than 255 characters.'
+        required: false
+        example: vmqeopfuudtdsufvyvddq
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        custom: []
+      description:
+        name: description
+        description: ''
+        required: false
+        example: 'Dolores dolorum amet iste laborum eius est dolor.'
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        custom: []
+      discount_percentage:
+        name: discount_percentage
+        description: 'Must be at least 0. Must not be greater than 100.'
+        required: false
+        example: 4
+        type: number
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        custom: []
+      start_date:
+        name: start_date
+        description: 'Must be a valid date.'
+        required: false
+        example: '2025-07-14T10:40:27'
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        custom: []
+      end_date:
+        name: end_date
+        description: 'Must be a valid date. Must be a date after <code>start_date</code>.'
+        required: false
+        example: '2106-08-12'
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        custom: []
+      is_active:
+        name: is_active
+        description: ''
+        required: false
+        example: false
+        type: boolean
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        custom: []
+      terms_conditions:
+        name: terms_conditions
+        description: ''
+        required: false
+        example: consequatur
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: true
+        custom: []
+    cleanBodyParameters:
+      title: vmqeopfuudtdsufvyvddq
+      description: 'Dolores dolorum amet iste laborum eius est dolor.'
+      discount_percentage: 4
+      start_date: '2025-07-14T10:40:27'
+      end_date: '2106-08-12'
+      is_active: false
+      terms_conditions: consequatur
+    fileParameters: []
+    responses: []
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+    custom: []
+  -
+    httpMethods:
+      - DELETE
+    uri: 'api/offers/{id}'
+    metadata:
+      groupName: Endpoints
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'Remove the specified offer'
+      description: ''
+      authenticated: false
+      custom: []
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters:
+      id:
+        name: id
+        description: 'The ID of the offer.'
+        required: true
+        example: 1
+        type: integer
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        custom: []
+    cleanUrlParameters:
+      id: 1
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses: []
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+    custom: []
+  -
+    httpMethods:
+      - GET
+    uri: 'api/reviews/{id}'
+    metadata:
+      groupName: Endpoints
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'Display the specified resource.'
+      description: ''
+      authenticated: false
+      custom: []
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters:
+      id:
+        name: id
+        description: 'The ID of the review.'
+        required: true
+        example: consequatur
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        custom: []
+    cleanUrlParameters:
+      id: consequatur
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses:
+      -
+        status: 401
+        content: '{"message":"Unauthenticated."}'
+        headers:
+          cache-control: 'no-cache, private'
+          content-type: application/json
+          access-control-allow-origin: '*'
+        description: null
+        custom: []
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+    custom: []
+  -
+    httpMethods:
+      - PUT
+      - PATCH
+    uri: 'api/reviews/{id}'
+    metadata:
+      groupName: Endpoints
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'Update the specified resource in storage.'
+      description: ''
+      authenticated: false
+      custom: []
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters:
+      id:
+        name: id
+        description: 'The ID of the review.'
+        required: true
+        example: consequatur
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        custom: []
+    cleanUrlParameters:
+      id: consequatur
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses: []
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+    custom: []
+  -
+    httpMethods:
+      - DELETE
+    uri: 'api/reviews/{id}'
+    metadata:
+      groupName: Endpoints
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'Remove the specified resource from storage.'
+      description: ''
+      authenticated: false
+      custom: []
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters:
+      id:
+        name: id
+        description: 'The ID of the review.'
+        required: true
+        example: consequatur
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        custom: []
+    cleanUrlParameters:
+      id: consequatur
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses: []
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+    custom: []
