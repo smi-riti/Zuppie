@@ -93,4 +93,5 @@
 
     <!-- Livewire Modals -->
     <livewire:admin.offers.create-offer />
+    <livewire:admin.offers.update />
 </div>
