@@ -113,7 +113,7 @@
                     Description
                 </h4>
                 <div class="bg-gray-50 p-5 rounded-lg border border-gray-100">
-                    <p class="text-gray-800 whitespace-pre-wrap leading-relaxed">{{ $package->description ?: 'No description available.' }}</p>
+                    <p class="text-gray-800 whitespace-pre-wrap leading-relaxed">{!! $package->description ?: 'No description available.' !!}</p>
                 </div>
             </div>
         </div>

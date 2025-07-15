@@ -744,12 +744,12 @@
                             </select>
                         </div>
 
-                        <div>
-                            <label class="block text-gray-700 font-semibold mb-2">Tell us about your event *</label>
-                            <textarea wire:model="message" rows="5"
-                                class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-zuppie-purple focus:border-transparent transition-all duration-300"
-                                placeholder="Share your vision, requirements, and any special requests..."></textarea>
+                        <div wire:ignore>
+                            <input id="description" type="hidden" name="description" value="{{ $description }}">
+                            <trix-editor input="description"></trix-editor>
                         </div>
+                        
+
 
                         <button type="submit"
                             class="w-full gradient-bg text-white py-4 rounded-lg font-semibold text-lg hover:shadow-lg hover:scale-105 transition-all duration-300 flex items-center justify-center space-x-2">
@@ -761,4 +761,9 @@
             </div>
         </div>
     </section>
+    <script>
+                            document.addEventListener('trix-change', function (e) {
+                                @this.set('description', e.target.innerHTML);
+                            });
+                        </script>
 </div>
