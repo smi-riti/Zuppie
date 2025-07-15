@@ -2,8 +2,10 @@
 
 namespace App\Livewire\Public\Section;
 
+use App\Models\EventPackage;
 use Livewire\Component;
-use App\Models\Category; 
+use App\Models\Category;
+use Illuminate\Support\Facades\Storage;
 
 class Homepage extends Component
 {
@@ -32,10 +34,16 @@ class Homepage extends Component
     ];
 
     public $categories = [];
+    public $packages = [];
 
     public function mount()
     {
-        $this->categories = Category::all();
+        $this->categories = Category::where('is_special', true)->get();
+
+        $this->packages = EventPackage::with('images')
+            ->where('is_active', true)
+            ->where('is_special', true)
+            ->get();
     }
 
     public function render()
