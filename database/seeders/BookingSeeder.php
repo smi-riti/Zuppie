@@ -148,7 +148,6 @@ class BookingSeeder extends Seeder
             Booking::create([
                 'user_id' => $user->id,
                 'event_package_id' => $package->id,
-                'booking_date' => $bookingDate,
                 'event_date' => $eventDate,
                 'event_end_date' => $eventDate->copy()->addHours($package->duration),
                 'guest_count' => rand(10, 200),

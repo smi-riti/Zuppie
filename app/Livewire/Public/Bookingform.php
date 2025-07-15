@@ -17,7 +17,6 @@ class Bookingform extends Component
     public $email;
     public $phone_no;
     public $event_package_id;
-    public $booking_date;
     public $event_date;
     public $event_end_date;
     public $guest_count = 1;
@@ -33,8 +32,7 @@ class Bookingform extends Component
         'email' => 'required|email|unique:users,email',
         'phone_no' => 'required|digits:10',
         'event_package_id' => 'required|exists:event_packages,id',
-        'booking_date' => 'required|date',
-        'event_date' => 'required|date|after_or_equal:booking_date',
+        'event_date' => 'required|date|after_or_equal:today',
         'event_end_date' => 'nullable|date|after_or_equal:event_date',
         'pin_code' => 'required|string|size:6',
         'guest_count' => 'required|integer|min:1',
@@ -130,7 +128,6 @@ class Bookingform extends Component
             Booking::create([
                 'user_id' => $user->id,
                 'event_package_id' => $this->event_package_id,
-                'booking_date' => $this->booking_date,
                 'event_date' => $this->event_date,
                 'event_end_date' => $this->event_end_date,
                 'guest_count' => $this->guest_count,
@@ -148,7 +145,6 @@ class Bookingform extends Component
             session()->flash('error', 'Error creating booking: ' . $e->getMessage());
         }
     }
-
 
     public function render()
     {
