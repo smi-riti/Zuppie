@@ -44,7 +44,7 @@ class CreateOffer extends Component
         // Upload image if present
         $imageData = null;
         if ($this->image) {
-            $imageData = ImageKitHelper::uploadImage($this->image, 'offers');
+            $imageData = ImageKitHelper::uploadImage($this->image, '/Zuppie/offer_images');
 
             if (!$imageData) {
                 session()->flash('error', 'Failed to upload image. Please try again.');
