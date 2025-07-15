@@ -19,7 +19,6 @@ class CreateBooking extends Component
     public $email;
     public $phone_no;
     public $event_package_id;
-    public $booking_date;
     public $event_date;
     public $event_end_date;
     public $guest_count = 1;
@@ -35,9 +34,8 @@ class CreateBooking extends Component
         'email' => 'required|email',
         'phone_no' => 'required|digits:10',
         'event_package_id' => 'required|exists:event_packages,id',
-        'booking_date' => 'required|date',
-        'event_date' => 'required|date|after:today',
-        'event_end_date' => 'required|date|after:event_date',
+        'event_date' => 'required|date|after_or_equal:today',
+        'event_end_date' => 'required|date|after_or_equal:event_date',
         'guest_count' => 'required|integer|min:1',
         'pin_code' => 'required|digits:6',
         'location' => 'required|min:5',
@@ -136,7 +134,6 @@ class CreateBooking extends Component
         Booking::create([
             'user_id' => $user->id,
             'event_package_id' => $this->event_package_id,
-            'booking_date' => $this->booking_date,
             'event_date' => $this->event_date,
             'event_end_date' => $this->event_end_date,
             'guest_count' => $this->guest_count,

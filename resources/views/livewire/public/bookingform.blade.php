@@ -87,17 +87,6 @@
                                     <span class="text-sm text-pink-600">{{ $message }}</span>
                                 @enderror
                             </div>
-
-                            <!-- Booking Date -->
-                            <div>
-                                <label class="block text-sm font-medium text-purple-700 mb-1">Booking Date</label>
-                                <input type="datetime-local" wire:model="booking_date"
-                                    class="w-full px-4 py-2 rounded-lg border border-purple-200 focus:ring-2 focus:ring-purple-300 focus:border-purple-400 transition">
-                                @error('booking_date')
-                                    <span class="text-sm text-pink-600">{{ $message }}</span>
-                                @enderror
-                            </div>
-
                             <!-- Event Date -->
                             <div>
                                 <label class="block text-sm font-medium text-purple-700 mb-1">Event Date</label>

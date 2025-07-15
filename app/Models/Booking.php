@@ -15,7 +15,6 @@ class Booking extends Model
     protected $fillable = [
         'user_id',
         'event_package_id',
-        'booking_date',
         'event_date',
         'event_end_date',
         'guest_count',
@@ -29,7 +28,6 @@ class Booking extends Model
     protected $casts = [
         'event_date' => 'datetime',
         'event_end_date' => 'datetime',
-        'booking_date' => 'datetime',
         'total_price' => 'decimal:2',
     ];
 
