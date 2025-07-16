@@ -15,7 +15,6 @@ return new class extends Migration
             $table->id();
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
             $table->foreignId('event_package_id')->constrained()->onDelete('cascade');
-            $table->dateTime('booking_date');
             $table->dateTime('event_date');
             $table->dateTime('event_end_date')->nullable();
             $table->integer('guest_count')->default(0);

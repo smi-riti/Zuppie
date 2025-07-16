@@ -16,6 +16,7 @@ use App\Livewire\Admin\Category\ManageCategories;
 use App\Livewire\Admin\User\ManageUser;
 use App\Livewire\Admin\Dashboard;
 use Illuminate\Support\Facades\Route;
+use App\Livewire\Admin\Service\Show as ShowService;
 
 // Route::get('/', function () {
 //     return view('welcome');
@@ -38,5 +39,7 @@ Route::prefix('admin')->middleware(['auth', 'admin'])->group(function () {
     Route::get('/offers/all', AllOffers::class)->name('admin.offers.show');
     Route::get('/booking/manage', ManageBooking::class)->name('admin.booking.manage');
     Route::get('/users/manage', ManageUser::class)->name('admin.users.manage');
+    Route::get('/services/manage', ShowService::class)->name('admin.services.manage');
+
 
 });
