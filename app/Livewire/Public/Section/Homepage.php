@@ -2,6 +2,7 @@
 
 namespace App\Livewire\Public\Section;
 
+use App\Models\Enquiry;
 use App\Models\EventPackage;
 use Livewire\Component;
 use App\Models\Category;
@@ -44,6 +45,32 @@ class Homepage extends Component
             ->where('is_active', true)
             ->where('is_special', true)
             ->get();
+    }
+
+    public $fullname, $email, $phone, $eventType, $eventDate, $budget, $message;
+    public function submitEnquiry()
+    {
+        $this->validate([
+            'fullname' => 'required|string|max:255',
+            'email' => 'required|email|max:255',
+            'phone' => 'nullable|string|max:20',
+            'eventType' => 'string|max:255',
+            'eventDate' => 'date',
+            'message' => 'nullable|string|max:1000',
+        ]);
+
+        Enquiry::create([
+            'fullname' => $this->fullname,
+            'email' => $this->email,
+            'phone' => $this->phone,
+            'event_type' => $this->eventType,
+            'event_date' => $this->eventDate,
+            'budget' => $this->budget,
+            'message' => $this->message,
+        ]);
+        $this->reset(['fullname', 'email', 'phone', 'eventType', 'eventDate', 'budget', 'message']);
+
+        session()->flash('success', 'Your enquiry has been submitted successfully!');
     }
 
     public function render()

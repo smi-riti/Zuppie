@@ -1,6 +1,7 @@
 <?php
 
 use App\Livewire\Admin\Category\Show;
+use App\Livewire\Admin\Enquiry\AllEnquiry;
 use App\Livewire\Admin\EventPackage\ListPackage;
 use App\Livewire\Admin\Offers\AllOffers;
 use App\Livewire\Admin\Offers\ShowAll;
@@ -40,6 +41,5 @@ Route::prefix('admin')->middleware(['auth', 'admin'])->group(function () {
     Route::get('/booking/manage', ManageBooking::class)->name('admin.booking.manage');
     Route::get('/users/manage', ManageUser::class)->name('admin.users.manage');
     Route::get('/services/manage', ShowService::class)->name('admin.services.manage');
-
-
+    Route::get('/enquiries/all', AllEnquiry::class)->name('admin.enquiries.all');
 });

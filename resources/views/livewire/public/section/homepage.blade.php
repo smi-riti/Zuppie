@@ -123,8 +123,8 @@
                         <div class="bg-white rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden"
                             data-aos="fade-up">
                             <div class="relative h-48 overflow-hidden">
-                                <img src="{{ $package->images->first()->image_url }}" alt="package_image"
-                                    class="w-full h-full object-cover">
+                                <img src="{{ $package->images->first()->image_url ?? 'No Images Found' }}"
+                                    alt="package_image" class="w-full h-full object-cover">
 
                                 <div class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent"></div>
                                 <div class="absolute bottom-4 left-4 text-white">
@@ -159,7 +159,9 @@
                                         <div class="text-3xl font-bold gradient-text mb-2">
                                             ₹{{ number_format($package->price, 2) }}</div>
                                     @endif
-                                    <p class="text-gray-600 text-sm mb-3">{{ $package->description }}</p>
+                                    <div class="prose-custom max-w-full">
+                                        {!! $package->description !!}
+                                    </div>
 
                                     <div class="flex justify-center space-x-4 text-xs text-gray-500">
 
@@ -677,42 +679,41 @@
                         </div>
                     </div>
                 </div>
-
                 <!-- Contact Form -->
                 <div data-aos="fade-left">
-                    <form class="space-y-6" wire:submit.prevent="submitContact">
-                        <div class="grid md:grid-cols-2 gap-6">
-                            <div>
-                                <label class="block text-gray-700 font-semibold mb-2">First Name *</label>
-                                <input type="text" wire:model="firstName"
-                                    class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-zuppie-purple focus:border-transparent transition-all duration-300"
-                                    placeholder="Your first name">
-                            </div>
-                            <div>
-                                <label class="block text-gray-700 font-semibold mb-2">Last Name *</label>
-                                <input type="text" wire:model="lastName"
-                                    class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-zuppie-purple focus:border-transparent transition-all duration-300"
-                                    placeholder="Your last name">
-                            </div>
+                    <form class="space-y-6" wire:submit.prevent="submitEnquiry">
+                        <div>
+                            <label class="block text-gray-700 font-semibold mb-2">Full Name *</label>
+                            <input type="text" wire:model.live="fullname"
+                                class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-zuppie-purple focus:border-transparent transition-all duration-300"
+                                placeholder="Enter full name">
+                            @error('fullname')
+                                <span class="text-red-500 text-sm">{{ $message }}</span>
+                            @enderror
                         </div>
-
                         <div>
                             <label class="block text-gray-700 font-semibold mb-2">Email Address *</label>
-                            <input type="email" wire:model="email"
+                            <input type="email" wire:model.live="email"
                                 class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-zuppie-purple focus:border-transparent transition-all duration-300"
                                 placeholder="your@email.com">
+                            @error('email')
+                                <span class="text-red-500 text-sm">{{ $message }}</span>
+                            @enderror
                         </div>
 
                         <div>
                             <label class="block text-gray-700 font-semibold mb-2">Phone Number</label>
-                            <input type="tel" wire:model="phone"
+                            <input type="tel" wire:model.live="phone"
                                 class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-zuppie-purple focus:border-transparent transition-all duration-300"
                                 placeholder="(555) 123-4567">
+                            @error('phone')
+                                <span class="text-red-500 text-sm">{{ $message }}</span>
+                            @enderror
                         </div>
 
                         <div>
                             <label class="block text-gray-700 font-semibold mb-2">Event Type</label>
-                            <select wire:model="eventType"
+                            <select wire:model.live="eventType"
                                 class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-zuppie-purple focus:border-transparent transition-all duration-300">
                                 <option value="">Select Event Type</option>
                                 <option value="birthday">Birthday Party</option>
@@ -723,17 +724,23 @@
                                 <option value="graduation">Graduation</option>
                                 <option value="other">Other</option>
                             </select>
+                            @error('eventType')
+                                <span class="text-red-500 text-sm">{{ $message }}</span>
+                            @enderror
                         </div>
 
                         <div>
                             <label class="block text-gray-700 font-semibold mb-2">Event Date</label>
-                            <input type="date" wire:model="eventDate"
+                            <input type="date" wire:model.live="eventDate"
                                 class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-zuppie-purple focus:border-transparent transition-all duration-300">
                         </div>
+                        @error('eventDate')
+                            <span class="text-red-500 text-sm">{{ $message }}</span>
+                        @enderror
 
                         <div>
                             <label class="block text-gray-700 font-semibold mb-2">Budget Range</label>
-                            <select wire:model="budget"
+                            <select wire:model.live="budget"
                                 class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-zuppie-purple focus:border-transparent transition-all duration-300">
                                 <option value="">Select Budget Range</option>
                                 <option value="under_500">Under $500</option>
@@ -742,15 +749,19 @@
                                 <option value="2500_5000">$2,500 - $5,000</option>
                                 <option value="over_5000">Over $5,000</option>
                             </select>
+                            @error('budget')
+                                <span class="text-red-500 text-sm">{{ $message }}</span>
+                            @enderror
                         </div>
-
-                        <div wire:ignore>
-                            <input id="description" type="hidden" name="description" value="{{ $description }}">
-                            <trix-editor input="description"></trix-editor>
+                        <div>
+                            <label class="block text-gray-700 font-semibold mb-2">Message</label>
+                            <textarea wire:model.live="message"
+                                class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-zuppie-purple focus:border-transparent transition-all duration-300"
+                                rows="4" placeholder="Tell us about your event..."></textarea>
+                            @error('message')
+                                <span class="text-red-500 text-sm">{{ $message }}</span>
+                            @enderror
                         </div>
-                        
-
-
                         <button type="submit"
                             class="w-full gradient-bg text-white py-4 rounded-lg font-semibold text-lg hover:shadow-lg hover:scale-105 transition-all duration-300 flex items-center justify-center space-x-2">
                             <i class="fas fa-paper-plane"></i>
@@ -761,9 +772,4 @@
             </div>
         </div>
     </section>
-    <script>
-                            document.addEventListener('trix-change', function (e) {
-                                @this.set('description', e.target.innerHTML);
-                            });
-                        </script>
 </div>
