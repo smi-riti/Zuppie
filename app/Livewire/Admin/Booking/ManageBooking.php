@@ -149,7 +149,7 @@ class ManageBooking extends Component
             $query->where('event_package_id', $this->packageFilter);
         }
         
-        $bookings = $query->orderBy('event_date', 'desc')->paginate(6);
+        $bookings = $query->orderBy('event_date', 'desc')->paginate(4);
         
         return view('livewire.admin.booking.manage-booking', [
             'bookings' => $bookings,
