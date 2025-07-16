@@ -11,44 +11,6 @@
         <!-- Tailwind CSS -->
          @vite('resources/css/app.css')
         
-        <!-- Custom Tailwind Configuration -->
-        <script>
-            tailwind.config = {
-                theme: {
-                    extend: {
-                        colors: {
-                            'zuppie': {
-                                'purple': '#8B5CF6',
-                                'pink': '#EC4899',
-                                'light-purple': '#A78BFA',
-                                'light-pink': '#F472B6',
-                            }
-                        },
-                        fontFamily: {
-                            'sans': ['Inter', 'system-ui', 'sans-serif'],
-                            'display': ['Poppins', 'system-ui', 'sans-serif'],
-                        },
-                        animation: {
-                            'bounce-slow': 'bounce 3s infinite',
-                            'pulse-slow': 'pulse 4s infinite',
-                            'float': 'float 6s ease-in-out infinite',
-                            'glow': 'glow 2s ease-in-out infinite alternate',
-                        },
-                        keyframes: {
-                            float: {
-                                '0%, 100%': { transform: 'translateY(0px)' },
-                                '50%': { transform: 'translateY(-10px)' },
-                            },
-                            glow: {
-                                '0%': { 'box-shadow': '0 0 20px rgba(139, 92, 246, 0.5)' },
-                                '100%': { 'box-shadow': '0 0 30px rgba(139, 92, 246, 0.8)' },
-                            }
-                        }
-                    }
-                }
-            }
-        </script>
-        
         <!-- Google Fonts -->
         <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
         

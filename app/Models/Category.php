@@ -49,4 +49,31 @@ class Category extends Model
             }
         });
     }
+
+    // Relationship methods
+    public function children()
+    {
+        return $this->hasMany(Category::class, 'parent_id');
+    }
+
+    public function parent()
+    {
+        return $this->belongsTo(Category::class, 'parent_id');
+    }
+
+    public function eventPackages()
+    {
+        return $this->hasMany(EventPackage::class);
+    }
+
+    // Helper methods
+    public function isParent()
+    {
+        return $this->children()->exists();
+    }
+
+    public function isChild()
+    {
+        return !is_null($this->parent_id);
+    }
 }

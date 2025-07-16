@@ -15,7 +15,7 @@
 
             <!-- Desktop Navigation with Mega Menu -->
             <nav class="hidden md:flex space-x-8">
-                <div @mouseenter="showMegaMenu = true" @mouseleave="showMegaMenu = false" class="relative">
+                {{-- <div @mouseenter="showMegaMenu = true" @mouseleave="showMegaMenu = false" class="relative">
                     <button class="flex items-center text-pink-700 hover:text-pink-600 font-medium transition">
                         Events
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 ml-1" fill="none" viewBox="0 0 24 24"
@@ -90,10 +90,10 @@
                             </div>
                         </div>
                     </div>
-                </div>
-                <a href="#" class="text-pink-700 hover:text-pink-600 font-medium transition">Venues</a>
-                <a href="#" class="text-pink-700 hover:text-pink-600 font-medium transition">Pricing</a>
-                <a href="#" class="text-pink-700 hover:text-pink-600 font-medium transition">Testimonials</a>
+                </div> --}}
+                <a wire:navigate href="{{route('event-packages')}}" class="text-pink-700 hover:text-pink-600 font-medium transition">EventPackage</a>
+                <a wire:navigate href="{{route('about')}}" class="text-pink-700 hover:text-pink-600 font-medium transition">About</a>
+                <a wire:navigate href="{{route('contact')}}" class="text-pink-700 hover:text-pink-600 font-medium transition">Contact</a>
             </nav>
 
             <!-- Auth Buttons -->

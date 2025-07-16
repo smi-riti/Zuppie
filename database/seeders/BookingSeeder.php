@@ -6,170 +6,97 @@ use App\Models\Booking;
 use App\Models\Category;
 use App\Models\EventPackage;
 use App\Models\User;
+use App\Models\Payment;
 use Carbon\Carbon;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
 
 class BookingSeeder extends Seeder
 {
-    public function run()
+    public function run(): void
     {
-        // Create categories if they don't exist
-        $categories = [
-            ['name' => 'Wedding', 'description' => 'Wedding events and ceremonies'],
-            ['name' => 'Birthday', 'description' => 'Birthday parties and celebrations'],
-            ['name' => 'Corporate', 'description' => 'Corporate events and meetings'],
-            ['name' => 'Conference', 'description' => 'Conferences and seminars'],
-        ];
+        // Get some event packages and users
+        $packages = EventPackage::all();
+        $allUsers = User::all();
 
-        foreach ($categories as $category) {
-            Category::firstOrCreate(['name' => $category['name']], $category);
+        if ($packages->count() > 0 && $allUsers->count() > 0) {
+            // Create sample bookings
+            $bookings = [
+                [
+                    'user_id' => $allUsers->random()->id,
+                    'event_package_id' => $packages->random()->id,
+                    'event_date' => Carbon::now()->addDays(15),
+                    'location' => '123 Main Street, New Delhi, 110001',
+                    'pin_code' => '110001',
+                    'special_requests' => 'Please include extra balloons',
+                    'guest_count' => 25,
+                    'total_price' => 12000.00,
+                    'status' => 'confirmed',
+                    'created_at' => Carbon::now()->subDays(5),
+                ],
+                [
+                    'user_id' => $allUsers->random()->id,
+                    'event_package_id' => $packages->random()->id,
+                    'event_date' => Carbon::now()->addDays(30),
+                    'location' => '456 Oak Avenue, Mumbai, 400001',
+                    'pin_code' => '400001',
+                    'special_requests' => 'Princess theme with pink decorations',
+                    'guest_count' => 30,
+                    'total_price' => 15000.00,
+                    'status' => 'confirmed',
+                    'created_at' => Carbon::now()->subDays(3),
+                ],
+                [
+                    'user_id' => $allUsers->random()->id,
+                    'event_package_id' => $packages->random()->id,
+                    'event_date' => Carbon::now()->addDays(7),
+                    'location' => '789 Pine Road, Bangalore, 560001',
+                    'pin_code' => '560001',
+                    'special_requests' => 'Superhero theme for 5-year-old',
+                    'guest_count' => 20,
+                    'total_price' => 11500.00,
+                    'status' => 'pending',
+                    'created_at' => Carbon::now()->subDays(1),
+                ],
+                [
+                    'user_id' => $allUsers->random()->id,
+                    'event_package_id' => $packages->random()->id,
+                    'event_date' => Carbon::now()->addDays(45),
+                    'location' => '321 Cedar Lane, Chennai, 600001',
+                    'pin_code' => '600001',
+                    'special_requests' => 'Anniversary celebration with roses',
+                    'guest_count' => 50,
+                    'total_price' => 25000.00,
+                    'status' => 'confirmed',
+                    'created_at' => Carbon::now()->subDays(7),
+                ],
+                [
+                    'user_id' => $allUsers->random()->id,
+                    'event_package_id' => $packages->random()->id,
+                    'event_date' => Carbon::now()->addDays(60),
+                    'location' => '654 Maple Street, Hyderabad, 500001',
+                    'pin_code' => '500001',
+                    'special_requests' => 'Baby shower with pastel colors',
+                    'guest_count' => 35,
+                    'total_price' => 18000.00,
+                    'status' => 'confirmed',
+                    'created_at' => Carbon::now()->subDays(2),
+                ],
+            ];
+
+            foreach ($bookings as $bookingData) {
+                $booking = Booking::create($bookingData);
+
+                // Create corresponding payment record
+                Payment::create([
+                    'booking_id' => $booking->id,
+                    'payment_method' => 'cash',
+                    'status' => $booking->status === 'confirmed' ? 'completed' : 'pending',
+                    'amount' => $booking->total_price,
+                    'transaction_id' => 'CASH_' . strtoupper(uniqid()),
+                    'payment_date' => $booking->status === 'confirmed' ? $booking->created_at : now(),
+                ]);
+            }
         }
-
-        // Create event packages with realistic data
-        $packages = [
-            [
-                'name' => 'Premium Wedding Package',
-                'price' => 2999.99,
-                'category_id' => Category::where('name', 'Wedding')->first()->id,
-                'description' => 'Complete wedding package with premium services',
-                'duration' => 8, // hours
-                'is_active' => true,
-                'is_special' => true
-            ],
-            [
-                'name' => 'Standard Birthday Package',
-                'price' => 999.99,
-                'category_id' => Category::where('name', 'Birthday')->first()->id,
-                'description' => 'Standard birthday celebration package',
-                'duration' => 4, // hours
-                'is_active' => true,
-                'is_special' => false
-            ],
-            [
-                'name' => 'Corporate Event Basic',
-                'price' => 1999.99,
-                'category_id' => Category::where('name', 'Corporate')->first()->id,
-                'description' => 'Basic package for corporate events',
-                'duration' => 6, // hours
-                'is_active' => true,
-                'is_special' => false
-            ],
-            [
-                'name' => 'Conference Deluxe',
-                'price' => 3999.99,
-                'category_id' => Category::where('name', 'Conference')->first()->id,
-                'description' => 'Deluxe conference package with all amenities',
-                'duration' => 8, // hours
-                'is_active' => true,
-                'is_special' => true
-            ],
-        ];
-
-        foreach ($packages as $package) {
-            EventPackage::firstOrCreate(['name' => $package['name']], $package);
-        }
-
-        // Create test users
-        $users = [
-            [
-                'name' => 'John Doe',
-                'email' => 'john@example.com',
-                'phone_no' => '1234567890',
-                'password' => Hash::make('password'),
-                'is_admin' => false
-            ],
-            [
-                'name' => 'Jane Smith',
-                'email' => 'jane@example.com',
-                'phone_no' => '0987654321',
-                'password' => Hash::make('password'),
-                'is_admin' => false
-            ],
-            [
-                'name' => 'Alice Johnson',
-                'email' => 'alice@example.com',
-                'phone_no' => '1122334455',
-                'password' => Hash::make('password'),
-                'is_admin' => false
-            ],
-            [
-                'name' => 'Bob Williams',
-                'email' => 'bob@example.com',
-                'phone_no' => '5566778899',
-                'password' => Hash::make('password'),
-                'is_admin' => false
-            ],
-        ];
-
-        foreach ($users as $user) {
-            User::firstOrCreate(['email' => $user['email']], $user);
-        }
-
-        // Create sample bookings
-        $statuses = ['pending', 'confirmed', 'cancelled'];
-        $locations = [
-            'Grand Ballroom, Hotel Taj',
-            'Convention Center, Downtown',
-            'Beachside Resort, Malibu',
-            'Garden Pavilion, Central Park',
-            'Rooftop Terrace, City View Hotel'
-        ];
-        $specialRequests = [
-            'Vegetarian meal options required',
-            'Wheelchair accessibility needed',
-            'Minimal decoration preferred',
-            'AV equipment required',
-            'Special cake at midnight',
-            null
-        ];
-        
-        // Add pin codes corresponding to locations
-        $pinCodes = [
-            '400001', // Mumbai
-            '110001', // Delhi
-            '600001', // Chennai
-            '700001', // Kolkata
-            '560001'  // Bangalore
-        ];
-
-        for ($i = 0; $i < 50; $i++) {
-            $user = User::where('is_admin', false)->inRandomOrder()->first();
-            $package = EventPackage::inRandomOrder()->first();
-            
-            $eventDate = Carbon::now()->addDays(rand(1, 90));
-            $bookingDate = $eventDate->copy()->subDays(rand(1, 30));
-            
-            // Get random location and matching pin code
-            $locationIndex = array_rand($locations);
-            $location = $locations[$locationIndex];
-            $pinCode = $pinCodes[$locationIndex];
-
-            Booking::create([
-                'user_id' => $user->id,
-                'event_package_id' => $package->id,
-                'event_date' => $eventDate,
-                'event_end_date' => $eventDate->copy()->addHours($package->duration),
-                'guest_count' => rand(10, 200),
-                'location' => $location,
-                'pin_code' => $pinCode,
-                'special_requests' => $specialRequests[array_rand($specialRequests)],
-                'status' => $statuses[array_rand($statuses)],
-                'total_price' => $package->price * $this->calculateGuestMultiplier(rand(10, 200)),
-            ]);
-        }
-
-        $this->command->info('Successfully seeded 50 bookings with related data!');
-    }
-
-    /**
-     * Calculate price multiplier based on guest count
-     */
-    private function calculateGuestMultiplier($guestCount): float
-    {
-        if ($guestCount < 20) return 1.0;
-        if ($guestCount < 50) return 0.9;
-        if ($guestCount < 100) return 0.85;
-        return 0.8; // Discount for large groups
     }
 }
