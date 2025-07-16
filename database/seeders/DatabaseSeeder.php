@@ -21,6 +21,7 @@ class DatabaseSeeder extends Seeder
            CategorySeeder::class,
             AdminUserSeeder::class,
             BookingSeeder::class,
+            ServiceSeeder::class,
         ]);
         
        

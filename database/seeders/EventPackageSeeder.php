@@ -20,148 +20,360 @@ class EventPackageSeeder extends Seeder
      */
     public function run(): void
     {
-        // Create some categories if none exist
-        if (Category::count() === 0) {
-            $categories = [
-                ['name' => 'Wedding'],
-                ['name' => 'Birthday'],
-                ['name' => 'Corporate Event'],
-                ['name' => 'Anniversary'],
-                ['name' => 'Baby Shower'],
-            ];
+        // Get categories
+        $birthdayCategory = Category::where('slug', 'birthday')->first();
+        $anniversaryCategory = Category::where('slug', 'wedding-anniversary')->first();
+        $festivalCategory = Category::where('slug', 'festival')->first();
+        $firstBirthdayCategory = Category::where('slug', '1st-birthday')->first();
+        $haldiMehndiCategory = Category::where('slug', 'haldi-mehndi')->first();
+        $premiumCategory = Category::where('slug', 'premium-decoration')->first();
+        $flowerCategory = Category::where('slug', 'flower-bouquet')->first();
+        $giftCategory = Category::where('slug', 'gift-section')->first();
+        $simpleCategory = Category::where('slug', 'simple-decoration')->first();
+        $ringCategory = Category::where('slug', 'ring-decoration')->first();
+        $welcomeBabyCategory = Category::where('slug', 'welcome-baby')->first();
+        $babyShowerCategory = Category::where('slug', 'baby-shower')->first();
+        $loveThemeCategory = Category::where('slug', 'love-theme')->first();
+        $brideToBeCategory = Category::where('slug', 'bride-to-be')->first();
 
-            foreach ($categories as $category) {
-                Category::create($category);
-            }
-        }
-
-        // Get all categories
-        $categories = Category::all();
-
-        // Sample packages
         $packages = [
+            // Birthday Packages
             [
-                'name' => 'Premium Wedding Package',
-                'price' => 2999.99,
-                'discount_type' => 'percentage',
-                'discount_value' => 10,
-                'description' => "Our premium wedding package includes:\n- Professional photography\n- Gourmet catering\n- Venue decoration\n- DJ and entertainment\n- Wedding coordinator\n- Floral arrangements",
-                'is_active' => true,
-                'is_special' => true,
-                'duration' => 480 * 60 * 1000, // 8 hours in milliseconds
-                'category_id' => $categories->where('name', 'Wedding')->first()?->id,
-                'images' => [
-                    'https://ik.imagekit.io/demo/sample-image1.jpg',
-                    'https://ik.imagekit.io/demo/sample-image2.jpg',
-                    'https://ik.imagekit.io/demo/sample-image3.jpg',
-                ]
-            ],
-            [
-                'name' => 'Basic Birthday Party',
-                'price' => 599.99,
+                'name' => 'Princess Birthday Package',
+                'description' => 'Transform your little princess\'s birthday into a magical fairy tale with our enchanting princess-themed decorations.',
+                'price' => 15000,
                 'discount_type' => 'fixed',
-                'discount_value' => 50,
-                'description' => "Perfect for children's birthday parties:\n- Themed decorations\n- Birthday cake\n- Party games\n- Party favors\n- Basic catering",
-                'is_active' => true,
-                'is_special' => false,
-                'duration' => 180, // 3 hours
-                'category_id' => $categories->where('name', 'Birthday')->first()?->id,
-                'images' => [
-                    'https://ik.imagekit.io/demo/sample-birthday1.jpg',
-                    'https://ik.imagekit.io/demo/sample-birthday2.jpg',
-                ]
-            ],
-            [
-                'name' => 'Corporate Conference',
-                'price' => 4999.99,
-                'discount_type' => null,
-                'discount_value' => null,
-                'description' => "Professional corporate event solution:\n- Conference room setup\n- Audio/visual equipment\n- Professional staff\n- Catering options\n- Networking area\n- Registration services",
-                'is_active' => true,
-                'is_special' => false,
-                'duration' => 480, // 8 hours
-                'category_id' => $categories->where('name', 'Corporate Event')->first()?->id,
-                'images' => [
-                    'https://ik.imagekit.io/demo/sample-corporate1.jpg',
-                ]
-            ],
-            [
-                'name' => 'Silver Anniversary',
-                'price' => 1499.99,
-                'discount_type' => 'percentage',
-                'discount_value' => 5,
-                'description' => "Celebrate your special milestone:\n- Elegant decorations\n- Anniversary cake\n- Professional photography\n- Dinner service\n- Champagne toast",
+                'discount_value' => 3000,
+                'duration' => 6 * 60 * 60 * 1000, // 6 hours in milliseconds
                 'is_active' => true,
                 'is_special' => true,
-                'duration' => 300, // 5 hours
-                'category_id' => $categories->where('name', 'Anniversary')->first()?->id,
+                'category_id' => $birthdayCategory->id,
                 'images' => [
-                    'https://ik.imagekit.io/demo/sample-anniversary1.jpg',
-                    'https://ik.imagekit.io/demo/sample-anniversary2.jpg',
+                    'https://images.unsplash.com/photo-1464207687429-7505649dae38?w=800&h=600&fit=crop',
+                    'https://images.unsplash.com/photo-1530103862676-de8c9debad1d?w=800&h=600&fit=crop'
                 ]
             ],
             [
-                'name' => 'Deluxe Baby Shower',
-                'price' => 899.99,
+                'name' => 'Superhero Birthday Bash',
+                'description' => 'Let your little hero save the day with our action-packed superhero birthday celebration.',
+                'price' => 14000,
                 'discount_type' => 'fixed',
-                'discount_value' => 100,
-                'description' => "Welcome the new arrival in style:\n- Custom theme decorations\n- Catering and refreshments\n- Baby shower games\n- Party favors\n- Professional photography",
+                'discount_value' => 2500,
+                'duration' => 6 * 60 * 60 * 1000, // 6 hours in milliseconds
                 'is_active' => true,
                 'is_special' => false,
-                'duration' => 240, // 4 hours
-                'category_id' => $categories->where('name', 'Baby Shower')->first()?->id,
+                'category_id' => $birthdayCategory->id,
                 'images' => [
-                    'https://ik.imagekit.io/demo/sample-babyshower1.jpg',
+                    'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&h=600&fit=crop'
                 ]
             ],
             [
-                'name' => 'Elite Wedding Experience',
-                'price' => 8999.99,
-                'discount_type' => null,
-                'discount_value' => null,
-                'description' => "The ultimate wedding experience:\n- Luxury venue\n- Gourmet multi-course meal\n- Premium open bar\n- Live band and DJ\n- Professional photography and videography\n- Wedding planner\n- Luxury transportation",
+                'name' => 'Teenage Glow Party',
+                'description' => 'Light up the night with our trendy glow-in-the-dark teenage birthday party setup.',
+                'price' => 18000,
+                'discount_type' => 'fixed',
+                'discount_value' => 3000,
+                'duration' => 8 * 60 * 60 * 1000, // 8 hours in milliseconds
                 'is_active' => true,
                 'is_special' => true,
-                'duration' => 720, // 12 hours
-                'category_id' => $categories->where('name', 'Wedding')->first()?->id,
+                'category_id' => $birthdayCategory->id,
                 'images' => [
-                    'https://ik.imagekit.io/demo/sample-elite-wedding1.jpg',
-                    'https://ik.imagekit.io/demo/sample-elite-wedding2.jpg',
+                    'https://images.unsplash.com/photo-1549451371-64aa98a6f660?w=800&h=600&fit=crop'
                 ]
             ],
             [
-                'name' => 'VIP Birthday Experience',
-                'price' => 1999.99,
-                'discount_type' => 'percentage',
-                'discount_value' => 15,
-                'description' => "Celebrate in VIP style:\n- Private venue\n- Custom decorations\n- Premium catering\n- Open bar\n- Entertainment options\n- Red carpet entrance",
-                'is_active' => false, // Inactive package
-                'is_special' => true,
-                'duration' => 360, // 6 hours
-                'category_id' => $categories->where('name', 'Birthday')->first()?->id,
+                'name' => 'Elegant Adult Birthday',
+                'description' => 'Celebrate another year of life with sophisticated and elegant birthday decorations.',
+                'price' => 25000,
+                'discount_type' => 'fixed',
+                'discount_value' => 5000,
+                'duration' => 8 * 60 * 60 * 1000, // 8 hours in milliseconds
+                'is_active' => true,
+                'is_special' => false,
+                'category_id' => $birthdayCategory->id,
                 'images' => [
-                    'https://ik.imagekit.io/demo/sample-vip-birthday1.jpg',
+                    'https://images.unsplash.com/photo-1527529482837-4698179dc6ce?w=800&h=600&fit=crop'
                 ]
             ],
+
+            // Anniversary Packages
+            [
+                'name' => 'First Anniversary Romance',
+                'description' => 'Celebrate your first year of marriage with romantic candlelit decorations and rose petals.',
+                'price' => 20000,
+                'discount_type' => 'fixed',
+                'discount_value' => 4000,
+                'duration' => 4 * 60 * 60 * 1000, // 4 hours in milliseconds
+                'is_active' => true,
+                'is_special' => true,
+                'category_id' => $anniversaryCategory->id,
+                'images' => [
+                    'https://images.unsplash.com/photo-1519225421980-715cb0215aed?w=800&h=600&fit=crop'
+                ]
+            ],
+            [
+                'name' => 'Silver Jubilee Celebration',
+                'description' => 'Honor 25 years of togetherness with elegant silver-themed decorations and memories.',
+                'price' => 35000,
+                'discount_type' => 'fixed',
+                'discount_value' => 5000,
+                'duration' => 6 * 60 * 60 * 1000, // 6 hours in milliseconds
+                'is_active' => true,
+                'is_special' => true,
+                'category_id' => $anniversaryCategory->id,
+                'images' => [
+                    'https://images.unsplash.com/photo-1511578314322-379afb476865?w=800&h=600&fit=crop'
+                ]
+            ],
+            [
+                'name' => 'Golden Anniversary Grandeur',
+                'description' => 'Celebrate 50 years of love with luxurious golden decorations and family gatherings.',
+                'price' => 50000,
+                'discount_type' => 'fixed',
+                'discount_value' => 5000,
+                'duration' => 8 * 60 * 60 * 1000, // 8 hours in milliseconds
+                'is_active' => true,
+                'is_special' => true,
+                'category_id' => $anniversaryCategory->id,
+                'images' => [
+                    'https://images.unsplash.com/photo-1465495976277-4387d4b0e4a6?w=800&h=600&fit=crop'
+                ]
+            ],
+
+            // Festival Packages
+            [
+                'name' => 'Diwali Festival Celebration',
+                'description' => 'Light up your home with traditional Diwali decorations, diyas, and rangoli.',
+                'price' => 12000,
+                'discount_type' => 'fixed',
+                'discount_value' => 2000,
+                'duration' => 4 * 60 * 60 * 1000, // 4 hours in milliseconds
+                'is_active' => true,
+                'is_special' => false,
+                'category_id' => $festivalCategory->id,
+                'images' => [
+                    'https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=800&h=600&fit=crop'
+                ]
+            ],
+
+            // 1st Birthday Special
+            [
+                'name' => 'Baby Girl First Birthday',
+                'description' => 'Celebrate your baby girl\'s milestone first birthday with pastel colors and cute decorations.',
+                'price' => 10000,
+                'discount_type' => 'fixed',
+                'discount_value' => 2000,
+                'duration' => 4 * 60 * 60 * 1000, // 4 hours in milliseconds
+                'is_active' => true,
+                'is_special' => true,
+                'category_id' => $firstBirthdayCategory->id,
+                'images' => [
+                    'https://images.unsplash.com/photo-1464207687429-7505649dae38?w=800&h=600&fit=crop'
+                ]
+            ],
+            [
+                'name' => 'Baby Boy First Birthday',
+                'description' => 'Celebrate your baby boy\'s first birthday with playful and colorful decorations.',
+                'price' => 10000,
+                'discount_type' => 'fixed',
+                'discount_value' => 2000,
+                'duration' => 4 * 60 * 60 * 1000, // 4 hours in milliseconds
+                'is_active' => true,
+                'is_special' => true,
+                'category_id' => $firstBirthdayCategory->id,
+                'images' => [
+                    'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&h=600&fit=crop'
+                ]
+            ],
+
+            // Haldi & Mehndi
+            [
+                'name' => 'Traditional Haldi Ceremony',
+                'description' => 'Create a vibrant yellow-themed setup for your traditional haldi ceremony.',
+                'price' => 22000,
+                'discount_type' => 'fixed',
+                'discount_value' => 4000,
+                'duration' => 6 * 60 * 60 * 1000, // 6 hours in milliseconds
+                'is_active' => true,
+                'is_special' => false,
+                'category_id' => $haldiMehndiCategory->id,
+                'images' => [
+                    'https://images.unsplash.com/photo-1606800052052-a08af7148866?w=800&h=600&fit=crop'
+                ]
+            ],
+            [
+                'name' => 'Mehndi Night Celebration',
+                'description' => 'Beautiful green and orange themed decorations for your mehndi night festivities.',
+                'price' => 25000,
+                'discount_type' => 'fixed',
+                'discount_value' => 5000,
+                'duration' => 8 * 60 * 60 * 1000, // 8 hours in milliseconds
+                'is_active' => true,
+                'is_special' => true,
+                'category_id' => $haldiMehndiCategory->id,
+                'images' => [
+                    'https://images.unsplash.com/photo-1606800052052-a08af7148866?w=800&h=600&fit=crop'
+                ]
+            ],
+
+            // Premium Decoration
+            [
+                'name' => 'Luxury Wedding Decoration',
+                'description' => 'Opulent and grand wedding decorations with premium flowers and lighting.',
+                'price' => 100000,
+                'discount_type' => 'fixed',
+                'discount_value' => 15000,
+                'duration' => 12 * 60 * 60 * 1000, // 12 hours in milliseconds
+                'is_active' => true,
+                'is_special' => true,
+                'category_id' => $premiumCategory->id,
+                'images' => [
+                    'https://images.unsplash.com/photo-1519225421980-715cb0215aed?w=800&h=600&fit=crop'
+                ]
+            ],
+
+            // Flower Bouquet
+            [
+                'name' => 'Rose Bouquet Arrangement',
+                'description' => 'Beautiful red rose bouquets perfect for romantic occasions and proposals.',
+                'price' => 3000,
+                'discount_type' => 'fixed',
+                'discount_value' => 500,
+                'duration' => 1 * 60 * 60 * 1000, // 1 hour in milliseconds
+                'is_active' => true,
+                'is_special' => false,
+                'category_id' => $flowerCategory->id,
+                'images' => [
+                    'https://images.unsplash.com/photo-1455659817273-f96807779a8a?w=800&h=600&fit=crop'
+                ]
+            ],
+
+            // Gift Section
+            [
+                'name' => 'Surprise Gift Box',
+                'description' => 'Curated gift boxes with personalized items for special occasions.',
+                'price' => 5000,
+                'discount_type' => 'fixed',
+                'discount_value' => 1000,
+                'duration' => 1 * 60 * 60 * 1000, // 1 hour in milliseconds
+                'is_active' => true,
+                'is_special' => false,
+                'category_id' => $giftCategory->id,
+                'images' => [
+                    'https://images.unsplash.com/photo-1549465220-1a8b9238cd48?w=800&h=600&fit=crop'
+                ]
+            ],
+
+            // Simple Decoration
+            [
+                'name' => 'Minimalist Birthday Setup',
+                'description' => 'Clean and elegant minimalist decoration for intimate birthday celebrations.',
+                'price' => 8000,
+                'discount_type' => 'fixed',
+                'discount_value' => 1500,
+                'duration' => 3 * 60 * 60 * 1000, // 3 hours in milliseconds
+                'is_active' => true,
+                'is_special' => false,
+                'category_id' => $simpleCategory->id,
+                'images' => [
+                    'https://images.unsplash.com/photo-1527529482837-4698179dc6ce?w=800&h=600&fit=crop'
+                ]
+            ],
+
+            // Ring Decoration
+            [
+                'name' => 'Ring Ceremony Decoration',
+                'description' => 'Elegant ring ceremony setup with floral arrangements and traditional elements.',
+                'price' => 30000,
+                'discount_type' => 'fixed',
+                'discount_value' => 5000,
+                'duration' => 6 * 60 * 60 * 1000, // 6 hours in milliseconds
+                'is_active' => true,
+                'is_special' => false,
+                'category_id' => $ringCategory->id,
+                'images' => [
+                    'https://images.unsplash.com/photo-1515934751635-c81c6bc9a2d8?w=800&h=600&fit=crop'
+                ]
+            ],
+
+            // Welcome Baby
+            [
+                'name' => 'Welcome Baby Home Setup',
+                'description' => 'Adorable decorations to welcome your newborn baby home.',
+                'price' => 7000,
+                'discount_type' => 'fixed',
+                'discount_value' => 1500,
+                'duration' => 2 * 60 * 60 * 1000, // 2 hours in milliseconds
+                'is_active' => true,
+                'is_special' => false,
+                'category_id' => $welcomeBabyCategory->id,
+                'images' => [
+                    'https://images.unsplash.com/photo-1515488042361-ee00e0ddd4e4?w=800&h=600&fit=crop'
+                ]
+            ],
+
+            // Baby Shower
+            [
+                'name' => 'Baby Shower Celebration',
+                'description' => 'Beautiful baby shower decorations with balloons, banners, and cute props.',
+                'price' => 12000,
+                'discount_type' => 'fixed',
+                'discount_value' => 2000,
+                'duration' => 4 * 60 * 60 * 1000, // 4 hours in milliseconds
+                'is_active' => true,
+                'is_special' => false,
+                'category_id' => $babyShowerCategory->id,
+                'images' => [
+                    'https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=800&h=600&fit=crop'
+                ]
+            ],
+
+            // Love Theme
+            [
+                'name' => 'Romantic Date Night Setup',
+                'description' => 'Intimate romantic setup with candles, flowers, and mood lighting for couples.',
+                'price' => 8000,
+                'discount_type' => 'fixed',
+                'discount_value' => 1500,
+                'duration' => 3 * 60 * 60 * 1000, // 3 hours in milliseconds
+                'is_active' => true,
+                'is_special' => true,
+                'category_id' => $loveThemeCategory->id,
+                'images' => [
+                    'https://images.unsplash.com/photo-1518621012420-9f4c3ba55fdd?w=800&h=600&fit=crop'
+                ]
+            ],
+
+            // Bride to Be
+            [
+                'name' => 'Bride to Be Party',
+                'description' => 'Celebrate the bride-to-be with elegant and fun decorations for her special day.',
+                'price' => 15000,
+                'discount_type' => 'fixed',
+                'discount_value' => 2500,
+                'duration' => 6 * 60 * 60 * 1000, // 6 hours in milliseconds
+                'is_active' => true,
+                'is_special' => true,
+                'category_id' => $brideToBeCategory->id,
+                'images' => [
+                    'https://images.unsplash.com/photo-1594736797933-d0d3482ba3a8?w=800&h=600&fit=crop'
+                ]
+            ]
         ];
 
-        // Create packages
         foreach ($packages as $packageData) {
             $images = $packageData['images'];
             unset($packageData['images']);
-            
+
             $package = EventPackage::create($packageData);
 
-            // Create images for this package
+            // Create package images
             foreach ($images as $imageUrl) {
                 EventPackageImage::create([
                     'event_package_id' => $package->id,
-                    'image_url' => $imageUrl,
-                    'image_file_id' => 'seed_' . uniqid(), // Fake file ID for seeded data
+                    'image_url' => $imageUrl
                 ]);
             }
         }
-
-        $this->command->info('Created ' . count($packages) . ' event packages with images!');
     }
 }

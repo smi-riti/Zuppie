@@ -22,6 +22,7 @@ class User extends Authenticatable
         'email',
         'password',
         'phone_no',
+        'address',
         'is_admin',
     ];
 
@@ -47,5 +48,22 @@ class User extends Authenticatable
             'password' => 'hashed',
             'is_admin' => 'boolean',
         ];
+    }
+
+    // Relationship methods
+    public function bookings()
+    {
+        return $this->hasMany(Booking::class);
+    }
+
+    // Accessor for phone field compatibility
+    public function getPhoneAttribute()
+    {
+        return $this->phone_no;
+    }
+
+    public function setPhoneAttribute($value)
+    {
+        $this->attributes['phone_no'] = $value;
     }
 }
