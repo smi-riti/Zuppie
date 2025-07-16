@@ -1,13 +1,12 @@
 <?php
-
 namespace App\Livewire\Admin\Booking;
 
 use Livewire\Component;
 use App\Models\Booking;
 use App\Models\EventPackage;
 use App\Models\User;
-use Illuminate\Support\Facades\Http;
-
+use App\Models\Service;
+use Illuminate\Validation\ValidationException;
 
 class UpdateBooking extends Component
 {
@@ -16,7 +15,6 @@ class UpdateBooking extends Component
     public $email;
     public $phone_no;
     public $event_package_id;
-    public $booking_date;
     public $event_date;
     public $event_end_date;
     public $guest_count;
@@ -25,15 +23,14 @@ class UpdateBooking extends Component
     public $special_requests;
     public $total_price = 0;
     public $user_id;
-    public $is_fetching_location = false;
+    
     protected $rules = [
         'name' => 'required|min:3',
         'email' => 'required|email',
         'phone_no' => 'required|digits:10',
         'event_package_id' => 'required|exists:event_packages,id',
-        'booking_date' => 'required|date',
-        'event_date' => 'required|date',
-        'event_end_date' => 'required|date|after:event_date',
+        'event_date' => 'required|date|after_or_equal:today',
+        'event_end_date' => 'required|date|after_or_equal:event_date',
         'guest_count' => 'required|integer|min:1',
         'pin_code' => 'required|digits:6',
         'location' => 'required|min:5',
@@ -48,7 +45,6 @@ class UpdateBooking extends Component
         $this->email = $booking->user->email;
         $this->phone_no = $booking->user->phone_no;
         $this->event_package_id = $booking->event_package_id;
-        $this->booking_date = $booking->booking_date->format('Y-m-d\TH:i');
         $this->event_date = $booking->event_date->format('Y-m-d\TH:i');
         $this->event_end_date = $booking->event_end_date->format('Y-m-d\TH:i');
         $this->guest_count = $booking->guest_count;
@@ -78,47 +74,21 @@ class UpdateBooking extends Component
             }
         }
     }
-    public function updatedPinCode($value)
-    {
-        // Only fetch location if PIN code is 6 digits
-        if (strlen($value) === 6) {
-            $this->is_fetching_location = true;
-            
-            try {
-                // Make API request to get location details
-                $response = Http::get("https://api.postalpincode.in/pincode/{$value}");
-                
-                if ($response->successful()) {
-                    $data = $response->json();
-                    
-                    if (isset($data[0]['Status']) && $data[0]['Status'] === 'Success' && 
-                        !empty($data[0]['PostOffice'])) {
-                        // Extract location details
-                        $postOffice = $data[0]['PostOffice'][0];
-                        $this->location = "{$postOffice['Name']}, {$postOffice['District']}, {$postOffice['State']}";
-                        
-                        // Clear any previous errors
-                        $this->resetErrorBag('pin_code');
-                        $this->resetErrorBag('location');
-                    } else {
-                        $this->addError('pin_code', 'Invalid PIN code or no location found');
-                    }
-                } else {
-                    $this->addError('pin_code', 'Failed to fetch location details');
-                }
-            } catch (\Exception $e) {
-                $this->addError('pin_code', 'Error fetching location: ' . $e->getMessage());
-            } finally {
-                $this->is_fetching_location = false;
-            }
-        } else {
-            $this->location = '';
-        }
-    }
 
     public function update()
     {
-        $this->validate();
+        // Add custom validation for service availability
+        $this->validate(array_merge($this->rules, [
+            'pin_code' => [
+                'required',
+                'digits:6',
+                function ($attribute, $value, $fail) {
+                    if (!Service::where('pin_code', $value)->exists()) {
+                        $fail('Service is not available for this PIN code.');
+                    }
+                }
+            ]
+        ]));
 
         // Update user
         $user = User::findOrFail($this->user_id);
@@ -132,7 +102,6 @@ class UpdateBooking extends Component
         $booking = Booking::findOrFail($this->bookingId);
         $booking->update([
             'event_package_id' => $this->event_package_id,
-            'booking_date' => $this->booking_date,
             'event_date' => $this->event_date,
             'event_end_date' => $this->event_end_date,
             'guest_count' => $this->guest_count,

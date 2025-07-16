@@ -5,15 +5,15 @@ namespace App\Livewire\Public;
 use Livewire\Component;
 use App\Models\User;
 use App\Models\Booking;
-use App\Models\Category;
 use App\Models\EventPackage;
+use App\Models\Service;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
 use Illuminate\Validation\ValidationException;
 
 class Bookingform extends Component
 {
-  public $name;
+    public $name;
     public $email;
     public $phone_no;
     public $event_package_id;
@@ -65,30 +65,12 @@ class Bookingform extends Component
     public function updatedPinCode($value)
     {
         if (strlen($value) === 6) {
-            try {
-                $response = \Illuminate\Support\Facades\Http::get("https://api.postalpincode.in/pincode/{$value}")->json();
-                
-                if (isset($response[0]['Status']) && $response[0]['Status'] === 'Success' && !empty($response[0]['PostOffice'])) {
-                    $location = "{$response[0]['PostOffice'][0]['Name']}, {$response[0]['PostOffice'][0]['District']}, {$response[0]['PostOffice'][0]['State']}";
-                    // Update location using Livewire's data binding
-                    $this->location = $location;
-                    
-                    // Clear any previous errors
-                    $this->resetErrorBag('pin_code');
-                    $this->resetErrorBag('location');
-                    
-                    // Validate the location field
-                    $this->validateOnly('location');
-                } else {
-                    $this->location = '';
-                    $this->addError('pin_code', 'Invalid PIN code or no location found.');
-                }
-            } catch (\Exception $e) {
-                $this->location = '';
-                $this->addError('pin_code', 'Error fetching location: ' . $e->getMessage());
+            // Check if PIN code is serviceable
+            if (!Service::where('pin_code', $value)->exists()) {
+                $this->addError('pin_code', 'Service is not available for this PIN code.');
+            } else {
+                $this->resetErrorBag('pin_code');
             }
-        } else {
-            $this->location = '';
         }
     }
 
@@ -106,7 +88,19 @@ class Bookingform extends Component
 
     public function submit()
     {
-        $this->validate();
+        // Add custom validation for service availability
+        $this->validate(array_merge($this->rules, [
+            'pin_code' => [
+                'required',
+                'string',
+                'size:6',
+                function ($attribute, $value, $fail) {
+                    if (!Service::where('pin_code', $value)->exists()) {
+                        $fail('Service is not available for this PIN code.');
+                    }
+                }
+            ]
+        ]));
 
         if (User::where('phone_no', $this->phone_no)->exists()) {
             throw ValidationException::withMessages([
@@ -151,4 +145,3 @@ class Bookingform extends Component
         return view('livewire.public.bookingform');
     }
 }
-

@@ -6,12 +6,10 @@ use Livewire\Component;
 use App\Models\Booking;
 use App\Models\EventPackage;
 use App\Models\User;
+use App\Models\Service; // Import the Service model
 use Illuminate\Support\Carbon;
-use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Str;
-
 use Illuminate\Validation\ValidationException;
-
 
 class CreateBooking extends Component
 {
@@ -27,7 +25,6 @@ class CreateBooking extends Component
     public $special_requests;
     public $total_price = 0;
     public $user_id;
-    public $is_fetching_location = false;
 
     protected $rules = [
         'name' => 'required|min:3',
@@ -39,6 +36,10 @@ class CreateBooking extends Component
         'guest_count' => 'required|integer|min:1',
         'pin_code' => 'required|digits:6',
         'location' => 'required|min:5',
+    ];
+
+    protected $messages = [
+        'pin_code.service_available' => 'Service is not available for this PIN code.',
     ];
 
     public function mount()
@@ -68,57 +69,20 @@ class CreateBooking extends Component
         }
     }
 
-   public function updated($propertyName)
-    {
-        // Automatically call the location API when pin_code is updated
-        if ($propertyName === 'pin_code') {
-            $this->fetchLocationFromPinCode();
-        }
-    }
-
-    private function fetchLocationFromPinCode()
-    {
-        $pinCode = $this->pin_code;
-        
-        // Only fetch location if PIN code is 6 digits
-        if (strlen($pinCode) === 6) {
-            $this->is_fetching_location = true;
-            
-            try {
-                // Make API request to get location details
-                $response = Http::get("https://api.postalpincode.in/pincode/{$pinCode}");
-                
-                if ($response->successful()) {
-                    $data = $response->json();
-                    
-                    if (isset($data[0]['Status']) && $data[0]['Status'] === 'Success' && 
-                        !empty($data[0]['PostOffice'])) {
-                        // Extract location details
-                        $postOffice = $data[0]['PostOffice'][0];
-                        $this->location = "{$postOffice['Name']}, {$postOffice['District']}, {$postOffice['State']}";
-                        
-                        // Clear any previous errors
-                        $this->resetErrorBag('pin_code');
-                        $this->resetErrorBag('location');
-                    } else {
-                        $this->addError('pin_code', 'Invalid PIN code or no location found');
-                    }
-                } else {
-                    $this->addError('pin_code', 'Failed to fetch location details');
-                }
-            } catch (\Exception $e) {
-                $this->addError('pin_code', 'Error fetching location: ' . $e->getMessage());
-            } finally {
-                $this->is_fetching_location = false;
-            }
-        } else {
-            $this->location = '';
-        }
-    }
-
     public function save()
     {
-        $this->validate();
+        // Add custom validation for service availability
+        $this->validate(array_merge($this->rules, [
+            'pin_code' => [
+                'required',
+                'digits:6',
+                function ($attribute, $value, $fail) {
+                    if (!Service::where('pin_code', $value)->exists()) {
+                        $fail('Service is not available for this PIN code.');
+                    }
+                }
+            ]
+        ]));
 
         // Create new user or get existing
         $user = User::firstOrCreate(
@@ -147,7 +111,6 @@ class CreateBooking extends Component
         session()->flash('message', 'Booking created successfully!');
         $this->dispatch('bookingCreated');
     }
-
 
     public function render()
     {
