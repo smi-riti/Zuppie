@@ -1,4 +1,4 @@
-<div>
+<div> hello
      @if($showModal)
         <div class="fixed inset-0 bg-white/80 backdrop-blur-sm z-40 transition-opacity" wire:click="closeModal"></div>
     @endif
