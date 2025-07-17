@@ -86,7 +86,7 @@
                             </h4>
                             <div class="flex space-x-3">
                                 <input type="text" 
-                                       wire:model="pinCode"
+                                       wire:model.live="pinCode"
                                        placeholder="Enter your pincode" 
                                        class="flex-1 border border-gray-300 rounded-xl px-4 py-2 focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-300"
                                        maxlength="6">

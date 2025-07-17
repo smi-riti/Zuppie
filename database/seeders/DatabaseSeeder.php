@@ -20,15 +20,11 @@ class DatabaseSeeder extends Seeder
         $this->call([
            CategorySeeder::class,
             AdminUserSeeder::class,
-            BookingSeeder::class,
             ServiceSeeder::class,
+               EventPackageSeeder::class,
         ]);
         
        
-        
-        // Seed event packages
-        $this->call([
-            EventPackageSeeder::class,
-        ]);
+       
     }
 }
