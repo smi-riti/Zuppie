@@ -8,7 +8,7 @@
     }, 3000);
 ">
     <!-- Hero Section -->
-    <section id="home" class="relative min-h-screen flex items-center justify-center overflow-hidden bg-gradient-to-br from-purple-600 via-blue-600 to-pink-600">
+    <section id="home" class="relative min-h-screen flex items-center justify-center overflow-hidden bg-gradient-to-br from-purple-500 via-purple-400 to-pink-500">
         <!-- Floating Balloons Background (only in hero) -->
         <div class="absolute inset-0 pointer-events-none overflow-hidden">
             <!-- Balloon 1 -->
@@ -205,7 +205,7 @@
                                 </p>
 
                                 <!-- Action Button -->
-                                <a href="{{ route('event-packages') }}?package={{ $package->id }}"
+                                <a href="{{ route('package-detail', ['id' => $package->id]) }}"
                                    class="block w-full bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white py-3 px-4 rounded-xl text-center font-semibold transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl">
                                     <i class="fas fa-calendar-check mr-2"></i>Book Now
                                 </a>

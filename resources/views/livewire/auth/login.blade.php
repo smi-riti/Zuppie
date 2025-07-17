@@ -11,7 +11,13 @@
                 </span>
             </a>
             <h1 class="text-2xl font-bold text-gray-800 mt-4">Welcome back!</h1>
-            <p class="text-gray-600">Sign in to your account</p>
+            <p class="text-gray-600">
+                @if(session('booking_step3_data'))
+                    Sign in to continue with your booking
+                @else
+                    Sign in to your account
+                @endif
+            </p>
         </div>
 
         <!-- Login Card -->

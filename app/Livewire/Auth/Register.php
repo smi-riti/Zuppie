@@ -17,6 +17,17 @@ class Register extends Component
     public $phone_no = '';
     public $message = '';
 
+    public function mount()
+    {
+        // Pre-fill form if coming from booking
+        $bookingData = session('booking_step3_data');
+        if ($bookingData) {
+            $this->name = $bookingData['name'] ?? '';
+            $this->email = $bookingData['email'] ?? '';
+            $this->phone_no = $bookingData['phone'] ?? '';
+        }
+    }
+
     protected $rules = [
         'name' => 'required|string|max:255',
         'email' => 'required|email|max:255|unique:users',
@@ -43,6 +54,13 @@ class Register extends Component
             ]);
 
             auth()->login($user);
+
+            // Check if coming from booking flow
+            $bookingData = session('booking_form_data');
+            if ($bookingData) {
+                session()->flash('success', 'Registration successful! Continue with your booking.');
+                return redirect()->route('package-booking', ['package_id' => $bookingData['packageId']]);
+            }
 
             if ($user->is_admin) {
                 return redirect()->to('/admin/dashboard');

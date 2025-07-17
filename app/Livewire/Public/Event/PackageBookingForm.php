@@ -76,9 +76,18 @@ class PackageBookingForm extends Component
         
         $this->loadPackage();
         $this->checkUserAuthentication();
+        $this->loadFormDataFromSession();
+        
+        // If user just logged in/registered and has form data, go to step 4
+        if ($this->isLoggedIn && session('booking_form_data') && 
+            $this->name && $this->phone && $this->eventDate && $this->location) {
+            $this->currentStep = 4;
+        }
         
         // Set default end date as same day
-        $this->eventEndDate = $this->eventDate;
+        if (!$this->eventEndDate && $this->eventDate) {
+            $this->eventEndDate = $this->eventDate;
+        }
     }
 
     public function loadPackage()
@@ -137,12 +146,19 @@ class PackageBookingForm extends Component
     {
         $this->isSubmitting = true;
         
+        // Ensure user is logged in before allowing booking
+        if (!$this->isLoggedIn) {
+            session()->flash('error', 'You must be logged in to complete the booking.');
+            $this->isSubmitting = false;
+            return;
+        }
+        
         // Validate all fields
         $this->validate();
 
         try {
-            // Create or find user
-            $user = $this->createOrFindUser();
+            // Update logged in user's information
+            $user = $this->updateUserInfo();
             
             // Create booking
             $booking = $this->createBooking($user);
@@ -150,17 +166,15 @@ class PackageBookingForm extends Component
             // Create payment record
             $this->createPaymentRecord($booking);
             
-            // Login user if not already logged in
-            if (!$this->isLoggedIn) {
-                Auth::login($user);
-            }
-            
             // Send email if email provided
             if ($this->email) {
                 $this->sendConfirmationEmail($user, $booking);
             }
 
             session()->flash('booking_success', 'Your booking has been confirmed successfully!');
+            
+            // Clear saved form data
+            session()->forget('booking_form_data');
             
             // Redirect to manage booking
             return redirect()->route('manage-booking', ['booking_id' => $booking->id]);
@@ -181,6 +195,79 @@ class PackageBookingForm extends Component
     public function togglePackageDetails()
     {
         $this->showPackageDetails = !$this->showPackageDetails;
+    }
+
+    public function toggleEditForm()
+    {
+        $this->showEditForm = !$this->showEditForm;
+    }
+
+    public function updateUserDetails()
+    {
+        if (!$this->isLoggedIn) {
+            return;
+        }
+
+        $this->validate([
+            'name' => 'required|string|min:2|max:255',
+            'phone' => 'required|string|min:10|max:15',
+            'email' => 'nullable|email|max:255',
+        ]);
+
+        try {
+            // Note: This updates the user account info, not just booking details
+            $this->existingUser->update([
+                'name' => $this->name,
+                'email' => $this->email,
+                'phone_no' => $this->phone,
+            ]);
+
+            $this->showEditForm = false;
+            session()->flash('success', 'Your account details have been updated successfully.');
+
+        } catch (\Exception $e) {
+            session()->flash('error', 'Failed to update details. Please try again.');
+            \Log::error('Update error: ' . $e->getMessage());
+        }
+    }
+
+    private function saveFormDataToSession()
+    {
+        session([
+            'booking_form_data' => [
+                'eventDate' => $this->eventDate,
+                'eventEndDate' => $this->eventEndDate,
+                'location' => $this->location,
+                'guestCount' => $this->guestCount,
+                'specialRequests' => $this->specialRequests,
+                'packageId' => $this->packageId,
+                'pinCode' => $this->pinCode,
+            ]
+        ]);
+    }
+
+    private function loadFormDataFromSession()
+    {
+        // Load form data
+        $formData = session('booking_form_data');
+        if ($formData) {
+            $this->eventDate = $formData['eventDate'] ?? $this->eventDate;
+            $this->eventEndDate = $formData['eventEndDate'] ?? $this->eventEndDate;
+            $this->location = $formData['location'] ?? $this->location;
+            $this->guestCount = $formData['guestCount'] ?? $this->guestCount;
+            $this->specialRequests = $formData['specialRequests'] ?? $this->specialRequests;
+        }
+
+        // Load step 3 data if available
+        $step3Data = session('booking_step3_data');
+        if ($step3Data) {
+            $this->name = $step3Data['name'] ?? $this->name;
+            $this->email = $step3Data['email'] ?? $this->email;
+            $this->phone = $step3Data['phone'] ?? $this->phone;
+            
+            // Clear step 3 data after loading
+            session()->forget('booking_step3_data');
+        }
     }
 
     public function validateStep1()
@@ -209,51 +296,43 @@ class PackageBookingForm extends Component
         $this->validate([
             'name' => 'required|string|min:2|max:255',
             'phone' => 'required|string|min:10|max:15',
-            'email' => 'required|email|max:255',
+            'email' => 'nullable|email|max:255',
         ]);
+        
+        // Check if user needs to register/login
+        if (!$this->isLoggedIn) {
+            // Save form data to session before redirecting
+            $this->saveFormDataToSession();
+            session(['booking_step3_data' => [
+                'name' => $this->name,
+                'email' => $this->email,
+                'phone' => $this->phone
+            ]]);
+            
+            // Check if user exists
+            if ($this->existingUser) {
+                // Redirect to login page
+                session()->flash('info', 'Please login to complete your booking.');
+                return redirect()->route('login');
+            } else {
+                // Redirect to register page
+                session()->flash('info', 'Please register to complete your booking.');
+                return redirect()->route('register');
+            }
+        }
         
         $this->currentStep = 4;
     }
 
-    private function createOrFindUser()
+    private function updateUserInfo()
     {
-        // If user is already logged in, use that user
-        if ($this->isLoggedIn && $this->existingUser) {
-            // Update user info with any changes
-            $this->existingUser->update([
-                'name' => $this->name,
-                'email' => $this->email ?: $this->existingUser->email
-            ]);
-            
-            return $this->existingUser;
+        // For this booking system, we don't update user's account details
+        // The booking details are separate from user account details
+        if (!$this->isLoggedIn || !$this->existingUser) {
+            throw new \Exception('User must be logged in to complete booking');
         }
         
-        // Check if user exists by phone
-        $user = User::where('phone_no', $this->phone)->first();
-        
-        if (!$user) {
-            // Generate random password
-            // $password = Str::random(8);
-            $password = 'Zuppie@123'; // For demo purposes, use a fixed password
-            $user = User::create([
-                'name' => $this->name,
-                'email' => $this->email,
-                'phone_no' => $this->phone,
-                'password' => Hash::make($password),
-                'is_admin' => false
-            ]);
-            
-            // Store password for email
-            $user->temp_password = $password;
-        } else {
-            // Update user info if needed
-            $user->update([
-                'name' => $this->name,
-                'email' => $this->email ?: $user->email
-            ]);
-        }
-        
-        return $user;
+        return $this->existingUser;
     }
 
     private function createBooking($user)
@@ -261,6 +340,9 @@ class PackageBookingForm extends Component
         return Booking::create([
             'user_id' => $user->id,
             'event_package_id' => $this->package->id,
+            'booking_name' => $this->name,
+            'booking_email' => $this->email,
+            'booking_phone_no' => $this->phone,
             'event_date' => $this->eventDate,
             'event_end_date' => $this->eventEndDate ?: $this->eventDate,
             'guest_count' => $this->guestCount ?: null,
@@ -268,7 +350,8 @@ class PackageBookingForm extends Component
             'special_requests' => $this->specialRequests,
             'status' => 'pending',
             'total_price' => $this->package->discounted_price,
-            'pin_code' => $this->pinCode
+            'pin_code' => $this->pinCode,
+            'is_completed' => true
         ]);
     }
 
@@ -312,12 +395,15 @@ class PackageBookingForm extends Component
             $this->isLoggedIn = true;
             $this->existingUser = Auth::user();
             
-            // Pre-fill form with user data
-            $this->name = $this->existingUser->name;
-            $this->email = $this->existingUser->email;
-            $this->phone = $this->existingUser->phone_no;
+            // Pre-fill booking form with user data (but these can be edited for booking)
+            $this->name = $this->existingUser->name ?? '';
+            $this->email = $this->existingUser->email ?? '';
+            $this->phone = $this->existingUser->phone_no ?? '';
             
-            $this->userMessage = "Welcome back, {$this->existingUser->name}! Your information has been pre-filled.";
+            $this->userMessage = "Welcome back, {$this->existingUser->name}! Your information has been pre-filled but you can modify it for this booking.";
+        } else {
+            $this->isLoggedIn = false;
+            $this->existingUser = null;
         }
     }
 

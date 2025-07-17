@@ -1,5 +1,39 @@
 
 <div class="min-h-screen bg-gradient-to-br from-slate-50 via-white to-purple-50 py-12 md:py-24">
+    
+    <!-- Flash Messages -->
+    @if(session('success'))
+        <div class="fixed top-4 right-4 z-50 max-w-md">
+            <div class="bg-green-500 text-white px-6 py-4 rounded-xl shadow-lg" id="success-message">
+                <div class="flex items-center">
+                    <i class="fas fa-check-circle mr-3"></i>
+                    {{ session('success') }}
+                </div>
+            </div>
+        </div>
+    @endif
+
+    @if(session('error'))
+        <div class="fixed top-4 right-4 z-50 max-w-md">
+            <div class="bg-red-500 text-white px-6 py-4 rounded-xl shadow-lg" id="error-message">
+                <div class="flex items-center">
+                    <i class="fas fa-exclamation-circle mr-3"></i>
+                    {{ session('error') }}
+                </div>
+            </div>
+        </div>
+    @endif
+
+    @if(session('info'))
+        <div class="fixed top-4 right-4 z-50 max-w-md">
+            <div class="bg-blue-500 text-white px-6 py-4 rounded-xl shadow-lg" id="info-message">
+                <div class="flex items-center">
+                    <i class="fas fa-info-circle mr-3"></i>
+                    {{ session('info') }}
+                </div>
+            </div>
+        </div>
+    @endif
     @if(!$package)
         <div class="text-center py-20">
             <h2 class="text-2xl font-bold text-gray-800">Package not found</h2>
@@ -129,7 +163,7 @@
                             <div>
                                 <label class="block text-gray-700 font-semibold mb-2">
                                     <i class="fas fa-users text-purple-600 mr-2"></i>
-                                    Expected Guests (Optional)
+                                    Expected Guests 
                                 </label>
                                 <input type="number" 
                                        wire:model="guestCount"
@@ -174,55 +208,68 @@
                         </h3>
                         
                         @if($isLoggedIn)
-                            <div class="mb-6 p-4 bg-blue-50 border border-blue-200 rounded-xl">
+                            <div class="mb-6 p-4 bg-green-50 border border-green-200 rounded-xl">
                                 <div class="flex items-center">
-                                    <i class="fas fa-user-check text-blue-500 mr-3 text-xl"></i>
+                                    <i class="fas fa-user-check text-green-500 mr-3 text-xl"></i>
                                     <div>
-                                        <p class="font-semibold">You're logged in as {{ $existingUser->name }}</p>
-                                        <p class="text-sm text-blue-700">{{ $existingUser->email ?: $existingUser->phone_no }}</p>
+                                        <p class="font-semibold text-green-800">Welcome back, {{ $existingUser->name }}!</p>
+                                        <p class="text-sm text-green-700">{{ $existingUser->email ?: $existingUser->phone_no }}</p>
+                                        <p class="text-xs text-green-600 mt-1">Your booking details are pre-filled but can be edited below.</p>
                                     </div>
                                 </div>
                             </div>
                         @endif
 
+                        <!-- User Details Form -->
                         <div class="space-y-6">
+                            <!-- Info note -->
+                            <div class="bg-blue-50 border border-blue-200 rounded-lg p-4">
+                                <div class="flex items-start">
+                                    <i class="fas fa-info-circle text-blue-500 mr-2 mt-0.5"></i>
+                                    <div class="text-sm text-blue-700">
+                                        <p class="font-medium">Booking Details</p>
+                                        <p>These details are specifically for this booking and can be different from your account information.</p>
+                                    </div>
+                                </div>
+                            </div>
+
                             <div>
                                 <label class="block text-gray-700 font-semibold mb-2">
                                     <i class="fas fa-user text-purple-600 mr-2"></i>
-                                    Full Name *
+                                    Full Name (for booking) *
                                 </label>
                                 <input type="text" 
                                        wire:model="name"
-                                       @if($isLoggedIn) readonly @endif
-                                       class="w-full border border-gray-300 rounded-xl px-4 py-3 focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all duration-300 @error('name') border-red-500 @enderror @if($isLoggedIn) bg-gray-50 @endif" 
-                                       placeholder="Enter your full name">
+                                       class="w-full border border-gray-300 rounded-xl px-4 py-3 focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all duration-300 @error('name') border-red-500 @enderror" 
+                                       placeholder="Enter name for this booking">
                                 @error('name') <span class="text-red-500 text-sm mt-1">{{ $message }}</span> @enderror
+                                <p class="text-sm text-gray-500 mt-1">This name will be used for the booking details</p>
                             </div>
 
                             <div class="grid md:grid-cols-2 gap-6">
                                 <div>
                                     <label class="block text-gray-700 font-semibold mb-2">
                                         <i class="fas fa-phone text-purple-600 mr-2"></i>
-                                        Phone Number *
+                                        Phone Number (for booking) *
                                     </label>
                                     <input type="tel" 
                                            wire:model="phone"
-                                           @if($isLoggedIn) readonly @endif
-                                           class="w-full border border-gray-300 rounded-xl px-4 py-3 focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all duration-300 @error('phone') border-red-500 @enderror @if($isLoggedIn) bg-gray-50 @endif" 
+                                           class="w-full border border-gray-300 rounded-xl px-4 py-3 focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all duration-300 @error('phone') border-red-500 @enderror" 
                                            placeholder="+91 98765 43210">
                                     @error('phone') <span class="text-red-500 text-sm mt-1">{{ $message }}</span> @enderror
+                                    <p class="text-sm text-gray-500 mt-1">Contact number for this booking</p>
                                 </div>
                                 <div>
                                     <label class="block text-gray-700 font-semibold mb-2">
                                         <i class="fas fa-envelope text-purple-600 mr-2"></i>
-                                        Email Address
+                                        Email Address (Optional)
                                     </label>
                                     <input type="email" 
                                            wire:model="email"
-                                           @if($isLoggedIn) readonly @endif
-                                           class="w-full border border-gray-300 rounded-xl px-4 py-3 focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all duration-300 @error('email') border-red-500 @enderror @if($isLoggedIn) bg-gray-50 @endif" 
-                                           placeholder="your@email.com">
+                                           class="w-full border border-gray-300 rounded-xl px-4 py-3 focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all duration-300 @error('email') border-red-500 @enderror" 
+                                           placeholder="your@email.com (optional)">
                                     @error('email') <span class="text-red-500 text-sm mt-1">{{ $message }}</span> @enderror
+                                    <p class="text-sm text-gray-500 mt-1">Email for booking confirmations (optional)</p>
                                 </div>
                             </div>
 
@@ -472,4 +519,35 @@
             to { opacity: 1; transform: translateY(0); }
         }
     </style>
+
+    <!-- Auto-hide flash messages -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Auto-hide flash messages after 5 seconds
+            const messages = ['success-message', 'error-message', 'info-message'];
+            messages.forEach(id => {
+                const element = document.getElementById(id);
+                if (element) {
+                    setTimeout(() => {
+                        element.style.opacity = '0';
+                        element.style.transform = 'translateX(400px)';
+                        setTimeout(() => element.remove(), 300);
+                    }, 5000);
+                }
+            });
+        });
+        
+        // Listen for Livewire events
+        document.addEventListener('livewire:init', () => {
+            Livewire.on('user-found', (event) => {
+                console.log('User found:', event.message);
+                // You can add additional UI feedback here
+            });
+            
+            Livewire.on('user-not-found', () => {
+                console.log('User not found');
+                // You can add additional UI feedback here
+            });
+        });
+    </script>
 </div>
