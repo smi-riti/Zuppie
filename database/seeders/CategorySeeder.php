@@ -142,7 +142,7 @@ class CategorySeeder extends Seeder
                 'slug' => 'flower-bouquet',
                 'description' => 'Beautiful flower arrangements and bouquets for all occasions',
                 'image' => 'https://images.unsplash.com/photo-1455659817273-f96807779a8a?w=800&h=600&fit=crop',
-                'is_special' => false,
+                'is_special' => true,
                 'parent_id' => null,
                 'subcategories' => []
             ],
@@ -153,7 +153,7 @@ class CategorySeeder extends Seeder
                 'slug' => 'gift-section',
                 'description' => 'Special gift packages and surprise arrangements',
                 'image' => 'https://images.unsplash.com/photo-1549465220-1a8b9238cd48?w=800&h=600&fit=crop',
-                'is_special' => false,
+                'is_special' => true,
                 'parent_id' => null,
                 'subcategories' => []
             ],
@@ -164,7 +164,7 @@ class CategorySeeder extends Seeder
                 'slug' => 'simple-decoration',
                 'description' => 'Elegant and minimalistic decoration for intimate celebrations',
                 'image' => 'https://images.unsplash.com/photo-1527529482837-4698179dc6ce?w=800&h=600&fit=crop',
-                'is_special' => false,
+                'is_special' => true,
                 'parent_id' => null,
                 'subcategories' => []
             ],
@@ -208,7 +208,7 @@ class CategorySeeder extends Seeder
                 'slug' => 'love-theme',
                 'description' => 'Romantic and love-themed decorations for couples',
                 'image' => 'https://images.unsplash.com/photo-1518621012420-9f4c3ba55fdd?w=800&h=600&fit=crop',
-                'is_special' => true,
+                'is_special' => false,
                 'parent_id' => null,
                 'subcategories' => []
             ],
@@ -219,7 +219,7 @@ class CategorySeeder extends Seeder
                 'slug' => 'bride-to-be',
                 'description' => 'Special celebration packages for bride-to-be parties',
                 'image' => 'https://images.unsplash.com/photo-1594736797933-d0d3482ba3a8?w=800&h=600&fit=crop',
-                'is_special' => true,
+                'is_special' => false,
                 'parent_id' => null,
                 'subcategories' => []
             ]
