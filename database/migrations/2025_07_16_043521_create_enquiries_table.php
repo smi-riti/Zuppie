@@ -20,6 +20,7 @@ return new class extends Migration
             $table->date('event_date')->nullable();
             $table->string('budget')->nullable();
             $table->text('message')->nullable();
+            $table->enum('status', ['pending','resolved'])->default('pending');
             $table->timestamps();
         });
     }
