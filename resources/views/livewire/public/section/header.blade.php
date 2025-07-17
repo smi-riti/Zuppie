@@ -98,12 +98,28 @@
 
             <!-- Auth Buttons -->
             <div class="hidden md:flex items-center space-x-4">
-                <a href="{{ route('login') }}"
-                    class="px-4 py-2 text-pink-700 font-medium hover:text-pink-600 transition">Login</a>
-                <a href="{{ route('register') }}"
-                    class="px-4 py-2 bg-gradient-to-r from-pink-600 to-purple-400 text-white rounded-lg hover:from-pink-600 hover:to-purple-600 transition shadow-md hover:shadow-lg transform hover:-translate-y-1">
-                    Register
-                </a>
+                @auth
+                    <a href="{{ route('manage-booking') }}"
+                        class="px-4 py-2 text-pink-700 font-medium hover:text-pink-600 transition flex items-center space-x-2">
+                        <i class="fas fa-calendar-check"></i>
+                        <span>My Bookings</span>
+                    </a>
+                    <form method="POST" action="{{ route('logout') }}" class="inline">
+                        @csrf
+                        <button type="submit"
+                            class="px-4 py-2 bg-gradient-to-r from-pink-600 to-purple-400 text-white rounded-lg hover:from-pink-600 hover:to-purple-600 transition shadow-md hover:shadow-lg transform hover:-translate-y-1 flex items-center space-x-2">
+                            <i class="fas fa-sign-out-alt"></i>
+                            <span>Logout</span>
+                        </button>
+                    </form>
+                @else
+                    <a href="{{ route('login') }}"
+                        class="px-4 py-2 text-pink-700 font-medium hover:text-pink-600 transition">Login</a>
+                    <a href="{{ route('register') }}"
+                        class="px-4 py-2 bg-gradient-to-r from-pink-600 to-purple-400 text-white rounded-lg hover:from-pink-600 hover:to-purple-600 transition shadow-md hover:shadow-lg transform hover:-translate-y-1">
+                        Register
+                    </a>
+                @endauth
             </div>
 
             <!-- Mobile menu button -->
@@ -119,17 +135,33 @@
         <!-- Mobile menu -->
         <div x-show="open" x-transition:enter="animate__animated animate__fadeInDown"
             x-transition:leave="animate__animated animate__fadeOutUp" class="md:hidden mt-4 pb-4 space-y-3">
-            <a href="#" class="block px-3 py-2 text-pink-700 font-medium hover:bg-pink-50 rounded">Home</a>
-            <a href="#" class="block px-3 py-2 text-pink-700 font-medium hover:bg-pink-50 rounded">Events</a>
-            <a href="#" class="block px-3 py-2 text-pink-700 font-medium hover:bg-pink-50 rounded">Venues</a>
-            <a href="#" class="block px-3 py-2 text-pink-700 font-medium hover:bg-pink-50 rounded">Pricing</a>
+            <a wire:navigate href="{{ route('home') }}" class="block px-3 py-2 text-pink-700 font-medium hover:bg-pink-50 rounded">Home</a>
+            <a wire:navigate href="{{ route('event-packages') }}" class="block px-3 py-2 text-pink-700 font-medium hover:bg-pink-50 rounded">Event Packages</a>
+            <a wire:navigate href="{{ route('about') }}" class="block px-3 py-2 text-pink-700 font-medium hover:bg-pink-50 rounded">About</a>
+            <a wire:navigate href="{{ route('contact') }}" class="block px-3 py-2 text-pink-700 font-medium hover:bg-pink-50 rounded">Contact</a>
             <div class="pt-2 border-t border-pink-200 space-y-2">
-                <a href="#"
-                    class="block px-3 py-2 text-center text-pink-700 font-medium hover:bg-pink-50 rounded">Login</a>
-                <a href="#"
-                    class="block px-3 py-2 text-center bg-gradient-to-r from-pink-600 to-purple-600 text-white rounded-lg hover:from-pink-600 hover:to-purple-600 transition">
-                    Register
-                </a>
+                @auth
+                    <a href="{{ route('manage-booking') }}"
+                        class="block px-3 py-2 text-center text-pink-700 font-medium hover:bg-pink-50 rounded flex items-center justify-center space-x-2">
+                        <i class="fas fa-calendar-check"></i>
+                        <span>My Bookings</span>
+                    </a>
+                    <form method="POST" action="{{ route('logout') }}" class="block">
+                        @csrf
+                        <button type="submit"
+                            class="w-full px-3 py-2 text-center bg-gradient-to-r from-pink-600 to-purple-600 text-white rounded-lg hover:from-pink-600 hover:to-purple-600 transition flex items-center justify-center space-x-2">
+                            <i class="fas fa-sign-out-alt"></i>
+                            <span>Logout</span>
+                        </button>
+                    </form>
+                @else
+                    <a href="{{ route('login') }}"
+                        class="block px-3 py-2 text-center text-pink-700 font-medium hover:bg-pink-50 rounded">Login</a>
+                    <a href="{{ route('register') }}"
+                        class="block px-3 py-2 text-center bg-gradient-to-r from-pink-600 to-purple-600 text-white rounded-lg hover:from-pink-600 hover:to-purple-600 transition">
+                        Register
+                    </a>
+                @endauth
             </div>
         </div>
     </div>

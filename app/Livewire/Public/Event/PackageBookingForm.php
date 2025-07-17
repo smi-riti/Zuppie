@@ -18,6 +18,8 @@ class PackageBookingForm extends Component
     public $pinCode;
     public $package;
     
+  
+    
     // Form fields
     public $name = '';
     public $email = '';
@@ -28,6 +30,11 @@ class PackageBookingForm extends Component
     public $location = '';
     public $specialRequests = '';
     public $paymentMethod = 'cash';
+    public $acceptTerms = false;
+    
+    // Multi-step form
+    public $currentStep = 1;
+    public $showPackageDetails = false;
     
     // User state
     public $isLoggedIn = false;
@@ -46,7 +53,8 @@ class PackageBookingForm extends Component
         'guestCount' => 'nullable|integer|min:1|max:10000',
         'location' => 'required|string|min:5|max:500',
         'specialRequests' => 'nullable|string|max:1000',
-        'paymentMethod' => 'required|in:cash'
+        'paymentMethod' => 'required|in:cash',
+        'acceptTerms' => 'required|accepted'
     ];
 
     protected $messages = [
@@ -57,12 +65,12 @@ class PackageBookingForm extends Component
         'eventDate.after' => 'Event date must be in the future',
         'eventEndDate.after_or_equal' => 'Event end date must be same or after event start date',
         'location.required' => 'Event location is required',
-        'location.min' => 'Location must be at least 5 characters'
+        'location.min' => 'Location must be at least 5 characters',
+        'acceptTerms.required' => 'You must accept the terms and conditions'
     ];
 
     public function mount($package_id = null, $pin_code = null)
     {
-        // Get from URL parameters or session
         $this->packageId = $package_id ?: session('package_id') ?: request('package_id');
         $this->pinCode = $pin_code ?: session('pin_code') ?: request('pin_code');
         
@@ -104,15 +112,32 @@ class PackageBookingForm extends Component
             $this->guestCount = $this->guestCount === '' ? null : $this->guestCount;
         }
         
-        // Validate field on change
-        $this->validateOnly($field);
+        // Validate field on change for current step
+        if ($this->currentStep === 1 && in_array($field, ['eventDate', 'eventEndDate', 'location'])) {
+            $this->validateOnly($field, [
+                'eventDate' => 'required|date|after:today',
+                'eventEndDate' => 'nullable|date|after_or_equal:eventDate',
+                'location' => 'required|string|min:5|max:500',
+            ]);
+        } elseif ($this->currentStep === 2 && in_array($field, ['guestCount', 'specialRequests'])) {
+            $this->validateOnly($field, [
+                'guestCount' => 'nullable|integer|min:1|max:10000',
+                'specialRequests' => 'nullable|string|max:1000',
+            ]);
+        } elseif ($this->currentStep === 3 && in_array($field, ['name', 'phone', 'email'])) {
+            $this->validateOnly($field, [
+                'name' => 'required|string|min:2|max:255',
+                'phone' => 'required|string|min:10|max:15',
+                'email' => 'nullable|email|max:255',
+            ]);
+        }
     }
 
     public function submitBooking()
     {
         $this->isSubmitting = true;
         
-        // Validate form
+        // Validate all fields
         $this->validate();
 
         try {
@@ -143,9 +168,51 @@ class PackageBookingForm extends Component
         } catch (\Exception $e) {
             session()->flash('error', 'Something went wrong. Please try again.');
             \Log::error('Booking error: ' . $e->getMessage());
+            $this->isSubmitting = false;
         }
+    }
+
+    // Step navigation methods
+    public function goToStep($step)
+    {
+        $this->currentStep = $step;
+    }
+
+    public function togglePackageDetails()
+    {
+        $this->showPackageDetails = !$this->showPackageDetails;
+    }
+
+    public function validateStep1()
+    {
+        $this->validate([
+            'eventDate' => 'required|date|after:today',
+            'eventEndDate' => 'nullable|date|after_or_equal:eventDate',
+            'location' => 'required|string|min:5|max:500',
+        ]);
         
-        $this->isSubmitting = false;
+        $this->currentStep = 2;
+    }
+
+    public function validateStep2()
+    {
+        $this->validate([
+            'guestCount' => 'nullable|integer|min:1|max:10000',
+            'specialRequests' => 'nullable|string|max:1000',
+        ]);
+        
+        $this->currentStep = 3;
+    }
+
+    public function validateStep3()
+    {
+        $this->validate([
+            'name' => 'required|string|min:2|max:255',
+            'phone' => 'required|string|min:10|max:15',
+            'email' => 'required|email|max:255',
+        ]);
+        
+        $this->currentStep = 4;
     }
 
     private function createOrFindUser()
@@ -166,8 +233,8 @@ class PackageBookingForm extends Component
         
         if (!$user) {
             // Generate random password
-            $password = Str::random(8);
-            
+            // $password = Str::random(8);
+            $password = 'Zuppie@123'; // For demo purposes, use a fixed password
             $user = User::create([
                 'name' => $this->name,
                 'email' => $this->email,
@@ -196,10 +263,10 @@ class PackageBookingForm extends Component
             'event_package_id' => $this->package->id,
             'event_date' => $this->eventDate,
             'event_end_date' => $this->eventEndDate ?: $this->eventDate,
-            'guest_count' => $this->guestCount ?: null, // Convert empty string to null
+            'guest_count' => $this->guestCount ?: null,
             'location' => $this->location,
             'special_requests' => $this->specialRequests,
-            'status' => 'confirmed',
+            'status' => 'pending',
             'total_price' => $this->package->discounted_price,
             'pin_code' => $this->pinCode
         ]);
@@ -239,11 +306,6 @@ class PackageBookingForm extends Component
         return $this->package ? $this->package->discounted_price : 0;
     }
 
-    public function render()
-    {
-        return view('livewire.public.event.package-booking-form');
-    }
-    
     public function checkUserAuthentication()
     {
         if (Auth::check()) {
@@ -281,5 +343,10 @@ class PackageBookingForm extends Component
                 $this->dispatch('user-not-found');
             }
         }
+    }
+
+    public function render()
+    {
+        return view('livewire.public.event.package-booking-form');
     }
 }
