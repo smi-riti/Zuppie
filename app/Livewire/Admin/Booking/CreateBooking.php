@@ -6,12 +6,10 @@ use Livewire\Component;
 use App\Models\Booking;
 use App\Models\EventPackage;
 use App\Models\User;
+use App\Models\Service;
 use Illuminate\Support\Carbon;
-use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Str;
-
 use Illuminate\Validation\ValidationException;
-
 
 class CreateBooking extends Component
 {
@@ -19,23 +17,29 @@ class CreateBooking extends Component
     public $email;
     public $phone_no;
     public $event_package_id;
-    public $event_date;
-    public $event_end_date;
+    
+    // Split date and time properties
+    public $event_date_date;
+    public $event_date_time;
+    public $event_end_date_date;
+    public $event_end_date_time;
+    
     public $guest_count = 1;
     public $pin_code;
     public $location;
     public $special_requests;
     public $total_price = 0;
     public $user_id;
-    public $is_fetching_location = false;
 
     protected $rules = [
         'name' => 'required|min:3',
         'email' => 'required|email',
         'phone_no' => 'required|digits:10',
         'event_package_id' => 'required|exists:event_packages,id',
-        'event_date' => 'required|date|after_or_equal:today',
-        'event_end_date' => 'required|date|after_or_equal:event_date',
+        'event_date_date' => 'required|date|after_or_equal:today',
+        'event_date_time' => 'required',
+        'event_end_date_date' => 'required|date|after_or_equal:event_date_date',
+        'event_end_date_time' => 'required',
         'guest_count' => 'required|integer|min:1',
         'pin_code' => 'required|digits:6',
         'location' => 'required|min:5',
@@ -43,9 +47,13 @@ class CreateBooking extends Component
 
     public function mount()
     {
-        $this->booking_date = now()->format('Y-m-d\TH:i');
-        $this->event_date = now()->addDays(7)->format('Y-m-d\TH:i');
-        $this->event_end_date = now()->addDays(7)->addHours(4)->format('Y-m-d\TH:i');
+        $defaultDate = now()->addDays(7);
+        $this->event_date_date = $defaultDate->format('Y-m-d');
+        $this->event_date_time = $defaultDate->format('g:i A'); // AM/PM format
+        
+        $endDate = $defaultDate->addHours(4);
+        $this->event_end_date_date = $endDate->format('Y-m-d');
+        $this->event_end_date_time = $endDate->format('g:i A'); // AM/PM format
     }
 
     public function updatedEventPackageId($value)
@@ -68,57 +76,23 @@ class CreateBooking extends Component
         }
     }
 
-   public function updated($propertyName)
-    {
-        // Automatically call the location API when pin_code is updated
-        if ($propertyName === 'pin_code') {
-            $this->fetchLocationFromPinCode();
-        }
-    }
-
-    private function fetchLocationFromPinCode()
-    {
-        $pinCode = $this->pin_code;
-        
-        // Only fetch location if PIN code is 6 digits
-        if (strlen($pinCode) === 6) {
-            $this->is_fetching_location = true;
-            
-            try {
-                // Make API request to get location details
-                $response = Http::get("https://api.postalpincode.in/pincode/{$pinCode}");
-                
-                if ($response->successful()) {
-                    $data = $response->json();
-                    
-                    if (isset($data[0]['Status']) && $data[0]['Status'] === 'Success' && 
-                        !empty($data[0]['PostOffice'])) {
-                        // Extract location details
-                        $postOffice = $data[0]['PostOffice'][0];
-                        $this->location = "{$postOffice['Name']}, {$postOffice['District']}, {$postOffice['State']}";
-                        
-                        // Clear any previous errors
-                        $this->resetErrorBag('pin_code');
-                        $this->resetErrorBag('location');
-                    } else {
-                        $this->addError('pin_code', 'Invalid PIN code or no location found');
-                    }
-                } else {
-                    $this->addError('pin_code', 'Failed to fetch location details');
-                }
-            } catch (\Exception $e) {
-                $this->addError('pin_code', 'Error fetching location: ' . $e->getMessage());
-            } finally {
-                $this->is_fetching_location = false;
-            }
-        } else {
-            $this->location = '';
-        }
-    }
-
     public function save()
     {
-        $this->validate();
+        // Convert AM/PM time to 24-hour format for database
+        $this->prepareDateTimeForStorage();
+        
+        // Add custom validation for service availability
+        $this->validate(array_merge($this->rules, [
+            'pin_code' => [
+                'required',
+                'digits:6',
+                function ($attribute, $value, $fail) {
+                    if (!Service::where('pin_code', $value)->exists()) {
+                        $fail('Service is not available for this PIN code.');
+                    }
+                }
+            ]
+        ]));
 
         // Create new user or get existing
         $user = User::firstOrCreate(
@@ -130,12 +104,16 @@ class CreateBooking extends Component
             ]
         );
 
+        // Combine date and time for database storage
+        $eventDate = Carbon::parse($this->event_date_date . ' ' . $this->event_date_time);
+        $eventEndDate = Carbon::parse($this->event_end_date_date . ' ' . $this->event_end_date_time);
+
         // Create booking
         Booking::create([
             'user_id' => $user->id,
             'event_package_id' => $this->event_package_id,
-            'event_date' => $this->event_date,
-            'event_end_date' => $this->event_end_date,
+            'event_date' => $eventDate,
+            'event_end_date' => $eventEndDate,
             'guest_count' => $this->guest_count,
             'pin_code' => $this->pin_code,
             'location' => $this->location,
@@ -147,7 +125,13 @@ class CreateBooking extends Component
         session()->flash('message', 'Booking created successfully!');
         $this->dispatch('bookingCreated');
     }
-
+    
+    protected function prepareDateTimeForStorage()
+    {
+        // Convert AM/PM time to 24-hour format for validation
+        $this->event_date_time = Carbon::parse($this->event_date_time)->format('H:i');
+        $this->event_end_date_time = Carbon::parse($this->event_end_date_time)->format('H:i');
+    }
 
     public function render()
     {

@@ -22,6 +22,7 @@ class DatabaseSeeder extends Seeder
             AdminUserSeeder::class,
             ServiceSeeder::class,
                EventPackageSeeder::class,
+            BlogSeeder::class,
         ]);
         
        
