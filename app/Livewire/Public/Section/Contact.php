@@ -2,12 +2,15 @@
 
 namespace App\Livewire\Public\Section;
 
+use App\Models\Category;
 use Livewire\Component;
 
 class Contact extends Component
 {
+    
     public function render()
     {
+        
         return view('livewire.public.section.contact');
     }
 }
