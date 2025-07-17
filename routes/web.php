@@ -24,13 +24,16 @@ use App\Livewire\Public\Event\PackageDetail;
 use App\Livewire\Public\Event\PackageBookingForm;
 use App\Livewire\Public\Event\ManageBooking as PublicManageBooking;
 use App\Livewire\Admin\Blog\ManageBlog;
-
+use App\Livewire\Auth\ForgotPassword;
+use App\Livewire\Auth\ResetPassword;
 // Route::get('/', function () {
 //     return view('welcome');
 // });
 Route::get('/', Homepage::class)->name('home');
 Route::get('/register', Register::class)->name('register');
 Route::get('/login', Login::class)->name('login');
+Route::get('/forgot-password', ForgotPassword::class)->name('password.request');
+Route::get('/reset-password/{token}', ResetPassword::class)->name('password.reset');
 Route::post('/logout', function () {
     Auth::logout();
     return redirect('/');
