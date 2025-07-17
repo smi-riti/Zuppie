@@ -19,8 +19,6 @@ class ManageBooking extends Component
     public $confirmingDeletion = false;
     public $bookingIdToUpdate;
     public $bookingIdToDelete;
-
-    // Search and filter properties
     public $search = '';
     public $statusFilter = '';
     public $userFilter = '';

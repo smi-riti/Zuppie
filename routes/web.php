@@ -23,6 +23,7 @@ use App\Livewire\Public\Event\EventPackage;
 use App\Livewire\Public\Event\PackageDetail;
 use App\Livewire\Public\Event\PackageBookingForm;
 use App\Livewire\Public\Event\ManageBooking as PublicManageBooking;
+use App\Livewire\Admin\Blog\ManageBlog;
 
 // Route::get('/', function () {
 //     return view('welcome');
@@ -54,4 +55,6 @@ Route::prefix('admin')->middleware(['auth', 'admin'])->group(function () {
     Route::get('/booking/manage', ManageBooking::class)->name('admin.booking.manage');
     Route::get('/users/manage', ManageUser::class)->name('admin.users.manage');
     Route::get('/services/manage', ShowService::class)->name('admin.services.manage');
+    Route::get('/manage/blogs', ManageBlog::class)->name('admin.blogs.manage');
+
 });
