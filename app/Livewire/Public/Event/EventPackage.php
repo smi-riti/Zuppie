@@ -15,6 +15,7 @@ class EventPackage extends Component
     public $modalCategory = null;
     public $packagesPerPage = 15;
     public $loadMoreCount = 0;
+    public $showAllCategoriesMode = false;
 
     public function mount()
     {
@@ -60,6 +61,7 @@ class EventPackage extends Component
         $this->selectedCategory = null;
         $this->selectedSubCategory = null;
         $this->loadMoreCount = 0;
+        $this->showAllCategoriesMode = !$this->showAllCategoriesMode;
     }
 
     public function clearSearch()
@@ -215,6 +217,22 @@ class EventPackage extends Component
         return $categoryData;
     }
 
+    public function getDisplayCategoriesProperty()
+    {
+        if ($this->showAllCategoriesMode) {
+            // Show all categories (both special and non-special)
+            return Category::with('children')
+                ->whereNull('parent_id')
+                ->get();
+        } else {
+            // Show only special categories (existing behavior)
+            return Category::where('is_special', true)
+                ->whereNull('parent_id')
+                ->take(9)
+                ->get();
+        }
+    }
+
     public function getAllCategoriesProperty()
     {
         // Get all categories with their subcategories for modal
@@ -245,8 +263,8 @@ class EventPackage extends Component
 
     public function getSimilarPackagesProperty()
     {
-        // Only show similar packages when there's a search or category selection
-        if (!$this->searchQuery && !$this->selectedCategory) {
+        // Show similar packages when there's a search, category selection, or no packages found
+        if (!$this->searchQuery && !$this->selectedCategory && count($this->filteredPackages) > 0) {
             return collect([]);
         }
 
@@ -263,7 +281,7 @@ class EventPackage extends Component
                 });
             }
         } else {
-            // If no category selected but there's a search, show popular packages
+            // If no category selected but there's a search, or no packages found, show popular packages
             $query->where('is_special', true);
         }
 

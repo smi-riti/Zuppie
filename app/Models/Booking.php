@@ -15,6 +15,9 @@ class Booking extends Model
     protected $fillable = [
         'user_id',
         'event_package_id',
+        'booking_name',
+        'booking_email',
+        'booking_phone_no',
         'event_date',
         'event_end_date',
         'guest_count',
@@ -23,6 +26,7 @@ class Booking extends Model
         'status', 
         'total_price',
         'pin_code',
+        'is_completed',
     ];
 
     protected $casts = [

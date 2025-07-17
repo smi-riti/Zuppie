@@ -1,36 +1,11 @@
 <div class="min-h-screen bg-gradient-to-br from-slate-50 via-white to-purple-50">
     
-    <!-- Hero Section with Carousel -->
+    <!-- Hero Section with Single Image and Gradient -->
     <section class="relative min-h-screen flex items-center justify-center overflow-hidden">
-        <!-- Background Carousel -->
         <div class="absolute inset-0 z-0">
-            <div class="hero-carousel w-full h-full">
-                <div class="carousel-slide active">
-                    <img src="https://images.unsplash.com/photo-1519225421980-715cb0215aed?w=1920&h=1080&fit=crop" 
-                         alt="Event Planning" class="w-full h-full object-cover">
-                    <div class="absolute inset-0 bg-gradient-to-r from-purple-900/40 via-pink-900/30 to-purple-900/40"></div>
-                </div>
-                <div class="carousel-slide">
-                    <img src="https://images.unsplash.com/photo-1511578314322-379afb476865?w=1920&h=1080&fit=crop" 
-                         alt="Wedding Events" class="w-full h-full object-cover">
-                    <div class="absolute inset-0 bg-gradient-to-r from-purple-900/40 via-pink-900/30 to-purple-900/40"></div>
-                </div>
-                <div class="carousel-slide">
-                    <img src="https://images.unsplash.com/photo-1530103862676-de8c9debad1d?w=1920&h=1080&fit=crop" 
-                         alt="Birthday Parties" class="w-full h-full object-cover">
-                    <div class="absolute inset-0 bg-gradient-to-r from-purple-900/40 via-pink-900/30 to-purple-900/40"></div>
-                </div>
-                <div class="carousel-slide">
-                    <img src="https://images.unsplash.com/photo-1464366400600-7168b8af9bc3?w=1920&h=1080&fit=crop" 
-                         alt="Anniversary Events" class="w-full h-full object-cover">
-                    <div class="absolute inset-0 bg-gradient-to-r from-purple-900/40 via-pink-900/30 to-purple-900/40"></div>
-                </div>
-                <div class="carousel-slide">
-                    <img src="https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?w=1920&h=1080&fit=crop" 
-                         alt="Corporate Events" class="w-full h-full object-cover">
-                    <div class="absolute inset-0 bg-gradient-to-r from-purple-900/40 via-pink-900/30 to-purple-900/40"></div>
-                </div>
-            </div>
+            <img src="https://images.unsplash.com/photo-1519225421980-715cb0215aed?w=1920&h=1080&fit=crop" 
+                 alt="Event Planning" class="w-full h-full object-cover">
+            <div class="absolute inset-0 bg-gradient-to-r from-purple-900/40 via-pink-900/30 to-purple-900/40"></div>
             
             <!-- Sparkle Animation Elements -->
             <div class="absolute inset-0 overflow-hidden pointer-events-none">
@@ -44,7 +19,7 @@
         <div class="relative z-10 w-full flex flex-col items-center px-4 sm:px-6 lg:px-8 max-w-6xl mx-auto text-center">
             <h1 class="text-4xl sm:text-6xl md:text-8xl font-black text-white leading-tight mb-6 animate-fade-in">
                 <span class="block drop-shadow-lg">Magical</span>
-                <span class="block text-transparent bg-clip-text bg-gradient-to-r from-pink-400 via-purple-400 to-pink-400 animate-gradient-x">
+                <span class="block text-transparent bg-clip-text bg-gradient-to-r from-purple-600 via-purple-400 to-pink-500 animate-gradient-x">
                     Event Packages
                 </span>
             </h1>
@@ -65,15 +40,6 @@
                         <i class="fas fa-search text-gray-200 text-xl"></i>
                     </div>
                 </div>
-            </div>
-
-            <!-- Navigation Dots -->
-            <div class="flex space-x-3 mt-8">
-                <div class="dot active w-3 h-3 rounded-full bg-white/80 cursor-pointer transition-all duration-300"></div>
-                <div class="dot w-3 h-3 rounded-full bg-white/40 cursor-pointer transition-all duration-300 hover:bg-white/60"></div>
-                <div class="dot w-3 h-3 rounded-full bg-white/40 cursor-pointer transition-all duration-300 hover:bg-white/60"></div>
-                <div class="dot w-3 h-3 rounded-full bg-white/40 cursor-pointer transition-all duration-300 hover:bg-white/60"></div>
-                <div class="dot w-3 h-3 rounded-full bg-white/40 cursor-pointer transition-all duration-300 hover:bg-white/60"></div>
             </div>
         </div>
     </section>
@@ -168,23 +134,25 @@
                     Choose from our wide range of event packages for every occasion
                 </p>
                 <div class="flex flex-wrap justify-center gap-2 sm:gap-3 mt-4">
-                    @foreach($this->categories as $key => $category)
+                    @foreach($this->displayCategories as $category)
                         <button 
-                            @if($category['has_subcategories'])
-                                wire:click="openCategoryModal('{{ $key }}')"
+                            @if($category->children->count())
+                                wire:click="openCategoryModal('{{ $category->slug }}')"
                             @else
-                                wire:click="selectCategory('{{ $key }}')"
+                                wire:click="selectCategory('{{ $category->slug }}')"
                             @endif
-                            class="px-4 py-2 sm:px-6 sm:py-3 bg-white text-gray-700 rounded-xl border border-gray-200 hover:border-purple-300 mb-2 {{ $selectedCategory === $key ? 'ring-2 ring-purple-400 font-bold' : '' }} relative group"
+                            class="px-4 py-2 sm:px-6 sm:py-3 bg-white text-gray-700 rounded-xl border border-gray-200 hover:border-purple-300 mb-2 {{ $selectedCategory === $category->slug ? 'ring-2 ring-purple-400 font-bold' : '' }} relative group"
                         >
-                            <i class="{{ $category['icon'] }} mr-2"></i>
-                            {{ $category['name'] }}
-                            @if($category['has_subcategories'])
+                            <i class="{{ $this->getCategoryIcon($category->slug) }} mr-2"></i>
+                            {{ $category->name }}
+                            @if($category->children->count())
                                 <i class="fas fa-chevron-down ml-1 text-xs"></i>
                             @endif
                         </button>
                     @endforeach
-                    <button wire:click="showAllCategories" class="px-4 py-2 sm:px-6 sm:py-3 bg-purple-600 text-white rounded-xl font-semibold ml-2 mb-2 {{ !$selectedCategory ? 'ring-2 ring-purple-400' : '' }}">View All</button>
+                    <button wire:click="showAllCategories" class="px-4 py-2 sm:px-6 sm:py-3 bg-purple-600 text-white rounded-xl font-semibold ml-2 mb-2 {{ !$selectedCategory ? 'ring-2 ring-purple-400' : '' }}">
+                        {{ $showAllCategoriesMode ? 'Show Special Only' : 'View All' }}
+                    </button>
                 </div>
             </div>
 
@@ -353,12 +321,20 @@
                         <div class="text-6xl text-gray-300 mb-6">
                             <i class="fas fa-search"></i>
                         </div>
-                        <h3 class="text-2xl font-bold text-gray-600 mb-4">No packages found</h3>
+                        <h3 class="text-2xl font-bold text-gray-600 mb-4">
+                            @if($selectedSubCategory)
+                                No packages found in this subcategory
+                            @else
+                                No packages found
+                            @endif
+                        </h3>
                         <p class="text-gray-500 mb-8">
                             @if($searchQuery && $selectedCategory)
                                 Try different search terms or browse other categories
                             @elseif($searchQuery)
                                 Try different search terms or browse by category
+                            @elseif($selectedSubCategory)
+                                This subcategory doesn't have any packages yet. Try browsing the main category or other subcategories.
                             @elseif($selectedCategory)
                                 No packages available in this category yet
                             @else
@@ -371,17 +347,70 @@
                                     Clear Search
                                 </button>
                             @endif
+                            @if($selectedSubCategory)
+                                <button wire:click="selectCategory('{{ $selectedCategory }}')" class="bg-purple-600 text-white px-6 py-3 rounded-lg font-medium hover:bg-purple-700 transition-colors duration-300">
+                                    View Main Category
+                                </button>
+                            @endif
                             @if($selectedCategory)
                                 <button wire:click="showAllCategories" class="border border-purple-600 text-purple-600 px-6 py-3 rounded-lg font-medium hover:bg-purple-50 transition-colors duration-300">
                                     Browse All Categories
                                 </button>
                             @else
-                                <button wire:click="setDesignMode('modern')" class="bg-purple-600 text-white px-6 py-3 rounded-lg font-medium hover:bg-purple-700 transition-colors duration-300">
-                                    Switch to Modern Layout
+                                <button wire:click="showAllCategories" class="bg-purple-600 text-white px-6 py-3 rounded-lg font-medium hover:bg-purple-700 transition-colors duration-300">
+                                    Browse Categories
                                 </button>
                             @endif
                         </div>
                     </div>
+
+                    <!-- Similar Packages when no packages found -->
+                    @if(count($this->similarPackages) > 0)
+                        <div class="mt-16">
+                            <div class="text-center mb-12">
+                                <h3 class="text-3xl md:text-4xl font-bold text-gray-800 mb-4">
+                                    You Might Like These
+                                </h3>
+                                <p class="text-lg text-gray-600">
+                                    Popular packages from other categories
+                                </p>
+                            </div>
+                            
+                            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                                @foreach($this->similarPackages as $package)
+                                    <div class="package-card bg-white rounded-3xl shadow-xl overflow-hidden hover:shadow-2xl transform hover:-translate-y-2 transition-all duration-300">
+                                        <div class="relative h-56 overflow-hidden">
+                                            <img src="{{ $package['image'] }}" alt="{{ $package['name'] }}" class="w-full h-full object-cover">
+                                            @if(isset($package['popular']) && $package['popular'])
+                                                <div class="absolute top-4 right-4">
+                                                    <span class="bg-gradient-to-r from-yellow-400 to-orange-500 text-white px-3 py-2 rounded-full text-sm font-bold">
+                                                        <i class="fas fa-star mr-1"></i>Popular
+                                                    </span>
+                                                </div>
+                                            @endif
+                                            <div class="absolute bottom-4 left-4">
+                                                <div class="bg-white/90 backdrop-blur-sm text-gray-800 px-3 py-2 rounded-full font-bold text-lg">
+                                                    ₹{{ number_format($package['price']) }}
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="p-6">
+                                            <h4 class="text-xl font-bold text-gray-800 mb-3">
+                                                {{ $package['name'] }}
+                                            </h4>
+                                            <p class="text-gray-600 mb-4 leading-relaxed line-clamp-2">{{ $package['description'] }}</p>
+                                            <div class="flex space-x-3">
+                                                <a href="{{ route('package-detail', ['id' => $package['id']]) }}" class="flex-1 bg-gradient-to-r from-purple-600 to-pink-600 text-white py-3 px-4 rounded-xl font-semibold text-center hover:from-purple-700 hover:to-pink-700 transform hover:scale-105 transition-all duration-300">
+                                                    <i class="fas fa-eye mr-2"></i>
+                                                    View Details
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                @endforeach
+                            </div>
+                        </div>
+                    @endif
                 @endif
             </div>
         </div>
@@ -390,269 +419,224 @@
     <!-- Enhanced JavaScript -->
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            // Hero Carousel with smooth transitions
-            const slides = document.querySelectorAll('.carousel-slide');
-            const dots = document.querySelectorAll('.dot');
-            let currentSlide = 0;
+            // Removed hero carousel JS
+        });
+
+        // Enhanced Featured Packages Auto-scroll
+        const featuredCarousel = document.querySelector('.featured-carousel');
+        if (featuredCarousel) {
+            let scrollAmount = 0;
+            const cardWidth = 320; // w-80 = 320px
+            const gap = 32; // gap-8 = 32px
+            const totalWidth = cardWidth + gap;
+            const totalCards = {{ count($this->featuredPackages) }};
             
-            function showSlide(index) {
-                // Hide all slides
-                slides.forEach(slide => {
-                    slide.classList.remove('active');
-                });
+            function autoScrollFeatured() {
+                if (totalCards <= 1) return;
                 
-                // Update dots
-                dots.forEach(dot => {
-                    dot.classList.remove('active', 'bg-white/80');
-                    dot.classList.add('bg-white/40');
-                });
-                
-                // Show current slide
-                if (slides[index]) {
-                    slides[index].classList.add('active');
+                scrollAmount += totalWidth;
+                if (scrollAmount >= totalWidth * totalCards) {
+                    scrollAmount = 0;
                 }
-                
-                // Update current dot
-                if (dots[index]) {
-                    dots[index].classList.remove('bg-white/40');
-                    dots[index].classList.add('active', 'bg-white/80');
-                }
+                featuredCarousel.scrollTo({ 
+                    left: scrollAmount, 
+                    behavior: 'smooth' 
+                });
             }
             
-            function nextSlide() {
-                currentSlide = (currentSlide + 1) % slides.length;
-                showSlide(currentSlide);
+            // Auto-scroll every 4 seconds
+            setInterval(autoScrollFeatured, 4000);
+            
+            // Manual navigation buttons
+            const prevBtn = document.querySelector('.featured-prev');
+            const nextBtn = document.querySelector('.featured-next');
+            
+            if (prevBtn) {
+                prevBtn.addEventListener('click', function() {
+                    scrollAmount -= totalWidth;
+                    if (scrollAmount < 0) {
+                        scrollAmount = totalWidth * (totalCards - 1);
+                    }
+                    featuredCarousel.scrollTo({ left: scrollAmount, behavior: 'smooth' });
+                });
             }
             
-            // Auto-advance carousel every 4 seconds
-            setInterval(nextSlide, 4000);
-            
-            // Add click handlers to dots
-            dots.forEach((dot, index) => {
-                dot.addEventListener('click', () => {
-                    currentSlide = index;
-                    showSlide(currentSlide);
-                });
-            });
-
-            // ...existing code...
-
-            // Enhanced Featured Packages Auto-scroll
-            const featuredCarousel = document.querySelector('.featured-carousel');
-            if (featuredCarousel) {
-                let scrollAmount = 0;
-                const cardWidth = 320; // w-80 = 320px
-                const gap = 32; // gap-8 = 32px
-                const totalWidth = cardWidth + gap;
-                const totalCards = {{ count($this->featuredPackages) }};
-                
-                function autoScrollFeatured() {
-                    if (totalCards <= 1) return;
-                    
+            if (nextBtn) {
+                nextBtn.addEventListener('click', function() {
                     scrollAmount += totalWidth;
                     if (scrollAmount >= totalWidth * totalCards) {
                         scrollAmount = 0;
                     }
-                    featuredCarousel.scrollTo({ 
-                        left: scrollAmount, 
-                        behavior: 'smooth' 
-                    });
-                }
-                
-                // Auto-scroll every 4 seconds
-                setInterval(autoScrollFeatured, 4000);
-                
-                // Manual navigation buttons
-                const prevBtn = document.querySelector('.featured-prev');
-                const nextBtn = document.querySelector('.featured-next');
-                
-                if (prevBtn) {
-                    prevBtn.addEventListener('click', function() {
-                        scrollAmount -= totalWidth;
-                        if (scrollAmount < 0) {
-                            scrollAmount = totalWidth * (totalCards - 1);
-                        }
-                        featuredCarousel.scrollTo({ left: scrollAmount, behavior: 'smooth' });
-                    });
-                }
-                
-                if (nextBtn) {
-                    nextBtn.addEventListener('click', function() {
-                        scrollAmount += totalWidth;
-                        if (scrollAmount >= totalWidth * totalCards) {
-                            scrollAmount = 0;
-                        }
-                        featuredCarousel.scrollTo({ left: scrollAmount, behavior: 'smooth' });
-                    });
-                }
+                    featuredCarousel.scrollTo({ left: scrollAmount, behavior: 'smooth' });
+                });
             }
+        }
 
-            // Enhanced Category Carousels Auto-scroll with smooth transitions
-            @foreach($this->categories as $key => $category)
-                (function() {
-                    const carousel{{ ucfirst($key) }} = document.querySelector('.packages-carousel-{{ $key }} .carousel-track');
-                    if (carousel{{ ucfirst($key) }}) {
-                        let scrollPos{{ ucfirst($key) }} = 0;
-                        const cardWidth = 384; // w-96 = 384px
-                        const gap = 32; // gap-8 = 32px  
-                        const totalWidth = cardWidth + gap;
-                        const totalCards = {{ count($this->featuredPackages) }};
-                        let isScrolling{{ ucfirst($key) }} = false;
+        // Enhanced Category Carousels Auto-scroll with smooth transitions
+        @foreach($this->categories as $key => $category)
+            (function() {
+                const carousel{{ ucfirst($key) }} = document.querySelector('.packages-carousel-{{ $key }} .carousel-track');
+                if (carousel{{ ucfirst($key) }}) {
+                    let scrollPos{{ ucfirst($key) }} = 0;
+                    const cardWidth = 384; // w-96 = 384px
+                    const gap = 32; // gap-8 = 32px  
+                    const totalWidth = cardWidth + gap;
+                    const totalCards = {{ count($this->featuredPackages) }};
+                    let isScrolling{{ ucfirst($key) }} = false;
+                    
+                    function autoScroll{{ ucfirst($key) }}() {
+                        if (totalCards <= 1 || isScrolling{{ ucfirst($key) }}) return;
                         
-                        function autoScroll{{ ucfirst($key) }}() {
-                            if (totalCards <= 1 || isScrolling{{ ucfirst($key) }}) return;
+                        isScrolling{{ ucfirst($key) }} = true;
+                        scrollPos{{ ucfirst($key) }} += totalWidth;
+                        
+                        if (scrollPos{{ ucfirst($key) }} >= totalWidth * totalCards) {
+                            scrollPos{{ ucfirst($key) }} = 0;
+                        }
+                        
+                        carousel{{ ucfirst($key) }}.style.transition = 'transform 0.8s ease-in-out';
+                        carousel{{ ucfirst($key) }}.style.transform = `translateX(-${scrollPos{{ ucfirst($key) }}}px)`;
+                        
+                        // Reset scrolling flag after transition
+                        setTimeout(() => {
+                            isScrolling{{ ucfirst($key) }} = false;
+                        }, 800);
+                    }
+                    
+                    // Staggered auto-scroll timing for visual variety
+                    const scrollInterval = 3500 + ({{ $loop->index }} * 750);
+                    let autoScrollTimer{{ ucfirst($key) }} = setInterval(autoScroll{{ ucfirst($key) }}, scrollInterval);
+                    
+                    // Enhanced manual controls
+                    const prevBtn = document.querySelector('.carousel-prev-{{ $key }}');
+                    const nextBtn = document.querySelector('.carousel-next-{{ $key }}');
+                    
+                    if (prevBtn) {
+                        prevBtn.addEventListener('click', function() {
+                            if (isScrolling{{ ucfirst($key) }}) return;
                             
                             isScrolling{{ ucfirst($key) }} = true;
-                            scrollPos{{ ucfirst($key) }} += totalWidth;
+                            clearInterval(autoScrollTimer{{ ucfirst($key) }});
                             
-                            if (scrollPos{{ ucfirst($key) }} >= totalWidth * totalCards) {
-                                scrollPos{{ ucfirst($key) }} = 0;
+                            scrollPos{{ ucfirst($key) }} -= totalWidth;
+                            if (scrollPos{{ ucfirst($key) }} < 0) {
+                                scrollPos{{ ucfirst($key) }} = totalWidth * (totalCards - 1);
                             }
                             
-                            carousel{{ ucfirst($key) }}.style.transition = 'transform 0.8s ease-in-out';
+                            carousel{{ ucfirst($key) }}.style.transition = 'transform 0.5s ease-in-out';
                             carousel{{ ucfirst($key) }}.style.transform = `translateX(-${scrollPos{{ ucfirst($key) }}}px)`;
                             
-                            // Reset scrolling flag after transition
                             setTimeout(() => {
                                 isScrolling{{ ucfirst($key) }} = false;
-                            }, 800);
-                        }
-                        
-                        // Staggered auto-scroll timing for visual variety
-                        const scrollInterval = 3500 + ({{ $loop->index }} * 750);
-                        let autoScrollTimer{{ ucfirst($key) }} = setInterval(autoScroll{{ ucfirst($key) }}, scrollInterval);
-                        
-                        // Enhanced manual controls
-                        const prevBtn = document.querySelector('.carousel-prev-{{ $key }}');
-                        const nextBtn = document.querySelector('.carousel-next-{{ $key }}');
-                        
-                        if (prevBtn) {
-                            prevBtn.addEventListener('click', function() {
-                                if (isScrolling{{ ucfirst($key) }}) return;
-                                
-                                isScrolling{{ ucfirst($key) }} = true;
-                                clearInterval(autoScrollTimer{{ ucfirst($key) }});
-                                
-                                scrollPos{{ ucfirst($key) }} -= totalWidth;
-                                if (scrollPos{{ ucfirst($key) }} < 0) {
-                                    scrollPos{{ ucfirst($key) }} = totalWidth * (totalCards - 1);
-                                }
-                                
-                                carousel{{ ucfirst($key) }}.style.transition = 'transform 0.5s ease-in-out';
-                                carousel{{ ucfirst($key) }}.style.transform = `translateX(-${scrollPos{{ ucfirst($key) }}}px)`;
-                                
-                                setTimeout(() => {
-                                    isScrolling{{ ucfirst($key) }} = false;
-                                    autoScrollTimer{{ ucfirst($key) }} = setInterval(autoScroll{{ ucfirst($key) }}, scrollInterval);
-                                }, 500);
-                            });
-                        }
-                        
-                        if (nextBtn) {
-                            nextBtn.addEventListener('click', function() {
-                                if (isScrolling{{ ucfirst($key) }}) return;
-                                
-                                clearInterval(autoScrollTimer{{ ucfirst($key) }});
-                                autoScroll{{ ucfirst($key) }}();
                                 autoScrollTimer{{ ucfirst($key) }} = setInterval(autoScroll{{ ucfirst($key) }}, scrollInterval);
-                            });
-                        }
-                        
-                        // Pause auto-scroll on hover for better UX
-                        const carouselContainer = document.querySelector('.packages-carousel-{{ $key }}');
-                        if (carouselContainer) {
-                            carouselContainer.addEventListener('mouseenter', function() {
-                                clearInterval(autoScrollTimer{{ ucfirst($key) }});
-                            });
+                            }, 500);
+                        });
+                    }
+                    
+                    if (nextBtn) {
+                        nextBtn.addEventListener('click', function() {
+                            if (isScrolling{{ ucfirst($key) }}) return;
                             
-                            carouselContainer.addEventListener('mouseleave', function() {
-                                autoScrollTimer{{ ucfirst($key) }} = setInterval(autoScroll{{ ucfirst($key) }}, scrollInterval);
-                            });
-                        }
+                            clearInterval(autoScrollTimer{{ ucfirst($key) }});
+                            autoScroll{{ ucfirst($key) }}();
+                            autoScrollTimer{{ ucfirst($key) }} = setInterval(autoScroll{{ ucfirst($key) }}, scrollInterval);
+                        });
                     }
-                })();
-            @endforeach
-
-            // Category menu smooth scrolling
-            document.addEventListener('livewire:initialized', function() {
-                // Listen for category selection events
-                window.addEventListener('category-selected', function(event) {
-                    if (event.detail && event.detail.category) {
-                        const categorySection = document.querySelector(`#category-${event.detail.category}`);
-                        if (categorySection) {
-                            categorySection.scrollIntoView({ 
-                                behavior: 'smooth',
-                                block: 'start'
-                            });
-                        }
+                    
+                    // Pause auto-scroll on hover for better UX
+                    const carouselContainer = document.querySelector('.packages-carousel-{{ $key }}');
+                    if (carouselContainer) {
+                        carouselContainer.addEventListener('mouseenter', function() {
+                            clearInterval(autoScrollTimer{{ ucfirst($key) }});
+                        });
+                        
+                        carouselContainer.addEventListener('mouseleave', function() {
+                            autoScrollTimer{{ ucfirst($key) }} = setInterval(autoScroll{{ ucfirst($key) }}, scrollInterval);
+                        });
                     }
-                });
-            });
-
-            // Enhanced search functionality with better UX
-            const searchInput = document.querySelector('input[wire\\:model\\.live="searchQuery"]');
-            if (searchInput) {
-                let searchTimeout;
-                
-                searchInput.addEventListener('input', function(event) {
-                    // Clear existing timeout
-                    clearTimeout(searchTimeout);
-                    
-                    // Add loading indicator class
-                    searchInput.classList.add('searching');
-                    
-                    // Remove loading indicator after delay
-                    searchTimeout = setTimeout(() => {
-                        searchInput.classList.remove('searching');
-                    }, 500);
-                });
-            }
-
-            // Enhanced parallax scrolling effects
-            window.addEventListener('scroll', function() {
-                const scrolled = window.pageYOffset;
-                const parallaxElements = document.querySelectorAll('.parallax-element');
-                
-                parallaxElements.forEach(function(element) {
-                    const speed = element.dataset.speed || 0.5;
-                    const yPos = -(scrolled * speed);
-                    element.style.transform = `translateY(${yPos}px)`;
-                });
-            });
-
-            // Enhanced hover effects for package cards
-            const packageCards = document.querySelectorAll('.package-card');
-            packageCards.forEach(function(card) {
-                card.addEventListener('mouseenter', function() {
-                    this.style.transform = 'translateY(-8px) scale(1.02)';
-                });
-                
-                card.addEventListener('mouseleave', function() {
-                    this.style.transform = 'translateY(0) scale(1)';
-                });
-            });
-
-            // Enhanced loading animations
-            function showLoadingState() {
-                const packageGrid = document.querySelector('.packages-grid');
-                if (packageGrid) {
-                    packageGrid.style.opacity = '0.6';
-                    packageGrid.style.pointerEvents = 'none';
                 }
-            }
+            })();
+        @endforeach
 
-            function hideLoadingState() {
-                const packageGrid = document.querySelector('.packages-grid');
-                if (packageGrid) {
-                    packageGrid.style.opacity = '1';
-                    packageGrid.style.pointerEvents = 'auto';
+        // Category menu smooth scrolling
+        document.addEventListener('livewire:initialized', function() {
+            // Listen for category selection events
+            window.addEventListener('category-selected', function(event) {
+                if (event.detail && event.detail.category) {
+                    const categorySection = document.querySelector(`#category-${event.detail.category}`);
+                    if (categorySection) {
+                        categorySection.scrollIntoView({ 
+                            behavior: 'smooth',
+                            block: 'start'
+                        });
+                    }
                 }
-            }
-
-            // Listen for Livewire events
-            document.addEventListener('livewire:request', showLoadingState);
-            document.addEventListener('livewire:response', hideLoadingState);
+            });
         });
+
+        // Enhanced search functionality with better UX
+        const searchInput = document.querySelector('input[wire\\:model\\.live="searchQuery"]');
+        if (searchInput) {
+            let searchTimeout;
+            
+            searchInput.addEventListener('input', function(event) {
+                // Clear existing timeout
+                clearTimeout(searchTimeout);
+                
+                // Add loading indicator class
+                searchInput.classList.add('searching');
+                
+                // Remove loading indicator after delay
+                searchTimeout = setTimeout(() => {
+                    searchInput.classList.remove('searching');
+                }, 500);
+            });
+        }
+
+        // Enhanced parallax scrolling effects
+        window.addEventListener('scroll', function() {
+            const scrolled = window.pageYOffset;
+            const parallaxElements = document.querySelectorAll('.parallax-element');
+            
+            parallaxElements.forEach(function(element) {
+                const speed = element.dataset.speed || 0.5;
+                const yPos = -(scrolled * speed);
+                element.style.transform = `translateY(${yPos}px)`;
+            });
+        });
+
+        // Enhanced hover effects for package cards
+        const packageCards = document.querySelectorAll('.package-card');
+        packageCards.forEach(function(card) {
+            card.addEventListener('mouseenter', function() {
+                this.style.transform = 'translateY(-8px) scale(1.02)';
+            });
+            
+            card.addEventListener('mouseleave', function() {
+                this.style.transform = 'translateY(0) scale(1)';
+            });
+        });
+
+        // Enhanced loading animations
+        function showLoadingState() {
+            const packageGrid = document.querySelector('.packages-grid');
+            if (packageGrid) {
+                packageGrid.style.opacity = '0.6';
+                packageGrid.style.pointerEvents = 'none';
+            }
+        }
+
+        function hideLoadingState() {
+            const packageGrid = document.querySelector('.packages-grid');
+            if (packageGrid) {
+                packageGrid.style.opacity = '1';
+                packageGrid.style.pointerEvents = 'auto';
+            }
+        }
+
+        // Listen for Livewire events
+        document.addEventListener('livewire:request', showLoadingState);
+        document.addEventListener('livewire:response', hideLoadingState);
     </script>
 
     <!-- Enhanced CSS for animations and effects -->

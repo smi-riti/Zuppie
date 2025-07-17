@@ -18,6 +18,8 @@ class PackageBookingForm extends Component
     public $pinCode;
     public $package;
     
+  
+    
     // Form fields
     public $name = '';
     public $email = '';
@@ -28,6 +30,11 @@ class PackageBookingForm extends Component
     public $location = '';
     public $specialRequests = '';
     public $paymentMethod = 'cash';
+    public $acceptTerms = false;
+    
+    // Multi-step form
+    public $currentStep = 1;
+    public $showPackageDetails = false;
     
     // User state
     public $isLoggedIn = false;
@@ -46,7 +53,8 @@ class PackageBookingForm extends Component
         'guestCount' => 'nullable|integer|min:1|max:10000',
         'location' => 'required|string|min:5|max:500',
         'specialRequests' => 'nullable|string|max:1000',
-        'paymentMethod' => 'required|in:cash'
+        'paymentMethod' => 'required|in:cash',
+        'acceptTerms' => 'required|accepted'
     ];
 
     protected $messages = [
@@ -57,20 +65,29 @@ class PackageBookingForm extends Component
         'eventDate.after' => 'Event date must be in the future',
         'eventEndDate.after_or_equal' => 'Event end date must be same or after event start date',
         'location.required' => 'Event location is required',
-        'location.min' => 'Location must be at least 5 characters'
+        'location.min' => 'Location must be at least 5 characters',
+        'acceptTerms.required' => 'You must accept the terms and conditions'
     ];
 
     public function mount($package_id = null, $pin_code = null)
     {
-        // Get from URL parameters or session
         $this->packageId = $package_id ?: session('package_id') ?: request('package_id');
         $this->pinCode = $pin_code ?: session('pin_code') ?: request('pin_code');
         
         $this->loadPackage();
         $this->checkUserAuthentication();
+        $this->loadFormDataFromSession();
+        
+        // If user just logged in/registered and has form data, go to step 4
+        if ($this->isLoggedIn && session('booking_form_data') && 
+            $this->name && $this->phone && $this->eventDate && $this->location) {
+            $this->currentStep = 4;
+        }
         
         // Set default end date as same day
-        $this->eventEndDate = $this->eventDate;
+        if (!$this->eventEndDate && $this->eventDate) {
+            $this->eventEndDate = $this->eventDate;
+        }
     }
 
     public function loadPackage()
@@ -104,31 +121,50 @@ class PackageBookingForm extends Component
             $this->guestCount = $this->guestCount === '' ? null : $this->guestCount;
         }
         
-        // Validate field on change
-        $this->validateOnly($field);
+        // Validate field on change for current step
+        if ($this->currentStep === 1 && in_array($field, ['eventDate', 'eventEndDate', 'location'])) {
+            $this->validateOnly($field, [
+                'eventDate' => 'required|date|after:today',
+                'eventEndDate' => 'nullable|date|after_or_equal:eventDate',
+                'location' => 'required|string|min:5|max:500',
+            ]);
+        } elseif ($this->currentStep === 2 && in_array($field, ['guestCount', 'specialRequests'])) {
+            $this->validateOnly($field, [
+                'guestCount' => 'nullable|integer|min:1|max:10000',
+                'specialRequests' => 'nullable|string|max:1000',
+            ]);
+        } elseif ($this->currentStep === 3 && in_array($field, ['name', 'phone', 'email'])) {
+            $this->validateOnly($field, [
+                'name' => 'required|string|min:2|max:255',
+                'phone' => 'required|string|min:10|max:15',
+                'email' => 'nullable|email|max:255',
+            ]);
+        }
     }
 
     public function submitBooking()
     {
         $this->isSubmitting = true;
         
-        // Validate form
+        // Ensure user is logged in before allowing booking
+        if (!$this->isLoggedIn) {
+            session()->flash('error', 'You must be logged in to complete the booking.');
+            $this->isSubmitting = false;
+            return;
+        }
+        
+        // Validate all fields
         $this->validate();
 
         try {
-            // Create or find user
-            $user = $this->createOrFindUser();
+            // Update logged in user's information
+            $user = $this->updateUserInfo();
             
             // Create booking
             $booking = $this->createBooking($user);
             
             // Create payment record
             $this->createPaymentRecord($booking);
-            
-            // Login user if not already logged in
-            if (!$this->isLoggedIn) {
-                Auth::login($user);
-            }
             
             // Send email if email provided
             if ($this->email) {
@@ -137,56 +173,166 @@ class PackageBookingForm extends Component
 
             session()->flash('booking_success', 'Your booking has been confirmed successfully!');
             
+            // Clear saved form data
+            session()->forget('booking_form_data');
+            
             // Redirect to manage booking
             return redirect()->route('manage-booking', ['booking_id' => $booking->id]);
             
         } catch (\Exception $e) {
             session()->flash('error', 'Something went wrong. Please try again.');
             \Log::error('Booking error: ' . $e->getMessage());
+            $this->isSubmitting = false;
         }
-        
-        $this->isSubmitting = false;
     }
 
-    private function createOrFindUser()
+    // Step navigation methods
+    public function goToStep($step)
     {
-        // If user is already logged in, use that user
-        if ($this->isLoggedIn && $this->existingUser) {
-            // Update user info with any changes
-            $this->existingUser->update([
-                'name' => $this->name,
-                'email' => $this->email ?: $this->existingUser->email
-            ]);
-            
-            return $this->existingUser;
+        $this->currentStep = $step;
+    }
+
+    public function togglePackageDetails()
+    {
+        $this->showPackageDetails = !$this->showPackageDetails;
+    }
+
+    public function toggleEditForm()
+    {
+        $this->showEditForm = !$this->showEditForm;
+    }
+
+    public function updateUserDetails()
+    {
+        if (!$this->isLoggedIn) {
+            return;
         }
-        
-        // Check if user exists by phone
-        $user = User::where('phone_no', $this->phone)->first();
-        
-        if (!$user) {
-            // Generate random password
-            $password = Str::random(8);
-            
-            $user = User::create([
+
+        $this->validate([
+            'name' => 'required|string|min:2|max:255',
+            'phone' => 'required|string|min:10|max:15',
+            'email' => 'nullable|email|max:255',
+        ]);
+
+        try {
+            // Note: This updates the user account info, not just booking details
+            $this->existingUser->update([
                 'name' => $this->name,
                 'email' => $this->email,
                 'phone_no' => $this->phone,
-                'password' => Hash::make($password),
-                'is_admin' => false
             ]);
+
+            $this->showEditForm = false;
+            session()->flash('success', 'Your account details have been updated successfully.');
+
+        } catch (\Exception $e) {
+            session()->flash('error', 'Failed to update details. Please try again.');
+            \Log::error('Update error: ' . $e->getMessage());
+        }
+    }
+
+    private function saveFormDataToSession()
+    {
+        session([
+            'booking_form_data' => [
+                'eventDate' => $this->eventDate,
+                'eventEndDate' => $this->eventEndDate,
+                'location' => $this->location,
+                'guestCount' => $this->guestCount,
+                'specialRequests' => $this->specialRequests,
+                'packageId' => $this->packageId,
+                'pinCode' => $this->pinCode,
+            ]
+        ]);
+    }
+
+    private function loadFormDataFromSession()
+    {
+        // Load form data
+        $formData = session('booking_form_data');
+        if ($formData) {
+            $this->eventDate = $formData['eventDate'] ?? $this->eventDate;
+            $this->eventEndDate = $formData['eventEndDate'] ?? $this->eventEndDate;
+            $this->location = $formData['location'] ?? $this->location;
+            $this->guestCount = $formData['guestCount'] ?? $this->guestCount;
+            $this->specialRequests = $formData['specialRequests'] ?? $this->specialRequests;
+        }
+
+        // Load step 3 data if available
+        $step3Data = session('booking_step3_data');
+        if ($step3Data) {
+            $this->name = $step3Data['name'] ?? $this->name;
+            $this->email = $step3Data['email'] ?? $this->email;
+            $this->phone = $step3Data['phone'] ?? $this->phone;
             
-            // Store password for email
-            $user->temp_password = $password;
-        } else {
-            // Update user info if needed
-            $user->update([
+            // Clear step 3 data after loading
+            session()->forget('booking_step3_data');
+        }
+    }
+
+    public function validateStep1()
+    {
+        $this->validate([
+            'eventDate' => 'required|date|after:today',
+            'eventEndDate' => 'nullable|date|after_or_equal:eventDate',
+            'location' => 'required|string|min:5|max:500',
+        ]);
+        
+        $this->currentStep = 2;
+    }
+
+    public function validateStep2()
+    {
+        $this->validate([
+            'guestCount' => 'nullable|integer|min:1|max:10000',
+            'specialRequests' => 'nullable|string|max:1000',
+        ]);
+        
+        $this->currentStep = 3;
+    }
+
+    public function validateStep3()
+    {
+        $this->validate([
+            'name' => 'required|string|min:2|max:255',
+            'phone' => 'required|string|min:10|max:15',
+            'email' => 'nullable|email|max:255',
+        ]);
+        
+        // Check if user needs to register/login
+        if (!$this->isLoggedIn) {
+            // Save form data to session before redirecting
+            $this->saveFormDataToSession();
+            session(['booking_step3_data' => [
                 'name' => $this->name,
-                'email' => $this->email ?: $user->email
-            ]);
+                'email' => $this->email,
+                'phone' => $this->phone
+            ]]);
+            
+            // Check if user exists
+            if ($this->existingUser) {
+                // Redirect to login page
+                session()->flash('info', 'Please login to complete your booking.');
+                return redirect()->route('login');
+            } else {
+                // Redirect to register page
+                session()->flash('info', 'Please register to complete your booking.');
+                return redirect()->route('register');
+            }
         }
         
-        return $user;
+        $this->currentStep = 4;
+    }
+
+    private function updateUserInfo()
+    {
+        // For this booking system, we don't update user's account details
+        // The booking details are separate from user account details
+        if (!$this->isLoggedIn || !$this->existingUser) {
+            throw new \Exception('User must be logged in to complete booking');
+        }
+        
+        return $this->existingUser;
     }
 
     private function createBooking($user)
@@ -194,14 +340,18 @@ class PackageBookingForm extends Component
         return Booking::create([
             'user_id' => $user->id,
             'event_package_id' => $this->package->id,
+            'booking_name' => $this->name,
+            'booking_email' => $this->email,
+            'booking_phone_no' => $this->phone,
             'event_date' => $this->eventDate,
             'event_end_date' => $this->eventEndDate ?: $this->eventDate,
-            'guest_count' => $this->guestCount ?: null, // Convert empty string to null
+            'guest_count' => $this->guestCount ?: null,
             'location' => $this->location,
             'special_requests' => $this->specialRequests,
-            'status' => 'confirmed',
+            'status' => 'pending',
             'total_price' => $this->package->discounted_price,
-            'pin_code' => $this->pinCode
+            'pin_code' => $this->pinCode,
+            'is_completed' => true
         ]);
     }
 
@@ -239,23 +389,21 @@ class PackageBookingForm extends Component
         return $this->package ? $this->package->discounted_price : 0;
     }
 
-    public function render()
-    {
-        return view('livewire.public.event.package-booking-form');
-    }
-    
     public function checkUserAuthentication()
     {
         if (Auth::check()) {
             $this->isLoggedIn = true;
             $this->existingUser = Auth::user();
             
-            // Pre-fill form with user data
-            $this->name = $this->existingUser->name;
-            $this->email = $this->existingUser->email;
-            $this->phone = $this->existingUser->phone_no;
+            // Pre-fill booking form with user data (but these can be edited for booking)
+            $this->name = $this->existingUser->name ?? '';
+            $this->email = $this->existingUser->email ?? '';
+            $this->phone = $this->existingUser->phone_no ?? '';
             
-            $this->userMessage = "Welcome back, {$this->existingUser->name}! Your information has been pre-filled.";
+            $this->userMessage = "Welcome back, {$this->existingUser->name}! Your information has been pre-filled but you can modify it for this booking.";
+        } else {
+            $this->isLoggedIn = false;
+            $this->existingUser = null;
         }
     }
 
@@ -281,5 +429,10 @@ class PackageBookingForm extends Component
                 $this->dispatch('user-not-found');
             }
         }
+    }
+
+    public function render()
+    {
+        return view('livewire.public.event.package-booking-form');
     }
 }
