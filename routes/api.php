@@ -42,5 +42,6 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::apiResource('event-packages', EventPackageController::class)->except(['index', 'show']);
         Route::apiResource('offers', OfferController::class)->except(['index', 'show']);
         Route::apiResource('reviews', ReviewController::class)->except(['index', 'store']);
+        Route::apiResource('blogs', BlogController::class);
     });
 });
