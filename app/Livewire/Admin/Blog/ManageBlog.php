@@ -15,13 +15,20 @@ class ManageBlog extends Component
     public $confirmingDeletion = false;
     public $blogToDelete = null;
     public $search = '';
-    public $perPage = 5;
+    public $perPage = 7;
+    public $isLoading = false;
 
     protected $queryString = ['search' => ['except' => ''], 'perPage'];
 
     public function updatingSearch()
     {
+        $this->isLoading = true;
         $this->resetPage();
+    }
+
+    public function updatedSearch()
+    {
+        $this->isLoading = false;
     }
 
     public function confirmDelete($blogId)
@@ -33,10 +40,12 @@ class ManageBlog extends Component
     public function deleteBlog()
     {
         if ($this->blogToDelete) {
+            $this->isLoading = true;
             $blog = Blog::find($this->blogToDelete);
             if ($blog) {
                 $blog->delete();
             }
+            $this->isLoading = false;
         }
 
         $this->confirmingDeletion = false;
@@ -47,6 +56,13 @@ class ManageBlog extends Component
     {
         $this->confirmingDeletion = false;
         $this->blogToDelete = null;
+    }
+
+    public function refresh()
+    {
+        $this->isLoading = true;
+        $this->resetPage();
+        $this->isLoading = false;
     }
 
     #[Layout('components.layouts.admin')]
