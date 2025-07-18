@@ -67,14 +67,14 @@ Route::prefix('admin')->middleware(['auth', 'admin'])->group(function () {
 
 });
 
-// SEO Routes
-Route::get('/sitemap.xml', [\App\Http\Controllers\SimpleSitemapController::class, 'index'])->name('sitemap.index');
-Route::get('/sitemap/static.xml', [SitemapController::class, 'static'])->name('sitemap.static');
-Route::get('/sitemap/categories.xml', [SitemapController::class, 'categories'])->name('sitemap.categories');
-Route::get('/sitemap/packages.xml', [SitemapController::class, 'packages'])->name('sitemap.packages');
-Route::get('/sitemap/offers.xml', [SitemapController::class, 'offers'])->name('sitemap.offers');
-Route::get('/sitemap/blogs.xml', [SitemapController::class, 'blogs'])->name('sitemap.blogs');
-Route::get('/robots.txt', [RobotsController::class, 'index'])->name('robots');
+// SEO Routes - Production Optimized
+Route::get('/sitemap.xml', [\App\Http\Controllers\ProductionSitemapController::class, 'index'])->name('sitemap.index');
+Route::get('/sitemap/static.xml', [\App\Http\Controllers\ProductionSitemapController::class, 'static'])->name('sitemap.static');
+Route::get('/sitemap/categories.xml', [\App\Http\Controllers\ProductionSitemapController::class, 'categories'])->name('sitemap.categories');
+Route::get('/sitemap/packages.xml', [\App\Http\Controllers\ProductionSitemapController::class, 'packages'])->name('sitemap.packages');
+Route::get('/sitemap/offers.xml', [\App\Http\Controllers\ProductionSitemapController::class, 'offers'])->name('sitemap.offers');
+Route::get('/sitemap/blogs.xml', [\App\Http\Controllers\ProductionSitemapController::class, 'blogs'])->name('sitemap.blogs');
+Route::get('/robots.txt', [\App\Http\Controllers\ProductionRobotsController::class, 'index'])->name('robots');
 
 // PWA Routes
 Route::get('/manifest.json', function () {

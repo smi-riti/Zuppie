@@ -109,6 +109,79 @@ class SEOHelper
         $metaTags[] = '<meta name="msapplication-navbutton-color" content="#8B5CF6">';
         $metaTags[] = '<meta name="apple-mobile-web-app-status-bar-style" content="default">';
         
+        // Production-specific optimizations
+        if (app()->environment('production')) {
+            // DNS Prefetch
+            $preconnectDomains = config('seo.production.preconnect_domains', []);
+            foreach ($preconnectDomains as $domain) {
+                $metaTags[] = '<link rel="preconnect" href="' . $domain . '" crossorigin>';
+            }
+            
+            $dnsPrefetchDomains = config('seo.production.dns_prefetch', []);
+            foreach ($dnsPrefetchDomains as $domain) {
+                $metaTags[] = '<link rel="dns-prefetch" href="' . $domain . '">';
+            }
+            
+            // Security headers
+            $metaTags[] = '<meta http-equiv="X-Content-Type-Options" content="nosniff">';
+            $metaTags[] = '<meta http-equiv="X-Frame-Options" content="DENY">';
+            $metaTags[] = '<meta http-equiv="X-XSS-Protection" content="1; mode=block">';
+            
+            // Analytics and tracking
+            if (config('app.google_analytics_id')) {
+                $metaTags[] = '<!-- Google Analytics -->';
+                $metaTags[] = '<script async src="https://www.googletagmanager.com/gtag/js?id=' . config('app.google_analytics_id') . '"></script>';
+                $metaTags[] = '<script>
+                    window.dataLayer = window.dataLayer || [];
+                    function gtag(){dataLayer.push(arguments);}
+                    gtag("js", new Date());
+                    gtag("config", "' . config('app.google_analytics_id') . '", {
+                        page_location: "' . $meta['url'] . '",
+                        page_title: "' . htmlspecialchars($title) . '"
+                    });
+                </script>';
+            }
+            
+            // Google Tag Manager
+            if (config('app.google_tag_manager_id')) {
+                $metaTags[] = '<!-- Google Tag Manager -->';
+                $metaTags[] = '<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({"gtm.start":
+                new Date().getTime(),event:"gtm.js"});var f=d.getElementsByTagName(s)[0],
+                j=d.createElement(s),dl=l!="dataLayer"?"&l="+l:"";j.async=true;j.src=
+                "https://www.googletagmanager.com/gtm.js?id="+i+dl;f.parentNode.insertBefore(j,f);
+                })(window,document,"script","dataLayer","' . config('app.google_tag_manager_id') . '");</script>';
+            }
+            
+            // Facebook Pixel
+            if (config('app.facebook_pixel_id')) {
+                $metaTags[] = '<!-- Facebook Pixel -->';
+                $metaTags[] = '<script>
+                    !function(f,b,e,v,n,t,s)
+                    {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+                    n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+                    if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version="2.0";
+                    n.queue=[];t=b.createElement(e);t.async=!0;
+                    t.src=v;s=b.getElementsByTagName(e)[0];
+                    s.parentNode.insertBefore(t,s)}(window, document,"script",
+                    "https://connect.facebook.net/en_US/fbevents.js");
+                    fbq("init", "' . config('app.facebook_pixel_id') . '");
+                    fbq("track", "PageView");
+                </script>';
+            }
+            
+            // Microsoft Clarity
+            if (config('app.microsoft_clarity_id')) {
+                $metaTags[] = '<!-- Microsoft Clarity -->';
+                $metaTags[] = '<script type="text/javascript">
+                    (function(c,l,a,r,i,t,y){
+                        c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+                        t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+                        y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+                    })(window, document, "clarity", "script", "' . config('app.microsoft_clarity_id') . '");
+                </script>';
+            }
+        }
+        
         return implode("\n    ", $metaTags);
     }
 
