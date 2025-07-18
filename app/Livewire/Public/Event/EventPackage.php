@@ -312,6 +312,14 @@ class EventPackage extends Component
 
     public function render()
     {
-        return view('livewire.public.event.event-package');
+        return view('livewire.public.event.event-package', [
+            'featuredPackages' => $this->featuredPackages,
+            'categories' => $this->categories,
+            'filteredPackages' => $this->filteredPackages,
+            'displayCategories' => $this->displayCategories,
+            'similarPackages' => $this->similarPackages,
+            'hasMorePackages' => $this->hasMorePackages,
+            'totalPackagesCount' => $this->totalPackagesCount
+        ]);
     }
 }

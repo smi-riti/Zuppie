@@ -7,6 +7,7 @@ use App\Models\EventPackage;
 use App\Models\Booking;
 use App\Models\Payment;
 use App\Models\User;
+use App\Models\Service;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
@@ -49,7 +50,7 @@ class PackageBookingForm extends Component
         'phone' => 'required|string|min:10|max:15',
         'email' => 'nullable|email|max:255',
         'eventDate' => 'required|date|after:today',
-        'eventEndDate' => 'nullable|date|after_or_equal:eventDate',
+        'eventEndDate' => 'nullable|date|after:eventDate',
         'guestCount' => 'nullable|integer|min:1|max:10000',
         'location' => 'required|string|min:5|max:500',
         'specialRequests' => 'nullable|string|max:1000',
@@ -59,13 +60,23 @@ class PackageBookingForm extends Component
 
     protected $messages = [
         'name.required' => 'Name is required',
+        'name.min' => 'Name must be at least 2 characters',
         'phone.required' => 'Phone number is required',
         'phone.min' => 'Phone number must be at least 10 digits',
+        'phone.max' => 'Phone number cannot exceed 15 digits',
+        'email.email' => 'Please enter a valid email address',
         'eventDate.required' => 'Event date is required',
         'eventDate.after' => 'Event date must be in the future',
-        'eventEndDate.after_or_equal' => 'Event end date must be same or after event start date',
+        'eventDate.date' => 'Please enter a valid event date',
+        'eventEndDate.after' => 'Event end date must be after event start date',
+        'eventEndDate.date' => 'Please enter a valid event end date',
+        'guestCount.integer' => 'Guest count must be a number',
+        'guestCount.min' => 'Guest count must be at least 1',
+        'guestCount.max' => 'Guest count cannot exceed 10,000',
         'location.required' => 'Event location is required',
         'location.min' => 'Location must be at least 5 characters',
+        'location.max' => 'Location cannot exceed 500 characters',
+        'specialRequests.max' => 'Special requests cannot exceed 1000 characters',
         'acceptTerms.required' => 'You must accept the terms and conditions'
     ];
 
@@ -73,6 +84,18 @@ class PackageBookingForm extends Component
     {
         $this->packageId = $package_id ?: session('package_id') ?: request('package_id');
         $this->pinCode = $pin_code ?: session('pin_code') ?: request('pin_code');
+        
+        // Validate pin code exists in services
+        if ($this->pinCode) {
+            $service = Service::where('pin_code', $this->pinCode)->first();
+            if (!$service) {
+                session()->flash('error', 'Invalid service area pin code. Please check pincode availability on package detail page.');
+                return redirect()->route('event-packages');
+            }
+        } else {
+            session()->flash('error', 'Pin code is required. Please check pincode availability on package detail page.');
+            return redirect()->route('event-packages');
+        }
         
         $this->loadPackage();
         $this->checkUserAuthentication();
@@ -84,9 +107,9 @@ class PackageBookingForm extends Component
             $this->currentStep = 4;
         }
         
-        // Set default end date as same day
+        // Set default end date as next day
         if (!$this->eventEndDate && $this->eventDate) {
-            $this->eventEndDate = $this->eventDate;
+            $this->eventEndDate = date('Y-m-d', strtotime($this->eventDate . ' +1 day'));
         }
     }
 
@@ -106,8 +129,9 @@ class PackageBookingForm extends Component
     {
         // Auto-set end date when start date changes
         if ($field === 'eventDate' && $this->eventDate) {
-            if (!$this->eventEndDate || $this->eventEndDate < $this->eventDate) {
-                $this->eventEndDate = $this->eventDate;
+            if (!$this->eventEndDate || $this->eventEndDate <= $this->eventDate) {
+                // Set end date to next day by default
+                $this->eventEndDate = date('Y-m-d', strtotime($this->eventDate . ' +1 day'));
             }
         }
         
@@ -118,27 +142,39 @@ class PackageBookingForm extends Component
         
         // Clean up guest count - convert empty string to null
         if ($field === 'guestCount') {
-            $this->guestCount = $this->guestCount === '' ? null : $this->guestCount;
+            $this->guestCount = $this->guestCount === '' ? null : intval($this->guestCount);
         }
         
         // Validate field on change for current step
         if ($this->currentStep === 1 && in_array($field, ['eventDate', 'eventEndDate', 'location'])) {
-            $this->validateOnly($field, [
-                'eventDate' => 'required|date|after:today',
-                'eventEndDate' => 'nullable|date|after_or_equal:eventDate',
-                'location' => 'required|string|min:5|max:500',
-            ]);
+            try {
+                $this->validateOnly($field, [
+                    'eventDate' => 'required|date|after:today',
+                    'eventEndDate' => 'nullable|date|after:eventDate',
+                    'location' => 'required|string|min:5|max:500',
+                ]);
+            } catch (\Illuminate\Validation\ValidationException $e) {
+                // Validation error will be automatically shown
+            }
         } elseif ($this->currentStep === 2 && in_array($field, ['guestCount', 'specialRequests'])) {
-            $this->validateOnly($field, [
-                'guestCount' => 'nullable|integer|min:1|max:10000',
-                'specialRequests' => 'nullable|string|max:1000',
-            ]);
+            try {
+                $this->validateOnly($field, [
+                    'guestCount' => 'nullable|integer|min:1|max:10000',
+                    'specialRequests' => 'nullable|string|max:1000',
+                ]);
+            } catch (\Illuminate\Validation\ValidationException $e) {
+                // Validation error will be automatically shown
+            }
         } elseif ($this->currentStep === 3 && in_array($field, ['name', 'phone', 'email'])) {
-            $this->validateOnly($field, [
-                'name' => 'required|string|min:2|max:255',
-                'phone' => 'required|string|min:10|max:15',
-                'email' => 'nullable|email|max:255',
-            ]);
+            try {
+                $this->validateOnly($field, [
+                    'name' => 'required|string|min:2|max:255',
+                    'phone' => 'required|string|min:10|max:15',
+                    'email' => 'nullable|email|max:255',
+                ]);
+            } catch (\Illuminate\Validation\ValidationException $e) {
+                // Validation error will be automatically shown
+            }
         }
     }
 
@@ -153,10 +189,10 @@ class PackageBookingForm extends Component
             return;
         }
         
-        // Validate all fields
-        $this->validate();
-
         try {
+            // Validate all fields
+            $this->validate();
+
             // Update logged in user's information
             $user = $this->updateUserInfo();
             
@@ -179,8 +215,12 @@ class PackageBookingForm extends Component
             // Redirect to manage booking
             return redirect()->route('manage-booking', ['booking_id' => $booking->id]);
             
+        } catch (\Illuminate\Validation\ValidationException $e) {
+            // Validation failed, show specific validation errors
+            session()->flash('validation_error', 'Please fix the validation errors before submitting your booking.');
+            $this->isSubmitting = false;
         } catch (\Exception $e) {
-            session()->flash('error', 'Something went wrong. Please try again.');
+            session()->flash('error', 'Something went wrong. Please try again. Error: ' . $e->getMessage());
             \Log::error('Booking error: ' . $e->getMessage());
             $this->isSubmitting = false;
         }
@@ -272,56 +312,71 @@ class PackageBookingForm extends Component
 
     public function validateStep1()
     {
-        $this->validate([
-            'eventDate' => 'required|date|after:today',
-            'eventEndDate' => 'nullable|date|after_or_equal:eventDate',
-            'location' => 'required|string|min:5|max:500',
-        ]);
-        
-        $this->currentStep = 2;
+        try {
+            $this->validate([
+                'eventDate' => 'required|date|after:today',
+                'eventEndDate' => 'nullable|date|after:eventDate',
+                'location' => 'required|string|min:5|max:500',
+            ]);
+            
+            $this->currentStep = 2;
+        } catch (\Illuminate\Validation\ValidationException $e) {
+            // Validation failed, errors will be automatically displayed
+            session()->flash('validation_error', 'Please fix the validation errors before proceeding.');
+        }
     }
 
     public function validateStep2()
     {
-        $this->validate([
-            'guestCount' => 'nullable|integer|min:1|max:10000',
-            'specialRequests' => 'nullable|string|max:1000',
-        ]);
-        
-        $this->currentStep = 3;
+        try {
+            $this->validate([
+                'guestCount' => 'nullable|integer|min:1|max:10000',
+                'specialRequests' => 'nullable|string|max:1000',
+            ]);
+            
+            $this->currentStep = 3;
+        } catch (\Illuminate\Validation\ValidationException $e) {
+            // Validation failed, errors will be automatically displayed
+            session()->flash('validation_error', 'Please fix the validation errors before proceeding.');
+        }
     }
 
     public function validateStep3()
     {
-        $this->validate([
-            'name' => 'required|string|min:2|max:255',
-            'phone' => 'required|string|min:10|max:15',
-            'email' => 'nullable|email|max:255',
-        ]);
-        
-        // Check if user needs to register/login
-        if (!$this->isLoggedIn) {
-            // Save form data to session before redirecting
-            $this->saveFormDataToSession();
-            session(['booking_step3_data' => [
-                'name' => $this->name,
-                'email' => $this->email,
-                'phone' => $this->phone
-            ]]);
+        try {
+            $this->validate([
+                'name' => 'required|string|min:2|max:255',
+                'phone' => 'required|string|min:10|max:15',
+                'email' => 'nullable|email|max:255',
+            ]);
             
-            // Check if user exists
-            if ($this->existingUser) {
-                // Redirect to login page
-                session()->flash('info', 'Please login to complete your booking.');
-                return redirect()->route('login');
-            } else {
-                // Redirect to register page
-                session()->flash('info', 'Please register to complete your booking.');
-                return redirect()->route('register');
+            // Check if user needs to register/login
+            if (!$this->isLoggedIn) {
+                // Save form data to session before redirecting
+                $this->saveFormDataToSession();
+                session(['booking_step3_data' => [
+                    'name' => $this->name,
+                    'email' => $this->email,
+                    'phone' => $this->phone
+                ]]);
+                
+                // Check if user exists
+                if ($this->existingUser) {
+                    // Redirect to login page
+                    session()->flash('info', 'Please login to complete your booking.');
+                    return redirect()->route('login');
+                } else {
+                    // Redirect to register page
+                    session()->flash('info', 'Please register to complete your booking.');
+                    return redirect()->route('register');
+                }
             }
+            
+            $this->currentStep = 4;
+        } catch (\Illuminate\Validation\ValidationException $e) {
+            // Validation failed, errors will be automatically displayed
+            session()->flash('validation_error', 'Please fix the validation errors before proceeding.');
         }
-        
-        $this->currentStep = 4;
     }
 
     private function updateUserInfo()
@@ -337,6 +392,12 @@ class PackageBookingForm extends Component
 
     private function createBooking($user)
     {
+        // Validate pin code again before creating booking
+        $service = Service::where('pin_code', $this->pinCode)->first();
+        if (!$service) {
+            throw new \Exception('Invalid pin code. Service not available in this area.');
+        }
+
         return Booking::create([
             'user_id' => $user->id,
             'event_package_id' => $this->package->id,
@@ -345,13 +406,13 @@ class PackageBookingForm extends Component
             'booking_phone_no' => $this->phone,
             'event_date' => $this->eventDate,
             'event_end_date' => $this->eventEndDate ?: $this->eventDate,
-            'guest_count' => $this->guestCount ?: null,
+            'guest_count' => $this->guestCount ? intval($this->guestCount) : null, // Keep null if not provided
             'location' => $this->location,
             'special_requests' => $this->specialRequests,
             'status' => 'pending',
             'total_price' => $this->package->discounted_price,
             'pin_code' => $this->pinCode,
-            'is_completed' => true
+            'is_completed' => false
         ]);
     }
 

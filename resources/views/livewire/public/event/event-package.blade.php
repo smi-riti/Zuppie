@@ -415,7 +415,9 @@
             </div>
         </div>
     </section>
-
+  
+    <livewire:public.section.enquiry-form />
+    <livewire:public.components.bottom-navigation />
     <!-- Enhanced JavaScript -->
     <script>
         document.addEventListener('DOMContentLoaded', function() {

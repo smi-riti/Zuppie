@@ -65,10 +65,18 @@ class PackageDetail extends Component
             return;
         }
 
+        // Store package and pin code data in session for booking form
+        session([
+            'package_id' => $this->packageId,
+            'pin_code' => $this->pinCode,
+            'pin_code_checked' => true
+        ]);
+
         // Redirect to booking form with package and pin code data
-        return redirect()->route('package-booking-form')
-            ->with('package_id', $this->packageId)
-            ->with('pin_code', $this->pinCode);
+        return redirect()->route('package-booking-form', [
+            'package_id' => $this->packageId,
+            'pin_code' => $this->pinCode
+        ]);
     }
 
     public function getPackageImagesProperty()

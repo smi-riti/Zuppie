@@ -264,7 +264,9 @@
         </section>
     @endif
     @endif
-
+      
+    <livewire:public.section.enquiry-form />
+    <livewire:public.components.bottom-navigation />
     <!-- Custom Styles -->
     <style>
         /* Custom Animations */

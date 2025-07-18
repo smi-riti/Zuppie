@@ -507,7 +507,9 @@
             </div>
         </div>
     @endif
-
+  
+    <livewire:public.section.enquiry-form />
+    <livewire:public.components.bottom-navigation />
     <!-- Custom Styles -->
     <style>
         .animate-fade-in {

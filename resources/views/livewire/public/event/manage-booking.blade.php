@@ -263,7 +263,9 @@
             </div>
         </div>
     </section>
-    
+      
+    <livewire:public.section.enquiry-form />
+    <livewire:public.components.bottom-navigation />
     <!-- Flash Messages -->
     @if(session('info'))
         <div class="fixed bottom-4 right-4 z-50">

@@ -611,7 +611,8 @@
 
     <!-- Contact Form Section -->
    
-
+    <livewire:public.section.enquiry-form />
+    <livewire:public.components.bottom-navigation />
     <!-- Include Category Popup Component -->
     @livewire('public.components.category-popup')
 

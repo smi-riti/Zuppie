@@ -344,7 +344,9 @@
             </div>
         </section>
     </main>
-
+  
+    <livewire:public.section.enquiry-form />
+    <livewire:public.components.bottom-navigation />
 
 <style>
     /* Sparkle Text Animation */

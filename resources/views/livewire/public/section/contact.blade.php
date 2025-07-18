@@ -407,5 +407,7 @@
         });
     </script>
     <!-- form modal -->
+      
     <livewire:public.section.enquiry-form />
+    <livewire:public.components.bottom-navigation />
 </div>

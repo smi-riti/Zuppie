@@ -5,6 +5,7 @@ use App\Http\Controllers\Review\ReviewController;
 use App\Http\Controllers\EventPackage\EventPackageController;
 use App\Http\Controllers\Booking\BookingController;
 use App\Http\Controllers\Offer\OfferController;
+use App\Http\Controllers\BlogController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\RegistrationController;
