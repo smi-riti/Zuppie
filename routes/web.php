@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\SitemapController;
+use App\Http\Controllers\RobotsController;
 use App\Livewire\Admin\Category\Show;
 use App\Livewire\Admin\Enquiry\AllEnquiry;
 use App\Livewire\Admin\EventPackage\ListPackage;
@@ -64,3 +66,41 @@ Route::prefix('admin')->middleware(['auth', 'admin'])->group(function () {
     Route::get('/manage/blogs', ManageBlog::class)->name('admin.blogs.manage');
 
 });
+
+// SEO Routes
+Route::get('/sitemap.xml', [\App\Http\Controllers\SimpleSitemapController::class, 'index'])->name('sitemap.index');
+Route::get('/sitemap/static.xml', [SitemapController::class, 'static'])->name('sitemap.static');
+Route::get('/sitemap/categories.xml', [SitemapController::class, 'categories'])->name('sitemap.categories');
+Route::get('/sitemap/packages.xml', [SitemapController::class, 'packages'])->name('sitemap.packages');
+Route::get('/sitemap/offers.xml', [SitemapController::class, 'offers'])->name('sitemap.offers');
+Route::get('/sitemap/blogs.xml', [SitemapController::class, 'blogs'])->name('sitemap.blogs');
+Route::get('/robots.txt', [RobotsController::class, 'index'])->name('robots');
+
+// PWA Routes
+Route::get('/manifest.json', function () {
+    return response()->json([
+        'name' => 'Zuppie - Event Management',
+        'short_name' => 'Zuppie',
+        'description' => 'Premium event planning and birthday celebration services',
+        'start_url' => '/',
+        'display' => 'standalone',
+        'background_color' => '#ffffff',
+        'theme_color' => '#8B5CF6',
+        'icons' => [
+            [
+                'src' => '/images/icons/icon-192x192.png',
+                'sizes' => '192x192',
+                'type' => 'image/png'
+            ],
+            [
+                'src' => '/images/icons/icon-512x512.png',
+                'sizes' => '512x512',
+                'type' => 'image/png'
+            ]
+        ]
+    ]);
+})->name('manifest');
+
+Route::get('/browserconfig.xml', function () {
+    return response()->view('browserconfig')->header('Content-Type', 'text/xml');
+})->name('browserconfig');
