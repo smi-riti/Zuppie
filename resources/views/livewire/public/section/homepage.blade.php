@@ -41,10 +41,10 @@
         <div class="absolute inset-0 bg-black/30"></div>
 
         <div class="relative z-10 text-center text-white px-4 max-w-6xl mx-auto">
-            <!-- Main Tagline with Animation -->
+            <!-- Main Tagline with SEO-Optimized Keywords -->
             <h1 class="text-4xl sm:text-5xl md:text-7xl lg:text-8xl font-bold font-display mb-6" data-aos="fade-up">
-                <span class="block" data-aos="zoom-in" data-aos-delay="200">🎈 Make Every</span>
-                <!-- Changing Text Animation -->
+                <span class="block" data-aos="zoom-in" data-aos-delay="200">🎈 Premium Event Planning Purnia</span>
+                <!-- Changing Text Animation with Keywords -->
                 <span class="block text-transparent bg-clip-text bg-gradient-to-r from-yellow-300 via-pink-300 to-purple-300 drop-shadow-lg"
                       data-aos="zoom-in" data-aos-delay="400">
                     <span x-text="texts[currentText]" class="transition-all duration-1000 ease-in-out"></span>
@@ -53,17 +53,18 @@
 
             <p class="text-lg sm:text-xl md:text-2xl mb-8 text-white/90 max-w-3xl mx-auto leading-relaxed drop-shadow-md" data-aos="fade-up"
                 data-aos-delay="600">
-                From intimate birthday celebrations to grand special events, we create unforgettable experiences that
-                bring joy, wonder, and pure magic to your most precious moments.
+                Expert <strong>birthday celebrations</strong> and <strong>anniversary decorations</strong> in <strong>Purnia, Bihar</strong>. 
+                We create unforgettable <strong>event management</strong> experiences with <strong>premium party planning</strong> services 
+                across Bihar and Eastern India.
             </p>
 
-            <!-- CTA Buttons -->
+            <!-- CTA Buttons with Keywords -->
             <div class="flex flex-col sm:flex-row gap-4 justify-center items-center" data-aos="fade-up"
                 data-aos-delay="800">
                 <a href="{{route('event-packages')}}"
                     class="bg-white/20 backdrop-blur-sm border-2 border-white/50 text-white px-6 sm:px-8 py-3 sm:py-4 rounded-full font-semibold text-base sm:text-lg hover:bg-white hover:text-purple-700 transition-all duration-300 flex items-center space-x-2 shadow-lg">
                     <i class="fas fa-gift"></i>
-                    <span>View Packages</span>
+                    <span>View Event Packages</span>
                 </a>
             </div>
         </div>
@@ -74,15 +75,16 @@
         </div>
     </section>
 
-    <!-- Categories Section -->
+    <!-- Categories Section with SEO Keywords -->
     <section id="categories" class="py-12 sm:py-20 bg-gradient-to-br from-purple-50 to-pink-50 relative z-10">
         <div class="container mx-auto px-4">
             <div class="text-center mb-12 sm:mb-16">
                 <h2 class="text-3xl sm:text-4xl md:text-5xl font-bold font-display text-transparent bg-clip-text bg-gradient-to-r from-purple-600 to-pink-600 mb-6" data-aos="fade-up">
-                    Event Categories
+                    Event Planning Services in Purnia, Bihar
                 </h2>
                 <p class="text-lg sm:text-xl text-gray-600 max-w-3xl mx-auto" data-aos="fade-up" data-aos-delay="200">
-                    Discover our magical collection of event categories, each designed to create unforgettable moments
+                    Discover our magical collection of <strong>birthday celebrations</strong>, <strong>anniversary decorations</strong>, 
+                    and <strong>premium event management</strong> services designed to create unforgettable moments across Bihar
                 </p>
             </div>
 
@@ -407,10 +409,11 @@
         <div class="container mx-auto px-4">
             <div class="text-center mb-16">
                 <h2 class="text-4xl md:text-5xl font-bold font-display gradient-text mb-6" data-aos="fade-up">
-                    Why Choose Zuppie?
+                    Why Choose Zuppie for Event Planning in Bihar?
                 </h2>
                 <p class="text-xl text-gray-600 max-w-3xl mx-auto" data-aos="fade-up" data-aos-delay="200">
-                    We don't just plan events, we create magical experiences that leave lasting memories
+                    We are the leading <strong>event management company in Purnia</strong> offering <strong>affordable party packages</strong> 
+                    with exceptional service quality and creative decoration ideas for all your celebrations
                 </p>
             </div>
             
@@ -471,10 +474,10 @@
         <div class="container mx-auto px-4">
             <div class="text-center mb-16">
                 <h2 class="text-4xl md:text-5xl font-bold font-display gradient-text mb-6" data-aos="fade-up">
-                    What Our Clients Say
+                    Reviews from Our Satisfied Clients
                 </h2>
                 <p class="text-xl text-gray-600 max-w-3xl mx-auto" data-aos="fade-up" data-aos-delay="200">
-                    Don't just take our word for it - hear from our delighted clients
+                    Discover why we're the <strong>trusted event planning company in Purnia</strong> - hear testimonials from our delighted clients who experienced our <strong>premium event management services</strong>
                 </p>
             </div>
             
@@ -535,10 +538,10 @@
         <div class="container mx-auto px-4">
             <div class="text-center mb-16">
                 <h2 class="text-4xl md:text-5xl font-bold font-display gradient-text mb-6" data-aos="fade-up">
-                    Latest from Our Blog
+                    Event Planning Tips & Decoration Ideas
                 </h2>
                 <p class="text-xl text-gray-600 max-w-3xl mx-auto" data-aos="fade-up" data-aos-delay="200">
-                    Tips, trends, and inspiration for your next magical event
+                    Expert advice on <strong>birthday party planning</strong>, <strong>anniversary decorations</strong>, and the latest trends for creating magical celebrations in Bihar
                 </p>
             </div>
             

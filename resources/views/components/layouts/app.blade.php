@@ -488,26 +488,37 @@
         document.addEventListener('DOMContentLoaded', preloadCriticalResources);
     </script>
 
-    <!-- Google Tag Manager / Analytics (Add your tracking ID) -->
-    @if(config('app.env') === 'production')
-    <script async src="https://www.googletagmanager.com/gtag/js?id=GA_MEASUREMENT_ID"></script>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-PCX15ZTQQ3"></script>
     <script>
-        window.dataLayer = window.dataLayer || [];
-        function gtag(){dataLayer.push(arguments);}
-        gtag('js', new Date());
-        gtag('config', 'GA_MEASUREMENT_ID', {
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-PCX15ZTQQ3');
+    </script>
+
+    <!-- Enhanced Analytics for Production -->
+    @if(config('app.env') === 'production')
+    <script>
+        // Enhanced ecommerce tracking
+        gtag('config', 'G-PCX15ZTQQ3', {
             page_title: document.title,
             page_location: window.location.href,
             anonymize_ip: true,
-            cookie_flags: 'SameSite=None;Secure'
-        });
-        
-        // Enhanced ecommerce tracking
-        gtag('config', 'GA_MEASUREMENT_ID', {
+            cookie_flags: 'SameSite=None;Secure',
             custom_map: {
                 'custom_dimension_1': 'event_type',
-                'custom_dimension_2': 'package_category'
+                'custom_dimension_2': 'package_category',
+                'custom_dimension_3': 'location'
             }
+        });
+        
+        // Track key events
+        gtag('event', 'page_view', {
+            page_title: document.title,
+            page_location: window.location.href,
+            custom_parameter: 'zuppie_visit'
         });
     </script>
     @endif

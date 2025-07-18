@@ -11,7 +11,7 @@ return [
     */
 
     'site_name' => 'Zuppie - Premium Event Management & Birthday Celebrations in Purnia, Bihar',
-    'site_description' => 'Transform your special moments into magical memories with Zuppie\'s professional event planning services in Purnia, Bihar. Expert birthday celebrations, anniversary decorations, festivals, and premium event management across Bihar and Eastern India.',
+    'site_description' => 'Leading event planning company in Purnia, Bihar specializing in premium birthday celebrations, anniversary decorations, and affordable party packages. Transform your special moments into magical memories with our professional event management services across Bihar and Eastern India.',
     'keywords' => [
         // Primary Local Keywords
         'event planning Purnia', 'birthday celebrations Purnia Bihar', 'anniversary decorations Purnia', 'festival events Bihar',
