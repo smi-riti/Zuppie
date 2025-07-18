@@ -86,7 +86,7 @@
                                                         <p class="text-gray-600 text-sm mb-4">{{ Str::limit($package->description, 100) }}</p>
                                                     </div>
                                                     
-                                                    <a href="{{ route('event-packages') }}?package={{ $package->id }}"
+                                                    <a href="{{ route('package-detail', ['id' => $package->id]) }}"
                                                        class="block w-full bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white py-3 px-4 rounded-lg text-center font-semibold transition-all duration-300 transform hover:scale-105 shadow-md hover:shadow-lg">
                                                         Book Now
                                                     </a>
