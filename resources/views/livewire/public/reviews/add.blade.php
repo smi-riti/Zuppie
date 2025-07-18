@@ -44,8 +44,7 @@
                 @if($images)
                     @foreach($images as $image)
                         <img src="{{ $image->temporaryUrl() }}"
-                            class="h-24 w-24 object-cover rounded border border-pink-200 shadow"
-                            alt="Preview">
+                            class="h-24 w-24 object-cover rounded border border-pink-200 shadow" alt="Preview">
                     @endforeach
                 @endif
             </div>
@@ -54,9 +53,41 @@
             @enderror
         </div>
 
-        <button type="submit"
+        <button type="submit" id="submitReview"
             class="w-full bg-pink-500 hover:bg-purple-600 text-white font-bold py-2 px-4 rounded-lg shadow transition">
             Submit Review
         </button>
     </form>
+    <!-- excitment styles -->
+    <style>
+        .confetti-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1000;
+        }
+
+        .success-message {
+            animation: bounceIn 0.5s ease-out;
+        }
+
+        @keyframes bounceIn {
+            0% {
+                transform: scale(0.8);
+                opacity: 0;
+            }
+
+            50% {
+                transform: scale(1.05);
+            }
+
+            100% {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+    </style>
 </div>

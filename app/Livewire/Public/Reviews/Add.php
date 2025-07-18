@@ -97,6 +97,7 @@ class Add extends Component
 
         $this->reset(['rating', 'comment', 'images']);
         session()->flash('message', 'Review submitted successfully!');
+         $this->dispatch('reviewSubmitted');
     }
 
     #[Layout('components.layouts.app')]
