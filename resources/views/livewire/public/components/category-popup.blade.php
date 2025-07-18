@@ -124,7 +124,7 @@
                                                 <div class="p-4">
                                                     <div class="text-center">
                                                         <div class="text-lg font-bold text-transparent bg-clip-text bg-gradient-to-r from-purple-600 to-pink-600 mb-2">₹{{ number_format($package->discounted_price ?? $package->price, 2) }}</div>
-                                                        <a href="{{ route('event-packages') }}?package={{ $package->id }}"
+                                                        <a href="{{ route('package-detail', ['id' => $package->id]) }}"
                                                            class="block w-full bg-purple-100 hover:bg-purple-200 text-purple-700 py-2 px-3 rounded-lg text-center text-sm font-medium transition-colors duration-200">
                                                             View Details
                                                         </a>
