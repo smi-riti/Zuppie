@@ -6,6 +6,7 @@ use App\Models\Service;
 use Livewire\Component;
 use Livewire\WithPagination;
 use Livewire\Attributes\Layout;
+ #[Layout('components.layouts.admin')]
 class Show extends Component
 {
     use WithPagination;
@@ -74,7 +75,7 @@ class Show extends Component
         session()->flash('message', 'Service deleted successfully!');
         $this->resetPage();
     }
-    #[Layout('components.layouts.admin')]
+   
     public function render()
     {
         $services = Service::when($this->search, function ($query) {

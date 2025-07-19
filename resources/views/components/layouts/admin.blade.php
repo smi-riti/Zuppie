@@ -32,12 +32,12 @@
 
 <body class="bg-gray-50 font-sans antialiased min-h-screen">
     <!-- Main Layout Container -->
-    <div class="flex h-screen overflow-hidden">
+    <div class="flex h-screen ">
         <!-- Sidebar -->
         <x-admin.sidebar />
 
         <!-- Main Content Area -->
-        <div class="flex-1 flex flex-col overflow-hidden p-4">
+        <div class="flex-1 flex flex-col p-4">
             <div class="bg-white rounded-lg shadow-sm p-2 ">
                 {{ $slot }}
             </div>
