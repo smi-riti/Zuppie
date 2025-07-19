@@ -92,7 +92,7 @@
                 @foreach ($categories as $index => $category)
                     <div class="group relative overflow-hidden rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-500 hover:scale-105 cursor-pointer"
                          data-aos="fade-up" data-aos-delay="{{ 100 * ($index + 1) }}"
-                         wire:click="$dispatch('openCategoryPopup', { categoryId: {{ $category->id }} })">
+                         wire:click="$dispatch('openSubCategoryPopup', {categorySlug: '{{ $category->slug }}'})">
                         <div class="relative h-64 sm:h-80">
                             <!-- Category Image with fallback -->
                             @if($category->image)
@@ -616,8 +616,8 @@
    
     <livewire:public.section.enquiry-form />
     <livewire:public.components.bottom-navigation />
+    <livewire:public.components.category-testing-popup/>
     <!-- Include Category Popup Component -->
-    @livewire('public.components.category-popup')
 
     <!-- Custom Styles for Animations -->
     <style>
