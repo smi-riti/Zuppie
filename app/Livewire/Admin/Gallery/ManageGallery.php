@@ -18,6 +18,12 @@ class ManageGallery extends Component
     public $showEditModal = false;
     public $editId = null;
 
+public function closeModal()
+{
+    $this->showEditModal = false;
+    $this->editId = null;
+}
+
     public function refreshList()
     {
         $this->resetPage();
@@ -35,6 +41,7 @@ class ManageGallery extends Component
     protected $listeners = [
         'imageCreated' => 'refreshList',
         'imageUpdated' => 'refreshList',
+        'closeEditModal' => 'closeModal'
     ];
 
     public function sortBy($field)

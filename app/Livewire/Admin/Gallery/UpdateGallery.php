@@ -20,15 +20,17 @@ class UpdateGallery extends Component
     public $categories;
     public $existingImage;
 
-    public function mount($imageId)
+    // Fixed parameter name here 👇
+    public function mount($id)  // Changed from $imageId to $id
     {
-        $this->galleryImage = GalleryImage::findOrFail($imageId);
+        $this->galleryImage = GalleryImage::findOrFail($id);
         $this->alt = $this->galleryImage->alt;
         $this->category_id = $this->galleryImage->category_id;
         $this->description = $this->galleryImage->description;
         $this->categories = Category::all();
         $this->existingImage = $this->galleryImage->filename;
     }
+
 
     protected $rules = [
         'image' => 'nullable|image|max:2048',
@@ -63,6 +65,7 @@ class UpdateGallery extends Component
 
         session()->flash('message', 'Image updated successfully!');
         $this->dispatch('gallery-updated');
+        return redirect()->route('gallery.manage'); // Redirect after update
         $this->closeModal();
     }
 
@@ -70,6 +73,8 @@ class UpdateGallery extends Component
     {
         $this->dispatch('close-modal', type: 'edit');
     }
+
+    
 
     public function removeImage()
     {

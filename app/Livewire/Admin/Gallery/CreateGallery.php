@@ -59,7 +59,9 @@ class CreateGallery extends Component
 
         $this->reset(['images', 'alt', 'category_id', 'description']);
         $this->dispatch('gallery-created');
+
         session()->flash('message', 'Images uploaded successfully!');
+        return redirect()->route('gallery.manage');
         $this->closeModal();
     }
 
