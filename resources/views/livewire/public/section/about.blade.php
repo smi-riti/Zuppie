@@ -5,25 +5,26 @@
         <section class="relative h-[70vh] overflow-hidden">
             <!-- Background Image with Overlay -->
             <div class="absolute inset-0">
-                <img src="https://images.unsplash.com/photo-1556125574-d7f27ec36a06?w=1920&h=1080&fit=crop" alt="About Us" class="w-full h-full object-cover">
-                <div class="absolute inset-0 bg-gradient-to-r from-purple-900/80 to-pink-900/60"></div>
+                <img src="https://images.unsplash.com/photo-1519741497674-611481863552?ixlib=rb-4.0.3&auto=format&fit=crop&w=2340&q=80" 
+                     alt="About Us Background" 
+                     class="w-full h-full object-cover">
+                <div class="absolute inset-0 bg-gradient-to-br from-purple-900/40 via-pink-800/35 to-indigo-900/40"></div>
+                <div class="absolute inset-0 bg-black/15"></div>
             </div>
-            
+
             <!-- Content -->
             <div class="relative z-10 flex items-center justify-center h-full text-center text-white px-4">
-                <div class="max-w-4xl mx-auto">
-                    <h1 class="text-5xl md:text-7xl font-bold font-display mb-6 sparkle-text">
-                        About Zuppie
-                    </h1>
-                    <p class="text-xl md:text-2xl opacity-90 leading-relaxed">
-                        Creating magical moments and unforgettable experiences since 2015
+                <div class="max-w-5xl mx-auto">
+                    <h1 class="text-5xl md:text-7xl font-bold mb-6 sparkle-text drop-shadow-2xl">About {{ $settings['site_name'] }}</h1>
+                    <p class="text-xl md:text-2xl text-purple-100 max-w-3xl mx-auto leading-relaxed drop-shadow-lg">
+                        {{ $settings['site_description'] ?? 'Creating unforgettable moments through exceptional event planning and coordination.' }}
                     </p>
-                    
-                    <!-- Floating sparkles -->
-                    <div class="absolute inset-0 pointer-events-none">
-                        <div class="sparkle-float absolute w-3 h-3 bg-yellow-300 rounded-full top-20 left-20"></div>
-                        <div class="sparkle-float absolute w-2 h-2 bg-white rounded-full top-40 right-32" style="animation-delay: 1s;"></div>
-                        <div class="sparkle-float absolute w-4 h-4 bg-pink-300 rounded-full bottom-32 left-32" style="animation-delay: 2s;"></div>
+                    <div class="mt-8">
+                        <button 
+                            wire:click="$dispatch('open-enquiry-form')"
+                            class="px-8 py-4 bg-gradient-to-r from-pink-500 to-purple-600 text-white rounded-full font-bold text-lg hover:from-pink-600 hover:to-purple-700 transition-all transform hover:scale-105 shadow-lg">
+                            <i class="fas fa-calendar-plus mr-2"></i>Plan Your Event
+                        </button>
                     </div>
                 </div>
             </div>

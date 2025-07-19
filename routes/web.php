@@ -19,6 +19,7 @@ use App\Livewire\Public\Bookingform;
 use App\Livewire\Admin\Booking\ManageBooking;
 use App\Livewire\Admin\Category\ManageCategories;
 use App\Livewire\Admin\User\ManageUser;
+use App\Livewire\Admin\Setting\ManageSetting;
 use App\Livewire\Admin\Dashboard;
 use Illuminate\Support\Facades\Route;
 use App\Livewire\Admin\Service\Show as ShowService;
@@ -30,6 +31,8 @@ use App\Livewire\Admin\Blog\ManageBlog;
 use App\Livewire\Admin\Gallery\ManageGallery;
 use App\Livewire\Auth\ForgotPassword;
 use App\Livewire\Auth\ResetPassword;
+use App\Livewire\Public\Pages\TermsOfService;
+use App\Livewire\Public\Pages\PrivacyPolicy;
 // Route::get('/', function () {
 //     return view('welcome');
 // });
@@ -46,6 +49,8 @@ Route::get('/about', About::class)->name('about');
 Route::get('/contact',Contact::class)->name('contact');
 Route::get('/booking',Bookingform::class)->name('booking');
 Route::get('/reviews/add', Add::class)->name('reviews.add');
+Route::get('/terms-of-service', TermsOfService::class)->name('terms-of-service');
+Route::get('/privacy-policy', PrivacyPolicy::class)->name('privacy-policy');
 
 // Event Package Routes
 Route::get('/event-packages', EventPackage::class)->name('event-packages');
@@ -65,6 +70,7 @@ Route::prefix('admin')->middleware(['auth', 'admin'])->group(function () {
     Route::get('/users/manage', ManageUser::class)->name('admin.users.manage');
     Route::get('/services/manage', ShowService::class)->name('admin.services.manage');
     Route::get('/manage/blogs', ManageBlog::class)->name('admin.blogs.manage');
+    Route::get('/settings', ManageSetting::class)->name('admin.settings');
     Route::get('/admin/gallery', ManageGallery::class)->name('gallery.manage');
 
 });
