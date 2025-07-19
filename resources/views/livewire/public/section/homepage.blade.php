@@ -616,7 +616,7 @@
    
     <livewire:public.section.enquiry-form />
     <livewire:public.components.bottom-navigation />
-    <livewire:public.components.category-testing-popup/>
+    <livewire:public.components.category-popup/>
     <!-- Include Category Popup Component -->
 
     <!-- Custom Styles for Animations -->
