@@ -28,6 +28,7 @@ use App\Livewire\Public\Event\PackageDetail;
 use App\Livewire\Public\Event\PackageBookingForm;
 use App\Livewire\Public\Event\ManageBooking as PublicManageBooking;
 use App\Livewire\Admin\Blog\ManageBlog;
+use App\Livewire\Admin\Gallery\ManageGallery;
 use App\Livewire\Auth\ForgotPassword;
 use App\Livewire\Auth\ResetPassword;
 use App\Livewire\Public\Pages\TermsOfService;
@@ -70,6 +71,7 @@ Route::prefix('admin')->middleware(['auth', 'admin'])->group(function () {
     Route::get('/services/manage', ShowService::class)->name('admin.services.manage');
     Route::get('/manage/blogs', ManageBlog::class)->name('admin.blogs.manage');
     Route::get('/settings', ManageSetting::class)->name('admin.settings');
+    Route::get('/admin/gallery', ManageGallery::class)->name('gallery.manage');
 
 });
 

@@ -11,15 +11,25 @@ class EventPackage extends Component
     public $searchQuery = '';
     public $selectedCategory = null;
     public $selectedSubCategory = null;
-    public $showCategoryModal = false;
-    public $modalCategory = null;
     public $packagesPerPage = 15;
     public $loadMoreCount = 0;
     public $showAllCategoriesMode = false;
 
+    protected $listeners = [
+        'subcategory-selected' => 'handleSubcategorySelected'
+    ];
+
+    public function handleSubcategorySelected($data)
+    {
+        $this->selectedCategory = $data['categorySlug'];
+        $this->selectedSubCategory = $data['subCategorySlug'];
+        $this->loadMoreCount = 0; // Reset pagination
+    }
+
     public function mount()
     {
-        // Initialize component
+        $this->selectedCategory = request()->query('category');
+        $this->selectedSubCategory = request()->query('subcategory');
     }
 
     public function selectCategory($category)
@@ -27,29 +37,15 @@ class EventPackage extends Component
         $this->selectedCategory = $category;
         $this->selectedSubCategory = null;
         $this->loadMoreCount = 0;
-        $this->closeCategoryModal();
         $this->dispatch('category-selected', ['category' => $category]);
     }
 
     public function openCategoryModal($categorySlug)
     {
-        $this->modalCategory = Category::where('slug', $categorySlug)->first();
-        $this->showCategoryModal = true;
+        $this->dispatch('openCategoryModal', categorySlug: $categorySlug);
     }
 
-    public function closeCategoryModal()
-    {
-        $this->showCategoryModal = false;
-        $this->modalCategory = null;
-    }
 
-    public function selectSubCategory($categorySlug, $subCategorySlug)
-    {
-        $this->selectedCategory = $categorySlug;
-        $this->selectedSubCategory = $subCategorySlug;
-        $this->loadMoreCount = 0;
-        $this->closeCategoryModal();
-    }
 
     public function loadMorePackages()
     {
@@ -77,41 +73,32 @@ class EventPackage extends Component
 
         // Search filter
         if ($this->searchQuery) {
-            $query->where(function($q) {
+            $query->where(function ($q) {
                 $q->where('name', 'like', '%' . $this->searchQuery . '%')
-                  ->orWhere('description', 'like', '%' . $this->searchQuery . '%');
+                    ->orWhere('description', 'like', '%' . $this->searchQuery . '%');
             });
         }
 
         // Category filter
         if ($this->selectedCategory) {
+            $category = Category::where('slug', $this->selectedCategory)->first();
+
             if ($this->selectedSubCategory) {
-                // Filter by subcategory and also include parent category packages
-                $query->whereHas('category', function($q) {
-                    $parentCategory = Category::where('slug', $this->selectedCategory)->first();
-                    $subCategory = Category::where('slug', $this->selectedSubCategory)->first();
-                    
-                    if ($parentCategory && $subCategory) {
-                        $q->where('slug', $this->selectedSubCategory)
-                          ->orWhere('id', $parentCategory->id);
-                    }
+                // Filter by specific subcategory
+                $query->whereHas('category', function ($q) {
+                    $q->where('slug', $this->selectedSubCategory);
                 });
-            } else {
+            } else if ($category) {
                 // Filter by main category and its subcategories
-                $query->whereHas('category', function($q) {
-                    $category = Category::where('slug', $this->selectedCategory)->first();
-                    if ($category) {
-                        $q->where('slug', $this->selectedCategory)
-                          ->orWhere('parent_id', $category->id);
-                    }
+                $query->whereHas('category', function ($q) use ($category) {
+                    $q->where('slug', $this->selectedCategory)
+                        ->orWhere('parent_id', $category->id);
                 });
             }
         }
 
         $totalToShow = $this->packagesPerPage + ($this->loadMoreCount * $this->packagesPerPage);
-        $packages = $query->take($totalToShow)->get();
-
-        return $packages->map(function($package) {
+        return $query->take($totalToShow)->get()->map(function ($package) {
             return [
                 'id' => $package->id,
                 'name' => $package->name,
@@ -139,23 +126,23 @@ class EventPackage extends Component
         $query = EventPackageModel::where('is_active', true);
 
         if ($this->searchQuery) {
-            $query->where(function($q) {
+            $query->where(function ($q) {
                 $q->where('name', 'like', '%' . $this->searchQuery . '%')
-                  ->orWhere('description', 'like', '%' . $this->searchQuery . '%');
+                    ->orWhere('description', 'like', '%' . $this->searchQuery . '%');
             });
         }
 
         if ($this->selectedCategory) {
             if ($this->selectedSubCategory) {
-                $query->whereHas('category', function($q) {
+                $query->whereHas('category', function ($q) {
                     $q->where('slug', $this->selectedSubCategory);
                 });
             } else {
-                $query->whereHas('category', function($q) {
+                $query->whereHas('category', function ($q) {
                     $category = Category::where('slug', $this->selectedCategory)->first();
                     if ($category) {
                         $q->where('slug', $this->selectedCategory)
-                          ->orWhere('parent_id', $category->id);
+                            ->orWhere('parent_id', $category->id);
                     }
                 });
             }
@@ -178,7 +165,7 @@ class EventPackage extends Component
             ->take(6)
             ->get();
 
-        return $packages->map(function($package) {
+        return $packages->map(function ($package) {
             return [
                 'id' => $package->id,
                 'name' => $package->name,
@@ -203,7 +190,7 @@ class EventPackage extends Component
             ->whereNull('parent_id')
             ->take(9)
             ->get();
-        
+
         $categoryData = [];
         foreach ($categories as $category) {
             $categoryData[$category->slug] = [
@@ -239,7 +226,7 @@ class EventPackage extends Component
         $categories = Category::with('children')
             ->whereNull('parent_id')
             ->get();
-        
+
         return $categories;
     }
 
@@ -275,9 +262,9 @@ class EventPackage extends Component
         if ($this->selectedCategory) {
             $category = Category::where('slug', $this->selectedCategory)->first();
             if ($category) {
-                $query->whereHas('category', function($q) use ($category) {
+                $query->whereHas('category', function ($q) use ($category) {
                     $q->where('id', $category->id)
-                      ->orWhere('parent_id', $category->id);
+                        ->orWhere('parent_id', $category->id);
                 });
             }
         } else {
@@ -287,7 +274,7 @@ class EventPackage extends Component
 
         $packages = $query->take(6)->get();
 
-        return $packages->map(function($package) {
+        return $packages->map(function ($package) {
             return [
                 'id' => $package->id,
                 'name' => $package->name,

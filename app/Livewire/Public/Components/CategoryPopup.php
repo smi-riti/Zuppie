@@ -9,53 +9,61 @@ use Livewire\Attributes\On;
 
 class CategoryPopup extends Component
 {
-    public $isOpen = false;
-    public $selectedCategory = null;
-    public $subcategories = [];
-    public $selectedSubcategory = null;
-    public $packages = [];
-    public $similarPackages = [];
+ public $showModal = false;
+    public $modalCategory = null;
 
-    #[On('openCategoryPopup')]
-    public function openPopup($categoryId)
+    protected $listeners = [
+        'openSubCategoryPopup' => 'openModal'
+    ];
+
+    public function openModal($categorySlug)
     {
-        $this->selectedCategory = Category::with('children')->find($categoryId);
-        if ($this->selectedCategory) {
-            $this->subcategories = $this->selectedCategory->children;
-            $this->isOpen = true;
-            $this->selectedSubcategory = null;
-            $this->packages = [];
-            $this->similarPackages = [];
-        }
+        $this->modalCategory = Category::where('slug', $categorySlug)->first();
+        $this->showModal = true;
     }
 
-    public function closePopup()
+    public function selectCategory($categorySlug)
     {
-        $this->isOpen = false;
-        $this->reset(['selectedCategory', 'subcategories', 'selectedSubcategory', 'packages', 'similarPackages']);
+        // Redirect to packages page with category filter
+        return $this->redirect(
+            route('event-packages', ['category' => $categorySlug])
+            ,
+            navigate: true
+        );
+    }
+    public function closeModal()
+    {
+        $this->showModal = false;
+        $this->modalCategory = null;
     }
 
-    public function selectSubcategory($subcategoryId)
+    public function selectSubCategory($categorySlug, $subCategorySlug)
     {
-        $this->selectedSubcategory = Category::find($subcategoryId);
-        
-        // Get packages for selected subcategory
-        $this->packages = EventPackage::with(['images', 'category'])
-            ->where('category_id', $subcategoryId)
-            ->where('is_active', true)
-            ->get();
+        // Redirect to packages page with both category and subcategory filters
+        return $this->redirect(
+            route('event-packages', [
+                'category' => $categorySlug,
+                'subcategory' => $subCategorySlug
+            ]),
+            navigate: true // This enables SPA-like navigation
+        );
+    }
+    public function getCategoryIcon($slug)
+    {
+        $icons = [
+            'birthday' => 'fas fa-birthday-cake',
+            'wedding-anniversary' => 'fas fa-heart',
+            'festival' => 'fas fa-star',
+            '1st-birthday' => 'fas fa-baby',
+            'haldi-mehndi' => 'fas fa-flower',
+            'premium-decoration' => 'fas fa-crown',
+            'flower-bouquet' => 'fas fa-seedling',
+            'gift-section' => 'fas fa-gift',
+            'love-theme' => 'fas fa-heart',
+            'bride-to-be' => 'fas fa-ring'
+        ];
 
-        // Get similar packages from the same parent category but different subcategories
-        if ($this->selectedCategory && $this->selectedSubcategory) {
-            $this->similarPackages = EventPackage::with(['images', 'category'])
-                ->whereHas('category', function($query) {
-                    $query->where('parent_id', $this->selectedCategory->id)
-                          ->where('id', '!=', $this->selectedSubcategory->id);
-                })
-                ->where('is_active', true)
-                ->take(6)
-                ->get();
-        }
+        return $icons[$slug] ?? 'fas fa-star';
     }
 
     public function render()
