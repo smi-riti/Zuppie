@@ -80,7 +80,7 @@ class UpdateGallery extends Component
             $response = $imagekit->upload([
                 'file' => $image->getRealPath(),
                 'fileName' => $image->getClientOriginalName(),
-                'folder' => '/gallery/',
+                'folder' => 'Zuppie/gallery/',
                 'useUniqueFileName' => true,
             ]);
 
