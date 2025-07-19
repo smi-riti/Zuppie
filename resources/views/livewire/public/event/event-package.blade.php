@@ -1,12 +1,12 @@
 <div class="min-h-screen bg-gradient-to-br from-slate-50 via-white to-purple-50">
-    
+
     <!-- Hero Section with Single Image and Gradient -->
     <section class="relative min-h-screen flex items-center justify-center overflow-hidden">
         <div class="absolute inset-0 z-0">
-            <img src="https://images.unsplash.com/photo-1519225421980-715cb0215aed?w=1920&h=1080&fit=crop" 
-                 alt="Event Planning" class="w-full h-full object-cover">
+            <img src="https://images.unsplash.com/photo-1519225421980-715cb0215aed?w=1920&h=1080&fit=crop"
+                alt="Event Planning" class="w-full h-full object-cover">
             <div class="absolute inset-0 bg-gradient-to-r from-purple-900/40 via-pink-900/30 to-purple-900/40"></div>
-            
+
             <!-- Sparkle Animation Elements -->
             <div class="absolute inset-0 overflow-hidden pointer-events-none">
                 <div class="sparkle-1 absolute animate-ping"></div>
@@ -19,24 +19,24 @@
         <div class="relative z-10 w-full flex flex-col items-center px-4 sm:px-6 lg:px-8 max-w-6xl mx-auto text-center">
             <h1 class="text-4xl sm:text-6xl md:text-8xl font-black text-white leading-tight mb-6 animate-fade-in">
                 <span class="block drop-shadow-lg">Magical</span>
-                <span class="block text-transparent bg-clip-text bg-gradient-to-r from-purple-600 via-purple-400 to-pink-500 animate-gradient-x">
+                <span
+                    class="block text-transparent bg-clip-text bg-gradient-to-r from-purple-600 via-purple-400 to-pink-500 animate-gradient-x">
                     Event Packages
                 </span>
             </h1>
-            <p class="text-lg sm:text-xl md:text-2xl text-gray-100 max-w-3xl mx-auto leading-relaxed mb-8 drop-shadow-md animate-fade-in-up">
+            <p
+                class="text-lg sm:text-xl md:text-2xl text-gray-100 max-w-3xl mx-auto leading-relaxed mb-8 drop-shadow-md animate-fade-in-up">
                 Transform your celebrations into unforgettable experiences with our expertly crafted event packages
             </p>
-            
+
             <!-- Search Bar -->
             <div class="w-full max-w-lg mx-auto mb-8 animate-fade-in-up">
                 <div class="relative group">
-                    <input 
-                        type="text" 
-                        wire:model.live="searchQuery"
+                    <input type="text" wire:model.live="searchQuery"
                         placeholder="Search for your perfect event package..."
-                        class="w-full pl-6 pr-16 py-5 rounded-2xl bg-white/15 backdrop-blur-lg border border-white/30 text-white placeholder-gray-200 text-lg focus:outline-none focus:ring-4 focus:ring-pink-400/50 focus:border-pink-400 transition-all duration-300 shadow-xl group-hover:bg-white/20"
-                    >
-                    <div class="absolute right-6 top-1/2 transform -translate-y-1/2 transition-colors duration-300 group-hover:text-pink-300">
+                        class="w-full pl-6 pr-16 py-5 rounded-2xl bg-white/15 backdrop-blur-lg border border-white/30 text-white placeholder-gray-200 text-lg focus:outline-none focus:ring-4 focus:ring-pink-400/50 focus:border-pink-400 transition-all duration-300 shadow-xl group-hover:bg-white/20">
+                    <div
+                        class="absolute right-6 top-1/2 transform -translate-y-1/2 transition-colors duration-300 group-hover:text-pink-300">
                         <i class="fas fa-search text-gray-200 text-xl"></i>
                     </div>
                 </div>
@@ -61,23 +61,25 @@
                 <div class="featured-carousel-container relative" data-aos="fade-up" data-aos-delay="200">
                     <div class="featured-carousel flex space-x-8 overflow-x-auto pb-4 scrollbar-hide">
                         @foreach($this->featuredPackages as $index => $package)
-                            <div class="featured-card flex-shrink-0 w-80 bg-white rounded-3xl shadow-2xl overflow-hidden hover:shadow-3xl transform hover:-translate-y-2 transition-all duration-500 group">
+                            <div
+                                class="featured-card flex-shrink-0 w-80 bg-white rounded-3xl shadow-2xl overflow-hidden hover:shadow-3xl transform hover:-translate-y-2 transition-all duration-500 group">
                                 <!-- Image -->
                                 <div class="relative h-48 overflow-hidden">
-                                    <img src="{{ $package['image'] }}" 
-                                         alt="{{ $package['name'] }}" 
-                                         class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
-                                    
+                                    <img src="{{ $package['image'] }}" alt="{{ $package['name'] }}"
+                                        class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+
                                     <!-- Most Popular Badge -->
                                     <div class="absolute top-4 right-4">
-                                        <span class="bg-gradient-to-r from-yellow-400 to-orange-500 text-white px-4 py-2 rounded-full text-sm font-bold shadow-lg animate-pulse">
+                                        <span
+                                            class="bg-gradient-to-r from-yellow-400 to-orange-500 text-white px-4 py-2 rounded-full text-sm font-bold shadow-lg animate-pulse">
                                             <i class="fas fa-crown mr-1"></i>Most Popular
                                         </span>
                                     </div>
-                                    
+
                                     <!-- Price Badge -->
                                     <div class="absolute bottom-4 left-4">
-                                        <span class="bg-white/90 backdrop-blur-sm text-gray-800 px-4 py-2 rounded-full font-bold text-lg shadow-lg">
+                                        <span
+                                            class="bg-white/90 backdrop-blur-sm text-gray-800 px-4 py-2 rounded-full font-bold text-lg shadow-lg">
                                             ₹{{ number_format($package['price']) }}
                                         </span>
                                     </div>
@@ -85,17 +87,20 @@
 
                                 <!-- Content -->
                                 <div class="p-6">
-                                    <h3 class="text-xl font-bold text-gray-800 group-hover:text-purple-600 transition-colors duration-300 mb-3">
+                                    <h3
+                                        class="text-xl font-bold text-gray-800 group-hover:text-purple-600 transition-colors duration-300 mb-3">
                                         {{ $package['name'] }}
                                     </h3>
-                                    
+
                                     <p class="text-gray-600 mb-4 leading-relaxed">{{ $package['description'] }}</p>
-                                    
+
                                     <!-- Features Preview -->
                                     <div class="space-y-2 mb-6">
                                         @foreach(array_slice($package['features'], 0, 3) as $feature)
                                             <div class="flex items-center space-x-2">
-                                                <div class="w-2 h-2 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full flex-shrink-0"></div>
+                                                <div
+                                                    class="w-2 h-2 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full flex-shrink-0">
+                                                </div>
                                                 <span class="text-gray-700 text-sm">{{ $feature }}</span>
                                             </div>
                                         @endforeach
@@ -105,10 +110,11 @@
                                             </div>
                                         @endif
                                     </div>
-                                    
+
                                     <!-- CTA Button -->
                                     <div class="flex gap-3">
-                                        <a href="{{ route('package-detail', ['id' => $package['id']]) }}" class="flex-1 bg-gradient-to-r from-purple-600 to-pink-600 text-white py-3 px-6 rounded-2xl font-bold hover:from-purple-700 hover:to-pink-700 transform hover:scale-105 transition-all duration-300 shadow-lg text-center">
+                                        <a href="{{ route('package-detail', ['id' => $package['id']]) }}"
+                                            class="flex-1 bg-gradient-to-r from-purple-600 to-pink-600 text-white py-3 px-6 rounded-2xl font-bold hover:from-purple-700 hover:to-pink-700 transform hover:scale-105 transition-all duration-300 shadow-lg text-center">
                                             <i class="fas fa-eye mr-2"></i>
                                             View Package
                                         </a>
@@ -135,14 +141,10 @@
                 </p>
                 <div class="flex flex-wrap justify-center gap-2 sm:gap-3 mt-4">
                     @foreach($this->displayCategories as $category)
-                        <button 
-                            @if($category->children->count())
-                                wire:click="openCategoryModal('{{ $category->slug }}')"
-                            @else
-                                wire:click="selectCategory('{{ $category->slug }}')"
-                            @endif
-                            class="px-4 py-2 sm:px-6 sm:py-3 bg-white text-gray-700 rounded-xl border border-gray-200 hover:border-purple-300 mb-2 {{ $selectedCategory === $category->slug ? 'ring-2 ring-purple-400 font-bold' : '' }} relative group"
-                        >
+                        <button @if($category->children->count())
+                        wire:click="$dispatch('openSubCategoryPopup', {categorySlug: '{{ $category->slug }}', redirect: false})" @else
+                            wire:click="selectCategory('{{ $category->slug }}')" @endif
+                            class="px-4 py-2 sm:px-6 sm:py-3 bg-white text-gray-700 rounded-xl border border-gray-200 hover:border-purple-300 mb-2 {{ $selectedCategory === $category->slug ? 'ring-2 ring-purple-400 font-bold' : '' }} relative group">
                             <i class="{{ $this->getCategoryIcon($category->slug) }} mr-2"></i>
                             {{ $category->name }}
                             @if($category->children->count())
@@ -150,7 +152,8 @@
                             @endif
                         </button>
                     @endforeach
-                    <button wire:click="showAllCategories" class="px-4 py-2 sm:px-6 sm:py-3 bg-purple-600 text-white rounded-xl font-semibold ml-2 mb-2 {{ !$selectedCategory ? 'ring-2 ring-purple-400' : '' }}">
+                    <button wire:click="showAllCategories"
+                        class="px-4 py-2 sm:px-6 sm:py-3 bg-purple-600 text-white rounded-xl font-semibold ml-2 mb-2 {{ !$selectedCategory ? 'ring-2 ring-purple-400' : '' }}">
                         {{ $showAllCategoriesMode ? 'Show Special Only' : 'View All' }}
                     </button>
                 </div>
@@ -158,7 +161,6 @@
 
             <!-- Packages Grid -->
             <div class="packages-section">
-                <!-- Clear Selection -->
                 @if($selectedCategory || $searchQuery)
                     <div class="flex items-center justify-between mb-8">
                         <div class="text-gray-600">
@@ -169,17 +171,16 @@
                                 <span class="mx-2">in</span>
                             @endif
                             @if($selectedCategory)
-                                <span>{{ $this->categories[$selectedCategory]['name'] }}</span>
-                                @if($selectedSubCategory)
-                                    @php
-                                        $subCategory = \App\Models\Category::where('slug', $selectedSubCategory)->first();
-                                    @endphp
-                                    @if($subCategory)
-                                        <span> > {{ $subCategory->name }}</span>
-                                    @endif
+                                @php
+                                    $category = \App\Models\Category::where('slug', $selectedCategory)->first();
+                                    $subCategory = $selectedSubCategory ? \App\Models\Category::where('slug', $selectedSubCategory)->first() : null;
+                                @endphp
+                                <span>{{ $category->name }}</span>
+                                @if($subCategory)
+                                    <span> > {{ $subCategory->name }}</span>
                                 @endif
                             @endif
-                            <span class="ml-2 text-purple-600 font-semibold">({{ count($this->filteredPackages) }} found)</span>
+                            <span class="ml-2 text-purple-600 font-semibold">({{ count($filteredPackages) }} found)</span>
                         </div>
                         <div class="flex gap-3">
                             @if($searchQuery)
@@ -188,7 +189,8 @@
                                 </button>
                             @endif
                             @if($selectedCategory)
-                                <button wire:click="showAllCategories" class="text-purple-600 hover:text-purple-800 font-medium">
+                                <button wire:click="showAllCategories"
+                                    class="text-purple-600 hover:text-purple-800 font-medium">
                                     Show All Categories
                                 </button>
                             @endif
@@ -202,24 +204,28 @@
                             @foreach($this->filteredPackages as $package)
                                 <div class="package-card bg-white rounded-3xl shadow-xl overflow-hidden">
                                     <div class="relative h-56 overflow-hidden">
-                                        <img src="{{ $package['image'] }}" alt="{{ $package['name'] }}" class="w-full h-full object-cover">
+                                        <img src="{{ $package['image'] }}" alt="{{ $package['name'] }}"
+                                            class="w-full h-full object-cover">
                                         @if(isset($package['popular']) && $package['popular'])
                                             <div class="absolute top-4 right-4">
-                                                <span class="bg-gradient-to-r from-yellow-400 to-orange-500 text-white px-3 py-2 rounded-full text-sm font-bold">
+                                                <span
+                                                    class="bg-gradient-to-r from-yellow-400 to-orange-500 text-white px-3 py-2 rounded-full text-sm font-bold">
                                                     <i class="fas fa-star mr-1"></i>Popular
                                                 </span>
                                             </div>
                                         @endif
                                         @if(isset($package['rating']))
                                             <div class="absolute top-4 left-4">
-                                                <div class="bg-black/60 backdrop-blur-sm text-white px-3 py-2 rounded-full text-sm font-semibold flex items-center space-x-1">
+                                                <div
+                                                    class="bg-black/60 backdrop-blur-sm text-white px-3 py-2 rounded-full text-sm font-semibold flex items-center space-x-1">
                                                     <i class="fas fa-star text-yellow-400"></i>
                                                     <span>{{ $package['rating'] }}</span>
                                                 </div>
                                             </div>
                                         @endif
                                         <div class="absolute bottom-4 left-4">
-                                            <div class="bg-white/90 backdrop-blur-sm text-gray-800 px-3 py-2 rounded-full font-bold text-lg">
+                                            <div
+                                                class="bg-white/90 backdrop-blur-sm text-gray-800 px-3 py-2 rounded-full font-bold text-lg">
                                                 ₹{{ number_format($package['price']) }}
                                             </div>
                                         </div>
@@ -232,7 +238,9 @@
                                         <div class="space-y-2 mb-6">
                                             @foreach(array_slice($package['features'], 0, 4) as $feature)
                                                 <div class="flex items-center space-x-2">
-                                                    <div class="w-2 h-2 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full flex-shrink-0"></div>
+                                                    <div
+                                                        class="w-2 h-2 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full flex-shrink-0">
+                                                    </div>
                                                     <span class="text-gray-700 text-sm">{{ $feature }}</span>
                                                 </div>
                                             @endforeach
@@ -243,7 +251,8 @@
                                             @endif
                                         </div>
                                         <div class="flex space-x-3">
-                                            <a href="{{ route('package-detail', ['id' => $package['id']]) }}" class="flex-1 bg-gradient-to-r from-purple-600 to-pink-600 text-white py-3 px-4 rounded-xl font-semibold text-center">
+                                            <a href="{{ route('package-detail', ['id' => $package['id']]) }}"
+                                                class="flex-1 bg-gradient-to-r from-purple-600 to-pink-600 text-white py-3 px-4 rounded-xl font-semibold text-center">
                                                 <i class="fas fa-eye mr-2"></i>
                                                 View Details
                                             </a>
@@ -253,12 +262,12 @@
                             @endforeach
                         </div>
                     </div>
-                    
+
                     <!-- View More Button -->
                     @if($this->hasMorePackages)
                         <div class="text-center mt-12" data-aos="fade-up">
-                            <button wire:click="loadMorePackages" 
-                                    class="bg-gradient-to-r from-purple-600 to-pink-600 text-white px-8 py-4 rounded-xl font-semibold text-lg hover:from-purple-700 hover:to-pink-700 transform hover:scale-105 transition-all duration-300 shadow-lg hover:shadow-xl">
+                            <button wire:click="loadMorePackages"
+                                class="bg-gradient-to-r from-purple-600 to-pink-600 text-white px-8 py-4 rounded-xl font-semibold text-lg hover:from-purple-700 hover:to-pink-700 transform hover:scale-105 transition-all duration-300 shadow-lg hover:shadow-xl">
                                 <i class="fas fa-plus-circle mr-2"></i>
                                 View More Packages
                             </button>
@@ -280,21 +289,25 @@
                                     @endif
                                 </p>
                             </div>
-                            
+
                             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
                                 @foreach($this->similarPackages as $package)
-                                    <div class="package-card bg-white rounded-3xl shadow-xl overflow-hidden hover:shadow-2xl transform hover:-translate-y-2 transition-all duration-300">
+                                    <div
+                                        class="package-card bg-white rounded-3xl shadow-xl overflow-hidden hover:shadow-2xl transform hover:-translate-y-2 transition-all duration-300">
                                         <div class="relative h-56 overflow-hidden">
-                                            <img src="{{ $package['image'] }}" alt="{{ $package['name'] }}" class="w-full h-full object-cover">
+                                            <img src="{{ $package['image'] }}" alt="{{ $package['name'] }}"
+                                                class="w-full h-full object-cover">
                                             @if(isset($package['popular']) && $package['popular'])
                                                 <div class="absolute top-4 right-4">
-                                                    <span class="bg-gradient-to-r from-yellow-400 to-orange-500 text-white px-3 py-2 rounded-full text-sm font-bold">
+                                                    <span
+                                                        class="bg-gradient-to-r from-yellow-400 to-orange-500 text-white px-3 py-2 rounded-full text-sm font-bold">
                                                         <i class="fas fa-star mr-1"></i>Popular
                                                     </span>
                                                 </div>
                                             @endif
                                             <div class="absolute bottom-4 left-4">
-                                                <div class="bg-white/90 backdrop-blur-sm text-gray-800 px-3 py-2 rounded-full font-bold text-lg">
+                                                <div
+                                                    class="bg-white/90 backdrop-blur-sm text-gray-800 px-3 py-2 rounded-full font-bold text-lg">
                                                     ₹{{ number_format($package['price']) }}
                                                 </div>
                                             </div>
@@ -303,9 +316,11 @@
                                             <h4 class="text-xl font-bold text-gray-800 mb-3">
                                                 {{ $package['name'] }}
                                             </h4>
-                                            <p class="text-gray-600 mb-4 leading-relaxed line-clamp-2">{{ $package['description'] }}</p>
+                                            <p class="text-gray-600 mb-4 leading-relaxed line-clamp-2">{{ $package['description'] }}
+                                            </p>
                                             <div class="flex space-x-3">
-                                                <a href="{{ route('package-detail', ['id' => $package['id']]) }}" class="flex-1 bg-gradient-to-r from-purple-600 to-pink-600 text-white py-3 px-4 rounded-xl font-semibold text-center hover:from-purple-700 hover:to-pink-700 transform hover:scale-105 transition-all duration-300">
+                                                <a href="{{ route('package-detail', ['id' => $package['id']]) }}"
+                                                    class="flex-1 bg-gradient-to-r from-purple-600 to-pink-600 text-white py-3 px-4 rounded-xl font-semibold text-center hover:from-purple-700 hover:to-pink-700 transform hover:scale-105 transition-all duration-300">
                                                     <i class="fas fa-eye mr-2"></i>
                                                     View Details
                                                 </a>
@@ -334,7 +349,8 @@
                             @elseif($searchQuery)
                                 Try different search terms or browse by category
                             @elseif($selectedSubCategory)
-                                This subcategory doesn't have any packages yet. Try browsing the main category or other subcategories.
+                                This subcategory doesn't have any packages yet. Try browsing the main category or other
+                                subcategories.
                             @elseif($selectedCategory)
                                 No packages available in this category yet
                             @else
@@ -343,21 +359,25 @@
                         </p>
                         <div class="space-x-4">
                             @if($searchQuery)
-                                <button wire:click="clearSearch" class="bg-purple-600 text-white px-6 py-3 rounded-lg font-medium hover:bg-purple-700 transition-colors duration-300">
+                                <button wire:click="clearSearch"
+                                    class="bg-purple-600 text-white px-6 py-3 rounded-lg font-medium hover:bg-purple-700 transition-colors duration-300">
                                     Clear Search
                                 </button>
                             @endif
                             @if($selectedSubCategory)
-                                <button wire:click="selectCategory('{{ $selectedCategory }}')" class="bg-purple-600 text-white px-6 py-3 rounded-lg font-medium hover:bg-purple-700 transition-colors duration-300">
+                                <button wire:click="selectCategory('{{ $selectedCategory }}')"
+                                    class="bg-purple-600 text-white px-6 py-3 rounded-lg font-medium hover:bg-purple-700 transition-colors duration-300">
                                     View Main Category
                                 </button>
                             @endif
                             @if($selectedCategory)
-                                <button wire:click="showAllCategories" class="border border-purple-600 text-purple-600 px-6 py-3 rounded-lg font-medium hover:bg-purple-50 transition-colors duration-300">
+                                <button wire:click="showAllCategories"
+                                    class="border border-purple-600 text-purple-600 px-6 py-3 rounded-lg font-medium hover:bg-purple-50 transition-colors duration-300">
                                     Browse All Categories
                                 </button>
                             @else
-                                <button wire:click="showAllCategories" class="bg-purple-600 text-white px-6 py-3 rounded-lg font-medium hover:bg-purple-700 transition-colors duration-300">
+                                <button wire:click="showAllCategories"
+                                    class="bg-purple-600 text-white px-6 py-3 rounded-lg font-medium hover:bg-purple-700 transition-colors duration-300">
                                     Browse Categories
                                 </button>
                             @endif
@@ -375,21 +395,25 @@
                                     Popular packages from other categories
                                 </p>
                             </div>
-                            
+
                             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
                                 @foreach($this->similarPackages as $package)
-                                    <div class="package-card bg-white rounded-3xl shadow-xl overflow-hidden hover:shadow-2xl transform hover:-translate-y-2 transition-all duration-300">
+                                    <div
+                                        class="package-card bg-white rounded-3xl shadow-xl overflow-hidden hover:shadow-2xl transform hover:-translate-y-2 transition-all duration-300">
                                         <div class="relative h-56 overflow-hidden">
-                                            <img src="{{ $package['image'] }}" alt="{{ $package['name'] }}" class="w-full h-full object-cover">
+                                            <img src="{{ $package['image'] }}" alt="{{ $package['name'] }}"
+                                                class="w-full h-full object-cover">
                                             @if(isset($package['popular']) && $package['popular'])
                                                 <div class="absolute top-4 right-4">
-                                                    <span class="bg-gradient-to-r from-yellow-400 to-orange-500 text-white px-3 py-2 rounded-full text-sm font-bold">
+                                                    <span
+                                                        class="bg-gradient-to-r from-yellow-400 to-orange-500 text-white px-3 py-2 rounded-full text-sm font-bold">
                                                         <i class="fas fa-star mr-1"></i>Popular
                                                     </span>
                                                 </div>
                                             @endif
                                             <div class="absolute bottom-4 left-4">
-                                                <div class="bg-white/90 backdrop-blur-sm text-gray-800 px-3 py-2 rounded-full font-bold text-lg">
+                                                <div
+                                                    class="bg-white/90 backdrop-blur-sm text-gray-800 px-3 py-2 rounded-full font-bold text-lg">
                                                     ₹{{ number_format($package['price']) }}
                                                 </div>
                                             </div>
@@ -398,9 +422,11 @@
                                             <h4 class="text-xl font-bold text-gray-800 mb-3">
                                                 {{ $package['name'] }}
                                             </h4>
-                                            <p class="text-gray-600 mb-4 leading-relaxed line-clamp-2">{{ $package['description'] }}</p>
+                                            <p class="text-gray-600 mb-4 leading-relaxed line-clamp-2">{{ $package['description'] }}
+                                            </p>
                                             <div class="flex space-x-3">
-                                                <a href="{{ route('package-detail', ['id' => $package['id']]) }}" class="flex-1 bg-gradient-to-r from-purple-600 to-pink-600 text-white py-3 px-4 rounded-xl font-semibold text-center hover:from-purple-700 hover:to-pink-700 transform hover:scale-105 transition-all duration-300">
+                                                <a href="{{ route('package-detail', ['id' => $package['id']]) }}"
+                                                    class="flex-1 bg-gradient-to-r from-purple-600 to-pink-600 text-white py-3 px-4 rounded-xl font-semibold text-center hover:from-purple-700 hover:to-pink-700 transform hover:scale-105 transition-all duration-300">
                                                     <i class="fas fa-eye mr-2"></i>
                                                     View Details
                                                 </a>
@@ -415,12 +441,12 @@
             </div>
         </div>
     </section>
-  
+
     <livewire:public.section.enquiry-form />
     <livewire:public.components.bottom-navigation />
     <!-- Enhanced JavaScript -->
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
+        document.addEventListener('DOMContentLoaded', function () {
             // Removed hero carousel JS
         });
 
@@ -432,29 +458,29 @@
             const gap = 32; // gap-8 = 32px
             const totalWidth = cardWidth + gap;
             const totalCards = {{ count($this->featuredPackages) }};
-            
+
             function autoScrollFeatured() {
                 if (totalCards <= 1) return;
-                
+
                 scrollAmount += totalWidth;
                 if (scrollAmount >= totalWidth * totalCards) {
                     scrollAmount = 0;
                 }
-                featuredCarousel.scrollTo({ 
-                    left: scrollAmount, 
-                    behavior: 'smooth' 
+                featuredCarousel.scrollTo({
+                    left: scrollAmount,
+                    behavior: 'smooth'
                 });
             }
-            
+
             // Auto-scroll every 4 seconds
             setInterval(autoScrollFeatured, 4000);
-            
+
             // Manual navigation buttons
             const prevBtn = document.querySelector('.featured-prev');
             const nextBtn = document.querySelector('.featured-next');
-            
+
             if (prevBtn) {
-                prevBtn.addEventListener('click', function() {
+                prevBtn.addEventListener('click', function () {
                     scrollAmount -= totalWidth;
                     if (scrollAmount < 0) {
                         scrollAmount = totalWidth * (totalCards - 1);
@@ -462,9 +488,9 @@
                     featuredCarousel.scrollTo({ left: scrollAmount, behavior: 'smooth' });
                 });
             }
-            
+
             if (nextBtn) {
-                nextBtn.addEventListener('click', function() {
+                nextBtn.addEventListener('click', function () {
                     scrollAmount += totalWidth;
                     if (scrollAmount >= totalWidth * totalCards) {
                         scrollAmount = 0;
@@ -476,7 +502,7 @@
 
         // Enhanced Category Carousels Auto-scroll with smooth transitions
         @foreach($this->categories as $key => $category)
-            (function() {
+            (function () {
                 const carousel{{ ucfirst($key) }} = document.querySelector('.packages-carousel-{{ $key }} .carousel-track');
                 if (carousel{{ ucfirst($key) }}) {
                     let scrollPos{{ ucfirst($key) }} = 0;
@@ -485,74 +511,74 @@
                     const totalWidth = cardWidth + gap;
                     const totalCards = {{ count($this->featuredPackages) }};
                     let isScrolling{{ ucfirst($key) }} = false;
-                    
+
                     function autoScroll{{ ucfirst($key) }}() {
                         if (totalCards <= 1 || isScrolling{{ ucfirst($key) }}) return;
-                        
+
                         isScrolling{{ ucfirst($key) }} = true;
                         scrollPos{{ ucfirst($key) }} += totalWidth;
-                        
+
                         if (scrollPos{{ ucfirst($key) }} >= totalWidth * totalCards) {
                             scrollPos{{ ucfirst($key) }} = 0;
                         }
-                        
+
                         carousel{{ ucfirst($key) }}.style.transition = 'transform 0.8s ease-in-out';
                         carousel{{ ucfirst($key) }}.style.transform = `translateX(-${scrollPos{{ ucfirst($key) }}}px)`;
-                        
+
                         // Reset scrolling flag after transition
                         setTimeout(() => {
                             isScrolling{{ ucfirst($key) }} = false;
                         }, 800);
                     }
-                    
+
                     // Staggered auto-scroll timing for visual variety
                     const scrollInterval = 3500 + ({{ $loop->index }} * 750);
                     let autoScrollTimer{{ ucfirst($key) }} = setInterval(autoScroll{{ ucfirst($key) }}, scrollInterval);
-                    
+
                     // Enhanced manual controls
                     const prevBtn = document.querySelector('.carousel-prev-{{ $key }}');
                     const nextBtn = document.querySelector('.carousel-next-{{ $key }}');
-                    
+
                     if (prevBtn) {
-                        prevBtn.addEventListener('click', function() {
+                        prevBtn.addEventListener('click', function () {
                             if (isScrolling{{ ucfirst($key) }}) return;
-                            
+
                             isScrolling{{ ucfirst($key) }} = true;
                             clearInterval(autoScrollTimer{{ ucfirst($key) }});
-                            
+
                             scrollPos{{ ucfirst($key) }} -= totalWidth;
                             if (scrollPos{{ ucfirst($key) }} < 0) {
                                 scrollPos{{ ucfirst($key) }} = totalWidth * (totalCards - 1);
                             }
-                            
+
                             carousel{{ ucfirst($key) }}.style.transition = 'transform 0.5s ease-in-out';
                             carousel{{ ucfirst($key) }}.style.transform = `translateX(-${scrollPos{{ ucfirst($key) }}}px)`;
-                            
+
                             setTimeout(() => {
                                 isScrolling{{ ucfirst($key) }} = false;
                                 autoScrollTimer{{ ucfirst($key) }} = setInterval(autoScroll{{ ucfirst($key) }}, scrollInterval);
                             }, 500);
                         });
                     }
-                    
+
                     if (nextBtn) {
-                        nextBtn.addEventListener('click', function() {
+                        nextBtn.addEventListener('click', function () {
                             if (isScrolling{{ ucfirst($key) }}) return;
-                            
+
                             clearInterval(autoScrollTimer{{ ucfirst($key) }});
                             autoScroll{{ ucfirst($key) }}();
                             autoScrollTimer{{ ucfirst($key) }} = setInterval(autoScroll{{ ucfirst($key) }}, scrollInterval);
                         });
                     }
-                    
+
                     // Pause auto-scroll on hover for better UX
                     const carouselContainer = document.querySelector('.packages-carousel-{{ $key }}');
                     if (carouselContainer) {
-                        carouselContainer.addEventListener('mouseenter', function() {
+                        carouselContainer.addEventListener('mouseenter', function () {
                             clearInterval(autoScrollTimer{{ ucfirst($key) }});
                         });
-                        
-                        carouselContainer.addEventListener('mouseleave', function() {
+
+                        carouselContainer.addEventListener('mouseleave', function () {
                             autoScrollTimer{{ ucfirst($key) }} = setInterval(autoScroll{{ ucfirst($key) }}, scrollInterval);
                         });
                     }
@@ -561,13 +587,13 @@
         @endforeach
 
         // Category menu smooth scrolling
-        document.addEventListener('livewire:initialized', function() {
+        document.addEventListener('livewire:initialized', function () {
             // Listen for category selection events
-            window.addEventListener('category-selected', function(event) {
+            window.addEventListener('category-selected', function (event) {
                 if (event.detail && event.detail.category) {
                     const categorySection = document.querySelector(`#category-${event.detail.category}`);
                     if (categorySection) {
-                        categorySection.scrollIntoView({ 
+                        categorySection.scrollIntoView({
                             behavior: 'smooth',
                             block: 'start'
                         });
@@ -580,14 +606,14 @@
         const searchInput = document.querySelector('input[wire\\:model\\.live="searchQuery"]');
         if (searchInput) {
             let searchTimeout;
-            
-            searchInput.addEventListener('input', function(event) {
+
+            searchInput.addEventListener('input', function (event) {
                 // Clear existing timeout
                 clearTimeout(searchTimeout);
-                
+
                 // Add loading indicator class
                 searchInput.classList.add('searching');
-                
+
                 // Remove loading indicator after delay
                 searchTimeout = setTimeout(() => {
                     searchInput.classList.remove('searching');
@@ -596,11 +622,11 @@
         }
 
         // Enhanced parallax scrolling effects
-        window.addEventListener('scroll', function() {
+        window.addEventListener('scroll', function () {
             const scrolled = window.pageYOffset;
             const parallaxElements = document.querySelectorAll('.parallax-element');
-            
-            parallaxElements.forEach(function(element) {
+
+            parallaxElements.forEach(function (element) {
                 const speed = element.dataset.speed || 0.5;
                 const yPos = -(scrolled * speed);
                 element.style.transform = `translateY(${yPos}px)`;
@@ -609,12 +635,12 @@
 
         // Enhanced hover effects for package cards
         const packageCards = document.querySelectorAll('.package-card');
-        packageCards.forEach(function(card) {
-            card.addEventListener('mouseenter', function() {
+        packageCards.forEach(function (card) {
+            card.addEventListener('mouseenter', function () {
                 this.style.transform = 'translateY(-8px) scale(1.02)';
             });
-            
-            card.addEventListener('mouseleave', function() {
+
+            card.addEventListener('mouseleave', function () {
                 this.style.transform = 'translateY(0) scale(1)';
             });
         });
@@ -647,31 +673,36 @@
             opacity: 0;
             transition: opacity 1s ease-in-out;
         }
-        
+
         .carousel-slide.active {
             opacity: 1;
         }
 
         .searching {
-            background-image: linear-gradient(45deg, rgba(255,255,255,0.1) 25%, transparent 25%), 
-                              linear-gradient(-45deg, rgba(255,255,255,0.1) 25%, transparent 25%), 
-                              linear-gradient(45deg, transparent 75%, rgba(255,255,255,0.1) 75%), 
-                              linear-gradient(-45deg, transparent 75%, rgba(255,255,255,0.1) 75%);
+            background-image: linear-gradient(45deg, rgba(255, 255, 255, 0.1) 25%, transparent 25%),
+                linear-gradient(-45deg, rgba(255, 255, 255, 0.1) 25%, transparent 25%),
+                linear-gradient(45deg, transparent 75%, rgba(255, 255, 255, 0.1) 75%),
+                linear-gradient(-45deg, transparent 75%, rgba(255, 255, 255, 0.1) 75%);
             background-size: 20px 20px;
             background-position: 0 0, 0 10px, 10px -10px, -10px 0px;
             animation: slide 1s infinite linear;
         }
 
         @keyframes slide {
-            0% { background-position: 0 0, 0 10px, 10px -10px, -10px 0px; }
-            100% { background-position: 20px 20px, 20px 30px, 30px 10px, 10px 20px; }
+            0% {
+                background-position: 0 0, 0 10px, 10px -10px, -10px 0px;
+            }
+
+            100% {
+                background-position: 20px 20px, 20px 30px, 30px 10px, 10px 20px;
+            }
         }
 
         .scrollbar-hide {
             -ms-overflow-style: none;
             scrollbar-width: none;
         }
-        
+
         .scrollbar-hide::-webkit-scrollbar {
             display: none;
         }
@@ -699,9 +730,17 @@
         }
 
         @keyframes gradient {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
+            0% {
+                background-position: 0% 50%;
+            }
+
+            50% {
+                background-position: 100% 50%;
+            }
+
+            100% {
+                background-position: 0% 50%;
+            }
         }
 
         /* Enhanced shadow effects */
@@ -717,61 +756,15 @@
         }
 
         @keyframes loading {
-            0% { background-position: 200% 0; }
-            100% { background-position: -200% 0; }
+            0% {
+                background-position: 200% 0;
+            }
+
+            100% {
+                background-position: -200% 0;
+            }
         }
     </style>
 
-    <!-- Category Selection Modal -->
-    @if($showCategoryModal && $modalCategory)
-        <div class="fixed inset-0 bg-black bg-opacity-30 backdrop-blur-sm flex items-center justify-center z-50" wire:click="closeCategoryModal">
-            <div class="bg-white/95 backdrop-blur-lg rounded-3xl p-8 max-w-2xl w-full mx-4 max-h-96 overflow-y-auto shadow-2xl border border-white/20" wire:click.stop>
-                <div class="flex justify-between items-center mb-6">
-                    <h3 class="text-2xl font-bold text-gray-800">
-                        <i class="{{ $this->getCategoryIcon($modalCategory->slug) }} mr-2 text-purple-600"></i>
-                        {{ $modalCategory->name }}
-                    </h3>
-                    <button wire:click="closeCategoryModal" class="text-gray-400 hover:text-gray-600 text-2xl">
-                        <i class="fas fa-times"></i>
-                    </button>
-                </div>
-                
-                @if($modalCategory->children->count() > 0)
-                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                        <!-- Main Category Option -->
-                        <button wire:click="selectCategory('{{ $modalCategory->slug }}')" 
-                                class="p-4 border-2 border-purple-200 rounded-xl hover:border-purple-400 hover:bg-purple-50 transition-all duration-300 text-left group">
-                            <div class="flex items-center space-x-3">
-                                <div class="w-12 h-12 bg-purple-100 rounded-full flex items-center justify-center group-hover:bg-purple-200 transition-colors">
-                                    <i class="{{ $this->getCategoryIcon($modalCategory->slug) }} text-purple-600"></i>
-                                </div>
-                                <div>
-                                    <h4 class="font-semibold text-gray-800">All {{ $modalCategory->name }}</h4>
-                                    <p class="text-sm text-gray-500">View all packages</p>
-                                </div>
-                            </div>
-                        </button>
-                        
-                        <!-- Subcategory Options -->
-                        @foreach($modalCategory->children as $subcategory)
-                            <button wire:click="selectSubCategory('{{ $modalCategory->slug }}', '{{ $subcategory->slug }}')" 
-                                    class="p-4 border-2 border-gray-200 rounded-xl hover:border-purple-400 hover:bg-purple-50 transition-all duration-300 text-left group">
-                                <div class="flex items-center space-x-3">
-                                    <div class="w-12 h-12 bg-gray-100 rounded-full flex items-center justify-center group-hover:bg-purple-100 transition-colors">
-                                        <i class="{{ $this->getCategoryIcon($subcategory->slug) }} text-gray-600 group-hover:text-purple-600"></i>
-                                    </div>
-                                    <div>
-                                        <h4 class="font-semibold text-gray-800">{{ $subcategory->name }}</h4>
-                                        <p class="text-sm text-gray-500">{{ $subcategory->description }}</p>
-                                    </div>
-                                </div>
-                            </button>
-                        @endforeach
-                    </div>
-                @else
-                    <p class="text-gray-500 text-center">No subcategories available for this category.</p>
-                @endif
-            </div>
-        </div>
-    @endif
+    <livewire:public.components.category-popup />
 </div>
