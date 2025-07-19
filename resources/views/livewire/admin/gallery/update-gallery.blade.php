@@ -2,7 +2,7 @@
     <div class="bg-white rounded-lg shadow-xl max-w-2xl w-full p-6 border-2 border-purple-300">
         <div class="flex justify-between items-center mb-4">
             <h3 class="text-xl font-bold text-purple-700">Edit Gallery Image</h3>
-            <button wire:click="$emit('closeModal')" class="text-gray-500 hover:text-gray-700">
+            <button wire:click="closeModal" class="text-gray-500 hover:text-gray-700">
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
                     stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
@@ -26,17 +26,18 @@
                         Select New Image
                     </label>
                     <p class="text-gray-500 text-sm mt-1">Max 2MB</p>
-                    @error('uploadedImage')
+                    @error('image')
                         <span class="text-red-500 text-sm mt-1">{{ $message }}</span>
                     @enderror
 
-                    @if ($uploadedImage)
+                    @if ($image)
                         <div class="mt-4">
                             <p class="text-sm font-medium text-gray-700 mb-1">New Image Preview:</p>
-                            <img src="{{ $uploadedImage->temporaryUrl() }}" alt="Preview"
+                            <img src="{{ $image->temporaryUrl() }}" alt="Preview"
                                 class="h-32 object-cover rounded-lg border border-purple-200">
                         </div>
                     @endif
+
                 </div>
 
                 <div>
