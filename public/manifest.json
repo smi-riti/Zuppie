@@ -1,0 +1,167 @@
+{
+  "name": "Zuppie - Premium Event Management",
+  "short_name": "Zuppie",
+  "description": "Transform your special moments into magical memories with Zuppie's premium event management services",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#6366f1",
+  "orientation": "portrait-primary",
+  "lang": "en-US",
+  "scope": "/",
+  "categories": ["lifestyle", "entertainment", "business"],
+  "icons": [
+    {
+      "src": "/images/icons/icon-72x72.png",
+      "sizes": "72x72",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/images/icons/icon-96x96.png",
+      "sizes": "96x96",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/images/icons/icon-128x128.png",
+      "sizes": "128x128",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/images/icons/icon-144x144.png",
+      "sizes": "144x144",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/images/icons/icon-152x152.png",
+      "sizes": "152x152",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/images/icons/icon-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/images/icons/icon-384x384.png",
+      "sizes": "384x384",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/images/icons/icon-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  "screenshots": [
+    {
+      "src": "/images/screenshots/desktop-home.png",
+      "sizes": "1280x720",
+      "type": "image/png",
+      "form_factor": "wide",
+      "label": "Home page showcasing event packages"
+    },
+    {
+      "src": "/images/screenshots/mobile-home.png",
+      "sizes": "375x667",
+      "type": "image/png",
+      "form_factor": "narrow",
+      "label": "Mobile home page with event categories"
+    },
+    {
+      "src": "/images/screenshots/desktop-packages.png",
+      "sizes": "1280x720",
+      "type": "image/png",
+      "form_factor": "wide",
+      "label": "Event packages and pricing"
+    },
+    {
+      "src": "/images/screenshots/mobile-booking.png",
+      "sizes": "375x667",
+      "type": "image/png",
+      "form_factor": "narrow",
+      "label": "Easy booking process"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Browse Packages",
+      "short_name": "Packages",
+      "description": "Explore our premium event packages",
+      "url": "/packages",
+      "icons": [
+        {
+          "src": "/images/icons/shortcut-packages.png",
+          "sizes": "96x96",
+          "type": "image/png"
+        }
+      ]
+    },
+    {
+      "name": "Book Now",
+      "short_name": "Book",
+      "description": "Book your event instantly",
+      "url": "/book",
+      "icons": [
+        {
+          "src": "/images/icons/shortcut-book.png",
+          "sizes": "96x96",
+          "type": "image/png"
+        }
+      ]
+    },
+    {
+      "name": "My Bookings",
+      "short_name": "Bookings",
+      "description": "View your event bookings",
+      "url": "/dashboard/bookings",
+      "icons": [
+        {
+          "src": "/images/icons/shortcut-bookings.png",
+          "sizes": "96x96",
+          "type": "image/png"
+        }
+      ]
+    },
+    {
+      "name": "Contact Us",
+      "short_name": "Contact",
+      "description": "Get in touch with our event experts",
+      "url": "/contact",
+      "icons": [
+        {
+          "src": "/images/icons/shortcut-contact.png",
+          "sizes": "96x96",
+          "type": "image/png"
+        }
+      ]
+    }
+  ],
+  "related_applications": [
+    {
+      "platform": "webapp",
+      "url": "https://zuppie.com/manifest.json"
+    }
+  ],
+  "prefer_related_applications": false,
+  "features": [
+    "Cross Platform",
+    "Fast",
+    "Secure",
+    "Offline Support",
+    "Push Notifications"
+  ],
+  "protocol_handlers": [
+    {
+      "protocol": "web+zuppie",
+      "url": "/book?package=%s"
+    }
+  ]
+}
