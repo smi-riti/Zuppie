@@ -7,10 +7,11 @@ use App\Models\Category;
 use Livewire\Component;
 use Livewire\WithFileUploads;
 use ImageKit\ImageKit;
+use App\Helpers\ImageKitHelper;
 
 class CreateGallery extends Component
 {
-    use WithFileUploads;
+        use WithFileUploads;
 
     public $images = [];
     public $alt = '';
@@ -34,64 +35,37 @@ class CreateGallery extends Component
     {
         $this->validate();
 
+        // Upload images first
+        $uploadedImages = [];
         foreach ($this->images as $image) {
-            $uploadResult = $this->uploadToImageKit($image);
-            
-            if ($uploadResult) {
-                GalleryImage::create([
-                    'filename' => $uploadResult['url'],
-                    'file_id' => $uploadResult['fileId'],
-                    'alt' => $this->alt,
-                    'category_id' => $this->category_id,
-                    'description' => $this->description,
-                ]);
+            if ($image) {
+                $upload = ImageKitHelper::uploadImage($image, '/Zuppie/gallery');
+                if ($upload) {
+                    $uploadedImages[] = [
+                        'filename' => $upload['url'],
+                        'file_id' => $upload['fileId'],
+                        'alt' => $this->alt,
+                        'category_id' => $this->category_id,
+                        'description' => $this->description,
+                    ];
+                }
             }
         }
 
+        // Create gallery images in bulk
+        if (!empty($uploadedImages)) {
+            GalleryImage::insert($uploadedImages);
+        }
+
         $this->reset(['images', 'alt', 'category_id', 'description']);
-        $this->dispatch('image-created'); 
+        $this->dispatch('gallery-created');
         session()->flash('message', 'Images uploaded successfully!');
-
-       
+        $this->closeModal();
     }
-public function closeModal()
-{
-    $this->dispatch('close-modal'); // Dispatch event to parent
-}
 
-    private function uploadToImageKit($image)
+    public function closeModal()
     {
-        $publicKey = config('imagekit.public_key');
-        $privateKey = config('imagekit.private_key');
-        $urlEndpoint = config('imagekit.url_endpoint');
-
-        if (empty($publicKey) || empty($privateKey) || empty($urlEndpoint)) {
-            session()->flash('error', 'ImageKit credentials are not configured!');
-            return null;
-        }
-
-        $imagekit = new ImageKit(
-            $publicKey,
-            $privateKey,
-            $urlEndpoint
-        );
-
-        try {
-            $response = $imagekit->upload([
-                'file' => $image->getRealPath(),
-                'fileName' => $image->getClientOriginalName(),
-                'folder' => 'Zuppie/gallery/',
-                'useUniqueFileName' => true,
-            ]);
-
-            return [
-                'url' => $response->result->url,
-                'fileId' => $response->result->fileId
-            ];
-        } catch (\Exception $e) {
-            session()->flash('error', 'Image upload failed: ' . $e->getMessage());
-            return null;
-        }
+        $this->dispatch('close-modal', type: 'create');
     }
 
     public function removeImage($index)
