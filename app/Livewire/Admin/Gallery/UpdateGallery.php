@@ -65,16 +65,14 @@ class UpdateGallery extends Component
 
         session()->flash('message', 'Image updated successfully!');
         $this->dispatch('gallery-updated');
+        $this->dispatch('close-edit-modal'); // Simple event name
         return redirect()->route('gallery.manage'); // Redirect after update
         $this->closeModal();
-    }
-
+    }   
     public function closeModal()
     {
-        $this->dispatch('close-modal', type: 'edit');
+        $this->dispatch('close-edit-modal');
     }
-
-    
 
     public function removeImage()
     {

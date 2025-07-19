@@ -5,6 +5,7 @@ use App\Models\GalleryImage;
 use Livewire\Component;
 use Livewire\WithPagination;
 use Livewire\Attributes\Layout;
+use Livewire\Attributes\On;
 
 class ManageGallery extends Component
 {
@@ -18,26 +19,24 @@ class ManageGallery extends Component
     public $showEditModal = false;
     public $editId = null;
 
-public function closeModal()
-{
-    $this->showEditModal = false;
-    $this->editId = null;
-}
+    #[On('close-edit-modal')] 
+    public function closeEditModal()
+    {
+        $this->showEditModal = false;
+        $this->editId = null;
+    }
+
+    public function closeModal()
+    {
+     $this->showEditModal = false;
+     $this->editId = null;
+    }
 
     public function refreshList()
     {
         $this->resetPage();
         $this->closeModals();
     }
-
-    public function closeModals()
-    {
-        $this->showCreateModal = false;
-        $this->showEditModal = false;
-        $this->editId = null;
-    }
-
-
     protected $listeners = [
         'imageCreated' => 'refreshList',
         'imageUpdated' => 'refreshList',

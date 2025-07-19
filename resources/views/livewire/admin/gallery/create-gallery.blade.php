@@ -72,14 +72,23 @@
                 </div>
             </div>
 
-            <div class="flex justify-end gap-3 mt-6">
-                <button type="button" wire:click="$dispatch('closeModal')"
+             <div class="flex justify-end gap-3 mt-6">
+                <button type="button" wire:click="closeModal"
                     class="px-4 py-2 bg-gray-100 text-gray-700 rounded-lg hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-gray-300">
                     Cancel
                 </button>
-                <button type="submit"
-                    class="px-4 py-2 bg-gradient-to-r from-pink-500 to-purple-600 text-white rounded-lg hover:from-purple-600 hover:to-pink-500 focus:outline-none focus:ring-2 focus:ring-pink-300">
-                    Upload Images
+                <button type="submit" 
+                    class="px-4 py-2 bg-gradient-to-r from-pink-500 to-purple-600 text-white rounded-lg hover:from-purple-600 hover:to-pink-500 focus:outline-none focus:ring-2 focus:ring-pink-300
+                    disabled:opacity-50" 
+                    wire:loading.attr="disabled"
+                    wire:target="save">
+                    
+                    <span wire:loading.remove wire:target="save">
+                        Upload {{ count($images) }} Image(s)
+                    </span>
+                    <span wire:loading wire:target="save">
+                        Uploading...
+                    </span>
                 </button>
             </div>
         </form>
