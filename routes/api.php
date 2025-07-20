@@ -6,6 +6,8 @@ use App\Http\Controllers\EventPackage\EventPackageController;
 use App\Http\Controllers\Booking\BookingController;
 use App\Http\Controllers\Offer\OfferController;
 use App\Http\Controllers\BlogController;
+use App\Http\Controllers\Gallery\GalleryApiController;
+use App\Http\Controllers\User\UserApiController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\RegistrationController;
@@ -44,5 +46,7 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::apiResource('offers', OfferController::class)->except(['index', 'show']);
         Route::apiResource('reviews', ReviewController::class)->except(['index', 'store']);
         Route::apiResource('blogs', BlogController::class);
+        Route::apiResource('gallery',GalleryApiController::class)->except(['show']);
+        Route::apiResource('users', UserApiController::class)->except(['show']);
     });
 });
