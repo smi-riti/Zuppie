@@ -20,6 +20,7 @@ use App\Livewire\Admin\Booking\ManageBooking;
 use App\Livewire\Admin\Category\ManageCategories;
 use App\Livewire\Admin\User\ManageUser;
 use App\Livewire\Admin\Dashboard;
+use App\Livewire\Public\User\Profile;
 use Illuminate\Support\Facades\Route;
 use App\Livewire\Admin\Service\Show as ShowService;
 use App\Livewire\Public\Event\EventPackage;
@@ -43,8 +44,8 @@ Route::post('/logout', function () {
     return redirect('/');
 })->name('logout');
 Route::get('/about', About::class)->name('about');
-Route::get('/contact',Contact::class)->name('contact');
-Route::get('/booking',Bookingform::class)->name('booking');
+Route::get('/contact', Contact::class)->name('contact');
+Route::get('/booking', Bookingform::class)->name('booking');
 Route::get('/reviews/add', Add::class)->name('reviews.add');
 
 // Event Package Routes
@@ -52,7 +53,13 @@ Route::get('/event-packages', EventPackage::class)->name('event-packages');
 Route::get('/package-detail/{id}', PackageDetail::class)->name('package-detail');
 Route::get('/package-booking-form', PackageBookingForm::class)->name('package-booking');
 Route::get('/package-booking/{package_id?}', PackageBookingForm::class)->name('package-booking-form');
-Route::get('/manage-booking/{booking_id?}', PublicManageBooking::class)->name('manage-booking');
+
+// User profile routes
+Route::middleware(['auth'])->group(function () {
+    Route::get('/profile', Profile::class)->name('profile');
+});
+Route::get('/profile/manage-booking/{booking_id?}', PublicManageBooking::class)->name('manage-booking');
+
 
 Route::prefix('admin')->middleware(['auth', 'admin'])->group(function () {
     Route::get('/dashboard', Dashboard::class)->name('admin.dashboard');
