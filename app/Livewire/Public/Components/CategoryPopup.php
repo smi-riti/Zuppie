@@ -3,51 +3,21 @@
 namespace App\Livewire\Public\Components;
 
 use App\Models\Category;
-use App\Models\EventPackage;
 use Livewire\Component;
-use Livewire\Attributes\On;
 
 class CategoryPopup extends Component
 {
- public $showModal = false;
+    public $showModal = false;
     public $modalCategory = null;
 
-    protected $listeners = [
-        'openSubCategoryPopup' => 'openModal'
-    ];
+    protected $listeners = ['openCategoryModal'];
 
-    public function openModal($categorySlug)
+    public function openCategoryModal($categorySlug)
     {
-        $this->modalCategory = Category::where('slug', $categorySlug)->first();
+        $this->modalCategory = Category::with('children')->where('slug', $categorySlug)->first();
         $this->showModal = true;
     }
 
-    public function selectCategory($categorySlug)
-    {
-        // Redirect to packages page with category filter
-        return $this->redirect(
-            route('event-packages', ['category' => $categorySlug])
-            ,
-            navigate: true
-        );
-    }
-    public function closeModal()
-    {
-        $this->showModal = false;
-        $this->modalCategory = null;
-    }
-
-    public function selectSubCategory($categorySlug, $subCategorySlug)
-    {
-        // Redirect to packages page with both category and subcategory filters
-        return $this->redirect(
-            route('event-packages', [
-                'category' => $categorySlug,
-                'subcategory' => $subCategorySlug
-            ]),
-            navigate: true // This enables SPA-like navigation
-        );
-    }
     public function getCategoryIcon($slug)
     {
         $icons = [
@@ -64,6 +34,29 @@ class CategoryPopup extends Component
         ];
 
         return $icons[$slug] ?? 'fas fa-star';
+    }
+
+    public function selectSubCategory($categorySlug, $subCategorySlug)
+    {
+        $this->showModal = false;
+        return redirect()->route('event-package.filter', [
+            'category' => $categorySlug,
+            'subcategory' => $subCategorySlug
+        ]);
+    }
+
+    public function selectCategory($categorySlug)
+    {
+        $this->showModal = false;
+        return redirect()->route('event-package.filter', [
+            'category' => $categorySlug
+        ]);
+    }
+
+    public function closeModal()
+    {
+        $this->showModal = false;
+        $this->modalCategory = null;
     }
 
     public function render()

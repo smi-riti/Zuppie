@@ -16,21 +16,22 @@
                     <!-- Header -->
                     <div class="bg-gradient-to-r from-purple-600 to-pink-500 text-white p-6 rounded-t-2xl">
                         <h2 class="text-2xl font-bold">{{ $modalCategory->name }}</h2>
-                        <p class="text-purple-100 opacity-90 mt-1">Choose a subcategory to explore our amazing packages</p>
+                        <p class="text-purple-100 opacity-90 mt-1">Choose a subcategory to explore our amazing packages
+                        </p>
                     </div>
 
                     <!-- Content -->
                     <div class="p-6 max-h-[70vh] overflow-y-auto">
                         @if($modalCategory->children->count() > 0)
-                            <div class="grid grid-cols-4 gap-4">
+                            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
                                 @foreach($modalCategory->children as $subcategory)
                                     <button wire:click="selectSubCategory('{{ $modalCategory->slug }}', '{{ $subcategory->slug }}')"
                                         class="group bg-white hover:bg-purple-50 rounded-lg p-4 text-center transition-all duration-200 border border-gray-200 hover:border-purple-300 hover:shadow-md">
-                                        <div
-                                            class="w-12 h-12 mx-auto mb-3 bg-purple-100 rounded-full flex items-center justify-center group-hover:bg-purple-200 transition-colors">
+                                        <div class="w-12 h-12 mx-auto mb-3 bg-purple-100 rounded-full flex items-center justify-center group-hover:bg-purple-200 transition-colors">
                                             <i class="{{ $this->getCategoryIcon($subcategory->slug) }} text-purple-600"></i>
                                         </div>
-                                        <h3 class="font-medium text-gray-800 group-hover:text-purple-700">{{ $subcategory->name }}
+                                        <h3 class="font-medium text-gray-800 group-hover:text-purple-700">
+                                            {{ $subcategory->name }}
                                         </h3>
                                         @if($subcategory->description)
                                             <p class="text-xs text-gray-500 mt-1 opacity-0 group-hover:opacity-100 transition-opacity">
