@@ -34,6 +34,8 @@ use App\Livewire\Auth\ForgotPassword;
 use App\Livewire\Auth\ResetPassword;
 use App\Livewire\Public\Pages\TermsOfService;
 use App\Livewire\Public\Pages\PrivacyPolicy;
+use App\Livewire\Public\Event\EventPackageFilter;
+
 // Route::get('/', function () {
 //     return view('welcome');
 // });
@@ -57,7 +59,7 @@ Route::get('/event-packages', EventPackage::class)->name('event-packages');
 Route::get('/package-detail/{id}', PackageDetail::class)->name('package-detail');
 Route::get('/package-booking-form', PackageBookingForm::class)->name('package-booking');
 Route::get('/package-booking/{package_id?}', PackageBookingForm::class)->name('package-booking-form');
-
+Route::get('/events/filter', EventPackageFilter::class)->name('event-package.filter');
 // User profile routes
 Route::middleware(['auth'])->group(function () {
     Route::get('/profile', Profile::class)->name('profile');
