@@ -12,79 +12,22 @@
                 <div class="absolute inset-0 bg-black/10"></div>
             </div>
 
-            <!-- Enhanced Content with Floating Elements -->
+            <!-- Content -->
             <div class="relative z-10 flex items-center justify-center h-full text-center text-white px-4">
-                <!-- Floating Background Elements -->
-                <div class="absolute inset-0 overflow-hidden pointer-events-none">
-                    <div class="absolute top-20 left-10 w-32 h-32 bg-white/10 rounded-full blur-3xl animate-float-slow"></div>
-                    <div class="absolute bottom-20 right-10 w-24 h-24 bg-pink-300/20 rounded-full blur-2xl animate-float-delayed"></div>
-                    <div class="absolute top-1/2 right-1/4 w-16 h-16 bg-purple-300/15 rounded-full blur-xl animate-float-fast"></div>
-                </div>
-
-                <div class="max-w-5xl mx-auto relative">
-                   
-                    <!-- Enhanced Description -->
-                    <div class="mb-12 animate-fade-in-up animation-delay-300">
-                        <p class="text-2xl md:text-3xl text-white/90 max-w-3xl mx-auto leading-relaxed drop-shadow-lg font-light">
-                            Ready to create your <span class="font-bold bg-gradient-to-r from-yellow-300 to-orange-300 bg-clip-text text-transparent">perfect event?</span> 
-                            Let's bring your vision to life with <span class="font-bold text-pink-200">{{ $settings['site_name'] }}</span>.
-                        </p>
-                        
-                    </div>
-
-                    <!-- Enhanced Button Group -->
-                    <div class="space-y-6 animate-fade-in-up animation-delay-600">
-                        <!-- Primary Actions -->
-                        <div class="flex flex-col sm:flex-row gap-4 justify-center">
-                            <a href="tel:{{ $settings['phone_no'] }}" 
-                               class="group relative px-10 py-5 bg-gradient-to-r from-pink-500 via-pink-600 to-purple-600 text-white rounded-2xl font-bold text-lg hover:from-pink-600 hover:via-pink-700 hover:to-purple-700 transition-all duration-300 transform hover:scale-105 hover:-translate-y-1 shadow-2xl hover:shadow-pink-500/25">
-                                <div class="absolute inset-0 bg-gradient-to-r from-pink-400 to-purple-500 rounded-2xl blur opacity-75 group-hover:opacity-100 transition-opacity"></div>
-                                <div class="relative flex items-center justify-center">
-                                    <div class="w-6 h-6 bg-white/20 rounded-full flex items-center justify-center mr-3 group-hover:rotate-12 transition-transform">
-                                        <i class="fas fa-phone text-sm"></i>
-                                    </div>
-                                    <span>Call Now</span>
-                                    <div class="ml-3 opacity-0 group-hover:opacity-100 transition-opacity">
-                                        <i class="fas fa-arrow-right text-sm"></i>
-                                    </div>
-                                </div>
-                            </a>
-
-                            <a href="mailto:{{ $settings['email'] }}" 
-                               class="group relative px-10 py-5 bg-white/10 backdrop-blur-xl text-white rounded-2xl font-bold text-lg hover:bg-white/20 transition-all duration-300 transform hover:scale-105 hover:-translate-y-1 border-2 border-white/30 hover:border-white/50 shadow-2xl">
-                                <div class="flex items-center justify-center">
-                                    <div class="w-6 h-6 bg-white/20 rounded-full flex items-center justify-center mr-3 group-hover:rotate-12 transition-transform">
-                                        <i class="fas fa-envelope text-sm"></i>
-                                    </div>
-                                    <span>Email Us</span>
-                                    <div class="ml-3 opacity-0 group-hover:opacity-100 transition-opacity">
-                                        <i class="fas fa-external-link-alt text-sm"></i>
-                                    </div>
-                                </div>
-                            </a>
-                        </div>
-
-                        <!-- Primary CTA Button -->
-                        <div class="flex justify-center">
-                            <button 
-                                wire:click="$dispatch('open-enquiry-form')"
-                                class="group relative px-12 py-6 bg-gradient-to-r from-purple-600 via-blue-600 to-purple-600 text-white rounded-2xl font-bold text-xl hover:from-purple-700 hover:via-blue-700 hover:to-purple-700 transition-all duration-500 transform hover:scale-110 hover:-translate-y-2 shadow-2xl hover:shadow-purple-500/30 animate-pulse-border">
-                                <div class="absolute inset-0 bg-gradient-to-r from-purple-400 via-blue-400 to-purple-400 rounded-2xl blur-lg opacity-75 group-hover:opacity-100 transition-opacity"></div>
-                                <div class="relative flex items-center justify-center">
-                                    <div class="w-8 h-8 bg-white/20 rounded-full flex items-center justify-center mr-4 group-hover:rotate-180 transition-transform duration-500">
-                                        <i class="fas fa-calendar-plus text-lg"></i>
-                                    </div>
-                                    <span class="mr-2">Get Free Consultation</span>
-                                    <div class="flex space-x-1">
-                                        <div class="w-2 h-2 bg-yellow-300 rounded-full animate-bounce"></div>
-                                        <div class="w-2 h-2 bg-yellow-300 rounded-full animate-bounce animation-delay-100"></div>
-                                        <div class="w-2 h-2 bg-yellow-300 rounded-full animate-bounce animation-delay-200"></div>
-                                    </div>
-                                </div>
-                                <div class="absolute -inset-1 bg-gradient-to-r from-purple-600 via-pink-600 to-blue-600 rounded-2xl opacity-0 group-hover:opacity-75 blur transition-opacity duration-300"></div>
-                            </button>
-                        </div>
-
+                <div class="max-w-4xl mx-auto">
+                    <h1 class="text-5xl md:text-7xl font-bold mb-6 sparkle-text drop-shadow-2xl">Get In Touch</h1>
+                    <p class="text-xl md:text-2xl text-purple-100 max-w-2xl mx-auto leading-relaxed drop-shadow-lg">
+                        Ready to create your perfect event? Let's bring your vision to life with {{ $settings['site_name'] }}.
+                    </p>
+                    <div class="mt-8 flex flex-col sm:flex-row gap-4 justify-center">
+                        <a href="tel:{{ $settings['phone_no'] }}" 
+                           class="px-8 py-4 bg-gradient-to-r from-pink-500 to-purple-600 text-white rounded-full font-bold text-lg hover:from-pink-600 hover:to-purple-700 transition-all transform hover:scale-105 shadow-lg">
+                            <i class="fas fa-phone mr-2"></i>Call Now
+                        </a>
+                        <a href="mailto:{{ $settings['email'] }}" 
+                           class="px-8 py-4 bg-white/20 backdrop-blur-sm text-white rounded-full font-bold text-lg hover:bg-white/30 transition-all transform hover:scale-105 border border-white/30">
+                            <i class="fas fa-envelope mr-2"></i>Email Us
+                        </a>
                     </div>
                 </div>
             </div>
@@ -278,30 +221,27 @@
     </main>
 
     <style>
-        /* Enhanced Sparkle Text Animation */
+        /* Sparkle Text Animation */
         .sparkle-text {
             position: relative;
-            background: linear-gradient(45deg, #ff6b6b, #4ecdc4, #45b7d1, #96ceb4, #feca57, #ff9ff3, #54a0ff);
-            background-size: 400% 400%;
-            animation: sparkle-gradient 4s ease infinite;
+            background: linear-gradient(45deg, #ff6b6b, #4ecdc4, #45b7d1, #96ceb4, #feca57);
+            background-size: 300% 300%;
+            animation: sparkle-gradient 3s ease infinite;
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
-            filter: drop-shadow(0 0 30px rgba(255, 255, 255, 0.5));
         }
 
         @keyframes sparkle-gradient {
             0% { background-position: 0% 50%; }
-            25% { background-position: 100% 50%; }
-            50% { background-position: 100% 100%; }
-            75% { background-position: 0% 100%; }
+            50% { background-position: 100% 50%; }
             100% { background-position: 0% 50%; }
         }
 
-        /* Enhanced Gradient Text */
+        /* Gradient Text */
         .gradient-text {
-            background: linear-gradient(45deg, #8B5CF6, #EC4899, #F59E0B, #10B981);
-            background-size: 300% 300%;
+            background: linear-gradient(45deg, #8B5CF6, #EC4899, #F59E0B);
+            background-size: 200% 200%;
             animation: gradient-shift 3s ease infinite;
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
@@ -312,151 +252,6 @@
             0% { background-position: 0% 50%; }
             50% { background-position: 100% 50%; }
             100% { background-position: 0% 50%; }
-        }
-
-        /* Floating Animations */
-        .animate-float-slow {
-            animation: float-slow 6s ease-in-out infinite;
-        }
-
-        .animate-float-delayed {
-            animation: float-delayed 4s ease-in-out infinite;
-        }
-
-        .animate-float-fast {
-            animation: float-fast 3s ease-in-out infinite;
-        }
-
-        @keyframes float-slow {
-            0%, 100% { transform: translateY(0px) translateX(0px); }
-            25% { transform: translateY(-20px) translateX(10px); }
-            50% { transform: translateY(-10px) translateX(-15px); }
-            75% { transform: translateY(-25px) translateX(5px); }
-        }
-
-        @keyframes float-delayed {
-            0%, 100% { transform: translateY(0px) rotate(0deg); }
-            33% { transform: translateY(-15px) rotate(120deg); }
-            66% { transform: translateY(-25px) rotate(240deg); }
-        }
-
-        @keyframes float-fast {
-            0%, 100% { transform: translateY(0px) scale(1); }
-            50% { transform: translateY(-30px) scale(1.1); }
-        }
-
-        /* Fade In Up Animation */
-        .animate-fade-in-up {
-            animation: fade-in-up 1s ease-out forwards;
-            opacity: 0;
-            transform: translateY(30px);
-        }
-
-        @keyframes fade-in-up {
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        /* Animation Delays */
-        .animation-delay-100 { animation-delay: 0.1s; }
-        .animation-delay-200 { animation-delay: 0.2s; }
-        .animation-delay-300 { animation-delay: 0.3s; }
-        .animation-delay-600 { animation-delay: 0.6s; }
-
-        /* Pulse Glow Effect */
-        .animate-pulse-glow {
-            animation: pulse-glow 2s ease-in-out infinite;
-        }
-
-        @keyframes pulse-glow {
-            0%, 100% {
-                box-shadow: 0 0 20px rgba(236, 72, 153, 0.5);
-                transform: scaleX(1);
-            }
-            50% {
-                box-shadow: 0 0 40px rgba(236, 72, 153, 0.8), 0 0 60px rgba(139, 92, 246, 0.6);
-                transform: scaleX(1.1);
-            }
-        }
-
-        /* Pulse Border Animation */
-        .animate-pulse-border {
-            position: relative;
-        }
-
-        .animate-pulse-border::before {
-            content: '';
-            position: absolute;
-            inset: -3px;
-            background: linear-gradient(45deg, #ff6b6b, #4ecdc4, #45b7d1, #96ceb4, #feca57);
-            background-size: 400% 400%;
-            border-radius: 1rem;
-            z-index: -1;
-            animation: border-pulse 3s ease infinite;
-            opacity: 0.7;
-        }
-
-        @keyframes border-pulse {
-            0%, 100% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-        }
-
-        /* Enhanced Button Hover Effects */
-        .group:hover .group-hover\:rotate-12 {
-            transform: rotate(12deg);
-        }
-
-        .group:hover .group-hover\:rotate-180 {
-            transform: rotate(180deg);
-        }
-
-        /* Enhanced Shadows */
-        .shadow-2xl {
-            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
-        }
-
-        .hover\:shadow-pink-500\/25:hover {
-            box-shadow: 0 25px 50px -12px rgba(236, 72, 153, 0.25);
-        }
-
-        .hover\:shadow-purple-500\/30:hover {
-            box-shadow: 0 25px 50px -12px rgba(139, 92, 246, 0.3);
-        }
-
-        /* Backdrop Blur Enhancement */
-        .backdrop-blur-xl {
-            backdrop-filter: blur(24px);
-        }
-
-        /* Custom Scrollbar for smooth experience */
-        ::-webkit-scrollbar {
-            width: 8px;
-        }
-
-        ::-webkit-scrollbar-track {
-            background: rgba(255, 255, 255, 0.1);
-        }
-
-        ::-webkit-scrollbar-thumb {
-            background: linear-gradient(to bottom, #8B5CF6, #EC4899);
-            border-radius: 4px;
-        }
-
-        ::-webkit-scrollbar-thumb:hover {
-            background: linear-gradient(to bottom, #7C3AED, #DB2777);
-        }
-
-        /* Responsive Enhancements */
-        @media (max-width: 640px) {
-            .sparkle-text {
-                font-size: 3rem;
-            }
-            
-            .animate-fade-in-up {
-                animation-duration: 0.8s;
-            }
         }
     </style>
 

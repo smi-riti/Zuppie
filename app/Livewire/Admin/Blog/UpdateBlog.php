@@ -119,7 +119,7 @@ class UpdateBlog extends Component
             $response = $imagekit->upload([
                 'file' => $fileResource,
                 'fileName' => $fileName,
-                'folder' => '/Blogs/',
+                'folder' => '/Zuppie/Blogs/',
                 'useUniqueFileName' => true,
             ]);
         } finally {

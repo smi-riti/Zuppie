@@ -1,18 +1,26 @@
 <div>
      @if($showModal)
-        <div class="fixed inset-0 bg-white/80 backdrop-blur-sm z-40 transition-opacity" wire:click="closeModal"></div>
+        <div class="fixed inset-0 bg-black/60 backdrop-blur-md z-40 transition-all duration-300" wire:click="closeModal"></div>
     @endif
 
     <!-- Modal Container -->
-    <div class="@if(!$showModal) hidden @endif fixed inset-0 z-50 flex items-start justify-center pt-16 ">
-        <div class="relative mx-auto p-6 w-full max-w-6xl">
+    <div class="@if(!$showModal) hidden @endif fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6">
+        <div class="relative mx-auto w-full max-w-4xl max-h-[90vh] overflow-y-auto">
             <!-- Modal Content -->
-            <div class="bg-white rounded-xl shadow-xl border border-purple-100 overflow-hidden transform transition-all">
+            <div class="bg-white rounded-2xl shadow-2xl border-0 overflow-hidden transform transition-all animate-in zoom-in-95 duration-300">
                 <!-- Modal Header -->
-                <div class="bg-gradient-to-r from-pink-50 to-purple-50 px-6 py-4 border-b border-pink-100">
+                <div class="bg-gradient-to-r from-purple-600 to-pink-600 px-6 py-5">
                     <div class="flex justify-between items-center">
-                        <h3 class="text-xl font-bold text-purple-800">Contact us</h3>
-                        <button wire:click="closeModal" class="text-pink-500 hover:text-purple-700 transition-colors">
+                        <div>
+                            <h3 class="text-2xl font-bold text-white flex items-center">
+                                <svg class="w-6 h-6 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"></path>
+                                </svg>
+                                Plan Your Dream Event
+                            </h3>
+                            <p class="text-purple-100 text-sm mt-1">Tell us about your vision and we'll make it happen</p>
+                        </div>
+                        <button wire:click="closeModal" class="text-white/80 hover:text-white transition-colors rounded-full p-2 hover:bg-white/20">
                             <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
                             </svg>
@@ -21,7 +29,10 @@
                 </div>
 
                 @if (session('message'))
-                    <div class="mx-6 mt-4 px-4 py-3 rounded-lg bg-green-50 text-green-700 font-medium border border-green-100">
+                    <div class="mx-6 mt-4 px-4 py-3 rounded-xl bg-gradient-to-r from-green-50 to-emerald-50 text-green-700 font-medium border border-green-200 flex items-center">
+                        <svg class="w-5 h-5 mr-2 text-green-600" fill="currentColor" viewBox="0 0 20 20">
+                            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+                        </svg>
                         {{ session('message') }}
                     </div>
                 @endif
