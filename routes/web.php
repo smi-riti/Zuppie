@@ -49,7 +49,6 @@ Route::post('/logout', function () {
 Route::get('/about', About::class)->name('about');
 Route::get('/contact', Contact::class)->name('contact');
 Route::get('/booking', Bookingform::class)->name('booking');
-Route::get('/reviews/add', Add::class)->name('reviews.add');
 Route::get('/terms-of-service', TermsOfService::class)->name('terms-of-service');
 Route::get('/privacy-policy', PrivacyPolicy::class)->name('privacy-policy');
 
