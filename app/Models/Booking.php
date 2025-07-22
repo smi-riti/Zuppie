@@ -3,13 +3,9 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use App\Models\User;
-use App\Models\Category;
-use App\Models\EventPackage;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
-use App\Models\Payment;
 class Booking extends Model
 {
     protected $fillable = [
@@ -23,7 +19,7 @@ class Booking extends Model
         'guest_count',
         'location',
         'special_requests',
-        'status', 
+        'status',
         'total_price',
         'pin_code',
         'is_completed',
@@ -35,7 +31,6 @@ class Booking extends Model
         'total_price' => 'decimal:2',
     ];
 
-    // Relationships
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);
@@ -46,7 +41,7 @@ class Booking extends Model
         return $this->belongsTo(Category::class);
     }
 
-    public function eventPackage()
+    public function eventPackage(): BelongsTo
     {
         return $this->belongsTo(EventPackage::class, 'event_package_id');
     }
@@ -55,7 +50,4 @@ class Booking extends Model
     {
         return $this->hasMany(Payment::class);
     }
-
-
 }
-

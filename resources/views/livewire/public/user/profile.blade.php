@@ -90,13 +90,13 @@
                                             <div class="text-right">
                                                 <span
                                                     class="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium 
-                                                                                                                    @if($booking->status == 'confirmed')
-                                                                                                                        bg-green-100 text-green-800
-                                                                                                                    @elseif($booking->status == 'pending')
-                                                                                                                        bg-yellow-100 text-yellow-800
-                                                                                                                    @else
-                                                                                                                        bg-red-100 text-red-800
-                                                                                                                    @endif">
+                                                                                                                        @if($booking->status == 'confirmed')
+                                                                                                                            bg-green-100 text-green-800
+                                                                                                                        @elseif($booking->status == 'pending')
+                                                                                                                            bg-yellow-100 text-yellow-800
+                                                                                                                        @else
+                                                                                                                            bg-red-100 text-red-800
+                                                                                                                        @endif">
 
                                                     @if ($booking->status == 'confirmed')
                                                         Confirmed
@@ -148,11 +148,10 @@
                                                 </button>
 
                                                 @if ($booking->is_completed == 1)
-                                                    <button
-                                                        class="border border-purple-300 text-purple-600 px-4 py-2 rounded-lg font-semibold hover:bg-purple-50 transition-all duration-300">
-                                                        <i class="fas fa-download mr-2"></i>
-                                                        Invoice
-                                                    </button>
+                                                    <a href="{{ route('invoices.download', $booking->id) }}"
+                                                        class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+                                                        Download Invoice
+                                                    </a>
                                                 @endif
                                             </div>
 
@@ -235,13 +234,13 @@
                                             <div class="text-right">
                                                 <span
                                                     class="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium 
-                                                                                                                    @if($upBooking->status == 'confirmed')
-                                                                                                                        bg-green-100 text-green-800
-                                                                                                                    @elseif($upBooking->status == 'pending')
-                                                                                                                        bg-yellow-100 text-yellow-800
-                                                                                                                    @else
-                                                                                                                        bg-red-100 text-red-800
-                                                                                                                    @endif">
+                                                                                                                        @if($upBooking->status == 'confirmed')
+                                                                                                                            bg-green-100 text-green-800
+                                                                                                                        @elseif($upBooking->status == 'pending')
+                                                                                                                            bg-yellow-100 text-yellow-800
+                                                                                                                        @else
+                                                                                                                            bg-red-100 text-red-800
+                                                                                                                        @endif">
                                                     {{$upBooking->status == 'confirmed' ? 'Confirmed' : 'Pending'}}
                                                 </span>
                                             </div>
@@ -348,13 +347,13 @@
                                             <div class="text-right">
                                                 <span
                                                     class="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium 
-                                                                                                                    @if($pastBooking->status == 'confirmed')
-                                                                                                                        bg-green-100 text-green-800
-                                                                                                                    @elseif($pastBooking->status == 'pending')
-                                                                                                                        bg-yellow-100 text-yellow-800
-                                                                                                                    @else
-                                                                                                                        bg-red-100 text-red-800
-                                                                                                                    @endif">
+                                                                                                                        @if($pastBooking->status == 'confirmed')
+                                                                                                                            bg-green-100 text-green-800
+                                                                                                                        @elseif($pastBooking->status == 'pending')
+                                                                                                                            bg-yellow-100 text-yellow-800
+                                                                                                                        @else
+                                                                                                                            bg-red-100 text-red-800
+                                                                                                                        @endif">
                                                     {{$pastBooking->status == 'confirmed' ? 'Confirmed' : 'Pending'}}
                                                 </span>
                                             </div>
@@ -461,13 +460,13 @@
                                             <div class="text-right">
                                                 <span
                                                     class="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium 
-                                                                                                                    @if($cancelBooking->status == 'confirmed')
-                                                                                                                        bg-green-100 text-green-800
-                                                                                                                    @elseif($cancelBooking->status == 'pending')
-                                                                                                                        bg-yellow-100 text-yellow-800
-                                                                                                                    @else
-                                                                                                                        bg-red-100 text-red-800
-                                                                                                                    @endif">
+                                                                                                                        @if($cancelBooking->status == 'confirmed')
+                                                                                                                            bg-green-100 text-green-800
+                                                                                                                        @elseif($cancelBooking->status == 'pending')
+                                                                                                                            bg-yellow-100 text-yellow-800
+                                                                                                                        @else
+                                                                                                                            bg-red-100 text-red-800
+                                                                                                                        @endif">
                                                     @if ($cancelBooking->status == 'confirmed')
                                                         Confirmed
                                                     @elseif ($cancelBooking->status == 'pending')
@@ -547,7 +546,7 @@
 
 
     @if ($showEditProfileModal)
-    <livewire:public.user.edit-profile-modal :user-id="$userIdToEdit"/>
+        <livewire:public.user.edit-profile-modal :user-id="$userIdToEdit" />
     @endif
     @if($showViewModal)
         <livewire:public.user.my-package-modal :booking-id="$bookingIdToView" />
