@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\BookingInvoice;
 use App\Http\Controllers\SitemapController;
 use App\Http\Controllers\RobotsController;
 use App\Livewire\Admin\Category\Show;
@@ -120,3 +121,11 @@ Route::get('/manifest.json', function () {
 Route::get('/browserconfig.xml', function () {
     return response()->view('browserconfig')->header('Content-Type', 'text/xml');
 })->name('browserconfig');
+
+
+
+
+
+
+Route::get('/invoices/{invoice}/download', [BookingInvoice::class, 'downloadInvoice'])
+     ->name('invoices.download');
