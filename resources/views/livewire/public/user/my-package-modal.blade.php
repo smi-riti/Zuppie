@@ -58,10 +58,12 @@
                                         <span
                                             class="text-gray-800">{{ \Carbon\Carbon::parse($booking->event_end_date)->format('D, M j, Y') }}</span>
                                     </div>
-                                    <div class="grid grid-cols-2 gap-4 py-2 border-b border-gray-100">
-                                        <span class="font-medium text-gray-600">Total Guests:</span>
-                                        <span class="text-gray-800">{{ $booking->guest_count }}</span>
-                                    </div>
+                                    @if(!empty($booking->guest_count))
+                                        <div class="grid grid-cols-2 gap-4 py-2 border-b border-gray-100">
+                                            <span class="font-medium text-gray-600">Total Guests:</span>
+                                            <span class="text-gray-800">{{ $booking->guest_count }}</span>
+                                        </div>
+                                    @endif
                                     <div class="grid grid-cols-2 gap-4 py-2 border-b border-gray-100">
                                         <span class="font-medium text-gray-600">Location:</span>
                                         <span class="text-gray-800">{{ $booking->location }}</span>
@@ -226,7 +228,7 @@
                                     @if ($booking->is_completed == 1)
                                         <h2 class="text-red-500 font-semibold">Download Invoice</h2>
                                     @endif
-                                    
+
                                 </div>
                             </div>
                         </div>

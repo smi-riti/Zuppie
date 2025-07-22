@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\BookingInvoice;
 use App\Http\Controllers\SitemapController;
 use App\Http\Controllers\RobotsController;
 use App\Livewire\Admin\Category\Show;
@@ -33,6 +34,8 @@ use App\Livewire\Auth\ForgotPassword;
 use App\Livewire\Auth\ResetPassword;
 use App\Livewire\Public\Pages\TermsOfService;
 use App\Livewire\Public\Pages\PrivacyPolicy;
+use App\Livewire\Public\Event\EventPackageFilter;
+
 // Route::get('/', function () {
 //     return view('welcome');
 // });
@@ -56,7 +59,7 @@ Route::get('/event-packages', EventPackage::class)->name('event-packages');
 Route::get('/package-detail/{id}', PackageDetail::class)->name('package-detail');
 Route::get('/package-booking-form', PackageBookingForm::class)->name('package-booking');
 Route::get('/package-booking/{package_id?}', PackageBookingForm::class)->name('package-booking-form');
-
+Route::get('/events/filter', EventPackageFilter::class)->name('event-package.filter');
 // User profile routes
 Route::middleware(['auth'])->group(function () {
     Route::get('/profile', Profile::class)->name('manage-booking');
@@ -117,3 +120,11 @@ Route::get('/manifest.json', function () {
 Route::get('/browserconfig.xml', function () {
     return response()->view('browserconfig')->header('Content-Type', 'text/xml');
 })->name('browserconfig');
+
+
+
+
+
+
+Route::get('/invoices/{invoice}/download', [BookingInvoice::class, 'downloadInvoice'])
+     ->name('invoices.download');

@@ -12,14 +12,16 @@ class Profile extends Component
     public $pastBookings;
     public $cancelledBookings;
     public $completedBookings;
-
     public $bookingIdToView;
     public $showViewModal = false;
     public $packageIdToReview;
     public $showReviewModal = false;
+    public $showEditProfileModal = false;
+    public $userIdToEdit;
     protected $listeners = [
         'closeViewModal' => 'closeViewModal',
         'closeReviewModal' => 'closeReviewModal',
+        'closeEditProfileModal' => 'closeEditProfileModal'
     ];
     public function mount()
     {
@@ -51,6 +53,15 @@ class Profile extends Component
     public function closeViewModal()
     {
         $this->showViewModal = false;
+    }
+    public function openEditProfileModal($userId)
+    {
+        $this->userIdToEdit = $userId;
+        $this->showEditProfileModal = true;
+    }
+    public function closeEditProfileModal()
+    {
+        $this->showEditProfileModal = false;
     }
 
     public function openReviewModal($packageId)
