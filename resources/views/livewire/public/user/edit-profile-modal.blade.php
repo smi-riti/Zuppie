@@ -1,72 +1,61 @@
 <div>
     <!-- Backdrop -->
-    <div class="fixed inset-0 bg-black/30 backdrop-blur-sm z-40 transition-opacity" wire:click="closeEditProfileModal">
-    </div>
+    <div class="fixed inset-0 bg-black/40 backdrop-blur-sm z-40 transition-opacity duration-300" wire:click="closeEditProfileModal"></div>
 
     <!-- Modal Container -->
-    <div class="fixed inset-0 z-50 flex items-center justify-center p-4" wire:click.stop>
-        <div class="relative mx-auto w-full max-w-4xl">
+    <div class="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6">
+        <div class="relative w-full max-w-lg sm:max-w-xl">
             <!-- Modal Content -->
-            <div class="bg-white rounded-xl shadow-2xl overflow-hidden" wire:click.stop>
-                <!-- Close button -->
-                <button wire:click="closeEditProfileModal"
-                    class="absolute top-4 right-4 text-gray-500 hover:text-purple-600 transition-colors z-10">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
-                        stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                            d="M6 18L18 6M6 6l12 12" />
+            <div class="bg-white rounded-2xl shadow-xl overflow-hidden transform transition-all duration-300">
+                <!-- Close Button -->
+                <button wire:click="closeEditProfileModal" class="absolute top-3 right-3 text-pink-500 hover:text-pink-700 transition-colors duration-200 z-10">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
                     </svg>
                 </button>
 
                 <!-- Profile Edit Form -->
-                <div class="p-6 md:p-8 space-y-6 max-h-[80vh] overflow-y-auto bg-gray-50 rounded-lg shadow-sm">
-                    <h2 class="text-2xl font-bold text-gray-800 mb-6">Edit Profile</h2>
-                    <form wire:submit.prevent="updateProfile">
-                        <div class="space-y-4">
-                            <!-- Name Field -->
-                            <div class="grid grid-cols-1 md:grid-cols-3 gap-4 items-center">
-                                <label class="text-gray-700 font-medium">Full Name</label>
-                                <div class="md:col-span-2">
-                                    <input type="text" wire:model.defer="name" 
-                                        class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent">
-                                    @error('name')
-                                        <span class="text-red-500 font-semibold">{{ $message }}</span>
-                                    @enderror
-                                </div>
-                            </div>
-
-                            <!-- Email Field -->
-                            <div class="grid grid-cols-1 md:grid-cols-3 gap-4 items-center">
-                                <label class="text-gray-700 font-medium">Email</label>
-                                <div class="md:col-span-2">
-                                    <input type="email" wire:model.defer="email" 
-                                        class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent">
-                                    @error('email')
-                                        <span class="text-red-500 font-semibold">{{ $message }}</span>
-                                    @enderror
-                                </div>
-                            </div>
-
-                            <!-- Phone Field -->
-                            <div class="grid grid-cols-1 md:grid-cols-3 gap-4 items-center">
-                                <label class="text-gray-700 font-medium">Phone Number</label>
-                                <div class="md:col-span-2">
-                                    <input type="tel" wire:model.defer="phone_no" 
-                                        class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent">
-                                    @error('phone_no')
-                                        <span class="text-red-500 font-semibold">{{ $message }}</span>
-                                    @enderror
-                                </div>
-                            </div>
+                <div class="p-6 sm:p-8 space-y-6 bg-gradient-to-br from-pink-50 to-purple-50 rounded-2xl">
+                    <h2 class="text-2xl font-semibold text-purple-900">Edit Profile</h2>
+                    <form wire:submit.prevent="updateProfile" class="space-y-5">
+                        <!-- Name Field -->
+                        <div class="space-y-2">
+                            <label class="text-purple-800 font-medium text-sm">Full Name</label>
+                            <input type="text" wire:model.defer="name" 
+                                   class="w-full px-4 py-2 bg-white border border-pink-200 rounded-lg focus:ring-2 focus:ring-pink-400 focus:border-pink-400 transition-colors duration-200 text-gray-800 placeholder-gray-400">
+                            @error('name')
+                                <span class="text-pink-600 text-sm font-medium">{{ $message }}</span>
+                            @enderror
                         </div>
+
+                        <!-- Email Field -->
+                        <div class="space-y-2">
+                            <label class="text-purple-800 font-medium text-sm">Email</label>
+                            <input type="email" wire:model.defer="email" 
+                                   class="w-full px-4 py-2 bg-white border border-pink-200 rounded-lg focus:ring-2 focus:ring-pink-400 focus:border-pink-400 transition-colors duration-200 text-gray-800 placeholder-gray-400">
+                            @error('email')
+                                <span class="text-pink-600 text-sm font-medium">{{ $message }}</span>
+                            @enderror
+                        </div>
+
+                        <!-- Phone Field -->
+                        <div class="space-y-2">
+                            <label class="text-purple-800 font-medium text-sm">Phone Number</label>
+                            <input type="tel" wire:model.defer="phone_no" 
+                                   class="w-full px-4 py-2 bg-white border border-pink-200 rounded-lg focus:ring-2 focus:ring-pink-400 focus:border-pink-400 transition-colors duration-200 text-gray-800 placeholder-gray-400">
+                            @error('phone_no')
+                                <span class="text-pink-600 text-sm font-medium">{{ $message }}</span>
+                            @enderror
+                        </div>
+
                         <!-- Footer Actions -->
-                        <div class="bg-gray-50 px-6 py-4 border-t border-gray-200 flex justify-end space-x-3">
+                        <div class="flex justify-end space-x-3 pt-4">
                             <button wire:click="closeEditProfileModal"
-                                class="px-4 py-2 text-gray-700 hover:text-purple-600 font-medium rounded-lg transition-colors">
+                                    class="px-4 py-2 text-purple-700 font-medium rounded-lg hover:bg-pink-100 transition-colors duration-200">
                                 Cancel
                             </button>
-                            <button
-                                class="px-6 py-2 bg-purple-600 text-white font-medium rounded-lg hover:bg-purple-700 transition-colors">
+                            <button type="submit"
+                                    class="px-5 py-2 bg-gradient-to-r from-pink-500 to-purple-600 text-white font-medium rounded-lg hover:from-pink-600 hover:to-purple-700 transition-all duration-200">
                                 Save Changes
                             </button>
                         </div>
