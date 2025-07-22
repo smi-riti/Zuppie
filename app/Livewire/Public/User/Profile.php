@@ -27,6 +27,7 @@ class Profile extends Component
     {
         $this->upComingBookings = Booking::where('user_id', auth()->id())
             ->where('status', 'confirmed')
+            ->where('is_completed', 0)
             ->whereDate('event_date', '>=', now()->toDateString())
             ->get();
 
