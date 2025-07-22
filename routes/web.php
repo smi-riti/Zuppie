@@ -11,7 +11,6 @@ use App\Livewire\Admin\Reviews\All;
 use App\Livewire\Auth\Login;
 use App\Livewire\Auth\Register;
 use App\Livewire\Auth\Logout;
-use App\Livewire\Public\Reviews\Add;
 use App\Livewire\Public\Section\About;
 use App\Livewire\Public\Section\Contact;
 use App\Livewire\Public\Section\Homepage;
@@ -49,7 +48,6 @@ Route::post('/logout', function () {
 Route::get('/about', About::class)->name('about');
 Route::get('/contact', Contact::class)->name('contact');
 Route::get('/booking', Bookingform::class)->name('booking');
-Route::get('/reviews/add', Add::class)->name('reviews.add');
 Route::get('/terms-of-service', TermsOfService::class)->name('terms-of-service');
 Route::get('/privacy-policy', PrivacyPolicy::class)->name('privacy-policy');
 
@@ -61,9 +59,9 @@ Route::get('/package-booking/{package_id?}', PackageBookingForm::class)->name('p
 
 // User profile routes
 Route::middleware(['auth'])->group(function () {
-    Route::get('/profile', Profile::class)->name('profile');
+    Route::get('/profile', Profile::class)->name('manage-booking');
 });
-Route::get('/profile/manage-booking/{booking_id?}', PublicManageBooking::class)->name('manage-booking');
+// Route::get('/profile/manage-booking/{booking_id?}', PublicManageBooking::class)->name('manage-booking');
 
 
 Route::prefix('admin')->middleware(['auth', 'admin'])->group(function () {

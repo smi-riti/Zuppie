@@ -99,7 +99,7 @@
             <!-- Auth Buttons -->
             <div class="hidden md:flex items-center space-x-4">
                 @auth
-                    <a href="{{ route('profile') }}"
+                    <a href="{{ route('manage-booking') }}"
                         class="px-4 py-2 text-pink-700 font-medium hover:text-pink-600 transition flex items-center space-x-2">
                         <i class="fas fa-calendar-check"></i>
                         <span>My Bookings</span>
