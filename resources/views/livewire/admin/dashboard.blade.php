@@ -36,26 +36,24 @@
         <div class="lg:col-span-2 bg-white rounded-xl shadow-sm p-6 hover:shadow-md transition">
             <div class="flex justify-between items-center border-b border-purple-100 pb-4 mb-6">
                 <h2 class="text-lg font-semibold text-purple-800">Upcoming Events</h2>
-                <button
-                    class="bg-gradient-to-r from-purple-500 to-pink-500 text-white px-4 py-2 rounded-md text-sm font-medium hover:opacity-90 transition shadow-md hover:shadow-lg">
-                    View All
-                </button>
+                <!-- Removed "View All" button since we have pagination -->
             </div>
 
             <!-- Event List -->
             <div class="space-y-4">
-
                 @foreach ($upComingBookings as $booking)
                     <div
                         class="flex items-center py-3 border-b border-purple-100 hover:bg-purple-50 transition rounded-lg px-2">
                         <div
                             class="flex-shrink-0 w-12 h-12 rounded-full bg-gradient-to-r from-purple-500 to-pink-500 flex items-center justify-center text-white font-bold mr-4">
                             {{ substr($booking->eventPackage->name, 0, 1) }}
-
                         </div>
                         <div class="flex-grow">
                             <div class="font-semibold text-purple-800">{{ $booking->eventPackage->name }}</div>
-                            <div class="text-xs text-purple-500">{{$booking->event_date}} • {{$booking->guest_count ?? 'not available'}} Guests</div>
+                            <div class="text-xs text-purple-500">
+                                {{ $booking->event_date->format('M d, Y') }} •
+                                {{ $booking->guest_count ?? 'N/A' }} Guests
+                            </div>
                         </div>
                         <div class="flex space-x-2">
                             <button
@@ -65,6 +63,11 @@
                         </div>
                     </div>
                 @endforeach
+            </div>
+
+            <!-- Pagination -->
+            <div class="mt-6">
+                {{ $upComingBookings->links() }}
             </div>
         </div>
 

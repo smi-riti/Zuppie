@@ -4,23 +4,31 @@ namespace App\Livewire\Admin;
 
 use App\Models\Booking;
 use Livewire\Component;
+use Livewire\WithPagination;
 use Livewire\Attributes\Layout;
+
 #[Layout('components.layouts.admin')] 
 class Dashboard extends Component
 {
-    public $upComingBookings;
+    use WithPagination;
+    
+    public $perPage = 5; // Number of events per page
 
-     public function mount()
+    public function mount()
     {
-        
-       $this->upComingBookings = Booking::where('status', 'confirmed')
-        ->whereDate('event_date', '>=', now()->toDateString())
-        ->get();
+        // Initialization if needed
     }
-    #[Layout('components.layouts.admin')]
+
     public function render()
     {
-        return view('livewire.admin.dashboard');
+        $upComingBookings = Booking::with('eventPackage')
+            ->where('status', 'confirmed')
+            ->whereDate('event_date', '>=', now()->toDateString())
+            ->orderBy('event_date', 'asc') // Show soonest events first
+            ->paginate($this->perPage);
+
+        return view('livewire.admin.dashboard', [
+            'upComingBookings' => $upComingBookings,
+        ]);
     }
 }
-
