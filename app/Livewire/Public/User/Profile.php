@@ -3,6 +3,9 @@
 namespace App\Livewire\Public\User;
 
 use App\Models\Booking;
+use App\Models\EventPackage;
+use App\Models\Wishlist;
+use Illuminate\Support\Facades\Auth;
 use App\Models\Payment;
 use Livewire\Component;
 
@@ -14,11 +17,16 @@ class Profile extends Component
     public $cancelledBookings;
     public $completedBookings;
     public $bookingIdToView;
+    public $wishlistedPackages;
     public $showViewModal = false;
     public $packageIdToReview;
     public $showReviewModal = false;
     public $showEditProfileModal = false;
     public $userIdToEdit;
+    
+    public $wishlistStatus = [];
+    public $packages, $filteredPackages;
+
     public $isProcessingPayment = false;
     protected $listeners = [
         'closeViewModal' => 'closeViewModal',
@@ -31,6 +39,7 @@ class Profile extends Component
         $this->upComingBookings = Booking::with(['eventPackage', 'payments'])
             ->where('user_id', auth()->id())
             ->where('status', 'confirmed')
+            ->where('is_completed', 0)
             ->whereDate('event_date', '>=', now()->toDateString())
             ->get();
 
@@ -51,6 +60,40 @@ class Profile extends Component
             ->where('user_id', auth()->id())
             ->where('status', 'cancelled')
             ->get();
+        $this->wishlistedPackages = Wishlist::where('user_id', auth()->id())->get();
+
+       
+    }
+    
+    
+
+    public function toggleWishlist($packageId)
+    {
+        if (!Auth::check()) {
+            return redirect()->route('login');
+        }
+
+        $wishlist = Wishlist::where('user_id', Auth::id())
+                           ->where('event_package_id', $packageId)
+                           ->first();
+
+        if ($wishlist) {
+            $wishlist->delete();
+            $this->dispatch('toast', message: 'Removed from wishlist!');
+        } else {
+            Wishlist::create([
+                'user_id' => Auth::id(),
+                'event_package_id' => $packageId,
+            ]);
+            $this->dispatch('toast', message: 'Added to wishlist!');
+        }
+    }
+
+    public function getWishlistedPackagesProperty()
+    {
+        return Wishlist::where('user_id', Auth::id())
+                       ->with(['eventPackage.category', 'eventPackage.images'])
+                       ->get();
     }
 
     public function openViewModal($bookingId)

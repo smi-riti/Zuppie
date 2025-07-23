@@ -6,33 +6,23 @@ use App\Models\Category;
 use Livewire\Attributes\Layout;
 use Livewire\Attributes\Title;
 use Livewire\Component;
+use Livewire\WithPagination;
 
 #[Title('Show')]
 class Show extends Component
 {
+    use WithPagination; // Add this trait
+
     public $confirmingDeletion = false;
     public $categoryToDelete = null;
-    public $categories;
     public $search = '';
-
-    public function mount()
-    {
-        $this->loadCategories();
-    }
-
-    public function loadCategories()
-    {
-        $this->categories = Category::when($this->search, function ($query) {
-            $query->where('name', 'like', '%' . $this->search . '%');
-        })->latest()->get();
-    }
 
     public function updatedSearch()
     {
-        $this->loadCategories();
+        $this->resetPage(); // Reset pagination when searching
     }
 
-     public function confirmDelete($categoryId)
+    public function confirmDelete($categoryId)
     {
         $this->confirmingDeletion = true;
         $this->categoryToDelete = $categoryId;
@@ -49,7 +39,7 @@ class Show extends Component
 
         $this->confirmingDeletion = false;
         $this->categoryToDelete = null;
-        $this->loadCategories();
+        $this->resetPage(); // Reset pagination after deletion
     }
 
     public function cancelDelete()
@@ -57,11 +47,14 @@ class Show extends Component
         $this->confirmingDeletion = false;
         $this->categoryToDelete = null;
     }
-    
+
     #[Layout('components.layouts.admin')]
     public function render()
     {
-        return view('livewire.admin.category.show');
-    }
+        $categories = Category::when($this->search, function ($query) {
+            $query->where('name', 'like', '%' . $this->search . '%');
+        })->latest()->paginate(8);
 
+        return view('livewire.admin.category.show', compact('categories'));
+    }
 }

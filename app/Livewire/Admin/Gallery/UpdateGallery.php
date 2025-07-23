@@ -21,7 +21,7 @@ class UpdateGallery extends Component
     public $existingImage;
 
     // Fixed parameter name here 👇
-    public function mount($id)  // Changed from $imageId to $id
+    public function mount($id)  
     {
         $this->galleryImage = GalleryImage::findOrFail($id);
         $this->alt = $this->galleryImage->alt;

@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Support\Str;
 
 class EventPackage extends Model
 {
@@ -13,10 +14,12 @@ class EventPackage extends Model
     protected $fillable = [
         'category_id',
         'name',
+        'slug',
         'price',
         'discount_type',
         'discount_value',
         'description',
+        'features',
         'is_active',
         'is_special',
         'duration',
@@ -25,7 +28,61 @@ class EventPackage extends Model
     protected $casts = [
         'is_active' => 'boolean',
         'is_special' => 'boolean',
+        'features' => 'array',
+
     ];
+
+    protected static function boot()
+    {
+        parent::boot();
+
+        static::creating(function ($package) {
+            if (empty($package->slug)) {
+                $package->slug = static::generateUniqueSlug($package->name);
+            }
+        });
+
+        static::updating(function ($package) {
+            if ($package->isDirty('name') && empty($package->slug)) {
+                $package->slug = static::generateUniqueSlug($package->name);
+            }
+        });
+    }
+
+    /**
+     * Generate a unique slug for the package
+     */
+    public static function generateUniqueSlug($name, $excludeId = null)
+    {
+        $slug = Str::slug($name);
+        $originalSlug = $slug;
+        $counter = 1;
+
+        $query = static::where('slug', $slug);
+        if ($excludeId) {
+            $query->where('id', '!=', $excludeId);
+        }
+
+        while ($query->exists()) {
+            $slug = $originalSlug . '-' . $counter;
+            $counter++;
+            
+            $query = static::where('slug', $slug);
+            if ($excludeId) {
+                $query->where('id', '!=', $excludeId);
+            }
+        }
+
+        return $slug;
+    }
+
+    /**
+     * Get the route key for the model.
+     */
+    public function getRouteKeyName()
+    {
+        return 'slug';
+    }
 
     public function category()
     {

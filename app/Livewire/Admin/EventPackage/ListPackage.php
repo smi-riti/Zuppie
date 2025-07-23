@@ -15,12 +15,9 @@ class ListPackage extends Component
 {
     use WithPagination;
 
-    public $showCreateModal = false;
-    public $showUpdateModal = false;
     public $showDeleteModal = false;
     public $showViewModal = false;
     public $packageToDelete;
-    public $packageIdToUpdate;
     public $packageIdToView;
     
     // Search and filter properties
@@ -33,22 +30,17 @@ class ListPackage extends Component
     public $updatingSpecial = false;
 
     protected $listeners = [
-        'packageCreated' => '$refresh',
-        'packageUpdated' => '$refresh',
-        'closeCreateModal' => 'closeCreateModal',
-        'closeUpdateModal' => 'closeUpdateModal',
         'closeViewModal' => 'closeViewModal',
     ];
 
-    public function openCreateModal()
+    public function createPackage()
     {
-        $this->showCreateModal = true;
+        return redirect()->route('admin.event-packages.create');
     }
 
-    public function openUpdateModal($packageId)
+    public function editPackage($packageId)
     {
-        $this->packageIdToUpdate = $packageId;
-        $this->showUpdateModal = true;
+        return redirect()->route('admin.event-packages.edit', $packageId);
     }
 
     public function openViewModal($packageId)
@@ -63,16 +55,6 @@ class ListPackage extends Component
         $this->showDeleteModal = true;
     }
 
-    public function closeCreateModal()
-    {
-        $this->showCreateModal = false;
-    }
-
-    public function closeUpdateModal()
-    {
-        $this->showUpdateModal = false;
-    }
-    
     public function closeViewModal()
     {
         $this->showViewModal = false;

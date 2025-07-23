@@ -6,6 +6,8 @@ use App\Http\Controllers\RobotsController;
 use App\Livewire\Admin\Category\Show;
 use App\Livewire\Admin\Enquiry\AllEnquiry;
 use App\Livewire\Admin\EventPackage\ListPackage;
+use App\Livewire\Admin\EventPackage\CreatePackage;
+use App\Livewire\Admin\EventPackage\UpdatePackage;
 use App\Livewire\Admin\Offers\AllOffers;
 use App\Livewire\Admin\Offers\ShowAll;
 use App\Livewire\Admin\Reviews\All;
@@ -72,6 +74,8 @@ Route::prefix('admin')->middleware(['auth', 'admin'])->group(function () {
     Route::get('/dashboard', Dashboard::class)->name('admin.dashboard');
     Route::get('/category/show', Show::class)->name('admin.category.show');
     Route::get('/event-packages', ListPackage::class)->name('admin.event-packages');
+    Route::get('/event-packages/create', CreatePackage::class)->name('admin.event-packages.create');
+    Route::get('/event-packages/edit/{packageId}', UpdatePackage::class)->name('admin.event-packages.edit');
     Route::get('/reviews/show', All::class)->name('admin.reviews.show');
     Route::get('/offers/all', AllOffers::class)->name('admin.offers.show');
     Route::get('/enquiries/all', AllEnquiry::class)->name('admin.enquiries.all');
