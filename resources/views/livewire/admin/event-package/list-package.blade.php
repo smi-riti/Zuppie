@@ -1,4 +1,4 @@
-<div class="p-2 bg-gradient-to-br from-purple-50 to-pink-50 min-h-screen">
+<div class="p-2 bg-gradient-to-br from-purple-50 to-pink-50 ">
     <div class="">
         <div class="flex justify-between items-center mb-8">
             <div>

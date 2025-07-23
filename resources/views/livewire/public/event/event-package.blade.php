@@ -246,7 +246,7 @@
                                         <h3 class="text-xl font-bold text-gray-800 mb-3">
                                             {{ $package['name'] }}
                                         </h3>
-                                        <p class="text-gray-600 mb-4 leading-relaxed">{{ $package['description'] }}</p>
+                                        <p class="text-gray-600 mb-4 leading-relaxed">{{\Illuminate\Support\Str::words($package['description'], 10, '...') }}</p>
                                         <div class="space-y-2 mb-6">
                                             @foreach (array_slice($package['features'], 0, 4) as $feature)
                                                 <div class="flex items-center space-x-2">

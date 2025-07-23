@@ -1,4 +1,4 @@
-<div class="fixed inset-0 bg-gray-600 bg-opacity-75 flex items-center justify-center z-50" x-data="{ show: true }" x-show="show" x-transition wire:ignore.self>
+<div class="fixed inset-0 backdrop-blur-sm bg-opacity-75 flex items-center justify-center z-50" x-data="{ show: true }" x-show="show" x-transition wire:ignore.self>
     <div class="relative bg-white rounded-xl shadow-2xl w-full max-w-4xl p-6 max-h-[90vh] overflow-y-auto">
         <!-- Header -->
         <div class="flex justify-between items-center mb-6 pb-4 border-b border-gray-200">
