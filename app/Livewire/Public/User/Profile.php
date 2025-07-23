@@ -5,6 +5,7 @@ namespace App\Livewire\Public\User;
 use App\Models\Booking;
 use App\Models\EventPackage;
 use App\Models\Wishlist;
+use App\Services\WishlistService;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
 
@@ -31,6 +32,33 @@ class Profile extends Component
         'closeReviewModal' => 'closeReviewModal',
         'closeEditProfileModal' => 'closeEditProfileModal'
     ];
+    
+    
+
+     public $featuredPackages;
+    protected $wishlistService;
+
+    public function boot(WishlistService $wishlistService)
+    {
+        $this->wishlistService = $wishlistService;
+    }
+
+    public function toggleWishlist($packageId)
+    {
+        $result = $this->wishlistService->toggleWishlist($packageId);
+        
+        if ($result['status'] === 'login_required') {
+            return redirect()->route('login');
+        }
+        
+        // Update local status
+        $this->wishlistStatus[$packageId] = !($this->wishlistStatus[$packageId] ?? false);
+        
+        // Refresh wishlisted packages
+        $this->wishlistedPackages = Wishlist::with('eventPackage.images', 'eventPackage.category')
+            ->where('user_id', auth()->id())
+            ->get();
+    }
     public function mount()
     {
         $this->upComingBookings = Booking::where('user_id', auth()->id())
@@ -52,42 +80,17 @@ class Profile extends Component
         $this->cancelledBookings = Booking::where('user_id', auth()->id())
             ->where('status', 'cancelled')
             ->get();
-        $this->wishlistedPackages = Wishlist::where('user_id', auth()->id())->get();
 
-       
+       // Load wishlisted packages
+        $this->wishlistedPackages = Wishlist::with('eventPackage.images', 'eventPackage.category')
+            ->where('user_id', auth()->id())
+            ->get();
+
+        // Initialize wishlist statuses for wishlisted packages
+        $wishlistPackageIds = $this->wishlistedPackages->pluck('event_package_id')->toArray();
+        $this->wishlistStatus = $this->wishlistService->getWishlistStatuses($wishlistPackageIds);
     }
     
-    
-
-    public function toggleWishlist($packageId)
-    {
-        if (!Auth::check()) {
-            return redirect()->route('login');
-        }
-
-        $wishlist = Wishlist::where('user_id', Auth::id())
-                           ->where('event_package_id', $packageId)
-                           ->first();
-
-        if ($wishlist) {
-            $wishlist->delete();
-            $this->dispatch('toast', message: 'Removed from wishlist!');
-        } else {
-            Wishlist::create([
-                'user_id' => Auth::id(),
-                'event_package_id' => $packageId,
-            ]);
-            $this->dispatch('toast', message: 'Added to wishlist!');
-        }
-    }
-
-    public function getWishlistedPackagesProperty()
-    {
-        return Wishlist::where('user_id', Auth::id())
-                       ->with(['eventPackage.category', 'eventPackage.images'])
-                       ->get();
-    }
-
     public function openViewModal($bookingId)
     {
         $this->bookingIdToView = $bookingId;
