@@ -1,3 +1,3 @@
 <div>
-    {{-- The whole world belongs to you. --}}
+    <h2> Booking Details mnbgvfdsdfghjkl;</h2>
 </div>
