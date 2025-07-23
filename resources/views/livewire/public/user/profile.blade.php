@@ -98,13 +98,13 @@
                                             <div class="text-right">
                                                 <span
                                                     class="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium 
-                                                                                                                                    @if($booking->status == 'confirmed')
-                                                                                                                                        bg-green-100 text-green-800
-                                                                                                                                    @elseif($booking->status == 'pending')
-                                                                                                                                        bg-yellow-100 text-yellow-800
-                                                                                                                                    @else
-                                                                                                                                        bg-red-100 text-red-800
-                                                                                                                                    @endif">
+                                                                                                                                        @if($booking->status == 'confirmed')
+                                                                                                                                            bg-green-100 text-green-800
+                                                                                                                                        @elseif($booking->status == 'pending')
+                                                                                                                                            bg-yellow-100 text-yellow-800
+                                                                                                                                        @else
+                                                                                                                                            bg-red-100 text-red-800
+                                                                                                                                        @endif">
 
                                                     @if ($booking->status == 'confirmed')
                                                         Confirmed
@@ -280,13 +280,13 @@
                                             <div class="text-right">
                                                 <span
                                                     class="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium 
-                                                                                                                                    @if($upBooking->status == 'confirmed')
-                                                                                                                                        bg-green-100 text-green-800
-                                                                                                                                    @elseif($upBooking->status == 'pending')
-                                                                                                                                        bg-yellow-100 text-yellow-800
-                                                                                                                                    @else
-                                                                                                                                        bg-red-100 text-red-800
-                                                                                                                                    @endif">
+                                                                                                                                        @if($upBooking->status == 'confirmed')
+                                                                                                                                            bg-green-100 text-green-800
+                                                                                                                                        @elseif($upBooking->status == 'pending')
+                                                                                                                                            bg-yellow-100 text-yellow-800
+                                                                                                                                        @else
+                                                                                                                                            bg-red-100 text-red-800
+                                                                                                                                        @endif">
                                                     {{$upBooking->status == 'confirmed' ? 'Confirmed' : 'Pending'}}
                                                 </span>
                                             </div>
@@ -429,13 +429,13 @@
                                             <div class="text-right">
                                                 <span
                                                     class="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium 
-                                                                                                                                    @if($pastBooking->status == 'confirmed')
-                                                                                                                                        bg-green-100 text-green-800
-                                                                                                                                    @elseif($pastBooking->status == 'pending')
-                                                                                                                                        bg-yellow-100 text-yellow-800
-                                                                                                                                    @else
-                                                                                                                                        bg-red-100 text-red-800
-                                                                                                                                    @endif">
+                                                                                                                                        @if($pastBooking->status == 'confirmed')
+                                                                                                                                            bg-green-100 text-green-800
+                                                                                                                                        @elseif($pastBooking->status == 'pending')
+                                                                                                                                            bg-yellow-100 text-yellow-800
+                                                                                                                                        @else
+                                                                                                                                            bg-red-100 text-red-800
+                                                                                                                                        @endif">
                                                     {{$pastBooking->status == 'confirmed' ? 'Confirmed' : 'Pending'}}
                                                 </span>
                                             </div>
@@ -578,13 +578,13 @@
                                             <div class="text-right">
                                                 <span
                                                     class="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium 
-                                                                                                                                    @if($cancelBooking->status == 'confirmed')
-                                                                                                                                        bg-green-100 text-green-800
-                                                                                                                                    @elseif($cancelBooking->status == 'pending')
-                                                                                                                                        bg-yellow-100 text-yellow-800
-                                                                                                                                    @else
-                                                                                                                                        bg-red-100 text-red-800
-                                                                                                                                    @endif">
+                                                                                                                                        @if($cancelBooking->status == 'confirmed')
+                                                                                                                                            bg-green-100 text-green-800
+                                                                                                                                        @elseif($cancelBooking->status == 'pending')
+                                                                                                                                            bg-yellow-100 text-yellow-800
+                                                                                                                                        @else
+                                                                                                                                            bg-red-100 text-red-800
+                                                                                                                                        @endif">
                                                     @if ($cancelBooking->status == 'confirmed')
                                                         Confirmed
                                                     @elseif ($cancelBooking->status == 'pending')
@@ -677,43 +677,38 @@
                 <section class="pb-20">
                     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                         <div class="grid grid-cols-3 gap-3">
-                            @forelse ($wishlistedPackages as $package)
-                                <div
-                                    class="wishlist-card bg-white rounded-3xl shadow-xl overflow-hidden hover:shadow-2xl transform hover:-translate-y-2 transition-all duration-300">
-                                    <!-- Image Section -->
-                                    <div class="relative h-56 overflow-hidden">
-                                        <img src="{{ $package->eventPackage->images->first()->image_url ?? 'https://images.unsplash.com/photo-1519225421980-715cb0215aed?w=400&h=300&fit=crop' }}"
-                                            alt="{{ $package->eventPackage->name }}"
-                                            class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
-                                        <!-- Wishlist Button -->
-                                        <button wire:click="toggleWishlist({{ $package->event_package_id }})"
-                                            class="absolute top-3 right-3 focus:outline-none text-red-500 hover:text-red-600"
-                                            wire:loading.attr="disabled"
-                                            aria-label="Remove {{ $package->eventPackage->name }} from wishlist">
-                                            <svg class="h-6 w-6 transition-colors duration-200" fill="currentColor"
-                                                stroke="currentColor" viewBox="0 0 24 24"
-                                                xmlns="http://www.w3.org/2000/svg">
-                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                                    d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
-                                            </svg>
-                                            <span wire:loading
-                                                wire:target="toggleWishlist({{ $package->event_package_id }})"
-                                                class="absolute inset-0 flex items-center justify-center">
-                                                <i class="fas fa-spinner fa-spin text-gray-400"></i>
-                                            </span>
-                                        </button>
+                           @forelse ($wishlistedPackages as $wishlistItem)
+                    @php 
+                        $package = $wishlistItem->eventPackage;
+                        $packageId = $package->id;
+                    @endphp
+                    <div class="wishlist-card bg-white rounded-3xl shadow-xl overflow-hidden hover:shadow-2xl transform hover:-translate-y-2 transition-all duration-300">
+                        <!-- Image Section -->
+                        <div class="relative h-56 overflow-hidden">
+                            <img src="{{ $package->images->first()->image_url ?? 'https://images.unsplash.com/photo-1519225421980-715cb0215aed?w=400&h=300&fit=crop' }}"
+                                alt="{{ $package->name }}"
+                                class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                            <!-- Wishlist Button -->
+                            <div wire:click="toggleWishlist({{ $packageId }})"
+                                class="absolute top-4 right-4 cursor-pointer">
+                                @if($wishlistStatus[$packageId] ?? false)
+                                    <i class="fa-solid fa-heart text-red-500 text-2xl"></i>
+                                @else
+                                    <i class="fa-regular fa-heart text-2xl"></i>
+                                @endif
+                            </div>
                                         <!-- Price Badge -->
                                         <div class="absolute bottom-4 left-4">
                                             <span
                                                 class="bg-white/90 backdrop-blur-sm text-gray-800 px-3 py-2 rounded-full font-bold text-lg shadow-lg">
-                                                ₹{{ number_format($package->eventPackage->price) }}
+                                                ₹{{ number_format($package->price) }}
                                             </span>
                                         </div>
                                         <!-- Category Badge -->
                                         <div class="absolute top-4 left-4">
                                             <span
                                                 class="bg-purple-600/80 text-white px-3 py-1 rounded-full text-sm font-semibold shadow-md">
-                                                {{ $package->eventPackage->category->name ?? 'General' }}
+                                                {{ $package->name ?? 'General' }}
                                             </span>
                                         </div>
                                     </div>
@@ -722,20 +717,20 @@
                                     <div class="p-6">
                                         <h3
                                             class="text-xl font-bold text-gray-800 mb-3 group-hover:text-purple-600 transition-colors duration-300">
-                                            {{ $package->eventPackage->name }}
+                                            {{ $package->name }}
                                         </h3>
                                         <p class="text-gray-600 mb-4 leading-relaxed line-clamp-2">
-                                            {{ $package->eventPackage->description }}
+                                            {{ $package->description }}
                                         </p>
                                         <div class="flex items-center space-x-2 mb-4">
                                             <i class="fas fa-clock text-purple-500"></i>
                                             <span class="text-gray-700 text-sm">
-                                                Duration: {{ $package->eventPackage->getFormattedDurationAttribute() }}
+                                                Duration: {{ $package->getFormattedDurationAttribute() }}
                                             </span>
                                         </div>
                                         <!-- CTA Button -->
                                         <div class="flex gap-3">
-                                            <a href="{{ route('package-detail', ['id' => $package->event_package_id]) }}"
+                                            <a href="{{ route('package-detail', ['id' => $package->id]) }}"
                                                 class="flex-1 bg-gradient-to-r from-purple-600 to-pink-600 text-white py-3 px-6 rounded-2xl font-bold hover:from-purple-700 hover:to-pink-700 transform hover:scale-105 transition-all duration-300 shadow-lg text-center">
                                                 <i class="fas fa-eye mr-2"></i>
                                                 View Package
