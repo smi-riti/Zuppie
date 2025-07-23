@@ -2,19 +2,23 @@
 
 namespace App\Livewire\Public\Event;
 
+use App\Models\Wishlist;
+use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
 use App\Models\EventPackage as EventPackageModel;
 use App\Models\Category;
 
 class EventPackage extends Component
 {
+    public $wishlistStatus = [];
+    public $packages;
+
     public $searchQuery = '';
     public $selectedCategory = null;
     public $selectedSubCategory = null;
     public $packagesPerPage = 15;
     public $loadMoreCount = 0;
     public $showAllCategoriesMode = false;
-
     protected $listeners = [
         'subcategory-selected' => 'handleSubcategorySelected'
     ];
@@ -26,10 +30,43 @@ class EventPackage extends Component
         $this->loadMoreCount = 0; // Reset pagination
     }
 
-    public function mount()
+    public function mount(EventPackageModel $package)
     {
         $this->selectedCategory = request()->query('category');
         $this->selectedSubCategory = request()->query('subcategory');
+
+        // Initialize packages first
+        $this->packages = $this->filteredPackages; // Or use $this->getFilteredPackagesProperty()
+
+        if (Auth::check()) {
+            // Initialize wishlist status for all packages
+            $wishlistedPackages = Wishlist::where('user_id', Auth::id())
+                ->pluck('event_package_id')
+                ->toArray();
+
+            foreach ($this->packages as $package) {
+                $this->wishlistStatus[$package['id']] = in_array($package['id'], $wishlistedPackages);
+            }
+        }
+    }
+     public function toggleWishlist($packageId)
+    {
+        if (!Auth::check()) {
+            return redirect()->route('login');
+        }
+
+        if (isset($this->wishlistStatus[$packageId]) && $this->wishlistStatus[$packageId]) {
+            Wishlist::where('user_id', Auth::id())
+                ->where('event_package_id', $packageId)
+                ->delete();
+            $this->wishlistStatus[$packageId] = false;
+        } else {
+            Wishlist::create([
+                'user_id' => Auth::id(),
+                'event_package_id' => $packageId,
+            ]);
+            $this->wishlistStatus[$packageId] = true;
+        }
     }
 
     public function selectCategory($category)
@@ -296,6 +333,7 @@ class EventPackage extends Component
             ];
         });
     }
+   
 
     public function render()
     {
