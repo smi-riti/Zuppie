@@ -8,6 +8,7 @@ use App\Models\Booking;
 use App\Models\Payment;
 use App\Models\User;
 use App\Models\Service;
+use App\Services\RazorpayService;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
@@ -26,6 +27,7 @@ class PackageBookingForm extends Component
     public $email = '';
     public $phone = '';
     public $eventDate = '';
+    public $eventTime = '';
     public $eventEndDate = '';
     public $guestCount = '';
     public $location = '';
@@ -44,17 +46,23 @@ class PackageBookingForm extends Component
     
     // Validation state
     public $isSubmitting = false;
+    
+    // Razorpay specific properties
+    public $razorpayOrderId = null;
+    public $razorpayPaymentId = null;
+    public $razorpaySignature = null;
 
     protected $rules = [
         'name' => 'required|string|min:2|max:255',
         'phone' => 'required|string|min:10|max:15',
         'email' => 'nullable|email|max:255',
         'eventDate' => 'required|date|after:today',
+        'eventTime' => 'nullable|date_format:H:i',
         'eventEndDate' => 'nullable|date|after:eventDate',
         'guestCount' => 'nullable|integer|min:1|max:10000',
         'location' => 'required|string|min:5|max:500',
         'specialRequests' => 'nullable|string|max:1000',
-        'paymentMethod' => 'required|in:cash',
+        'paymentMethod' => 'required|in:cash,razorpay',
         'acceptTerms' => 'required|accepted'
     ];
 
@@ -68,6 +76,7 @@ class PackageBookingForm extends Component
         'eventDate.required' => 'Event date is required',
         'eventDate.after' => 'Event date must be in the future',
         'eventDate.date' => 'Please enter a valid event date',
+        'eventTime.date_format' => 'Please enter a valid time format (HH:MM)',
         'eventEndDate.after' => 'Event end date must be after event start date',
         'eventEndDate.date' => 'Please enter a valid event end date',
         'guestCount.integer' => 'Guest count must be a number',
@@ -82,8 +91,8 @@ class PackageBookingForm extends Component
 
     public function mount($package_id = null, $pin_code = null)
     {
-        $this->packageId = $package_id ?: session('package_id') ?: request('package_id');
-        $this->pinCode = $pin_code ?: session('pin_code') ?: request('pin_code');
+        $this->packageId = $package_id ?: session('booking_package_id') ?: session('package_id') ?: request('package_id');
+        $this->pinCode = $pin_code ?: session('booking_pin_code') ?: session('pin_code') ?: request('pin_code');
         
         // Validate pin code exists in services
         if ($this->pinCode) {
@@ -101,16 +110,23 @@ class PackageBookingForm extends Component
         $this->checkUserAuthentication();
         $this->loadFormDataFromSession();
         
-        // If user just logged in/registered and has form data, go to step 4
-        if ($this->isLoggedIn && session('booking_form_data') && 
-            $this->name && $this->phone && $this->eventDate && $this->location) {
-            $this->currentStep = 4;
+        // If user just logged in and has booking data, continue to step 4
+        if ($this->isLoggedIn && session('booking_step3_data')) {
+            $step3Data = session('booking_step3_data');
+            $this->name = $step3Data['name'] ?? '';
+            $this->email = $step3Data['email'] ?? '';
+            $this->phone = $step3Data['phone'] ?? '';
+            $this->eventTime = $step3Data['eventTime'] ?? $this->eventTime;
+            $this->currentStep = 4; // Go to review page
+            session()->forget('booking_step3_data');
+            session(['prefill_user_data' => true]); // Allow pre-fill for authenticated user
+        } else {
+            // Always start from step 1 unless explicitly navigating
+            $this->currentStep = 1;
         }
         
-        // Set default end date as next day
-        if (!$this->eventEndDate && $this->eventDate) {
-            $this->eventEndDate = date('Y-m-d', strtotime($this->eventDate . ' +1 day'));
-        }
+        // Clear any step completion flags to ensure proper navigation
+        session()->forget(['booking_step3_completed', 'review_step_access']);
     }
 
     public function loadPackage()
@@ -127,51 +143,59 @@ class PackageBookingForm extends Component
 
     public function updated($field)
     {
-        // Auto-set end date when start date changes
+        // Real-time validation for event date
         if ($field === 'eventDate' && $this->eventDate) {
-            if (!$this->eventEndDate || $this->eventEndDate <= $this->eventDate) {
-                // Set end date to next day by default
-                $this->eventEndDate = date('Y-m-d', strtotime($this->eventDate . ' +1 day'));
+            try {
+                $this->validateOnly('eventDate');
+            } catch (\Illuminate\Validation\ValidationException $e) {
+                // Validation error will be automatically shown
+            }
+        }
+        
+        // Real-time validation for event time
+        if ($field === 'eventTime' && $this->eventTime) {
+            try {
+                $this->validateOnly('eventTime');
+            } catch (\Illuminate\Validation\ValidationException $e) {
+                // Validation error will be automatically shown
+            }
+        }
+        
+        // Real-time validation for event end date
+        if ($field === 'eventEndDate' && $this->eventEndDate) {
+            try {
+                $this->validateOnly('eventEndDate');
+            } catch (\Illuminate\Validation\ValidationException $e) {
+                // Validation error will be automatically shown
             }
         }
         
         // Check for existing user when phone is entered
         if ($field === 'phone' && strlen($this->phone) >= 10) {
             $this->checkExistingUser();
+            try {
+                $this->validateOnly('phone');
+            } catch (\Illuminate\Validation\ValidationException $e) {
+                // Validation error will be automatically shown
+            }
         }
         
         // Clean up guest count - convert empty string to null
         if ($field === 'guestCount') {
             $this->guestCount = $this->guestCount === '' ? null : intval($this->guestCount);
+            if ($this->guestCount !== null) {
+                try {
+                    $this->validateOnly('guestCount');
+                } catch (\Illuminate\Validation\ValidationException $e) {
+                    // Validation error will be automatically shown
+                }
+            }
         }
         
-        // Validate field on change for current step
-        if ($this->currentStep === 1 && in_array($field, ['eventDate', 'eventEndDate', 'location'])) {
+        // Real-time validation for other fields
+        if (in_array($field, ['name', 'email', 'location', 'specialRequests', 'paymentMethod', 'acceptTerms'])) {
             try {
-                $this->validateOnly($field, [
-                    'eventDate' => 'required|date|after:today',
-                    'eventEndDate' => 'nullable|date|after:eventDate',
-                    'location' => 'required|string|min:5|max:500',
-                ]);
-            } catch (\Illuminate\Validation\ValidationException $e) {
-                // Validation error will be automatically shown
-            }
-        } elseif ($this->currentStep === 2 && in_array($field, ['guestCount', 'specialRequests'])) {
-            try {
-                $this->validateOnly($field, [
-                    'guestCount' => 'nullable|integer|min:1|max:10000',
-                    'specialRequests' => 'nullable|string|max:1000',
-                ]);
-            } catch (\Illuminate\Validation\ValidationException $e) {
-                // Validation error will be automatically shown
-            }
-        } elseif ($this->currentStep === 3 && in_array($field, ['name', 'phone', 'email'])) {
-            try {
-                $this->validateOnly($field, [
-                    'name' => 'required|string|min:2|max:255',
-                    'phone' => 'required|string|min:10|max:15',
-                    'email' => 'nullable|email|max:255',
-                ]);
+                $this->validateOnly($field);
             } catch (\Illuminate\Validation\ValidationException $e) {
                 // Validation error will be automatically shown
             }
@@ -196,24 +220,14 @@ class PackageBookingForm extends Component
             // Update logged in user's information
             $user = $this->updateUserInfo();
             
-            // Create booking
-            $booking = $this->createBooking($user);
-            
-            // Create payment record
-            $this->createPaymentRecord($booking);
-            
-            // Send email if email provided
-            if ($this->email) {
-                $this->sendConfirmationEmail($user, $booking);
+            // Handle payment method
+            if ($this->paymentMethod === 'razorpay') {
+                // Create Razorpay order and initiate payment
+                $this->initiateRazorpayPayment($user);
+            } else {
+                // Process cash payment directly
+                $this->processCashPayment($user);
             }
-
-            session()->flash('booking_success', 'Your booking has been confirmed successfully!');
-            
-            // Clear saved form data
-            session()->forget('booking_form_data');
-            
-            // Redirect to manage booking
-            return redirect()->route('manage-booking', ['booking_id' => $booking->id]);
             
         } catch (\Illuminate\Validation\ValidationException $e) {
             // Validation failed, show specific validation errors
@@ -224,6 +238,294 @@ class PackageBookingForm extends Component
             \Log::error('Booking error: ' . $e->getMessage());
             $this->isSubmitting = false;
         }
+    }
+
+    private function processCashPayment($user)
+    {
+        // For cash payment, require 20% advance payment online first
+        $this->initiateAdvancePayment($user);
+    }
+
+    private function initiateAdvancePayment($user)
+    {
+        try {
+            $razorpayService = new RazorpayService();
+            
+            // Calculate 20% advance amount
+            $totalAmount = $this->getTotalPriceProperty();
+            $advanceAmount = $totalAmount * 0.20; // 20% advance
+            
+            // Create Razorpay order for advance payment
+            $order = $razorpayService->createOrder(
+                $advanceAmount,
+                'INR',
+                'advance_' . time(),
+                [
+                    'package_id' => $this->packageId,
+                    'user_id' => $user->id,
+                    'pin_code' => $this->pinCode,
+                    'payment_type' => 'advance_cash',
+                    'total_amount' => $totalAmount
+                ]
+            );
+            
+            $this->razorpayOrderId = $order->id;
+            
+            // Store advance payment info in session
+            session([
+                'advance_payment_data' => [
+                    'user_id' => $user->id,
+                    'total_amount' => $totalAmount,
+                    'advance_amount' => $advanceAmount,
+                    'payment_method' => 'cash',
+                    'order_id' => $order->id
+                ]
+            ]);
+            
+            // Emit JavaScript event to open Razorpay
+            $this->dispatch('initiate-razorpay-payment', [
+                'order_id' => $order->id,
+                'amount' => $order->amount,
+                'currency' => 'INR',
+                'customer_name' => $this->name,
+                'customer_email' => $this->email,
+                'customer_phone' => $this->phone,
+                'description' => '20% Advance Payment for ' . $this->package->name
+            ]);
+
+        } catch (\Exception $e) {
+            session()->flash('error', 'Failed to initiate advance payment: ' . $e->getMessage());
+            \Log::error('Advance payment initiation failed: ' . $e->getMessage());
+            $this->isSubmitting = false;
+        }
+    }
+
+    private function initiateRazorpayPayment($user)
+    {
+        try {
+            $razorpayService = new RazorpayService();
+            
+            // Calculate total amount
+            $totalAmount = $this->getTotalPriceProperty();
+            
+            // Create Razorpay order
+            $order = $razorpayService->createOrder(
+                $totalAmount,
+                'INR',
+                'booking_' . time(),
+                [
+                    'package_id' => $this->packageId,
+                    'user_id' => $user->id,
+                    'pin_code' => $this->pinCode
+                ]
+            );
+            
+            $this->razorpayOrderId = $order->id;
+            
+            // Store booking data in session for completion after payment
+            session(['pending_booking_data' => [
+                'user_id' => $user->id,
+                'package_id' => $this->packageId,
+                'pin_code' => $this->pinCode,
+                'event_date' => $this->eventDate,
+                'event_time' => $this->eventTime,
+                'event_end_date' => $this->eventEndDate,
+                'guest_count' => $this->guestCount,
+                'location' => $this->location,
+                'special_requests' => $this->specialRequests,
+                'total_price' => $totalAmount,
+                'booking_name' => $this->name,
+                'booking_email' => $this->email,
+                'booking_phone_no' => $this->phone,
+                'razorpay_order_id' => $this->razorpayOrderId
+            ]]);
+            
+            $this->isSubmitting = false;
+            
+            \Log::info('Razorpay order created successfully', [
+                'order_id' => $this->razorpayOrderId,
+                'amount' => $totalAmount,
+                'user_id' => $user->id
+            ]);
+            
+            // Emit event to frontend to show Razorpay checkout
+            $this->dispatch('initiate-razorpay-payment', [
+                'order_id' => $this->razorpayOrderId,
+                'amount' => $totalAmount * 100, // Convert to paise
+                'currency' => 'INR',
+                'name' => config('app.name'),
+                'description' => $this->package->name . ' - Event Booking',
+                'prefill' => [
+                    'name' => $this->name,
+                    'email' => $this->email,
+                    'contact' => $this->phone
+                ]
+            ]);
+            
+        } catch (\Exception $e) {
+            \Log::error('Razorpay payment initiation failed', [
+                'error' => $e->getMessage(),
+                'user_id' => $user->id,
+                'package_id' => $this->packageId
+            ]);
+            
+            // Fallback to cash payment if Razorpay fails
+            session()->flash('error', 'Online payment is currently unavailable. Please select cash payment or try again later.');
+            $this->paymentMethod = 'cash';
+            $this->isSubmitting = false;
+        }
+    }
+
+    public function handleAdvancePaymentSuccess($paymentId, $orderId, $signature)
+    {
+        try {
+            $razorpayService = new RazorpayService();
+            
+            // Verify payment signature
+            $isValid = $razorpayService->verifyPaymentSignature($orderId, $paymentId, $signature);
+            
+            if (!$isValid) {
+                throw new \Exception('Payment verification failed');
+            }
+
+            $advanceData = session('advance_payment_data');
+            if (!$advanceData) {
+                throw new \Exception('Advance payment session data not found');
+            }
+
+            // Create booking
+            $user = User::find($advanceData['user_id']);
+            $booking = $this->createBooking($user);
+            
+            // Update booking to mark advance as paid
+            $booking->update([
+                'advance_paid' => true,
+                'due_amount' => $booking->total_price * 0.80
+            ]);
+            
+            // Create advance payment record (20% paid)
+            Payment::create([
+                'booking_id' => $booking->id,
+                'razorpay_payment_id' => $paymentId,
+                'razorpay_order_id' => $orderId,
+                'razorpay_signature' => $signature,
+                'amount' => $advanceData['advance_amount'],
+                'currency' => 'INR',
+                'status' => 'paid',
+                'payment_method' => 'razorpay',
+                'payment_date' => now('Asia/Kolkata'),
+                'notes' => '20% advance payment for cash booking (Balance ₹' . number_format($booking->total_price * 0.80, 2) . ' to be paid in cash on event day)'
+            ]);
+
+            // Send confirmation email if email provided
+            if ($this->email) {
+                $this->sendConfirmationEmail($user, $booking);
+            }
+
+            // Clear session data
+            session()->forget(['advance_payment_data', 'booking_form_data']);
+            
+            session()->flash('booking_success', 
+                'Your booking has been confirmed! You have paid ₹' . number_format($advanceData['advance_amount'], 2) . 
+                ' as advance. Remaining balance: ₹' . number_format($advanceData['total_amount'] - $advanceData['advance_amount'], 2) . 
+                ' can be paid later from your profile or on event day.'
+            );
+            
+            $this->isSubmitting = false;
+            
+            // Redirect to profile page  
+            return redirect()->route('profile');
+            
+        } catch (\Exception $e) {
+            session()->flash('error', 'Advance payment processing failed: ' . $e->getMessage());
+            \Log::error('Advance payment processing error: ' . $e->getMessage());
+            $this->isSubmitting = false;
+        }
+    }
+
+    public function completeRazorpayPayment($paymentId, $orderId, $signature)
+    {
+        try {
+            $razorpayService = new RazorpayService();
+            
+            // Verify payment signature
+            if (!$razorpayService->verifyPaymentSignature($orderId, $paymentId, $signature)) {
+                throw new Exception('Payment signature verification failed');
+            }
+            
+            // Check if this is an advance payment for cash booking
+            $advanceData = session('advance_payment_data');
+            if ($advanceData && $advanceData['order_id'] === $orderId) {
+                return $this->handleAdvancePaymentSuccess($paymentId, $orderId, $signature);
+            }
+            
+            // Handle full payment scenario
+            $bookingData = session('pending_booking_data');
+            if (!$bookingData || $bookingData['razorpay_order_id'] !== $orderId) {
+                throw new Exception('Invalid booking session data');
+            }
+            
+            // Create booking
+            $booking = Booking::create([
+                'user_id' => $bookingData['user_id'],
+                'event_package_id' => $bookingData['package_id'],
+                'pin_code' => $bookingData['pin_code'],
+                'event_date' => $bookingData['event_date'],
+                'event_time' => $bookingData['event_time'] ?? null,
+                'event_end_date' => !empty($bookingData['event_end_date']) ? $bookingData['event_end_date'] : null,
+                'guest_count' => !empty($bookingData['guest_count']) ? intval($bookingData['guest_count']) : null,
+                'location' => $bookingData['location'],
+                'special_requests' => !empty($bookingData['special_requests']) ? $bookingData['special_requests'] : null,
+                'total_price' => $bookingData['total_price'],
+                'payment_method' => 'razorpay',
+                'advance_amount' => null,
+                'advance_paid' => true,
+                'due_amount' => 0,
+                'booking_name' => $bookingData['booking_name'],
+                'booking_email' => !empty($bookingData['booking_email']) ? $bookingData['booking_email'] : null,
+                'booking_phone_no' => $bookingData['booking_phone_no'],
+                'status' => 'confirmed',
+                'is_completed' => false
+            ]);
+            
+            // Create full payment record
+            Payment::create([
+                'booking_id' => $booking->id,
+                'amount' => $bookingData['total_price'],
+                'payment_date' => now('Asia/Kolkata'),
+                'payment_method' => 'razorpay',
+                'razorpay_payment_id' => $paymentId,
+                'razorpay_order_id' => $orderId,
+                'razorpay_signature' => $signature,
+                'status' => 'paid',
+                'currency' => 'INR',
+                'notes' => 'Full payment via Razorpay'
+            ]);
+            
+            // Send confirmation email
+            if ($bookingData['booking_email']) {
+                $user = User::find($bookingData['user_id']);
+                $this->sendConfirmationEmail($user, $booking);
+            }
+            
+            // Clear session data
+            session()->forget(['pending_booking_data', 'booking_form_data']);
+            
+            session()->flash('booking_success', 'Your payment was successful and booking has been confirmed!');
+            
+            return redirect()->route('profile');
+            
+        } catch (Exception $e) {
+            session()->flash('error', 'Payment verification failed: ' . $e->getMessage());
+            \Log::error('Razorpay payment completion error: ' . $e->getMessage());
+        }
+    }
+
+    public function handleRazorpayError($error)
+    {
+        session()->flash('error', 'Payment failed: ' . $error['description'] ?? 'Unknown error');
+        session()->forget('pending_booking_data');
+        $this->isSubmitting = false;
     }
 
     // Step navigation methods
@@ -276,6 +578,7 @@ class PackageBookingForm extends Component
         session([
             'booking_form_data' => [
                 'eventDate' => $this->eventDate,
+                'eventTime' => $this->eventTime,
                 'eventEndDate' => $this->eventEndDate,
                 'location' => $this->location,
                 'guestCount' => $this->guestCount,
@@ -292,6 +595,7 @@ class PackageBookingForm extends Component
         $formData = session('booking_form_data');
         if ($formData) {
             $this->eventDate = $formData['eventDate'] ?? $this->eventDate;
+            $this->eventTime = $formData['eventTime'] ?? $this->eventTime;
             $this->eventEndDate = $formData['eventEndDate'] ?? $this->eventEndDate;
             $this->location = $formData['location'] ?? $this->location;
             $this->guestCount = $formData['guestCount'] ?? $this->guestCount;
@@ -354,19 +658,27 @@ class PackageBookingForm extends Component
             if (!$this->isLoggedIn) {
                 // Save form data to session before redirecting
                 $this->saveFormDataToSession();
+                session(['booking_return_url' => request()->url()]);
+                session(['booking_package_id' => $this->packageId]);
+                session(['booking_pin_code' => $this->pinCode]);
                 session(['booking_step3_data' => [
                     'name' => $this->name,
                     'email' => $this->email,
-                    'phone' => $this->phone
+                    'phone' => $this->phone,
+                    'eventTime' => $this->eventTime
                 ]]);
                 
-                // Check if user exists
-                if ($this->existingUser) {
-                    // Redirect to login page
-                    session()->flash('info', 'Please login to complete your booking.');
+                // Check if user with this email/phone exists
+                $existingUser = \App\Models\User::where('email', $this->email)
+                    ->orWhere('phone_no', $this->phone)
+                    ->first();
+                
+                if ($existingUser) {
+                    // User exists, redirect to login
+                    session()->flash('info', 'Account found! Please login to complete your booking.');
                     return redirect()->route('login');
                 } else {
-                    // Redirect to register page
+                    // User doesn't exist, redirect to register
                     session()->flash('info', 'Please register to complete your booking.');
                     return redirect()->route('register');
                 }
@@ -398,35 +710,63 @@ class PackageBookingForm extends Component
             throw new \Exception('Invalid pin code. Service not available in this area.');
         }
 
+        // Set booking status to confirmed for both payment methods
+        $status = 'confirmed';
+        $isCompleted = false; // Only admin can mark as completed
+
         return Booking::create([
             'user_id' => $user->id,
             'event_package_id' => $this->package->id,
             'booking_name' => $this->name,
-            'booking_email' => $this->email,
+            'booking_email' => $this->email ?: null,
             'booking_phone_no' => $this->phone,
             'event_date' => $this->eventDate,
-            'event_end_date' => $this->eventEndDate ?: $this->eventDate,
-            'guest_count' => $this->guestCount ? intval($this->guestCount) : null, // Keep null if not provided
+            'event_time' => $this->eventTime ?: null,
+            'event_end_date' => $this->eventEndDate ?: null,
+            'guest_count' => !empty($this->guestCount) ? intval($this->guestCount) : null,
             'location' => $this->location,
-            'special_requests' => $this->specialRequests,
-            'status' => 'pending',
+            'special_requests' => !empty($this->specialRequests) ? $this->specialRequests : null,
+            'status' => $status,
             'total_price' => $this->package->discounted_price,
+            'payment_method' => $this->paymentMethod,
+            'advance_amount' => $this->paymentMethod === 'cash' ? ($this->package->discounted_price * 0.20) : null,
+            'advance_paid' => false,
+            'due_amount' => $this->paymentMethod === 'cash' ? ($this->package->discounted_price * 0.80) : 0,
             'pin_code' => $this->pinCode,
-            'is_completed' => false
+            'is_completed' => $isCompleted
         ]);
     }
 
     private function createPaymentRecord($booking)
     {
-        return Payment::create([
-            'booking_id' => $booking->id,
-            'amount' => $booking->total_price,
-            'payment_date' => now(),
-            'payment_method' => $this->paymentMethod,
-            'transaction_id' => 'CASH_' . now()->format('YmdHis') . '_' . $booking->id,
-            'status' => 'pending',
-            'notes' => 'Cash payment - to be collected on event day'
-        ]);
+        if ($this->paymentMethod === 'cash') {
+            // Create advance payment record for 20% of total amount
+            $advanceAmount = $booking->total_price * 0.20;
+            
+            $paymentData = [
+                'booking_id' => $booking->id,
+                'amount' => $advanceAmount,
+                'payment_date' => now('Asia/Kolkata'),
+                'payment_method' => 'razorpay', // 20% advance via Razorpay
+                'transaction_id' => 'ADVANCE_' . now()->format('YmdHis') . '_' . $booking->id,
+                'status' => 'pending',
+                'notes' => 'Cash booking - 20% advance payment via Razorpay (Balance ₹' . number_format($booking->total_price * 0.80, 2) . ' to be paid in cash on event day)',
+                'currency' => 'INR'
+            ];
+        } else {
+            // For full online payment
+            $paymentData = [
+                'booking_id' => $booking->id,
+                'amount' => $booking->total_price,
+                'payment_date' => now('Asia/Kolkata'),
+                'payment_method' => $this->paymentMethod,
+                'status' => 'pending',
+                'notes' => 'Full online payment',
+                'currency' => 'INR'
+            ];
+        }
+
+        return Payment::create($paymentData);
     }
 
     private function sendConfirmationEmail($user, $booking)
@@ -456,12 +796,15 @@ class PackageBookingForm extends Component
             $this->isLoggedIn = true;
             $this->existingUser = Auth::user();
             
-            // Pre-fill booking form with user data (but these can be edited for booking)
-            $this->name = $this->existingUser->name ?? '';
-            $this->email = $this->existingUser->email ?? '';
-            $this->phone = $this->existingUser->phone_no ?? '';
+            // Only pre-fill if explicitly requested or if returning from login
+            if (session('prefill_user_data') || session('booking_step3_data')) {
+                $this->name = $this->existingUser->name ?? '';
+                $this->email = $this->existingUser->email ?? '';
+                $this->phone = $this->existingUser->phone_no ?? '';
+                session()->forget('prefill_user_data');
+            }
             
-            $this->userMessage = "Welcome back, {$this->existingUser->name}! Your information has been pre-filled but you can modify it for this booking.";
+            $this->userMessage = "Welcome back, {$this->existingUser->name}! You can modify your information for this booking if needed.";
         } else {
             $this->isLoggedIn = false;
             $this->existingUser = null;

@@ -103,17 +103,65 @@
                         </h3>
                         
                         <div class="space-y-6">
-                            <div class="grid md:grid-cols-2 gap-6">
+                            <div class="grid md:grid-cols-3 gap-6">
                                 <div>
                                     <label class="block text-gray-700 font-semibold mb-2">
                                         <i class="fas fa-calendar text-purple-600 mr-2"></i>
                                         Event Date *
                                     </label>
                                     <input type="date" 
-                                           wire:model="eventDate"
+                                           wire:model.live="eventDate"
                                            min="{{ date('Y-m-d', strtotime('+1 day')) }}"
                                            class="w-full border border-gray-300 rounded-xl px-4 py-3 focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all duration-300 @error('eventDate') border-red-500 @enderror">
                                     @error('eventDate') <span class="text-red-500 text-sm mt-1">{{ $message }}</span> @enderror
+                                </div>
+                                <div>
+                                    <label class="block text-gray-700 font-semibold mb-2">
+                                        <i class="fas fa-clock text-purple-600 mr-2"></i>
+                                        Event Time
+                                    </label>
+                                    <select wire:model="eventTime" 
+                                            class="w-full border border-gray-300 rounded-xl px-4 py-3 focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all duration-300 @error('eventTime') border-red-500 @enderror">
+                                        <option value="">Select Time (Optional)</option>
+                                        <option value="06:00">06:00 AM</option>
+                                        <option value="06:30">06:30 AM</option>
+                                        <option value="07:00">07:00 AM</option>
+                                        <option value="07:30">07:30 AM</option>
+                                        <option value="08:00">08:00 AM</option>
+                                        <option value="08:30">08:30 AM</option>
+                                        <option value="09:00">09:00 AM</option>
+                                        <option value="09:30">09:30 AM</option>
+                                        <option value="10:00">10:00 AM</option>
+                                        <option value="10:30">10:30 AM</option>
+                                        <option value="11:00">11:00 AM</option>
+                                        <option value="11:30">11:30 AM</option>
+                                        <option value="12:00">12:00 PM</option>
+                                        <option value="12:30">12:30 PM</option>
+                                        <option value="13:00">01:00 PM</option>
+                                        <option value="13:30">01:30 PM</option>
+                                        <option value="14:00">02:00 PM</option>
+                                        <option value="14:30">02:30 PM</option>
+                                        <option value="15:00">03:00 PM</option>
+                                        <option value="15:30">03:30 PM</option>
+                                        <option value="16:00">04:00 PM</option>
+                                        <option value="16:30">04:30 PM</option>
+                                        <option value="17:00">05:00 PM</option>
+                                        <option value="17:30">05:30 PM</option>
+                                        <option value="18:00">06:00 PM</option>
+                                        <option value="18:30">06:30 PM</option>
+                                        <option value="19:00">07:00 PM</option>
+                                        <option value="19:30">07:30 PM</option>
+                                        <option value="20:00">08:00 PM</option>
+                                        <option value="20:30">08:30 PM</option>
+                                        <option value="21:00">09:00 PM</option>
+                                        <option value="21:30">09:30 PM</option>
+                                        <option value="22:00">10:00 PM</option>
+                                        <option value="22:30">10:30 PM</option>
+                                        <option value="23:00">11:00 PM</option>
+                                        <option value="23:30">11:30 PM</option>
+                                    </select>
+                                    @error('eventTime') <span class="text-red-500 text-sm mt-1">{{ $message }}</span> @enderror
+                                    <p class="text-xs text-gray-500 mt-1">Select the preferred start time for your event</p>
                                 </div>
                                 <div>
                                     <label class="block text-gray-700 font-semibold mb-2">
@@ -122,10 +170,17 @@
                                     </label>
                                     <input type="date" 
                                            wire:model="eventEndDate"
-                                           min="{{ $eventDate ?: date('Y-m-d', strtotime('+1 day')) }}"
-                                           class="w-full border border-gray-300 rounded-xl px-4 py-3 focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all duration-300 @error('eventEndDate') border-red-500 @enderror">
+                                           min="{{ $eventDate ? date('Y-m-d', strtotime($eventDate . ' +1 day')) : date('Y-m-d', strtotime('+2 days')) }}"
+                                           @if(!$eventDate) disabled @endif
+                                           class="w-full border border-gray-300 rounded-xl px-4 py-3 focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all duration-300 @error('eventEndDate') border-red-500 @enderror @if(!$eventDate) bg-gray-100 @endif">
                                     @error('eventEndDate') <span class="text-red-500 text-sm mt-1">{{ $message }}</span> @enderror
-                                    <p class="text-xs text-gray-500 mt-1">Leave blank if single day event</p>
+                                    <p class="text-xs text-gray-500 mt-1">
+                                        @if(!$eventDate)
+                                            Please select event start date first
+                                        @else
+                                            Leave blank if single day event
+                                        @endif
+                                    </p>
                                 </div>
                             </div>
 
@@ -362,20 +417,50 @@
                                 
                                 <div class="space-y-3">
                                     <label class="flex items-center p-4 border border-gray-300 rounded-xl cursor-pointer hover:border-purple-500 transition-all duration-300 bg-white">
-                                        <input type="radio" wire:model="paymentMethod" value="cash" class="mr-3" checked>
+                                        <input type="radio" wire:model="paymentMethod" value="cash" class="mr-3">
                                         <div class="flex-1">
-                                            <div class="font-semibold text-gray-800">Cash Payment</div>
-                                            <div class="text-sm text-gray-600">Pay on the day of event</div>
+                                            <div class="font-semibold text-gray-800 flex items-center">
+                                                <i class="fas fa-money-bill-wave text-green-600 mr-2"></i>
+                                                Cash Payment (20% Advance Required)
+                                            </div>
+                                            <div class="text-sm text-gray-600">20% advance via Razorpay, 80% cash on event day</div>
+                                        </div>
+                                    </label>
+                                    
+                                    <label class="flex items-center p-4 border border-gray-300 rounded-xl cursor-pointer hover:border-purple-500 transition-all duration-300 bg-white">
+                                        <input type="radio" wire:model="paymentMethod" value="razorpay" class="mr-3">
+                                        <div class="flex-1">
+                                            <div class="font-semibold text-gray-800 flex items-center">
+                                                <i class="fas fa-credit-card text-blue-600 mr-2"></i>
+                                                Online Payment
+                                            </div>
+                                            <div class="text-sm text-gray-600">Pay securely online via Razorpay</div>
+                                            <div class="text-xs text-gray-500 mt-1">Supports UPI, Cards, Net Banking & Wallets</div>
                                         </div>
                                     </label>
                                 </div>
                                 
-                                <div class="mt-4 p-3 bg-blue-50 rounded-lg">
-                                    <p class="text-sm text-blue-800">
+                                @if($paymentMethod === 'cash')
+                                <div class="mt-4 p-3 bg-orange-50 rounded-lg border border-orange-200">
+                                    <p class="text-sm text-orange-800">
                                         <i class="fas fa-info-circle mr-2"></i>
-                                        Currently only cash payment is available. You can pay on the event day.
+                                        <strong>Cash Payment:</strong> 20% advance payment required online to confirm booking. 
+                                        Remaining 80% can be paid on event day.
+                                    </p>
+                                    <p class="text-xs text-orange-600 mt-1">
+                                        Total Amount: ₹{{ number_format($package->discounted_price, 2) }} | 
+                                        Advance Required: ₹{{ number_format($package->discounted_price * 0.20, 2) }} | 
+                                        Balance on Event Day: ₹{{ number_format($package->discounted_price * 0.80, 2) }}
                                     </p>
                                 </div>
+                                @elseif($paymentMethod === 'razorpay')
+                                <div class="mt-4 p-3 bg-green-50 rounded-lg">
+                                    <p class="text-sm text-green-800">
+                                        <i class="fas fa-shield-alt mr-2"></i>
+                                        Secure online payment powered by Razorpay. Complete payment to confirm your booking instantly.
+                                    </p>
+                                </div>
+                                @endif
                             </div>
 
                             <!-- Package Price Summary -->
@@ -432,10 +517,19 @@
                                         wire:loading.attr="disabled"
                                         class="bg-gradient-to-r from-purple-600 to-pink-600 text-white py-3 rounded-xl font-bold hover:from-purple-700 hover:to-pink-700 transition-all duration-300 disabled:opacity-50">
                                     <span wire:loading.remove>
-                                        <i class="fas fa-check-circle mr-2"></i> Confirm Booking
+                                        @if($paymentMethod === 'razorpay')
+                                            <i class="fas fa-credit-card mr-2"></i> Pay Now ₹{{ number_format($this->totalPrice) }}
+                                        @else
+                                            <i class="fas fa-check-circle mr-2"></i> Confirm Booking
+                                        @endif
                                     </span>
                                     <span wire:loading>
-                                        <i class="fas fa-spinner fa-spin mr-2"></i> Processing...
+                                        <i class="fas fa-spinner fa-spin mr-2"></i> 
+                                        @if($paymentMethod === 'razorpay')
+                                            Initiating Payment...
+                                        @else
+                                            Processing...
+                                        @endif
                                     </span>
                                 </button>
                             </div>
@@ -522,6 +616,9 @@
         }
     </style>
 
+    <!-- Razorpay Script -->
+    <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+
     <!-- Auto-hide flash messages -->
     <script>
         document.addEventListener('DOMContentLoaded', function() {
@@ -541,6 +638,13 @@
         
         // Listen for Livewire events
         document.addEventListener('livewire:init', () => {
+            // Check if Razorpay is available
+            if (typeof Razorpay === 'undefined') {
+                console.error('Razorpay script not loaded properly');
+            } else {
+                console.log('Razorpay script loaded successfully');
+            }
+            
             Livewire.on('user-found', (event) => {
                 console.log('User found:', event.message);
                 // You can add additional UI feedback here
@@ -550,6 +654,119 @@
                 console.log('User not found');
                 // You can add additional UI feedback here
             });
+
+            // Listen for Razorpay payment initiation
+            Livewire.on('initiate-razorpay-payment', (data) => {
+                console.log('Received payment initiation event:', data);
+                if (data && data.length > 0) {
+                    initiateRazorpayPayment(data[0]);
+                } else {
+                    console.error('No payment data received');
+                    alert('Payment initialization failed. Please try again.');
+                }
+            });
         });
+
+        function initiateRazorpayPayment(paymentData) {
+            console.log('Initiating Razorpay payment with data:', paymentData);
+            
+            // Validate payment data
+            if (!paymentData || !paymentData.order_id || !paymentData.amount) {
+                console.error('Invalid payment data:', paymentData);
+                alert('Payment initialization failed. Missing required data.');
+                @this.set('isSubmitting', false);
+                return;
+            }
+            
+            // Check if test mode (for development)
+            const isTestMode = paymentData.order_id.includes('test_');
+            
+            if (isTestMode) {
+                console.log('Running in test mode');
+                simulateTestPayment(paymentData);
+                return;
+            }
+
+            console.log('Initializing real Razorpay payment');
+            
+            // Real Razorpay integration
+            const options = {
+                key: '{{ config("razorpay.key_id") }}', // Your Razorpay key
+                amount: paymentData.amount,
+                currency: paymentData.currency || 'INR',
+                name: paymentData.name || 'Zuppie Events',
+                description: paymentData.description || 'Event Booking',
+                order_id: paymentData.order_id,
+                prefill: paymentData.prefill || {},
+                theme: {
+                    color: '#9333ea' // Purple theme to match your design
+                },
+                handler: function (response) {
+                    console.log('Payment successful:', response);
+                    // Call Livewire method to complete the payment
+                    @this.call('completeRazorpayPayment', 
+                        response.razorpay_payment_id,
+                        response.razorpay_order_id,
+                        response.razorpay_signature
+                    );
+                },
+                modal: {
+                    ondismiss: function() {
+                        console.log('Payment modal dismissed');
+                        // Re-enable the submit button
+                        @this.set('isSubmitting', false);
+                        alert('Payment was cancelled. You can try again or choose cash payment.');
+                    }
+                }
+            };
+
+            console.log('Razorpay options:', options);
+
+            try {
+                const rzp = new Razorpay(options);
+                
+                rzp.on('payment.failed', function (response) {
+                    console.log('Payment failed:', response.error);
+                    @this.call('handleRazorpayError', response.error);
+                });
+
+                console.log('Opening Razorpay checkout...');
+                rzp.open();
+            } catch (error) {
+                console.error('Error initializing Razorpay:', error);
+                alert('Failed to initialize payment gateway. Please try again.');
+                @this.set('isSubmitting', false);
+            }
+        }
+
+        function simulateTestPayment(paymentData) {
+            console.log('Simulating test payment for:', paymentData);
+            
+            // Show test payment modal
+            if (confirm('This is TEST MODE. Click OK to simulate successful payment or Cancel to simulate failure.')) {
+                // Simulate successful payment
+                const testResponse = {
+                    razorpay_payment_id: 'pay_test_' + Date.now(),
+                    razorpay_order_id: paymentData.order_id,
+                    razorpay_signature: 'test_signature_' + Date.now()
+                };
+                
+                setTimeout(() => {
+                    @this.call('completeRazorpayPayment', 
+                        testResponse.razorpay_payment_id,
+                        testResponse.razorpay_order_id,
+                        testResponse.razorpay_signature
+                    );
+                }, 1000);
+            } else {
+                // Simulate payment failure
+                setTimeout(() => {
+                    @this.call('handleRazorpayError', {
+                        code: 'TEST_PAYMENT_CANCELLED',
+                        description: 'Test payment was cancelled by user'
+                    });
+                }, 500);
+            }
+        }
     </script>
 </div>

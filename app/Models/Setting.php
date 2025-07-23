@@ -154,7 +154,7 @@ class Setting extends Model
             'site_tagline' => 'Your Perfect Event Partner',
             'contact_form_email' => 'contact@zuppie.com',
             'business_hours' => 'Mon-Sat: 9AM-6PM',
-            'whatsapp_number' => '+91 9876543210',
+            'whatsapp_number' => '+91 9123456789',
             'youtube_link' => '',
             'twitter_link' => '',
             'linkedin_link' => '',

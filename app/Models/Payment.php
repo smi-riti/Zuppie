@@ -10,9 +10,13 @@ class Payment extends Model
     protected $fillable = [
         'booking_id',
         'amount',
+        'currency',
         'payment_date',
         'payment_method',
         'transaction_id',
+        'razorpay_payment_id',
+        'razorpay_order_id',
+        'razorpay_signature',
         'status',
         'notes',
         'receipt_url'

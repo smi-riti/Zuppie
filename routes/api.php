@@ -8,11 +8,15 @@ use App\Http\Controllers\Offer\OfferController;
 use App\Http\Controllers\BlogController;
 use App\Http\Controllers\Gallery\GalleryApiController;
 use App\Http\Controllers\User\UserApiController;
+use App\Http\Controllers\Payment\RazorpayWebhookController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\RegistrationController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\LogoutController;
+
+// Webhook routes (no authentication required)
+Route::post('/webhooks/razorpay', [RazorpayWebhookController::class, 'handleWebhook']);
 
 // Public routes
 Route::post('/register', [RegistrationController::class, 'register']);

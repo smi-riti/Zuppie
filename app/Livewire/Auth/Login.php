@@ -37,9 +37,15 @@ class Login extends Component
             
             // Check if coming from booking flow
             $bookingData = session('booking_form_data');
-            if ($bookingData) {
+            $packageId = session('booking_package_id');
+            $pinCode = session('booking_pin_code');
+            
+            if ($bookingData && $packageId && $pinCode) {
                 session()->flash('success', 'Login successful! Continue with your booking.');
-                return redirect()->route('package-booking', ['package_id' => $bookingData['packageId']]);
+                return redirect()->route('package-booking', [
+                    'package_id' => $packageId,
+                    'pin_code' => $pinCode
+                ]);
             }
             
             // Check if user is admin
