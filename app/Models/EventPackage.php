@@ -28,6 +28,8 @@ class EventPackage extends Model
     protected $casts = [
         'is_active' => 'boolean',
         'is_special' => 'boolean',
+        'features' => 'array',
+
     ];
 
     protected static function boot()
