@@ -75,6 +75,15 @@
                                             <i class="fas fa-crown mr-1"></i>Most Popular
                                         </span>
                                     </div>
+                                    <!-- wishlist Badge -->
+                                    <div wire:click="toggleWishlist({{ $package['id'] }})"
+                                        class="absolute top-4 left-4 cursor-pointer">
+                                        @if ($wishlistStatus[$package['id']] ?? false)
+                                            <i class="fa-solid fa-heart text-red-500 text-2xl"></i>
+                                        @else
+                                            <i class="fa-regular fa-heart text-2xl"></i>
+                                        @endif
+                                    </div>
 
                                     <!-- Price Badge -->
                                     <div class="absolute bottom-4 left-4">
@@ -141,10 +150,10 @@
                 </p>
                 <div class="flex flex-wrap justify-center gap-2 sm:gap-3 mt-4">
                     @foreach ($this->displayCategories as $category)
-                        <button
-                            @if ($category->children->count()) wire:click="$dispatch('openCategoryModal', { categorySlug: '{{ $category->slug }}' })"
-    @else
-        onclick="window.location.href='{{ route('event-package.filter', ['category' => $category->slug]) }}'" @endif
+                        <button @if ($category->children->count())
+                        wire:click="$dispatch('openCategoryModal', { categorySlug: '{{ $category->slug }}' })" @else
+                                onclick="window.location.href='{{ route('event-package.filter', ['category' => $category->slug]) }}'"
+                            @endif
                             class="px-4 py-2 bg-white text-gray-700 rounded-xl border border-gray-200 hover:border-purple-300 mb-2">
                             {{ $category->name }}
                             @if ($category->children->count())
@@ -187,8 +196,7 @@
                         </div>
                         <div class="flex gap-3">
                             @if ($searchQuery)
-                                <button wire:click="clearSearch"
-                                    class="text-purple-600 hover:text-purple-800 font-medium">
+                                <button wire:click="clearSearch" class="text-purple-600 hover:text-purple-800 font-medium">
                                     Clear Search
                                 </button>
                             @endif
@@ -453,7 +461,7 @@
     <livewire:public.components.bottom-navigation />
     <!-- Enhanced JavaScript -->
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
+        document.addEventListener('DOMContentLoaded', function () {
             // Removed hero carousel JS
         });
 
@@ -487,7 +495,7 @@
             const nextBtn = document.querySelector('.featured-next');
 
             if (prevBtn) {
-                prevBtn.addEventListener('click', function() {
+                prevBtn.addEventListener('click', function () {
                     scrollAmount -= totalWidth;
                     if (scrollAmount < 0) {
                         scrollAmount = totalWidth * (totalCards - 1);
@@ -500,7 +508,7 @@
             }
 
             if (nextBtn) {
-                nextBtn.addEventListener('click', function() {
+                nextBtn.addEventListener('click', function () {
                     scrollAmount += totalWidth;
                     if (scrollAmount >= totalWidth * totalCards) {
                         scrollAmount = 0;
@@ -515,7 +523,7 @@
 
         // Enhanced Category Carousels Auto-scroll with smooth transitions
         @foreach ($this->categories as $key => $category)
-            (function() {
+            (function () {
                 const carousel{{ ucfirst($key) }} = document.querySelector(
                     '.packages-carousel-{{ $key }} .carousel-track');
                 if (carousel{{ ucfirst($key) }}) {
@@ -538,7 +546,7 @@
 
                         carousel{{ ucfirst($key) }}.style.transition = 'transform 0.8s ease-in-out';
                         carousel{{ ucfirst($key) }}.style.transform =
-                        `translateX(-${scrollPos{{ ucfirst($key) }}}px)`;
+                            `translateX(-${scrollPos{{ ucfirst($key) }}}px)`;
 
                         // Reset scrolling flag after transition
                         setTimeout(() => {
@@ -556,7 +564,7 @@
                     const nextBtn = document.querySelector('.carousel-next-{{ $key }}');
 
                     if (prevBtn) {
-                        prevBtn.addEventListener('click', function() {
+                        prevBtn.addEventListener('click', function () {
                             if (isScrolling{{ ucfirst($key) }}) return;
 
                             isScrolling{{ ucfirst($key) }} = true;
@@ -580,7 +588,7 @@
                     }
 
                     if (nextBtn) {
-                        nextBtn.addEventListener('click', function() {
+                        nextBtn.addEventListener('click', function () {
                             if (isScrolling{{ ucfirst($key) }}) return;
 
                             clearInterval(autoScrollTimer{{ ucfirst($key) }});
@@ -593,11 +601,11 @@
                     // Pause auto-scroll on hover for better UX
                     const carouselContainer = document.querySelector('.packages-carousel-{{ $key }}');
                     if (carouselContainer) {
-                        carouselContainer.addEventListener('mouseenter', function() {
+                        carouselContainer.addEventListener('mouseenter', function () {
                             clearInterval(autoScrollTimer{{ ucfirst($key) }});
                         });
 
-                        carouselContainer.addEventListener('mouseleave', function() {
+                        carouselContainer.addEventListener('mouseleave', function () {
                             autoScrollTimer{{ ucfirst($key) }} = setInterval(autoScroll{{ ucfirst($key) }},
                                 scrollInterval);
                         });
@@ -607,9 +615,9 @@
         @endforeach
 
         // Category menu smooth scrolling
-        document.addEventListener('livewire:initialized', function() {
+        document.addEventListener('livewire:initialized', function () {
             // Listen for category selection events
-            window.addEventListener('category-selected', function(event) {
+            window.addEventListener('category-selected', function (event) {
                 if (event.detail && event.detail.category) {
                     const categorySection = document.querySelector(`#category-${event.detail.category}`);
                     if (categorySection) {
@@ -627,7 +635,7 @@
         if (searchInput) {
             let searchTimeout;
 
-            searchInput.addEventListener('input', function(event) {
+            searchInput.addEventListener('input', function (event) {
                 // Clear existing timeout
                 clearTimeout(searchTimeout);
 
@@ -642,11 +650,11 @@
         }
 
         // Enhanced parallax scrolling effects
-        window.addEventListener('scroll', function() {
+        window.addEventListener('scroll', function () {
             const scrolled = window.pageYOffset;
             const parallaxElements = document.querySelectorAll('.parallax-element');
 
-            parallaxElements.forEach(function(element) {
+            parallaxElements.forEach(function (element) {
                 const speed = element.dataset.speed || 0.5;
                 const yPos = -(scrolled * speed);
                 element.style.transform = `translateY(${yPos}px)`;
@@ -655,12 +663,12 @@
 
         // Enhanced hover effects for package cards
         const packageCards = document.querySelectorAll('.package-card');
-        packageCards.forEach(function(card) {
-            card.addEventListener('mouseenter', function() {
+        packageCards.forEach(function (card) {
+            card.addEventListener('mouseenter', function () {
                 this.style.transform = 'translateY(-8px) scale(1.02)';
             });
 
-            card.addEventListener('mouseleave', function() {
+            card.addEventListener('mouseleave', function () {
                 this.style.transform = 'translateY(0) scale(1)';
             });
         });
