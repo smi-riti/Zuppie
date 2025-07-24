@@ -689,14 +689,6 @@
                                 alt="{{ $package->name }}"
                                 class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
                             <!-- Wishlist Button -->
-                            <div wire:click="toggleWishlist({{ $packageId }})"
-                                class="absolute top-4 right-4 cursor-pointer">
-                                @if($wishlistStatus[$packageId] ?? false)
-                                    <i class="fa-solid fa-heart text-red-500 text-2xl"></i>
-                                @else
-                                    <i class="fa-regular fa-heart text-2xl"></i>
-                                @endif
-                            </div>
                                         <!-- Price Badge -->
                                         <div class="absolute bottom-4 left-4">
                                             <span
@@ -708,8 +700,12 @@
                                         <div class="absolute top-4 left-4">
                                             <span
                                                 class="bg-purple-600/80 text-white px-3 py-1 rounded-full text-sm font-semibold shadow-md">
-                                                {{ $package->name ?? 'General' }}
+                                                {{ $package->category->name }}
                                             </span>
+                                        </div>
+                                        <div class="absolute top-4 right-4">
+                           <livewire:public.components.wishlist-button :packageId="$package->id"/>
+                                            
                                         </div>
                                     </div>
 
