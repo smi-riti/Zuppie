@@ -76,13 +76,8 @@
                                         </span>
                                     </div>
                                     <!-- wishlist Badge -->
-                                    <div wire:click="toggleWishlist({{ $package['id'] }})"
-                                        class="absolute top-4 left-4 cursor-pointer">
-                                        @if ($wishlistStatus[$package['id']] ?? false)
-                                            <i class="fa-solid fa-heart text-red-500 text-2xl"></i>
-                                        @else
-                                            <i class="fa-regular fa-heart text-2xl"></i>
-                                        @endif
+                                    <div class="absolute top-4 right-4">
+                                        <livewire:public.components.wishlist-button :packageId="$package['id']" />
                                     </div>
 
                                     <!-- Price Badge -->
@@ -235,6 +230,9 @@
                                                 </div>
                                             </div>
                                         @endif
+                                        <div class="absolute top-4 right-4">
+                                            <livewire:public.components.wishlist-button :packageId="$package['id']" />
+                                        </div>
                                         <div class="absolute bottom-4 left-4">
                                             <div
                                                 class="bg-white/90 backdrop-blur-sm text-gray-800 px-3 py-2 rounded-full font-bold text-lg">
@@ -246,7 +244,9 @@
                                         <h3 class="text-xl font-bold text-gray-800 mb-3">
                                             {{ $package['name'] }}
                                         </h3>
-                                        <p class="text-gray-600 mb-4 leading-relaxed">{{\Illuminate\Support\Str::words($package['description'], 10, '...') }}</p>
+                                        <p class="text-gray-600 mb-4 leading-relaxed">
+                                            {{\Illuminate\Support\Str::words($package['description'], 10, '...') }}
+                                        </p>
                                         <div class="space-y-2 mb-6">
                                             @foreach (array_slice($package['features'], 0, 4) as $feature)
                                                 <div class="flex items-center space-x-2">
