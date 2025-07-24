@@ -21,36 +21,11 @@ class EventPackage extends Component
     protected $listeners = [
         'subcategory-selected' => 'handleSubcategorySelected'
     ];
-    
-     public $wishlistStatus = [];
-    protected $wishlistService;
-
-    public function boot(WishlistService $wishlistService)
-    {
-        $this->wishlistService = $wishlistService;
-    }
 
     public function mount()
     {
         $this->selectedCategory = request()->query('category');
         $this->selectedSubCategory = request()->query('subcategory');
-
-        $this->packages = $this->filteredPackages;
-        
-        // Initialize wishlist statuses
-        $packageIds = collect($this->packages)->pluck('id')->toArray();
-        $this->wishlistStatus = $this->wishlistService->getWishlistStatuses($packageIds);
-    }
-    public function toggleWishlist($packageId)
-    {
-        $result = $this->wishlistService->toggleWishlist($packageId);
-        
-        if ($result['status'] === 'login_required') {
-            return redirect()->route('login');
-        }
-        
-        // Update local status
-        $this->wishlistStatus[$packageId] = !($this->wishlistStatus[$packageId] ?? false);
     }
 
     public function handleSubcategorySelected($data)
@@ -59,8 +34,6 @@ class EventPackage extends Component
         $this->selectedSubCategory = $data['subCategorySlug'];
         $this->loadMoreCount = 0; // Reset pagination
     }
-
-
 
     public function selectCategory($category)
     {

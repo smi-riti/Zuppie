@@ -64,6 +64,7 @@
                                 </p>
                             @endif
                         </div>
+                        <livewire:public.components.wishlist-button :packageId="$package->id" />
                         
                         <!-- Price and Offers -->
                         <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-6 space-y-4 sm:space-y-0">

@@ -24,7 +24,7 @@ class Profile extends Component
     public $showReviewModal = false;
     public $showEditProfileModal = false;
     public $userIdToEdit;
-    
+
     public $wishlistStatus = [];
     public $packages, $filteredPackages;
 
@@ -35,34 +35,8 @@ class Profile extends Component
         'closeEditProfileModal' => 'closeEditProfileModal',
         'completeRazorpayPayment' => 'completeRazorpayPayment'
     ];
-    
-    
 
-     public $featuredPackages;
-    protected $wishlistService;
-
-    public function boot(WishlistService $wishlistService)
-    {
-        $this->wishlistService = $wishlistService;
-    }
-
-    public function toggleWishlist($packageId)
-    {
-        $result = $this->wishlistService->toggleWishlist($packageId);
-        
-        if ($result['status'] === 'login_required') {
-            return redirect()->route('login');
-        }
-        
-        // Update local status
-        $this->wishlistStatus[$packageId] = !($this->wishlistStatus[$packageId] ?? false);
-        
-        // Refresh wishlisted packages
-        $this->wishlistedPackages = Wishlist::with('eventPackage.images', 'eventPackage.category')
-            ->where('user_id', auth()->id())
-            ->get();
-    }
-    public function mount()
+        public function mount()
     {
         $this->upComingBookings = Booking::with(['eventPackage', 'payments'])
             ->where('user_id', auth()->id())
@@ -83,22 +57,19 @@ class Profile extends Component
                 $query->where('user_id', auth()->id())
                     ->where('is_completed', 1);
             })->get();
-            
+
         $this->cancelledBookings = Booking::with(['eventPackage', 'payments'])
             ->where('user_id', auth()->id())
             ->where('status', 'cancelled')
             ->get();
 
-       // Load wishlisted packages
+        // Load wishlisted packages
         $this->wishlistedPackages = Wishlist::with('eventPackage.images', 'eventPackage.category')
             ->where('user_id', auth()->id())
             ->get();
 
-        // Initialize wishlist statuses for wishlisted packages
-        $wishlistPackageIds = $this->wishlistedPackages->pluck('event_package_id')->toArray();
-        $this->wishlistStatus = $this->wishlistService->getWishlistStatuses($wishlistPackageIds);
     }
-    
+
     public function openViewModal($bookingId)
     {
         $this->bookingIdToView = $bookingId;
@@ -138,7 +109,7 @@ class Profile extends Component
                     ->where('status', 'paid')
                     ->where('payment_method', 'razorpay')
                     ->exists();
-                
+
                 if ($advancePaid) {
                     return 'Cash Payment (20% advance paid via Razorpay)';
                 } else {
@@ -148,27 +119,28 @@ class Profile extends Component
                 return 'Online Payment (Razorpay)';
             }
         }
-        
+
         // Fallback for older bookings without payment_method field
         if (!$booking->payments->count()) {
             return 'Cash Payment (20% advance required)';
         }
-        
+
         $payment = $booking->payments->first();
         return $payment->payment_method === 'razorpay' ? 'Online Payment (Razorpay)' : 'Cash Payment';
     }
 
     public function getPaymentStatus($booking)
     {
-        if (!$booking->payments->count()) return 'pending';
-        
+        if (!$booking->payments->count())
+            return 'pending';
+
         return $booking->payments->first()->status;
     }
 
     public function downloadInvoice($bookingId)
     {
         $booking = Booking::find($bookingId);
-        
+
         if (!$booking || $booking->user_id !== auth()->id()) {
             session()->flash('error', 'Booking not found or unauthorized access.');
             return;
@@ -188,15 +160,15 @@ class Profile extends Component
     {
         // Use discounted price as the total amount (after discount)
         $totalAfterDiscount = $booking->eventPackage->discounted_price ?? $booking->total_price;
-        
+
         // Calculate total amount paid
         $totalPaid = $booking->payments()
             ->where('status', 'paid')
             ->sum('amount');
-        
+
         // Balance = Total After Discount - Amount Paid
         $balance = $totalAfterDiscount - $totalPaid;
-        
+
         return max(0, $balance); // Ensure balance is never negative
     }
 
@@ -209,11 +181,11 @@ class Profile extends Component
     {
         // Use discounted price as the total amount (after discount)
         $totalAfterDiscount = $booking->eventPackage->discounted_price ?? $booking->total_price;
-        
+
         $totalPaid = $booking->payments()
             ->where('status', 'paid')
             ->sum('amount');
-        
+
         return $totalPaid >= $totalAfterDiscount;
     }
 
@@ -232,21 +204,21 @@ class Profile extends Component
     public function getDueAmount($booking)
     {
         $dueAmount = $this->getBalanceAmount($booking);
-        
+
         // Update the due_amount in database if different
         if ($booking->due_amount != $dueAmount) {
             $booking->update(['due_amount' => $dueAmount]);
         }
-        
+
         return $dueAmount;
     }
 
     public function initiatePayment($bookingId)
     {
         $this->isProcessingPayment = true;
-        
+
         $booking = Booking::with(['eventPackage', 'payments'])->find($bookingId);
-        
+
         if (!$booking || $booking->user_id !== auth()->id()) {
             session()->flash('error', 'Booking not found or unauthorized access.');
             $this->isProcessingPayment = false;
@@ -270,7 +242,7 @@ class Profile extends Component
             // Debug: Check Razorpay configuration
             $razorpayKey = config('services.razorpay.key');
             $razorpaySecret = config('services.razorpay.secret');
-            
+
             \Log::info('Profile Payment Initiation - Config Check', [
                 'key' => $razorpayKey ? 'Set (Length: ' . strlen($razorpayKey) . ')' : 'Not Set',
                 'secret' => $razorpaySecret ? 'Set (Length: ' . strlen($razorpaySecret) . ')' : 'Not Set',
@@ -281,7 +253,7 @@ class Profile extends Component
             if (!$razorpayKey || !$razorpaySecret) {
                 throw new \Exception('Razorpay credentials not configured properly. Key: ' . ($razorpayKey ? 'Set' : 'Missing') . ', Secret: ' . ($razorpaySecret ? 'Set' : 'Missing'));
             }
-            
+
             $razorpayService = new \App\Services\RazorpayService();
             $orderData = $razorpayService->createOrder(
                 $this->getBalanceAmount($booking),
@@ -316,7 +288,7 @@ class Profile extends Component
                 'error' => $e->getMessage(),
                 'trace' => $e->getTraceAsString()
             ]);
-            
+
             session()->flash('error', 'Payment Failed: ' . $e->getMessage());
             $this->isProcessingPayment = false;
         }
@@ -326,9 +298,9 @@ class Profile extends Component
     {
         try {
             $this->isProcessingPayment = true;
-            
+
             $razorpayService = new \App\Services\RazorpayService();
-            
+
             // Verify payment signature
             $isValid = $razorpayService->verifyPaymentSignature(
                 $orderId,
@@ -352,11 +324,11 @@ class Profile extends Component
             // Create payment record
             $paymentAmount = session('pending_payment_amount');
             $paymentNotes = 'Balance payment via Razorpay from profile';
-            
+
             // Check if this is an advance payment for cash booking
             if ($booking->payment_method === 'cash' && !$booking->advance_paid) {
                 $paymentNotes = '20% advance payment via Razorpay for cash booking (Balance ₹' . number_format($booking->total_price * 0.80, 2) . ' to be paid in cash on event day)';
-                
+
                 // Update booking to mark advance as paid
                 $booking->update([
                     'advance_paid' => true,
