@@ -31,7 +31,7 @@
                     @error('name')
                         <span class="text-xs text-pink-600 mt-1 block">{{ $message }}</span>
                     @enderror
-                </div>
+                </div
 
                 <!-- Email -->
                 <div>
@@ -41,7 +41,7 @@
                     @error('email')
                         <span class="text-xs text-pink-600 mt-1 block">{{ $message }}</span>
                     @enderror
-                </div>
+                </div
 
                 <!-- Phone -->
                 <div>
@@ -51,7 +51,7 @@
                     @error('phone_no')
                         <span class="text-xs text-pink-600 mt-1 block">{{ $message }}</span>
                     @enderror
-                </div>
+                </div
 
                 <!-- Spacer -->
                 <div class="md:col-span-2 h-4"></div>
@@ -162,7 +162,7 @@
 
                 <!-- Action Buttons -->
                 <div class="md:col-span-2 pt-4 flex flex-col-reverse sm:flex-row justify-end gap-3">
-                    <button type="button" wire:click="$dispatch('closeModal')"
+                    <button type="button" wire:click="closeModal"
                         class="px-4 py-2 bg-gray-200 text-gray-700 font-medium rounded-lg shadow transition text-sm">
                         Cancel
                     </button>
