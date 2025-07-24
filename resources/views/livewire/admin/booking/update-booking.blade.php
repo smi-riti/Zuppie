@@ -25,9 +25,9 @@
                         <!-- Name -->
                         <div>
                             <label class="block text-sm font-medium text-purple-700 mb-1">Full Name</label>
-                            <input type="text" wire:model="name"
+                            <input type="text" wire:model="booking_name"
                                 class="w-full px-4 py-2 rounded-lg border border-purple-200 focus:ring-2 focus:ring-purple-300 focus:border-purple-400 transition">
-                            @error('name')
+                            @error('booking_name')
                                 <span class="text-sm text-pink-600">{{ $message }}</span>
                             @enderror
                         </div>
@@ -35,9 +35,9 @@
                         <!-- Email -->
                         <div>
                             <label class="block text-sm font-medium text-purple-700 mb-1">Email</label>
-                            <input type="email" wire:model="email"
+                            <input type="email" wire:model="booking_email"
                                 class="w-full px-4 py-2 rounded-lg border border-purple-200 focus:ring-2 focus:ring-purple-300 focus:border-purple-400 transition">
-                            @error('email')
+                            @error('booking_email')
                                 <span class="text-sm text-pink-600">{{ $message }}</span>
                             @enderror
                         </div>
@@ -45,9 +45,9 @@
                         <!-- Phone -->
                         <div>
                             <label class="block text-sm font-medium text-purple-700 mb-1">Phone Number</label>
-                            <input type="text" wire:model="phone_no"
+                            <input type="text" wire:model="booking_phone_no"
                                 class="w-full px-4 py-2 rounded-lg border border-purple-200 focus:ring-2 focus:ring-purple-300 focus:border-purple-400 transition">
-                            @error('phone_no')
+                            @error('booking_phone_no')
                                 <span class="text-sm text-pink-600">{{ $message }}</span>
                             @enderror
                         </div>
@@ -152,10 +152,10 @@
 
                 <!-- Action Buttons -->
                 <div class="pt-4 flex justify-end space-x-4">
-                    <button type="button" wire:click="$dispatch('closeModal')"
+                    <button type="button" wire:click="closeModal"
                         class="px-6 py-3 bg-gray-200 text-gray-700 font-semibold rounded-lg shadow-md transition">
                         Cancel
-                    </button>
+                    </button
                     <button type="submit"
                         class="px-6 py-3 bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 text-white font-semibold rounded-lg shadow-md transition">
                         Update Booking

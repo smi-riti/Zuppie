@@ -147,13 +147,13 @@
                                     <div class="flex items-center">
                                         <div
                                             class="flex-shrink-0 h-10 w-10 rounded-full bg-gradient-to-r from-purple-400 to-pink-400 flex items-center justify-center text-white font-bold">
-                                            {{ strtoupper(substr($booking->user->name, 0, 1)) }}
+                                            {{ strtoupper(substr($booking->booking_name, 0, 1)) }}
                                         </div>
                                         <div class="ml-4">
-                                            <div class="text-sm font-medium text-purple-900">{{ $booking->user->name }}
+                                            <div class="text-sm font-medium text-purple-900">{{ $booking->booking_name }}
                                             </div>
-                                            <div class="text-sm text-purple-600">{{ $booking->user->email }}</div>
-                                            <div class="text-xs text-purple-500">{{ $booking->user->phone_no }}</div>
+                                            <div class="text-sm text-purple-600">{{ $booking->booking_email }}</div>
+                                            <div class="text-xs text-purple-500">{{ $booking->booking_phone_no }}</div>
                                         </div>
                                     </div>
                                 </td>
