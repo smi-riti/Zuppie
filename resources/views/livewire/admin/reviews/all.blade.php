@@ -34,7 +34,7 @@
                                 <td class="px-6 py-4">{{ $review->id }}</td>
                                 <td class="px-6 py-4">{{ $review->user->name }}</td>
                                 <td class="px-6 py-4">
-                                    {{ optional($review->booking->eventPackage)->name ?? '-' }}
+                                    {{ $review->eventPackage->name ?? '-' }}
                                 </td>
                                 <td class="px-6 py-4">
                                     <span class="text-yellow-500 font-bold">{{ $review->rating }} &#9733;</span>
@@ -79,7 +79,7 @@
                                 <td class="px-6 py-4">{{ $apvr->id }}</td>
                                 <td class="px-6 py-4">{{ $apvr->user->name }}</td>
                                 <td class="px-6 py-4">
-                                    {{ optional($apvr->booking->eventPackage)->name ?? '-' }}
+                                    {{ $apvr->eventPackage->name ?? '-' }}
                                 </td>
                                 <td class="px-6 py-4">
                                     <span class="text-yellow-500 font-bold">{{ $apvr->rating }} &#9733;</span>
