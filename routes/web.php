@@ -11,6 +11,8 @@ use App\Livewire\Admin\EventPackage\UpdatePackage;
 use App\Livewire\Admin\Offers\AllOffers;
 use App\Livewire\Admin\Offers\ShowAll;
 use App\Livewire\Admin\Reviews\All;
+use App\Livewire\Auth\ForgotPass;
+use App\Livewire\Auth\ResetPass;
 use App\Livewire\Auth\Login;
 use App\Livewire\Auth\Register;
 use App\Livewire\Auth\Logout;
@@ -34,21 +36,16 @@ use App\Livewire\Admin\Booking\ViewBooking;
 
 use App\Livewire\Admin\Blog\ManageBlog;
 use App\Livewire\Admin\Gallery\ManageGallery;
-use App\Livewire\Auth\ForgotPassword;
-use App\Livewire\Auth\ResetPassword;
 use App\Livewire\Public\Pages\TermsOfService;
 use App\Livewire\Public\Pages\PrivacyPolicy;
 use App\Livewire\Public\Event\EventPackageFilter;
 use Illuminate\Support\Facades\Auth;
 
-// Route::get('/', function () {
-//     return view('welcome');
-// });
 Route::get('/', Homepage::class)->name('home');
 Route::get('/register', Register::class)->name('register');
 Route::get('/login', Login::class)->name('login');
-Route::get('/forgot-password', ForgotPassword::class)->name('password.request');
-Route::get('/reset-password/{token}', ResetPassword::class)->name('password.reset');
+Route::get('/forgot-password', ForgotPass::class)->name('password.request');
+Route::get('/reset-password/{token}', ResetPass::class)->name('password.reset');
 Route::post('/logout', function () {
     Auth::logout();
     return redirect('/');
