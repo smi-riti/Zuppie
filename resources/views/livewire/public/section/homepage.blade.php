@@ -1,20 +1,13 @@
 <!-- Hero Section with Floating Balloons and Changing Text -->
-<div x-data="{ 
-    currentText: 0,
-    texts: ['Moment Magical ✨', 'Dream Come True 🎉', 'Memory Special 💫', 'Celebration Perfect 🎈', 'Event Unforgettable ⭐']
-}" x-init="
-    setInterval(() => {
-        currentText = (currentText + 1) % texts.length;
-    }, 3000);
-">
+<div>
     <!-- Hero Section -->
-   <livewire:public.section.hero-section/>
+    <livewire:public.section.hero-section />
 
     <!-- Categories Section with SEO Keywords -->
     <section id="categories" class="py-12 sm:py-20 bg-gradient-to-br from-purple-50 to-pink-50 relative z-10">
         <div class="container mx-auto px-4">
             <div class="text-center mb-12 sm:mb-16">
-                <h2 class="text-3xl sm:text-4xl md:text-5xl font-bold font-display text-transparent bg-clip-text bg-gradient-to-r from-purple-600 to-pink-600 mb-6"
+                <h2 class="text-3xl py-2 sm:text-4xl md:text-5xl font-bold font-display text-transparent bg-clip-text bg-gradient-to-r from-purple-600 to-pink-600 mb-6"
                     data-aos="fade-up">
                     Event Planning Services in Purnia, Bihar
                 </h2>
@@ -73,7 +66,8 @@
                                 </div>
                                 <h3
                                     class="text-xl sm:text-2xl font-bold mb-2 group-hover:scale-105 transition-transform duration-300 drop-shadow-md">
-                                    {{$category->name}}</h3>
+                                    {{$category->name}}
+                                </h3>
                                 <p
                                     class="text-sm opacity-90 group-hover:opacity-100 transition-opacity duration-300 drop-shadow-sm">
                                     Click to explore subcategories</p>
@@ -91,104 +85,7 @@
     </section>
 
     <!-- Enhanced Packages Section - Horizontal Scroll -->
-    <section id="packages" class="py-12 sm:py-20 bg-white relative z-10">
-        <div class="container mx-auto px-4">
-            <div class="text-center mb-12 sm:mb-16">
-                <h2 class="text-3xl sm:text-4xl md:text-5xl font-bold font-display text-transparent bg-clip-text bg-gradient-to-r from-purple-600 to-pink-600 mb-6"
-                    data-aos="fade-up">
-                    Featured Packages
-                </h2>
-                <p class="text-lg sm:text-xl text-gray-600 max-w-3xl mx-auto" data-aos="fade-up" data-aos-delay="200">
-                    Choose from our carefully crafted packages designed to make your event planning effortless
-                </p>
-            </div>
-
-            <!-- Horizontal Scroll Container -->
-            <div class="relative max-w-full mx-auto" data-aos="fade-up" data-aos-delay="400">
-                <div class="flex overflow-x-auto scrollbar-hide space-x-6 pb-4" id="packages-scroll">
-                    @foreach ($packages as $package)
-                        <div
-                            class="flex-none w-80 sm:w-96 bg-white rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden group border border-gray-100">
-                            <div class="relative h-56 sm:h-64 overflow-hidden">
-                                <img src="{{ $package->images->first()?->image_url ?? 'https://via.placeholder.com/400x300' }}"
-                                    alt="{{ $package->name }}"
-                                    class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
-
-                                <!-- Gradient Overlay -->
-                                <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent">
-                                </div>
-
-                                <!-- Package Info Overlay -->
-                                <div class="absolute bottom-4 left-4 right-4 text-white">
-                                    <h3 class="text-lg sm:text-xl font-bold mb-1 drop-shadow-md">{{ $package->name }}</h3>
-                                    <p class="text-sm opacity-90 flex items-center drop-shadow-sm">
-                                        <i
-                                            class="fas fa-clock mr-2"></i>{{ $package->formatted_duration ?? 'Custom Duration' }}
-                                    </p>
-                                </div>
-
-                                <!-- Category Badge -->
-                                @if($package->category)
-                                    <div class="absolute top-4 left-4">
-                                        <span
-                                            class="bg-white/20 backdrop-blur-sm text-white px-3 py-1 rounded-full text-xs font-medium drop-shadow-sm">
-                                            {{ $package->category->name }}
-                                        </span>
-                                    </div>
-                                @endif
-                            </div>
-
-                            <div class="p-6">
-                                <!-- Price Section -->
-                                <div class="text-center mb-4">
-                                    @if($package->discount_value > 0)
-                                        <div class="flex justify-center items-center space-x-2 mb-2">
-                                            <span
-                                                class="text-gray-400 line-through text-lg">₹{{ number_format($package->price, 0) }}</span>
-                                            <span
-                                                class="text-2xl sm:text-3xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-purple-600 to-pink-600">
-                                                ₹{{ number_format($package->discounted_price, 0) }}
-                                            </span>
-                                            <span class="text-xs bg-red-100 text-red-800 px-2 py-1 rounded-full font-medium">
-                                                {{ $package->discount_value }}{{ $package->discount_type === 'percentage' ? '%' : '₹' }}
-                                                OFF
-                                            </span>
-                                        </div>
-                                    @else
-                                        <div
-                                            class="text-2xl sm:text-3xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-purple-600 to-pink-600 mb-2">
-                                            ₹{{ number_format($package->price, 0) }}
-                                        </div>
-                                    @endif
-                                </div>
-
-                                <!-- Description -->
-                                <p class="text-gray-600 text-sm mb-4 text-center leading-relaxed">
-                                    {{ Str::limit($package->description, 120) }}
-                                </p>
-
-                                <!-- Action Button -->
-                                <a href="{{ route('package-detail', ['id' => $package->id]) }}"
-                                    class="block w-full bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white py-3 px-4 rounded-xl text-center font-semibold transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl">
-                                    <i class="fas fa-calendar-check mr-2"></i>Book Now
-                                </a>
-                            </div>
-                        </div>
-                    @endforeach
-                </div>
-
-                <!-- View All Button -->
-                <div class="text-center mt-8">
-                    <a href="{{ route('event-packages') }}"
-                        class="inline-flex items-center bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white px-8 py-4 rounded-full font-semibold text-lg transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl">
-                        <i class="fas fa-grid-3x3 mr-3"></i>
-                        View All Packages
-                        <i class="fas fa-arrow-right ml-3"></i>
-                    </a>
-                </div>
-            </div>
-        </div>
-    </section>
+    <livewire:public.section.other-section />
 
     <!-- Enhanced Birthday Special Section -->
     <section class="py-12 sm:py-20 bg-gradient-to-br from-pink-50 via-purple-50 to-indigo-50 relative overflow-hidden">
@@ -306,7 +203,7 @@
     <section id="gallery" class="py-20 bg-gradient-to-br from-pink-50 to-purple-50">
         <div class="container mx-auto px-4">
             <div class="text-center mb-16">
-                <h2 class="text-4xl md:text-5xl font-bold font-display gradient-text mb-6" data-aos="fade-up">
+                <h2 class="text-4xl md:text-5xl py-2 font-bold font-display gradient-text mb-6" data-aos="fade-up">
                     Our Magic Gallery
                 </h2>
                 <p class="text-xl text-gray-600 max-w-3xl mx-auto" data-aos="fade-up" data-aos-delay="200">
@@ -402,7 +299,7 @@
     <section id="about" class="py-20 bg-gradient-to-br from-purple-50 to-pink-50">
         <div class="container mx-auto px-4">
             <div class="text-center mb-16">
-                <h2 class="text-4xl md:text-5xl font-bold font-display gradient-text mb-6" data-aos="fade-up">
+                <h2 class="text-4xl md:text-5xl py-2 font-bold font-display gradient-text mb-6" data-aos="fade-up">
                     Why Choose Zuppie for Event Planning in Bihar?
                 </h2>
                 <p class="text-xl text-gray-600 max-w-3xl mx-auto" data-aos="fade-up" data-aos-delay="200">
@@ -479,7 +376,7 @@
     <section class="py-20 bg-white">
         <div class="container mx-auto px-4">
             <div class="text-center mb-16">
-                <h2 class="text-4xl md:text-5xl font-bold font-display gradient-text mb-6" data-aos="fade-up">
+                <h2 class="text-4xl py-2 md:text-5xl font-bold font-display gradient-text mb-6" data-aos="fade-up">
                     Reviews from Our Satisfied Clients
                 </h2>
                 <p class="text-xl text-gray-600 max-w-3xl mx-auto" data-aos="fade-up" data-aos-delay="200">
@@ -553,7 +450,7 @@
     <section class="py-20 bg-gradient-to-br from-pink-50 to-purple-50">
         <div class="container mx-auto px-4">
             <div class="text-center mb-16">
-                <h2 class="text-4xl md:text-5xl font-bold font-display gradient-text mb-6" data-aos="fade-up">
+                <h2 class="text-4xl md:text-5xl py-2 font-bold font-display gradient-text mb-6" data-aos="fade-up">
                     Event Planning Tips & Decoration Ideas
                 </h2>
                 <p class="text-xl text-gray-600 max-w-3xl mx-auto" data-aos="fade-up" data-aos-delay="200">
