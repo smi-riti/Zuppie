@@ -6,6 +6,8 @@ use Livewire\Attributes\Layout;
 use Livewire\Component;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
+use App\Mail\LoginNotificationMail;
+use Illuminate\Support\Facades\Mail;
 
 #[Layout("components.layouts.app")]
 class Login extends Component
@@ -34,6 +36,9 @@ class Login extends Component
 
         if (Auth::attempt(['email' => $this->email, 'password' => $this->password])) {
             $user = Auth::user();
+            
+            // Send login notification email
+            Mail::to($user->email)->send(new LoginNotificationMail($user));
             
             // Check if coming from booking flow
             $bookingData = session('booking_form_data');

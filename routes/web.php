@@ -40,6 +40,7 @@ use App\Livewire\Public\Pages\TermsOfService;
 use App\Livewire\Public\Pages\PrivacyPolicy;
 use App\Livewire\Public\Event\EventPackageFilter;
 use Illuminate\Support\Facades\Auth;
+use App\Mail\LoginNotificationMail;
 
 Route::get('/', Homepage::class)->name('home');
 Route::get('/register', Register::class)->name('register');
@@ -96,6 +97,7 @@ Route::get('/sitemap/packages.xml', [\App\Http\Controllers\ProductionSitemapCont
 Route::get('/sitemap/offers.xml', [\App\Http\Controllers\ProductionSitemapController::class, 'offers'])->name('sitemap.offers');
 Route::get('/sitemap/blogs.xml', [\App\Http\Controllers\ProductionSitemapController::class, 'blogs'])->name('sitemap.blogs');
 Route::get('/robots.txt', [\App\Http\Controllers\ProductionRobotsController::class, 'index'])->name('robots');
+Route::get('/mail', [\App\Http\Controllers\MailController::class, 'sendEmail'])->name('mail');
 
 // PWA Routes
 Route::get('/manifest.json', function () {
