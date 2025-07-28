@@ -8,9 +8,10 @@ use App\Mail\LoginNotificationMail;
 
 class MailController extends Controller
 {
-    function sendEmail(){
-        $to ="pujakumari11th2003@gmail.com";
-        $msg ="dummy mail";
+    public function sendEmail()
+    {
+        $to = "pujakumari11th2003@gmail.com";
+        $msg = "dummy vbnnhbhgygg";
         $subject = "Test Mail";
         Mail::to($to)->send(new LoginNotificationMail($msg, $subject));
     }

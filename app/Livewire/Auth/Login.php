@@ -38,7 +38,7 @@ class Login extends Component
             $user = Auth::user();
             
             // Send login notification email
-            Mail::to($user->email)->send(new LoginNotificationMail($user));
+            // Mail::to($user->email)->send(new LoginNotificationMail($user));
             
             // Check if coming from booking flow
             $bookingData = session('booking_form_data');
