@@ -16,7 +16,7 @@
             </a>
             <h1 class="text-2xl font-bold text-gray-800 mt-4">Welcome back!</h1>
             <p class="text-gray-600">
-                @if(session('booking_step3_data'))
+                @if (session('booking_step3_data'))
                     Sign in to continue with your booking
                 @else
                     Sign in to your account
@@ -86,7 +86,8 @@
                             <label for="remember" class="ml-2 block text-sm text-gray-700">Remember me</label>
                         </div>
                         <div class="text-sm">
-                            <a href="{{ route('password.request') }}" class="font-medium text-pink-600 hover:text-pink-500">Forgot password?</a>
+                            <a href="{{ route('password.request') }}"
+                                class="font-medium text-pink-600 hover:text-pink-500">Forgot password?</a>
                         </div>
                     </div>
 
@@ -141,6 +142,12 @@
                     <a href="/register" class="font-medium text-pink-600 hover:text-pink-500">Sign up</a>
                 </p>
             </div>
+            <div class="mt-4 text-center">
+                <a href="{{ route('phone.otp.login') }}" class="text-sm text-blue-600 hover:underline">
+                    Login with Phone OTP
+                </a>
+            </div>
+
         </div>
     </div>
 </div>
