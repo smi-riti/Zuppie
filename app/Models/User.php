@@ -23,6 +23,8 @@ class User extends Authenticatable
         'password',
         'phone_no',
         'is_admin',
+        'otp',
+        'otp_expires_at' => 'datetime',
     ];
 
     /**
@@ -33,6 +35,9 @@ class User extends Authenticatable
     protected $hidden = [
         'password',
         'remember_token',
+        'otp',              
+        'otp_expires_at'
+
     ];
 
     /**
