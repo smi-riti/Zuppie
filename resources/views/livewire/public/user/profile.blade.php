@@ -180,7 +180,7 @@
                                                     View Details
                                                 </button>
 
-                                                @if ($booking->status === 'confirmed')
+                                                @if ($booking->is_completed === 1)
                                                     <button wire:click="downloadInvoice({{ $booking->id }})"
                                                         class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-lg transition-all duration-300">
                                                         <i class="fas fa-download mr-2"></i>
@@ -223,7 +223,7 @@
                                                         </span>
                                                     </div>
                                                 @endif
-                                            @endif
+                                            @endif   
                                         </div>
                                     </div>
                                 </div>
@@ -349,19 +349,11 @@
 
                                         <div class="flex justify-between items-center">
                                             <div class="flex space-x-3">
-                                                <button
+                                                <button wire:click="openViewModal({{ $booking->id }})"
                                                     class="bg-gradient-to-r from-purple-600 to-pink-600 text-white px-4 py-2 rounded-lg font-semibold hover:from-purple-700 hover:to-pink-700 transition-all duration-300">
                                                     <i class="fas fa-eye mr-2"></i>
                                                     View Details
                                                 </button>
-
-                                                @if ($upBooking->is_completed == 1)
-                                                    <button
-                                                        class="border border-purple-300 text-purple-600 px-4 py-2 rounded-lg font-semibold hover:bg-purple-50 transition-all duration-300">
-                                                        <i class="fas fa-download mr-2"></i>
-                                                        Invoice
-                                                    </button>
-                                                @endif
                                             </div>
 
                                             @if ($upBooking->is_completed == 1)
@@ -498,17 +490,17 @@
 
                                         <div class="flex justify-between items-center">
                                             <div class="flex space-x-3">
-                                                <button
+                                                <button wire:click="openViewModal({{ $booking->id }})"
                                                     class="bg-gradient-to-r from-purple-600 to-pink-600 text-white px-4 py-2 rounded-lg font-semibold hover:from-purple-700 hover:to-pink-700 transition-all duration-300">
                                                     <i class="fas fa-eye mr-2"></i>
                                                     View Details
                                                 </button>
 
                                                 @if ($pastBooking->is_completed == 1)
-                                                    <button
+                                                    <button wire:click="downloadInvoice({{ $booking->id }})"
                                                         class="border border-purple-300 text-purple-600 px-4 py-2 rounded-lg font-semibold hover:bg-purple-50 transition-all duration-300">
                                                         <i class="fas fa-download mr-2"></i>
-                                                        Invoice
+                                                         Download Invoice
                                                     </button>
                                                 @endif
                                             </div>
@@ -643,28 +635,14 @@
 
                                         <div class="flex justify-between items-center">
                                             <div class="flex space-x-3">
-                                                <button
+                                                <button wire:click="openViewModal({{ $booking->id }})"
                                                     class="bg-gradient-to-r from-purple-600 to-pink-600 text-white px-4 py-2 rounded-lg font-semibold hover:from-purple-700 hover:to-pink-700 transition-all duration-300">
                                                     <i class="fas fa-eye mr-2"></i>
                                                     View Details
                                                 </button>
-
-                                                @if ($cancelBooking->is_completed == 1)
-                                                    <button
-                                                        class="border border-purple-300 text-purple-600 px-4 py-2 rounded-lg font-semibold hover:bg-purple-50 transition-all duration-300">
-                                                        <i class="fas fa-download mr-2"></i>
-                                                        Invoice
-                                                    </button>
-                                                @endif
                                             </div>
 
-                                            @if ($cancelBooking->is_completed == 1)
-                                                <div
-                                                    class="bg-green-500 text-white px-4 py-2 rounded-lg font-semibold hover:bg-green-600 transition-all duration-300">
-                                                    <i class="fas fa-check mr-2"></i>
-                                                    Completed
-                                                </div>
-                                            @endif
+                                            
                                         </div>
                                     </div>
                                 </div>
