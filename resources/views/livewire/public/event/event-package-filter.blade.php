@@ -62,19 +62,7 @@
                                 </h3>
                                 <p class="text-gray-600 mb-4 leading-relaxed">{{ $package->description }}</p>
                                 <div class="space-y-2 mb-6">
-                                    @foreach (array_slice($package->features ?? [], 0, 4) as $feature)
-                                        <div class="flex items-center space-x-2">
-                                            <div
-                                                class="w-2 h-2 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full flex-shrink-0">
-                                            </div>
-                                            <span class="text-gray-700 text-sm">{{ $feature }}</span>
-                                        </div>
-                                    @endforeach
-                                    @if (is_array($package->features) && count($package->features) > 4)
-                                        <div class="text-purple-600 font-semibold text-sm">
-                                            +{{ count($package->features) - 4 }} more features
-                                        </div>
-                                    @endif
+                                    {!! $package->features !!}
                                 </div>
                                 <div class="flex space-x-3">
                                     <a href="{{ route('package-detail', ['id' => $package->id]) }}"
