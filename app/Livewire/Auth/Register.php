@@ -32,7 +32,19 @@ class Register extends Component
         'name' => 'required|string|max:255',
         'email' => 'required|email|max:255|unique:users',
         'password' => 'required|min:8|same:password_confirmation',
-        'phone_no' => 'required|string|max:20',
+        'phone_no' => 'required|string|max:20|unique:users',
+    ];
+
+    protected $messages = [
+        'name.required' => 'Name is required',
+        'email.required' => 'Email address is required',
+        'email.email' => 'Please enter a valid email address',
+        'email.unique' => 'This email address is already registered',
+        'password.required' => 'Password is required',
+        'password.min' => 'Password must be at least 8 characters',
+        'password.same' => 'Password confirmation does not match',
+        'phone_no.required' => 'Phone number is required',
+        'phone_no.unique' => 'This phone number is already registered',
     ];
 
     public function register()

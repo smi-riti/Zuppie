@@ -9,6 +9,7 @@ use App\Models\Payment;
 use App\Models\User;
 use App\Models\Service;
 use App\Services\RazorpayService;
+use App\Mail\BookingConfirmationMail;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
@@ -62,7 +63,7 @@ class PackageBookingForm extends Component
         'guestCount' => 'nullable|integer|min:1|max:10000',
         'location' => 'required|string|min:5|max:500',
         'specialRequests' => 'nullable|string|max:1000',
-        'paymentMethod' => 'required|in:cash,razorpay',
+        'paymentMethod' => 'required|in:cash,online',
         'acceptTerms' => 'required|accepted'
     ];
 
@@ -86,7 +87,9 @@ class PackageBookingForm extends Component
         'location.min' => 'Location must be at least 5 characters',
         'location.max' => 'Location cannot exceed 500 characters',
         'specialRequests.max' => 'Special requests cannot exceed 1000 characters',
-        'acceptTerms.required' => 'You must accept the terms and conditions'
+        'paymentMethod.required' => 'Please select a payment method',
+        'acceptTerms.required' => 'You must accept the terms and conditions',
+        'acceptTerms.accepted' => 'You must accept the terms and conditions to proceed'
     ];
 
     public function mount($package_id = null, $pin_code = null)
@@ -143,6 +146,11 @@ class PackageBookingForm extends Component
 
     public function updated($field)
     {
+        // Clean up time field - convert empty string to null
+        if ($field === 'eventTime') {
+            $this->eventTime = empty($this->eventTime) ? null : $this->eventTime;
+        }
+        
         // Real-time validation for event date
         if ($field === 'eventDate' && $this->eventDate) {
             try {
@@ -153,7 +161,7 @@ class PackageBookingForm extends Component
         }
         
         // Real-time validation for event time
-        if ($field === 'eventTime' && $this->eventTime) {
+        if ($field === 'eventTime' && !empty($this->eventTime)) {
             try {
                 $this->validateOnly('eventTime');
             } catch (\Illuminate\Validation\ValidationException $e) {
@@ -214,14 +222,26 @@ class PackageBookingForm extends Component
         }
         
         try {
-            // Validate all fields
-            $this->validate();
+            // Validate all fields including terms acceptance
+            $this->validate([
+                'name' => 'required|string|min:2|max:255',
+                'phone' => 'required|string|min:10|max:15',
+                'email' => 'nullable|email|max:255',
+                'eventDate' => 'required|date|after:today',
+                'eventTime' => 'nullable|date_format:H:i',
+                'eventEndDate' => 'nullable|date|after:eventDate',
+                'guestCount' => 'nullable|integer|min:1|max:10000',
+                'location' => 'required|string|min:5|max:500',
+                'specialRequests' => 'nullable|string|max:1000',
+                'paymentMethod' => 'required|in:cash,online',
+                'acceptTerms' => 'required|accepted'
+            ]);
 
             // Update logged in user's information
             $user = $this->updateUserInfo();
             
             // Handle payment method
-            if ($this->paymentMethod === 'razorpay') {
+            if ($this->paymentMethod === 'online') {
                 // Create Razorpay order and initiate payment
                 $this->initiateRazorpayPayment($user);
             } else {
@@ -328,14 +348,14 @@ class PackageBookingForm extends Component
                 'package_id' => $this->packageId,
                 'pin_code' => $this->pinCode,
                 'event_date' => $this->eventDate,
-                'event_time' => $this->eventTime,
-                'event_end_date' => $this->eventEndDate,
-                'guest_count' => $this->guestCount,
+                'event_time' => !empty($this->eventTime) ? $this->eventTime : null,
+                'event_end_date' => !empty($this->eventEndDate) ? $this->eventEndDate : null,
+                'guest_count' => !empty($this->guestCount) ? $this->guestCount : null,
                 'location' => $this->location,
-                'special_requests' => $this->specialRequests,
+                'special_requests' => !empty($this->specialRequests) ? $this->specialRequests : null,
                 'total_price' => $totalAmount,
                 'booking_name' => $this->name,
-                'booking_email' => $this->email,
+                'booking_email' => !empty($this->email) ? $this->email : null,
                 'booking_phone_no' => $this->phone,
                 'razorpay_order_id' => $this->razorpayOrderId
             ]]);
@@ -412,15 +432,13 @@ class PackageBookingForm extends Component
                 'amount' => $advanceData['advance_amount'],
                 'currency' => 'INR',
                 'status' => 'paid',
-                'payment_method' => 'razorpay',
+                'payment_method' => 'online',
                 'payment_date' => now('Asia/Kolkata'),
                 'notes' => '20% advance payment for cash booking (Balance ₹' . number_format($booking->total_price * 0.80, 2) . ' to be paid in cash on event day)'
             ]);
 
-            // Send confirmation email if email provided
-            if ($this->email) {
-                $this->sendConfirmationEmail($user, $booking);
-            }
+            // Send confirmation email
+            $this->sendConfirmationEmail($user, $booking);
 
             // Clear session data
             session()->forget(['advance_payment_data', 'booking_form_data']);
@@ -471,13 +489,13 @@ class PackageBookingForm extends Component
                 'event_package_id' => $bookingData['package_id'],
                 'pin_code' => $bookingData['pin_code'],
                 'event_date' => $bookingData['event_date'],
-                'event_time' => $bookingData['event_time'] ?? null,
+                'event_time' => !empty($bookingData['event_time']) ? $bookingData['event_time'] : null,
                 'event_end_date' => !empty($bookingData['event_end_date']) ? $bookingData['event_end_date'] : null,
                 'guest_count' => !empty($bookingData['guest_count']) ? intval($bookingData['guest_count']) : null,
                 'location' => $bookingData['location'],
                 'special_requests' => !empty($bookingData['special_requests']) ? $bookingData['special_requests'] : null,
                 'total_price' => $bookingData['total_price'],
-                'payment_method' => 'razorpay',
+                'payment_method' => 'online',
                 'advance_amount' => null,
                 'advance_paid' => true,
                 'due_amount' => 0,
@@ -493,7 +511,7 @@ class PackageBookingForm extends Component
                 'booking_id' => $booking->id,
                 'amount' => $bookingData['total_price'],
                 'payment_date' => now('Asia/Kolkata'),
-                'payment_method' => 'razorpay',
+                'payment_method' => 'online',
                 'razorpay_payment_id' => $paymentId,
                 'razorpay_order_id' => $orderId,
                 'razorpay_signature' => $signature,
@@ -503,10 +521,8 @@ class PackageBookingForm extends Component
             ]);
             
             // Send confirmation email
-            if ($bookingData['booking_email']) {
-                $user = User::find($bookingData['user_id']);
-                $this->sendConfirmationEmail($user, $booking);
-            }
+            $user = User::find($bookingData['user_id']);
+            $this->sendConfirmationEmail($user, $booking);
             
             // Clear session data
             session()->forget(['pending_booking_data', 'booking_form_data']);
@@ -578,11 +594,11 @@ class PackageBookingForm extends Component
         session([
             'booking_form_data' => [
                 'eventDate' => $this->eventDate,
-                'eventTime' => $this->eventTime,
-                'eventEndDate' => $this->eventEndDate,
+                'eventTime' => !empty($this->eventTime) ? $this->eventTime : null,
+                'eventEndDate' => !empty($this->eventEndDate) ? $this->eventEndDate : null,
                 'location' => $this->location,
-                'guestCount' => $this->guestCount,
-                'specialRequests' => $this->specialRequests,
+                'guestCount' => !empty($this->guestCount) ? $this->guestCount : null,
+                'specialRequests' => !empty($this->specialRequests) ? $this->specialRequests : null,
                 'packageId' => $this->packageId,
                 'pinCode' => $this->pinCode,
             ]
@@ -616,79 +632,65 @@ class PackageBookingForm extends Component
 
     public function validateStep1()
     {
-        try {
-            $this->validate([
-                'eventDate' => 'required|date|after:today',
-                'eventEndDate' => 'nullable|date|after:eventDate',
-                'location' => 'required|string|min:5|max:500',
-            ]);
-            
-            $this->currentStep = 2;
-        } catch (\Illuminate\Validation\ValidationException $e) {
-            // Validation failed, errors will be automatically displayed
-            session()->flash('validation_error', 'Please fix the validation errors before proceeding.');
-        }
+        $this->validate([
+            'eventDate' => 'required|date|after:today',
+            'eventTime' => 'nullable|date_format:H:i',
+            'eventEndDate' => 'nullable|date|after:eventDate',
+            'location' => 'required|string|min:5|max:500',
+        ]);
+        
+        $this->currentStep = 2;
     }
 
     public function validateStep2()
     {
-        try {
-            $this->validate([
-                'guestCount' => 'nullable|integer|min:1|max:10000',
-                'specialRequests' => 'nullable|string|max:1000',
-            ]);
-            
-            $this->currentStep = 3;
-        } catch (\Illuminate\Validation\ValidationException $e) {
-            // Validation failed, errors will be automatically displayed
-            session()->flash('validation_error', 'Please fix the validation errors before proceeding.');
-        }
+        $this->validate([
+            'guestCount' => 'nullable|integer|min:1|max:10000',
+            'specialRequests' => 'nullable|string|max:1000',
+        ]);
+        
+        $this->currentStep = 3;
     }
 
     public function validateStep3()
     {
-        try {
-            $this->validate([
-                'name' => 'required|string|min:2|max:255',
-                'phone' => 'required|string|min:10|max:15',
-                'email' => 'nullable|email|max:255',
-            ]);
+        $this->validate([
+            'name' => 'required|string|min:2|max:255',
+            'phone' => 'required|string|min:10|max:15',
+            'email' => 'nullable|email|max:255',
+        ]);
+        
+        // Check if user needs to register/login
+        if (!$this->isLoggedIn) {
+            // Save form data to session before redirecting
+            $this->saveFormDataToSession();
+            session(['booking_return_url' => request()->url()]);
+            session(['booking_package_id' => $this->packageId]);
+            session(['booking_pin_code' => $this->pinCode]);
+            session(['booking_step3_data' => [
+                'name' => $this->name,
+                'email' => $this->email,
+                'phone' => $this->phone,
+                'eventTime' => $this->eventTime
+            ]]);
             
-            // Check if user needs to register/login
-            if (!$this->isLoggedIn) {
-                // Save form data to session before redirecting
-                $this->saveFormDataToSession();
-                session(['booking_return_url' => request()->url()]);
-                session(['booking_package_id' => $this->packageId]);
-                session(['booking_pin_code' => $this->pinCode]);
-                session(['booking_step3_data' => [
-                    'name' => $this->name,
-                    'email' => $this->email,
-                    'phone' => $this->phone,
-                    'eventTime' => $this->eventTime
-                ]]);
-                
-                // Check if user with this email/phone exists
-                $existingUser = \App\Models\User::where('email', $this->email)
-                    ->orWhere('phone_no', $this->phone)
-                    ->first();
-                
-                if ($existingUser) {
-                    // User exists, redirect to login
-                    session()->flash('info', 'Account found! Please login to complete your booking.');
-                    return redirect()->route('login');
-                } else {
-                    // User doesn't exist, redirect to register
-                    session()->flash('info', 'Please register to complete your booking.');
-                    return redirect()->route('register');
-                }
+            // Check if user with this email/phone exists
+            $existingUser = \App\Models\User::where('email', $this->email)
+                ->orWhere('phone_no', $this->phone)
+                ->first();
+            
+            if ($existingUser) {
+                // User exists, redirect to login
+                session()->flash('info', 'Account found! Please login to complete your booking.');
+                return redirect()->route('login');
+            } else {
+                // User doesn't exist, redirect to register
+                session()->flash('info', 'Please register to complete your booking.');
+                return redirect()->route('register');
             }
-            
-            $this->currentStep = 4;
-        } catch (\Illuminate\Validation\ValidationException $e) {
-            // Validation failed, errors will be automatically displayed
-            session()->flash('validation_error', 'Please fix the validation errors before proceeding.');
         }
+        
+        $this->currentStep = 4;
     }
 
     private function updateUserInfo()
@@ -721,8 +723,8 @@ class PackageBookingForm extends Component
             'booking_email' => $this->email ?: null,
             'booking_phone_no' => $this->phone,
             'event_date' => $this->eventDate,
-            'event_time' => $this->eventTime ?: null,
-            'event_end_date' => $this->eventEndDate ?: null,
+            'event_time' => !empty($this->eventTime) ? $this->eventTime : null,
+            'event_end_date' => !empty($this->eventEndDate) ? $this->eventEndDate : null,
             'guest_count' => !empty($this->guestCount) ? intval($this->guestCount) : null,
             'location' => $this->location,
             'special_requests' => !empty($this->specialRequests) ? $this->specialRequests : null,
@@ -747,7 +749,7 @@ class PackageBookingForm extends Component
                 'booking_id' => $booking->id,
                 'amount' => $advanceAmount,
                 'payment_date' => now('Asia/Kolkata'),
-                'payment_method' => 'razorpay', // 20% advance via Razorpay
+                'payment_method' => 'online', // 20% advance via Razorpay
                 'transaction_id' => 'ADVANCE_' . now()->format('YmdHis') . '_' . $booking->id,
                 'status' => 'pending',
                 'notes' => 'Cash booking - 20% advance payment via Razorpay (Balance ₹' . number_format($booking->total_price * 0.80, 2) . ' to be paid in cash on event day)',
@@ -772,16 +774,44 @@ class PackageBookingForm extends Component
     private function sendConfirmationEmail($user, $booking)
     {
         try {
-            // You can implement email sending here
-            // For now, we'll just log it
-            \Log::info("Booking confirmation email would be sent to: {$this->email}");
+            \Log::info("Starting email send process for booking ID: {$booking->id}");
             
-            // If user has temp password, include it in email
+            // Load the booking with relationships
+            $booking->load(['eventPackage', 'user']);
+            
+            // Send confirmation email to user using the user_id from booking
+            $bookingUser = $booking->user;
+            if ($bookingUser && $bookingUser->email) {
+                Mail::to($bookingUser->email)->send(new BookingConfirmationMail($booking, false));
+                \Log::info("Booking confirmation email sent to user: {$bookingUser->email} (User ID: {$bookingUser->id})");
+            } else {
+                \Log::warning("No email found for user ID: {$booking->user_id}");
+            }
+            
+            // Send notification email to all admin users (where is_admin = 1)
+            $adminUsers = User::where('is_admin', 1)->get();
+            if ($adminUsers->count() > 0) {
+                foreach ($adminUsers as $admin) {
+                    if ($admin->email) {
+                        Mail::to($admin->email)->send(new BookingConfirmationMail($booking, true));
+                        \Log::info("Booking notification email sent to admin: {$admin->email} (Admin ID: {$admin->id})");
+                    }
+                }
+            } else {
+                \Log::warning("No admin users found with is_admin = 1");
+            }
+            
+            // If user has temp password, include it in email (for new registrations)
             if (isset($user->temp_password)) {
                 \Log::info("New account created with password: {$user->temp_password}");
+                // You could send a separate welcome email here if needed
             }
+            
+            \Log::info("Email send process completed for booking ID: {$booking->id}");
         } catch (\Exception $e) {
             \Log::error('Email sending failed: ' . $e->getMessage());
+            \Log::error('Email error stack trace: ' . $e->getTraceAsString());
+            // Don't throw the exception as we don't want email failure to break the booking process
         }
     }
 
@@ -796,15 +826,18 @@ class PackageBookingForm extends Component
             $this->isLoggedIn = true;
             $this->existingUser = Auth::user();
             
-            // Only pre-fill if explicitly requested or if returning from login
-            if (session('prefill_user_data') || session('booking_step3_data')) {
-                $this->name = $this->existingUser->name ?? '';
-                $this->email = $this->existingUser->email ?? '';
-                $this->phone = $this->existingUser->phone_no ?? '';
+            // Auto-fill user details if fields are empty or if explicitly requested
+            if (empty($this->name) || empty($this->email) || empty($this->phone) || 
+                session('prefill_user_data') || session('booking_step3_data')) {
+                
+                $this->name = $this->existingUser->name ?? $this->name;
+                $this->email = $this->existingUser->email ?? $this->email;
+                $this->phone = $this->existingUser->phone_no ?? $this->phone;
+                
                 session()->forget('prefill_user_data');
             }
             
-            $this->userMessage = "Welcome back, {$this->existingUser->name}! You can modify your information for this booking if needed.";
+            $this->userMessage = "Welcome back, {$this->existingUser->name}! Your details have been pre-filled. You can modify them for this booking if needed.";
         } else {
             $this->isLoggedIn = false;
             $this->existingUser = null;

@@ -428,7 +428,7 @@
                                     </label>
                                     
                                     <label class="flex items-center p-4 border border-gray-300 rounded-xl cursor-pointer hover:border-purple-500 transition-all duration-300 bg-white">
-                                        <input type="radio" wire:model="paymentMethod" value="razorpay" class="mr-3">
+                                        <input type="radio" wire:model="paymentMethod" value="online" class="mr-3">
                                         <div class="flex-1">
                                             <div class="font-semibold text-gray-800 flex items-center">
                                                 <i class="fas fa-credit-card text-blue-600 mr-2"></i>
@@ -453,7 +453,7 @@
                                         Balance on Event Day: ₹{{ number_format($package->discounted_price * 0.80, 2) }}
                                     </p>
                                 </div>
-                                @elseif($paymentMethod === 'razorpay')
+                                @elseif($paymentMethod === 'online')
                                 <div class="mt-4 p-3 bg-green-50 rounded-lg">
                                     <p class="text-sm text-green-800">
                                         <i class="fas fa-shield-alt mr-2"></i>
@@ -498,14 +498,14 @@
                             <!-- Terms and Conditions -->
                             <div class="bg-gray-50 rounded-xl p-4">
                                 <label class="flex items-start">
-                                    <input type="checkbox" wire:model="acceptTerms" class="mt-1 mr-3">
+                                    <input type="checkbox" wire:model="acceptTerms" class="mt-1 mr-3 @error('acceptTerms') border-red-500 @enderror">
                                     <span class="text-sm text-gray-700">
-                                        I agree to the <a href="#" class="text-purple-600 hover:underline">Terms & Conditions</a> and 
-                                        <a href="#" class="text-purple-600 hover:underline">Privacy Policy</a>. I understand that my booking 
+                                        I agree to the <a href="{{ route('terms-of-service') }}" target="_blank" class="text-purple-600 hover:underline font-medium">Terms & Conditions</a> and 
+                                        <a href="{{ route('privacy-policy') }}" target="_blank" class="text-purple-600 hover:underline font-medium">Privacy Policy</a>. I understand that my booking 
                                         is subject to availability and will be confirmed by the event organizer.
                                     </span>
                                 </label>
-                                @error('acceptTerms') <span class="text-red-500 text-sm mt-1">{{ $message }}</span> @enderror
+                                @error('acceptTerms') <span class="text-red-500 text-sm mt-1 block">{{ $message }}</span> @enderror
                             </div>
 
                             <div class="grid grid-cols-2 gap-4 pt-4">
@@ -517,7 +517,7 @@
                                         wire:loading.attr="disabled"
                                         class="bg-gradient-to-r from-purple-600 to-pink-600 text-white py-3 rounded-xl font-bold hover:from-purple-700 hover:to-pink-700 transition-all duration-300 disabled:opacity-50">
                                     <span wire:loading.remove>
-                                        @if($paymentMethod === 'razorpay')
+                                        @if($paymentMethod === 'online')
                                             <i class="fas fa-credit-card mr-2"></i> Pay Now ₹{{ number_format($this->totalPrice) }}
                                         @else
                                             <i class="fas fa-check-circle mr-2"></i> Confirm Booking
@@ -525,7 +525,7 @@
                                     </span>
                                     <span wire:loading>
                                         <i class="fas fa-spinner fa-spin mr-2"></i> 
-                                        @if($paymentMethod === 'razorpay')
+                                        @if($paymentMethod === 'online')
                                             Initiating Payment...
                                         @else
                                             Processing...
@@ -694,7 +694,7 @@
                 key: '{{ config("razorpay.key_id") }}', // Your Razorpay key
                 amount: paymentData.amount,
                 currency: paymentData.currency || 'INR',
-                name: paymentData.name || 'Zuppie Events',
+                name: paymentData.name || 'Zuppie',
                 description: paymentData.description || 'Event Booking',
                 order_id: paymentData.order_id,
                 prefill: paymentData.prefill || {},
