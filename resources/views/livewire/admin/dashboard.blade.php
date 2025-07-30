@@ -1,31 +1,29 @@
 <div class="p-6 bg-gradient-to-br from-purple-50 to-pink-50 min-h-screen">
     <!-- Stats Cards -->
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
-        <!-- Upcoming Events Card -->
+        <div class="bg-white rounded-xl shadow-sm p-6 border-t-4 border-purple-400 hover:shadow-md transition">
+            <div class="text-3xl font-bold text-purple-700">{{count($today_booking)}}</div>
+            <div class=" text-purple-500">Today's Booking</div>
+            <div class="mt-2 h-1 bg-gradient-to-r from-purple-300 to-pink-300 rounded-full"></div>
+        </div>
         <div class="bg-white rounded-xl shadow-sm p-6 border-t-4 border-pink-400 hover:shadow-md transition">
-            <div class="text-3xl font-bold text-purple-700">24</div>
-            <div class="text-sm text-purple-500">Upcoming Events</div>
+            <div class="text-3xl font-bold text-purple-700">{{ count($upComingBookings) }}</div>
+            <div class="text-purple-500">Upcoming Events</div>
             <div class="mt-2 h-1 bg-gradient-to-r from-pink-300 to-purple-300 rounded-full"></div>
         </div>
 
-        <!-- Birthdays Card -->
-        <div class="bg-white rounded-xl shadow-sm p-6 border-t-4 border-purple-400 hover:shadow-md transition">
-            <div class="text-3xl font-bold text-purple-700">18</div>
-            <div class="text-sm text-purple-500">Birthdays</div>
-            <div class="mt-2 h-1 bg-gradient-to-r from-purple-300 to-pink-300 rounded-full"></div>
-        </div>
 
         <!-- Baby Showers Card -->
         <div class="bg-white rounded-xl shadow-sm p-6 border-t-4 border-pink-300 hover:shadow-md transition">
-            <div class="text-3xl font-bold text-purple-700">6</div>
-            <div class="text-sm text-purple-500">Baby Showers</div>
+            <div class="text-3xl font-bold text-purple-700">{{ count($all_packages) }}</div>
+            <div class="text-purple-500">Total Packages</div>
             <div class="mt-2 h-1 bg-gradient-to-r from-pink-200 to-purple-200 rounded-full"></div>
         </div>
 
         <!-- Revenue Card -->
         <div class="bg-white rounded-xl shadow-sm p-6 border-t-4 border-purple-300 hover:shadow-md transition">
             <div class="text-3xl font-bold text-purple-700">$12,450</div>
-            <div class="text-sm text-purple-500">Revenue</div>
+            <div class="text-purple-500">Revenue</div>
             <div class="mt-2 h-1 bg-gradient-to-r from-purple-200 to-pink-200 rounded-full"></div>
         </div>
     </div>
@@ -39,7 +37,6 @@
                 <!-- Removed "View All" button since we have pagination -->
             </div>
 
-            <!-- Event List -->
             <div class="space-y-4">
                 @foreach ($upComingBookings as $booking)
                     <div
