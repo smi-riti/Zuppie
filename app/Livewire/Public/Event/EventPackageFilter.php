@@ -48,13 +48,13 @@ class EventPackageFilter extends Component
         $this->loadMoreCount++;
     }
 
-    public function clearFilters()
-    {
-        $this->selectedCategory = null;
-        $this->selectedSubCategory = null;
-        $this->searchQuery = '';
-        $this->loadMoreCount = 0;
-    }
+    // public function clearFilters()
+    // {
+    //     $this->selectedCategory = null;
+    //     $this->selectedSubCategory = null;
+    //     $this->searchQuery = '';
+    //     $this->loadMoreCount = 0;
+    // }
 
     public function getFilteredPackagesProperty()
     {
