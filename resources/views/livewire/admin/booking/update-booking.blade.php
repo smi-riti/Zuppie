@@ -24,6 +24,9 @@
                     <div class="grid grid-cols-1 gap-6 md:grid-cols-2">
                         <!-- Name -->
                         <div>
+                            <label class="block text-sm font-medium text-purple-700 mb-1">Full Name (User)</label>
+                            <input type="text" value="{{ $name }}" readonly
+                                class="w-full px-4 py-2 rounded-lg border border-purple-200 bg-gray-100 focus:ring-2 focus:ring-purple-300 focus:border-purple-400 transition">
                             <label class="block text-sm font-medium text-zuppie-700 mb-1">Full Name</label>
                             <input type="text" wire:model="booking_name"
                                 class="w-full px-4 py-2 rounded-lg border border-zuppie-200 focus:ring-2 focus:ring-zuppie-300 focus:border-zuppie-400 transition">
@@ -34,6 +37,9 @@
 
                         <!-- Email -->
                         <div>
+                            <label class="block text-sm font-medium text-purple-700 mb-1">Email (User)</label>
+                            <input type="email" value="{{ $email }}" readonly
+                                class="w-full px-4 py-2 rounded-lg border border-purple-200 bg-gray-100 focus:ring-2 focus:ring-purple-300 focus:border-purple-400 transition">
                             <label class="block text-sm font-medium text-zuppie-700 mb-1">Email</label>
                             <input type="email" wire:model="booking_email"
                                 class="w-full px-4 py-2 rounded-lg border border-zuppie-200 focus:ring-2 focus:ring-zuppie-300 focus:border-zuppie-400 transition">
@@ -44,6 +50,9 @@
 
                         <!-- Phone -->
                         <div>
+                            <label class="block text-sm font-medium text-purple-700 mb-1">Phone Number (User)</label>
+                            <input type="text" value="{{ $phone_no }}" readonly
+                                class="w-full px-4 py-2 rounded-lg border border-purple-200 bg-gray-100 focus:ring-2 focus:ring-purple-300 focus:border-purple-400 transition">
                             <label class="block text-sm font-medium text-zuppie-700 mb-1">Phone Number</label>
                             <input type="text" wire:model="booking_phone_no"
                                 class="w-full px-4 py-2 rounded-lg border border-zuppie-200 focus:ring-2 focus:ring-zuppie-300 focus:border-zuppie-400 transition">
@@ -53,8 +62,6 @@
                         </div>
                     </div>
                 </div>
-
-                <!-- Event Details Section -->
                 <div class="space-y-6">
                     <h3 class="text-xl font-semibold text-zuppie-800 border-b-2 border-zuppie-100 pb-2">
                         Event Details
@@ -155,7 +162,7 @@
                     <button type="button" wire:click="closeModal"
                         class="px-6 py-3 bg-gray-200 text-gray-700 font-semibold rounded-lg shadow-md transition">
                         Cancel
-                    </button
+                </button>
                     <button type="submit"
                         class="px-6 py-3 bg-gradient-to-r from-zuppie-500 to-zuppie-pink-500 hover:from-zuppie-600 hover:to-zuppie-pink-600 text-white font-semibold rounded-lg shadow-md transition">
                         Update Booking

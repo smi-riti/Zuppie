@@ -31,7 +31,7 @@
                     @error('name')
                         <span class="text-xs text-zuppie-pink-600 mt-1 block">{{ $message }}</span>
                     @enderror
-                </div
+                </div>
 
                 <!-- Email -->
                 <div>
@@ -41,7 +41,7 @@
                     @error('email')
                         <span class="text-xs text-zuppie-pink-600 mt-1 block">{{ $message }}</span>
                     @enderror
-                </div
+                </div>
 
                 <!-- Phone -->
                 <div>
@@ -51,7 +51,7 @@
                     @error('phone_no')
                         <span class="text-xs text-zuppie-pink-600 mt-1 block">{{ $message }}</span>
                     @enderror
-                </div
+                </div>
 
                 <!-- Spacer -->
                 <div class="md:col-span-2 h-4"></div>

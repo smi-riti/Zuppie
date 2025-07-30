@@ -28,6 +28,9 @@
                     @endif
                     <span class="ml-2 text-zuppie-600 font-semibold">({{ count($packages) }} found)</span>
                 </div>
+                <a href="{{ route('event-packages') }}"
+                    class="text-purple-600 hover:text-purple-800 font-semibold">
+                    <i class="fas fa-arrow-left mr-2"></i>Back to all packages</a>
                 <button wire:click="clearFilters" class="text-zuppie-600 hover:text-zuppie-800 font-medium">
                     Clear Filters
                 </button>
@@ -152,8 +155,6 @@
                     </h3>
                 </div>
             @endif
-
-            <!-- Similar Packages Section -->
             <!-- Similar Packages Section -->
             @if (count($similarPackages) > 0)
                 <div class="mt-16">

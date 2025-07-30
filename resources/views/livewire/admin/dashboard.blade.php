@@ -39,7 +39,6 @@
                 <!-- Removed "View All" button since we have pagination -->
             </div>
 
-            <!-- Event List -->
             <div class="space-y-4">
                 @foreach ($upComingBookings as $booking)
                     <div
