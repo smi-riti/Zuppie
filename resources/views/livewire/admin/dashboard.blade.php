@@ -54,9 +54,7 @@
                         </div>
                         <div class="flex space-x-2">
                             <button
-                                class="w-8 h-8 rounded-full bg-purple-100 flex items-center justify-center text-purple-600 hover:bg-purple-200 transition">✏️</button>
-                            <button
-                                class="w-8 h-8 rounded-full bg-pink-100 flex items-center justify-center text-pink-600 hover:bg-pink-200 transition">🗑️</button>
+                                class=" rounded bg-purple-100 flex items-center justify-center text-purple-600 hover:bg-purple-200 transition px-2 text-lg py-1 font-semibold  ">View</button>
                         </div>
                     </div>
                 @endforeach
@@ -68,24 +66,47 @@
             </div>
         </div>
 
-        <!-- Right Column (1/3 width) -->
         <div class="space-y-6">
             <!-- Calendar -->
-            <div class="bg-white rounded-xl shadow-sm p-6 hover:shadow-md transition">
+            <div class="bg-white rounded-xl shadow-sm p-6 hover:shadow-md transition" id="admin-calendar">
                 <div class="flex justify-between items-center mb-4">
-                    <h2 class="text-lg font-semibold text-purple-800">June 2023</h2>
+                    <h2 class="text-lg font-semibold text-purple-800" id="calendar-month-year">
+                        {{ \Carbon\Carbon::create($currentYear, $currentMonth, 1)->format('F Y') }}
+                    </h2>
                     <div class="flex space-x-2">
-                        <button
+                        <button wire:click="goToPreviousMonth"
                             class="w-8 h-8 rounded-full bg-purple-100 flex items-center justify-center text-purple-600 hover:bg-purple-200 transition">←</button>
-                        <button
+                        <button wire:click="goToNextMonth"
                             class="w-8 h-8 rounded-full bg-purple-100 flex items-center justify-center text-purple-600 hover:bg-purple-200 transition">→</button>
                     </div>
                 </div>
 
                 <div class="mb-4">
                     <div class="flex justify-between items-center mb-2">
-                        <div class="text-sm font-medium text-purple-700">Upcoming Events</div>
+                        <div class="text-sm font-medium text-purple-700">
+                            @if($selectedDate)
+                                Events on {{ $selectedDate->format('M j, Y') }}
+                            @else
+                                Select a date to view events
+                            @endif
+                        </div>
                     </div>
+                    @if($selectedDate)
+                        @if($this->getEventsCountForSelectedDate() > 0)
+                            <div class="flex items-center justify-between p-3 bg-purple-50 rounded-lg">
+                                <div class="flex items-center">
+                                    <div class="w-3 h-3 rounded-full bg-pink-500 mr-2"></div>
+                                    <span class="text-sm font-medium text-purple-800">Total Events</span>
+                                </div>
+                                <span
+                                    class="text-lg font-bold text-purple-700">{{ $this->getEventsCountForSelectedDate() }}</span>
+                            </div>
+                        @else
+                            <div class="p-3 bg-purple-50 rounded-lg text-center">
+                                <span class="text-sm text-gray-500">No events found on this date</span>
+                            </div>
+                        @endif
+                    @endif
                 </div>
 
                 <!-- Calendar Grid -->
@@ -100,80 +121,90 @@
                     <div class="text-xs text-purple-500 py-1">Sat</div>
 
                     <!-- Calendar days -->
-                    <div class="py-1 text-sm text-purple-400">28</div>
-                    <div class="py-1 text-sm text-purple-400">29</div>
-                    <div class="py-1 text-sm text-purple-400">30</div>
-                    <div class="py-1 text-sm text-purple-400">31</div>
-                    <div class="py-1 text-sm text-purple-700">1</div>
-                    <div class="py-1 text-sm text-purple-700">2</div>
-                    <div class="py-1 text-sm text-purple-700">3</div>
+                    @php
+                        $firstDay = \Carbon\Carbon::create($currentYear, $currentMonth, 1)->dayOfWeek;
+                        $daysInMonth = \Carbon\Carbon::create($currentYear, $currentMonth, 1)->daysInMonth;
+                        $daysInPrevMonth = \Carbon\Carbon::create($currentYear, $currentMonth - 1, 1)->daysInMonth;
+                        $today = now();
+                        $isCurrentMonth = ($currentMonth == $today->month && $currentYear == $today->year);
+                    @endphp
 
-                    <div class="py-1 text-sm text-purple-700">4</div>
-                    <div class="py-1 text-sm text-purple-700">5</div>
-                    <div class="py-1 text-sm text-purple-700">6</div>
-                    <div class="py-1 text-sm text-purple-700">7</div>
-                    <div class="py-1 text-sm text-purple-700">8</div>
-                    <div class="py-1 text-sm text-purple-700">9</div>
-                    <div class="py-1 text-sm text-purple-700">10</div>
+                    <!-- Previous month days -->
+                    @for ($i = $firstDay - 1; $i >= 0; $i--)
+                        <div class="py-1 text-sm text-purple-400">{{ $daysInPrevMonth - $i }}</div>
+                    @endfor
 
-                    <div class="py-1 text-sm text-purple-700">11</div>
-                    <div class="py-1 text-sm text-purple-700">12</div>
-                    <div class="py-1 text-sm text-purple-700">13</div>
-                    <div class="py-1 text-sm text-purple-700">14</div>
-                    <div
-                        class="py-1 text-sm bg-pink-500 text-white rounded-md font-medium cursor-pointer hover:bg-pink-600 transition">
-                        15</div>
-                    <div class="py-1 text-sm text-purple-700">16</div>
-                    <div class="py-1 text-sm text-purple-700">17</div>
+                    <!-- Current month days -->
+                    @for ($i = 1; $i <= $daysInMonth; $i++)
+                        @php
+                            $dateKey = $currentYear . '-' . $currentMonth . '-' . $i;
+                            $hasEvent = isset($calendarEvents[$dateKey]);
+                            $isToday = $isCurrentMonth && $i == $today->day;
+                        @endphp
 
-                    <div
-                        class="py-1 text-sm bg-pink-500 text-white rounded-md font-medium cursor-pointer hover:bg-pink-600 transition">
-                        18</div>
-                    <div class="py-1 text-sm text-purple-700">19</div>
-                    <div
-                        class="py-1 text-sm bg-pink-500 text-white rounded-md font-medium cursor-pointer hover:bg-pink-600 transition">
-                        20</div>
-                    <div class="py-1 text-sm text-purple-700">21</div>
-                    <div
-                        class="py-1 text-sm bg-pink-500 text-white rounded-md font-medium cursor-pointer hover:bg-pink-600 transition">
-                        22</div>
-                    <div class="py-1 text-sm text-purple-700">23</div>
-                    <div class="py-1 text-sm text-purple-700">24</div>
+                        @if($isToday)
+                            <div wire:click="selectDate({{ $i }})"
+                                class="py-1 text-sm border-2 border-purple-500 rounded-md font-medium cursor-pointer hover:bg-purple-50 transition">
+                                {{ $i }}
+                            </div>
+                        @elseif($hasEvent)
+                            <div wire:click="selectDate({{ $i }})"
+                                class="py-1 text-sm bg-pink-500 text-white rounded-md font-medium cursor-pointer hover:bg-pink-600 transition">
+                                {{ $i }}
+                            </div>
+                        @else
+                            <div wire:click="selectDate({{ $i }})" class="py-1 text-sm text-purple-700 cursor-pointer">{{ $i }}
+                            </div>
+                        @endif
+                    @endfor
 
-                    <div
-                        class="py-1 text-sm border-2 border-purple-500 rounded-md font-medium cursor-pointer hover:bg-purple-50 transition">
-                        25</div>
-                    <div class="py-1 text-sm text-purple-700">26</div>
-                    <div class="py-1 text-sm text-purple-700">27</div>
-                    <div class="py-1 text-sm text-purple-700">28</div>
-                    <div class="py-1 text-sm text-purple-700">29</div>
-                    <div class="py-1 text-sm text-purple-700">30</div>
-                    <div class="py-1 text-sm text-purple-400">1</div>
+                    <!-- Next month days -->
+                    @php
+                        $totalCells = $firstDay + $daysInMonth;
+                        $remainingCells = $totalCells > 35 ? 42 - $totalCells : 35 - $totalCells;
+                    @endphp
+
+                    @for ($i = 1; $i <= $remainingCells; $i++)
+                        <div class="py-1 text-sm text-purple-400">{{ $i }}</div>
+                    @endfor
                 </div>
             </div>
 
-            <!-- Quick Actions -->
             <div class="bg-white rounded-xl shadow-sm p-6 hover:shadow-md transition">
                 <h2 class="text-lg font-semibold text-purple-800 mb-4">Quick Actions</h2>
                 <div class="grid grid-cols-2 gap-3">
-                    <button
-                        class="bg-gradient-to-r from-purple-500 to-pink-500 text-white py-2 px-3 rounded-md text-sm font-medium hover:opacity-90 transition shadow-md hover:shadow-lg">
-                        + New Event
-                    </button>
-                    <button
+                    <a href="{{ route('admin.event-packages.create') }}" wire:navigate
+                        class="bg-gradient-to-r text-center from-purple-500 to-pink-500 text-white py-2 px-3 rounded-md text-sm font-medium hover:opacity-90 transition shadow-md hover:shadow-lg">
+                        + New Package
+                    </a>
+                    <a href="{{ route('admin.booking.manage') }}" wire:navigate
                         class="bg-white border border-purple-200 text-purple-700 py-2 px-3 rounded-md text-sm font-medium hover:bg-purple-50 transition">
-                        Add Client
-                    </button>
-                    <button
+                        Add New Booking
+                    </a>
+                    <a href="{{ route('admin.enquiries.all') }}" wire:navigate
                         class="bg-white border border-purple-200 text-purple-700 py-2 px-3 rounded-md text-sm font-medium hover:bg-purple-50 transition">
-                        Inventory Check
-                    </button>
-                    <button
+                        Enquiry
+                    </a>
+                    <a href="{{ route('admin.reviews.show') }}" wire:navigate
                         class="bg-gradient-to-r from-purple-500 to-pink-500 text-white py-2 px-3 rounded-md text-sm font-medium hover:opacity-90 transition shadow-md hover:shadow-lg">
-                        Send Reminders
-                    </button>
+                        Reviews
+                    </a>
                 </div>
             </div>
         </div>
     </div>
+    @script
+    <script>
+        Livewire.on('show-event-details', (data) => {
+            // You can implement a modal or other UI to show event details
+            // For now, we'll just show an alert
+            alert('Event ID: ' + data.bookingId);
+
+            // In a real implementation, you might do something like:
+            // const modal = new Modal(document.getElementById('event-modal'));
+            // modal.show();
+            // Livewire.dispatch('load-booking-details', { id: data.bookingId });
+        });
+    </script>
+    @endscript
 </div>
