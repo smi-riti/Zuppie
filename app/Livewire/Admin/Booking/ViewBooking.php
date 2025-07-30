@@ -6,8 +6,12 @@ use Livewire\Component;
 use App\Models\Booking;
 use Livewire\Attributes\Layout;
 
-class ViewBooking extends Component
+class ViewBooking extends Component   
 { 
+     public function closeModal()
+    {
+        $this->dispatch('closeModal');
+    }
     public Booking $booking; // Type-hint as Booking model
 
     public function mount(Booking $booking) // Use route model binding

@@ -1,11 +1,11 @@
-<div class="fixed inset-0 backdrop-blur-sm bg-black/30 flex items-center justify-center z-50 p-4">
-    <div class="bg-white rounded-2xl shadow-xl overflow-hidden w-full max-w-3xl">
-        <div class="bg-gradient-to-r from-purple-400 to-pink-400 p-6 text-white">
-            <h2 class="text-2xl font-bold text-center">Booking Details</h2>
+<div class="w-full min-h-screen bg-gradient-to-br from-purple-50 to-pink-50 flex flex-col items-center py-10">
+    <div class="bg-white rounded-2xl shadow-xl overflow-hidden w-full max-w-5xl border border-purple-200">
+        <div class="bg-gradient-to-r from-purple-400 to-pink-400 p-8 text-white flex flex-col md:flex-row md:items-center md:justify-between">
+            <h2 class="text-3xl font-bold text-center md:text-left">Booking Details</h2>
+            <span class="mt-2 md:mt-0 text-purple-100 text-base">ID: {{ $booking->id }}</span>
         </div>
-        <div class="p-6 space-y-6">
-            <!-- Debug: Uncomment to check if data exists -->
-            {{-- <pre>{{ print_r($booking->toArray(), true) }}</pre> --}}
+        <div class="p-8 space-y-8">
+            <!-- Booking details are shown below -->
             
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div>
@@ -55,10 +55,18 @@
                     <div class="mb-2"><span class="font-medium">Special Requests:</span> {{ $booking->special_requests ?? 'None' }}</div>
                 </div>
             </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div>
+                    <h3 class="text-lg font-semibold text-purple-800 mb-2">Booking Info</h3>
+                    <div class="mb-2"><span class="font-medium">Booking ID:</span> {{ $booking->id }}</div>
+                    <div class="mb-2"><span class="font-medium">User ID:</span> {{ $booking->user_id }}</div>
+                </div>
+            </div>
             
             <div class="flex justify-end pt-4">
-                <button type="button" onclick="window.history.back()" 
-                        class="px-4 py-2 bg-gray-200 text-gray-700 rounded-lg shadow hover:bg-gray-300">
+                <button type="button" onclick="window.history.back()"
+                        class="px-6 py-3 bg-gradient-to-r from-purple-500 to-pink-500 text-white font-semibold rounded-lg shadow hover:from-purple-600 hover:to-pink-600 transition">
                     Close
                 </button>
             </div>

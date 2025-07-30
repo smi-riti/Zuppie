@@ -18,7 +18,6 @@ class CreateBooking extends Component
     public $phone_no;
     public $event_package_id;
     
-    // Split date and time properties
     public $event_date_date;
     public $event_date_time;
     public $event_end_date_date;
@@ -65,6 +64,10 @@ class CreateBooking extends Component
     {
         $this->calculateTotal();
     }
+     public function closeModal()
+    {
+        $this->dispatch('closeModal');
+    }
 
     public function calculateTotal()
     {
@@ -108,7 +111,7 @@ class CreateBooking extends Component
         $eventDate = Carbon::parse($this->event_date_date . ' ' . $this->event_date_time);
         $eventEndDate = Carbon::parse($this->event_end_date_date . ' ' . $this->event_end_date_time);
 
-        // Create booking
+        // Create booking with both user and booking fields
         Booking::create([
             'user_id' => $user->id,
             'event_package_id' => $this->event_package_id,
@@ -120,6 +123,9 @@ class CreateBooking extends Component
             'special_requests' => $this->special_requests,
             'total_price' => $this->total_price,
             'status' => 'confirmed',
+            'booking_name' => $this->name,
+            'booking_email' => $this->email,
+            'booking_phone_no' => $this->phone_no,
         ]);
 
         session()->flash('message', 'Booking created successfully!');
