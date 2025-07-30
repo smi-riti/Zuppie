@@ -1585,16 +1585,16 @@
         },
         {
             "name": "knuckleswtf/scribe",
-            "version": "5.2.1",
+            "version": "5.3.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/knuckleswtf/scribe.git",
-                "reference": "7d1866bfccc96559b753466afdc1f70ed6c6125e"
+                "reference": "380f9cd6de6d65d2e92930a8613d8a682e83e8c7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/knuckleswtf/scribe/zipball/7d1866bfccc96559b753466afdc1f70ed6c6125e",
-                "reference": "7d1866bfccc96559b753466afdc1f70ed6c6125e",
+                "url": "https://api.github.com/repos/knuckleswtf/scribe/zipball/380f9cd6de6d65d2e92930a8613d8a682e83e8c7",
+                "reference": "380f9cd6de6d65d2e92930a8613d8a682e83e8c7",
                 "shasum": ""
             },
             "require": {
@@ -1667,7 +1667,7 @@
             ],
             "support": {
                 "issues": "https://github.com/knuckleswtf/scribe/issues",
-                "source": "https://github.com/knuckleswtf/scribe/tree/5.2.1"
+                "source": "https://github.com/knuckleswtf/scribe/tree/5.3.0"
             },
             "funding": [
                 {
@@ -1675,7 +1675,7 @@
                     "type": "patreon"
                 }
             ],
-            "time": "2025-05-01T01:14:54+00:00"
+            "time": "2025-07-28T22:27:25+00:00"
         },
         {
             "name": "laravel/framework",

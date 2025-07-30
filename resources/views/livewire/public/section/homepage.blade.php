@@ -22,8 +22,10 @@
             <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 sm:gap-8 max-w-7xl mx-auto">
                 @foreach ($categories as $index => $category)
                     <div class="group relative overflow-hidden rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-500 hover:scale-105 cursor-pointer"
-                        data-aos="fade-up" data-aos-delay="{{ 100 * ($index + 1) }}"
-                        wire:click="$dispatch('openSubCategoryPopup', {categorySlug: '{{ $category->slug }}'})">
+                        data-aos="fade-up" data-aos-delay="{{ 100 * ($index + 1) }}" @if ($category->children->count())
+                        wire:click="$dispatch('openCategoryModal', { categorySlug: '{{ $category->slug }}' })" @else
+                            onclick="window.location.href='{{ route('event-package.filter', ['category' => $category->slug]) }}'"
+                        @endif>
                         <div class="relative h-64 sm:h-80">
                             <!-- Category Image with fallback -->
                             @if($category->image)
@@ -34,7 +36,6 @@
                                 <!-- Dynamic Gradient Background -->
                                 <div
                                     class="absolute inset-0 bg-gradient-to-br {{ $gradientColors[$index % count($gradientColors)] }}">
-
                                 </div>
                             @endif
 
