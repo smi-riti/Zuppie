@@ -1,4 +1,4 @@
-<div class="min-h-screen bg-gradient-to-br from-slate-50 via-white to-purple-50">
+<div class="min-h-screen bg-gradient-to-br from-slate-50 via-white to-zuppie-50">
     <!-- Privacy Policy Page -->
     <main class="min-h-screen bg-white">
         <!-- Hero Section -->
@@ -8,14 +8,14 @@
                 <img src="https://images.unsplash.com/photo-1563013544-824ae1b704d3?ixlib=rb-4.0.3&auto=format&fit=crop&w=2340&q=80" 
                      alt="Privacy Policy Background" 
                      class="w-full h-full object-cover">
-                <div class="absolute inset-0 bg-gradient-to-r from-purple-900/45 to-pink-800/45"></div>
+                <div class="absolute inset-0 bg-gradient-to-r from-zuppie-900/45 to-zuppie-pink-800/45"></div>
             </div>
 
             <!-- Content -->
             <div class="relative z-10 flex items-center justify-center h-full text-center text-white px-4">
                 <div class="max-w-4xl mx-auto">
                     <h1 class="text-4xl md:text-6xl font-bold mb-6 sparkle-text drop-shadow-2xl">Privacy Policy</h1>
-                    <p class="text-xl md:text-2xl text-purple-100 max-w-2xl mx-auto leading-relaxed drop-shadow-lg">
+                    <p class="text-xl md:text-2xl text-zuppie-100 max-w-2xl mx-auto leading-relaxed drop-shadow-lg">
                         How {{ $settings['site_name'] }} protects and handles your personal information
                     </p>
                 </div>
@@ -27,7 +27,7 @@
             <div class="container mx-auto px-4 max-w-4xl">
                 <div class="prose prose-lg max-w-none">
                     <!-- Last Updated -->
-                    <div class="bg-gradient-to-r from-purple-50 to-pink-50 rounded-lg p-6 mb-8">
+                    <div class="bg-gradient-to-r from-zuppie-50 to-zuppie-pink-50 rounded-lg p-6 mb-8">
                         <p class="text-sm text-gray-600 mb-0">
                             <strong>Last Updated:</strong> {{ $settings['last_updated_date'] ?? date('F j, Y') }}
                         </p>
@@ -42,8 +42,8 @@
                     <!-- Information We Collect -->
                     <h2 class="text-3xl font-bold gradient-text mb-6">2. Information We Collect</h2>
                     <div class="grid md:grid-cols-2 gap-6 mb-6">
-                        <div class="bg-blue-50 rounded-lg p-6">
-                            <h3 class="text-xl font-bold text-blue-800 mb-4">Personal Information</h3>
+                        <div class="bg-info-50 rounded-lg p-6">
+                            <h3 class="text-xl font-bold text-info-800 mb-4">Personal Information</h3>
                             <ul class="text-gray-700 space-y-2 text-sm">
                                 <li>• Full name and contact details</li>
                                 <li>• Email address and phone number</li>
@@ -68,7 +68,7 @@
 
                     <!-- How We Use Your Information -->
                     <h2 class="text-3xl font-bold gradient-text mb-6">3. How We Use Your Information</h2>
-                    <div class="bg-purple-50 rounded-lg p-6 mb-6">
+                    <div class="bg-zuppie-50 rounded-lg p-6 mb-6">
                         <p class="text-gray-700 mb-4 leading-relaxed">
                             We use your personal information for the following purposes:
                         </p>
@@ -120,11 +120,11 @@
                             <h3 class="font-bold text-orange-800 mb-2">Access Control</h3>
                             <p class="text-gray-700 text-sm">Restricted access with authentication and authorization</p>
                         </div>
-                        <div class="bg-purple-50 rounded-lg p-6 text-center">
-                            <div class="w-16 h-16 bg-gradient-to-r from-purple-500 to-purple-600 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <div class="bg-zuppie-50 rounded-lg p-6 text-center">
+                            <div class="w-16 h-16 bg-gradient-to-r from-zuppie-500 to-zuppie-600 rounded-full flex items-center justify-center mx-auto mb-4">
                                 <i class="fas fa-server text-white text-2xl"></i>
                             </div>
-                            <h3 class="font-bold text-purple-800 mb-2">Secure Storage</h3>
+                            <h3 class="font-bold text-zuppie-800 mb-2">Secure Storage</h3>
                             <p class="text-gray-700 text-sm">Data stored on secure servers with regular backups</p>
                         </div>
                     </div>
@@ -155,17 +155,17 @@
 
                     <!-- Cookies -->
                     <h2 class="text-3xl font-bold gradient-text mb-6">7. Cookies and Tracking</h2>
-                    <div class="bg-pink-50 rounded-lg p-6 mb-6">
+                    <div class="bg-zuppie-pink-50 rounded-lg p-6 mb-6">
                         <p class="text-gray-700 mb-4 leading-relaxed">
                             We use cookies and similar technologies to enhance your experience:
                         </p>
                         <div class="grid md:grid-cols-2 gap-4">
                             <div>
-                                <h4 class="font-bold text-pink-800 mb-2">Essential Cookies</h4>
+                                <h4 class="font-bold text-zuppie-pink-800 mb-2">Essential Cookies</h4>
                                 <p class="text-gray-700 text-sm">Required for website functionality and security</p>
                             </div>
                             <div>
-                                <h4 class="font-bold text-pink-800 mb-2">Analytics Cookies</h4>
+                                <h4 class="font-bold text-zuppie-pink-800 mb-2">Analytics Cookies</h4>
                                 <p class="text-gray-700 text-sm">Help us understand usage patterns and improve services</p>
                             </div>
                         </div>
@@ -182,7 +182,7 @@
 
                     <!-- Third-Party Services -->
                     <h2 class="text-3xl font-bold gradient-text mb-6">9. Third-Party Services</h2>
-                    <div class="bg-blue-50 rounded-lg p-6 mb-6">
+                    <div class="bg-info-50 rounded-lg p-6 mb-6">
                         <p class="text-gray-700 mb-4 leading-relaxed">
                             Our website and services may contain links to third-party websites or integrate with external services:
                         </p>
@@ -210,45 +210,45 @@
                     </p>
 
                     <!-- Contact Information -->
-                    <div class="bg-gradient-to-r from-purple-50 to-pink-50 rounded-2xl p-8 mt-12">
+                    <div class="bg-gradient-to-r from-zuppie-50 to-zuppie-pink-50 rounded-2xl p-8 mt-12">
                         <h2 class="text-3xl font-bold gradient-text mb-6">Contact Our Privacy Team</h2>
                         <p class="text-gray-700 mb-6 leading-relaxed">
                             If you have any questions, concerns, or requests regarding this Privacy Policy or your personal information, please contact us:
                         </p>
                         <div class="grid md:grid-cols-3 gap-6">
                             <div class="text-center">
-                                <div class="w-12 h-12 bg-gradient-to-r from-purple-500 to-purple-600 rounded-full flex items-center justify-center mx-auto mb-3">
+                                <div class="w-12 h-12 bg-gradient-to-r from-zuppie-500 to-zuppie-600 rounded-full flex items-center justify-center mx-auto mb-3">
                                     <i class="fas fa-envelope text-white"></i>
                                 </div>
                                 <h3 class="font-bold text-gray-800 mb-1">Email</h3>
-                                <a href="mailto:{{ $settings['email'] }}" class="text-purple-600 hover:text-purple-700">
+                                <a href="mailto:{{ $settings['email'] }}" class="text-zuppie-600 hover:text-zuppie-700">
                                     {{ $settings['email'] }}
                                 </a>
                                 <p class="text-xs text-gray-500 mt-1">Privacy inquiries welcome</p>
                             </div>
                             <div class="text-center">
-                                <div class="w-12 h-12 bg-gradient-to-r from-pink-500 to-pink-600 rounded-full flex items-center justify-center mx-auto mb-3">
+                                <div class="w-12 h-12 bg-gradient-to-r from-zuppie-pink-500 to-zuppie-pink-600 rounded-full flex items-center justify-center mx-auto mb-3">
                                     <i class="fas fa-phone text-white"></i>
                                 </div>
                                 <h3 class="font-bold text-gray-800 mb-1">Phone</h3>
-                                <a href="tel:{{ $settings['phone_no'] }}" class="text-pink-600 hover:text-pink-700">
+                                <a href="tel:{{ $settings['phone_no'] }}" class="text-zuppie-pink-600 hover:text-zuppie-pink-700">
                                     {{ $settings['phone_no'] }}
                                 </a>
                                 <p class="text-xs text-gray-500 mt-1">Mon-Fri 9AM-6PM</p>
                             </div>
                             <div class="text-center">
-                                <div class="w-12 h-12 bg-gradient-to-r from-blue-500 to-blue-600 rounded-full flex items-center justify-center mx-auto mb-3">
+                                <div class="w-12 h-12 bg-gradient-to-r from-info-500 to-info-600 rounded-full flex items-center justify-center mx-auto mb-3">
                                     <i class="fas fa-map-marker-alt text-white"></i>
                                 </div>
                                 <h3 class="font-bold text-gray-800 mb-1">Address</h3>
-                                <p class="text-blue-600">{{ $settings['address'] }}</p>
+                                <p class="text-info-600">{{ $settings['address'] }}</p>
                                 <p class="text-xs text-gray-500 mt-1">Visit by appointment</p>
                             </div>
                         </div>
                         
-                        <div class="mt-8 p-4 bg-white rounded-lg border border-purple-200">
+                        <div class="mt-8 p-4 bg-white rounded-lg border border-zuppie-200">
                             <p class="text-sm text-gray-600 text-center">
-                                <i class="fas fa-info-circle text-purple-500 mr-2"></i>
+                                <i class="fas fa-info-circle text-zuppie-500 mr-2"></i>
                                 We typically respond to privacy requests within 48 hours during business days.
                             </p>
                         </div>

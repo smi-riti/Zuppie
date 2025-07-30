@@ -9,7 +9,7 @@
         class="absolute inset-0 bg-cover bg-center transition-all duration-1000 ease-in-out"
     >
         <!-- Purple-Pink Overlay -->
-        <div class="absolute inset-0 bg-gradient-to-br from-purple-900/70 via-purple-700/60 to-pink-600/50"></div>
+        <div class="absolute inset-0 bg-gradient-to-br from-zuppie-900/70 via-zuppie-700/60 to-zuppie-pink-600/50"></div>
     </div>
 
     <!-- Floating Balloons - Responsive Sizing -->
@@ -50,7 +50,7 @@
         <div class="mb-6 sm:mb-8 md:mb-10">
             <p 
                 x-text="quotes[currentIndex].author"
-                class="text-base xs:text-lg sm:text-xl md:text-2xl text-purple-100 italic px-2"
+                class="text-base xs:text-lg sm:text-xl md:text-2xl text-zuppie-100 italic px-2"
                 x-transition:enter="transition ease-out duration-500 delay-200"
                 x-transition:enter-start="opacity-0 translate-y-10"
                 x-transition:enter-end="opacity-100 translate-y-0"
@@ -64,7 +64,7 @@
         <div class="flex flex-col sm:flex-row gap-4 justify-center">
             <a 
                 href="{{ route('event-packages') }}"
-                class="inline-block px-8 py-3 bg-gradient-to-r from-purple-600 to-pink-500 text-white font-semibold rounded-full shadow-lg hover:shadow-xl transition-all hover:scale-105"
+                class="inline-block px-8 py-3 bg-gradient-to-r from-zuppie-600 to-zuppie-pink-500 text-white font-semibold rounded-full shadow-lg hover:shadow-xl transition-all hover:scale-105"
                 x-transition:enter="transition ease-out duration-500 delay-400"
                 x-transition:enter-start="opacity-0 translate-y-10"
                 x-transition:enter-end="opacity-100 translate-y-0"
@@ -106,27 +106,27 @@
             balloons: [
                 { 
                     sizeClasses: 'w-8 h-10 xs:w-10 xs:h-12 sm:w-12 sm:h-16',
-                    colorClasses: 'bg-gradient-to-b from-pink-400 to-pink-600',
+                    colorClasses: 'bg-gradient-to-b from-zuppie-pink-400 to-zuppie-pink-600',
                     positionClasses: 'top-[15%] left-[5%] xs:top-[20%] xs:left-[10%]'
                 },
                 { 
                     sizeClasses: 'w-6 h-8 xs:w-8 xs:h-10 sm:w-10 sm:h-12',
-                    colorClasses: 'bg-gradient-to-b from-purple-400 to-purple-600',
+                    colorClasses: 'bg-gradient-to-b from-zuppie-400 to-zuppie-600',
                     positionClasses: 'top-[30%] right-[5%] xs:top-[35%] xs:right-[10%]'
                 },
                 { 
                     sizeClasses: 'w-8 h-10 xs:w-10 xs:h-12 sm:w-12 sm:h-16',
-                    colorClasses: 'bg-gradient-to-b from-fuchsia-400 to-fuchsia-600',
+                    colorClasses: 'bg-gradient-to-b from-zuppie-pink-400 to-zuppie-pink-600',
                     positionClasses: 'bottom-[20%] left-[5%] xs:bottom-[25%] xs:left-[10%]'
                 },
                 { 
                     sizeClasses: 'w-6 h-8 xs:w-8 xs:h-10 sm:w-10 sm:h-12',
-                    colorClasses: 'bg-gradient-to-b from-pink-400 to-pink-600',
+                    colorClasses: 'bg-gradient-to-b from-zuppie-pink-400 to-zuppie-pink-600',
                     positionClasses: 'bottom-[15%] right-[5%] xs:bottom-[20%] xs:right-[10%]'
                 },
                 { 
                     sizeClasses: 'w-8 h-10 xs:w-10 xs:h-12 sm:w-12 sm:h-16',
-                    colorClasses: 'bg-gradient-to-b from-purple-400 to-purple-600',
+                    colorClasses: 'bg-gradient-to-b from-zuppie-400 to-zuppie-600',
                     positionClasses: 'top-[25%] right-[5%] xs:top-[20%] xs:right-[15%]'
                 },
                 { 

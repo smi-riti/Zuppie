@@ -1,6 +1,6 @@
-<div class="min-h-screen bg-gradient-to-br from-purple-50 to-pink-50 p-6">
+<div class="min-h-screen bg-gradient-to-br from-zuppie-50 to-zuppie-pink-50 p-6">
     @if (session()->has('message'))
-        <div class="mb-4 px-4 py-2 bg-gradient-to-r from-purple-100 to-pink-100 text-purple-700 rounded-lg border border-purple-200 shadow-sm">
+        <div class="mb-4 px-4 py-2 bg-gradient-to-r from-zuppie-100 to-zuppie-pink-100 text-zuppie-700 rounded-lg border border-zuppie-200 shadow-sm">
             {{ session('message') }}
         </div>
     @endif
@@ -9,19 +9,19 @@
         <div class="w-full md:w-1/3">
             <input type="text" wire:model.debounce.300ms="search" 
                    placeholder="Search images..." 
-                   class="w-full px-4 py-2 border border-purple-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-300 focus:border-purple-300 bg-white shadow-sm">
+                   class="w-full px-4 py-2 border border-zuppie-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-zuppie-300 focus:border-zuppie-300 bg-white shadow-sm">
         </div>
         <button wire:click="openCreateModal" 
-                class="px-4 py-2 bg-gradient-to-r from-purple-500 to-pink-500 text-white rounded-lg hover:from-purple-600 hover:to-pink-600 transition-all transform hover:scale-[1.02] shadow-md w-full md:w-auto">
+                class="px-4 py-2 bg-gradient-to-r from-zuppie-500 to-zuppie-pink-500 text-white rounded-lg hover:from-zuppie-600 hover:to-zuppie-pink-600 transition-all transform hover:scale-[1.02] shadow-md w-full md:w-auto">
             + Add Images
         </button>
     </div>
 
-    <div class="overflow-x-auto bg-white rounded-lg shadow-lg border border-purple-100">
-        <table class="min-w-full divide-y divide-purple-100">
-            <thead class="bg-gradient-to-r from-purple-50 to-pink-50">
+    <div class="overflow-x-auto bg-white rounded-lg shadow-lg border border-zuppie-100">
+        <table class="min-w-full divide-y divide-zuppie-100">
+            <thead class="bg-gradient-to-r from-zuppie-50 to-zuppie-pink-50">
                 <tr>
-                    <th class="px-6 py-3 text-left text-xs font-medium text-purple-700 uppercase tracking-wider cursor-pointer"
+                    <th class="px-6 py-3 text-left text-xs font-medium text-zuppie-700 uppercase tracking-wider cursor-pointer"
                         wire:click="sortBy('id')">
                         <div class="flex items-center">
                             ID
@@ -33,8 +33,8 @@
                             @endif
                         </div>
                     </th>
-                    <th class="px-6 py-3 text-left text-xs font-medium text-purple-700 uppercase tracking-wider">Image</th>
-                    <th class="px-6 py-3 text-left text-xs font-medium text-purple-700 uppercase tracking-wider cursor-pointer"
+                    <th class="px-6 py-3 text-left text-xs font-medium text-zuppie-700 uppercase tracking-wider">Image</th>
+                    <th class="px-6 py-3 text-left text-xs font-medium text-zuppie-700 uppercase tracking-wider cursor-pointer"
                         wire:click="sortBy('alt')">
                         <div class="flex items-center">
                             Alt Text
@@ -46,31 +46,31 @@
                             @endif
                         </div>
                     </th>
-                    <th class="px-6 py-3 text-left text-xs font-medium text-purple-700 uppercase tracking-wider">Category</th>
-                    <th class="px-6 py-3 text-left text-xs font-medium text-purple-700 uppercase tracking-wider">Actions</th>
+                    <th class="px-6 py-3 text-left text-xs font-medium text-zuppie-700 uppercase tracking-wider">Category</th>
+                    <th class="px-6 py-3 text-left text-xs font-medium text-zuppie-700 uppercase tracking-wider">Actions</th>
                 </tr>
             </thead>
-            <tbody class="bg-white divide-y divide-purple-50">
+            <tbody class="bg-white divide-y divide-zuppie-50">
                 @forelse ($images as $image)
-                    <tr class="hover:bg-purple-50 transition-colors">
-                        <td class="px-6 py-4 whitespace-nowrap text-purple-900 font-medium">{{ $image->id }}</td>
+                    <tr class="hover:bg-zuppie-50 transition-colors">
+                        <td class="px-6 py-4 whitespace-nowrap text-zuppie-900 font-medium">{{ $image->id }}</td>
                         <td class="px-6 py-4 whitespace-nowrap">
                             <img src="{{ $image->filename }}" alt="{{ $image->alt }}" 
-                                 class="h-16 w-16 object-cover rounded-lg border-2 border-purple-100 shadow">
+                                 class="h-16 w-16 object-cover rounded-lg border-2 border-zuppie-100 shadow">
                         </td>
-                        <td class="px-6 py-4 text-purple-800">{{ $image->alt }}</td>
+                        <td class="px-6 py-4 text-zuppie-800">{{ $image->alt }}</td>
                         <td class="px-6 py-4">
-                            <span class="px-2 py-1 bg-purple-100 text-purple-700 rounded-full text-xs">
+                            <span class="px-2 py-1 bg-zuppie-100 text-zuppie-700 rounded-full text-xs">
                                 {{ $image->category->name ?? '-' }}
                             </span>
                         </td>
                         <td class="px-6 py-4 whitespace-nowrap">
                             <button wire:click="openEditModal({{ $image->id }})"
-                                    class="px-3 py-1 bg-gradient-to-r from-purple-400 to-purple-500 text-white rounded-lg hover:from-purple-500 hover:to-purple-600 mr-2 shadow transition">
+                                    class="px-3 py-1 bg-gradient-to-r from-zuppie-400 to-zuppie-500 text-white rounded-lg hover:from-zuppie-500 hover:to-zuppie-600 mr-2 shadow transition">
                                 Edit
                             </button>
                             <button wire:click="deleteImage({{ $image->id }})"
-                                    class="px-3 py-1 bg-gradient-to-r from-pink-400 to-pink-500 text-white rounded-lg hover:from-pink-500 hover:to-pink-600 shadow transition"
+                                    class="px-3 py-1 bg-gradient-to-r from-zuppie-pink-400 to-zuppie-pink-500 text-white rounded-lg hover:from-zuppie-pink-500 hover:to-zuppie-pink-600 shadow transition"
                                     onclick="return confirm('Are you sure?')">
                                 Delete
                             </button>
@@ -78,9 +78,9 @@
                     </tr>
                 @empty
                     <tr>
-                        <td colspan="5" class="px-6 py-8 text-center text-purple-700">
+                        <td colspan="5" class="px-6 py-8 text-center text-zuppie-700">
                             <div class="flex flex-col items-center justify-center">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="h-16 w-16 text-purple-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-16 w-16 text-zuppie-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
                                 </svg>
                                 <p class="mt-4 text-lg">No images found</p>

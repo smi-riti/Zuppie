@@ -3,8 +3,8 @@
         <!-- Header -->
         <div class="flex justify-between items-center mb-6 pb-4 border-b border-gray-200">
             <div class="flex items-center">
-                <div class="bg-blue-100 p-2 rounded-lg mr-3">
-                    <svg class="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <div class="bg-info-100 p-2 rounded-lg mr-3">
+                    <svg class="w-6 h-6 text-info-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"></path>
                     </svg>
                 </div>
@@ -34,7 +34,7 @@
         <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
             <div class="bg-white p-6 rounded-xl shadow-sm border border-gray-100">
                 <h4 class="font-semibold text-lg text-gray-700 mb-5 flex items-center">
-                    <svg class="w-5 h-5 mr-2 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <svg class="w-5 h-5 mr-2 text-info-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
                     </svg>
                     Basic Information
@@ -93,10 +93,10 @@
                             <span class="block text-sm font-medium text-gray-500 mb-2">Special</span>
                             <div class="flex items-center">
                                 <div class="relative inline-block w-10 mr-2 align-middle select-none">
-                                    <div class="block w-10 h-6 bg-gray-200 rounded-full shadow-inner {{ $package->is_special ? 'bg-purple-400' : 'bg-gray-300' }}"></div>
-                                    <div class="absolute inset-y-0 left-0 w-6 h-6 bg-white rounded-full shadow transform transition-transform {{ $package->is_special ? 'translate-x-full border-purple-400' : 'border-gray-300' }}"></div>
+                                    <div class="block w-10 h-6 bg-gray-200 rounded-full shadow-inner {{ $package->is_special ? 'bg-zuppie-400' : 'bg-gray-300' }}"></div>
+                                    <div class="absolute inset-y-0 left-0 w-6 h-6 bg-white rounded-full shadow transform transition-transform {{ $package->is_special ? 'translate-x-full border-zuppie-400' : 'border-gray-300' }}"></div>
                                 </div>
-                                <span class="ml-2 text-sm {{ $package->is_special ? 'text-purple-600 font-medium' : 'text-gray-500' }}">
+                                <span class="ml-2 text-sm {{ $package->is_special ? 'text-zuppie-600 font-medium' : 'text-gray-500' }}">
                                     {{ $package->is_special ? 'Special' : 'Regular' }}
                                 </span>
                             </div>
@@ -107,7 +107,7 @@
             
             <div class="bg-white p-6 rounded-xl shadow-sm border border-gray-100">
                 <h4 class="font-semibold text-lg text-gray-700 mb-5 flex items-center">
-                    <svg class="w-5 h-5 mr-2 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <svg class="w-5 h-5 mr-2 text-info-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h7"></path>
                     </svg>
                     Description
@@ -121,11 +121,11 @@
         <!-- Package Images -->
         <div class="bg-white p-6 rounded-xl shadow-sm border border-gray-100">
             <h4 class="font-semibold text-lg text-gray-700 mb-5 flex items-center">
-                <svg class="w-5 h-5 mr-2 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <svg class="w-5 h-5 mr-2 text-info-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
                 </svg>
                 Package Images
-                <span class="ml-2 text-xs bg-blue-100 text-blue-800 px-2 py-1 rounded-full">{{ count($package->images) }} {{ count($package->images) == 1 ? 'image' : 'images' }}</span>
+                <span class="ml-2 text-xs bg-info-100 text-info-800 px-2 py-1 rounded-full">{{ count($package->images) }} {{ count($package->images) == 1 ? 'image' : 'images' }}</span>
             </h4>
             
             @if(count($package->images) > 0)
@@ -140,7 +140,7 @@
                                         rounded-lg flex items-center justify-center space-x-2 transition-all duration-300">
                                 <div class="absolute bottom-0 left-0 right-0 p-3 flex justify-center space-x-3">
                                     <a href="{{ $image->image_url }}" target="_blank" 
-                                       class="bg-blue-500 hover:bg-blue-600 text-white p-2 rounded-lg shadow-lg flex items-center transition-all">
+                                       class="bg-info-500 hover:bg-info-600 text-white p-2 rounded-lg shadow-lg flex items-center transition-all">
                                         <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" 
                                                 d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
@@ -176,7 +176,7 @@
         <!-- Footer -->
         <div class="flex justify-end mt-8 pt-5 border-t border-gray-200">
             <button wire:click="closeViewModal" 
-                    class="px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition flex items-center shadow-md">
+                    class="px-6 py-2 bg-info-600 text-white rounded-lg hover:bg-info-700 transition flex items-center shadow-md">
                 <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
                 </svg>

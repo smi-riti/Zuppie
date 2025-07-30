@@ -1,5 +1,5 @@
-<div class="min-h-screen bg-gradient-to-br from-slate-50 via-white to-purple-50">
-    <section class="py-20 bg-gradient-to-br from-gray-50 to-purple-50">
+<div class="min-h-screen bg-gradient-to-br from-slate-50 via-white to-zuppie-50">
+    <section class="py-20 bg-gradient-to-br from-gray-50 to-zuppie-50">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <!-- Heading for Filtered Packages -->
             <div class="text-center mb-12">
@@ -26,9 +26,9 @@
                             <span> > {{ $subCategory->name }}</span>
                         @endif
                     @endif
-                    <span class="ml-2 text-purple-600 font-semibold">({{ count($packages) }} found)</span>
+                    <span class="ml-2 text-zuppie-600 font-semibold">({{ count($packages) }} found)</span>
                 </div>
-                <button wire:click="clearFilters" class="text-purple-600 hover:text-purple-800 font-medium">
+                <button wire:click="clearFilters" class="text-zuppie-600 hover:text-zuppie-800 font-medium">
                     Clear Filters
                 </button>
             </div>
@@ -117,7 +117,7 @@
                                                 @endforeach
                                             </ul>
                                             <button @click="showAll = !showAll"
-                                                class="text-sm font-medium text-purple-600 hover:text-purple-700 mt-2 flex items-center">
+                                                class="text-sm font-medium text-zuppie-600 hover:text-zuppie-700 mt-2 flex items-center">
                                                 <span x-text="showAll ? 'Show less' : 'Show more'"></span>
                                                 <svg class="w-4 h-4 ml-1 transition-transform duration-200"
                                                     :class="{ 'rotate-180': showAll }" fill="currentColor" viewBox="0 0 20 20">
@@ -132,7 +132,7 @@
 
                                 <div class="flex space-x-3">
                                     <a href="{{ route('package-detail', ['id' => $package->id]) }}"
-                                        class="flex-1 bg-gradient-to-r from-purple-600 to-pink-600 text-white py-3 px-4 rounded-xl font-semibold text-center hover:shadow-lg transition-all duration-300">
+                                        class="flex-1 bg-gradient-to-r from-zuppie-600 to-zuppie-pink-600 text-white py-3 px-4 rounded-xl font-semibold text-center hover:shadow-lg transition-all duration-300">
                                         <i class="fas fa-eye mr-2"></i>
                                         View Details
                                     </a>
@@ -199,7 +199,7 @@
                                     </p>
                                     <div class="flex space-x-3">
                                         <a href="{{ route('package-detail', ['id' => $package->id]) }}"
-                                            class="flex-1 bg-gradient-to-r from-purple-600 to-pink-600 text-white py-3 px-4 rounded-xl font-semibold text-center hover:from-purple-700 hover:to-pink-700 transform hover:scale-105 transition-all duration-300">
+                                            class="flex-1 bg-gradient-to-r from-zuppie-600 to-zuppie-pink-600 text-white py-3 px-4 rounded-xl font-semibold text-center hover:from-zuppie-700 hover:to-zuppie-pink-700 transform hover:scale-105 transition-all duration-300">
                                             <i class="fas fa-eye mr-2"></i>
                                             View Details
                                         </a>

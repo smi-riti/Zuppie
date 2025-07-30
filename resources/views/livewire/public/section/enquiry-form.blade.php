@@ -9,7 +9,7 @@
             <!-- Modal Content -->
             <div class="bg-white rounded-2xl shadow-2xl border-0 overflow-hidden transform transition-all animate-in zoom-in-95 duration-300">
                 <!-- Modal Header -->
-                <div class="bg-gradient-to-r from-purple-600 to-pink-600 px-6 py-5">
+                <div class="bg-gradient-to-r from-zuppie-600 to-zuppie-pink-600 px-6 py-5">
                     <div class="flex justify-between items-center">
                         <div>
                             <h3 class="text-2xl font-bold text-white flex items-center">
@@ -18,7 +18,7 @@
                                 </svg>
                                 Plan Your Dream Event
                             </h3>
-                            <p class="text-purple-100 text-sm mt-1">Tell us about your vision and we'll make it happen</p>
+                            <p class="text-zuppie-100 text-sm mt-1">Tell us about your vision and we'll make it happen</p>
                         </div>
                         <button wire:click="closeModal" class="text-white/80 hover:text-white transition-colors rounded-full p-2 hover:bg-white/20">
                             <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -93,9 +93,9 @@
             <div class="grid grid-cols-2 md:grid-cols-4 gap-3">
                 @foreach ($parentCategory as $category)
                     <div x-on:click="formData.event_type = '{{ $category->slug }}'; $wire.set('formData.event_type', '{{ $category->slug }}'); autoNext('budget')"
-                        :class="formData.event_type === '{{ $category->slug }}' ? 'ring-2 ring-purple-500 bg-purple-50 shadow-md' : 'border-gray-200 hover:bg-purple-50 hover:shadow-md'"
+                        :class="formData.event_type === '{{ $category->slug }}' ? 'ring-2 ring-zuppie-500 bg-zuppie-50 shadow-md' : 'border-gray-200 hover:bg-zuppie-50 hover:shadow-md'"
                         class="p-4 border rounded-xl cursor-pointer transition-all duration-200 flex flex-col items-center">
-                        <i class="{{ $category->icon }} text-purple-600 text-2xl mb-2"></i>
+                        <i class="{{ $category->icon }} text-zuppie-600 text-2xl mb-2"></i>
                         <p class="text-gray-700 font-medium">{{ $category->name }}</p>
                     </div>
                 @endforeach
@@ -115,7 +115,7 @@
     x-model="formData.budget"
     x-on:input="updateBudgetRange($event.target.value); autoNext('message')"
     min="0" max="5" step="1"
-    class="w-full h-3 bg-gray-200 rounded-full appearance-none cursor-pointer accent-purple-600">
+    class="w-full h-3 bg-gray-200 rounded-full appearance-none cursor-pointer accent-zuppie-600">
                 <div class="flex justify-between text-xs text-gray-500 mt-3 px-1">
                     <span class="text-center">₹1000</span>
                     <span class="text-center">₹2500</span>
@@ -128,9 +128,9 @@
                     <span class="text-red-500 text-sm mt-2">{{ $message }}</span>
                 @enderror
             </div>
-            <div class="mt-4 p-3 bg-purple-50 rounded-lg">
+            <div class="mt-4 p-3 bg-zuppie-50 rounded-lg">
                 <span class="text-gray-700">Selected budget: </span>
-                <span x-text="budgetDisplay" class="font-semibold text-purple-700"></span>
+                <span x-text="budgetDisplay" class="font-semibold text-zuppie-700"></span>
             </div>
         </div>
         <div class="flex justify-between items-center">
@@ -139,7 +139,7 @@
                 ← Back
             </button>
             <button type="button" @click="skipField"
-                class="bg-purple-600 text-white px-4 py-2 rounded-lg font-medium hover:bg-purple-700 transition-colors">
+                class="bg-zuppie-600 text-white px-4 py-2 rounded-lg font-medium hover:bg-zuppie-700 transition-colors">
                 Skip →
             </button>
         </div>
@@ -150,7 +150,7 @@
         <div>
             <label class="block text-gray-700 font-semibold mb-2">Tell Us About Your Event *</label>
             <textarea wire:model="formData.message" rows="5"
-                class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all duration-300"
+                class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-zuppie-500 focus:border-transparent transition-all duration-300"
                 placeholder="Share your vision, requirements, theme ideas, and any special requests..."></textarea>
             @error('formData.message')
                 <span class="text-red-500 text-sm mt-2">{{ $message }}</span>
@@ -162,7 +162,7 @@
                 ← Back
             </button>
             <button type="button" @click="autoNext('contact_info')"
-                class="bg-purple-600 text-white px-4 py-2 rounded-lg font-medium hover:bg-purple-700 transition-colors">
+                class="bg-zuppie-600 text-white px-4 py-2 rounded-lg font-medium hover:bg-zuppie-700 transition-colors">
                 Continue
             </button>
         </div>
@@ -174,7 +174,7 @@
             <div>
                 <label class="block text-gray-700 font-semibold mb-2">Full Name *</label>
                 <input wire:model="formData.fullname" type="text"
-                    class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all duration-300"
+                    class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-zuppie-500 focus:border-transparent transition-all duration-300"
                     placeholder="Your full name">
                 @error('formData.fullname')
                     <span class="text-red-500 text-sm mt-2">{{ $message }}</span>
@@ -183,7 +183,7 @@
             <div>
                 <label class="block text-gray-700 font-semibold mb-2">Email Address *</label>
                 <input wire:model="formData.email" type="email"
-                    class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all duration-300"
+                    class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-zuppie-500 focus:border-transparent transition-all duration-300"
                     placeholder="your@email.com">
                 @error('formData.email')
                     <span class="text-red-500 text-sm mt-2">{{ $message }}</span>
@@ -192,7 +192,7 @@
             <div class="md:col-span-2">
                 <label class="block text-gray-700 font-semibold mb-2">Phone Number</label>
                 <input wire:model="formData.phone" type="tel"
-                    class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all duration-300"
+                    class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-zuppie-500 focus:border-transparent transition-all duration-300"
                     placeholder="(555) 123-4567">
                 @error('formData.phone')
                     <span class="text-red-500 text-sm mt-2">{{ $message }}</span>
@@ -206,7 +206,7 @@
                 ← Back
             </button>
             <button type="submit"
-                class="w-fit bg-gradient-to-r from-purple-600 to-pink-600 text-white py-3 px-4 rounded-lg font-semibold text-lg hover:shadow-lg hover:scale-[1.02] transition-all duration-300 flex items-center justify-center space-x-2">
+                class="w-fit bg-gradient-to-r from-zuppie-600 to-zuppie-pink-600 text-white py-3 px-4 rounded-lg font-semibold text-lg hover:shadow-lg hover:scale-[1.02] transition-all duration-300 flex items-center justify-center space-x-2">
                 <i class="fas fa-paper-plane"></i>
                 <span>Send Message</span>
             </button>

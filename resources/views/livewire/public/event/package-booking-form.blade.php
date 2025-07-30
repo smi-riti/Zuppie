@@ -1,5 +1,5 @@
 
-<div class="min-h-screen bg-gradient-to-br from-slate-50 via-white to-purple-50 py-12 md:py-24">
+<div class="min-h-screen bg-gradient-to-br from-slate-50 via-white to-zuppie-50 py-12 md:py-24">
     
     <!-- Flash Messages -->
     @if(session('success'))
@@ -26,7 +26,7 @@
 
     @if(session('info'))
         <div class="fixed top-4 right-4 z-50 max-w-md">
-            <div class="bg-blue-500 text-white px-6 py-4 rounded-xl shadow-lg" id="info-message">
+            <div class="bg-info-500 text-white px-6 py-4 rounded-xl shadow-lg" id="info-message">
                 <div class="flex items-center">
                     <i class="fas fa-info-circle mr-3"></i>
                     {{ session('info') }}
@@ -37,7 +37,7 @@
     @if(!$package)
         <div class="text-center py-20">
             <h2 class="text-2xl font-bold text-gray-800">Package not found</h2>
-            <a href="{{ route('event-packages') }}" class="mt-4 inline-block bg-purple-600 text-white px-6 py-3 rounded-lg">
+            <a href="{{ route('event-packages') }}" class="mt-4 inline-block bg-zuppie-600 text-white px-6 py-3 rounded-lg">
                 Back to Packages
             </a>
         </div>
@@ -52,7 +52,7 @@
                             <div class="flex justify-between relative mb-8">
                                 <!-- Progress line -->
                                 <div class="absolute top-1/2 left-0 right-0 h-1 bg-gray-200 -translate-y-1/2 z-0"></div>
-                                <div class="absolute top-1/2 left-0 h-1 bg-purple-600 -translate-y-1/2 z-10 transition-all duration-500" 
+                                <div class="absolute top-1/2 left-0 h-1 bg-zuppie-600 -translate-y-1/2 z-10 transition-all duration-500" 
                                      style="width: {{ ($currentStep / 4) * 100 }}%"></div>
                                 
                                 <!-- Steps -->
@@ -60,7 +60,7 @@
                                     <div class="relative z-20">
                                         <button class="w-12 h-12 rounded-full flex items-center justify-center transition-all duration-300
                                             @if($currentStep > $index + 1) bg-green-100 text-green-600 border-2 border-green-500
-                                            @elseif($currentStep === $index + 1) bg-purple-600 text-white border-2 border-purple-600 shadow-lg
+                                            @elseif($currentStep === $index + 1) bg-zuppie-600 text-white border-2 border-zuppie-600 shadow-lg
                                             @else bg-white text-gray-500 border-2 border-gray-300 @endif">
                                             @if($currentStep > $index + 1)
                                                 <i class="fas fa-check"></i>
@@ -69,7 +69,7 @@
                                             @endif
                                         </button>
                                         <span class="absolute top-full left-1/2 -translate-x-1/2 mt-2 text-sm font-medium 
-                                            @if($currentStep === $index + 1) text-purple-600 @else text-gray-500 @endif">
+                                            @if($currentStep === $index + 1) text-zuppie-600 @else text-gray-500 @endif">
                                             {{ $step }}
                                         </span>
                                     </div>
@@ -81,14 +81,14 @@
  <!-- Form Content -->
                 <div class="bg-white rounded-3xl shadow-xl overflow-hidden">
                     <!-- Package Summary Header -->
-                    <div class="bg-gradient-to-r from-purple-600 to-pink-600 p-6 text-white">
+                    <div class="bg-gradient-to-r from-zuppie-600 to-zuppie-pink-600 p-6 text-white">
                         <div class="flex flex-col md:flex-row md:items-center justify-between">
                             <div>
                                 <h2 class="text-2xl font-bold">{{ $package->name }}</h2>
-                                <p class="text-purple-100">{{ $package->category->name ?? 'Event Package' }}</p>
+                                <p class="text-zuppie-100">{{ $package->category->name ?? 'Event Package' }}</p>
                             </div>
                             <div class="mt-4 md:mt-0 text-right">
-                                <p class="text-sm text-purple-100">Total Price</p>
+                                <p class="text-sm text-zuppie-100">Total Price</p>
                                 <p class="text-2xl font-bold">₹{{ number_format($this->totalPrice) }}</p>
                             </div>
                         </div>
@@ -98,7 +98,7 @@
                     @if($currentStep === 1)
                     <div class="p-6 animate-fade-in">
                         <h3 class="text-xl font-bold text-gray-800 mb-6 flex items-center">
-                            <i class="fas fa-calendar-day text-purple-600 mr-3"></i>
+                            <i class="fas fa-calendar-day text-zuppie-600 mr-3"></i>
                             When & Where is Your Event?
                         </h3>
                         
@@ -106,22 +106,22 @@
                             <div class="grid md:grid-cols-3 gap-6">
                                 <div>
                                     <label class="block text-gray-700 font-semibold mb-2">
-                                        <i class="fas fa-calendar text-purple-600 mr-2"></i>
+                                        <i class="fas fa-calendar text-zuppie-600 mr-2"></i>
                                         Event Date *
                                     </label>
                                     <input type="date" 
                                            wire:model.live="eventDate"
                                            min="{{ date('Y-m-d', strtotime('+1 day')) }}"
-                                           class="w-full border border-gray-300 rounded-xl px-4 py-3 focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all duration-300 @error('eventDate') border-red-500 @enderror">
+                                           class="w-full border border-gray-300 rounded-xl px-4 py-3 focus:ring-2 focus:ring-zuppie-500 focus:border-transparent transition-all duration-300 @error('eventDate') border-red-500 @enderror">
                                     @error('eventDate') <span class="text-red-500 text-sm mt-1">{{ $message }}</span> @enderror
                                 </div>
                                 <div>
                                     <label class="block text-gray-700 font-semibold mb-2">
-                                        <i class="fas fa-clock text-purple-600 mr-2"></i>
+                                        <i class="fas fa-clock text-zuppie-600 mr-2"></i>
                                         Event Time
                                     </label>
                                     <select wire:model="eventTime" 
-                                            class="w-full border border-gray-300 rounded-xl px-4 py-3 focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all duration-300 @error('eventTime') border-red-500 @enderror">
+                                            class="w-full border border-gray-300 rounded-xl px-4 py-3 focus:ring-2 focus:ring-zuppie-500 focus:border-transparent transition-all duration-300 @error('eventTime') border-red-500 @enderror">
                                         <option value="">Select Time (Optional)</option>
                                         <option value="06:00">06:00 AM</option>
                                         <option value="06:30">06:30 AM</option>
@@ -165,14 +165,14 @@
                                 </div>
                                 <div>
                                     <label class="block text-gray-700 font-semibold mb-2">
-                                        <i class="fas fa-calendar-check text-purple-600 mr-2"></i>
+                                        <i class="fas fa-calendar-check text-zuppie-600 mr-2"></i>
                                         Event End Date
                                     </label>
                                     <input type="date" 
                                            wire:model="eventEndDate"
                                            min="{{ $eventDate ? date('Y-m-d', strtotime($eventDate . ' +1 day')) : date('Y-m-d', strtotime('+2 days')) }}"
                                            @if(!$eventDate) disabled @endif
-                                           class="w-full border border-gray-300 rounded-xl px-4 py-3 focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all duration-300 @error('eventEndDate') border-red-500 @enderror @if(!$eventDate) bg-gray-100 @endif">
+                                           class="w-full border border-gray-300 rounded-xl px-4 py-3 focus:ring-2 focus:ring-zuppie-500 focus:border-transparent transition-all duration-300 @error('eventEndDate') border-red-500 @enderror @if(!$eventDate) bg-gray-100 @endif">
                                     @error('eventEndDate') <span class="text-red-500 text-sm mt-1">{{ $message }}</span> @enderror
                                     <p class="text-xs text-gray-500 mt-1">
                                         @if(!$eventDate)
@@ -186,11 +186,11 @@
 
                             <div>
                                 <label class="block text-gray-700 font-semibold mb-2">
-                                    <i class="fas fa-map-marker-alt text-purple-600 mr-2"></i>
+                                    <i class="fas fa-map-marker-alt text-zuppie-600 mr-2"></i>
                                     Event Venue/Location *
                                 </label>
                                 <textarea wire:model="location"
-                                          class="w-full border border-gray-300 rounded-xl px-4 py-3 focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all duration-300 @error('location') border-red-500 @enderror" 
+                                          class="w-full border border-gray-300 rounded-xl px-4 py-3 focus:ring-2 focus:ring-zuppie-500 focus:border-transparent transition-all duration-300 @error('location') border-red-500 @enderror" 
                                           rows="3"
                                           placeholder="Enter complete venue address with pin code"></textarea>
                                 @error('location') <span class="text-red-500 text-sm mt-1">{{ $message }}</span> @enderror
@@ -198,7 +198,7 @@
 
                             <div class="pt-4">
                                 <button wire:click="validateStep1" 
-                                        class="w-full bg-purple-600 text-white py-4 rounded-2xl font-bold text-lg hover:bg-purple-700 transition-all duration-300">
+                                        class="w-full bg-zuppie-600 text-white py-4 rounded-2xl font-bold text-lg hover:bg-zuppie-700 transition-all duration-300">
                                     Continue to Requirements <i class="fas fa-arrow-right ml-2"></i>
                                 </button>
                             </div>
@@ -210,31 +210,31 @@
                     @if($currentStep === 2)
                     <div class="p-6 animate-fade-in">
                         <h3 class="text-xl font-bold text-gray-800 mb-6 flex items-center">
-                            <i class="fas fa-clipboard-list text-purple-600 mr-3"></i>
+                            <i class="fas fa-clipboard-list text-zuppie-600 mr-3"></i>
                             Event Requirements
                         </h3>
                         
                         <div class="space-y-6">
                             <div>
                                 <label class="block text-gray-700 font-semibold mb-2">
-                                    <i class="fas fa-users text-purple-600 mr-2"></i>
+                                    <i class="fas fa-users text-zuppie-600 mr-2"></i>
                                     Expected Guests 
                                 </label>
                                 <input type="number" 
                                        wire:model="guestCount"
                                        min="1"
-                                       class="w-full border border-gray-300 rounded-xl px-4 py-3 focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all duration-300 @error('guestCount') border-red-500 @enderror"
+                                       class="w-full border border-gray-300 rounded-xl px-4 py-3 focus:ring-2 focus:ring-zuppie-500 focus:border-transparent transition-all duration-300 @error('guestCount') border-red-500 @enderror"
                                        placeholder="Approximate number of guests">
                                 @error('guestCount') <span class="text-red-500 text-sm mt-1">{{ $message }}</span> @enderror
                             </div>
 
                             <div>
                                 <label class="block text-gray-700 font-semibold mb-2">
-                                    <i class="fas fa-comment-dots text-purple-600 mr-2"></i>
+                                    <i class="fas fa-comment-dots text-zuppie-600 mr-2"></i>
                                     Special Requirements (Optional)
                                 </label>
                                 <textarea wire:model="specialRequests"
-                                          class="w-full border border-gray-300 rounded-xl px-4 py-3 focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all duration-300" 
+                                          class="w-full border border-gray-300 rounded-xl px-4 py-3 focus:ring-2 focus:ring-zuppie-500 focus:border-transparent transition-all duration-300" 
                                           rows="4" 
                                           placeholder="Any special requests, dietary requirements, or additional services..."></textarea>
                                 @error('specialRequests') <span class="text-red-500 text-sm mt-1">{{ $message }}</span> @enderror
@@ -246,7 +246,7 @@
                                     <i class="fas fa-arrow-left mr-2"></i> Back
                                 </button>
                                 <button wire:click="validateStep2" 
-                                        class="bg-purple-600 text-white py-3 rounded-xl font-bold hover:bg-purple-700 transition-all duration-300">
+                                        class="bg-zuppie-600 text-white py-3 rounded-xl font-bold hover:bg-zuppie-700 transition-all duration-300">
                                     Continue <i class="fas fa-arrow-right ml-2"></i>
                                 </button>
                             </div>
@@ -258,7 +258,7 @@
                     @if($currentStep === 3)
                     <div class="p-6 animate-fade-in">
                         <h3 class="text-xl font-bold text-gray-800 mb-6 flex items-center">
-                            <i class="fas fa-user-circle text-purple-600 mr-3"></i>
+                            <i class="fas fa-user-circle text-zuppie-600 mr-3"></i>
                             Your Information
                         </h3>
                         
@@ -278,10 +278,10 @@
                         <!-- User Details Form -->
                         <div class="space-y-6">
                             <!-- Info note -->
-                            <div class="bg-blue-50 border border-blue-200 rounded-lg p-4">
+                            <div class="bg-info-50 border border-info-200 rounded-lg p-4">
                                 <div class="flex items-start">
-                                    <i class="fas fa-info-circle text-blue-500 mr-2 mt-0.5"></i>
-                                    <div class="text-sm text-blue-700">
+                                    <i class="fas fa-info-circle text-info-500 mr-2 mt-0.5"></i>
+                                    <div class="text-sm text-info-700">
                                         <p class="font-medium">Booking Details</p>
                                         <p>These details are specifically for this booking and can be different from your account information.</p>
                                     </div>
@@ -290,12 +290,12 @@
 
                             <div>
                                 <label class="block text-gray-700 font-semibold mb-2">
-                                    <i class="fas fa-user text-purple-600 mr-2"></i>
+                                    <i class="fas fa-user text-zuppie-600 mr-2"></i>
                                     Full Name (for booking) *
                                 </label>
                                 <input type="text" 
                                        wire:model="name"
-                                       class="w-full border border-gray-300 rounded-xl px-4 py-3 focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all duration-300 @error('name') border-red-500 @enderror" 
+                                       class="w-full border border-gray-300 rounded-xl px-4 py-3 focus:ring-2 focus:ring-zuppie-500 focus:border-transparent transition-all duration-300 @error('name') border-red-500 @enderror" 
                                        placeholder="Enter name for this booking">
                                 @error('name') <span class="text-red-500 text-sm mt-1">{{ $message }}</span> @enderror
                                 <p class="text-sm text-gray-500 mt-1">This name will be used for the booking details</p>
@@ -304,24 +304,24 @@
                             <div class="grid md:grid-cols-2 gap-6">
                                 <div>
                                     <label class="block text-gray-700 font-semibold mb-2">
-                                        <i class="fas fa-phone text-purple-600 mr-2"></i>
+                                        <i class="fas fa-phone text-zuppie-600 mr-2"></i>
                                         Phone Number (for booking) *
                                     </label>
                                     <input type="tel" 
                                            wire:model="phone"
-                                           class="w-full border border-gray-300 rounded-xl px-4 py-3 focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all duration-300 @error('phone') border-red-500 @enderror" 
+                                           class="w-full border border-gray-300 rounded-xl px-4 py-3 focus:ring-2 focus:ring-zuppie-500 focus:border-transparent transition-all duration-300 @error('phone') border-red-500 @enderror" 
                                            placeholder="+91 98765 43210">
                                     @error('phone') <span class="text-red-500 text-sm mt-1">{{ $message }}</span> @enderror
                                     <p class="text-sm text-gray-500 mt-1">Contact number for this booking</p>
                                 </div>
                                 <div>
                                     <label class="block text-gray-700 font-semibold mb-2">
-                                        <i class="fas fa-envelope text-purple-600 mr-2"></i>
+                                        <i class="fas fa-envelope text-zuppie-600 mr-2"></i>
                                         Email Address (Optional)
                                     </label>
                                     <input type="email" 
                                            wire:model="email"
-                                           class="w-full border border-gray-300 rounded-xl px-4 py-3 focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all duration-300 @error('email') border-red-500 @enderror" 
+                                           class="w-full border border-gray-300 rounded-xl px-4 py-3 focus:ring-2 focus:ring-zuppie-500 focus:border-transparent transition-all duration-300 @error('email') border-red-500 @enderror" 
                                            placeholder="your@email.com (optional)">
                                     @error('email') <span class="text-red-500 text-sm mt-1">{{ $message }}</span> @enderror
                                     <p class="text-sm text-gray-500 mt-1">Email for booking confirmations (optional)</p>
@@ -334,7 +334,7 @@
                                     <i class="fas fa-arrow-left mr-2"></i> Back
                                 </button>
                                 <button wire:click="validateStep3" 
-                                        class="bg-purple-600 text-white py-3 rounded-xl font-bold hover:bg-purple-700 transition-all duration-300">
+                                        class="bg-zuppie-600 text-white py-3 rounded-xl font-bold hover:bg-zuppie-700 transition-all duration-300">
                                     Review Booking <i class="fas fa-arrow-right ml-2"></i>
                                 </button>
                             </div>
@@ -346,7 +346,7 @@
                     @if($currentStep === 4)
                     <div class="p-6 animate-fade-in">
                         <h3 class="text-xl font-bold text-gray-800 mb-6 flex items-center">
-                            <i class="fas fa-clipboard-check text-purple-600 mr-3"></i>
+                            <i class="fas fa-clipboard-check text-zuppie-600 mr-3"></i>
                             Review Your Booking
                         </h3>
                         
@@ -412,11 +412,11 @@
                             </div>
 
                             <!-- Payment Options -->
-                            <div class="bg-purple-50 rounded-xl p-6">
+                            <div class="bg-zuppie-50 rounded-xl p-6">
                                 <h4 class="font-bold text-lg text-gray-800 mb-4 border-b pb-2">Payment Method</h4>
                                 
                                 <div class="space-y-3">
-                                    <label class="flex items-center p-4 border border-gray-300 rounded-xl cursor-pointer hover:border-purple-500 transition-all duration-300 bg-white">
+                                    <label class="flex items-center p-4 border border-gray-300 rounded-xl cursor-pointer hover:border-zuppie-500 transition-all duration-300 bg-white">
                                         <input type="radio" wire:model="paymentMethod" value="cash" class="mr-3">
                                         <div class="flex-1">
                                             <div class="font-semibold text-gray-800 flex items-center">
@@ -427,11 +427,11 @@
                                         </div>
                                     </label>
                                     
-                                    <label class="flex items-center p-4 border border-gray-300 rounded-xl cursor-pointer hover:border-purple-500 transition-all duration-300 bg-white">
+                                    <label class="flex items-center p-4 border border-gray-300 rounded-xl cursor-pointer hover:border-zuppie-500 transition-all duration-300 bg-white">
                                         <input type="radio" wire:model="paymentMethod" value="online" class="mr-3">
                                         <div class="flex-1">
                                             <div class="font-semibold text-gray-800 flex items-center">
-                                                <i class="fas fa-credit-card text-blue-600 mr-2"></i>
+                                                <i class="fas fa-credit-card text-info-600 mr-2"></i>
                                                 Online Payment
                                             </div>
                                             <div class="text-sm text-gray-600">Pay securely online via Razorpay</div>
@@ -489,7 +489,7 @@
                                     <div class="border-t border-gray-200 pt-3 mt-3">
                                         <div class="flex justify-between text-lg font-bold text-gray-800">
                                             <span>Total Amount:</span>
-                                            <span class="text-purple-600">₹{{ number_format($this->totalPrice) }}</span>
+                                            <span class="text-zuppie-600">₹{{ number_format($this->totalPrice) }}</span>
                                         </div>
                                     </div>
                                 </div>
@@ -500,8 +500,8 @@
                                 <label class="flex items-start">
                                     <input type="checkbox" wire:model="acceptTerms" class="mt-1 mr-3 @error('acceptTerms') border-red-500 @enderror">
                                     <span class="text-sm text-gray-700">
-                                        I agree to the <a href="{{ route('terms-of-service') }}" target="_blank" class="text-purple-600 hover:underline font-medium">Terms & Conditions</a> and 
-                                        <a href="{{ route('privacy-policy') }}" target="_blank" class="text-purple-600 hover:underline font-medium">Privacy Policy</a>. I understand that my booking 
+                                        I agree to the <a href="{{ route('terms-of-service') }}" target="_blank" class="text-zuppie-600 hover:underline font-medium">Terms & Conditions</a> and 
+                                        <a href="{{ route('privacy-policy') }}" target="_blank" class="text-zuppie-600 hover:underline font-medium">Privacy Policy</a>. I understand that my booking 
                                         is subject to availability and will be confirmed by the event organizer.
                                     </span>
                                 </label>
@@ -515,7 +515,7 @@
                                 </button>
                                 <button wire:click="submitBooking" 
                                         wire:loading.attr="disabled"
-                                        class="bg-gradient-to-r from-purple-600 to-pink-600 text-white py-3 rounded-xl font-bold hover:from-purple-700 hover:to-pink-700 transition-all duration-300 disabled:opacity-50">
+                                        class="bg-gradient-to-r from-zuppie-600 to-zuppie-pink-600 text-white py-3 rounded-xl font-bold hover:from-zuppie-700 hover:to-zuppie-pink-700 transition-all duration-300 disabled:opacity-50">
                                     <span wire:loading.remove>
                                         @if($paymentMethod === 'online')
                                             <i class="fas fa-credit-card mr-2"></i> Pay Now ₹{{ number_format($this->totalPrice) }}
@@ -544,9 +544,9 @@
                 <div class="lg:col-span-1">
                     <div class="bg-white rounded-3xl shadow-xl sticky top-8">
                         <!-- Package Header -->
-                        <div class="bg-gradient-to-r from-purple-600 to-pink-600 p-6 text-white rounded-t-3xl">
+                        <div class="bg-gradient-to-r from-zuppie-600 to-zuppie-pink-600 p-6 text-white rounded-t-3xl">
                             <h2 class="text-2xl font-bold">{{ $package->name }}</h2>
-                            <p class="text-purple-100">{{ $package->category->name ?? 'Event Package' }}</p>
+                            <p class="text-zuppie-100">{{ $package->category->name ?? 'Event Package' }}</p>
                         </div>
 
                         <!-- Package Image -->
@@ -591,7 +591,7 @@
                                 <div class="border-t border-gray-200 pt-2 mt-2">
                                     <div class="flex justify-between font-bold text-lg text-gray-800">
                                         <span>Total:</span>
-                                        <span class="text-purple-600">₹{{ number_format($this->totalPrice) }}</span>
+                                        <span class="text-zuppie-600">₹{{ number_format($this->totalPrice) }}</span>
                                     </div>
                                 </div>
                             </div>

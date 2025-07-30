@@ -19,7 +19,7 @@
                   x-transition:leave="transition ease-in duration-200"
                   x-transition:leave-start="opacity-100 scale-100"
                   x-transition:leave-end="opacity-0 scale-50">
-                <i class="fa-solid fa-heart text-2xl  text-pink-600"></i>
+                <i class="fa-solid fa-heart text-2xl  text-zuppie-pink-600"></i>
             </span>
         </template>
         <template x-if="!isLoading">

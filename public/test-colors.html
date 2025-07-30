@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Zuppie Colors Test</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        // Zuppie Brand Colors
+                        'zuppie': {
+                            50: '#f5f3ff',
+                            100: '#ede9fe',
+                            200: '#ddd6fe',
+                            300: '#c4b5fd',
+                            400: '#a78bfa',
+                            500: '#8b5cf6',  // Primary purple
+                            600: '#7c3aed',
+                            700: '#6d28d9',
+                            800: '#5b21b6',
+                            900: '#4c1d95',
+                            950: '#2e1065',
+                        },
+                        'zuppie-pink': {
+                            50: '#fdf2f8',
+                            100: '#fce7f3',
+                            200: '#fbcfe8',
+                            300: '#f9a8d4',
+                            400: '#f472b6',
+                            500: '#ec4899',  // Primary pink
+                            600: '#db2777',
+                            700: '#be185d',
+                            800: '#9d174d',
+                            900: '#831843',
+                            950: '#500724',
+                        },
+                        // Event Package Colors
+                        'package': {
+                            'birthday': {
+                                50: '#fff7ed',
+                                500: '#f97316',
+                                600: '#ea580c',
+                            },
+                            'wedding': {
+                                50: '#fef2f2',
+                                500: '#ef4444',
+                                600: '#dc2626',
+                            },
+                            'corporate': {
+                                50: '#f0f9ff',
+                                500: '#3b82f6',
+                                600: '#2563eb',
+                            },
+                            'anniversary': {
+                                50: '#f5f3ff',
+                                500: '#8b5cf6',
+                                600: '#7c3aed',
+                            },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-gray-100 p-8">
+    <div class="max-w-6xl mx-auto">
+        <h1 class="text-4xl font-bold text-center mb-8 text-zuppie-500">Zuppie Colors Test</h1>
+        
+        <!-- Zuppie Brand Colors -->
+        <div class="mb-12">
+            <h2 class="text-2xl font-bold mb-4 text-zuppie-700">Zuppie Brand Colors</h2>
+            <div class="grid grid-cols-5 gap-4 mb-6">
+                <div class="text-center">
+                    <div class="w-20 h-20 mx-auto rounded-lg bg-zuppie-50 border border-gray-200"></div>
+                    <p class="mt-2 text-sm text-zuppie-50">zuppie-50</p>
+                </div>
+                <div class="text-center">
+                    <div class="w-20 h-20 mx-auto rounded-lg bg-zuppie-100 border border-gray-200"></div>
+                    <p class="mt-2 text-sm text-zuppie-100">zuppie-100</p>
+                </div>
+                <div class="text-center">
+                    <div class="w-20 h-20 mx-auto rounded-lg bg-zuppie-200"></div>
+                    <p class="mt-2 text-sm text-zuppie-200">zuppie-200</p>
+                </div>
+                <div class="text-center">
+                    <div class="w-20 h-20 mx-auto rounded-lg bg-zuppie-300"></div>
+                    <p class="mt-2 text-sm text-zuppie-300">zuppie-300</p>
+                </div>
+                <div class="text-center">
+                    <div class="w-20 h-20 mx-auto rounded-lg bg-zuppie-400"></div>
+                    <p class="mt-2 text-sm text-zuppie-400">zuppie-400</p>
+                </div>
+            </div>
+            <div class="grid grid-cols-5 gap-4">
+                <div class="text-center">
+                    <div class="w-20 h-20 mx-auto rounded-lg bg-zuppie-500"></div>
+                    <p class="mt-2 text-sm text-white">zuppie-500</p>
+                </div>
+                <div class="text-center">
+                    <div class="w-20 h-20 mx-auto rounded-lg bg-zuppie-600"></div>
+                    <p class="mt-2 text-sm text-white">zuppie-600</p>
+                </div>
+                <div class="text-center">
+                    <div class="w-20 h-20 mx-auto rounded-lg bg-zuppie-700"></div>
+                    <p class="mt-2 text-sm text-white">zuppie-700</p>
+                </div>
+                <div class="text-center">
+                    <div class="w-20 h-20 mx-auto rounded-lg bg-zuppie-800"></div>
+                    <p class="mt-2 text-sm text-white">zuppie-800</p>
+                </div>
+                <div class="text-center">
+                    <div class="w-20 h-20 mx-auto rounded-lg bg-zuppie-900"></div>
+                    <p class="mt-2 text-sm text-white">zuppie-900</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Zuppie Pink Colors -->
+        <div class="mb-12">
+            <h2 class="text-2xl font-bold mb-4 text-zuppie-pink-500">Zuppie Pink Colors</h2>
+            <div class="grid grid-cols-5 gap-4 mb-6">
+                <div class="text-center">
+                    <div class="w-20 h-20 mx-auto rounded-lg bg-zuppie-pink-50 border border-gray-200"></div>
+                    <p class="mt-2 text-sm text-gray-800">pink-50</p>
+                </div>
+                <div class="text-center">
+                    <div class="w-20 h-20 mx-auto rounded-lg bg-zuppie-pink-100 border border-gray-200"></div>
+                    <p class="mt-2 text-sm text-gray-800">pink-100</p>
+                </div>
+                <div class="text-center">
+                    <div class="w-20 h-20 mx-auto rounded-lg bg-zuppie-pink-200"></div>
+                    <p class="mt-2 text-sm text-gray-800">pink-200</p>
+                </div>
+                <div class="text-center">
+                    <div class="w-20 h-20 mx-auto rounded-lg bg-zuppie-pink-300"></div>
+                    <p class="mt-2 text-sm text-gray-800">pink-300</p>
+                </div>
+                <div class="text-center">
+                    <div class="w-20 h-20 mx-auto rounded-lg bg-zuppie-pink-400"></div>
+                    <p class="mt-2 text-sm text-white">pink-400</p>
+                </div>
+            </div>
+            <div class="grid grid-cols-5 gap-4">
+                <div class="text-center">
+                    <div class="w-20 h-20 mx-auto rounded-lg bg-zuppie-pink-500"></div>
+                    <p class="mt-2 text-sm text-white">pink-500</p>
+                </div>
+                <div class="text-center">
+                    <div class="w-20 h-20 mx-auto rounded-lg bg-zuppie-pink-600"></div>
+                    <p class="mt-2 text-sm text-white">pink-600</p>
+                </div>
+                <div class="text-center">
+                    <div class="w-20 h-20 mx-auto rounded-lg bg-zuppie-pink-700"></div>
+                    <p class="mt-2 text-sm text-white">pink-700</p>
+                </div>
+                <div class="text-center">
+                    <div class="w-20 h-20 mx-auto rounded-lg bg-zuppie-pink-800"></div>
+                    <p class="mt-2 text-sm text-white">pink-800</p>
+                </div>
+                <div class="text-center">
+                    <div class="w-20 h-20 mx-auto rounded-lg bg-zuppie-pink-900"></div>
+                    <p class="mt-2 text-sm text-white">pink-900</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Event Package Colors -->
+        <div class="mb-12">
+            <h2 class="text-2xl font-bold mb-4 text-gray-800">Event Package Colors</h2>
+            <div class="grid grid-cols-4 gap-6">
+                <div class="text-center">
+                    <div class="w-20 h-20 mx-auto rounded-lg bg-package-birthday-500"></div>
+                    <p class="mt-2 text-sm font-medium text-package-birthday-500">Birthday</p>
+                    <p class="text-xs text-gray-600">package-birthday-500</p>
+                </div>
+                <div class="text-center">
+                    <div class="w-20 h-20 mx-auto rounded-lg bg-package-wedding-500"></div>
+                    <p class="mt-2 text-sm font-medium text-package-wedding-500">Wedding</p>
+                    <p class="text-xs text-gray-600">package-wedding-500</p>
+                </div>
+                <div class="text-center">
+                    <div class="w-20 h-20 mx-auto rounded-lg bg-package-corporate-500"></div>
+                    <p class="mt-2 text-sm font-medium text-package-corporate-500">Corporate</p>
+                    <p class="text-xs text-gray-600">package-corporate-500</p>
+                </div>
+                <div class="text-center">
+                    <div class="w-20 h-20 mx-auto rounded-lg bg-package-anniversary-500"></div>
+                    <p class="mt-2 text-sm font-medium text-package-anniversary-500">Anniversary</p>
+                    <p class="text-xs text-gray-600">package-anniversary-500</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Text Examples -->
+        <div class="mb-12">
+            <h2 class="text-2xl font-bold mb-4 text-gray-800">Text Color Examples</h2>
+            <div class="space-y-4">
+                <p class="text-zuppie-500 text-xl font-bold">This is Zuppie Purple text (text-zuppie-500)</p>
+                <p class="text-zuppie-pink-500 text-xl font-bold">This is Zuppie Pink text (text-zuppie-pink-500)</p>
+                <p class="text-package-birthday-500 text-lg">Birthday Package Color (text-package-birthday-500)</p>
+                <p class="text-package-wedding-500 text-lg">Wedding Package Color (text-package-wedding-500)</p>
+                <p class="text-package-corporate-500 text-lg">Corporate Package Color (text-package-corporate-500)</p>
+                <p class="text-package-anniversary-500 text-lg">Anniversary Package Color (text-package-anniversary-500)</p>
+            </div>
+        </div>
+
+        <!-- Background Examples -->
+        <div class="mb-12">
+            <h2 class="text-2xl font-bold mb-4 text-gray-800">Background Examples</h2>
+            <div class="grid grid-cols-2 gap-4">
+                <div class="bg-zuppie-500 text-white p-6 rounded-lg">
+                    <h3 class="text-xl font-bold">Zuppie Purple Background</h3>
+                    <p>bg-zuppie-500 with white text</p>
+                </div>
+                <div class="bg-zuppie-pink-500 text-white p-6 rounded-lg">
+                    <h3 class="text-xl font-bold">Zuppie Pink Background</h3>
+                    <p>bg-zuppie-pink-500 with white text</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Button Examples -->
+        <div class="mb-12">
+            <h2 class="text-2xl font-bold mb-4 text-gray-800">Button Examples</h2>
+            <div class="flex flex-wrap gap-4">
+                <button class="bg-zuppie-500 hover:bg-zuppie-600 text-white px-6 py-3 rounded-lg font-semibold transition-colors">
+                    Zuppie Purple Button
+                </button>
+                <button class="bg-zuppie-pink-500 hover:bg-zuppie-pink-600 text-white px-6 py-3 rounded-lg font-semibold transition-colors">
+                    Zuppie Pink Button
+                </button>
+                <button class="bg-package-birthday-500 hover:bg-package-birthday-600 text-white px-6 py-3 rounded-lg font-semibold transition-colors">
+                    Birthday Package
+                </button>
+                <button class="bg-package-wedding-500 hover:bg-package-wedding-600 text-white px-6 py-3 rounded-lg font-semibold transition-colors">
+                    Wedding Package
+                </button>
+            </div>
+        </div>
+
+        <!-- Success Message -->
+        <div class="bg-green-100 border-l-4 border-green-500 text-green-700 p-4 rounded">
+            <div class="flex">
+                <div class="flex-shrink-0">
+                    <svg class="h-5 w-5 text-green-400" viewBox="0 0 20 20" fill="currentColor">
+                        <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+                    </svg>
+                </div>
+                <div class="ml-3">
+                    <p class="text-sm font-medium">
+                        🎉 Success! All Zuppie custom colors are working perfectly!
+                    </p>
+                    <p class="mt-1 text-sm">
+                        Tailwind CSS v3 is properly configured with PostCSS. You can now use all the custom Zuppie colors in your Laravel application.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

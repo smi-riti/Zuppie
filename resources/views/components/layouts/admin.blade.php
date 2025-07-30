@@ -14,8 +14,8 @@
             theme: {
                 extend: {
                     colors: {
-                        primary: '#7C3AED',
-                        secondary: '#EC4899',
+                        primary: '#8b5cf6',  // zuppie-500
+                        secondary: '#ec4899',  // zuppie-pink-500
                         dark: '#1F2937',
                         light: '#F9FAFB',
                     }

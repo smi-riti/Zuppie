@@ -94,13 +94,13 @@
     <link rel="preload" href="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js" as="script">
     <link rel="preload" href="https://unpkg.com/aos@2.3.1/dist/aos.js" as="script">
     
-    <!-- Critical CSS for performance -->
+    <!-- Critical CSS for performance - Using Tailwind Config Colors -->
     <style>
-        /* Critical CSS - Above the fold content */
+        /* Critical CSS - Using Tailwind Config Colors */
         body { font-family: 'Inter', sans-serif; }
-        .gradient-bg { background: linear-gradient(135deg, #8B5CF6 0%, #EC4899 100%); }
+        .gradient-bg { background: linear-gradient(135deg, theme('colors.zuppie.500') 0%, theme('colors.zuppie-pink.500') 100%); }
         .gradient-text { 
-            background: linear-gradient(135deg, #8B5CF6 0%, #EC4899 100%);
+            background: linear-gradient(135deg, theme('colors.zuppie.500') 0%, theme('colors.zuppie-pink.500') 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
@@ -110,6 +110,11 @@
             backdrop-filter: blur(10px);
             border: 1px solid rgba(255, 255, 255, 0.2);
         }
+        /* Legacy support - Use Tailwind color classes in HTML instead */
+        .text-zuppie { color: theme('colors.zuppie.500'); }
+        .bg-zuppie { background-color: theme('colors.zuppie.500'); }
+        .text-zuppie-pink { color: theme('colors.zuppie-pink.500'); }
+        .bg-zuppie-pink { background-color: theme('colors.zuppie-pink.500'); }
     </style>
     
     <!-- Non-critical CSS -->

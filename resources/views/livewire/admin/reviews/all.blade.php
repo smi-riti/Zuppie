@@ -4,8 +4,8 @@
         <template x-for="tab in ['All Reviews', 'Approved', 'Denied']" :key="tab">
             <button @click="activeTab = tab"
                 class="px-6 py-3 font-semibold text-sm focus:outline-none transition-all duration-150" :class="{
-                    'text-purple-700 border-b-4 border-pink-400 bg-purple-50': activeTab === tab,
-                    'text-gray-500 hover:text-purple-700': activeTab !== tab
+                    'text-zuppie-700 border-b-4 border-zuppie-pink-400 bg-zuppie-50': activeTab === tab,
+                    'text-gray-500 hover:text-zuppie-700': activeTab !== tab
                 }" x-text="tab">
             </button>
         </template>
@@ -18,7 +18,7 @@
             <div>
                 <table class="min-w-full text-left text-sm font-light rounded-lg overflow-hidden">
                    
-                    <thead class="bg-purple-100 text-purple-700">
+                    <thead class="bg-zuppie-100 text-zuppie-700">
                         <tr>
                             <th class="px-6 py-3">ID</th>
                             <th class="px-6 py-3">User</th>
@@ -30,7 +30,7 @@
                     </thead>
                     <tbody>
                         @forelse($reviews as $review)
-                            <tr class="even:bg-gray-50 hover:bg-pink-50 transition">
+                            <tr class="even:bg-gray-50 hover:bg-zuppie-pink-50 transition">
                                 <td class="px-6 py-4">{{ $review->id }}</td>
                                 <td class="px-6 py-4">{{ $review->user->name }}</td>
                                 <td class="px-6 py-4">
@@ -42,10 +42,10 @@
                                 <td class="px-6 py-4">{{ $review->comment }}</td>
                                 <td class="px-6 py-4 flex gap-2">
                                     <button type="button"
-                                        class="bg-green-500 text-white px-3 py-1 rounded hover:bg-green-600 transition shadow"
+                                        class="bg-success-500 text-white px-3 py-1 rounded hover:bg-success-600 transition shadow"
                                         wire:click="approving({{ $review->id }})">Approve</button>
                                     <button
-                                        class="bg-red-500 text-white px-3 py-1 rounded hover:bg-red-600 transition shadow"
+                                        class="bg-error-500 text-white px-3 py-1 rounded hover:bg-error-600 transition shadow"
                                         >Deny</button>
                                 </td>
                             </tr>
@@ -63,7 +63,7 @@
         <template x-if="activeTab === 'Approved'">
             <div>
                 <table class="min-w-full text-left text-sm font-light rounded-lg overflow-hidden">
-                    <thead class="bg-green-100 text-green-700">
+                    <thead class="bg-success-100 text-success-700">
                         <tr>
                             <th class="px-6 py-3">ID</th>
                             <th class="px-6 py-3">User</th>
@@ -75,7 +75,7 @@
                     </thead>
                     <tbody>
                         @forelse($approvedReviews as $apvr)
-                            <tr class="even:bg-gray-50 hover:bg-green-50 transition">
+                            <tr class="even:bg-gray-50 hover:bg-success-50 transition">
                                 <td class="px-6 py-4">{{ $apvr->id }}</td>
                                 <td class="px-6 py-4">{{ $apvr->user->name }}</td>
                                 <td class="px-6 py-4">
@@ -87,7 +87,7 @@
                                 <td class="px-6 py-4">{{ $apvr->comment }}</td>
                                 <td class="px-6 py-4 flex gap-2">
                                     <button
-                                        class="bg-green-500 text-white px-3 py-1 rounded hover:bg-green-600 transition shadow"
+                                        class="bg-success-500 text-white px-3 py-1 rounded hover:bg-success-600 transition shadow"
                                         wire:click="">Something</button>
                                   
                                 </td>

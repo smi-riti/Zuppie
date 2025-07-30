@@ -4,8 +4,8 @@
         <template x-for="tab in ['All Enquiries', 'Resolved', 'Denied']" :key="tab">
             <button @click="activeTab = tab"
                 class="px-6 py-3 font-semibold text-sm focus:outline-none transition-all duration-150" :class="{
-                    'text-purple-700 border-b-4 border-pink-400 bg-purple-50': activeTab === tab,
-                    'text-gray-500 hover:text-purple-700': activeTab !== tab
+                    'text-zuppie-700 border-b-4 border-zuppie-pink-400 bg-zuppie-50': activeTab === tab,
+                    'text-gray-500 hover:text-zuppie-700': activeTab !== tab
                 }" x-text="tab">
             </button>
         </template>
@@ -17,7 +17,7 @@
         <template x-if="activeTab === 'All Enquiries'">
             <div>
                 <table class="min-w-full text-left text-sm font-light rounded-lg overflow-hidden">
-                    <thead class="bg-purple-100 text-purple-700">
+                    <thead class="bg-zuppie-100 text-zuppie-700">
                         <tr>
                             <th class="px-6 py-3">ID</th>
                             <th class="px-6 py-3">User Name</th>
@@ -29,7 +29,7 @@
                     </thead>
                     <tbody>
                         @forelse($enquiries as $enquiry)
-                            <tr class="even:bg-gray-50 hover:bg-pink-50 transition">
+                            <tr class="even:bg-gray-50 hover:bg-zuppie-pink-50 transition">
                                 <td class="px-6 py-4">{{ $enquiry->id }}</td>
                                 <td class="px-6 py-4">{{ $enquiry->fullname }}</td>
                                 <td class="px-6 py-4">{{ $enquiry->email }}</td>

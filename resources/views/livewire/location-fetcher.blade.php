@@ -1,5 +1,5 @@
 <div>
-    <button onclick="getLocation()" class="bg-blue-500 text-white p-2 rounded">Get My Location</button>
+    <button onclick="getLocation()" class="bg-info-500 text-white p-2 rounded">Get My Location</button>
 
     @if ($fullAddress)
         <div class="mt-4">
