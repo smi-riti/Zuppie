@@ -37,10 +37,8 @@
         <x-admin.sidebar />
 
         <!-- Main Content Area -->
-        <div class="flex-1 flex flex-col p-4">
-            <div class="bg-white rounded-lg overflow-y-scroll shadow-sm p-2 ">
-                {{ $slot }}
-            </div>
+        <div class="flex-1 flex flex-col">
+           {{ $slot }}
         </div>
     </div>
 </body>
