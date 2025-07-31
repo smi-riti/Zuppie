@@ -24,8 +24,8 @@
 
         <!-- Revenue Card -->
         <div class="bg-white rounded-xl shadow-sm p-6 border-t-4 border-zuppie-300 hover:shadow-md transition">
-            <div class="text-3xl font-bold text-zuppie-700">$12,450</div>
-            <div class="text-sm text-zuppie-500">Revenue</div>
+            <div class="text-3xl font-bold text-zuppie-700"> ₹ {{ number_format($totalRevenue, 2, '.', ',') }}</div>
+            <div class="text-sm text-zuppie-500">Total Revenue</div>
             <div class="mt-2 h-1 bg-gradient-to-r from-zuppie-200 to-zuppie-pink-200 rounded-full"></div>
         </div>
     </div>

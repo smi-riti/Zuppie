@@ -4,11 +4,12 @@ namespace App\Livewire\Admin;
 
 use App\Models\Booking;
 use App\Models\EventPackage;
+use App\Models\Payment;
 use Livewire\Component;
 use Livewire\WithPagination;
 use Livewire\Attributes\Layout;
 
-#[Layout('components.layouts.admin')] 
+#[Layout('components.layouts.admin')]
 class Dashboard extends Component
 {
     use WithPagination;
@@ -46,7 +47,7 @@ class Dashboard extends Component
     {
         $startDate = now()->startOfMonth()->format('Y-m-d');
         $endDate = now()->addMonths(2)->endOfMonth()->format('Y-m-d');
-        
+
         return Booking::with('eventPackage')
             ->where('status', 'confirmed')
             ->whereBetween('event_date', [$startDate, $endDate])
@@ -54,32 +55,43 @@ class Dashboard extends Component
             ->get()
             ->mapWithKeys(function ($booking) {
                 $dateKey = $booking->event_date->format('Y-n-j');
-                return [$dateKey => [
-                    'title' => $booking->eventPackage->name,
-                    'type' => 'important',
-                    'guests' => $booking->guest_count,
-                    'id' => $booking->id
-                ]];
+                return [
+                    $dateKey => [
+                        'title' => $booking->eventPackage->name,
+                        'type' => 'important',
+                        'guests' => $booking->guest_count,
+                        'id' => $booking->id
+                    ]
+                ];
             })
             ->toArray();
     }
-public $selectedDate = null;
+    public $selectedDate = null;
 
-public function selectDate($date)
-{
-    $this->selectedDate = \Carbon\Carbon::create($this->currentYear, $this->currentMonth, $date);
-}
-
-public function getEventsCountForSelectedDate()
-{
-    if (!$this->selectedDate) {
-        return 0;
+    public function selectDate($date)
+    {
+        $this->selectedDate = \Carbon\Carbon::create($this->currentYear, $this->currentMonth, $date);
     }
-    
-    return Booking::where('status', 'confirmed')
-        ->whereDate('event_date', $this->selectedDate->format('Y-m-d'))
-        ->count();
-}
+
+    public function getEventsCountForSelectedDate()
+    {
+        if (!$this->selectedDate) {
+            return 0;
+        }
+
+        return Booking::where('status', 'confirmed')
+            ->whereDate('event_date', $this->selectedDate->format('Y-m-d'))
+            ->count();
+    }
+    public $totalRevenue;
+
+    public function calculateRevenue()
+    {
+        $online_payment = Payment::where('status', 'paid')->sum('amount');
+        $cash_payment = Booking::where('is_completed', 1)->sum('due_amount');
+        $this->totalRevenue = $online_payment + $cash_payment;
+    }
+
 
     public function render()
     {
@@ -88,12 +100,12 @@ public function getEventsCountForSelectedDate()
             ->whereDate('event_date', '>=', now()->toDateString())
             ->orderBy('event_date', 'asc')
             ->paginate($this->perPage);
-            
+
         $today_booking = Booking::where('status', 'confirmed')
             ->whereDate('event_date', '=', now()->toDateString())->get();
 
         $all_packages = EventPackage::all();
-
+        $this->calculateRevenue();
         return view('livewire.admin.dashboard', [
             'upComingBookings' => $upComingBookings,
             'today_booking' => $today_booking,
