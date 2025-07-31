@@ -40,7 +40,6 @@
                             </div>
                         </div>
 
-                        <!-- Thumbnail Gallery -->
                         <div class="grid grid-cols-3 gap-2 md:gap-3">
                             @foreach($this->packageImages as $index => $image)
                                 <div
@@ -51,6 +50,88 @@
                                 </div>
                             @endforeach
                         </div>
+
+                        <!-- Review Section -->
+                        <div class="max-w-3xl mx-auto p-8 bg-white rounded-xl shadow-lg border border-purple-50">
+                            <!-- Section Header -->
+                            <div class="flex justify-between items-center mb-8">
+                                <h2
+                                    class="text-3xl font-bold bg-gradient-to-r from-purple-600 to-pink-500 bg-clip-text text-transparent">
+                                    Customer Reviews</h2>
+                            </div>
+
+                            <!-- Rating Summary -->
+                            <div class="flex items-center mb-10 p-6 bg-gradient-to-r from-purple-50 to-pink-50 rounded-lg">
+                                <div
+                                    class="text-5xl font-bold mr-6 bg-gradient-to-r from-purple-600 to-pink-500 bg-clip-text text-transparent">
+                                    {{ number_format($average_review, 1) }}
+                                </div>
+                                <div>
+                                    <div class="flex items-center mb-2">
+                                        @for($i = 1; $i <= 5; $i++)
+                                            @if($i <= $average_review)
+                                                <i class="fa-solid fa-star text-xl mr-1" style="color: #9333ea;"></i>
+                                            @elseif($i - 0.5 <= $average_review)
+                                                <i class="fa-solid fa-star-half-stroke text-xl mr-1" style="color: #9333ea;"></i>
+                                            @else
+                                                <i class="fa-regular fa-star text-xl mr-1" style="color: #d8b4fe;"></i>
+                                            @endif
+                                        @endfor
+                                    </div>
+                                    <div class="text-sm text-purple-700">Based on {{ $totalReview }} verified reviews</div>
+                                </div>
+                            </div>
+                            
+
+                            <!-- Reviews List -->
+                            <div class="space-y-8">
+                                @foreach ($reviews as $review)
+                                    <div class="p-6 border border-purple-100 rounded-lg hover:shadow-md transition-shadow">
+                                        <div class="flex justify-between items-start mb-3">
+                                            <div class="flex items-center">
+                                                <div
+                                                    class="w-10 h-10 rounded-full bg-purple-100 flex items-center justify-center mr-3">
+                                                    <span
+                                                        class="text-purple-600 font-medium">{{ strtoupper(substr($review->user->name, 0, 1)) }}</span>
+                                                </div>
+                                                <h3 class="font-semibold text-purple-900">{{ $review->user->name }}</h3>
+                                            </div>
+                                            <span
+                                                class="text-sm text-pink-600">{{ $review->created_at->format('M d, Y') }}</span>
+                                        </div>
+
+                                        <div class="flex items-center mb-3">
+                                            <div class="flex mr-3">
+                                                @for($i = 1; $i <= 5; $i++)
+                                                    @if($i <= $review->rating)
+                                                        <i class="fa-solid fa-star text-sm mr-0.5" style="color: #9333ea;"></i>
+                                                    @else
+                                                        <i class="fa-regular fa-star text-sm mr-0.5" style="color: #d8b4fe;"></i>
+                                                    @endif
+                                                @endfor
+                                            </div>
+                                            <span class="text-xs bg-pink-100 text-pink-800 px-2 py-1 rounded-full">Verified
+                                                Purchase</span>
+                                        </div>
+
+                                        <p class="text-gray-700 mb-4">
+                                            {{ $review->comment ?? 'This user did not leave a comment' }}</p>
+
+                                    </div>
+                                @endforeach
+                            </div>
+
+                            <!-- View More Button -->
+                            @if($reviews->count() > 3)
+                                <div class="mt-8 text-center">
+                                    <button
+                                        class="px-6 py-2 bg-gradient-to-r from-purple-500 to-pink-500 text-white rounded-full hover:shadow-lg transition-all">
+                                        View All Reviews
+                                    </button>
+                                </div>
+                            @endif
+                        </div>
+
                     </div>
 
                     <!-- Package Details -->
