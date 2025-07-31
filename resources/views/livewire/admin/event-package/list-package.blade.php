@@ -1,4 +1,4 @@
-<div class="p-2 bg-gradient-to-br from-zuppie-50 to-zuppie-pink-50 ">
+<div class="p-4 bg-gradient-to-br from-zuppie-50 to-zuppie-pink-50 ">
     <div class="">
         <div class="flex justify-between items-center mb-8">
             <div>
