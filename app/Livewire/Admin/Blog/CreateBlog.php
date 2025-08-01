@@ -86,7 +86,7 @@ class CreateBlog extends Component
     public function saveBlog()
     {
         $this->validate();
-
+        // dd($this->validate());
         try {
             // Create the blog
             $blog = Blog::create([

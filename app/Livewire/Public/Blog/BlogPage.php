@@ -15,7 +15,6 @@ class BlogPage extends Component
     public $search = '';
     public $selectedCategory = '';
     public $categories;
-    public $showAllCategories = false;
 
     protected $queryString = ['search', 'selectedCategory'];
 
@@ -31,11 +30,13 @@ class BlogPage extends Component
     public function updatingSearch()
     {
         $this->resetPage();
+        $this->dispatch('scroll-to-results');
     }
 
     public function updatingSelectedCategory()
     {
         $this->resetPage();
+        $this->dispatch('scroll-to-results');
     }
 
     public function clearFilters()
@@ -43,11 +44,6 @@ class BlogPage extends Component
         $this->search = '';
         $this->selectedCategory = '';
         $this->resetPage();
-    }
-
-    public function toggleCategoriesView()
-    {
-        $this->showAllCategories = !$this->showAllCategories;
     }
 
     public function selectCategory($categoryId)
@@ -67,14 +63,10 @@ class BlogPage extends Component
                 $query->byCategory($this->selectedCategory);
             })
             ->latest()
-            ->paginate(9);
-
-        // Get featured categories (top 9 by blog count)
-        $featuredCategories = $this->categories->take(9);
+            ->paginate(6);
         
         return view('livewire.public.blog.blog-page', [
             'blogs' => $blogs,
-            'featuredCategories' => $featuredCategories
         ]);
     }
 }
