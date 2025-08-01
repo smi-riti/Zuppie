@@ -66,6 +66,11 @@ class Category extends Model
         return $this->hasMany(EventPackage::class);
     }
 
+    public function blogs()
+    {
+        return $this->hasMany(\App\Models\Blog::class);
+    }
+
     // Helper methods
     public function isParent()
     {
