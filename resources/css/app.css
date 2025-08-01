@@ -453,6 +453,7 @@
 }
 
 @keyframes reveal {
+  
     to {
         left: 100%;
     }
