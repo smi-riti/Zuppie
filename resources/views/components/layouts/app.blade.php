@@ -80,11 +80,17 @@
     <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@400;500;600;700;800&display=swap"></noscript>
     
     <!-- Tailwind CSS -->
-    @vite('resources/css/app.css')
+  @vite(['resources/css/app.css', 'resources/js/app.js'])
+    
+    <!-- Livewire Styles -->
+    @livewireStyles
 
     <!-- Font Awesome for Icons -->
     <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
     <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"></noscript>
+
+    <!-- Alpine.js -->
+    <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
 
     <!-- AOS Animation Library -->
     <link rel="preload" href="https://unpkg.com/aos@2.3.1/dist/aos.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
@@ -353,6 +359,10 @@
     <livewire:public.section.header />
     {{ $slot }}
     <livewire:public.section.footer />
+    
+    <!-- Livewire Scripts -->
+    @livewireScripts
+    
     <!-- AOS Animation Script -->
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js" defer></script>
     

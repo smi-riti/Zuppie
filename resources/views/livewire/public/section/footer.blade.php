@@ -1,6 +1,6 @@
 <footer class="bg-gradient-to-r from-zuppie-900 to-zuppie-pink-800 text-white pt-16 pb-8">
     <div class="container mx-auto px-4">
-        <div class="grid grid-cols-1 md:grid-cols-4 gap-12 mb-12">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-12 mb-12">
             <!-- Column 1: About -->
             <div>
                 <div class="flex items-center space-x-2 mb-6">
@@ -27,36 +27,42 @@
                 </div>
             </div>
             
-            <!-- Column 2: Quick Links -->
+            <!-- Column 2: Explore Links -->
             <div>
                 <h4 class="text-xl font-bold text-white mb-6 relative inline-block">
-                    <span class="relative z-10">Quick Links</span>
+                    <span class="relative z-10">Explore</span>
                     <span class="absolute -bottom-1 left-0 w-full h-1 bg-zuppie-pink-500 z-0"></span>
                 </h4>
                 <ul class="space-y-3">
-                    <li><a href="#" class="text-zuppie-pink-200 hover:text-white transition flex items-center group">
+                    <li><a href="{{ route('home') }}" class="text-zuppie-pink-200 hover:text-white transition flex items-center group">
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-2 text-zuppie-pink-400 group-hover:text-white transition" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
                         </svg>
-                        Wedding Venues
+                        Homepage
                     </a></li>
-                    <li><a href="#" class="text-zuppie-pink-200 hover:text-white transition flex items-center group">
+                    <li><a href="{{ route('event-packages') }}" class="text-zuppie-pink-200 hover:text-white transition flex items-center group">
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-2 text-zuppie-pink-400 group-hover:text-white transition" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
                         </svg>
-                        Birthday Venues
+                        Event Packages
                     </a></li>
-                    <li><a href="#" class="text-zuppie-pink-200 hover:text-white transition flex items-center group">
+                    <li><a href="{{ route('blog') }}" class="text-zuppie-pink-200 hover:text-white transition flex items-center group">
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-2 text-zuppie-pink-400 group-hover:text-white transition" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
                         </svg>
-                        Corporate Events
+                        Blog
                     </a></li>
-                    <li><a href="#" class="text-zuppie-pink-200 hover:text-white transition flex items-center group">
+                    <li><a href="{{ route('about') }}" class="text-zuppie-pink-200 hover:text-white transition flex items-center group">
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-2 text-zuppie-pink-400 group-hover:text-white transition" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
                         </svg>
-                        Vendor Marketplace
+                        About
+                    </a></li>
+                    <li><a href="{{ route('contact') }}" class="text-zuppie-pink-200 hover:text-white transition flex items-center group">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-2 text-zuppie-pink-400 group-hover:text-white transition" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                        </svg>
+                        Contact
                     </a></li>
                 </ul>
             </div>
@@ -98,21 +104,6 @@
                         </a>
                     </li>
                 </ul>
-            </div>
-            
-            <!-- Column 4: Newsletter -->
-            <div>
-                <h4 class="text-xl font-bold text-white mb-6 relative inline-block">
-                    <span class="relative z-10">Newsletter</span>
-                    <span class="absolute -bottom-1 left-0 w-full h-1 bg-zuppie-pink-500 z-0"></span>
-                </h4>
-                <p class="text-zuppie-pink-100 mb-4">Subscribe for event tips and exclusive offers</p>
-                <form class="space-y-3">
-                    <input type="email" placeholder="Your email" class="w-full px-4 py-2 bg-zuppie-800/50 border border-zuppie-pink-300/30 rounded-lg focus:ring-2 focus:ring-zuppie-pink-500 focus:border-transparent text-white placeholder-zuppie-pink-200">
-                    <button type="submit" class="w-full px-6 py-2 bg-gradient-to-r from-zuppie-pink-500 to-zuppie-600 text-white rounded-lg hover:from-zuppie-pink-600 hover:to-zuppie-700 transition shadow-lg transform hover:-translate-y-0.5">
-                        Subscribe
-                    </button>
-                </form>
             </div>
         </div>
         

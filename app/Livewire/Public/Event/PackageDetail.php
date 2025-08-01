@@ -2,6 +2,7 @@
 
 namespace App\Livewire\Public\Event;
 
+use App\Models\reviews;
 use Livewire\Component;
 use App\Models\EventPackage;
 use App\Models\Service;
@@ -16,12 +17,23 @@ class PackageDetail extends Component
     public $showBookingForm = false;
     public $currentImageIndex = 0;
 
+    public $average_review = 0;
+    public $totalReview;
+    public $reviewImages;
+    public function countAvgReview()
+    {
+        $totalRating = reviews::where('event_package_id', $this->packageId)->sum('rating');
+        $reviewCount = reviews::where('event_package_id', $this->packageId)->count();
+        $this->totalReview = $reviewCount;
+        $this->average_review = $reviewCount > 0
+            ? round($totalRating / $reviewCount, 2) // Round to 2 decimal places
+            : 0; // Default when no reviews
+    }
     public function mount($id = null)
     {
         $this->packageId = $id;
         $this->loadPackage();
     }
-
     public function loadPackage()
     {
         $this->package = EventPackage::with(['category', 'images'])
@@ -41,14 +53,14 @@ class PackageDetail extends Component
         ]);
 
         $this->checkingPinCode = true;
-        
+
         // Simulate API call delay
         sleep(1);
-        
+
         // Check if pin code exists in service model
         $service = Service::where('pin_code', $this->pinCode)->first();
         $this->isPinCodeAvailable = $service ? true : false;
-        
+
         $this->checkingPinCode = false;
 
         if ($this->isPinCodeAvailable) {
@@ -81,10 +93,11 @@ class PackageDetail extends Component
 
     public function getPackageImagesProperty()
     {
-        if (!$this->package) return [];
-        
+        if (!$this->package)
+            return [];
+
         $images = $this->package->images->pluck('image_url')->toArray();
-        
+
         // Add default images if no images available
         if (empty($images)) {
             $images = [
@@ -93,7 +106,7 @@ class PackageDetail extends Component
                 'https://images.unsplash.com/photo-1530103862676-de8c9debad1d?w=800&h=600&fit=crop'
             ];
         }
-        
+
         // Show all images in package detail
         return $images;
     }
@@ -127,7 +140,7 @@ class PackageDetail extends Component
             ->take(6)
             ->get();
 
-        return $similarPackages->map(function($package) {
+        return $similarPackages->map(function ($package) {
             return [
                 'id' => $package->id,
                 'name' => $package->name,
@@ -152,8 +165,8 @@ class PackageDetail extends Component
     public function previousImage()
     {
         $totalImages = count($this->packageImages);
-        $this->currentImageIndex = $this->currentImageIndex === 0 
-            ? $totalImages - 1 
+        $this->currentImageIndex = $this->currentImageIndex === 0
+            ? $totalImages - 1
             : $this->currentImageIndex - 1;
     }
 
@@ -164,6 +177,8 @@ class PackageDetail extends Component
 
     public function render()
     {
-        return view('livewire.public.event.package-detail');
+        $reviews = reviews::all();
+        $this->countAvgReview();
+        return view('livewire.public.event.package-detail', compact('reviews'));
     }
 }

@@ -35,6 +35,8 @@ use App\Livewire\Public\Event\ManageBooking as PublicManageBooking;
 use App\Livewire\Admin\Booking\ViewBooking;
 
 use App\Livewire\Admin\Blog\ManageBlog;
+use App\Livewire\Public\Blog\BlogPage;
+use App\Livewire\Public\Blog\BlogDetailPage;
 use App\Livewire\Admin\Gallery\ManageGallery;
 use App\Livewire\Public\Pages\TermsOfService;
 use App\Livewire\Public\Pages\PrivacyPolicy;
@@ -74,6 +76,11 @@ Route::get('/package-detail/{id}', PackageDetail::class)->name('package-detail')
 Route::get('/package-booking-form', PackageBookingForm::class)->name('package-booking');
 Route::get('/package-booking/{package_id?}', PackageBookingForm::class)->name('package-booking-form');
 Route::get('/events/filter', EventPackageFilter::class)->name('event-package.filter');
+
+// Blog Routes
+Route::get('/blog', BlogPage::class)->name('blog');
+Route::get('/blog/{slug}', BlogDetailPage::class)->name('blog.detail');
+
 // User profile routes
 Route::middleware(['auth'])->group(function () {
     Route::get('/profile', Profile::class)->name('profile');

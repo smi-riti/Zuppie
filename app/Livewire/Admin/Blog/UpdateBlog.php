@@ -3,48 +3,59 @@
 namespace App\Livewire\Admin\Blog;
 
 use App\Models\Blog;
+use App\Models\BlogImage;
+use App\Models\Category;
+use App\Helpers\ImageKitHelper;
 use Livewire\Component;
 use ImageKit\ImageKit;
 use Livewire\WithFileUploads;
 use Illuminate\Support\Str;
 use Livewire\Attributes\On;
 
+#[Layout('components.layouts.admin')]
 class UpdateBlog extends Component
 {
     use WithFileUploads;
 
     public $showModal = false;
     public $blogId;
-    public $image;
+    public $blog;
+    public $images = [];
+    public $categories;
     public $form = [
         'title' => '',
-        'slug' => '',
         'content' => '',
-        'is_published' => false,
+        'status' => 'draft',
+        'category_id' => null,
     ];
 
     protected $rules = [
         'form.title' => 'required|string|max:255|unique:blogs,title',
-        'form.slug' => 'required|string|max:255|unique:blogs,slug',
         'form.content' => 'required|string',
-        'form.is_published' => 'boolean',
-        'image' => 'nullable|image|max:2048',
+        'form.status' => 'required|in:draft,published',
+        'form.category_id' => 'nullable|exists:categories,id',
+        'images.*' => 'nullable|image|max:2048',
     ];
+
+    public function mount()
+    {
+        $this->categories = Category::all();
+    }
 
     #[On('open-update-blog-modal')]
     public function openModal($id)
     {
         $this->blogId = $id;
-        $blog = Blog::findOrFail($id);
+        $this->blog = Blog::with(['images', 'featuredImage', 'galleryImages'])->findOrFail($id);
         
         $this->form = [
-            'title' => $blog->title,
-            'slug' => $blog->slug,
-            'content' => $blog->content,
-            'is_published' => $blog->is_published,
+            'title' => $this->blog->title,
+            'content' => $this->blog->content,
+            'status' => $this->blog->status,
+            'category_id' => $this->blog->category_id,
         ];
         
-        $this->image = $blog->image;
+        $this->images = []; // Reset file input
         $this->showModal = true;
     }
 
@@ -56,92 +67,63 @@ class UpdateBlog extends Component
 
     public function updatedFormTitle($value)
     {
-        $this->form['slug'] = Str::slug($value);
+        // Slug will be auto-generated in the model
+    }
+
+    public function toggleStatus()
+    {
+        $this->form['status'] = $this->form['status'] === 'published' ? 'draft' : 'published';
     }
 
     public function updateBlog()
     {
         $this->rules['form.title'] = 'required|string|max:255|unique:blogs,title,' . $this->blogId;
-        $this->rules['form.slug'] = 'required|string|max:255|unique:blogs,slug,' . $this->blogId;
         $this->validate();
 
-        $blog = Blog::findOrFail($this->blogId);
-        $imageUrl = $blog->image;
-        $imageFileId = $blog->image_file_id;
-
-        if ($this->image && !is_string($this->image)) {
-            $uploadResult = $this->uploadToImageKit();
-            if ($uploadResult) {
-                $imageUrl = $uploadResult['url'];
-                $imageFileId = $uploadResult['fileId'];
-            }
-        }
-
-        $data = $this->form;
-        $data['image'] = $imageUrl;
-        $data['image_file_id'] = $imageFileId;
-
-        $blog->update($data);
-
-        $this->showModal = false;
-        $this->resetForm();
-        $this->dispatch('blog-updated');
-        session()->flash('success', 'Blog updated successfully!');
-    }
-
-    private function uploadToImageKit()
-    {
-        $publicKey = config('imagekit.public_key', env('IMAGEKIT_PUBLIC_KEY'));
-        $privateKey = config('imagekit.private_key', env('IMAGEKIT_PRIVATE_KEY'));
-        $urlEndpoint = config('imagekit.url_endpoint', env('IMAGEKIT_URL_ENDPOINT'));
-        
-        if (empty($publicKey) || empty($privateKey) || empty($urlEndpoint)) {
-            session()->flash('error', 'ImageKit credentials are missing.');
-            return null;
-        }
-        
-        $imagekit = new ImageKit(
-            $publicKey,
-            $privateKey,
-            $urlEndpoint
-        );
-
-        $localPath = $this->image->getRealPath();
-        $fileName = $this->image->getClientOriginalName();
-
-        $fileResource = fopen($localPath, 'r');
-        if ($fileResource === false) {
-            session()->flash('error', 'Failed to open image file for upload.');
-            return null;
-        }
-        
         try {
-            $response = $imagekit->upload([
-                'file' => $fileResource,
-                'fileName' => $fileName,
-                'folder' => '/Zuppie/Blogs/',
-                'useUniqueFileName' => true,
+            $blog = Blog::findOrFail($this->blogId);
+            
+            // Update blog data
+            $blog->update([
+                'title' => $this->form['title'],
+                'content' => $this->form['content'],
+                'status' => $this->form['status'],
+                'category_id' => $this->form['category_id'] ?: null,
             ]);
-        } finally {
-            if (is_resource($fileResource)) {
-                fclose($fileResource);
-            }
-        }
 
-        if (isset($response->result) && !empty($response->result->url)) {
-            return [
-                'url' => $response->result->url,
-                'fileId' => $response->result->fileId
-            ];
-        } else {
-            $errorMsg = 'Image upload failed.';
-            if (isset($response->error)) {
-                $errorMsg .= ' ImageKit error: ' . json_encode($response->error);
-            } else {
-                $errorMsg .= ' No URL returned from ImageKit.';
+            // Handle new image uploads
+            if (!empty($this->images)) {
+                // Get current max sort order
+                $maxSortOrder = BlogImage::where('blog_id', $blog->id)->max('sort_order') ?? 0;
+                
+                foreach ($this->images as $index => $image) {
+                    $uploadResult = ImageKitHelper::uploadImage($image, 'Zuppie/Blogs');
+                    
+                    if ($uploadResult) {
+                        // If this is the first image and there's no featured image, make it featured
+                        $isFeatured = $index === 0 && !$blog->featuredImage;
+                        
+                        BlogImage::create([
+                            'blog_id' => $blog->id,
+                            'image_url' => $uploadResult['url'],
+                            'image_file_id' => $uploadResult['fileId'],
+                            'is_featured' => $isFeatured,
+                            'sort_order' => $maxSortOrder + $index + 1,
+                        ]);
+                    }
+                }
             }
-            session()->flash('error', $errorMsg);
-            return null;
+
+            $this->showModal = false;
+            $this->resetForm();
+            
+            // Dispatch event to refresh the blog list
+            $this->dispatch('blog-updated');
+            $this->dispatch('refreshBlogList');
+            session()->flash('success', 'Blog updated successfully!');
+
+        } catch (\Exception $e) {
+            session()->flash('error', 'Failed to update blog: ' . $e->getMessage());
         }
     }
 
@@ -149,11 +131,13 @@ class UpdateBlog extends Component
     {
         $this->form = [
             'title' => '',
-            'slug' => '',
             'content' => '',
-            'is_published' => false,
+            'status' => 'draft',
+            'category_id' => null,
         ];
-        $this->image = null;
+        $this->images = [];
+        $this->blog = null;
+        $this->resetErrorBag();
         $this->resetValidation();
     }
 

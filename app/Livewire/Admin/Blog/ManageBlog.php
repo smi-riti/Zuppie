@@ -7,6 +7,7 @@ use App\Models\Blog;
 use Livewire\WithPagination;
 use Illuminate\Support\Str;
 use Livewire\Attributes\Layout;
+use Livewire\Attributes\On;
 
 class ManageBlog extends Component
 {
@@ -37,6 +38,21 @@ class ManageBlog extends Component
         $this->blogToDelete = $blogId;
     }
 
+    public function viewBlog($blogId)
+    {
+        $this->dispatch('open-view-blog-modal', id: $blogId);
+    }
+
+    public function toggleStatus($blogId)
+    {
+        $blog = Blog::find($blogId);
+        if ($blog) {
+            $blog->status = $blog->status === 'published' ? 'draft' : 'published';
+            $blog->save();
+            session()->flash('success', 'Blog status updated successfully!');
+        }
+    }
+
     public function deleteBlog()
     {
         if ($this->blogToDelete) {
@@ -65,10 +81,19 @@ class ManageBlog extends Component
         $this->isLoading = false;
     }
 
+    #[On('refreshBlogList')]
+    #[On('blog-created')]
+    #[On('blog-updated')]
+    public function refreshList()
+    {
+        $this->refresh();
+    }
+
     #[Layout('components.layouts.admin')]
     public function render()
     {
-        $blogs = Blog::when($this->search, function ($query) {
+        $blogs = Blog::with(['featuredImage', 'category'])
+        ->when($this->search, function ($query) {
             $query->where('title', 'like', '%' . $this->search . '%')
                   ->orWhere('slug', 'like', '%' . $this->search . '%');
         })
