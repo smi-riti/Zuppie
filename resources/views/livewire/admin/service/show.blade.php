@@ -1,5 +1,5 @@
-<div class="min-h-screen bg-gradient-to-br from-zuppie-50 to-zuppie-pink-100 p-6">
-    <div class="max-w-7xl mx-auto">
+<div class="min-h-screen bg-gradient-to-br from-zuppie-50 to-zuppie-pink-100 p-4">
+    <div class="max-w-7xl">
         <!-- Header -->
         <div class="mb-8 text-center">
             <h1 class="text-3xl md:text-4xl font-bold text-zuppie-800">Services Management</h1>
