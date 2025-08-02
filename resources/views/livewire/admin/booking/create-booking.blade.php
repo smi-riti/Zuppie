@@ -381,7 +381,7 @@
                             </span>
                         </button>
                     </div>
-                </div>
+                </div>c 
         </div>
         @endif
     </div>
