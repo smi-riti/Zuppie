@@ -8,19 +8,51 @@ use App\Models\Payment;
 use Livewire\Component;
 use Livewire\WithPagination;
 use Livewire\Attributes\Layout;
+use Carbon\Carbon;
 
 #[Layout('components.layouts.admin')]
 class Dashboard extends Component
 {
     use WithPagination;
-    public $perPage = 5; // Number of events per page
+    
+    public $perPage = 3; // Number of events per page
     public $currentMonth;
     public $currentYear;
+    public $selectedDate = null;
+
+    // Statistics properties
+    public $upcomingEventsCount = 0;
+    public $pastEventsCount = 0;
+    public $cancelledEventsCount = 0;
+    public $totalRevenue = 0;
 
     public function mount()
     {
         $this->currentMonth = now()->month;
         $this->currentYear = now()->year;
+        $this->calculateStatistics();
+    }
+
+    public function calculateStatistics()
+    {
+        // Upcoming Events (confirmed events from today onwards)
+        $this->upcomingEventsCount = Booking::where('status', 'confirmed')
+            ->whereDate('event_date', '>=', now()->toDateString())
+            ->count();
+
+        // Past Events (completed events)
+        $this->pastEventsCount = Booking::where('status', 'confirmed')
+            ->where('is_completed', 1)
+            ->whereDate('event_date', '<', now()->toDateString())
+            ->count();
+
+        // Cancelled Events
+        $this->cancelledEventsCount = Booking::where('status', 'cancelled')->count();
+
+        // Total Revenue (online payments + completed cash payments)
+        $onlinePayment = Payment::where('status', 'paid')->sum('amount');
+        $cashPayment = Booking::where('is_completed', 1)->sum('due_amount');
+        $this->totalRevenue = $onlinePayment + $cashPayment;
     }
 
     public function goToPreviousMonth()
@@ -43,10 +75,26 @@ class Dashboard extends Component
         }
     }
 
+    public function selectDate($date)
+    {
+        $this->selectedDate = Carbon::create($this->currentYear, $this->currentMonth, $date);
+    }
+
+    public function getEventsCountForSelectedDate()
+    {
+        if (!$this->selectedDate) {
+            return 0;
+        }
+
+        return Booking::where('status', 'confirmed')
+            ->whereDate('event_date', $this->selectedDate->format('Y-m-d'))
+            ->count();
+    }
+
     public function getCalendarEventsProperty()
     {
-        $startDate = now()->startOfMonth()->format('Y-m-d');
-        $endDate = now()->addMonths(2)->endOfMonth()->format('Y-m-d');
+        $startDate = Carbon::create($this->currentYear, $this->currentMonth, 1)->startOfMonth()->format('Y-m-d');
+        $endDate = Carbon::create($this->currentYear, $this->currentMonth, 1)->endOfMonth()->format('Y-m-d');
 
         return Booking::with('eventPackage')
             ->where('status', 'confirmed')
@@ -66,32 +114,32 @@ class Dashboard extends Component
             })
             ->toArray();
     }
-    public $selectedDate = null;
 
-    public function selectDate($date)
+    public function getMonthlyRevenueData()
     {
-        $this->selectedDate = \Carbon\Carbon::create($this->currentYear, $this->currentMonth, $date);
-    }
-
-    public function getEventsCountForSelectedDate()
-    {
-        if (!$this->selectedDate) {
-            return 0;
+        $monthlyData = [];
+        for ($i = 11; $i >= 0; $i--) {
+            $month = now()->subMonths($i);
+            $monthName = $month->format('M');
+            
+            $monthlyRevenue = Payment::where('status', 'paid')
+                ->whereYear('created_at', $month->year)
+                ->whereMonth('created_at', $month->month)
+                ->sum('amount');
+                
+            $monthlyCash = Booking::where('is_completed', 1)
+                ->whereYear('updated_at', $month->year)
+                ->whereMonth('updated_at', $month->month)
+                ->sum('due_amount');
+                
+            $monthlyData[] = [
+                'month' => $monthName,
+                'revenue' => $monthlyRevenue + $monthlyCash
+            ];
         }
-
-        return Booking::where('status', 'confirmed')
-            ->whereDate('event_date', $this->selectedDate->format('Y-m-d'))
-            ->count();
+        
+        return $monthlyData;
     }
-    public $totalRevenue;
-
-    public function calculateRevenue()
-    {
-        $online_payment = Payment::where('status', 'paid')->sum('amount');
-        $cash_payment = Booking::where('is_completed', 1)->sum('due_amount');
-        $this->totalRevenue = $online_payment + $cash_payment;
-    }
-
 
     public function render()
     {
@@ -101,16 +149,19 @@ class Dashboard extends Component
             ->orderBy('event_date', 'asc')
             ->paginate($this->perPage);
 
-        $today_booking = Booking::where('status', 'confirmed')
-            ->whereDate('event_date', '=', now()->toDateString())->get();
+        $todayBookings = Booking::with('eventPackage')
+            ->where('status', 'confirmed')
+            ->whereDate('event_date', '=', now()->toDateString())
+            ->get();
 
-        $all_packages = EventPackage::all();
-        $this->calculateRevenue();
+        $calendarEvents = $this->calendar_events;
+        $monthlyRevenueData = $this->getMonthlyRevenueData();
+
         return view('livewire.admin.dashboard', [
             'upComingBookings' => $upComingBookings,
-            'today_booking' => $today_booking,
-            'all_packages' => $all_packages,
-            'calendarEvents' => $this->calendar_events,
+            'todayBookings' => $todayBookings,
+            'calendarEvents' => $calendarEvents,
+            'monthlyRevenueData' => $monthlyRevenueData,
         ]);
     }
 }

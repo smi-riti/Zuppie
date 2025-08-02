@@ -90,6 +90,7 @@ Route::middleware(['auth'])->group(function () {
 
 Route::prefix('admin')->middleware(['auth', 'admin'])->group(function () {
     Route::get('/dashboard', Dashboard::class)->name('admin.dashboard');
+    Route::get('/categories', Show::class)->name('admin.categories');
     Route::get('/category/show', Show::class)->name('admin.category.show');
     Route::get('/event-packages', ListPackage::class)->name('admin.event-packages');
     Route::get('/event-packages/create', CreatePackage::class)->name('admin.event-packages.create');

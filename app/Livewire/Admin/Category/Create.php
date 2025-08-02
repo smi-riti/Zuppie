@@ -2,17 +2,19 @@
 
 namespace App\Livewire\Admin\Category;
 
+use App\Helpers\ImageKitHelper;
 use App\Models\Category;
 use Livewire\Attributes\On;
 use Livewire\Component;
-use ImageKit\ImageKit;
 use Livewire\WithFileUploads;
 
 class Create extends Component
 {
     use WithFileUploads;
+    
     public $image;
     public $categories;
+    public $currentImageUrl = null;
     public $form = [
         'name' => '',
         'description' => '',
@@ -21,17 +23,22 @@ class Create extends Component
     ];
     public $editingId = null;
     public $showModal = false;
+
     protected $rules = [
         'form.name' => 'required|string|max:255|unique:categories,name',
         'form.description' => 'nullable|string',
         'form.parent_id' => 'nullable|exists:categories,id',
         'form.is_special' => 'boolean', 
+        'image' => 'nullable|image|max:2048',
     ];
 
     protected $messages = [
         'form.name.required' => 'The category name is required.',
-        'form.name.unique' => 'This category already exists.'
+        'form.name.unique' => 'This category already exists.',
+        'image.image' => 'Please upload a valid image file.',
+        'image.max' => 'Image size must be less than 2MB.',
     ];
+
     public function loadCategories()
     {
         $this->categories = Category::all();
@@ -51,112 +58,92 @@ class Create extends Component
                 'parent_id' => $category->parent_id,
                 'is_special' => (bool) $category->is_special,
             ];
-            $this->image = $category->image; // <-- Add this line
+            $this->currentImageUrl = $category->image;
+            $this->image = null; // Reset for new upload
             $this->rules['form.name'] = 'required|string|max:255|unique:categories,name,' . $editId;
         } else {
-            $this->image = null; // Reset image on create
+            $this->currentImageUrl = null;
+            $this->image = null;
+            $this->rules['form.name'] = 'required|string|max:255|unique:categories,name';
         }
 
         $this->showModal = true;
     }
+
     public function saveCategory()
     {
-        $this->validate([
-            'form.name' => 'required|string|max:255|unique:categories,name' . ($this->editingId ? ',' . $this->editingId : ''),
-            'form.description' => 'nullable|string',
-            'form.parent_id' => 'nullable|exists:categories,id',
-            'form.is_special' => 'boolean',
-            'image' => 'nullable|image|max:2048',
-        ]);
+        // Update validation rules for editing
+        if ($this->editingId) {
+            $this->rules['form.name'] = 'required|string|max:255|unique:categories,name,' . $this->editingId;
+        }
+        
+        $this->validate();
 
-        $imageUrl = null;
-        $imageFileId = null;
+        $data = $this->form;
+        $message = '';
 
+        // Handle image upload using ImageKitHelper
         if ($this->image) {
-            $publicKey = config('imagekit.public_key', env('IMAGEKIT_PUBLIC_KEY'));
-            $privateKey = config('imagekit.private_key', env('IMAGEKIT_PRIVATE_KEY'));
-            $urlEndpoint = config('imagekit.url_endpoint', env('IMAGEKIT_URL_ENDPOINT'));
-            if (empty($publicKey) || empty($privateKey) || empty($urlEndpoint)) {
-                throw new \Exception('ImageKit credentials are missing. Please check your .env and config/imagekit.php.');
-            }
-            $imagekit = new ImageKit(
-                $publicKey,
-                $privateKey,
-                $urlEndpoint
-            );
-
-            $localPath = $this->image->getRealPath();
-            $fileName = $this->image->getClientOriginalName();
-
-            $fileResource = fopen($localPath, 'r');
-            if ($fileResource === false) {
-                throw new \Exception('Failed to open image file for upload.');
-            }
-            try {
-                $response = $imagekit->upload([
-                    'file' => $fileResource,
-                    'fileName' => $fileName,
-                    'folder' => '/Zuppie/CategoryImages/',
-                    'useUniqueFileName' => true,
-                ]);
-            } finally {
-                if (is_resource($fileResource)) {
-                    fclose($fileResource);
+            $imageData = ImageKitHelper::uploadImage($this->image, '/Zuppie/CategoryImages');
+            
+            if ($imageData) {
+                // Delete old image if updating
+                if ($this->editingId) {
+                    $oldCategory = Category::find($this->editingId);
+                    if ($oldCategory && $oldCategory->image_file_id) {
+                        ImageKitHelper::deleteImage($oldCategory->image_file_id);
+                    }
                 }
-            }
-
-            if (isset($response->result) && !empty($response->result->url)) {
-                $imageUrl = $response->result->url;
-                $imageFileId = $response->result->fileId;
+                
+                $data['image'] = $imageData['url'];
+                $data['image_file_id'] = $imageData['fileId'];
             } else {
-                $errorMsg = 'Image upload failed.';
-                if (isset($response->error)) {
-                    $errorMsg .= ' ImageKit error: ' . json_encode($response->error);
-                } else {
-                    $errorMsg .= ' No URL returned from ImageKit. Full response: ' . json_encode($response);
-                }
-                \Log::error($errorMsg);
-                session()->flash('error', $errorMsg);
+                session()->flash('error', 'Failed to upload image. Please try again.');
                 return;
             }
         }
 
-        $data = $this->form;
-        if ($imageUrl) {
-            $data['image'] = $imageUrl;
-            $data['image_file_id'] = $imageFileId;
-        }
+        try {
+            if ($this->editingId) {
+                $category = Category::find($this->editingId);
+                $category->update($data);
+                $message = 'Category updated successfully!';
+            } else {
+                Category::create($data);
+                $message = 'Category created successfully!';
+            }
 
-        if ($this->editingId) {
-            Category::find($this->editingId)->update($data);
-            $message = 'Category updated successfully!';
-            $this->loadCategories();
-        } else {
-            Category::create($data);
-            $message = 'Category created successfully!';
-            $this->loadCategories();
+            session()->flash('message', $message);
+            $this->showModal = false;
+            $this->resetForm();
+            
+            // Dispatch event to refresh the parent component
+            $this->dispatch('category-saved');
+            
+        } catch (\Exception $e) {
+            session()->flash('error', 'An error occurred: ' . $e->getMessage());
         }
-
-        $this->showModal = false;
-        $this->resetForm();
-        return redirect()->route('admin.category.show');
     }
+
     public function resetForm()
     {
         $this->form = [
             'name' => '',
             'description' => '',
             'parent_id' => null,
-            'is_special' => false, // Add this line
+            'is_special' => false,
         ];
+        $this->image = null;
+        $this->currentImageUrl = null;
         $this->editingId = null;
         $this->resetValidation();
     }
+
     public function render()
     {
         $parentCategories = Category::when($this->editingId, function ($query) {
             $query->where('id', '!=', $this->editingId);
-        })->get();
+        })->whereNull('parent_id')->get(); // Only show parent categories
 
         return view('livewire.admin.category.create', [
             'parentCategories' => $parentCategories

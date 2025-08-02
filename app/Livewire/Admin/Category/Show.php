@@ -2,8 +2,10 @@
 
 namespace App\Livewire\Admin\Category;
 
+use App\Helpers\ImageKitHelper;
 use App\Models\Category;
 use Livewire\Attributes\Layout;
+use Livewire\Attributes\On;
 use Livewire\Attributes\Title;
 use Livewire\Component;
 use Livewire\WithPagination;
@@ -11,7 +13,7 @@ use Livewire\WithPagination;
 #[Title('Show')]
 class Show extends Component
 {
-    use WithPagination; // Add this trait
+    use WithPagination;
 
     public $confirmingDeletion = false;
     public $categoryToDelete = null;
@@ -19,7 +21,14 @@ class Show extends Component
 
     public function updatedSearch()
     {
-        $this->resetPage(); // Reset pagination when searching
+        $this->resetPage();
+    }
+
+    #[On('category-saved')]
+    public function refreshComponent()
+    {
+        $this->resetPage();
+        // Component will automatically re-render
     }
 
     public function confirmDelete($categoryId)
@@ -33,13 +42,18 @@ class Show extends Component
         if ($this->categoryToDelete) {
             $category = Category::find($this->categoryToDelete);
             if ($category) {
+                // Delete image from ImageKit if exists
+                if ($category->image_file_id) {
+                    ImageKitHelper::deleteImage($category->image_file_id);
+                }
                 $category->delete();
+                session()->flash('message', 'Category deleted successfully!');
             }
         }
 
         $this->confirmingDeletion = false;
         $this->categoryToDelete = null;
-        $this->resetPage(); // Reset pagination after deletion
+        $this->resetPage();
     }
 
     public function cancelDelete()
@@ -52,8 +66,9 @@ class Show extends Component
     public function render()
     {
         $categories = Category::when($this->search, function ($query) {
-            $query->where('name', 'like', '%' . $this->search . '%');
-        })->latest()->paginate(8);
+            $query->where('name', 'like', '%' . $this->search . '%')
+                  ->orWhere('description', 'like', '%' . $this->search . '%');
+        })->with('parent')->latest()->paginate(8);
 
         return view('livewire.admin.category.show', compact('categories'));
     }

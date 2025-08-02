@@ -95,44 +95,7 @@
             </div>
         </div>
 
-        <!-- Right Column -->
         <div class="space-y-6">
-            <!-- Quick Links -->
-            <div class="bg-white rounded-xl shadow-sm p-4 lg:p-6 hover:shadow-md transition-shadow">
-                <h3 class="text-lg font-semibold text-zuppie-800 mb-4 flex items-center">
-                    <svg class="w-5 h-5 mr-2 text-zuppie-pink-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1" />
-                    </svg>
-                    Quick Links
-                </h3>
-                <div class="grid grid-cols-2 gap-3">
-                    <a href="{{ route('admin.booking.manage') }}" class="flex items-center p-3 rounded-lg bg-zuppie-50 hover:bg-zuppie-100 transition-colors text-sm font-medium text-zuppie-700">
-                        <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
-                        </svg>
-                        Bookings
-                    </a>
-                    <a href="{{ route('admin.categories') }}" class="flex items-center p-3 rounded-lg bg-zuppie-pink-50 hover:bg-zuppie-pink-100 transition-colors text-sm font-medium text-zuppie-700">
-                        <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
-                        </svg>
-                        Categories
-                    </a>
-                    <a href="{{ route('admin.offers.show') }}" class="flex items-center p-3 rounded-lg bg-green-50 hover:bg-green-100 transition-colors text-sm font-medium text-zuppie-700">
-                        <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A1.994 1.994 0 013 12V7a4 4 0 014-4z" />
-                        </svg>
-                        Offers
-                    </a>
-                    <a href="{{ route('admin.event-packages') }}" class="flex items-center p-3 rounded-lg bg-blue-50 hover:bg-blue-100 transition-colors text-sm font-medium text-zuppie-700">
-                        <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4" />
-                        </svg>
-                        Packages
-                    </a>
-                </div>
-            </div>
-            
             <!-- Calendar -->
             <div class="bg-white rounded-xl shadow-sm p-4 lg:p-6 hover:shadow-md transition-shadow" id="admin-calendar">
                 <div class="flex justify-between items-center mb-4">
@@ -255,92 +218,67 @@
         @endif
     </div>
 
-    <!-- Chart.js CDN - Load before our script -->
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-
     @script
     <script>
-        // Chart.js Revenue Chart - with proper initialization
+        // Chart.js Revenue Chart
         document.addEventListener('DOMContentLoaded', function() {
-            console.log('Dashboard script loaded');
+            const ctx = document.getElementById('revenueChart').getContext('2d');
+            const monthlyData = @json($monthlyRevenueData);
             
-            const ctx = document.getElementById('revenueChart');
-            console.log('Canvas element found:', !!ctx);
-            console.log('Chart.js loaded:', typeof Chart !== 'undefined');
+            const months = monthlyData.map(item => item.month);
+            const revenues = monthlyData.map(item => item.revenue);
             
-            if (ctx && typeof Chart !== 'undefined') {
-                const monthlyData = @json($monthlyRevenueData);
-                console.log('Monthly data:', monthlyData);
-                
-                if (monthlyData && monthlyData.length > 0) {
-                    const months = monthlyData.map(item => item.month);
-                    const revenues = monthlyData.map(item => item.revenue);
-                    
-                    console.log('Creating chart with months:', months, 'revenues:', revenues);
-                    
-                    new Chart(ctx, {
-                        type: 'line',
-                        data: {
-                            labels: months,
-                            datasets: [{
-                                label: 'Revenue (₹)',
-                                data: revenues,
-                                borderColor: 'rgb(236, 72, 153)',
-                                backgroundColor: 'rgba(236, 72, 153, 0.1)',
-                                borderWidth: 3,
-                                fill: true,
-                                tension: 0.4,
-                                pointBackgroundColor: 'rgb(236, 72, 153)',
-                                pointBorderColor: '#fff',
-                                pointBorderWidth: 2,
-                                pointRadius: 6,
-                                pointHoverRadius: 8,
-                            }]
+            new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: months,
+                    datasets: [{
+                        label: 'Revenue (₹)',
+                        data: revenues,
+                        borderColor: 'rgb(236, 72, 153)',
+                        backgroundColor: 'rgba(236, 72, 153, 0.1)',
+                        borderWidth: 3,
+                        fill: true,
+                        tension: 0.4,
+                        pointBackgroundColor: 'rgb(236, 72, 153)',
+                        pointBorderColor: '#fff',
+                        pointBorderWidth: 2,
+                        pointRadius: 6,
+                        pointHoverRadius: 8,
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            display: false
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            ticks: {
+                                callback: function(value) {
+                                    return '₹' + value.toLocaleString();
+                                }
+                            },
+                            grid: {
+                                color: 'rgba(0, 0, 0, 0.05)'
+                            }
                         },
-                        options: {
-                            responsive: true,
-                            maintainAspectRatio: false,
-                            plugins: {
-                                legend: {
-                                    display: false
-                                }
-                            },
-                            scales: {
-                                y: {
-                                    beginAtZero: true,
-                                    ticks: {
-                                        callback: function(value) {
-                                            return '₹' + value.toLocaleString();
-                                        }
-                                    },
-                                    grid: {
-                                        color: 'rgba(0, 0, 0, 0.05)'
-                                    }
-                                },
-                                x: {
-                                    grid: {
-                                        display: false
-                                    }
-                                }
-                            },
-                            interaction: {
-                                intersect: false,
-                                mode: 'index'
+                        x: {
+                            grid: {
+                                display: false
                             }
                         }
-                    });
-                    console.log('Chart created successfully');
-                } else {
-                    console.log('No data available for chart');
-                    // Display fallback message if no data
-                    ctx.parentElement.innerHTML = '<div class="flex items-center justify-center h-full text-zuppie-500"><p>No revenue data available</p></div>';
+                    },
+                    interaction: {
+                        intersect: false,
+                        mode: 'index'
+                    }
                 }
-            } else if (ctx) {
-                console.error('Chart.js not loaded');
-                ctx.parentElement.innerHTML = '<div class="flex items-center justify-center h-full text-red-500"><p>Chart library failed to load</p></div>';
-            } else {
-                console.error('Canvas element not found');
-            }
+            });
         });
 
         Livewire.on('show-event-details', (data) => {
@@ -348,4 +286,7 @@
         });
     </script>
     @endscript
+
+    <!-- Chart.js CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </div>

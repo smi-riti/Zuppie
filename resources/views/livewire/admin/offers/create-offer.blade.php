@@ -41,8 +41,14 @@
                         <!-- Offer Code -->
                         <div>
                             <label class="block text-sm font-medium text-zuppie-700 mb-2">Offer Code</label>
-                            <input type="text" wire:model.live="offer_code" 
-                                   class="w-full px-4 py-2 border border-zuppie-100 rounded-lg focus:ring-2 focus:ring-zuppie-pink-300 focus:border-zuppie-pink-400 transition">
+                            <div class="flex space-x-2">
+                                <input type="text" wire:model.live="offer_code" 
+                                       class="flex-1 px-4 py-2 border border-zuppie-100 rounded-lg focus:ring-2 focus:ring-zuppie-pink-300 focus:border-zuppie-pink-400 transition">
+                                <button type="button" wire:click="generateOfferCode" 
+                                        class="px-4 py-2 bg-zuppie-100 text-zuppie-700 rounded-lg hover:bg-zuppie-200 transition text-sm font-medium">
+                                    Generate
+                                </button>
+                            </div>
                             @error('offer_code') <p class="mt-1 text-sm text-zuppie-pink-600">{{ $message }}</p> @enderror
                         </div>
 
@@ -70,6 +76,7 @@
                         <div>
                             <label class="block text-sm font-medium text-zuppie-700 mb-2">Start Date</label>
                             <input type="date" wire:model.live="start_date" 
+                                   min="{{ now()->toDateString() }}"
                                    class="w-full px-4 py-2 border border-zuppie-100 rounded-lg focus:ring-2 focus:ring-zuppie-pink-300 focus:border-zuppie-pink-400 transition">
                             @error('start_date') <p class="mt-1 text-sm text-zuppie-pink-600">{{ $message }}</p> @enderror
                         </div>
@@ -77,6 +84,7 @@
                         <div>
                             <label class="block text-sm font-medium text-zuppie-700 mb-2">End Date</label>
                             <input type="date" wire:model.live="end_date" 
+                                   min="{{ $start_date ? max($start_date, now()->toDateString()) : now()->toDateString() }}"
                                    class="w-full px-4 py-2 border border-zuppie-100 rounded-lg focus:ring-2 focus:ring-zuppie-pink-300 focus:border-zuppie-pink-400 transition">
                             @error('end_date') <p class="mt-1 text-sm text-zuppie-pink-600">{{ $message }}</p> @enderror
                         </div>

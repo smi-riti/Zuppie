@@ -33,7 +33,7 @@
                         <!-- Offer Title -->
                         <div>
                             <label class="block text-sm font-medium text-zuppie-700 mb-2">Offer Title</label>
-                            <input type="text" wire:model="title" 
+                            <input type="text" wire:model.live="title" 
                                    class="w-full px-4 py-2 border border-zuppie-100 rounded-lg focus:ring-2 focus:ring-zuppie-pink-300 focus:border-zuppie-pink-400 transition">
                             @error('title') <p class="mt-1 text-sm text-zuppie-pink-600">{{ $message }}</p> @enderror
                         </div>
@@ -41,8 +41,14 @@
                         <!-- Offer Code -->
                         <div>
                             <label class="block text-sm font-medium text-zuppie-700 mb-2">Offer Code</label>
-                            <input type="text" wire:model="offer_code" 
-                                   class="w-full px-4 py-2 border border-zuppie-100 rounded-lg focus:ring-2 focus:ring-zuppie-pink-300 focus:border-zuppie-pink-400 transition">
+                            <div class="flex space-x-2">
+                                <input type="text" wire:model.live="offer_code" 
+                                       class="flex-1 px-4 py-2 border border-zuppie-100 rounded-lg focus:ring-2 focus:ring-zuppie-pink-300 focus:border-zuppie-pink-400 transition">
+                                <button type="button" wire:click="generateCodeFromTitle" 
+                                        class="px-4 py-2 bg-zuppie-100 text-zuppie-700 rounded-lg hover:bg-zuppie-200 transition text-sm font-medium">
+                                    Generate
+                                </button>
+                            </div>
                             @error('offer_code') <p class="mt-1 text-sm text-zuppie-pink-600">{{ $message }}</p> @enderror
                         </div>
 
@@ -69,14 +75,16 @@
                         <!-- Dates -->
                         <div>
                             <label class="block text-sm font-medium text-zuppie-700 mb-2">Start Date</label>
-                            <input type="date" wire:model="start_date" 
+                            <input type="date" wire:model.live="start_date" 
+                                   min="{{ now()->toDateString() }}"
                                    class="w-full px-4 py-2 border border-zuppie-100 rounded-lg focus:ring-2 focus:ring-zuppie-pink-300 focus:border-zuppie-pink-400 transition">
                             @error('start_date') <p class="mt-1 text-sm text-zuppie-pink-600">{{ $message }}</p> @enderror
                         </div>
 
                         <div>
                             <label class="block text-sm font-medium text-zuppie-700 mb-2">End Date</label>
-                            <input type="date" wire:model="end_date" 
+                            <input type="date" wire:model.live="end_date" 
+                                   min="{{ $start_date ? max($start_date, now()->toDateString()) : now()->toDateString() }}"
                                    class="w-full px-4 py-2 border border-zuppie-100 rounded-lg focus:ring-2 focus:ring-zuppie-pink-300 focus:border-zuppie-pink-400 transition">
                             @error('end_date') <p class="mt-1 text-sm text-zuppie-pink-600">{{ $message }}</p> @enderror
                         </div>
@@ -93,21 +101,45 @@
                     <!-- Image Upload -->
                     <div>
                         <label class="block text-sm font-medium text-zuppie-700 mb-2">Offer Image</label>
-                        <div class="flex items-center space-x-4">
-                            @if($image)
-                                <div class="w-20 h-20 rounded-lg overflow-hidden border border-zuppie-100">
-                                    <img src="{{ $image }}" alt="Current offer image" class="w-full h-full object-cover">
+                        <div class="space-y-4">
+                            <!-- Current Image Preview -->
+                            @if($currentImageUrl && !$image)
+                                <div class="relative inline-block">
+                                    <img src="{{ $currentImageUrl }}" alt="Current offer image" 
+                                         class="w-32 h-24 object-cover rounded-lg border-2 border-zuppie-200 shadow-sm">
+                                    <div class="absolute top-2 right-2 bg-green-100 text-green-800 px-2 py-1 rounded-full text-xs font-medium">
+                                        Current
+                                    </div>
                                 </div>
                             @endif
+                            
+                            <!-- New Image Preview -->
+                            @if($image && is_object($image))
+                                <div class="relative inline-block">
+                                    <img src="{{ $image->temporaryUrl() }}" alt="New image preview"
+                                         class="w-32 h-24 object-cover rounded-lg border-2 border-zuppie-pink-200 shadow-sm">
+                                    <div class="absolute top-2 right-2 bg-blue-100 text-blue-800 px-2 py-1 rounded-full text-xs font-medium">
+                                        New
+                                    </div>
+                                    <button type="button" wire:click="$set('image', null)" 
+                                            class="absolute -top-2 -right-2 bg-red-500 text-white rounded-full p-1 hover:bg-red-600 transition">
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                                        </svg>
+                                    </button>
+                                </div>
+                            @endif
+                            
+                            <!-- Upload Area -->
                             <label class="flex flex-col items-center justify-center w-full px-4 py-6 border-2 border-dashed border-zuppie-pink-200 rounded-lg cursor-pointer bg-zuppie-pink-50 hover:bg-zuppie-pink-100 transition">
                                 <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-zuppie-pink-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
                                 </svg>
                                 <span class="mt-2 text-sm text-zuppie-700">Click to upload new image</span>
-                                <input type="file" wire:model="newImage" class="hidden">
+                                <input type="file" wire:model.live="image" class="hidden">
                             </label>
                         </div>
-                        @error('newImage') <p class="mt-1 text-sm text-zuppie-pink-600">{{ $message }}</p> @enderror
+                        @error('image') <p class="mt-1 text-sm text-zuppie-pink-600">{{ $message }}</p> @enderror
                     </div>
 
                     <!-- Description -->
