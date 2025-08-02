@@ -1,4 +1,4 @@
-<div>
+<div class="p-4">
     <div class="flex justify-between items-center mb-6">
         <h2 class="text-2xl font-bold text-zuppie-700">Categories List ({{ $categories->total() }})</h2>
         <div class="flex gap-2 items-center">
