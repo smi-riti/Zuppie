@@ -45,7 +45,7 @@
     </section>
 
     <!-- Featured Packages Section -->
-    @if (!$searchQuery)
+    {{-- @if (!$searchQuery)
         <section class="py-20 bg-white">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div class="text-center mb-16" data-aos="fade-up">
@@ -130,7 +130,7 @@
                 </div>
             </div>
         </section>
-    @endif
+    @endif --}}
 
     <!-- Main Packages Section -->
     <section class="py-20 bg-gradient-to-br from-gray-50 to-purple-50">
@@ -221,7 +221,10 @@
                                                 </span>
                                             </div>
                                         @endif
-                                        @if (isset($package['rating']))
+                                        <div class="absolute top-2 left-4">
+                                            <livewire:public.components.wishlist-button :packageId="$package['id']" />
+                                        </div>
+                                        {{-- @if (isset($package['rating']))
                                             <div class="absolute top-4 left-4">
                                                 <div
                                                     class="bg-black/60 backdrop-blur-sm text-white px-3 py-2 rounded-full text-sm font-semibold flex items-center space-x-1">
@@ -229,10 +232,8 @@
                                                     <span>{{ $package['rating'] }}</span>
                                                 </div>
                                             </div>
-                                        @endif
-                                        <div class="absolute top-4 right-4">
-                                            <livewire:public.components.wishlist-button :packageId="$package['id']" />
-                                        </div>
+                                        @endif --}}
+                                        
                                         <div class="absolute bottom-4 left-4">
                                             <div
                                                 class="bg-white/90 backdrop-blur-sm text-gray-800 px-3 py-2 rounded-full font-bold text-lg">
