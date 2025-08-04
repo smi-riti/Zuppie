@@ -1,12 +1,12 @@
 <div>
     @if ($showModal && $blog)
         <div class="fixed inset-0 backdrop-blur-sm bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
-            <div class="bg-white rounded-lg shadow-xl max-w-5xl w-full max-h-[90vh] overflow-hidden border-2 border-zuppie-300">
+            <div class="bg-white rounded-lg shadow-xl max-w-5xl w-full max-h-[90vh] overflow-hidden border-2 border-purple-300">
                 <!-- Header -->
                 <div class="sticky top-0 bg-white p-6 border-b border-gray-200 rounded-t-lg">
                     <div class="flex justify-between items-start">
                         <div class="flex-1">
-                            <h3 class="text-2xl font-bold text-zuppie-700 mb-2">{{ $blog->title }}</h3>
+                            <h3 class="text-2xl font-bold text-purple-700 mb-2">{{ $blog->title }}</h3>
                             <div class="flex items-center space-x-4 text-sm text-gray-500">
                                 <span>By {{ $blog->author->name }}</span>
                                 <span>•</span>
@@ -14,7 +14,7 @@
                                 <span>•</span>
                                 <div class="flex items-center space-x-2">
                                     <button wire:click="toggleStatus" 
-                                        class="relative inline-flex h-4 w-8 items-center rounded-full transition-colors focus:outline-none focus:ring-2 focus:ring-zuppie-500 focus:ring-offset-2 {{ $blog->status === 'published' ? 'bg-green-500' : 'bg-gray-300' }}">
+                                        class="relative inline-flex h-4 w-8 items-center rounded-full transition-colors focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-offset-2 {{ $blog->status === 'published' ? 'bg-green-500' : 'bg-gray-300' }}">
                                         <span class="sr-only">Toggle status</span>
                                         <span class="inline-block h-2 w-2 transform rounded-full bg-white transition {{ $blog->status === 'published' ? 'translate-x-5' : 'translate-x-1' }}"></span>
                                     </button>

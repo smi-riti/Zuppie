@@ -1,4 +1,4 @@
-<div class="min-h-screen bg-gradient-to-br from-slate-50 via-white to-zuppie-50">
+<div class="min-h-screen bg-gradient-to-br from-slate-50 via-white to-purple-50">
     <!-- About Page -->
     <main class="min-h-screen bg-white">
         <!-- Hero Section -->
@@ -8,7 +8,7 @@
                 <img src="https://images.unsplash.com/photo-1519741497674-611481863552?ixlib=rb-4.0.3&auto=format&fit=crop&w=2340&q=80" 
                      alt="About Us Background" 
                      class="w-full h-full object-cover">
-                <div class="absolute inset-0 bg-gradient-to-br from-zuppie-900/40 via-zuppie-pink-800/35 to-indigo-900/40"></div>
+                <div class="absolute inset-0 bg-gradient-to-br from-purple-900/40 via-pink-800/35 to-indigo-900/40"></div>
                 <div class="absolute inset-0 bg-black/15"></div>
             </div>
 
@@ -16,13 +16,13 @@
             <div class="relative z-10 flex items-center justify-center h-full text-center text-white px-4">
                 <div class="max-w-5xl mx-auto">
                     <h1 class="text-5xl md:text-7xl font-bold mb-6 sparkle-text drop-shadow-2xl">About {{ $settings['site_name'] }}</h1>
-                    <p class="text-xl md:text-2xl text-zuppie-100 max-w-3xl mx-auto leading-relaxed drop-shadow-lg">
+                    <p class="text-xl md:text-2xl text-purple-100 max-w-3xl mx-auto leading-relaxed drop-shadow-lg">
                         {{ $settings['site_description'] ?? 'Creating unforgettable moments through exceptional event planning and coordination.' }}
                     </p>
                     <div class="mt-8">
                         <button 
                             wire:click="$dispatch('open-enquiry-form')"
-                            class="px-8 py-4 bg-gradient-to-r from-zuppie-pink-500 to-zuppie-600 text-white rounded-full font-bold text-lg hover:from-zuppie-pink-600 hover:to-zuppie-700 transition-all transform hover:scale-105 shadow-lg">
+                            class="px-8 py-4 bg-gradient-to-r from-pink-500 to-purple-600 text-white rounded-full font-bold text-lg hover:from-pink-600 hover:to-purple-700 transition-all transform hover:scale-105 shadow-lg">
                             <i class="fas fa-calendar-plus mr-2"></i>Plan Your Event
                         </button>
                     </div>
@@ -31,7 +31,7 @@
         </section>
 
         <!-- Our Story Section -->
-        <section class="py-20 bg-gradient-to-br from-zuppie-50 to-zuppie-pink-50">
+        <section class="py-20 bg-gradient-to-br from-purple-50 to-pink-50">
             <div class="container mx-auto px-4 max-w-6xl">
                 <div class="grid lg:grid-cols-2 gap-16 items-center">
                     <div class="space-y-6">
@@ -76,7 +76,7 @@
                         <div class="absolute -top-6 -right-6 w-20 h-20 bg-yellow-400 rounded-full flex items-center justify-center animate-bounce-slow">
                             ✨
                         </div>
-                        <div class="absolute -bottom-4 -left-4 w-16 h-16 bg-zuppie-pink-400 rounded-full flex items-center justify-center animate-pulse-slow">
+                        <div class="absolute -bottom-4 -left-4 w-16 h-16 bg-pink-400 rounded-full flex items-center justify-center animate-pulse-slow">
                             🎉
                         </div>
                     </div>
@@ -98,8 +98,8 @@
                 
                 <div class="grid md:grid-cols-2 gap-16">
                     <!-- Mission -->
-                    <div class="relative bg-gradient-to-br from-zuppie-100 to-zuppie-pink-100 rounded-2xl p-8 shadow-lg hover:shadow-xl transition-all duration-300">
-                        <div class="absolute -top-4 left-8 w-16 h-16 bg-gradient-to-r from-zuppie-600 to-zuppie-pink-600 rounded-full flex items-center justify-center">
+                    <div class="relative bg-gradient-to-br from-purple-100 to-pink-100 rounded-2xl p-8 shadow-lg hover:shadow-xl transition-all duration-300">
+                        <div class="absolute -top-4 left-8 w-16 h-16 bg-gradient-to-r from-purple-600 to-pink-600 rounded-full flex items-center justify-center">
                             <i class="fas fa-heart text-white text-2xl"></i>
                         </div>
                         <div class="pt-8">
@@ -113,8 +113,8 @@
                     </div>
                     
                     <!-- Vision -->
-                    <div class="relative bg-gradient-to-br from-zuppie-pink-100 to-zuppie-100 rounded-2xl p-8 shadow-lg hover:shadow-xl transition-all duration-300">
-                        <div class="absolute -top-4 left-8 w-16 h-16 bg-gradient-to-r from-zuppie-pink-600 to-zuppie-600 rounded-full flex items-center justify-center">
+                    <div class="relative bg-gradient-to-br from-pink-100 to-purple-100 rounded-2xl p-8 shadow-lg hover:shadow-xl transition-all duration-300">
+                        <div class="absolute -top-4 left-8 w-16 h-16 bg-gradient-to-r from-pink-600 to-purple-600 rounded-full flex items-center justify-center">
                             <i class="fas fa-star text-white text-2xl"></i>
                         </div>
                         <div class="pt-8">
@@ -131,7 +131,7 @@
         </section>
 
         <!-- Our Values -->
-        <section class="py-20 bg-gradient-to-br from-zuppie-50 to-zuppie-pink-50">
+        <section class="py-20 bg-gradient-to-br from-purple-50 to-pink-50">
             <div class="container mx-auto px-4 max-w-6xl">
                 <div class="text-center mb-16">
                     <h2 class="text-4xl md:text-5xl font-bold font-display gradient-text mb-6">
@@ -145,7 +145,7 @@
                 <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
                     <!-- Excellence -->
                     <div class="text-center group hover:scale-105 transition-transform duration-300">
-                        <div class="w-20 h-20 bg-gradient-to-r from-zuppie-600 to-zuppie-pink-600 rounded-full flex items-center justify-center mx-auto mb-6 group-hover:shadow-lg transition-shadow duration-300">
+                        <div class="w-20 h-20 bg-gradient-to-r from-purple-600 to-pink-600 rounded-full flex items-center justify-center mx-auto mb-6 group-hover:shadow-lg transition-shadow duration-300">
                             <i class="fas fa-crown text-white text-3xl"></i>
                         </div>
                         <h3 class="text-xl font-bold text-gray-800 mb-4">Excellence</h3>
@@ -154,7 +154,7 @@
                     
                     <!-- Creativity -->
                     <div class="text-center group hover:scale-105 transition-transform duration-300">
-                        <div class="w-20 h-20 bg-gradient-to-r from-zuppie-pink-600 to-zuppie-600 rounded-full flex items-center justify-center mx-auto mb-6 group-hover:shadow-lg transition-shadow duration-300">
+                        <div class="w-20 h-20 bg-gradient-to-r from-pink-600 to-purple-600 rounded-full flex items-center justify-center mx-auto mb-6 group-hover:shadow-lg transition-shadow duration-300">
                             <i class="fas fa-palette text-white text-3xl"></i>
                         </div>
                         <h3 class="text-xl font-bold text-gray-800 mb-4">Creativity</h3>
@@ -163,7 +163,7 @@
                     
                     <!-- Integrity -->
                     <div class="text-center group hover:scale-105 transition-transform duration-300">
-                        <div class="w-20 h-20 bg-gradient-to-r from-zuppie-600 to-zuppie-pink-600 rounded-full flex items-center justify-center mx-auto mb-6 group-hover:shadow-lg transition-shadow duration-300">
+                        <div class="w-20 h-20 bg-gradient-to-r from-purple-600 to-pink-600 rounded-full flex items-center justify-center mx-auto mb-6 group-hover:shadow-lg transition-shadow duration-300">
                             <i class="fas fa-handshake text-white text-3xl"></i>
                         </div>
                         <h3 class="text-xl font-bold text-gray-800 mb-4">Integrity</h3>
@@ -172,7 +172,7 @@
                     
                     <!-- Passion -->
                     <div class="text-center group hover:scale-105 transition-transform duration-300">
-                        <div class="w-20 h-20 bg-gradient-to-r from-zuppie-pink-600 to-zuppie-600 rounded-full flex items-center justify-center mx-auto mb-6 group-hover:shadow-lg transition-shadow duration-300">
+                        <div class="w-20 h-20 bg-gradient-to-r from-pink-600 to-purple-600 rounded-full flex items-center justify-center mx-auto mb-6 group-hover:shadow-lg transition-shadow duration-300">
                             <i class="fas fa-fire text-white text-3xl"></i>
                         </div>
                         <h3 class="text-xl font-bold text-gray-800 mb-4">Passion</h3>
@@ -181,7 +181,7 @@
                     
                     <!-- Collaboration -->
                     <div class="text-center group hover:scale-105 transition-transform duration-300">
-                        <div class="w-20 h-20 bg-gradient-to-r from-zuppie-600 to-zuppie-pink-600 rounded-full flex items-center justify-center mx-auto mb-6 group-hover:shadow-lg transition-shadow duration-300">
+                        <div class="w-20 h-20 bg-gradient-to-r from-purple-600 to-pink-600 rounded-full flex items-center justify-center mx-auto mb-6 group-hover:shadow-lg transition-shadow duration-300">
                             <i class="fas fa-users text-white text-3xl"></i>
                         </div>
                         <h3 class="text-xl font-bold text-gray-800 mb-4">Collaboration</h3>
@@ -190,7 +190,7 @@
                     
                     <!-- Innovation -->
                     <div class="text-center group hover:scale-105 transition-transform duration-300">
-                        <div class="w-20 h-20 bg-gradient-to-r from-zuppie-pink-600 to-zuppie-600 rounded-full flex items-center justify-center mx-auto mb-6 group-hover:shadow-lg transition-shadow duration-300">
+                        <div class="w-20 h-20 bg-gradient-to-r from-pink-600 to-purple-600 rounded-full flex items-center justify-center mx-auto mb-6 group-hover:shadow-lg transition-shadow duration-300">
                             <i class="fas fa-lightbulb text-white text-3xl"></i>
                         </div>
                         <h3 class="text-xl font-bold text-gray-800 mb-4">Innovation</h3>
@@ -221,7 +221,7 @@
                         </div>
                         <div class="p-6 text-center">
                             <h3 class="text-xl font-bold text-gray-800 mb-2">Sarah Johnson</h3>
-                            <p class="text-zuppie-600 font-semibold mb-3">Founder & Creative Director</p>
+                            <p class="text-purple-600 font-semibold mb-3">Founder & Creative Director</p>
                             <p class="text-gray-600 text-sm">Passionate about creating magical moments that last a lifetime.</p>
                         </div>
                     </div>
@@ -234,7 +234,7 @@
                         </div>
                         <div class="p-6 text-center">
                             <h3 class="text-xl font-bold text-gray-800 mb-2">Michael Chen</h3>
-                            <p class="text-zuppie-600 font-semibold mb-3">Event Operations Manager</p>
+                            <p class="text-purple-600 font-semibold mb-3">Event Operations Manager</p>
                             <p class="text-gray-600 text-sm">Ensures every detail is perfectly executed with precision and care.</p>
                         </div>
                     </div>
@@ -247,7 +247,7 @@
                         </div>
                         <div class="p-6 text-center">
                             <h3 class="text-xl font-bold text-gray-800 mb-2">Emily Rodriguez</h3>
-                            <p class="text-zuppie-600 font-semibold mb-3">Design Specialist</p>
+                            <p class="text-purple-600 font-semibold mb-3">Design Specialist</p>
                             <p class="text-gray-600 text-sm">Brings creative visions to life with stunning visual designs.</p>
                         </div>
                     </div>
@@ -256,7 +256,7 @@
         </section>
 
         <!-- Our Journey Timeline -->
-        <section class="py-20 bg-gradient-to-br from-zuppie-50 to-zuppie-pink-50">
+        <section class="py-20 bg-gradient-to-br from-purple-50 to-pink-50">
             <div class="container mx-auto px-4 max-w-4xl">
                 <div class="text-center mb-16">
                     <h2 class="text-4xl md:text-5xl font-bold font-display gradient-text mb-6">
@@ -269,12 +269,12 @@
                 
                 <div class="relative">
                     <!-- Timeline line -->
-                    <div class="absolute left-8 top-0 bottom-0 w-0.5 bg-gradient-to-b from-zuppie-400 to-zuppie-pink-400"></div>
+                    <div class="absolute left-8 top-0 bottom-0 w-0.5 bg-gradient-to-b from-purple-400 to-pink-400"></div>
                     
                     <div class="space-y-12">
                         <!-- Timeline Item 1 -->
                         <div class="relative flex items-center">
-                            <div class="w-16 h-16 bg-gradient-to-r from-zuppie-600 to-zuppie-pink-600 rounded-full flex items-center justify-center text-white font-bold text-lg shadow-lg">
+                            <div class="w-16 h-16 bg-gradient-to-r from-purple-600 to-pink-600 rounded-full flex items-center justify-center text-white font-bold text-lg shadow-lg">
                                 2015
                             </div>
                             <div class="ml-8 bg-white rounded-lg p-6 shadow-lg flex-1">
@@ -285,7 +285,7 @@
                         
                         <!-- Timeline Item 2 -->
                         <div class="relative flex items-center">
-                            <div class="w-16 h-16 bg-gradient-to-r from-zuppie-pink-600 to-zuppie-600 rounded-full flex items-center justify-center text-white font-bold text-lg shadow-lg">
+                            <div class="w-16 h-16 bg-gradient-to-r from-pink-600 to-purple-600 rounded-full flex items-center justify-center text-white font-bold text-lg shadow-lg">
                                 2018
                             </div>
                             <div class="ml-8 bg-white rounded-lg p-6 shadow-lg flex-1">
@@ -296,7 +296,7 @@
                         
                         <!-- Timeline Item 3 -->
                         <div class="relative flex items-center">
-                            <div class="w-16 h-16 bg-gradient-to-r from-zuppie-600 to-zuppie-pink-600 rounded-full flex items-center justify-center text-white font-bold text-lg shadow-lg">
+                            <div class="w-16 h-16 bg-gradient-to-r from-purple-600 to-pink-600 rounded-full flex items-center justify-center text-white font-bold text-lg shadow-lg">
                                 2021
                             </div>
                             <div class="ml-8 bg-white rounded-lg p-6 shadow-lg flex-1">
@@ -307,7 +307,7 @@
                         
                         <!-- Timeline Item 4 -->
                         <div class="relative flex items-center">
-                            <div class="w-16 h-16 bg-gradient-to-r from-zuppie-pink-600 to-zuppie-600 rounded-full flex items-center justify-center text-white font-bold text-lg shadow-lg">
+                            <div class="w-16 h-16 bg-gradient-to-r from-pink-600 to-purple-600 rounded-full flex items-center justify-center text-white font-bold text-lg shadow-lg">
                                 2023
                             </div>
                             <div class="ml-8 bg-white rounded-lg p-6 shadow-lg flex-1">
@@ -332,11 +332,11 @@
                     </p>
                     
                     <div class="flex flex-col sm:flex-row gap-4 justify-center items-center">
-                        <a href="/contact" class="bg-gradient-to-r from-zuppie-600 to-zuppie-pink-600 text-white px-8 py-4 rounded-full font-semibold text-lg hover:shadow-lg hover:scale-105 transition-all duration-300 flex items-center space-x-2">
+                        <a href="/contact" class="bg-gradient-to-r from-purple-600 to-pink-600 text-white px-8 py-4 rounded-full font-semibold text-lg hover:shadow-lg hover:scale-105 transition-all duration-300 flex items-center space-x-2">
                             <i class="fas fa-calendar-plus"></i>
                             <span>Start Planning</span>
                         </a>
-                        <a href="/packages" class="border-2 border-zuppie-600 text-zuppie-600 px-8 py-4 rounded-full font-semibold text-lg hover:bg-zuppie-600 hover:text-white transition-all duration-300 flex items-center space-x-2">
+                        <a href="/packages" class="border-2 border-purple-600 text-purple-600 px-8 py-4 rounded-full font-semibold text-lg hover:bg-purple-600 hover:text-white transition-all duration-300 flex items-center space-x-2">
                             <i class="fas fa-eye"></i>
                             <span>View Packages</span>
                         </a>

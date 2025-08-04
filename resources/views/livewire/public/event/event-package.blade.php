@@ -1,11 +1,11 @@
-<div class="min-h-screen bg-gradient-to-br from-slate-50 via-white to-zuppie-50">
+<div class="min-h-screen bg-gradient-to-br from-slate-50 via-white to-purple-50">
 
     <!-- Hero Section with Single Image and Gradient -->
     <section class="relative min-h-screen flex items-center justify-center overflow-hidden">
         <div class="absolute inset-0 z-0">
             <img src="https://images.unsplash.com/photo-1519225421980-715cb0215aed?w=1920&h=1080&fit=crop"
                 alt="Event Planning" class="w-full h-full object-cover">
-            <div class="absolute inset-0 bg-gradient-to-r from-zuppie-900/40 via-zuppie-pink-900/30 to-zuppie-900/40"></div>
+            <div class="absolute inset-0 bg-gradient-to-r from-purple-900/40 via-pink-900/30 to-purple-900/40"></div>
 
             <!-- Sparkle Animation Elements -->
             <div class="absolute inset-0 overflow-hidden pointer-events-none">
@@ -20,7 +20,7 @@
             <h1 class="text-4xl sm:text-6xl md:text-8xl font-black text-white leading-tight mb-6 animate-fade-in">
                 <span class="block drop-shadow-lg">Magical</span>
                 <span
-                    class="block text-transparent bg-clip-text bg-gradient-to-r from-zuppie-600 via-zuppie-400 to-zuppie-pink-500 animate-gradient-x">
+                    class="block text-transparent bg-clip-text bg-gradient-to-r from-purple-600 via-purple-400 to-pink-500 animate-gradient-x">
                     Event Packages
                 </span>
             </h1>
@@ -34,9 +34,9 @@
                 <div class="relative group">
                     <input type="text" wire:model.live="searchQuery"
                         placeholder="Search for your perfect event package..."
-                        class="w-full pl-6 pr-16 py-5 rounded-2xl bg-white/15 backdrop-blur-lg border border-white/30 text-white placeholder-gray-200 text-lg focus:outline-none focus:ring-4 focus:ring-zuppie-pink-400/50 focus:border-zuppie-pink-400 transition-all duration-300 shadow-xl group-hover:bg-white/20">
+                        class="w-full pl-6 pr-16 py-5 rounded-2xl bg-white/15 backdrop-blur-lg border border-white/30 text-white placeholder-gray-200 text-lg focus:outline-none focus:ring-4 focus:ring-pink-400/50 focus:border-pink-400 transition-all duration-300 shadow-xl group-hover:bg-white/20">
                     <div
-                        class="absolute right-6 top-1/2 transform -translate-y-1/2 transition-colors duration-300 group-hover:text-zuppie-pink-300">
+                        class="absolute right-6 top-1/2 transform -translate-y-1/2 transition-colors duration-300 group-hover:text-pink-300">
                         <i class="fas fa-search text-gray-200 text-xl"></i>
                     </div>
                 </div>
@@ -92,7 +92,7 @@
                                 <!-- Content -->
                                 <div class="p-6">
                                     <h3
-                                        class="text-xl font-bold text-gray-800 group-hover:text-zuppie-600 transition-colors duration-300 mb-3">
+                                        class="text-xl font-bold text-gray-800 group-hover:text-purple-600 transition-colors duration-300 mb-3">
                                         {{ $package['name'] }}
                                     </h3>
 
@@ -103,13 +103,13 @@
                                         @foreach (array_slice($package['features'], 0, 3) as $feature)
                                             <div class="flex items-center space-x-2">
                                                 <div
-                                                    class="w-2 h-2 bg-gradient-to-r from-zuppie-500 to-zuppie-pink-500 rounded-full flex-shrink-0">
+                                                    class="w-2 h-2 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full flex-shrink-0">
                                                 </div>
                                                 <span class="text-gray-700 text-sm">{{ $feature }}</span>
                                             </div>
                                         @endforeach
                                         @if (count($package['features']) > 3)
-                                            <div class="text-zuppie-600 font-semibold text-sm">
+                                            <div class="text-purple-600 font-semibold text-sm">
                                                 +{{ count($package['features']) - 3 }} more features included
                                             </div>
                                         @endif
@@ -118,7 +118,7 @@
                                     <!-- CTA Button -->
                                     <div class="flex gap-3">
                                         <a href="{{ route('package-detail', ['id' => $package['id']]) }}"
-                                            class="flex-1 bg-gradient-to-r from-zuppie-600 to-zuppie-pink-600 text-white py-3 px-6 rounded-2xl font-bold hover:from-zuppie-700 hover:to-zuppie-pink-700 transform hover:scale-105 transition-all duration-300 shadow-lg text-center">
+                                            class="flex-1 bg-gradient-to-r from-purple-600 to-pink-600 text-white py-3 px-6 rounded-2xl font-bold hover:from-purple-700 hover:to-pink-700 transform hover:scale-105 transition-all duration-300 shadow-lg text-center">
                                             <i class="fas fa-eye mr-2"></i>
                                             View Package
                                         </a>
@@ -133,7 +133,7 @@
     @endif
 
     <!-- Main Packages Section -->
-    <section class="py-20 bg-gradient-to-br from-gray-50 to-zuppie-50">
+    <section class="py-20 bg-gradient-to-br from-gray-50 to-purple-50">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <!-- Section Header -->
             <div class="text-center mb-8">
@@ -149,7 +149,7 @@
                         wire:click="$dispatch('openCategoryModal', { categorySlug: '{{ $category->slug }}' })" @else
                                 onclick="window.location.href='{{ route('event-package.filter', ['category' => $category->slug]) }}'"
                             @endif
-                            class="px-4 py-2 bg-white text-gray-700 rounded-xl border border-gray-200 hover:border-zuppie-300 mb-2">
+                            class="px-4 py-2 bg-white text-gray-700 rounded-xl border border-gray-200 hover:border-purple-300 mb-2">
                             {{ $category->name }}
                             @if ($category->children->count())
                                 <i class="fas fa-chevron-down ml-1 text-xs"></i>
@@ -157,7 +157,7 @@
                         </button>
                     @endforeach
                     <button wire:click="showAllCategories"
-                        class="px-4 py-2 sm:px-6 sm:py-3 bg-zuppie-600 text-white rounded-xl font-semibold ml-2 mb-2 {{ !$selectedCategory ? 'ring-2 ring-zuppie-400' : '' }}">
+                        class="px-4 py-2 sm:px-6 sm:py-3 bg-purple-600 text-white rounded-xl font-semibold ml-2 mb-2 {{ !$selectedCategory ? 'ring-2 ring-purple-400' : '' }}">
                         {{ $showAllCategoriesMode ? 'Show Special Only' : 'View All' }}
                     </button>
                 </div>
@@ -186,18 +186,18 @@
                                     <span> > {{ $subCategory->name }}</span>
                                 @endif
                             @endif
-                            <span class="ml-2 text-zuppie-600 font-semibold">({{ count($filteredPackages) }}
+                            <span class="ml-2 text-purple-600 font-semibold">({{ count($filteredPackages) }}
                                 found)</span>
                         </div>
                         <div class="flex gap-3">
                             @if ($searchQuery)
-                                <button wire:click="clearSearch" class="text-zuppie-600 hover:text-zuppie-800 font-medium">
+                                <button wire:click="clearSearch" class="text-purple-600 hover:text-purple-800 font-medium">
                                     Clear Search
                                 </button>
                             @endif
                             @if ($selectedCategory)
                                 <button wire:click="showAllCategories"
-                                    class="text-zuppie-600 hover:text-zuppie-800 font-medium">
+                                    class="text-purple-600 hover:text-purple-800 font-medium">
                                     Show All Categories
                                 </button>
                             @endif
@@ -251,20 +251,20 @@
                                             @foreach (array_slice($package['features'], 0, 4) as $feature)
                                                 <div class="flex items-center space-x-2">
                                                     <div
-                                                        class="w-2 h-2 bg-gradient-to-r from-zuppie-500 to-zuppie-pink-500 rounded-full flex-shrink-0">
+                                                        class="w-2 h-2 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full flex-shrink-0">
                                                     </div>
                                                     <span class="text-gray-700 text-sm">{{ $feature }}</span>
                                                 </div>
                                             @endforeach
                                             @if (count($package['features']) > 4)
-                                                <div class="text-zuppie-600 font-semibold text-sm">
+                                                <div class="text-purple-600 font-semibold text-sm">
                                                     +{{ count($package['features']) - 4 }} more features
                                                 </div>
                                             @endif
                                         </div>
                                         <div class="flex space-x-3">
                                             <a href="{{ route('package-detail', ['id' => $package['id']]) }}"
-                                                class="flex-1 bg-gradient-to-r from-zuppie-600 to-zuppie-pink-600 text-white py-3 px-4 rounded-xl font-semibold text-center">
+                                                class="flex-1 bg-gradient-to-r from-purple-600 to-pink-600 text-white py-3 px-4 rounded-xl font-semibold text-center">
                                                 <i class="fas fa-eye mr-2"></i>
                                                 View Details
                                             </a>
@@ -279,7 +279,7 @@
                     @if ($this->hasMorePackages)
                         <div class="text-center mt-12" data-aos="fade-up">
                             <button wire:click="loadMorePackages"
-                                class="bg-gradient-to-r from-zuppie-600 to-zuppie-pink-600 text-white px-8 py-4 rounded-xl font-semibold text-lg hover:from-zuppie-700 hover:to-zuppie-pink-700 transform hover:scale-105 transition-all duration-300 shadow-lg hover:shadow-xl">
+                                class="bg-gradient-to-r from-purple-600 to-pink-600 text-white px-8 py-4 rounded-xl font-semibold text-lg hover:from-purple-700 hover:to-pink-700 transform hover:scale-105 transition-all duration-300 shadow-lg hover:shadow-xl">
                                 <i class="fas fa-plus-circle mr-2"></i>
                                 View More Packages
                             </button>
@@ -334,7 +334,7 @@
                                             </p>
                                             <div class="flex space-x-3">
                                                 <a href="{{ route('package-detail', ['id' => $package['id']]) }}"
-                                                    class="flex-1 bg-gradient-to-r from-zuppie-600 to-zuppie-pink-600 text-white py-3 px-4 rounded-xl font-semibold text-center hover:from-zuppie-700 hover:to-zuppie-pink-700 transform hover:scale-105 transition-all duration-300">
+                                                    class="flex-1 bg-gradient-to-r from-purple-600 to-pink-600 text-white py-3 px-4 rounded-xl font-semibold text-center hover:from-purple-700 hover:to-pink-700 transform hover:scale-105 transition-all duration-300">
                                                     <i class="fas fa-eye mr-2"></i>
                                                     View Details
                                                 </a>
@@ -374,24 +374,24 @@
                         <div class="space-x-4">
                             @if ($searchQuery)
                                 <button wire:click="clearSearch"
-                                    class="bg-zuppie-600 text-white px-6 py-3 rounded-lg font-medium hover:bg-zuppie-700 transition-colors duration-300">
+                                    class="bg-purple-600 text-white px-6 py-3 rounded-lg font-medium hover:bg-purple-700 transition-colors duration-300">
                                     Clear Search
                                 </button>
                             @endif
                             @if ($selectedSubCategory)
                                 <button wire:click="selectCategory('{{ $selectedCategory }}')"
-                                    class="bg-zuppie-600 text-white px-6 py-3 rounded-lg font-medium hover:bg-zuppie-700 transition-colors duration-300">
+                                    class="bg-purple-600 text-white px-6 py-3 rounded-lg font-medium hover:bg-purple-700 transition-colors duration-300">
                                     View Main Category
                                 </button>
                             @endif
                             @if ($selectedCategory)
                                 <button wire:click="showAllCategories"
-                                    class="border border-zuppie-600 text-zuppie-600 px-6 py-3 rounded-lg font-medium hover:bg-zuppie-50 transition-colors duration-300">
+                                    class="border border-purple-600 text-purple-600 px-6 py-3 rounded-lg font-medium hover:bg-purple-50 transition-colors duration-300">
                                     Browse All Categories
                                 </button>
                             @else
                                 <button wire:click="showAllCategories"
-                                    class="bg-zuppie-600 text-white px-6 py-3 rounded-lg font-medium hover:bg-zuppie-700 transition-colors duration-300">
+                                    class="bg-purple-600 text-white px-6 py-3 rounded-lg font-medium hover:bg-purple-700 transition-colors duration-300">
                                     Browse Categories
                                 </button>
                             @endif
@@ -441,7 +441,7 @@
                                             </p>
                                             <div class="flex space-x-3">
                                                 <a href="{{ route('package-detail', ['id' => $package['id']]) }}"
-                                                    class="flex-1 bg-gradient-to-r from-zuppie-600 to-zuppie-pink-600 text-white py-3 px-4 rounded-xl font-semibold text-center hover:from-zuppie-700 hover:to-zuppie-pink-700 transform hover:scale-105 transition-all duration-300">
+                                                    class="flex-1 bg-gradient-to-r from-purple-600 to-pink-600 text-white py-3 px-4 rounded-xl font-semibold text-center hover:from-purple-700 hover:to-pink-700 transform hover:scale-105 transition-all duration-300">
                                                     <i class="fas fa-eye mr-2"></i>
                                                     View Details
                                                 </a>

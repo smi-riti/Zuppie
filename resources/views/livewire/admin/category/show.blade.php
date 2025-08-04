@@ -14,8 +14,8 @@
     <!-- Header Section -->
     <div class="flex flex-col lg:flex-row justify-between items-start lg:items-center mb-6 gap-4">
         <div>
-            <h2 class="text-2xl font-bold text-zuppie-700">Categories</h2>
-            <p class="text-sm text-zuppie-500 mt-1">
+            <h2 class="text-2xl font-bold text-purple-700">Categories</h2>
+            <p class="text-sm text-purple-500 mt-1">
                 {{ $categories->total() }} {{ Str::plural('category', $categories->total()) }} available
             </p>
         </div>
@@ -24,14 +24,14 @@
             <div class="relative">
                 <input type="text" wire:model.live.debounce.300ms="search" 
                        placeholder="Search categories..." 
-                       class="w-full sm:w-64 px-4 py-2 pl-10 border border-zuppie-200 rounded-lg focus:ring-2 focus:ring-zuppie-pink-300 focus:border-zuppie-pink-400 transition">
-                <svg class="absolute left-3 top-2.5 h-5 w-5 text-zuppie-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                       class="w-full sm:w-64 px-4 py-2 pl-10 border border-purple-200 rounded-lg focus:ring-2 focus:ring-pink-300 focus:border-pink-400 transition">
+                <svg class="absolute left-3 top-2.5 h-5 w-5 text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
                 </svg>
             </div>
             <!-- Add Button -->
             <button wire:click="$dispatch('open-create-modal')"
-                class="flex items-center justify-center gap-2 bg-gradient-to-r from-zuppie-pink-500 to-zuppie-600 hover:from-zuppie-pink-600 hover:to-zuppie-700 text-white font-medium py-2.5 px-5 rounded-lg transition shadow-md">
+                class="flex items-center justify-center gap-2 bg-gradient-to-r from-pink-500 to-purple-600 hover:from-pink-600 hover:to-purple-700 text-white font-medium py-2.5 px-5 rounded-lg transition shadow-md">
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
                 </svg>
@@ -41,47 +41,47 @@
     </div>
 
     @if ($categories->count() > 0)
-        <div class="overflow-x-auto rounded-lg border border-zuppie-100 shadow-sm">
+        <div class="overflow-x-auto rounded-lg border border-purple-100 shadow-sm">
             <table class="w-full bg-white">
-                <thead class="bg-gradient-to-r from-zuppie-pink-50 to-zuppie-50">
+                <thead class="bg-gradient-to-r from-pink-50 to-purple-50">
                     <tr>
-                        <th class="px-6 lg:px-8 py-4 text-left text-xs font-semibold text-zuppie-700 uppercase tracking-wider">Image</th>
-                        <th class="px-6 lg:px-8 py-4 text-left text-xs font-semibold text-zuppie-700 uppercase tracking-wider">Name</th>
-                        <th class="px-6 lg:px-8 py-4 text-left text-xs font-semibold text-zuppie-700 uppercase tracking-wider">Parent</th>
-                        <th class="px-6 lg:px-8 py-4 text-left text-xs font-semibold text-zuppie-700 uppercase tracking-wider">Description</th>
-                        <th class="px-6 lg:px-8 py-4 text-left text-xs font-semibold text-zuppie-700 uppercase tracking-wider">Special</th>
-                        <th class="px-6 lg:px-8 py-4 text-right text-xs font-semibold text-zuppie-700 uppercase tracking-wider">Actions</th>
+                        <th class="px-6 lg:px-8 py-4 text-left text-xs font-semibold text-purple-700 uppercase tracking-wider">Image</th>
+                        <th class="px-6 lg:px-8 py-4 text-left text-xs font-semibold text-purple-700 uppercase tracking-wider">Name</th>
+                        <th class="px-6 lg:px-8 py-4 text-left text-xs font-semibold text-purple-700 uppercase tracking-wider">Parent</th>
+                        <th class="px-6 lg:px-8 py-4 text-left text-xs font-semibold text-purple-700 uppercase tracking-wider">Description</th>
+                        <th class="px-6 lg:px-8 py-4 text-left text-xs font-semibold text-purple-700 uppercase tracking-wider">Special</th>
+                        <th class="px-6 lg:px-8 py-4 text-right text-xs font-semibold text-purple-700 uppercase tracking-wider">Actions</th>
                     </tr>
                 </thead>
-                <tbody class="divide-y divide-zuppie-100">
+                <tbody class="divide-y divide-purple-100">
                     @foreach ($categories as $category)
-                        <tr class="hover:bg-zuppie-pink-25 transition-colors" wire:key="category-{{ $category->id }}">
+                        <tr class="hover:bg-pink-50 transition-colors" wire:key="category-{{ $category->id }}">
                             <td class="px-6 lg:px-8 py-5 whitespace-nowrap">
                                 @if ($category->image)
                                     <img src="{{ $category->image }}" alt="{{ $category->name }}" 
-                                         class="h-14 w-14 object-cover rounded-lg border border-zuppie-200 shadow-sm">
+                                         class="h-14 w-14 object-cover rounded-lg border border-purple-200 shadow-sm">
                                 @else
-                                    <div class="h-14 w-14 rounded-lg bg-zuppie-100 flex items-center justify-center">
-                                        <svg class="h-7 w-7 text-zuppie-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <div class="h-14 w-14 rounded-lg bg-purple-100 flex items-center justify-center">
+                                        <svg class="h-7 w-7 text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
                                         </svg>
                                     </div>
                                 @endif
                             </td>
                             <td class="px-6 lg:px-8 py-5">
-                                <div class="text-sm font-medium text-zuppie-900">{{ $category->name }}</div>
-                                <div class="text-sm text-zuppie-500">{{ $category->slug }}</div>
+                                <div class="text-sm font-medium text-purple-900">{{ $category->name }}</div>
+                                <div class="text-sm text-purple-500">{{ $category->slug }}</div>
                             </td>
-                            <td class="px-6 lg:px-8 py-5 whitespace-nowrap text-sm text-zuppie-700">
+                            <td class="px-6 lg:px-8 py-5 whitespace-nowrap text-sm text-purple-700">
                                 @if($category->parent)
-                                    <span class="px-2 py-1 text-xs font-medium bg-zuppie-100 text-zuppie-800 rounded-full">
+                                    <span class="px-2 py-1 text-xs font-medium bg-purple-100 text-purple-800 rounded-full">
                                         {{ $category->parent->name }}
                                     </span>
                                 @else
-                                    <span class="text-zuppie-400">—</span>
+                                    <span class="text-purple-400">—</span>
                                 @endif
                             </td>
-                            <td class="px-6 lg:px-8 py-5 text-sm text-zuppie-700">
+                            <td class="px-6 lg:px-8 py-5 text-sm text-purple-700">
                                 <div class="max-w-xs truncate">
                                     {{ $category->description ?: '—' }}
                                 </div>
@@ -95,13 +95,13 @@
                                         Special
                                     </span>
                                 @else
-                                    <span class="text-zuppie-400">—</span>
+                                    <span class="text-purple-400">—</span>
                                 @endif
                             </td>
                             <td class="px-6 lg:px-8 py-5 whitespace-nowrap text-right text-sm font-medium">
                                 <div class="flex justify-end space-x-3">
                                     <button wire:click="$dispatch('open-create-modal', { editId: {{ $category->id }}})"
-                                            class="p-2 text-zuppie-600 hover:text-zuppie-900 hover:bg-zuppie-50 rounded-lg transition-colors">
+                                            class="p-2 text-purple-600 hover:text-purple-900 hover:bg-purple-50 rounded-lg transition-colors">
                                         <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
                                         </svg>
@@ -127,13 +127,13 @@
         @endif
     @else
         <div class="text-center py-12">
-            <div class="mx-auto w-24 h-24 bg-zuppie-100 rounded-full flex items-center justify-center mb-4">
-                <svg class="w-12 h-12 text-zuppie-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <div class="mx-auto w-24 h-24 bg-purple-100 rounded-full flex items-center justify-center mb-4">
+                <svg class="w-12 h-12 text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
                 </svg>
             </div>
-            <h3 class="text-lg font-medium text-zuppie-700 mb-2">No categories found</h3>
-            <p class="text-zuppie-500 mb-4">
+            <h3 class="text-lg font-medium text-purple-700 mb-2">No categories found</h3>
+            <p class="text-purple-500 mb-4">
                 @if($search)
                     No categories match your search criteria.
                 @else
@@ -142,7 +142,7 @@
             </p>
             @if(!$search)
                 <button wire:click="$dispatch('open-create-modal')"
-                    class="bg-gradient-to-r from-zuppie-pink-500 to-zuppie-600 hover:from-zuppie-pink-600 hover:to-zuppie-700 text-white font-medium py-2 px-4 rounded-lg transition">
+                    class="bg-gradient-to-r from-pink-500 to-purple-600 hover:from-pink-600 hover:to-purple-700 text-white font-medium py-2 px-4 rounded-lg transition">
                     Create Your First Category
                 </button>
             @endif
@@ -152,7 +152,7 @@
     <!-- Delete Confirmation Modal -->
     @if ($confirmingDeletion)
         <div class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
-            <div class="bg-white rounded-lg shadow-xl max-w-md w-full p-6 border-2 border-zuppie-pink-300">
+            <div class="bg-white rounded-lg shadow-xl max-w-md w-full p-6 border-2 border-pink-300">
                 <div class="text-center">
                     <div class="mx-auto flex items-center justify-center h-12 w-12 rounded-full bg-red-100 mb-4">
                         <svg class="h-6 w-6 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">

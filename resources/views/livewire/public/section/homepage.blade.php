@@ -4,10 +4,10 @@
     <livewire:public.section.hero-section />
 
     <!-- Categories Section with SEO Keywords -->
-    <section id="categories" class="py-12 sm:py-20 bg-gradient-to-br from-zuppie-50 to-zuppie-pink-50 relative z-10">
+    <section id="categories" class="py-12 sm:py-20 bg-gradient-to-br from-purple-50 to-pink-50 relative z-10">
         <div class="container mx-auto px-4">
             <div class="text-center mb-12 sm:mb-16">
-                <h2 class="text-3xl py-2 sm:text-4xl md:text-5xl font-bold font-display text-transparent bg-clip-text bg-gradient-to-r from-zuppie-600 to-zuppie-pink-600 mb-6"
+                <h2 class="text-3xl py-2 sm:text-4xl md:text-5xl font-bold font-display text-transparent bg-clip-text bg-gradient-to-r from-purple-600 to-pink-600 mb-6"
                     data-aos="fade-up">
                     Event Planning Services in Purnia, Bihar
                 </h2>
@@ -89,11 +89,11 @@
     <livewire:public.section.other-section />
 
     <!-- Enhanced Birthday Special Section -->
-    <section class="py-12 sm:py-20 bg-gradient-to-br from-zuppie-pink-50 via-zuppie-50 to-zuppie-100 relative overflow-hidden">
+    <section class="py-12 sm:py-20 bg-gradient-to-br from-pink-50 via-purple-50 to-purple-100 relative overflow-hidden">
         <!-- Background Decorations -->
         <div class="absolute inset-0 opacity-10">
-            <div class="absolute top-20 left-10 w-32 h-32 bg-zuppie-pink-300 rounded-full blur-3xl"></div>
-            <div class="absolute bottom-20 right-10 w-40 h-40 bg-zuppie-300 rounded-full blur-3xl"></div>
+            <div class="absolute top-20 left-10 w-32 h-32 bg-pink-300 rounded-full blur-3xl"></div>
+            <div class="absolute bottom-20 right-10 w-40 h-40 bg-purple-300 rounded-full blur-3xl"></div>
             <div
                 class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-64 h-64 bg-accent-300 rounded-full blur-3xl">
             </div>
@@ -107,7 +107,7 @@
                         <img src="https://images.unsplash.com/photo-1530103862676-de8c9debad1d?w=600&h=400&fit=crop"
                             alt="Birthday Celebration"
                             class="w-full h-64 sm:h-80 lg:h-96 object-cover group-hover:scale-110 transition-transform duration-700">
-                        <div class="absolute inset-0 bg-gradient-to-t from-zuppie-900/30 to-transparent"></div>
+                        <div class="absolute inset-0 bg-gradient-to-t from-purple-900/30 to-transparent"></div>
 
                         <!-- Floating Elements -->
                         <div
@@ -115,29 +115,29 @@
                             <span class="text-2xl">🎂</span>
                         </div>
                         <div
-                            class="absolute bottom-6 left-6 w-10 h-10 bg-zuppie-pink-400 rounded-full flex items-center justify-center animate-pulse shadow-lg">
+                            class="absolute bottom-6 left-6 w-10 h-10 bg-pink-400 rounded-full flex items-center justify-center animate-pulse shadow-lg">
                             <span class="text-xl">🎈</span>
                         </div>
                     </div>
 
                     <!-- Decorative Elements -->
-                    <div class="absolute -top-4 -left-4 w-8 h-8 bg-zuppie-400 rounded-full animate-float opacity-80">
+                    <div class="absolute -top-4 -left-4 w-8 h-8 bg-purple-400 rounded-full animate-float opacity-80">
                     </div>
                     <div
-                        class="absolute -bottom-4 -right-4 w-6 h-6 bg-zuppie-pink-400 rounded-full animate-float-slow opacity-80">
+                        class="absolute -bottom-4 -right-4 w-6 h-6 bg-pink-400 rounded-full animate-float-slow opacity-80">
                     </div>
                 </div>
 
                 <!-- Content Section -->
                 <div data-aos="fade-left" class="space-y-6">
                     <div
-                        class="inline-flex items-center bg-gradient-to-r from-zuppie-100 to-zuppie-pink-100 text-zuppie-700 px-4 py-2 rounded-full font-medium text-sm">
+                        class="inline-flex items-center bg-gradient-to-r from-purple-100 to-pink-100 text-purple-700 px-4 py-2 rounded-full font-medium text-sm">
                         <i class="fas fa-star mr-2"></i>
                         Special Birthday Packages
                     </div>
 
                     <h2
-                        class="text-3xl sm:text-4xl lg:text-5xl font-bold font-display bg-gradient-to-r from-zuppie-600 via-zuppie-pink-600 to-zuppie-700 bg-clip-text text-transparent leading-tight">
+                        class="text-3xl sm:text-4xl lg:text-5xl font-bold font-display bg-gradient-to-r from-purple-600 via-pink-600 to-purple-700 bg-clip-text text-transparent leading-tight">
                         Make Birthdays Unforgettable
                     </h2>
 
@@ -153,7 +153,7 @@
                     <div class="space-y-4">
                         <div class="flex items-center space-x-4 group">
                             <div
-                                class="w-12 h-12 bg-gradient-to-br from-zuppie-500 to-zuppie-pink-500 rounded-full flex items-center justify-center group-hover:scale-110 transition-transform duration-300 shadow-lg">
+                                class="w-12 h-12 bg-gradient-to-br from-purple-500 to-pink-500 rounded-full flex items-center justify-center group-hover:scale-110 transition-transform duration-300 shadow-lg">
                                 <i class="fas fa-magic text-white text-lg"></i>
                             </div>
                             <div>
@@ -188,7 +188,7 @@
                     <!-- Action Buttons -->
                     <div class="flex flex-col sm:flex-row gap-4 pt-4">
                         <a href="{{ route('event-packages') }}"
-                            class="inline-flex items-center justify-center bg-gradient-to-r from-zuppie-600 to-zuppie-pink-600 hover:from-zuppie-700 hover:to-zuppie-pink-700 text-white px-8 py-4 rounded-full font-semibold text-lg transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl">
+                            class="inline-flex items-center justify-center bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white px-8 py-4 rounded-full font-semibold text-lg transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl">
                             <i class="fas fa-gift mr-3"></i>
                             View Birthday Packages
                         </a>
@@ -201,7 +201,7 @@
     </section>
 
     <!-- Gallery Collage Section -->
-    <section id="gallery" class="py-20 bg-gradient-to-br from-zuppie-pink-50 to-zuppie-50">
+    <section id="gallery" class="py-20 bg-gradient-to-br from-pink-50 to-purple-50">
         <div class="container mx-auto px-4">
             <div class="text-center mb-16">
                 <h2 class="text-4xl md:text-5xl py-2 font-bold font-display gradient-text mb-6" data-aos="fade-up">
@@ -297,7 +297,7 @@
     </section>
 
     <!-- Why Choose Us Section -->
-    <section id="about" class="py-20 bg-gradient-to-br from-zuppie-50 to-zuppie-pink-50">
+    <section id="about" class="py-20 bg-gradient-to-br from-purple-50 to-pink-50">
         <div class="container mx-auto px-4">
             <div class="text-center mb-16">
                 <h2 class="text-4xl md:text-5xl py-2 font-bold font-display gradient-text mb-6" data-aos="fade-up">
@@ -387,7 +387,7 @@
             </div>
 
             <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
-                <div class="bg-gradient-to-br from-zuppie-50 to-zuppie-pink-50 rounded-2xl p-8 shadow-lg hover:shadow-xl transition-all duration-300"
+                <div class="bg-gradient-to-br from-purple-50 to-pink-50 rounded-2xl p-8 shadow-lg hover:shadow-xl transition-all duration-300"
                     data-aos="fade-up" data-aos-delay="100">
                     <div class="flex items-center mb-4">
                         <div class="flex text-accent-400 text-xl">
@@ -406,7 +406,7 @@
                     </div>
                 </div>
 
-                <div class="bg-gradient-to-br from-zuppie-50 to-zuppie-pink-50 rounded-2xl p-8 shadow-lg hover:shadow-xl transition-all duration-300"
+                <div class="bg-gradient-to-br from-purple-50 to-pink-50 rounded-2xl p-8 shadow-lg hover:shadow-xl transition-all duration-300"
                     data-aos="fade-up" data-aos-delay="200">
                     <div class="flex items-center mb-4">
                         <div class="flex text-accent-400 text-xl">
@@ -425,7 +425,7 @@
                     </div>
                 </div>
 
-                <div class="bg-gradient-to-br from-zuppie-50 to-zuppie-pink-50 rounded-2xl p-8 shadow-lg hover:shadow-xl transition-all duration-300"
+                <div class="bg-gradient-to-br from-purple-50 to-pink-50 rounded-2xl p-8 shadow-lg hover:shadow-xl transition-all duration-300"
                     data-aos="fade-up" data-aos-delay="300">
                     <div class="flex items-center mb-4">
                         <div class="flex text-accent-400 text-xl">
@@ -448,7 +448,7 @@
     </section>
 
     <!-- Blog Section -->
-    <section class="py-20 bg-gradient-to-br from-zuppie-pink-50 to-zuppie-50">
+    <section class="py-20 bg-gradient-to-br from-pink-50 to-purple-50">
         <div class="container mx-auto px-4">
             <div class="text-center mb-16">
                 <h2 class="text-4xl md:text-5xl py-2 font-bold font-display gradient-text mb-6" data-aos="fade-up">
@@ -469,20 +469,20 @@
                             alt="Blog Post"
                             class="w-full h-48 object-cover group-hover:scale-110 transition-transform duration-300">
                         <div
-                            class="absolute top-4 left-4 bg-zuppie-600 text-white px-3 py-1 rounded-full text-sm font-semibold">
+                            class="absolute top-4 left-4 bg-purple-600 text-white px-3 py-1 rounded-full text-sm font-semibold">
                             Tips
                         </div>
                     </div>
                     <div class="p-6">
                         <h3
-                            class="text-xl font-bold text-gray-800 mb-3 group-hover:text-zuppie-600 transition-colors duration-300">
+                            class="text-xl font-bold text-gray-800 mb-3 group-hover:text-purple-600 transition-colors duration-300">
                             10 Birthday Party Ideas That Will Wow Your Guests
                         </h3>
                         <p class="text-gray-600 mb-4">Discover creative and magical birthday party themes that will make
                             your celebration unforgettable...</p>
                         <div class="flex items-center justify-between">
                             <span class="text-sm text-gray-500">Jan 15, 2025</span>
-                            <a href="#" class="text-zuppie-600 font-semibold hover:underline">Read More →</a>
+                            <a href="#" class="text-purple-600 font-semibold hover:underline">Read More →</a>
                         </div>
                     </div>
                 </article>
@@ -495,20 +495,20 @@
                             alt="Blog Post"
                             class="w-full h-48 object-cover group-hover:scale-110 transition-transform duration-300">
                         <div
-                            class="absolute top-4 left-4 bg-zuppie-pink-600 text-white px-3 py-1 rounded-full text-sm font-semibold">
+                            class="absolute top-4 left-4 bg-pink-600 text-white px-3 py-1 rounded-full text-sm font-semibold">
                             Trends
                         </div>
                     </div>
                     <div class="p-6">
                         <h3
-                            class="text-xl font-bold text-gray-800 mb-3 group-hover:text-zuppie-600 transition-colors duration-300">
+                            class="text-xl font-bold text-gray-800 mb-3 group-hover:text-purple-600 transition-colors duration-300">
                             2025 Wedding Trends You Need to Know
                         </h3>
                         <p class="text-gray-600 mb-4">Stay ahead with the latest wedding trends that are taking 2025 by
                             storm...</p>
                         <div class="flex items-center justify-between">
                             <span class="text-sm text-gray-500">Jan 10, 2025</span>
-                            <a href="#" class="text-zuppie-600 font-semibold hover:underline">Read More →</a>
+                            <a href="#" class="text-purple-600 font-semibold hover:underline">Read More →</a>
                         </div>
                     </div>
                 </article>
@@ -527,14 +527,14 @@
                     </div>
                     <div class="p-6">
                         <h3
-                            class="text-xl font-bold text-gray-800 mb-3 group-hover:text-zuppie-600 transition-colors duration-300">
+                            class="text-xl font-bold text-gray-800 mb-3 group-hover:text-purple-600 transition-colors duration-300">
                             Corporate Event Planning: A Complete Guide
                         </h3>
                         <p class="text-gray-600 mb-4">Everything you need to know about planning successful corporate
                             events...</p>
                         <div class="flex items-center justify-between">
                             <span class="text-sm text-gray-500">Jan 5, 2025</span>
-                            <a href="#" class="text-zuppie-600 font-semibold hover:underline">Read More →</a>
+                            <a href="#" class="text-purple-600 font-semibold hover:underline">Read More →</a>
                         </div>
                     </div>
                 </article>

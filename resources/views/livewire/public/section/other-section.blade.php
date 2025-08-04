@@ -3,7 +3,7 @@
         <div class="container mx-auto px-6 sm:px-8">
             <!-- Header -->
             <div class="text-center mb-12 sm:mb-16" x-data="{ animate: true }" x-intersect="animate = true">
-                <h2 class="text-3xl sm:text-4xl py-2 md:text-5xl font-extrabold font-display text-transparent bg-clip-text bg-gradient-to-r from-indigo-600 via-zuppie-600 to-zuppie-pink-600 mb-6"
+                <h2 class="text-3xl sm:text-4xl py-2 md:text-5xl font-extrabold font-display text-transparent bg-clip-text bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600 mb-6"
                     x-show="animate" x-transition:enter="transition ease-out duration-700"
                     x-transition:enter-start="opacity-0 transform translate-y-10"
                     x-transition:enter-end="opacity-100 transform translate-y-0">
@@ -53,7 +53,7 @@
                                         @if($package->category)
                                             <div class="absolute top-4 left-4">
                                                 <span
-                                                    class="bg-gradient-to-r from-zuppie-600 to-zuppie-pink-600 text-white px-3 py-1 rounded-full text-xs font-bold shadow-lg">
+                                                    class="bg-gradient-to-r from-purple-600 to-pink-600 text-white px-3 py-1 rounded-full text-xs font-bold shadow-lg">
                                                     {{ $package->category->name }}
                                                 </span>
                                             </div>
@@ -74,13 +74,13 @@
                                                     <span
                                                         class="text-gray-400 line-through text-lg">₹{{ number_format($package->price, 0) }}</span>
                                                     <span
-                                                        class="text-2xl sm:text-3xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-zuppie-600 to-zuppie-pink-600">
+                                                        class="text-2xl sm:text-3xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-purple-600 to-pink-600">
                                                         ₹{{ number_format($package->discounted_price, 0) }}
                                                     </span>
                                                 </div>
                                             @else
                                                 <div
-                                                    class="text-2xl sm:text-3xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-zuppie-600 to-zuppie-pink-600 mb-2">
+                                                    class="text-2xl sm:text-3xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-purple-600 to-pink-600 mb-2">
                                                     ₹{{ number_format($package->price, 0) }}
                                                 </div>
                                             @endif
@@ -93,7 +93,7 @@
 
                                         <!-- Action Button -->
                                         <a href="{{ route('package-detail', ['id' => $package->id]) }}"
-                                            class="block w-full bg-gradient-to-r from-zuppie-600 to-zuppie-pink-600 hover:from-zuppie-700 hover:to-zuppie-pink-700 text-white py-3 px-4 rounded-xl text-center font-semibold transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl mt-auto">
+                                            class="block w-full bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white py-3 px-4 rounded-xl text-center font-semibold transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl mt-auto">
                                             <i class="fas fa-calendar-check mr-2"></i>Book Now
                                         </a>
                                     </div>

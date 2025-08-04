@@ -5,7 +5,7 @@
             <nav class="flex" aria-label="Breadcrumb">
                 <ol class="inline-flex items-center space-x-1 md:space-x-3">
                     <li class="inline-flex items-center">
-                        <a href="/" class="inline-flex items-center text-sm font-medium text-gray-700 hover:text-zuppie-600">
+                        <a href="/" class="inline-flex items-center text-sm font-medium text-gray-700 hover:text-purple-600">
                             <svg class="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 20 20">
                                 <path d="M10.707 2.293a1 1 0 00-1.414 0l-7 7a1 1 0 001.414 1.414L4 10.414V17a1 1 0 001 1h2a1 1 0 001-1v-2a1 1 0 011-1h2a1 1 0 011 1v2a1 1 0 001 1h2a1 1 0 001-1v-6.586l.293.293a1 1 0 001.414-1.414l-7-7z"></path>
                             </svg>
@@ -17,7 +17,7 @@
                             <svg class="w-6 h-6 text-gray-400" fill="currentColor" viewBox="0 0 20 20">
                                 <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"></path>
                             </svg>
-                            <a href="/blog" class="ml-1 text-sm font-medium text-gray-700 hover:text-zuppie-600 md:ml-2">Blog</a>
+                            <a href="/blog" class="ml-1 text-sm font-medium text-gray-700 hover:text-purple-600 md:ml-2">Blog</a>
                         </div>
                     </li>
                     <li aria-current="page">
@@ -41,7 +41,7 @@
             <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-4">
                 <div class="flex items-center space-x-4 mb-2 sm:mb-0">
                     @if($blog->category)
-                        <span class="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-zuppie-100 text-zuppie-800">
+                        <span class="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-purple-100 text-purple-800">
                             {{ $blog->category->name }}
                         </span>
                     @endif
@@ -130,7 +130,7 @@
             @if($blog->category)
                 <div class="mb-6">
                     <h3 class="text-sm font-medium text-gray-900 mb-2">Category</h3>
-                    <span class="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-zuppie-100 text-zuppie-800">
+                    <span class="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-purple-100 text-purple-800">
                         {{ $blog->category->name }}
                     </span>
                 </div>
@@ -141,7 +141,7 @@
                 <h3 class="text-lg font-semibold text-gray-900 mb-2">About the Author</h3>
                 <div class="flex items-start space-x-4">
                     <div class="flex-shrink-0">
-                        <div class="w-12 h-12 bg-zuppie-600 rounded-full flex items-center justify-center">
+                        <div class="w-12 h-12 bg-purple-600 rounded-full flex items-center justify-center">
                             <span class="text-white font-semibold text-lg">
                                 {{ substr($blog->author->name ?? 'A', 0, 1) }}
                             </span>
@@ -159,7 +159,7 @@
             <!-- Navigation -->
             <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center space-y-4 sm:space-y-0">
                 <a href="/blog" 
-                   class="inline-flex items-center text-zuppie-600 hover:text-zuppie-800 font-medium transition-colors">
+                   class="inline-flex items-center text-purple-600 hover:text-purple-800 font-medium transition-colors">
                     <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
                     </svg>
@@ -212,13 +212,13 @@
 
                             <div class="p-6">
                                 @if($relatedBlog->category)
-                                    <span class="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-zuppie-100 text-zuppie-800 mb-3">
+                                    <span class="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-purple-100 text-purple-800 mb-3">
                                         {{ $relatedBlog->category->name }}
                                     </span>
                                 @endif
 
                                 <h3 class="text-lg font-semibold text-gray-900 mb-2 line-clamp-2">
-                                    <a href="/blog/{{ $relatedBlog->slug }}" class="hover:text-zuppie-600 transition-colors">
+                                    <a href="/blog/{{ $relatedBlog->slug }}" class="hover:text-purple-600 transition-colors">
                                         {{ $relatedBlog->title }}
                                     </a>
                                 </h3>
@@ -232,7 +232,7 @@
                                         {{ $relatedBlog->created_at->format('M d, Y') }}
                                     </time>
                                     <a href="/blog/{{ $relatedBlog->slug }}" 
-                                       class="text-zuppie-600 hover:text-zuppie-800 font-medium text-sm transition-colors">
+                                       class="text-purple-600 hover:text-purple-800 font-medium text-sm transition-colors">
                                         Read more →
                                     </a>
                                 </div>

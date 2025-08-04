@@ -118,25 +118,39 @@ class Dashboard extends Component
     public function getMonthlyRevenueData()
     {
         $monthlyData = [];
-        for ($i = 11; $i >= 0; $i--) {
-            $month = now()->subMonths($i);
-            $monthName = $month->format('M');
+        
+        // Use current year and show all 12 months
+        $currentYear = \Carbon\Carbon::now(config('app.timezone', 'UTC'))->year;
+        
+        // Generate all 12 months of current year (January to December)
+        for ($month = 1; $month <= 12; $month++) {
+            $targetDate = \Carbon\Carbon::create($currentYear, $month, 1);
+            $monthName = $targetDate->format('M');
             
             $monthlyRevenue = Payment::where('status', 'paid')
-                ->whereYear('created_at', $month->year)
-                ->whereMonth('created_at', $month->month)
+                ->whereYear('created_at', $currentYear)
+                ->whereMonth('created_at', $month)
                 ->sum('amount');
                 
             $monthlyCash = Booking::where('is_completed', 1)
-                ->whereYear('updated_at', $month->year)
-                ->whereMonth('updated_at', $month->month)
+                ->whereYear('updated_at', $currentYear)
+                ->whereMonth('updated_at', $month)
                 ->sum('due_amount');
+                
+            $totalRevenue = $monthlyRevenue + $monthlyCash;
                 
             $monthlyData[] = [
                 'month' => $monthName,
-                'revenue' => $monthlyRevenue + $monthlyCash
+                'revenue' => (float) $totalRevenue
             ];
         }
+        
+        // Debug: Log the current year and generated months for verification
+        \Log::info('Chart Full Year Debug:', [
+            'current_year' => $currentYear,
+            'chart_months' => collect($monthlyData)->pluck('month')->toArray(),
+            'total_months_shown' => count($monthlyData)
+        ]);
         
         return $monthlyData;
     }
@@ -154,7 +168,7 @@ class Dashboard extends Component
             ->whereDate('event_date', '=', now()->toDateString())
             ->get();
 
-        $calendarEvents = $this->calendar_events;
+        $calendarEvents = $this->getCalendarEventsProperty();
         $monthlyRevenueData = $this->getMonthlyRevenueData();
 
         return view('livewire.admin.dashboard', [

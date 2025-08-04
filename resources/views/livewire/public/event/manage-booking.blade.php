@@ -1,4 +1,4 @@
-<div class="min-h-screen bg-gradient-to-br from-slate-50 via-white to-zuppie-50">
+<div class="min-h-screen bg-gradient-to-br from-slate-50 via-white to-purple-50">
 
     <!-- Success Message -->
     @if($showSuccess)
@@ -13,11 +13,11 @@
                 <p class="text-gray-600 mb-6">Your event booking has been successfully confirmed. We'll contact you soon to
                     finalize the details.</p>
                 <div class="w-full bg-gray-200 rounded-full h-2 mb-4">
-                    <div class="bg-gradient-to-r from-zuppie-600 to-zuppie-pink-600 h-2 rounded-full" id="progress-bar"
+                    <div class="bg-gradient-to-r from-purple-600 to-pink-600 h-2 rounded-full" id="progress-bar"
                         style="width: 0%"></div>
                 </div>
                 <button wire:click="dismissSuccess"
-                    class="w-full bg-gradient-to-r from-zuppie-600 to-zuppie-pink-600 text-white py-3 rounded-xl font-semibold">
+                    class="w-full bg-gradient-to-r from-purple-600 to-pink-600 text-white py-3 rounded-xl font-semibold">
                     Continue
                 </button>
             </div>
@@ -39,11 +39,11 @@
                     <!-- Booking Card -->
                     <div class="bg-white rounded-3xl shadow-xl overflow-hidden">
                         <!-- Header -->
-                        <div class="bg-gradient-to-r from-zuppie-600 to-zuppie-pink-600 p-8 text-white">
+                        <div class="bg-gradient-to-r from-purple-600 to-pink-600 p-8 text-white">
                             <div class="flex flex-col md:flex-row md:items-center md:justify-between">
                                 <div>
                                     <h2 class="text-2xl font-bold mb-2">{{ $booking->eventPackage->name }}</h2>
-                                    <p class="text-zuppie-100">Booking ID:
+                                    <p class="text-purple-100">Booking ID:
                                         #{{ str_pad($booking->id, 6, '0', STR_PAD_LEFT) }}</p>
                                 </div>
                                 <div class="mt-4 md:mt-0">
@@ -61,7 +61,7 @@
                                 <!-- Booking Details -->
                                 <div>
                                     <h3 class="text-xl font-bold text-gray-800 mb-6 flex items-center">
-                                        <i class="fas fa-info-circle text-zuppie-600 mr-3"></i>
+                                        <i class="fas fa-info-circle text-purple-600 mr-3"></i>
                                         Booking Details
                                     </h3>
 
@@ -100,7 +100,7 @@
                                         <div class="flex items-center justify-between py-3 border-b border-gray-100">
                                             <span class="text-gray-600">Total Amount</span>
                                             <span
-                                                class="font-bold text-lg text-transparent bg-clip-text bg-gradient-to-r from-zuppie-600 to-zuppie-pink-600">
+                                                class="font-bold text-lg text-transparent bg-clip-text bg-gradient-to-r from-purple-600 to-pink-600">
                                                 ₹{{ number_format($booking->total_price) }}
                                             </span>
                                         </div>
@@ -120,7 +120,7 @@
                                 <!-- Event Information -->
                                 <div>
                                     <h3 class="text-xl font-bold text-gray-800 mb-6 flex items-center">
-                                        <i class="fas fa-map-marker-alt text-zuppie-600 mr-3"></i>
+                                        <i class="fas fa-map-marker-alt text-purple-600 mr-3"></i>
                                         Event Information
                                     </h3>
 
@@ -169,12 +169,12 @@
                             <div class="mt-8 pt-8 border-t border-gray-200">
                                 <div class="flex flex-col sm:flex-row gap-4">
                                     <button wire:click="downloadInvoice"
-                                        class="flex-1 bg-gradient-to-r from-zuppie-600 to-zuppie-pink-600 text-white py-3 px-6 rounded-xl font-semibold hover:from-zuppie-700 hover:to-zuppie-pink-700 transition-all duration-300">
+                                        class="flex-1 bg-gradient-to-r from-purple-600 to-pink-600 text-white py-3 px-6 rounded-xl font-semibold hover:from-purple-700 hover:to-pink-700 transition-all duration-300">
                                         <i class="fas fa-download mr-2"></i>
                                         Download Invoice
                                     </button>
                                     <button wire:click="contactSupport"
-                                        class="flex-1 border-2 border-zuppie-600 text-zuppie-600 py-3 px-6 rounded-xl font-semibold hover:bg-zuppie-50 transition-all duration-300">
+                                        class="flex-1 border-2 border-purple-600 text-purple-600 py-3 px-6 rounded-xl font-semibold hover:bg-purple-50 transition-all duration-300">
                                         <i class="fas fa-headset mr-2"></i>
                                         Contact Support
                                     </button>
@@ -210,11 +210,11 @@
                                                 {{ ucfirst($userBooking->status) }}
                                             </span>
                                             <span
-                                                class="font-bold text-zuppie-600">₹{{ number_format($userBooking->total_price) }}</span>
+                                                class="font-bold text-purple-600">₹{{ number_format($userBooking->total_price) }}</span>
                                         </div>
 
                                         <a href="{{ route('manage-booking', ['booking_id' => $userBooking->id]) }}"
-                                            class="w-full mt-4 bg-zuppie-600 text-white py-2 rounded-lg font-semibold hover:bg-zuppie-700 transition-colors duration-300 inline-block text-center">
+                                            class="w-full mt-4 bg-purple-600 text-white py-2 rounded-lg font-semibold hover:bg-purple-700 transition-colors duration-300 inline-block text-center">
                                             View Details
                                         </a>
                                     </div>
@@ -228,14 +228,14 @@
             <!-- No Booking State -->
             @if(!$booking)
                 <div class="text-center py-20">
-                    <div class="w-24 h-24 bg-zuppie-100 rounded-full flex items-center justify-center mx-auto mb-6">
-                        <i class="fas fa-calendar-times text-zuppie-600 text-3xl"></i>
+                    <div class="w-24 h-24 bg-purple-100 rounded-full flex items-center justify-center mx-auto mb-6">
+                        <i class="fas fa-calendar-times text-purple-600 text-3xl"></i>
                     </div>
                     <h2 class="text-2xl font-bold text-gray-800 mb-4">No Bookings Found</h2>
                     <p class="text-gray-600 mb-8">You don't have any bookings yet. Start by exploring our amazing event
                         packages.</p>
                     <a href="{{ route('event-packages') }}"
-                        class="inline-block bg-gradient-to-r from-zuppie-600 to-zuppie-pink-600 text-white py-3 px-8 rounded-xl font-semibold hover:from-zuppie-700 hover:to-zuppie-pink-700 transition-all duration-300">
+                        class="inline-block bg-gradient-to-r from-purple-600 to-pink-600 text-white py-3 px-8 rounded-xl font-semibold hover:from-purple-700 hover:to-pink-700 transition-all duration-300">
                         <i class="fas fa-search mr-2"></i>
                         Browse Packages
                     </a>
@@ -270,8 +270,8 @@
                 </a>
 
                 <a href="#" class="bg-white p-6 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300">
-                    <div class="w-12 h-12 bg-zuppie-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                        <i class="fas fa-comments text-zuppie-600 text-xl"></i>
+                    <div class="w-12 h-12 bg-purple-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <i class="fas fa-comments text-purple-600 text-xl"></i>
                     </div>
                     <h3 class="font-bold text-gray-800 mb-2">Live Chat</h3>
                     <p class="text-gray-600 text-sm">Available 24/7</p>

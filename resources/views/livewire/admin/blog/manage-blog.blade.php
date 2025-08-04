@@ -40,14 +40,14 @@
     @endif
 
     <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-8 gap-4">
-        <h2 class="text-3xl font-bold text-zuppie-700">Blog Posts ({{ $blogs->total() }})</h2>
+        <h2 class="text-3xl font-bold text-purple-700">Blog Posts ({{ $blogs->total() }})</h2>
         <div class="flex flex-col sm:flex-row gap-3 items-stretch sm:items-center w-full md:w-auto">
             <div class="flex-1 md:flex-none">
                 <input type="text" wire:model.live.debounce.300ms="search" placeholder="Search blogs..."
-                    class="w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-zuppie-500 focus:border-zuppie-500 bg-white text-gray-900" />
+                    class="w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-purple-500 bg-white text-gray-900" />
             </div>
             <button wire:click="$dispatch('open-create-blog-modal')"
-                class="bg-gradient-to-r from-zuppie-pink-500 to-zuppie-600 hover:from-zuppie-600 hover:to-zuppie-pink-500 text-white font-bold py-3 px-6 rounded-lg flex items-center justify-center shadow-lg transition">
+                class="bg-gradient-to-r from-pink-500 to-purple-600 hover:from-purple-600 hover:to-pink-500 text-white font-bold py-3 px-6 rounded-lg flex items-center justify-center shadow-lg transition">
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" viewBox="0 0 20 20" fill="currentColor">
                     <path fill-rule="evenodd"
                         d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z"
@@ -73,7 +73,7 @@
         <!-- Mobile Card View -->
         <div class="block md:hidden space-y-6">
             @foreach ($blogs as $blog)
-                <div class="bg-white rounded-xl border border-gray-200 shadow-lg hover:shadow-xl transition-all duration-300 p-6 hover:border-zuppie-200" wire:key="blog-mobile-{{ $blog->id }}">
+                <div class="bg-white rounded-xl border border-gray-200 shadow-lg hover:shadow-xl transition-all duration-300 p-6 hover:border-purple-200" wire:key="blog-mobile-{{ $blog->id }}">
                     <div class="flex items-start space-x-4">
                         @if ($blog->featuredImage)
                             <img src="{{ $blog->featuredImage->image_url }}" alt="Blog image"
@@ -101,7 +101,7 @@
                             <div class="flex items-center justify-between">
                                 <div class="flex items-center">
                                     <button wire:click="toggleStatus({{ $blog->id }})" 
-                                        class="relative inline-flex h-6 w-12 items-center rounded-full transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-zuppie-500 focus:ring-offset-2 shadow-inner {{ $blog->status === 'published' ? 'bg-gradient-to-r from-green-400 to-green-500 shadow-green-200' : 'bg-gradient-to-r from-gray-300 to-gray-400 shadow-gray-200' }}">
+                                        class="relative inline-flex h-6 w-12 items-center rounded-full transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-offset-2 shadow-inner {{ $blog->status === 'published' ? 'bg-gradient-to-r from-green-400 to-green-500 shadow-green-200' : 'bg-gradient-to-r from-gray-300 to-gray-400 shadow-gray-200' }}">
                                         <span class="sr-only">Toggle status</span>
                                         <span class="inline-block h-5 w-5 transform rounded-full bg-white transition-transform duration-300 shadow-lg border-2 border-white {{ $blog->status === 'published' ? 'translate-x-6' : 'translate-x-1' }}"></span>
                                     </button>
@@ -111,7 +111,7 @@
                                 </div>
                                 <div class="flex space-x-2">
                                     <button wire:click="viewBlog({{ $blog->id }})"
-                                        class="inline-flex items-center px-2 py-1.5 text-xs font-medium text-zuppie-600 hover:text-zuppie-900 hover:bg-zuppie-50 rounded-lg transition-all duration-200">
+                                        class="inline-flex items-center px-2 py-1.5 text-xs font-medium text-purple-600 hover:text-purple-900 hover:bg-purple-50 rounded-lg transition-all duration-200">
                                         <svg class="w-3.5 h-3.5 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path>
@@ -147,18 +147,18 @@
         <div class="hidden md:block desktop-table w-full overflow-hidden rounded-xl border border-gray-200 shadow-lg bg-white">
             <div class="overflow-x-auto">
                 <table class="w-full min-w-full">
-                    <thead class="bg-gradient-to-r from-zuppie-50 to-zuppie-100">
+                    <thead class="bg-gradient-to-r from-purple-50 to-purple-100">
                         <tr>
-                            <th class="py-4 px-6 text-left text-xs font-bold text-zuppie-700 uppercase tracking-wider">Image</th>
-                            <th class="py-4 px-6 text-left text-xs font-bold text-zuppie-700 uppercase tracking-wider">Title</th>
-                            <th class="py-4 px-6 text-left text-xs font-bold text-zuppie-700 uppercase tracking-wider">Category</th>
-                            <th class="py-4 px-6 text-left text-xs font-bold text-zuppie-700 uppercase tracking-wider">Status</th>
-                            <th class="py-4 px-6 text-left text-xs font-bold text-zuppie-700 uppercase tracking-wider">Created</th>
-                            <th class="py-4 px-6 text-right text-xs font-bold text-zuppie-700 uppercase tracking-wider">Actions</th>
+                            <th class="py-4 px-6 text-left text-xs font-bold text-purple-700 uppercase tracking-wider">Image</th>
+                            <th class="py-4 px-6 text-left text-xs font-bold text-purple-700 uppercase tracking-wider">Title</th>
+                            <th class="py-4 px-6 text-left text-xs font-bold text-purple-700 uppercase tracking-wider">Category</th>
+                            <th class="py-4 px-6 text-left text-xs font-bold text-purple-700 uppercase tracking-wider">Status</th>
+                            <th class="py-4 px-6 text-left text-xs font-bold text-purple-700 uppercase tracking-wider">Created</th>
+                            <th class="py-4 px-6 text-right text-xs font-bold text-purple-700 uppercase tracking-wider">Actions</th>
                         </tr>
                     </thead>
                     <tbody class="bg-white divide-y divide-gray-100">                        @foreach ($blogs as $blog)
-                            <tr class="hover:bg-zuppie-25 transition-colors duration-200" wire:key="blog-{{ $blog->id }}">
+                            <tr class="hover:bg-purple-50 transition-colors duration-200" wire:key="blog-{{ $blog->id }}">
                                 <td class="py-6 px-6 whitespace-nowrap">
                                     @if ($blog->featuredImage)
                                         <img src="{{ $blog->featuredImage->image_url }}" alt="Blog image"
@@ -191,7 +191,7 @@
                             <td class="py-6 px-6 whitespace-nowrap">
                                 <div class="flex items-center">
                                     <button wire:click="toggleStatus({{ $blog->id }})" 
-                                        class="relative inline-flex h-6 w-12 items-center rounded-full transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-zuppie-500 focus:ring-offset-2 shadow-inner {{ $blog->status === 'published' ? 'bg-gradient-to-r from-green-400 to-green-500 shadow-green-200' : 'bg-gradient-to-r from-gray-300 to-gray-400 shadow-gray-200' }}">
+                                        class="relative inline-flex h-6 w-12 items-center rounded-full transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-offset-2 shadow-inner {{ $blog->status === 'published' ? 'bg-gradient-to-r from-green-400 to-green-500 shadow-green-200' : 'bg-gradient-to-r from-gray-300 to-gray-400 shadow-gray-200' }}">
                                         <span class="sr-only">Toggle status</span>
                                         <span class="inline-block h-5 w-5 transform rounded-full bg-white transition-transform duration-300 shadow-lg border-2 border-white {{ $blog->status === 'published' ? 'translate-x-6' : 'translate-x-1' }}"></span>
                                     </button>
@@ -206,7 +206,7 @@
                             <td class="py-6 px-6 whitespace-nowrap text-right text-sm font-medium">
                                 <div class="flex items-center justify-end space-x-3">
                                     <button wire:click="viewBlog({{ $blog->id }})"
-                                        class="inline-flex items-center px-3 py-2 text-sm font-medium text-zuppie-600 hover:text-zuppie-900 hover:bg-zuppie-50 rounded-lg transition-all duration-200 group">
+                                        class="inline-flex items-center px-3 py-2 text-sm font-medium text-purple-600 hover:text-purple-900 hover:bg-purple-50 rounded-lg transition-all duration-200 group">
                                         <svg class="w-4 h-4 mr-1.5 group-hover:scale-110 transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path>

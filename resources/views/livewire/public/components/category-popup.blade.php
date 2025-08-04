@@ -14,9 +14,9 @@
                     </button>
 
                     <!-- Header -->
-                    <div class="bg-gradient-to-r from-zuppie-600 to-zuppie-pink-500 text-white p-6 rounded-t-2xl">
+                    <div class="bg-gradient-to-r from-purple-600 to-pink-500 text-white p-6 rounded-t-2xl">
                         <h2 class="text-2xl font-bold">{{ $modalCategory->name }}</h2>
-                        <p class="text-zuppie-100 opacity-90 mt-1">Choose a subcategory to explore our amazing packages
+                        <p class="text-purple-100 opacity-90 mt-1">Choose a subcategory to explore our amazing packages
                         </p>
                     </div>
 
@@ -26,11 +26,11 @@
                             <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
                                 @foreach($modalCategory->children as $subcategory)
                                     <button wire:click="selectSubCategory('{{ $modalCategory->slug }}', '{{ $subcategory->slug }}')"
-                                        class="group bg-white hover:bg-zuppie-50 rounded-lg p-4 text-center transition-all duration-200 border border-gray-200 hover:border-zuppie-300 hover:shadow-md">
-                                        <div class="w-12 h-12 mx-auto mb-3 bg-zuppie-100 rounded-full flex items-center justify-center group-hover:bg-zuppie-200 transition-colors">
-                                            <i class="{{ $this->getCategoryIcon($subcategory->slug) }} text-zuppie-600"></i>
+                                        class="group bg-white hover:bg-purple-50 rounded-lg p-4 text-center transition-all duration-200 border border-gray-200 hover:border-purple-300 hover:shadow-md">
+                                        <div class="w-12 h-12 mx-auto mb-3 bg-purple-100 rounded-full flex items-center justify-center group-hover:bg-purple-200 transition-colors">
+                                            <i class="{{ $this->getCategoryIcon($subcategory->slug) }} text-purple-600"></i>
                                         </div>
-                                        <h3 class="font-medium text-gray-800 group-hover:text-zuppie-700">
+                                        <h3 class="font-medium text-gray-800 group-hover:text-purple-700">
                                             {{ $subcategory->name }}
                                         </h3>
                                         @if($subcategory->description)
@@ -55,12 +55,12 @@
                     <!-- View All Option -->
                     <div class="border-t border-gray-100 p-4 bg-gray-50 rounded-b-2xl">
                         <button wire:click="selectCategory('{{ $modalCategory->slug }}')"
-                            class="group flex items-center justify-between w-full py-4 px-6 bg-white hover:bg-zuppie-50 rounded-xl font-semibold text-zuppie-700 transition-all duration-300 border-2 border-zuppie-100 hover:border-zuppie-300 shadow-sm hover:shadow-md">
+                            class="group flex items-center justify-between w-full py-4 px-6 bg-white hover:bg-purple-50 rounded-xl font-semibold text-purple-700 transition-all duration-300 border-2 border-purple-100 hover:border-purple-300 shadow-sm hover:shadow-md">
                             <span class="flex items-center">
-                                <i class="fas fa-box-open mr-3 text-zuppie-500"></i>
+                                <i class="fas fa-box-open mr-3 text-purple-500"></i>
                                 View All {{ $modalCategory->name }} Packages
                             </span>
-                            <i class="fas fa-arrow-right text-zuppie-400 group-hover:text-zuppie-600 group-hover:translate-x-1 transition-all duration-300"></i>
+                            <i class="fas fa-arrow-right text-purple-400 group-hover:text-purple-600 group-hover:translate-x-1 transition-all duration-300"></i>
                         </button>
                     </div>
                 </div>

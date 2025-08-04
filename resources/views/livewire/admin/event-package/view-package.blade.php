@@ -93,10 +93,10 @@
                             <span class="block text-sm font-medium text-gray-500 mb-2">Special</span>
                             <div class="flex items-center">
                                 <div class="relative inline-block w-10 mr-2 align-middle select-none">
-                                    <div class="block w-10 h-6 bg-gray-200 rounded-full shadow-inner {{ $package->is_special ? 'bg-zuppie-400' : 'bg-gray-300' }}"></div>
-                                    <div class="absolute inset-y-0 left-0 w-6 h-6 bg-white rounded-full shadow transform transition-transform {{ $package->is_special ? 'translate-x-full border-zuppie-400' : 'border-gray-300' }}"></div>
+                                    <div class="block w-10 h-6 bg-gray-200 rounded-full shadow-inner {{ $package->is_special ? 'bg-purple-400' : 'bg-gray-300' }}"></div>
+                                    <div class="absolute inset-y-0 left-0 w-6 h-6 bg-white rounded-full shadow transform transition-transform {{ $package->is_special ? 'translate-x-full border-purple-400' : 'border-gray-300' }}"></div>
                                 </div>
-                                <span class="ml-2 text-sm {{ $package->is_special ? 'text-zuppie-600 font-medium' : 'text-gray-500' }}">
+                                <span class="ml-2 text-sm {{ $package->is_special ? 'text-purple-600 font-medium' : 'text-gray-500' }}">
                                     {{ $package->is_special ? 'Special' : 'Regular' }}
                                 </span>
                             </div>

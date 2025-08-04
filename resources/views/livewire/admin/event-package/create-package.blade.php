@@ -1,4 +1,4 @@
-<div class="min-h-screen bg-gradient-to-br from-zuppie-50 via-zuppie-pink-50 to-indigo-50 py-6">
+<div class="min-h-screen bg-gradient-to-br from-purple-50 via-pink-50 to-indigo-50 py-6">
     <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
         <!-- Header -->
         <div class="mb-8">
@@ -36,7 +36,7 @@
             <form wire:submit.prevent="submit" id="package-form" class="space-y-8">
                 <div class="bg-white rounded-xl shadow-lg border border-gray-200 overflow-hidden">
                     <!-- Basic Information Section -->
-                    <div class="bg-gradient-to-r from-zuppie-600 to-zuppie-pink-600 px-6 py-4">
+                    <div class="bg-gradient-to-r from-purple-600 to-pink-600 px-6 py-4">
                         <h2 class="text-xl font-semibold text-white flex items-center">
                             <svg class="w-6 h-6 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
@@ -54,7 +54,7 @@
                                     <span class="text-gray-500 font-normal">(Slug will be auto-generated)</span>
                                 </label>
                                 <input type="text" wire:model.live="name"
-                                       class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-zuppie-500 focus:border-zuppie-500 transition-colors"
+                                       class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-purple-500 transition-colors"
                                        placeholder="Enter package name">
                                 @error('name') <p class="text-red-600 text-sm mt-1">{{ $message }}</p> @enderror
                             </div>
@@ -62,7 +62,7 @@
                             <div>
                                 <label class="block text-sm font-medium text-gray-700 mb-2">Category</label>
                                 <select wire:model.live="category_id"
-                                        class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-zuppie-500 focus:border-zuppie-500 transition-colors">
+                                        class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-purple-500 transition-colors">
                                     <option value="">Select Category</option>
                                     @foreach($categories as $category)
                                         <option value="{{ $category->id }}">{{ $category->name }}</option>
@@ -77,7 +77,7 @@
                             <div>
                                 <label class="block text-sm font-medium text-gray-700 mb-2">Price (₹)*</label>
                                 <input type="number" step="0.01" wire:model.live="price"
-                                       class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-zuppie-500 focus:border-zuppie-500 transition-colors"
+                                       class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-purple-500 transition-colors"
                                        placeholder="0.00">
                                 @error('price') <p class="text-red-600 text-sm mt-1">{{ $message }}</p> @enderror
                             </div>
@@ -85,7 +85,7 @@
                             <div>
                                 <label class="block text-sm font-medium text-gray-700 mb-2">Discount Type</label>
                                 <select wire:model.live="discount_type"
-                                        class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-zuppie-500 focus:border-zuppie-500 transition-colors">
+                                        class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-purple-500 transition-colors">
                                     <option value="">No Discount</option>
                                     <option value="percentage">Percentage (%)</option>
                                     <option value="fixed">Fixed Amount (₹)</option>
@@ -96,7 +96,7 @@
                             <div>
                                 <label class="block text-sm font-medium text-gray-700 mb-2">Discount Value</label>
                                 <input type="number" step="0.01" wire:model.live="discount_value"
-                                       class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-zuppie-500 focus:border-zuppie-500 transition-colors"
+                                       class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-purple-500 transition-colors"
                                        placeholder="0.00"
                                        {{ empty($discount_type) ? 'disabled' : '' }}>
                                 @error('discount_value') <p class="text-red-600 text-sm mt-1">{{ $message }}</p> @enderror
@@ -109,13 +109,13 @@
                             <div class="grid grid-cols-2 gap-4 max-w-md">
                                 <div>
                                     <input type="number" wire:model.live="duration_hours" min="0"
-                                           class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-zuppie-500 focus:border-zuppie-500 transition-colors"
+                                           class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-purple-500 transition-colors"
                                            placeholder="Hours">
                                     <label class="text-xs text-gray-500 mt-1">Hours</label>
                                 </div>
                                 <div>
                                     <input type="number" wire:model.live="duration_minutes" min="0" max="59"
-                                           class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-zuppie-500 focus:border-zuppie-500 transition-colors"
+                                           class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-purple-500 transition-colors"
                                            placeholder="Minutes">
                                     <label class="text-xs text-gray-500 mt-1">Minutes</label>
                                 </div>
@@ -142,7 +142,7 @@
                     <div>
                         <label class="block text-sm font-medium text-gray-700 mb-2">Description</label>
                         <textarea wire:model.live="description" rows="4"
-                                  class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-zuppie-500 focus:border-zuppie-500 transition-colors"
+                                  class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-purple-500 transition-colors"
                                   placeholder="Enter package description..."></textarea>
                         @error('description') <p class="text-red-600 text-sm mt-1">{{ $message }}</p> @enderror
                     </div>
@@ -174,7 +174,7 @@
                     <div>
                         <label class="block text-sm font-medium text-gray-700 mb-2">Upload Images</label>
                         <input type="file" wire:model.live="newImages" multiple
-                               class="w-full px-4 py-3 border-2 border-dashed border-gray-300 rounded-lg focus:ring-2 focus:ring-zuppie-500 focus:border-zuppie-500 transition-colors text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:bg-zuppie-50 file:text-zuppie-700 hover:file:bg-zuppie-100">
+                               class="w-full px-4 py-3 border-2 border-dashed border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-purple-500 transition-colors text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:bg-purple-50 file:text-purple-700 hover:file:bg-purple-100">
                         <p class="text-xs text-gray-500 mt-2">Accepted formats: JPG, PNG, GIF, SVG, WEBP. Max 2MB per file.</p>
                         @error('newImages.*') <p class="text-red-600 text-sm mt-1">{{ $message }}</p> @enderror
 
@@ -239,7 +239,7 @@
                                        class="sr-only" id="is_special">
                                 <label for="is_special" class="flex items-center cursor-pointer">
                                     <div class="relative">
-                                        <div class="block bg-gray-300 w-14 h-8 rounded-full transition-colors duration-200 {{ $is_special ? 'bg-zuppie-500' : 'bg-gray-300' }}"></div>
+                                        <div class="block bg-gray-300 w-14 h-8 rounded-full transition-colors duration-200 {{ $is_special ? 'bg-purple-500' : 'bg-gray-300' }}"></div>
                                         <div class="dot absolute left-1 top-1 bg-white w-6 h-6 rounded-full transition-transform duration-200 {{ $is_special ? 'transform translate-x-6' : '' }}"></div>
                                     </div>
                                 </label>
@@ -263,7 +263,7 @@
         </a>
         
         <button type="submit" form="package-form"
-                class="inline-flex items-center px-8 py-3 bg-gradient-to-r from-zuppie-600 to-zuppie-pink-600 text-white rounded-lg hover:from-zuppie-700 hover:to-zuppie-pink-700 transition-all duration-200 shadow-lg hover:shadow-xl transform hover:scale-105">
+                class="inline-flex items-center px-8 py-3 bg-gradient-to-r from-purple-600 to-pink-600 text-white rounded-lg hover:from-purple-700 hover:to-pink-700 transition-all duration-200 shadow-lg hover:shadow-xl transform hover:scale-105">
             <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
             </svg>

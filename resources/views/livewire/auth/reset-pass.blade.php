@@ -1,42 +1,42 @@
 <div
-    class="min-h-screen flex items-center justify-center bg-gradient-to-br from-zuppie-100 via-zuppie-pink-100 to-white py-12 px-4 sm:px-6 lg:px-8">
+    class="min-h-screen flex items-center justify-center bg-gradient-to-br from-purple-100 via-pink-100 to-white py-12 px-4 sm:px-6 lg:px-8">
     <div class="max-w-md w-full space-y-8 bg-white rounded-2xl shadow-xl p-8">
         <div>
-            <h2 class="text-center text-2xl font-bold text-zuppie-900">Reset Your Password</h2>
-            <p class="mt-2 text-center text-sm text-zuppie-pink-600">Enter your new password below</p>
+            <h2 class="text-center text-2xl font-bold text-purple-900">Reset Your Password</h2>
+            <p class="mt-2 text-center text-sm text-pink-600">Enter your new password below</p>
         </div>
 
         <form wire:submit.prevent="resetPassword" class="space-y-6">
             <div>
-                <label for="email" class="block text-sm font-medium text-zuppie-700">Email</label>
-                <input wire:model="email" id="email" type="email" required readonly class="mt-1 block w-full px-4 py-3 bg-zuppie-50 border border-zuppie-300 rounded-lg text-zuppie-900
-                    placeholder-zuppie-400 focus:outline-none focus:ring-2 focus:ring-zuppie-pink-500 focus:border-zuppie-pink-500
+                <label for="email" class="block text-sm font-medium text-purple-700">Email</label>
+                <input wire:model="email" id="email" type="email" required readonly class="mt-1 block w-full px-4 py-3 bg-purple-50 border border-purple-300 rounded-lg text-purple-900
+                    placeholder-purple-400 focus:outline-none focus:ring-2 focus:ring-pink-500 focus:border-pink-500
                     cursor-not-allowed">
             </div>
 
             <div>
-                <label for="password" class="block text-sm font-medium text-zuppie-700">Password</label>
-                <input wire:model="password" id="password" type="password" required class="mt-1 block w-full px-4 py-3 border border-zuppie-300 rounded-lg text-zuppie-900
-                    placeholder-zuppie-400 focus:outline-none focus:ring-2 focus:ring-zuppie-pink-500 focus:border-zuppie-pink-500
+                <label for="password" class="block text-sm font-medium text-purple-700">Password</label>
+                <input wire:model="password" id="password" type="password" required class="mt-1 block w-full px-4 py-3 border border-purple-300 rounded-lg text-purple-900
+                    placeholder-purple-400 focus:outline-none focus:ring-2 focus:ring-pink-500 focus:border-pink-500
                     transition duration-200">
                 @error('password')
-                    <span class="text-sm text-zuppie-pink-600 mt-1 block">{{ $message }}</span>
+                    <span class="text-sm text-pink-600 mt-1 block">{{ $message }}</span>
                 @enderror
             </div>
 
             <div>
-                <label for="password_confirmation" class="block text-sm font-medium text-zuppie-700">Confirm
+                <label for="password_confirmation" class="block text-sm font-medium text-purple-700">Confirm
                     Password</label>
-                <input wire:model="password_confirmation" id="password_confirmation" type="password" required class="mt-1 block w-full px-4 py-3 border border-zuppie-300 rounded-lg text-zuppie-900
-                    placeholder-zuppie-400 focus:outline-none focus:ring-2 focus:ring-zuppie-pink-500 focus:border-zuppie-pink-500
+                <input wire:model="password_confirmation" id="password_confirmation" type="password" required class="mt-1 block w-full px-4 py-3 border border-purple-300 rounded-lg text-purple-900
+                    placeholder-purple-400 focus:outline-none focus:ring-2 focus:ring-pink-500 focus:border-pink-500
                     transition duration-200">
             </div>
 
             <div>
                 <button type="submit" class="w-full flex justify-center py-3 px-4 border border-transparent rounded-lg shadow-sm
-                    text-sm font-medium text-white bg-gradient-to-r from-zuppie-600 to-zuppie-pink-600
-                    hover:from-zuppie-700 hover:to-zuppie-pink-700 focus:outline-none focus:ring-2 focus:ring-offset-2
-                    focus:ring-zuppie-pink-500 transition duration-200 disabled:opacity-50" wire:loading.attr="disabled">
+                    text-sm font-medium text-white bg-gradient-to-r from-purple-600 to-pink-600
+                    hover:from-purple-700 hover:to-pink-700 focus:outline-none focus:ring-2 focus:ring-offset-2
+                    focus:ring-pink-500 transition duration-200 disabled:opacity-50" wire:loading.attr="disabled">
                     <span wire:loading.remove>Reset Password</span>
                     <span wire:loading>
                         <svg xmlns="http://www.w3.org/2000/svg" class="animate-spin h-7 w-7 text-white mr-2" fill="none"
