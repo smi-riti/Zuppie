@@ -33,7 +33,6 @@
             </div>
 
             <!-- Step 1: Location -->
-            <!-- Step 1: Location -->
             @if ($currentStep === 1)
                 <div class="mb-6 p-4 bg-info-50 rounded-2xl">
                     <h4 class="font-bold text-gray-800 mb-3 flex items-center justify-center">
@@ -41,7 +40,6 @@
                         Event Location
                     </h4>
 
-                    <!-- PIN Code Input -->
                     <div class="mt-4">
                         <label class="block text-sm font-medium text-gray-700 mb-2">PIN Code</label>
                         <input type="text" wire:model.live="pin_code" maxlength="6" placeholder="6-digit PIN code"
@@ -51,17 +49,18 @@
                                 <i class="fas fa-check-circle mr-2"></i>{{ session('pin_message') }}
                             </div>
                         @endif
+
                         @if (session('pin_error'))
                             <div class="mt-3 p-3 bg-red-100 border border-red-400 text-red-700 rounded-lg">
                                 <i class="fas fa-exclamation-circle mr-2"></i>{{ session('pin_error') }}
                             </div>
                         @endif
+
                         @error('pin_code')
                             <span class="text-xs text-red-600 mt-1 block">{{ $message }}</span>
                         @enderror
                     </div>
 
-                    <!-- Navigation Buttons -->
                     <div class="flex justify-end mt-6 space-x-3">
                         <button type="button" wire:click="closeModal"
                             class="px-4 py-2 bg-gray-200 text-gray-700 font-medium rounded-lg shadow transition text-sm">
@@ -83,14 +82,16 @@
                     </h3>
 
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <!-- Package Selection -->
                         <div>
                             <label class="block text-sm font-medium text-gray-700 mb-1">Event Package</label>
                             <select wire:model="event_package_id" wire:change="calculateTotal"
                                 class="w-full px-3 py-2 rounded-lg border border-gray-300 focus:ring-2 focus:ring-purple-300 focus:border-purple-400 transition text-sm">
                                 <option value="">Select Package</option>
                                 @foreach ($packages as $package)
-                                    <option value="{{ $package->id }}">{{ $package->name }} -
-                                        ₹{{ number_format($package->price, 2) }}</option>
+                                    <option value="{{ $package->id }}">
+                                        {{ $package->name }} - ₹{{ number_format($package->price, 2) }}
+                                    </option>
                                 @endforeach
                             </select>
                             @error('event_package_id')
@@ -98,6 +99,7 @@
                             @enderror
                         </div>
 
+                        <!-- Guest Count -->
                         <div>
                             <label class="block text-sm font-medium text-gray-700 mb-1">Number of Guests</label>
                             <input type="number" wire:model="guest_count" min="1" wire:change="calculateTotal"
@@ -107,6 +109,7 @@
                             @enderror
                         </div>
 
+                        <!-- Event Date -->
                         <div>
                             <label class="block text-sm font-medium text-gray-700 mb-1">Event Date</label>
                             <input type="date" wire:model="event_date_date" min="{{ date('Y-m-d') }}"
@@ -116,6 +119,7 @@
                             @enderror
                         </div>
 
+                        <!-- Event Time -->
                         <div>
                             <label class="block text-sm font-medium text-gray-700 mb-1">Event Time</label>
                             <input type="time" wire:model="event_date_time"
@@ -125,6 +129,7 @@
                             @enderror
                         </div>
 
+                        <!-- End Date -->
                         <div>
                             <label class="block text-sm font-medium text-gray-700 mb-1">Event End Date</label>
                             <input type="date" wire:model="event_end_date_date" min="{{ $event_date_date }}"
@@ -134,6 +139,7 @@
                             @enderror
                         </div>
 
+                        <!-- End Time -->
                         <div>
                             <label class="block text-sm font-medium text-gray-700 mb-1">End Time</label>
                             <input type="time" wire:model="event_end_date_time"
@@ -144,7 +150,6 @@
                         </div>
                     </div>
 
-                    <!-- Navigation Buttons -->
                     <div class="flex justify-between mt-6">
                         <button type="button" wire:click="previousStep"
                             class="px-4 py-2 bg-gray-200 text-gray-700 font-medium rounded-lg shadow transition text-sm">
@@ -183,7 +188,6 @@
                         </div>
                     </div>
 
-                    <!-- Navigation Buttons -->
                     <div class="flex justify-between mt-6">
                         <button type="button" wire:click="previousStep"
                             class="px-4 py-2 bg-gray-200 text-gray-700 font-medium rounded-lg shadow transition text-sm">
@@ -197,7 +201,7 @@
                 </form>
             @endif
 
-            <!-- Step 4: Your Information -->
+            <!-- Step 4: Customer Information -->
             @if ($currentStep === 4)
                 <form wire:submit.prevent="nextStep" class="space-y-4">
                     <h3 class="text-lg font-semibold text-purple-800 border-b border-purple-200 pb-2 mb-3">Customer
@@ -232,8 +236,7 @@
                         </div>
 
                         <div>
-                            <label class="block text-sm font-medium text-gray-700 mb-1">Secondary Phone
-                                (Optional)</label>
+                            <label class="block text-sm font-medium text-gray-700 mb-1">Secondary Phone</label>
                             <input type="tel" wire:model="secondary_phone"
                                 class="w-full px-3 py-2 rounded-lg border border-gray-300 focus:ring-2 focus:ring-purple-300 focus:border-purple-400 transition text-sm">
                         </div>
@@ -248,7 +251,6 @@
                         @enderror
                     </div>
 
-                    <!-- Payment Method -->
                     <div class="mb-4">
                         <label class="block font-medium mb-2">Payment Method</label>
                         <label class="inline-flex items-center mr-4">
@@ -262,21 +264,10 @@
                             <span class="ml-2">Cash (20% advance online, rest at event)</span>
                         </label>
                         @error('payment_method')
-                            <span class="text-xs text-red-600">{{ $message }}</span>
+                            <span class="text-xs text-red-600 mt-1 block">{{ $message }}</span>
                         @enderror
                     </div>
-                    @if ($payment_method === 'cash')
-                        <div class="text-sm text-blue-600 mb-2">
-                            You will pay 20% advance online now. The remaining 80% is payable at the event.
-                        </div>
-                    @endif
-                    @if ($payment_method === 'online')
-                        <div class="text-sm text-blue-600 mb-2">
-                            You will pay the full amount online now.
-                        </div>
-                    @endif
 
-                    <!-- Navigation Buttons -->
                     <div class="flex justify-between mt-6">
                         <button type="button" wire:click="previousStep"
                             class="px-4 py-2 bg-gray-200 text-gray-700 font-medium rounded-lg shadow transition text-sm">
@@ -432,28 +423,121 @@
                             </span>
                         </label>
                         @error('acceptTerms')
-                            <span class="text-xs text-red-600 mt-1 block">{{ $message }}</span>
+                            <span class="text-red-500 text-sm mt-1 block">{{ $message }}</span>
                         @enderror
                     </div>
 
-                    <!-- Final Buttons -->
-                    <div class="flex justify-between">
-                        <button wire:click="previousStep"
-                            class="px-4 py-2 bg-gray-200 text-gray-700 font-medium rounded-lg shadow transition text-sm">
+                    <div class="grid grid-cols-2 gap-4 pt-4">
+                        <button type="button" wire:click="previousStep"
+                            class="bg-gray-200 text-gray-800 py-3 rounded-xl font-bold hover:bg-gray-300 transition-all duration-300">
                             <i class="fas fa-arrow-left mr-2"></i> Back
                         </button>
-                        <button wire:click="saveBooking" wire:loading.attr="disabled"
-                            class="px-4 py-2 bg-gradient-to-r from-green-500 to-green-600 text-white font-medium rounded-lg shadow transition text-sm">
+                        <button type="button" wire:click="saveBooking" wire:loading.attr="disabled" id="submit-button"
+                            class="bg-gradient-to-r from-zuppie-600 to-zuppie-pink-600 text-white py-3 rounded-xl font-bold hover:from-zuppie-700 hover:to-zuppie-pink-700 transition-all duration-300 disabled:opacity-50">
                             <span wire:loading.remove>
-                                <i class="fas fa-check-circle mr-2"></i> Confirm Booking
+                                @if ($payment_method === 'online')
+                                    <i class="fas fa-credit-card mr-2"></i> Pay Now
+                                    ₹{{ number_format($total_price) }}
+                                @else
+                                    <i class="fas fa-check-circle mr-2"></i> Confirm Booking
+                                @endif
                             </span>
                             <span wire:loading>
-                                <i class="fas fa-spinner fa-spin mr-2"></i> Processing...
+                                <i class="fas fa-spinner fa-spin mr-2"></i>
+                                @if ($payment_method === 'online')
+                                    Initiating Payment...
+                                @else
+                                    Processing...
+                                @endif
                             </span>
                         </button>
                     </div>
-                </div>
-            @endif
+                </div>c 
         </div>
+        @endif
     </div>
 </div>
+</div>
+
+<!-- Razorpay Integration -->
+<script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+<script>
+    document.addEventListener('livewire:initialized', () => {
+        // Fix for "childNodes" error - ensure elements exist before accessing
+        const hideMessages = () => {
+            const messages = ['success-message', 'error-message', 'info-message'];
+            messages.forEach(id => {
+                const element = document.getElementById(id);
+                if (element) {
+                    setTimeout(() => {
+                        element.style.opacity = '0';
+                        element.style.transform = 'translateX(400px)';
+                        setTimeout(() => element.remove(), 300);
+                    }, 5000);
+                }
+            });
+        };
+        hideMessages();
+
+        // Razorpay payment handler
+        Livewire.on('initiate-razorpay-payment', (data) => {
+            try {
+                // Validate data
+                if (!data || !data.order_id || !data.amount) {
+                    throw new Error('Invalid payment data');
+                }
+
+                // Create options
+                const options = {
+                    key: '{{ config('services.razorpay.key_id') }}',
+                    amount: data.amount,
+                    currency: data.currency || 'INR',
+                    name: data.name || '{{ config('app.name') }}',
+                    description: data.description || 'Booking Payment',
+                    order_id: data.order_id,
+                    prefill: data.prefill || {},
+                    theme: {
+                        color: '#9333ea'
+                    },
+                    handler: function(response) {
+                        Livewire.dispatch('complete-razorpay-payment', [
+                            response.razorpay_payment_id,
+                            response.razorpay_order_id,
+                            response.razorpay_signature
+                        ]);
+                    },
+                    modal: {
+                        ondismiss: function() {
+                            Livewire.dispatch('enable-submit-button');
+                        }
+                    }
+                };
+
+                // Initialize Razorpay
+                const rzp = new Razorpay(options);
+
+                rzp.on('payment.failed', function(response) {
+                    console.error('Payment failed:', response.error);
+                    Livewire.dispatch('payment-failed', {
+                        error: response.error
+                    });
+                });
+
+                rzp.open();
+
+            } catch (error) {
+                console.error('Razorpay initialization error:', error);
+                Livewire.dispatch('enable-submit-button');
+                alert('Payment initialization failed: ' + error.message);
+            }
+        });
+
+        // Enable submit button when payment fails
+        Livewire.on('enable-submit-button', () => {
+            const button = document.getElementById('submit-button');
+            if (button) {
+                button.disabled = false;
+            }
+        });
+    });
+</script>
