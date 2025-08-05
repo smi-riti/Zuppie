@@ -1,3 +1,7 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 /* Zuppie Custom Styles - Pure CSS */
 
 /* Reset and Base Styles */
