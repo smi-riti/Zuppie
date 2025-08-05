@@ -4,13 +4,48 @@ export default {
     './resources/**/*.blade.php',
     './resources/**/*.js',
     './resources/**/*.vue',
+    './resources/**/*.php',
   ],
   safelist: [
-    'bg-gradient-to-r',
-    'from-purple-600',
-    'to-pink-600',
-    'hover:from-purple-700',
-    'hover:to-pink-700',
+    {
+      pattern: /^bg-gradient-to-(r|l|t|b|tr|tl|br|bl)$/,
+      variants: ['hover', 'focus', 'active']
+    },
+    {
+      pattern: /^from-(purple|pink)-[0-9]+$/,
+      variants: ['hover', 'focus', 'active']
+    },
+    {
+      pattern: /^to-(purple|pink)-[0-9]+$/,
+      variants: ['hover', 'focus', 'active']
+    },
+    {
+      pattern: /^(inline-flex|items-center|justify-center)$/,
+    },
+    {
+      pattern: /^text-/,
+      variants: ['hover', 'focus', 'active']
+    },
+    {
+      pattern: /^(px|py)-[0-9]+$/,
+    },
+    {
+      pattern: /^rounded/,
+    },
+    {
+      pattern: /^(font|text)-(normal|medium|semibold|bold)$/,
+    },
+    {
+      pattern: /^(transform|transition|duration|ease)-/,
+    },
+    {
+      pattern: /^scale-/,
+      variants: ['hover', 'focus', 'active']
+    },
+    {
+      pattern: /^shadow/,
+      variants: ['hover', 'focus', 'active']
+    },
   ],
   theme: {
     extend: {},
