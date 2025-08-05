@@ -30,10 +30,16 @@ class PackageDetail extends Component
             : 0; // Default when no reviews
     }
     public function mount($id = null)
-    {
-        $this->packageId = $id;
-        $this->loadPackage();
+{
+    $this->packageId = $id;
+    $this->loadPackage();
+    
+    // Initialize pin code from session if available
+    if(session()->has('pin_code')) {
+        $this->pinCode = session('pin_code');
+        $this->checkPinCodeAvailability();
     }
+}
     public function loadPackage()
     {
         $this->package = EventPackage::with(['category', 'images'])
@@ -47,28 +53,30 @@ class PackageDetail extends Component
     }
 
     public function checkPinCodeAvailability()
-    {
-        $this->validate([
-            'pinCode' => 'required|numeric|digits:6'
-        ]);
+{
+    $this->validate([
+        'pinCode' => 'required|numeric|digits:6'
+    ]);
 
-        $this->checkingPinCode = true;
+    $this->checkingPinCode = true;
+    $this->resetErrorBag(); // Clear previous errors
 
-        // Simulate API call delay
-        sleep(1);
-
+    try {
         // Check if pin code exists in service model
         $service = Service::where('pin_code', $this->pinCode)->first();
         $this->isPinCodeAvailable = $service ? true : false;
-
-        $this->checkingPinCode = false;
 
         if ($this->isPinCodeAvailable) {
             session()->flash('pin_message', 'Great! We provide services in your area.');
         } else {
             session()->flash('pin_error', 'Sorry, we don\'t provide services in this area yet.');
         }
+    } catch (\Exception $e) {
+        session()->flash('pin_error', 'Error checking pin code availability');
+    } finally {
+        $this->checkingPinCode = false;
     }
+}
 
     public function bookNow()
     {
