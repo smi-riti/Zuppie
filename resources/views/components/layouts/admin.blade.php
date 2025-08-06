@@ -78,7 +78,6 @@
 <body class="bg-gray-50 font-sans antialiased min-h-screen">
     <!-- Main Layout Container -->
     <div class="flex h-screen ">
-        <!-- Sidebar -->
         <x-admin.sidebar />
 
         <!-- Main Content Area -->

@@ -266,7 +266,7 @@
   </div>
 
   <!-- Main content area -->
-  <div class="flex-1 flex flex-col overflow-hidden">
+  {{-- <div class="flex-1 flex flex-col overflow-hidden">
     <!-- Mobile header - Only menu button -->
     <header class="md:hidden bg-gradient-to-r from-purple-100 to-pink-100 border-b border-pink-300/50 shadow-sm">
       <div class="flex items-center justify-start px-4 py-3">
@@ -281,5 +281,5 @@
     
     <!-- Main content - Takes full width below menu button -->
 
-  </div>
+  </div> --}}
 </div>
