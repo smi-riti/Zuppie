@@ -20,7 +20,6 @@ class UpdateGallery extends Component
     public $categories;
     public $existingImage;
 
-    // Fixed parameter name here 👇
     public function mount($id)  
     {
         $this->galleryImage = GalleryImage::findOrFail($id);
@@ -65,8 +64,8 @@ class UpdateGallery extends Component
 
         session()->flash('message', 'Image updated successfully!');
         $this->dispatch('gallery-updated');
-        $this->dispatch('close-edit-modal'); // Simple event name
-        return redirect()->route('gallery.manage'); // Redirect after update
+        $this->dispatch('close-edit-modal'); 
+        return redirect()->route('gallery.manage'); 
         $this->closeModal();
     }   
     public function closeModal()

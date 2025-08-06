@@ -11,8 +11,7 @@ use App\Helpers\ImageKitHelper;
 
 class CreateGallery extends Component
 {
-        use WithFileUploads;
-
+    use WithFileUploads;
     public $images = [];
     public $alt = '';
     public $category_id = null;
@@ -35,7 +34,6 @@ class CreateGallery extends Component
     {
         $this->validate();
 
-        // Upload images first
         $uploadedImages = [];
         foreach ($this->images as $image) {
             if ($image) {
@@ -52,7 +50,6 @@ class CreateGallery extends Component
             }
         }
 
-        // Create gallery images in bulk
         if (!empty($uploadedImages)) {
             GalleryImage::insert($uploadedImages);
         }
