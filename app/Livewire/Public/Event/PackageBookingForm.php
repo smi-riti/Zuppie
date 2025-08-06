@@ -55,7 +55,7 @@ class PackageBookingForm extends Component
 
     protected $rules = [
         'name' => 'required|string|min:2|max:255',
-        'phone' => 'required|string|min:10|max:15',
+        'phone' => 'required|digits:10',
         'email' => 'nullable|email|max:255',
         'eventDate' => 'required|date|after:today',
         'eventTime' => 'nullable|date_format:H:i',

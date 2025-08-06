@@ -549,6 +549,7 @@
                                                     is subject to availability and will be confirmed by the event
                                                     organizer.
                                                 </span>
+                                                <span class="text-sm text-gray-500 ml-2">(Required)</span>
                                             </label>
                                             @error('acceptTerms')
                                                 <span class="text-red-500 text-sm mt-1 block">{{ $message }}</span>

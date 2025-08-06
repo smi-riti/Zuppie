@@ -100,10 +100,14 @@
                                         <span class="font-medium text-gray-600">Category:</span>
                                         <span class="text-gray-800">{{ $booking->eventPackage->category->name }}</span>
                                     </div>
+                                     @if ($booking->eventPackage->duration)
                                     <div class="grid grid-cols-2 gap-4 py-2">
-                                        <span class="font-medium text-gray-600">Duration:</span>
-                                        <span class="text-gray-800">{{ $booking->eventPackage->duration }}</span>
+                                         <span class="font-medium text-gray-600">Duration:</span>
+                                         <span class="text-gray-800"> {{ $booking->eventPackage->formatted_duration }}</span>
                                     </div>
+                                @endif
+                                    
+                                       
                                 </div>
                             </div>
 
@@ -221,6 +225,7 @@
                             </div>
 
                             <!-- Actions Card -->
+                             @if ($booking->is_completed == 1)
                             <div class="p-5 bg-white rounded-lg shadow">
                                 <h4 class="text-lg font-semibold text-purple-700 pb-2 border-b border-gray-200">Actions
                                 </h4>
@@ -231,6 +236,7 @@
 
                                 </div>
                             </div>
+                            @endif
                         </div>
                     </div>
                 </div>
