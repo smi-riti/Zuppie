@@ -28,7 +28,6 @@ class Show extends Component
     public function refreshComponent()
     {
         $this->resetPage();
-        // Component will automatically re-render
     }
 
     public function confirmDelete($categoryId)
@@ -42,7 +41,6 @@ class Show extends Component
         if ($this->categoryToDelete) {
             $category = Category::find($this->categoryToDelete);
             if ($category) {
-                // Delete image from ImageKit if exists
                 if ($category->image_file_id) {
                     ImageKitHelper::deleteImage($category->image_file_id);
                 }

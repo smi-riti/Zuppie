@@ -56,7 +56,7 @@ class ManageGallery extends Component
     public function openCreateModal()
     {
         $this->showCreateModal = true;
-            $this->dispatch('openCreateModal'); // Add this if needed
+            $this->dispatch('openCreateModal'); 
 
     }
 
@@ -66,16 +66,15 @@ class ManageGallery extends Component
         $this->showEditModal = true;
     }
 
-   // app/Http/Livewire/Admin/Gallery/ManageGallery.php
-public function deleteImage($id)
-{
-    try {
-        GalleryImage::find($id)->delete();
-        session()->flash('message', 'Image deleted successfully.');
-    } catch (\Exception $e) {
-        session()->flash('error', 'Error deleting image: ' . $e->getMessage());
+    public function deleteImage($id)
+    {
+        try {
+            GalleryImage::find($id)->delete();
+            session()->flash('message', 'Image deleted successfully.');
+        } catch (\Exception $e) {
+            session()->flash('error', 'Error deleting image: ' . $e->getMessage());
+        }
     }
-}
 
 
        #[Layout('components.layouts.admin')]
