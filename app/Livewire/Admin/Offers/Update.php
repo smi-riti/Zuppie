@@ -36,7 +36,7 @@ class Update extends Component
         $this->end_date = $this->offer->end_date;
         $this->is_active = $this->offer->is_active;
         $this->description = $this->offer->description;
-        $this->image = null; // Reset for new upload
+        $this->image = null; 
         $this->showModal = true;
     }
 
@@ -67,11 +67,9 @@ class Update extends Component
     public function generateCodeFromTitle()
     {
         if ($this->title) {
-            // Generate code from title
             $code = strtoupper(Str::slug($this->title, ''));
-            $code = substr($code, 0, 10); // Limit to 10 characters
+            $code = substr($code, 0, 10); 
             
-            // Check if code exists and add random suffix if needed
             $baseCode = $code;
             $counter = 1;
             while (Offer::where('offer_code', $code)->where('id', '!=', $this->offerId)->exists()) {
@@ -119,12 +117,10 @@ class Update extends Component
             'is_active' => $this->is_active,
         ];
 
-        // Handle image upload using ImageKitHelper
         if ($this->image) {
             $imageData = ImageKitHelper::uploadImage($this->image, '/Zuppie/offer_images');
             
             if ($imageData) {
-                // Delete old image if exists
                 if ($this->offer->image_file_id) {
                     ImageKitHelper::deleteImage($this->offer->image_file_id);
                 }
@@ -144,7 +140,6 @@ class Update extends Component
             session()->flash('message', 'Offer updated successfully!');
             $this->closeModal();
             
-            // Dispatch event to refresh the parent component
             $this->dispatch('offer-saved');
             
         } catch (\Exception $e) {

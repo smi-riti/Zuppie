@@ -26,11 +26,9 @@ class CreateOffer extends Component
     public function generateCodeFromTitle()
     {
         if ($this->title) {
-            // Generate code from title
             $code = strtoupper(Str::slug($this->title, ''));
             $code = substr($code, 0, 10); // Limit to 10 characters
             
-            // Check if code exists and add random suffix if needed
             $baseCode = $code;
             $counter = 1;
             while (Offer::where('offer_code', $code)->exists()) {
@@ -106,7 +104,6 @@ class CreateOffer extends Component
             'is_active' => true,
         ];
 
-        // Handle image upload using ImageKitHelper
         if ($this->image) {
             $imageData = ImageKitHelper::uploadImage($this->image, '/Zuppie/offer_images');
 
@@ -123,8 +120,7 @@ class CreateOffer extends Component
             Offer::create($data);
             session()->flash('message', 'Offer created successfully!');
             $this->closeModal();
-            
-            // Dispatch event to refresh the parent component
+
             $this->dispatch('offer-saved');
             
         } catch (\Exception $e) {
