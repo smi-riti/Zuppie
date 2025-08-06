@@ -1,4 +1,4 @@
-<div class="bg-gradient-to-br from-slate-100 via-pink-50 to-pink-100">
+<div class="bg-gradient-to-br from-slate-100 via-pink-20 to-pink-50">
     <!-- Animated Background Elements -->
     <div class="fixed inset-0 overflow-hidden pointer-events-none">
         <div class="absolute -top-40 -right-40 w-80 h-80 bg-pink-400 rounded-full mix-blend-multiply filter blur-xl opacity-20 animate-blob"></div>
@@ -10,7 +10,7 @@
         <!-- Modern Header with Glass Effect -->
         <div class="mb-8">
             <div class="bg-white/70 backdrop-blur-lg rounded-2xl shadow-xl border border-white/20 overflow-hidden">
-                <div class="bg-gradient-to-r from-pink-600 via-pink-500 to-pink-400 px-8 py-6">
+                <div class="bg-gradient-to-r from-pink-300 via-pink-200 to-pink-100 px-8 py-6">
                     <div class="flex items-center justify-between">
                         <div>
                             <h1 class="text-3xl font-bold text-white flex items-center">
@@ -95,7 +95,7 @@
                 <!-- Logo Section - Enhanced -->
                 <div class="lg:col-span-1">
                     <div class="bg-white/80 backdrop-blur-lg rounded-2xl shadow-xl border border-white/20 overflow-hidden h-fit">
-                        <div class="bg-gradient-to-r from-pink-500 to-pink-600 px-6 py-5">
+                        <div class="bg-gradient-to-r from-pink-300 to-pink-200 px-6 py-5">
                             <h2 class="text-xl font-bold text-white flex items-center">
                                 <div class="w-10 h-10 bg-white/20 rounded-lg flex items-center justify-center mr-3">
                                     <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -200,7 +200,7 @@
                 <!-- Settings Form Section - Enhanced -->
                 <div class="lg:col-span-2">
                     <div class="bg-white/80 backdrop-blur-lg rounded-2xl shadow-xl border border-white/20 overflow-hidden">
-                        <div class="bg-gradient-to-r from-purple-500 to-pink-600 px-6 py-5">
+                        <div class="bg-gradient-to-r from-purple-300 to-pink-200 px-6 py-5">
                             <h2 class="text-xl font-bold text-white flex items-center">
                                 <div class="w-10 h-10 bg-white/20 rounded-lg flex items-center justify-center mr-3">
                                     <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
