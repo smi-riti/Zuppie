@@ -12,11 +12,10 @@ class ViewBooking extends Component
     {
         $this->dispatch('closeModal');
     }
-    public Booking $booking; // Type-hint as Booking model
+    public Booking $booking; 
 
-    public function mount(Booking $booking) // Use route model binding
+    public function mount(Booking $booking) 
     {
-        // Eager load relationships with error handling
         $this->booking = $booking->load([
             'eventPackage.category', 
             'payments'
