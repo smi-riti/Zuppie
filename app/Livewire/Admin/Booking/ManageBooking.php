@@ -76,7 +76,6 @@ class ManageBooking extends Component
         $this->confirmingDeletion = false;
     }
 
-    // Reset pagination when filters change
     public function updatingSearch()
     {
         $this->resetPage();
@@ -97,7 +96,6 @@ class ManageBooking extends Component
         $this->resetPage();
     }
     
-    // Update booking status
     public function updateStatus($bookingId, $status)
     {
         $booking = Booking::findOrFail($bookingId);
@@ -116,7 +114,6 @@ class ManageBooking extends Component
         $query = Booking::query()
             ->with(['user', 'eventPackage.category']);
             
-        // Apply search filter
         if (!empty($this->search)) {
             $query->where(function($q) {
                 $q->where('location', 'like', '%' . $this->search . '%')
@@ -132,17 +129,14 @@ class ManageBooking extends Component
             });
         }
         
-        // Apply status filter
         if (!empty($this->statusFilter)) {
             $query->where('status', $this->statusFilter);
         }
         
-        // Apply user filter
         if (!empty($this->userFilter)) {
             $query->where('user_id', $this->userFilter);
         }
         
-        // Apply package filter
         if (!empty($this->packageFilter)) {
             $query->where('event_package_id', $this->packageFilter);
         }

@@ -27,7 +27,6 @@ class AllOffers extends Component
     public function refreshComponent()
     {
         $this->resetPage();
-        // Component will automatically re-render
     }
 
     public function confirmDelete($offerId)
@@ -41,7 +40,6 @@ class AllOffers extends Component
         if ($this->offerToDelete) {
             $offer = Offer::find($this->offerToDelete);
             if ($offer) {
-                // Delete image from ImageKit if exists
                 if ($offer->image_file_id) {
                     ImageKitHelper::deleteImage($offer->image_file_id);
                 }

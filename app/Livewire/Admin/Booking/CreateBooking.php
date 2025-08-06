@@ -171,10 +171,9 @@ class CreateBooking extends Component
 
             $razorpayService = new RazorpayService();
             
-            // Calculate amount based on payment method
             $amount = ($this->payment_method === 'cash') 
-                ? $this->total_price * 0.2  // 20% advance for cash
-                : $this->total_price;       // Full amount for online
+                ? $this->total_price * 0.2  
+                : $this->total_price;       
 
             $order = $razorpayService->createOrder(
                 $amount * 100, // Convert to paise
@@ -193,7 +192,6 @@ class CreateBooking extends Component
 
             $this->razorpayOrderId = $order->id;
 
-            // Dispatch event to open Razorpay
             $this->dispatch('initiate-razorpay-payment', [
                 'order_id' => $order->id,
                 'amount' => $order->amount,

@@ -1,16 +1,16 @@
-<div class="min-h-screen bg-gradient-to-br from-slate-100 via-purple-50 to-pink-50">
+<div class="bg-gradient-to-br from-slate-100 via-pink-50 to-pink-100">
     <!-- Animated Background Elements -->
     <div class="fixed inset-0 overflow-hidden pointer-events-none">
-        <div class="absolute -top-40 -right-40 w-80 h-80 bg-purple-400 rounded-full mix-blend-multiply filter blur-xl opacity-20 animate-blob"></div>
+        <div class="absolute -top-40 -right-40 w-80 h-80 bg-pink-400 rounded-full mix-blend-multiply filter blur-xl opacity-20 animate-blob"></div>
         <div class="absolute -bottom-40 -left-40 w-80 h-80 bg-pink-400 rounded-full mix-blend-multiply filter blur-xl opacity-20 animate-blob animation-delay-2000"></div>
-        <div class="absolute top-40 left-40 w-80 h-80 bg-info-400 rounded-full mix-blend-multiply filter blur-xl opacity-20 animate-blob animation-delay-4000"></div>
+        <div class="absolute top-40 left-40 w-80 h-80 bg-pink-300 rounded-full mix-blend-multiply filter blur-xl opacity-20 animate-blob animation-delay-4000"></div>
     </div>
 
     <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <!-- Modern Header with Glass Effect -->
         <div class="mb-8">
             <div class="bg-white/70 backdrop-blur-lg rounded-2xl shadow-xl border border-white/20 overflow-hidden">
-                <div class="bg-gradient-to-r from-purple-600 via-pink-600 to-info-600 px-8 py-6">
+                <div class="bg-gradient-to-r from-pink-600 via-pink-500 to-pink-400 px-8 py-6">
                     <div class="flex items-center justify-between">
                         <div>
                             <h1 class="text-3xl font-bold text-white flex items-center">
@@ -22,7 +22,7 @@
                                 </div>
                                 <div>
                                     <span class="block">Website Settings</span>
-                                    <span class="text-purple-100 text-lg font-normal">Configure your brand identity</span>
+                                    <span class="text-pink-100 text-lg font-normal">Configure your brand identity</span>
                                 </div>
                             </h1>
                         </div>
@@ -95,7 +95,7 @@
                 <!-- Logo Section - Enhanced -->
                 <div class="lg:col-span-1">
                     <div class="bg-white/80 backdrop-blur-lg rounded-2xl shadow-xl border border-white/20 overflow-hidden h-fit">
-                        <div class="bg-gradient-to-r from-info-500 to-purple-600 px-6 py-5">
+                        <div class="bg-gradient-to-r from-pink-500 to-pink-600 px-6 py-5">
                             <h2 class="text-xl font-bold text-white flex items-center">
                                 <div class="w-10 h-10 bg-white/20 rounded-lg flex items-center justify-center mr-3">
                                     <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -104,7 +104,7 @@
                                 </div>
                                 Brand Logo
                             </h2>
-                            <p class="text-info-100 text-sm mt-1">Upload your brand identity</p>
+                            <p class="text-pink-100 text-sm mt-1">Upload your brand identity</p>
                         </div>
                         <div class="p-6 space-y-6">
                             <!-- Current Logo Display -->
@@ -120,7 +120,7 @@
                             <!-- Logo Upload -->
                             <div>
                                 <label class="block text-sm font-semibold text-gray-700 mb-3">Upload New Logo</label>
-                                <div class="mt-1 flex justify-center px-6 pt-8 pb-8 border-2 border-gray-300 border-dashed rounded-xl hover:border-purple-400 transition-all duration-300 bg-gradient-to-br from-purple-50 to-pink-50 hover:from-purple-100 hover:to-pink-100">
+                                <div class="mt-1 flex justify-center px-6 pt-8 pb-8 border-2 border-gray-300 border-dashed rounded-xl hover:border-pink-400 transition-all duration-300 bg-gradient-to-br from-pink-50 to-pink-100 hover:from-pink-100 hover:to-pink-200">
                                     <div class="space-y-4 text-center">
                                         @if ($preview_logo)
                                             <div class="mb-6">
@@ -135,14 +135,14 @@
                                             </div>
                                         @endif
                                         
-                                        <div class="w-16 h-16 bg-gradient-to-br from-purple-500 to-pink-500 rounded-full flex items-center justify-center mx-auto mb-4">
+                                        <div class="w-16 h-16 bg-gradient-to-br from-pink-500 to-pink-600 rounded-full flex items-center justify-center mx-auto mb-4">
                                             <svg class="w-8 h-8 text-white" stroke="currentColor" fill="none" viewBox="0 0 48 48">
                                                 <path d="M28 8H12a4 4 0 00-4 4v20m32-12v8m0 0v8a4 4 0 01-4 4H12a4 4 0 01-4-4v-4m32-4l-3.172-3.172a4 4 0 00-5.656 0L28 28M8 32l9.172-9.172a4 4 0 015.656 0L28 28m0 0l4 4m4-24h8m-4-4v8m-12 4h.02" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
                                             </svg>
                                         </div>
                                         <div class="text-center">
                                             <label for="logo-upload" class="cursor-pointer">
-                                                <span class="inline-flex items-center px-6 py-3 bg-gradient-to-r from-purple-600 to-pink-600 text-white rounded-xl font-semibold hover:from-purple-700 hover:to-pink-700 transition-all duration-200 shadow-lg hover:shadow-xl transform hover:-translate-y-0.5">
+                                                <span class="inline-flex items-center px-6 py-3 bg-gradient-to-r from-pink-600 to-pink-500 text-white rounded-xl font-semibold hover:from-pink-700 hover:to-pink-600 transition-all duration-200 shadow-lg hover:shadow-xl transform hover:-translate-y-0.5">
                                                     <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"></path>
                                                     </svg>
@@ -165,9 +165,9 @@
                             </div>
 
                             <!-- Logo Guidelines -->
-                            <div class="bg-gradient-to-r from-info-50 to-purple-50 rounded-xl p-5 border border-info-100">
+                            <div class="bg-gradient-to-r from-pink-50 to-pink-100 rounded-xl p-5 border border-pink-200">
                                 <h4 class="text-sm font-bold text-gray-800 mb-3 flex items-center">
-                                    <svg class="w-4 h-4 mr-2 text-info-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <svg class="w-4 h-4 mr-2 text-pink-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
                                     </svg>
                                     Logo Guidelines
@@ -200,7 +200,7 @@
                 <!-- Settings Form Section - Enhanced -->
                 <div class="lg:col-span-2">
                     <div class="bg-white/80 backdrop-blur-lg rounded-2xl shadow-xl border border-white/20 overflow-hidden">
-                        <div class="bg-gradient-to-r from-green-500 to-teal-600 px-6 py-5">
+                        <div class="bg-gradient-to-r from-purple-500 to-pink-600 px-6 py-5">
                             <h2 class="text-xl font-bold text-white flex items-center">
                                 <div class="w-10 h-10 bg-white/20 rounded-lg flex items-center justify-center mr-3">
                                     <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -216,9 +216,9 @@
                             <div class="space-y-8">
                                 
                                 <!-- Basic Information Section -->
-                                <div class="bg-gradient-to-r from-info-50 to-purple-50 rounded-xl p-6 border border-info-100">
+                                <div class="bg-gradient-to-r from-pink-50 to-pink-100 rounded-xl p-6 border border-pink-200">
                                     <h3 class="text-lg font-bold text-gray-800 mb-6 flex items-center">
-                                        <div class="w-8 h-8 bg-gradient-to-r from-info-500 to-purple-500 rounded-lg flex items-center justify-center mr-3">
+                                        <div class="w-8 h-8 bg-gradient-to-r from-pink-500 to-pink-600 rounded-lg flex items-center justify-center mr-3">
                                             <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"></path>
                                             </svg>
@@ -241,7 +241,7 @@
                                                 <input type="text" 
                                                        id="site_name"
                                                        wire:model="site_name" 
-                                                       class="w-full pl-12 pr-4 py-4 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-purple-500 focus:border-purple-500 transition-all duration-200 text-base bg-white shadow-sm"
+                                                       class="w-full pl-12 pr-4 py-4 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-pink-500 focus:border-pink-500 transition-all duration-200 text-base bg-white shadow-sm"
                                                        placeholder="Enter your website name">
                                             </div>
                                             @error('site_name') 
@@ -253,7 +253,7 @@
                                 </div>
 
                                 <!-- Contact Information Section -->
-                                <div class="bg-gradient-to-r from-green-50 to-info-50 rounded-xl p-6 border border-green-100">
+                                <div class="bg-gradient-to-r from-purple-50 to-info-50 rounded-xl p-6 border border-green-100">
                                     <h3 class="text-lg font-bold text-gray-800 mb-6 flex items-center">
                                         <div class="w-8 h-8 bg-gradient-to-r from-green-500 to-info-500 rounded-lg flex items-center justify-center mr-3">
                                             <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -334,9 +334,9 @@
                                 </div>
 
                                 <!-- Social Media Section -->
-                                <div class="bg-gradient-to-r from-pink-50 to-purple-50 rounded-xl p-6 border border-pink-100">
+                                <div class="bg-gradient-to-r from-pink-50 to-pink-100 rounded-xl p-6 border border-pink-200">
                                     <h3 class="text-lg font-bold text-gray-800 mb-6 flex items-center">
-                                        <div class="w-8 h-8 bg-gradient-to-r from-pink-500 to-purple-500 rounded-lg flex items-center justify-center mr-3">
+                                        <div class="w-8 h-8 bg-gradient-to-r from-pink-500 to-pink-600 rounded-lg flex items-center justify-center mr-3">
                                             <svg class="w-4 h-4 text-white" fill="currentColor" viewBox="0 0 20 20">
                                                 <path fill-rule="evenodd" d="M3 5a2 2 0 012-2h10a2 2 0 012 2v8a2 2 0 01-2 2h-2.22l.123.489.804.804A1 1 0 0113 18H7a1 1 0 01-.707-1.707l.804-.804L7.22 15H5a2 2 0 01-2-2V5zm5.771 7H9a1 1 0 010 2H7.771l.062-.245L8.17 12h.601zm1.416-3H10a1 1 0 110 2H9.187l.062-.245L9.586 9z" clip-rule="evenodd"></path>
                                             </svg>
@@ -422,7 +422,7 @@
             <!-- Save Button -->
             <div class="flex justify-center">
                 <button type="submit" 
-                        class="group relative inline-flex items-center px-12 py-4 bg-gradient-to-r from-purple-600 via-pink-600 to-info-600 text-white text-lg font-bold rounded-2xl hover:from-purple-700 hover:via-pink-700 hover:to-info-700 focus:outline-none focus:ring-4 focus:ring-purple-300 shadow-2xl transform hover:scale-105 transition-all duration-300">
+                        class="group relative inline-flex items-center px-12 py-4 bg-gradient-to-r from-pink-600 via-pink-500 to-pink-400 text-white text-lg font-bold rounded-2xl hover:from-pink-700 hover:via-pink-600 hover:to-pink-500 focus:outline-none focus:ring-4 focus:ring-pink-300 shadow-2xl transform hover:scale-105 transition-all duration-300">
                     <svg class="w-6 h-6 mr-3 group-hover:rotate-12 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
                     </svg>
@@ -479,13 +479,13 @@
         }
 
         .custom-scrollbar::-webkit-scrollbar-thumb {
-            background: linear-gradient(135deg, #8B5CF6, #EC4899);
+            background: linear-gradient(135deg, #f472b6, #ec4899);
             border-radius: 8px;
             border: 2px solid rgba(243, 244, 246, 0.5);
         }
 
         .custom-scrollbar::-webkit-scrollbar-thumb:hover {
-            background: linear-gradient(135deg, #7C3AED, #DB2777);
+            background: linear-gradient(135deg, #ec4899, #db2777);
         }
 
         /* Enhanced input focus effects */
@@ -501,7 +501,7 @@
 
         /* Gradient text effect */
         .gradient-text {
-            background: linear-gradient(135deg, #8B5CF6, #EC4899, #3B82F6);
+            background: linear-gradient(135deg, #f472b6, #ec4899, #3B82F6);
             background-size: 200% 200%;
             animation: gradient 3s ease infinite;
             -webkit-background-clip: text;
@@ -523,7 +523,7 @@
         input[type="file"]::before {
             content: 'Select Logo';
             display: inline-block;
-            background: linear-gradient(to right, #8B5CF6, #EC4899);
+            background: linear-gradient(to right, #f472b6, #ec4899);
             color: white;
             border: none;
             border-radius: 6px;
@@ -536,7 +536,7 @@
         }
 
         input[type="file"]:hover::before {
-            background: linear-gradient(to right, #7C3AED, #DB2777);
+            background: linear-gradient(to right, #ec4899, #db2777);
         }
 
         /* Loading animation */
@@ -564,13 +564,12 @@
         }
 
         ::-webkit-scrollbar-thumb {
-            background: linear-gradient(to bottom, #8B5CF6, #EC4899);
+            background: linear-gradient(to bottom, #f472b6, #ec4899);
             border-radius: 3px;
         }
 
         ::-webkit-scrollbar-thumb:hover {
-            background: linear-gradient(to bottom, #7C3AED, #DB2777);
+            background: linear-gradient(to bottom, #ec4899, #db2777);
         }
     </style>
 </div>
-                                               

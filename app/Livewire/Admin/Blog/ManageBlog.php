@@ -16,7 +16,7 @@ class ManageBlog extends Component
     public $confirmingDeletion = false;
     public $blogToDelete = null;
     public $search = '';
-    public $perPage = 7;
+    public $perPage = 6;
     public $isLoading = false;
 
     protected $queryString = ['search' => ['except' => ''], 'perPage'];
