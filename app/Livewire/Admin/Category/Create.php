@@ -72,7 +72,6 @@ class Create extends Component
 
     public function saveCategory()
     {
-        // Update validation rules for editing
         if ($this->editingId) {
             $this->rules['form.name'] = 'required|string|max:255|unique:categories,name,' . $this->editingId;
         }
@@ -82,12 +81,10 @@ class Create extends Component
         $data = $this->form;
         $message = '';
 
-        // Handle image upload using ImageKitHelper
         if ($this->image) {
             $imageData = ImageKitHelper::uploadImage($this->image, '/Zuppie/CategoryImages');
             
             if ($imageData) {
-                // Delete old image if updating
                 if ($this->editingId) {
                     $oldCategory = Category::find($this->editingId);
                     if ($oldCategory && $oldCategory->image_file_id) {
@@ -117,7 +114,6 @@ class Create extends Component
             $this->showModal = false;
             $this->resetForm();
             
-            // Dispatch event to refresh the parent component
             $this->dispatch('category-saved');
             
         } catch (\Exception $e) {
@@ -143,7 +139,7 @@ class Create extends Component
     {
         $parentCategories = Category::when($this->editingId, function ($query) {
             $query->where('id', '!=', $this->editingId);
-        })->whereNull('parent_id')->get(); // Only show parent categories
+        })->whereNull('parent_id')->get(); 
 
         return view('livewire.admin.category.create', [
             'parentCategories' => $parentCategories
