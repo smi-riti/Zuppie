@@ -26,7 +26,7 @@ class PackageDetail extends Component
         $reviewCount = reviews::where('event_package_id', $this->packageId)->count();
         $this->totalReview = $reviewCount;
         $this->average_review = $reviewCount > 0
-            ? round($totalRating / $reviewCount, 2) // Round to 2 decimal places
+            ? round($totalRating / $reviewCount, 2) 
             : 0; // Default when no reviews
     }
     public function mount($id = null)
