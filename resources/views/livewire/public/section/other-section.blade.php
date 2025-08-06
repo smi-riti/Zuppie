@@ -92,7 +92,7 @@
                                         </p>
 
                                         <!-- Action Button -->
-                                        <a href="{{ route('package-detail', ['id' => $package->id]) }}"
+                                        <a href="{{ route('package-detail', $package['slug']) }}"
                                             class="block w-full bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white py-3 px-4 rounded-xl text-center font-semibold transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl mt-auto">
                                             <i class="fas fa-calendar-check mr-2"></i>Book Now
                                         </a>

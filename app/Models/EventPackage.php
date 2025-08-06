@@ -97,6 +97,14 @@ class EventPackage extends Model
         return $this->hasMany(EventPackageImage::class);
     }
 
+    /**
+     * Get the bookings for this event package.
+     */
+    public function bookings()
+    {
+        return $this->hasMany(Booking::class, 'event_package_id');
+    }
+
     public function getDiscountedPriceAttribute()
     {
         if (!$this->discount_type) {

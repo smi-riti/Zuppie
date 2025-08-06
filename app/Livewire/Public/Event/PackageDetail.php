@@ -29,9 +29,9 @@ class PackageDetail extends Component
             ? round($totalRating / $reviewCount, 2) // Round to 2 decimal places
             : 0; // Default when no reviews
     }
-    public function mount($id = null)
+    public function mount($slug = null)
 {
-    $this->packageId = $id;
+    $this->packageId = $slug;
     $this->loadPackage();
     
     // Initialize pin code from session if available
@@ -42,14 +42,21 @@ class PackageDetail extends Component
 }
     public function loadPackage()
     {
+        // Try to find by slug first, then by ID for backward compatibility
         $this->package = EventPackage::with(['category', 'images'])
-            ->where('id', $this->packageId)
+            ->where(function($query) {
+                $query->where('slug', $this->packageId)
+                      ->orWhere('id', $this->packageId);
+            })
             ->where('is_active', true)
             ->first();
 
         if (!$this->package) {
-            return redirect()->route('event-packages')->with('error', 'Package not found');
+            session()->flash('error', 'Package not found or no longer available.');
+            return redirect()->route('event-packages');
         }
+        
+        $this->countAvgReview();
     }
 
     public function checkPinCodeAvailability()
@@ -151,6 +158,7 @@ class PackageDetail extends Component
         return $similarPackages->map(function ($package) {
             return [
                 'id' => $package->id,
+                'slug' => $package->slug,
                 'name' => $package->name,
                 'price' => $package->discounted_price,
                 'original_price' => $package->price,

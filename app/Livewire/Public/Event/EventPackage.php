@@ -63,10 +63,105 @@ class EventPackage extends Component
         $this->showAllCategoriesMode = !$this->showAllCategoriesMode;
     }
 
-    public function clearSearch()
+    public function searchPackages()
     {
-        $this->searchQuery = '';
-        $this->loadMoreCount = 0;
+        if ($this->searchQuery) {
+            return redirect()->route('event-package.filter', ['search' => $this->searchQuery]);
+        }
+    }
+
+    public function redirectToFilter($categorySlug = null, $subCategorySlug = null)
+    {
+        $params = [];
+        if ($categorySlug) $params['category'] = $categorySlug;
+        if ($subCategorySlug) $params['subcategory'] = $subCategorySlug;
+        
+        return redirect()->route('event-package.filter', $params);
+    }
+
+    public function getPopularPackagesProperty()
+    {
+        // Get packages ordered by booking count (most booked first)
+        $packages = EventPackageModel::with(['category', 'images'])
+            ->where('is_active', true)
+            ->withCount('bookings') // Add booking count
+            ->orderBy('bookings_count', 'desc') // Order by most booked first
+            ->orderBy('created_at', 'desc') // Secondary ordering by newest
+            ->take(12) // Show more packages for horizontal scroll
+            ->get();
+
+        return $packages->map(function ($package) {
+            return [
+                'id' => $package->id,
+                'name' => $package->name,
+                'slug' => $package->slug,
+                'price' => $package->price,
+                'discounted_price' => $package->discounted_price,
+                'description' => $package->description,
+                'features' => is_array($package->features) ? $package->features : [
+                    'Professional Event Planning',
+                    'Venue Decoration',
+                    'Photography Services'
+                ],
+                'is_special' => $package->is_special,
+                'category' => $package->category->name ?? 'General',
+                'image' => $package->images->first()->image_url ?? 'https://images.unsplash.com/photo-1519225421980-715cb0215aed?w=400&h=300&fit=crop',
+                'formatted_duration' => $package->formatted_duration,
+                'bookings_count' => $package->bookings_count
+            ];
+        })->toArray();
+    }
+
+    public function getSpecialCategoriesProperty()
+    {
+        // Get only 10 special categories
+        return Category::where('is_special', true)
+            ->whereNull('parent_id')
+            ->take(10)
+            ->get()
+            ->map(function ($category) {
+                return [
+                    'id' => $category->id,
+                    'name' => $category->name,
+                    'slug' => $category->slug,
+                    'description' => $category->description,
+                    'packages' => $this->getCategoryPackages($category->id),
+                    'icon' => $this->getCategoryIcon($category->slug)
+                ];
+            });
+    }
+
+    public function getCategoryPackages($categoryId)
+    {
+        $packages = EventPackageModel::with(['category', 'images'])
+            ->where('is_active', true)
+            ->where(function($query) use ($categoryId) {
+                $query->where('category_id', $categoryId)
+                      ->orWhereHas('category', function($q) use ($categoryId) {
+                          $q->where('parent_id', $categoryId);
+                      });
+            })
+            ->take(12) // Show more packages for horizontal scroll
+            ->get();
+
+        return $packages->map(function ($package) {
+            return [
+                'id' => $package->id,
+                'name' => $package->name,
+                'slug' => $package->slug,
+                'price' => $package->price,
+                'discounted_price' => $package->discounted_price,
+                'description' => $package->description,
+                'is_special' => $package->is_special,
+                'category' => $package->category->name ?? 'General',
+                'image' => $package->images->first()->image_url ?? 'https://images.unsplash.com/photo-1519225421980-715cb0215aed?w=400&h=300&fit=crop',
+                'features' => is_array($package->features) ? $package->features : [
+                    'Professional Event Planning',
+                    'Venue Decoration',
+                    'Photography Services'
+                ]
+            ];
+        })->toArray();
     }
 
     public function getFilteredPackagesProperty()
@@ -78,7 +173,10 @@ class EventPackage extends Component
         if ($this->searchQuery) {
             $query->where(function ($q) {
                 $q->where('name', 'like', '%' . $this->searchQuery . '%')
-                    ->orWhere('description', 'like', '%' . $this->searchQuery . '%');
+                    ->orWhere('description', 'like', '%' . $this->searchQuery . '%')
+                    ->orWhereHas('category', function ($categoryQuery) {
+                        $categoryQuery->where('name', 'like', '%' . $this->searchQuery . '%');
+                    });
             });
         }
 
@@ -131,7 +229,10 @@ class EventPackage extends Component
         if ($this->searchQuery) {
             $query->where(function ($q) {
                 $q->where('name', 'like', '%' . $this->searchQuery . '%')
-                    ->orWhere('description', 'like', '%' . $this->searchQuery . '%');
+                    ->orWhere('description', 'like', '%' . $this->searchQuery . '%')
+                    ->orWhereHas('category', function ($categoryQuery) {
+                        $categoryQuery->where('name', 'like', '%' . $this->searchQuery . '%');
+                    });
             });
         }
 

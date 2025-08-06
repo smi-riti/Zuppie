@@ -27,6 +27,7 @@ class EventPackageFilter extends Component
         // Get from URL parameters if available
         $this->selectedCategory = request()->query('category');
         $this->selectedSubCategory = request()->query('subcategory');
+        $this->searchQuery = request()->query('search', '');
     }
 
     public function handleSubcategorySelected($data)
@@ -48,13 +49,15 @@ class EventPackageFilter extends Component
         $this->loadMoreCount++;
     }
 
-    // public function clearFilters()
-    // {
-    //     $this->selectedCategory = null;
-    //     $this->selectedSubCategory = null;
-    //     $this->searchQuery = '';
-    //     $this->loadMoreCount = 0;
-    // }
+    public function clearFilters()
+    {
+        $this->selectedCategory = null;
+        $this->selectedSubCategory = null;
+        $this->searchQuery = '';
+        $this->loadMoreCount = 0;
+        
+        return redirect()->route('event-packages');
+    }
 
     public function getFilteredPackagesProperty()
     {
@@ -64,7 +67,10 @@ class EventPackageFilter extends Component
         if ($this->searchQuery) {
             $query->where(function ($q) {
                 $q->where('name', 'like', '%' . $this->searchQuery . '%')
-                    ->orWhere('description', 'like', '%' . $this->searchQuery . '%');
+                    ->orWhere('description', 'like', '%' . $this->searchQuery . '%')
+                    ->orWhereHas('category', function ($categoryQuery) {
+                        $categoryQuery->where('name', 'like', '%' . $this->searchQuery . '%');
+                    });
             });
         }
 
@@ -89,11 +95,19 @@ class EventPackageFilter extends Component
 
     public function getSimilarPackagesProperty()
     {
+        // Don't show similar packages when viewing all categories or when there's a search
+        if (!$this->selectedCategory && !$this->selectedSubCategory && !$this->searchQuery) {
+            return collect([]);
+        }
+
         // Only fetch similar packages if filters are applied (category or subcategory is selected)
         if ($this->selectedCategory || $this->selectedSubCategory) {
+            $currentPackageIds = $this->filteredPackages->pluck('id')->toArray();
+            
             return EventPackage::with(['category', 'images'])
                 ->where('is_active', true)
                 ->where('is_special', true)
+                ->whereNotIn('id', $currentPackageIds) // Exclude already shown packages
                 ->take(6)
                 ->get();
         }

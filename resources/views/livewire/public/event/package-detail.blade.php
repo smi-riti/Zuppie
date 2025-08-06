@@ -383,7 +383,7 @@
                                     </div>
 
                                     <!-- CTA Button -->
-                                    <a href="{{ route('package-detail', ['id' => $similarPackage['id']]) }}"
+                                    <a href="{{ route('package-detail', $similarPackage['slug']) }}"
                                         class="block w-full bg-gradient-to-r from-purple-600 to-pink-600 text-white py-3 px-6 rounded-2xl font-bold text-center hover:from-purple-700 hover:to-pink-700 transform hover:scale-105 transition-all duration-300 shadow-lg">
                                         <i class="fas fa-eye mr-2"></i>
                                         View Details
