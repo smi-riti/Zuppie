@@ -116,22 +116,20 @@
                                     <span class="text-sm text-pink-600">{{ $message }}</span>
                                 @enderror
                             </div>
-
                             <!-- PIN Code -->
                             <div>
                                 <label class="block text-sm font-medium text-purple-700 mb-1">PIN Code</label>
                                 <input type="text" wire:model.live.debounce.500ms="pin_code" id="pin_code"
-                                    class="w-full px-4 py-2 rounded-lg border border-purple-200 focus:ring-2 focus:ring-purple-300 focus:border-purple-400 transition">
+                                    class="w-full px-4 py-2 rounded-lg border border-purple-200 focus:ring-2 focus:ring-purple-300 focus:border-purple-400 transition"
+                                    maxlength="6">
                                 @error('pin_code')
                                     <span class="text-sm text-pink-600">{{ $message }}</span>
                                 @enderror
                             </div>
-
                             <!-- Location -->
                             <div class="md:col-span-2">
                                 <label class="block text-sm font-medium text-purple-700 mb-1">Event Location</label>
-                                <input type="text" wire:model="location" id="location" x-data="{ location: $wire.entangle('location') }"
-                                    x-on:location-updated.window="location = $event.detail.location"
+                                <input type="text" wire:model="location" id="location"
                                     class="w-full px-4 py-2 rounded-lg border border-purple-200 focus:ring-2 focus:ring-purple-300 focus:border-purple-400 transition">
                                 @error('location')
                                     <span class="text-sm text-pink-600">{{ $message }}</span>
