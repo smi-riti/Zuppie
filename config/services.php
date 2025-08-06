@@ -41,4 +41,15 @@ return [
         'url_endpoint' => env('IMAGEKIT_URL_ENDPOINT', ''),
     ],
 
+    'razorpay' => [
+        'key' => env('RAZORPAY_API_KEY'),
+        'secret' => env('RAZORPAY_API_SECRET'),
+        'env' => env('RAZORPAY_ENV', 'test'),
+        'currency' => env('RAZORPAY_CURRENCY', 'INR'),
+    ],
+
+    'locationiq' => [
+        'key' => env('LOCATIONIQ_KEY'),
+],
+
 ];

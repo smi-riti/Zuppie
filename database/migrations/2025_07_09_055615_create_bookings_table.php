@@ -17,9 +17,9 @@ return new class extends Migration
             $table->foreignId('event_package_id')->constrained()->onDelete('cascade');
             $table->dateTime('event_date');
             $table->dateTime('event_end_date')->nullable();
-            $table->integer('guest_count')->default(0);
+            $table->integer('guest_count')->nullable();
             $table->string('location');
-            $table->string('pin_code', 6)->default('854301');
+            $table->string('pin_code', 6);
             $table->text('special_requests')->nullable();
             $table->enum('status', ['pending', 'confirmed', 'cancelled'])->default('pending');
             $table->decimal('total_price', 10, 2)->default(0.00);

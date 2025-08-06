@@ -23,6 +23,8 @@ class User extends Authenticatable
         'password',
         'phone_no',
         'is_admin',
+        'otp',
+        'otp_expires_at' => 'datetime',
     ];
 
     /**
@@ -33,6 +35,9 @@ class User extends Authenticatable
     protected $hidden = [
         'password',
         'remember_token',
+        'otp',              
+        'otp_expires_at'
+
     ];
 
     /**
@@ -48,4 +53,32 @@ class User extends Authenticatable
             'is_admin' => 'boolean',
         ];
     }
+
+    // Relationship methods
+    public function bookings()
+    {
+        return $this->hasMany(Booking::class);
+    }
+
+    // Accessor for phone field compatibility
+    public function getPhoneAttribute()
+    {
+        return $this->phone_no;
+    }
+
+    public function setPhoneAttribute($value)
+    {
+        $this->attributes['phone_no'] = $value;
+    }
+    public function setPhoneNoAttribute($value) 
+    {
+        $this->attributes['phone_no'] = preg_replace('/[^0-9]/', '', $value);
+    }
+
+    // Add accessor for consistent formatting
+    public function getFormattedPhoneAttribute()
+    {
+        return substr($this->phone_no, 0, 3) . '****' . substr($this->phone_no, -3);
+    }
+
 }

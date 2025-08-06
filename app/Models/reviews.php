@@ -12,8 +12,8 @@ class reviews extends Model
     {
         return $this->belongsTo(User::class);
     }
-    public function booking()
+    public function eventpackage()
     {
-        return $this->belongsTo(Booking::class, 'booking_id');
+        return $this->belongsTo(EventPackage::class, 'event_package_id');
     }
 }

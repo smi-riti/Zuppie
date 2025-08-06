@@ -64,7 +64,10 @@ class UpdateBooking extends Component
     {
         $this->calculateTotal();
     }
-
+    public function closeModal()
+    {
+        $this->dispatch('closeModal');
+    }
     public function calculateTotal()
     {
         if ($this->event_package_id) {
@@ -77,7 +80,6 @@ class UpdateBooking extends Component
 
     public function update()
     {
-        // Add custom validation for service availability
         $this->validate(array_merge($this->rules, [
             'pin_code' => [
                 'required',
@@ -90,7 +92,6 @@ class UpdateBooking extends Component
             ]
         ]));
 
-        // Update user
         $user = User::findOrFail($this->user_id);
         $user->update([
             'name' => $this->name,
@@ -98,7 +99,6 @@ class UpdateBooking extends Component
             'phone_no' => $this->phone_no,
         ]);
 
-        // Update booking
         $booking = Booking::findOrFail($this->bookingId);
         $booking->update([
             'event_package_id' => $this->event_package_id,
@@ -109,6 +109,9 @@ class UpdateBooking extends Component
             'location' => $this->location,
             'special_requests' => $this->special_requests,
             'total_price' => $this->total_price,
+            'booking_name' => $this->name,
+            'booking_email' => $this->email,
+            'booking_phone_no' => $this->phone_no,
         ]);
 
         session()->flash('message', 'Booking updated successfully!');

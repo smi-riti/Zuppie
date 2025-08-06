@@ -15,40 +15,29 @@ class ListPackage extends Component
 {
     use WithPagination;
 
-    public $showCreateModal = false;
-    public $showUpdateModal = false;
     public $showDeleteModal = false;
     public $showViewModal = false;
     public $packageToDelete;
-    public $packageIdToUpdate;
     public $packageIdToView;
-    
-    // Search and filter properties
     public $search = '';
     public $categoryFilter = '';
     public $categories = [];
     
-    // For toggling status
     public $updatingStatus = false;
     public $updatingSpecial = false;
 
     protected $listeners = [
-        'packageCreated' => '$refresh',
-        'packageUpdated' => '$refresh',
-        'closeCreateModal' => 'closeCreateModal',
-        'closeUpdateModal' => 'closeUpdateModal',
         'closeViewModal' => 'closeViewModal',
     ];
 
-    public function openCreateModal()
+    public function createPackage()
     {
-        $this->showCreateModal = true;
+        return redirect()->route('admin.event-packages.create');
     }
 
-    public function openUpdateModal($packageId)
+    public function editPackage($packageId)
     {
-        $this->packageIdToUpdate = $packageId;
-        $this->showUpdateModal = true;
+        return redirect()->route('admin.event-packages.edit', $packageId);
     }
 
     public function openViewModal($packageId)
@@ -63,16 +52,6 @@ class ListPackage extends Component
         $this->showDeleteModal = true;
     }
 
-    public function closeCreateModal()
-    {
-        $this->showCreateModal = false;
-    }
-
-    public function closeUpdateModal()
-    {
-        $this->showUpdateModal = false;
-    }
-    
     public function closeViewModal()
     {
         $this->showViewModal = false;
@@ -86,7 +65,6 @@ class ListPackage extends Component
         $this->showDeleteModal = false;
         session()->flash('message', 'Package deleted successfully!');
     }
-    // Reset pagination when filters change
     public function updatingSearch()
     {
         $this->resetPage();
@@ -97,7 +75,6 @@ class ListPackage extends Component
         $this->resetPage();
     }
     
-    // Toggle package active status
     public function toggleActive($packageId)
     {
         $this->updatingStatus = true;
@@ -107,7 +84,6 @@ class ListPackage extends Component
         $this->updatingStatus = false;
     }
     
-    // Toggle package special status
     public function toggleSpecial($packageId)
     {
         $this->updatingSpecial = true;
@@ -127,18 +103,15 @@ class ListPackage extends Component
         $query = EventPackage::query()
             ->with(['category', 'images']);
             
-        // Apply search filter
         if (!empty($this->search)) {
             $query->where('name', 'like', '%' . $this->search . '%')
                   ->orWhere('description', 'like', '%' . $this->search . '%');
         }
         
-        // Apply category filter
         if (!empty($this->categoryFilter)) {
             $query->where('category_id', $this->categoryFilter);
         }
         
-        // Make sure we're using an integer for pagination
         $perPage = 5;
         
         return view('livewire.admin.event-package.list-package', [

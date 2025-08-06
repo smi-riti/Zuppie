@@ -27,11 +27,8 @@ class ViewPackage extends Component
     {
         $image = \App\Models\EventPackageImage::find($this->imageToDelete);
         if ($image) {
-            // We're using soft delete now, so we don't need to delete from ImageKit
-            // Just soft delete the image
             $image->delete();
             
-            // Refresh the package data safely
             if ($this->package && $this->package->id) {
                 $this->package = EventPackage::with(['category', 'images'])->find($this->package->id);
             }

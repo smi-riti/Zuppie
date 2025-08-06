@@ -1,4 +1,4 @@
-<div x-data="{ activeTab: 'All Reviews' }" class="">
+<div x-data="{ activeTab: 'All Reviews' }" class="p-4">
     <!-- Tabs Navigation -->
     <div class="flex border-b border-gray-200 mb-6">
         <template x-for="tab in ['All Reviews', 'Approved', 'Denied']" :key="tab">
@@ -34,7 +34,7 @@
                                 <td class="px-6 py-4">{{ $review->id }}</td>
                                 <td class="px-6 py-4">{{ $review->user->name }}</td>
                                 <td class="px-6 py-4">
-                                    {{ optional($review->booking->eventPackage)->name ?? '-' }}
+                                    {{ $review->eventPackage->name ?? '-' }}
                                 </td>
                                 <td class="px-6 py-4">
                                     <span class="text-yellow-500 font-bold">{{ $review->rating }} &#9733;</span>
@@ -42,10 +42,10 @@
                                 <td class="px-6 py-4">{{ $review->comment }}</td>
                                 <td class="px-6 py-4 flex gap-2">
                                     <button type="button"
-                                        class="bg-green-500 text-white px-3 py-1 rounded hover:bg-green-600 transition shadow"
+                                        class="bg-success-500 text-white px-3 py-1 rounded hover:bg-success-600 transition shadow"
                                         wire:click="approving({{ $review->id }})">Approve</button>
                                     <button
-                                        class="bg-red-500 text-white px-3 py-1 rounded hover:bg-red-600 transition shadow"
+                                        class="bg-error-500 text-white px-3 py-1 rounded hover:bg-error-600 transition shadow"
                                         >Deny</button>
                                 </td>
                             </tr>
@@ -63,7 +63,7 @@
         <template x-if="activeTab === 'Approved'">
             <div>
                 <table class="min-w-full text-left text-sm font-light rounded-lg overflow-hidden">
-                    <thead class="bg-green-100 text-green-700">
+                    <thead class="bg-success-100 text-success-700">
                         <tr>
                             <th class="px-6 py-3">ID</th>
                             <th class="px-6 py-3">User</th>
@@ -75,11 +75,11 @@
                     </thead>
                     <tbody>
                         @forelse($approvedReviews as $apvr)
-                            <tr class="even:bg-gray-50 hover:bg-green-50 transition">
+                            <tr class="even:bg-gray-50 hover:bg-success-50 transition">
                                 <td class="px-6 py-4">{{ $apvr->id }}</td>
                                 <td class="px-6 py-4">{{ $apvr->user->name }}</td>
                                 <td class="px-6 py-4">
-                                    {{ optional($apvr->booking->eventPackage)->name ?? '-' }}
+                                    {{ $apvr->eventPackage->name ?? '-' }}
                                 </td>
                                 <td class="px-6 py-4">
                                     <span class="text-yellow-500 font-bold">{{ $apvr->rating }} &#9733;</span>
@@ -87,7 +87,7 @@
                                 <td class="px-6 py-4">{{ $apvr->comment }}</td>
                                 <td class="px-6 py-4 flex gap-2">
                                     <button
-                                        class="bg-green-500 text-white px-3 py-1 rounded hover:bg-green-600 transition shadow"
+                                        class="bg-success-500 text-white px-3 py-1 rounded hover:bg-success-600 transition shadow"
                                         wire:click="">Something</button>
                                   
                                 </td>

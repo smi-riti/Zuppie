@@ -6,12 +6,14 @@ use Livewire\Component;
 use App\Models\Category;
 use Livewire\WithFileUploads;
 use App\Helpers\ImageKitHelper;
+use Livewire\Attributes\Layout;
+
 class CreatePackage extends Component
 {
   
     use WithFileUploads;
 
-    public $category_id, $name, $price, $discount_type, $discount_value, $description, $is_active = true, $is_special = false;
+    public $category_id, $name, $price, $discount_type, $discount_value, $description, $features, $is_active = true, $is_special = false;
     public $duration_hours = 0;
     public $duration_minutes = 0;
     public $categories = [];
@@ -26,6 +28,7 @@ class CreatePackage extends Component
             'discount_type' => 'nullable|in:percentage,fixed',
             'discount_value' => 'nullable|numeric|min:0|required_if:discount_type,percentage,fixed',
             'description' => 'nullable|string',
+            'features' => 'nullable|string',
             'newImages.*' => 'nullable|image|max:2048',
             'is_active' => 'boolean',
             'is_special' => 'boolean',
@@ -45,7 +48,7 @@ class CreatePackage extends Component
 
     public function mount()
     {
-        $this->categories = Category::all()->pluck('name', 'id')->toArray();
+        $this->categories = Category::all();
     }
 
     public function updated($propertyName)
@@ -59,14 +62,11 @@ class CreatePackage extends Component
     {
         $this->validate();
 
-        // Convert hours and minutes to milliseconds
         $durationInMilliseconds = null;
         if ($this->duration_hours > 0 || $this->duration_minutes > 0) {
-            // Convert to milliseconds: (hours * 60 + minutes) * 60 * 1000
             $durationInMilliseconds = ((int)$this->duration_hours * 60 + (int)$this->duration_minutes) * 60 * 1000;
         }
 
-        // Create the package first
         $package = EventPackage::create([
             'category_id' => $this->category_id ?: null,
             'name' => $this->name,
@@ -74,12 +74,12 @@ class CreatePackage extends Component
             'discount_type' => $this->discount_type ?: null,
             'discount_value' => $this->discount_type ? $this->discount_value : null,
             'description' => $this->description,
+            'features' => $this->features,
             'is_active' => $this->is_active,
             'is_special' => $this->is_special,
             'duration' => $durationInMilliseconds,
         ]);
 
-        // Now upload and store images if any
         if ($this->newImages) {
             foreach ($this->newImages as $image) {
                 if ($image) {
@@ -93,15 +93,13 @@ class CreatePackage extends Component
                 }
             }
         }
-
         $this->reset();
-        $this->dispatch('packageCreated');
-        $this->dispatch('closeCreateModal');
         session()->flash('message', 'Package created successfully!');
+        return redirect()->route('admin.event-packages');
     }
 
-   
-  public function render()
+    #[Layout('components.layouts.admin')]
+    public function render()
     {
         return view('livewire.admin.event-package.create-package', [
             'categories' => $this->categories,

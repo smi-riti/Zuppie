@@ -5,11 +5,18 @@ use App\Http\Controllers\Review\ReviewController;
 use App\Http\Controllers\EventPackage\EventPackageController;
 use App\Http\Controllers\Booking\BookingController;
 use App\Http\Controllers\Offer\OfferController;
+use App\Http\Controllers\BlogController;
+use App\Http\Controllers\Gallery\GalleryApiController;
+use App\Http\Controllers\User\UserApiController;
+use App\Http\Controllers\Payment\RazorpayWebhookController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\RegistrationController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\LogoutController;
+
+// Webhook routes (no authentication required)
+Route::post('/webhooks/razorpay', [RazorpayWebhookController::class, 'handleWebhook']);
 
 // Public routes
 Route::post('/register', [RegistrationController::class, 'register']);
@@ -42,5 +49,8 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::apiResource('event-packages', EventPackageController::class)->except(['index', 'show']);
         Route::apiResource('offers', OfferController::class)->except(['index', 'show']);
         Route::apiResource('reviews', ReviewController::class)->except(['index', 'store']);
+        Route::apiResource('blogs', BlogController::class);
+        Route::apiResource('gallery',GalleryApiController::class)->except(['show']);
+        Route::apiResource('users', UserApiController::class)->except(['show']);
     });
 });
