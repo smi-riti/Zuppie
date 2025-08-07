@@ -348,7 +348,7 @@ class PackageBookingForm extends Component
             // Store booking data in session for completion after payment
             session(['pending_booking_data' => [
                 'user_id' => $user->id,
-                'package_id' => $this->packageId,
+                'package_id' => $this->package->id,
                 'pin_code' => $this->pinCode,
                 'event_date' => $this->eventDate,
                 'event_time' => !empty($this->eventTime) ? $this->eventTime : null,
@@ -535,7 +535,7 @@ class PackageBookingForm extends Component
             return redirect()->route('profile');
             
         } catch (Exception $e) {
-            session()->flash('error', 'Payment verification failed: ' . $e->getMessage());
+            session()->flash('error', 'Payment ver,ification failed: ' . $e->getMessage());
             \Log::error('Razorpay payment completion error: ' . $e->getMessage());
         }
     }
