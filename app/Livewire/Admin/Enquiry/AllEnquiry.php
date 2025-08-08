@@ -8,13 +8,29 @@ use Livewire\Component;
 
 class AllEnquiry extends Component
 {
+    public $showViewModal = false;
+    public $enquiryIdToView;
+
+    public $listeners = [
+        'closeViewModal' => 'closeViewModal',
+    ];
+    public function openEnquiryViewModal($enquiryId)
+    {
+        $this->enquiryIdToView = $enquiryId;
+        $this->showViewModal = true;
+    }
+   public function closeViewModal()
+    {
+        $this->showViewModal = false;
+    }
     
     public $activeTab = 'All Enquiries';
-    public $enquiries;
+    public $enquiries, $resolvedEnquiry;
 
      public function mount()
     {
-        $this->enquiries = Enquiry::all();
+        $this->enquiries = Enquiry::where('status', 'pending')->get();
+        $this->resolvedEnquiry = Enquiry::where('status', 'resolved')->get();
     }
 
     #[Layout('components.layouts.admin')]
