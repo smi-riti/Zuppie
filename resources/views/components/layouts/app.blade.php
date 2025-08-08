@@ -10,11 +10,11 @@
     <meta name="mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="default">
-    <meta name="theme-color" content="#8B5CF6">
-    <meta name="msapplication-navbutton-color" content="#8B5CF6">
+    <meta name="theme-color" content="#A855F7">
+    <meta name="msapplication-navbutton-color" content="#A855F7">
     <meta name="apple-mobile-web-app-title" content="Zuppie">
     <meta name="application-name" content="Zuppie">
-    <meta name="msapplication-TileColor" content="#8B5CF6">
+    <meta name="msapplication-TileColor" content="#A855F7">
     <meta name="msapplication-config" content="/browserconfig.xml">
     
     <!-- SEO Meta Tags -->
@@ -43,7 +43,7 @@
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
     <link rel="manifest" href="/site.webmanifest">
-    <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#8B5CF6">
+    <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#A855F7">
     
     <!-- Structured Data -->
     @if(config('seo.structured_data.enable_organization'))
@@ -79,8 +79,99 @@
     <link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@400;500;600;700;800&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
     <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@400;500;600;700;800&display=swap"></noscript>
     
-    <!-- Tailwind CSS -->
-  @vite(['resources/css/app.css', 'resources/js/app.js'])
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        'sans': ['Inter', 'ui-sans-serif', 'system-ui', 'sans-serif'],
+                        'display': ['Poppins', 'ui-sans-serif', 'system-ui', 'sans-serif'],
+                    },
+                    animation: {
+                        'float': 'float 4s ease-in-out infinite',
+                        'float-slow': 'float-slow 6s ease-in-out infinite',
+                        'float-slower': 'float-slower 8s ease-in-out infinite',
+                        'float-gentle': 'float-gentle 10s ease-in-out infinite',
+                        'bounce-soft': 'bounce-soft 3s ease-in-out infinite',
+                        'pulse-slow': 'pulse-glow 2.5s ease-in-out infinite',
+                        'sparkle': 'sparkle 2s ease-in-out infinite',
+                        'fade-in-up': 'fadeInUp 0.6s ease-out',
+                        'typewriter': 'typing 2s steps(40, end), blink 1s step-end infinite',
+                    },
+                    keyframes: {
+                        float: {
+                            '0%': { transform: 'translateY(0px) rotate(0deg)' },
+                            '33%': { transform: 'translateY(-30px) rotate(-2deg)' },
+                            '66%': { transform: 'translateY(-20px) rotate(2deg)' },
+                            '100%': { transform: 'translateY(0px) rotate(0deg)' },
+                        },
+                        'float-slow': {
+                            '0%': { transform: 'translateY(0px) rotate(0deg)' },
+                            '33%': { transform: 'translateY(-25px) rotate(1deg)' },
+                            '66%': { transform: 'translateY(-15px) rotate(-1deg)' },
+                            '100%': { transform: 'translateY(0px) rotate(0deg)' },
+                        },
+                        'float-slower': {
+                            '0%': { transform: 'translateY(0px) rotate(0deg)' },
+                            '33%': { transform: 'translateY(-20px) rotate(-1deg)' },
+                            '66%': { transform: 'translateY(-10px) rotate(1deg)' },
+                            '100%': { transform: 'translateY(0px) rotate(0deg)' },
+                        },
+                        'float-gentle': {
+                            '0%': { transform: 'translateY(0px) translateX(0px) rotate(0deg)' },
+                            '25%': { transform: 'translateY(-15px) translateX(5px) rotate(1deg)' },
+                            '50%': { transform: 'translateY(-10px) translateX(-3px) rotate(-0.5deg)' },
+                            '75%': { transform: 'translateY(-20px) translateX(2px) rotate(0.5deg)' },
+                            '100%': { transform: 'translateY(0px) translateX(0px) rotate(0deg)' },
+                        },
+                        'bounce-soft': {
+                            '0%, 100%': { transform: 'translateY(0px) scale(1)' },
+                            '50%': { transform: 'translateY(-12px) scale(1.05)' },
+                        },
+                        'pulse-glow': {
+                            '0%, 100%': { opacity: '0.7', boxShadow: '0 0 10px rgba(255, 255, 255, 0.3)' },
+                            '50%': { opacity: '1', boxShadow: '0 0 20px rgba(255, 255, 255, 0.5)' },
+                        },
+                        sparkle: {
+                            '0%, 100%': { opacity: '1', transform: 'scale(1)' },
+                            '50%': { opacity: '0.8', transform: 'scale(1.1)' },
+                        },
+                        fadeInUp: {
+                            from: { opacity: '0', transform: 'translate3d(0, 40px, 0)' },
+                            to: { opacity: '1', transform: 'translate3d(0, 0, 0)' },
+                        },
+                        typing: {
+                            from: { width: '0' },
+                            to: { width: '100%' },
+                        },
+                        blink: {
+                            '50%': { borderColor: 'transparent' },
+                        },
+                    },
+                    backgroundImage: {
+                        'gradient-primary': 'linear-gradient(135deg, #a855f7 0%, #ec4899 100%)',
+                        'gradient-secondary': 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+                        'gradient-rainbow': 'linear-gradient(135deg, #667eea 0%, #764ba2 25%, #f093fb 50%, #f5576c 75%, #4facfe 100%)',
+                    },
+                    boxShadow: {
+                        'glow': '0 0 30px rgba(168, 85, 247, 0.4)',
+                        'glow-pink': '0 0 30px rgba(236, 72, 153, 0.4)',
+                        'soft': '0 2px 15px -3px rgba(0, 0, 0, 0.07), 0 10px 20px -2px rgba(0, 0, 0, 0.04)',
+                    },
+                    spacing: {
+                        '18': '4.5rem',
+                        '88': '22rem',
+                        '128': '32rem',
+                    },
+                }
+            }
+        }
+    </script>
+    
+    <!-- Custom CSS -->
+    @vite(['resources/css/app.css', 'resources/js/app.js'])
     
     <!-- Livewire Styles -->
     @livewireStyles
@@ -89,9 +180,6 @@
     <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
     <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"></noscript>
 
-    <!-- Alpine.js -->
-    <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
-
     <!-- AOS Animation Library -->
     <link rel="preload" href="https://unpkg.com/aos@2.3.1/dist/aos.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
     <noscript><link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css"></noscript>
@@ -99,14 +187,15 @@
     <!-- Preload JavaScript -->
     <link rel="preload" href="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js" as="script">
     <link rel="preload" href="https://unpkg.com/aos@2.3.1/dist/aos.js" as="script">
+    <link rel="preload" href="https://cdn.jsdelivr.net/npm/chart.js" as="script">
     
-    <!-- Critical CSS for performance - Using Tailwind Config Colors -->
+    <!-- Critical CSS for performance -->
     <style>
-        /* Critical CSS - Using Tailwind Config Colors */
+        /* Critical CSS */
         body { font-family: 'Inter', sans-serif; }
-        .gradient-bg { background: linear-gradient(135deg, theme('colors.zuppie.500') 0%, theme('colors.zuppie-pink.500') 100%); }
+        .gradient-bg { background: linear-gradient(135deg, #a855f7 0%, #ec4899 100%); }
         .gradient-text { 
-            background: linear-gradient(135deg, theme('colors.zuppie.500') 0%, theme('colors.zuppie-pink.500') 100%);
+            background: linear-gradient(135deg, #a855f7 0%, #ec4899 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
@@ -116,11 +205,6 @@
             backdrop-filter: blur(10px);
             border: 1px solid rgba(255, 255, 255, 0.2);
         }
-        /* Legacy support - Use Tailwind color classes in HTML instead */
-        .text-zuppie { color: theme('colors.zuppie.500'); }
-        .bg-zuppie { background-color: theme('colors.zuppie.500'); }
-        .text-zuppie-pink { color: theme('colors.zuppie-pink.500'); }
-        .bg-zuppie-pink { background-color: theme('colors.zuppie-pink.500'); }
     </style>
     
     <!-- Non-critical CSS -->
@@ -186,6 +270,9 @@
             }
         });
     </script>
+
+    <!-- Load Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
     <!-- Custom Styles -->
     <style>

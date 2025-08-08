@@ -1,8 +1,9 @@
-<div class="min-h-screen bg-gradient-to-br from-slate-50 via-white to-zuppie-50">
-    @if(!$package)
+<div class="min-h-screen bg-gradient-to-br from-slate-50 via-white to-purple-50">
+    @if (!$package)
         <div class="text-center py-20">
             <h2 class="text-2xl font-bold text-gray-800">Package not found</h2>
-            <a href="{{ route('event-packages') }}" class="mt-4 inline-block bg-zuppie-600 text-white px-6 py-3 rounded-lg">
+            <a href="{{ route('event-packages') }}"
+                class="mt-4 inline-block bg-purple-600 text-white px-6 py-3 rounded-lg">
                 Back to Packages
             </a>
         </div>
@@ -41,9 +42,9 @@
                         </div>
 
                         <div class="grid grid-cols-3 gap-2 md:gap-3">
-                            @foreach($this->packageImages as $index => $image)
+                            @foreach ($this->packageImages as $index => $image)
                                 <div
-                                    class="aspect-w-4 aspect-h-3 rounded-lg md:rounded-xl overflow-hidden {{ $index === $currentImageIndex ? 'ring-2 md:ring-4 ring-zuppie-500' : 'hover:ring-2 hover:ring-zuppie-300' }} transition-all duration-300">
+                                    class="aspect-w-4 aspect-h-3 rounded-lg md:rounded-xl overflow-hidden {{ $index === $currentImageIndex ? 'ring-2 md:ring-4 ring-purple-500' : 'hover:ring-2 hover:ring-purple-300' }} transition-all duration-300">
                                     <img src="{{ $image }}" alt="Gallery image {{ $index + 1 }}"
                                         wire:click="selectImage({{ $index }})"
                                         class="thumbnail-image w-full h-full object-cover cursor-pointer hover:scale-110 transition-transform duration-300">
@@ -61,32 +62,36 @@
                             </div>
 
                             <!-- Rating Summary -->
-                            <div class="flex items-center mb-10 p-6 bg-gradient-to-r from-purple-50 to-pink-50 rounded-lg">
+                            <div
+                                class="flex items-center mb-10 p-6 bg-gradient-to-r from-purple-50 to-pink-50 rounded-lg">
                                 <div
                                     class="text-5xl font-bold mr-6 bg-gradient-to-r from-purple-600 to-pink-500 bg-clip-text text-transparent">
                                     {{ number_format($average_review, 1) }}
                                 </div>
                                 <div>
                                     <div class="flex items-center mb-2">
-                                        @for($i = 1; $i <= 5; $i++)
-                                            @if($i <= $average_review)
+                                        @for ($i = 1; $i <= 5; $i++)
+                                            @if ($i <= $average_review)
                                                 <i class="fa-solid fa-star text-xl mr-1" style="color: #9333ea;"></i>
                                             @elseif($i - 0.5 <= $average_review)
-                                                <i class="fa-solid fa-star-half-stroke text-xl mr-1" style="color: #9333ea;"></i>
+                                                <i class="fa-solid fa-star-half-stroke text-xl mr-1"
+                                                    style="color: #9333ea;"></i>
                                             @else
                                                 <i class="fa-regular fa-star text-xl mr-1" style="color: #d8b4fe;"></i>
                                             @endif
                                         @endfor
                                     </div>
-                                    <div class="text-sm text-purple-700">Based on {{ $totalReview }} verified reviews</div>
+                                    <div class="text-sm text-purple-700">Based on {{ $totalReview }} verified reviews
+                                    </div>
                                 </div>
                             </div>
-                            
+
 
                             <!-- Reviews List -->
                             <div class="space-y-8">
                                 @foreach ($reviews as $review)
-                                    <div class="p-6 border border-purple-100 rounded-lg hover:shadow-md transition-shadow">
+                                    <div
+                                        class="p-6 border border-purple-100 rounded-lg hover:shadow-md transition-shadow">
                                         <div class="flex justify-between items-start mb-3">
                                             <div class="flex items-center">
                                                 <div
@@ -94,7 +99,8 @@
                                                     <span
                                                         class="text-purple-600 font-medium">{{ strtoupper(substr($review->user->name, 0, 1)) }}</span>
                                                 </div>
-                                                <h3 class="font-semibold text-purple-900">{{ $review->user->name }}</h3>
+                                                <h3 class="font-semibold text-purple-900">{{ $review->user->name }}
+                                                </h3>
                                             </div>
                                             <span
                                                 class="text-sm text-pink-600">{{ $review->created_at->format('M d, Y') }}</span>
@@ -102,15 +108,18 @@
 
                                         <div class="flex items-center mb-3">
                                             <div class="flex mr-3">
-                                                @for($i = 1; $i <= 5; $i++)
-                                                    @if($i <= $review->rating)
-                                                        <i class="fa-solid fa-star text-sm mr-0.5" style="color: #9333ea;"></i>
+                                                @for ($i = 1; $i <= 5; $i++)
+                                                    @if ($i <= $review->rating)
+                                                        <i class="fa-solid fa-star text-sm mr-0.5"
+                                                            style="color: #9333ea;"></i>
                                                     @else
-                                                        <i class="fa-regular fa-star text-sm mr-0.5" style="color: #d8b4fe;"></i>
+                                                        <i class="fa-regular fa-star text-sm mr-0.5"
+                                                            style="color: #d8b4fe;"></i>
                                                     @endif
                                                 @endfor
                                             </div>
-                                            <span class="text-xs bg-pink-100 text-pink-800 px-2 py-1 rounded-full">Verified
+                                            <span
+                                                class="text-xs bg-pink-100 text-pink-800 px-2 py-1 rounded-full">Verified
                                                 Purchase</span>
                                         </div>
 
@@ -122,7 +131,7 @@
                             </div>
 
                             <!-- View More Button -->
-                            @if($reviews->count() > 3)
+                            @if ($reviews->count() > 3)
                                 <div class="mt-8 text-center">
                                     <button
                                         class="px-6 py-2 bg-gradient-to-r from-purple-500 to-pink-500 text-white rounded-full hover:shadow-lg transition-all">
@@ -141,8 +150,8 @@
                             <div class="mb-6">
                                 <h1 class="text-3xl font-bold text-gray-800 mb-2">{{ $package->name }}</h1>
                                 <p class="text-gray-600">{{ $package->category->name ?? 'Event Package' }}</p>
-                                @if($package->duration)
-                                    <p class="text-sm text-zuppie-600 font-medium mt-1">
+                                @if ($package->duration)
+                                    <p class="text-sm text-purple-600 font-medium mt-1">
                                         <i class="fas fa-clock mr-1"></i>{{ $package->formatted_duration }}
                                     </p>
                                 @endif
@@ -154,10 +163,10 @@
                                 class="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-6 space-y-4 sm:space-y-0">
                                 <div>
                                     <span
-                                        class="text-4xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-zuppie-600 to-zuppie-pink-600">
+                                        class="text-4xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-purple-600 to-pink-600">
                                         ₹{{ number_format($package->discounted_price) }}
                                     </span>
-                                    @if($package->discount_type && $package->price != $package->discounted_price)
+                                    @if ($package->discount_type && $package->price != $package->discounted_price)
                                         <span
                                             class="ml-2 text-lg text-gray-500 line-through">₹{{ number_format($package->price) }}</span>
                                     @endif
@@ -176,7 +185,7 @@
                                         class="flex-1 border border-gray-300 rounded-xl px-4 py-2 focus:ring-2 focus:ring-info-500 focus:border-transparent transition-all duration-300"
                                         maxlength="6">
                                     <button wire:click="checkPinCodeAvailability" wire:loading.attr="disabled"
-                                        class="bg-info-600 text-white px-6 py-2 rounded-xl font-semibold hover:bg-info-700 transition-all duration-300 disabled:opacity-50">
+                                        class="bg-blue-600 text-white px-6 py-2 rounded-xl font-semibold hover:bg-info-700 transition-all duration-300 disabled:opacity-50">
                                         <span wire:loading.remove>Check</span>
                                         <span wire:loading>
                                             <i class="fas fa-spinner fa-spin"></i>
@@ -184,13 +193,19 @@
                                     </button>
                                 </div>
 
-                                @if(session('pin_message'))
-                                    <div class="mt-3 p-3 bg-green-100 border border-green-400 text-green-700 rounded-lg">
+                                @if (session('pin_message'))
+                                    <div
+                                        class="mt-3 p-3 bg-green-100 border border-green-400 text-green-700 rounded-lg">
                                         <i class="fas fa-check-circle mr-2"></i>{{ session('pin_message') }}
                                     </div>
                                 @endif
+                                @error('pinCode')
+                                    <div class="mt-3 p-3 bg-red-100 border border-red-400 text-red-700 rounded-lg">
+                                        <i class="fas fa-exclamation-circle mr-2"></i>{{ $message }}
+                                    </div>
+                                @enderror
 
-                                @if(session('pin_error'))
+                                @if (session('pin_error'))
                                     <div class="mt-3 p-3 bg-red-100 border border-red-400 text-red-700 rounded-lg">
                                         <i class="fas fa-exclamation-circle mr-2"></i>{{ session('pin_error') }}
                                     </div>
@@ -203,17 +218,23 @@
                             </div>
 
                             <!-- Book Now Button -->
-                            @if($isPinCodeAvailable)
-                                <button wire:click="bookNow"
-                                    class="w-full bg-gradient-to-r from-zuppie-600 to-zuppie-pink-600 text-white px-8 py-4 rounded-2xl font-bold text-lg hover:from-zuppie-700 hover:to-zuppie-pink-700 transform hover:scale-105 transition-all duration-300 shadow-lg">
+                            @if ($isPinCodeAvailable === true)
+                                <button wire:click="bookNow" wire:loading.attr="disabled"
+                                    class="w-full bg-gradient-to-r from-purple-600 to-pink-600 text-white px-8 py-4 rounded-2xl font-bold text-lg hover:from-purple-700 hover:to-pink-700 transform hover:scale-105 transition-all duration-300 shadow-lg">
                                     <i class="fas fa-calendar-check mr-2"></i>
-                                    Book Now
+                                    <span wire:loading.remove>Book Now</span>
+                                    <span wire:loading>
+                                        <i class="fas fa-spinner fa-spin mr-2"></i> Checking...
+                                    </span>
                                 </button>
                             @else
-                                <button disabled
-                                    class="w-full bg-gray-400 text-white px-8 py-4 rounded-2xl font-bold text-lg cursor-not-allowed">
+                                <button wire:click="checkPinCodeAvailability" wire:loading.attr="disabled"
+                                    class="w-full bg-gradient-to-r from-gray-600 to-gray-700 text-white px-8 py-4 rounded-2xl font-bold text-lg hover:from-gray-700 hover:to-gray-800 transform hover:scale-105 transition-all duration-300 shadow-lg">
                                     <i class="fas fa-lock mr-2"></i>
-                                    Check Availability First
+                                    <span wire:loading.remove>Check Availability</span>
+                                    <span wire:loading>
+                                        <i class="fas fa-spinner fa-spin mr-2"></i> Checking...
+                                    </span>
                                 </button>
                             @endif
                         </div>
@@ -225,25 +246,25 @@
 
                             <!-- Package Details -->
                             <div class="grid md:grid-cols-2 gap-4 text-sm">
-                                @if($package->duration)
+                                @if ($package->duration)
                                     <div class="flex items-center space-x-2">
-                                        <i class="fas fa-clock text-zuppie-600"></i>
+                                        <i class="fas fa-clock text-purple-600"></i>
                                         <span class="font-medium">Duration:</span>
                                         <span class="text-gray-600">{{ $package->formatted_duration }}</span>
                                     </div>
                                 @endif
                                 <div class="flex items-center space-x-2">
-                                    <i class="fas fa-users text-zuppie-600"></i>
+                                    <i class="fas fa-users text-purple-600"></i>
                                     <span class="font-medium">Team Size:</span>
                                     <span class="text-gray-600">5-8 professionals</span>
                                 </div>
                                 <div class="flex items-center space-x-2">
-                                    <i class="fas fa-calendar text-zuppie-600"></i>
+                                    <i class="fas fa-calendar text-purple-600"></i>
                                     <span class="font-medium">Advance Booking:</span>
                                     <span class="text-gray-600">15 days minimum</span>
                                 </div>
                                 <div class="flex items-center space-x-2">
-                                    <i class="fas fa-star text-zuppie-600"></i>
+                                    <i class="fas fa-star text-purple-600"></i>
                                     <span class="font-medium">Category:</span>
                                     <span class="text-gray-600">{{ $package->category->name ?? 'General' }}</span>
                                 </div>
@@ -276,7 +297,7 @@
                                                 array_map('trim', explode(',', $package->features)),
                                                 function ($item) {
                                                     return !empty($item);
-                                                }
+                                                },
                                             );
                                         }
                                     }
@@ -284,10 +305,10 @@
                                 @endphp
 
                                 <ul class="features-list space-y-2 pr-2">
-                                    @foreach($features as $inclusion)
+                                    @foreach ($features as $inclusion)
                                         <li class="flex gap-3 items-start">
                                             <div
-                                                class="w-3 h-3 bg-gradient-to-r from-zuppie-500 to-zuppie-pink-500 rounded-full mt-2 flex-shrink-0">
+                                                class="w-3 h-3 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full mt-2 flex-shrink-0">
                                             </div>
                                             <span class="text-gray-700">{!! $inclusion !!}</span>
                                         </li>
@@ -301,7 +322,7 @@
         </section>
 
         <!-- Similar Packages Section -->
-        @if($this->similarPackages->count() > 0)
+        @if ($this->similarPackages->count() > 0)
             <section class="py-20 bg-white">
                 <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     <div class="text-center mb-16">
@@ -309,12 +330,13 @@
                             Similar Packages You Might Like
                         </h2>
                         <p class="text-xl text-gray-600 max-w-3xl mx-auto">
-                            Explore more packages from the same category - {{ $package->category->name ?? 'Event Packages' }}
+                            Explore more packages from the same category -
+                            {{ $package->category->name ?? 'Event Packages' }}
                         </p>
                     </div>
 
                     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-                        @foreach($this->similarPackages as $similarPackage)
+                        @foreach ($this->similarPackages as $similarPackage)
                             <div
                                 class="bg-white rounded-3xl shadow-xl overflow-hidden hover:shadow-2xl transform hover:-translate-y-2 transition-all duration-500 group">
                                 <!-- Image -->
@@ -322,7 +344,7 @@
                                     <img src="{{ $similarPackage['image'] }}" alt="{{ $similarPackage['name'] }}"
                                         class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
 
-                                    @if($similarPackage['popular'])
+                                    @if ($similarPackage['popular'])
                                         <div class="absolute top-4 right-4">
                                             <span
                                                 class="bg-gradient-to-r from-yellow-400 to-orange-500 text-white px-3 py-2 rounded-full text-sm font-bold shadow-lg">
@@ -342,11 +364,12 @@
                                 <!-- Content -->
                                 <div class="p-6">
                                     <h3
-                                        class="text-xl font-bold text-gray-800 group-hover:text-zuppie-600 transition-colors duration-300 mb-3">
+                                        class="text-xl font-bold text-gray-800 group-hover:text-purple-600 transition-colors duration-300 mb-3">
                                         {{ $similarPackage['name'] }}
                                     </h3>
 
-                                    <p class="text-gray-600 mb-4 leading-relaxed">{{ $similarPackage['description'] }}</p>
+                                    <p class="text-gray-600 mb-4 leading-relaxed">{{ $similarPackage['description'] }}
+                                    </p>
 
                                     <!-- Package Info -->
                                     <div class="flex items-center justify-between mb-4">
@@ -360,8 +383,8 @@
                                     </div>
 
                                     <!-- CTA Button -->
-                                    <a href="{{ route('package-detail', ['id' => $similarPackage['id']]) }}"
-                                        class="block w-full bg-gradient-to-r from-zuppie-600 to-zuppie-pink-600 text-white py-3 px-6 rounded-2xl font-bold text-center hover:from-zuppie-700 hover:to-zuppie-pink-700 transform hover:scale-105 transition-all duration-300 shadow-lg">
+                                    <a href="{{ route('package-detail', $similarPackage['slug']) }}"
+                                        class="block w-full bg-gradient-to-r from-purple-600 to-pink-600 text-white py-3 px-6 rounded-2xl font-bold text-center hover:from-purple-700 hover:to-pink-700 transform hover:scale-105 transition-all duration-300 shadow-lg">
                                         <i class="fas fa-eye mr-2"></i>
                                         View Details
                                     </a>
@@ -372,7 +395,7 @@
 
                     <div class="text-center mt-12">
                         <a href="{{ route('event-packages') }}"
-                            class="inline-flex items-center space-x-2 bg-white border-2 border-zuppie-600 text-zuppie-600 px-8 py-3 rounded-2xl font-bold hover:bg-zuppie-600 hover:text-white transition-all duration-300">
+                            class="inline-flex items-center space-x-2 bg-white border-2 border-purple-600 text-purple-600 px-8 py-3 rounded-2xl font-bold hover:bg-purple-600 hover:text-white transition-all duration-300">
                             <i class="fas fa-th-large"></i>
                             <span>View All Packages</span>
                         </a>
@@ -443,7 +466,7 @@
     </style>
 
     <script>
-        document.addEventListener('DOMContentLoaded', function () {
+        document.addEventListener('DOMContentLoaded', function() {
             const mainImage = document.getElementById('main-package-image');
             const imageCounter = document.querySelector('.image-counter'); // Add a class to the counter div
             const thumbnails = document.querySelectorAll('.thumbnail-image'); // Add a class to thumbnail images
@@ -465,9 +488,9 @@
                 thumbnails.forEach((thumb, i) => {
                     thumb.parentElement.classList.toggle('ring-2', i === currentIndex);
                     thumb.parentElement.classList.toggle('ring-4', i === currentIndex);
-                    thumb.parentElement.classList.toggle('ring-zuppie-500', i === currentIndex);
+                    thumb.parentElement.classList.toggle('ring-purple-500', i === currentIndex);
                     thumb.parentElement.classList.toggle('hover:ring-2', i !== currentIndex);
-                    thumb.parentElement.classList.toggle('hover:ring-zuppie-300', i !== currentIndex);
+                    thumb.parentElement.classList.toggle('hover:ring-purple-300', i !== currentIndex);
                 });
             }
 

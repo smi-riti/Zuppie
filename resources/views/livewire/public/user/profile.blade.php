@@ -1,4 +1,4 @@
-<div class="min-h-screen bg-gradient-to-br pt-10 from-slate-50 via-white to-zuppie-50">
+<div class="min-h-screen bg-gradient-to-br pt-10 from-slate-50 via-white to-purple-50">
 
     {{-- Loading Component for Payment Processing --}}
     @if($isProcessingPayment)
@@ -16,7 +16,7 @@
                     <!-- Profile Image -->
                     <div class="relative">
                         <div
-                            class="w-24 h-24 bg-gradient-to-r from-zuppie-500 to-zuppie-pink-500 rounded-full flex items-center justify-center text-white  text-3xl font-bold">
+                            class="w-24 h-24 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full flex items-center justify-center text-white  text-3xl font-bold">
                             {{ substr(auth()->user()->name ?? 'User', 0, 1) }}
                         </div>
                         <div
@@ -48,7 +48,7 @@
                     </div>
 
                     <button wire:click="openEditProfileModal({{ auth()->id() }})"
-                        class="bg-gradient-to-r from-zuppie-600 to-zuppie-pink-600 text-white px-6 py-2 rounded-xl font-semibold hover:from-zuppie-700 hover:to-zuppie-pink-700 transition-all duration-300">
+                        class="bg-gradient-to-r from-purple-600 to-pink-600 text-white px-6 py-2 rounded-xl font-semibold hover:from-purple-700 hover:to-pink-700 transition-all duration-300">
                         <i class="fas fa-edit mr-2"></i>
                         Edit Profile
                     </button>
@@ -65,7 +65,7 @@
                 <button @click="activeTab = tab"
                     class="px-3 sm:px-4 md:px-6 py-2 sm:py-3 text-sm sm:text-base md:text-lg focus:outline-none transition-all duration-150 whitespace-nowrap"
                     :class="{
-        'font-semibold rounded-lg transition-all duration-300 bg-gradient-to-r from-zuppie-600 to-zuppie-pink-600 text-white shadow-md': activeTab === tab,
+        'font-semibold rounded-lg transition-all duration-300 bg-gradient-to-r from-purple-600 to-pink-600 text-white shadow-md': activeTab === tab,
         'text-gray-800': activeTab !== tab
     }" x-text="tab">
                 </button>
@@ -85,7 +85,7 @@
                                         <div class="flex items-center justify-between mb-4">
                                             <div class="flex items-center space-x-4">
                                                 <div
-                                                    class="w-16 h-16 bg-gradient-to-r from-zuppie-500 to-zuppie-pink-500 rounded-full flex items-center justify-center text-white font-bold text-lg capitalize">
+                                                    class="w-16 h-16 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full flex items-center justify-center text-white font-bold text-lg capitalize">
                                                     {{ substr($booking->eventPackage->name, 0, 1) }}
                                                 </div>
                                                 <div>
@@ -175,7 +175,7 @@
                                         <div class="flex justify-between items-center">
                                             <div class="flex space-x-3">
                                                 <button wire:click="openViewModal({{ $booking->id }})"
-                                                    class="bg-gradient-to-r from-zuppie-600 to-zuppie-pink-600 text-white px-4 py-2 rounded-lg font-semibold hover:from-zuppie-700 hover:to-zuppie-pink-700 transition-all duration-300">
+                                                    class="bg-gradient-to-r from-purple-600 to-pink-600 text-white px-4 py-2 rounded-lg font-semibold hover:from-purple-700 hover:to-pink-700 transition-all duration-300">
                                                     <i class="fas fa-eye mr-2"></i>
                                                     View Details
                                                 </button>
@@ -232,15 +232,15 @@
                             @if($bookings->isEmpty())
                                 <div class="text-center py-20">
                                     <div
-                                        class="w-24 h-24 bg-zuppie-100 rounded-full flex items-center justify-center mx-auto mb-6">
-                                        <i class="fas fa-calendar-times text-zuppie-600 text-3xl"></i>
+                                        class="w-24 h-24 bg-purple-100 rounded-full flex items-center justify-center mx-auto mb-6">
+                                        <i class="fas fa-calendar-times text-purple-600 text-3xl"></i>
                                     </div>
                                     <h2 class="text-2xl font-bold text-gray-800 mb-4">No Bookings Found</h2>
                                     <p class="text-gray-600 mb-8">You don't have any bookings yet. Start by exploring our
                                         amazing event
                                         packages.</p>
                                     <a href="{{ route('event-packages') }}"
-                                        class="inline-block bg-gradient-to-r from-zuppie-600 to-zuppie-pink-600 text-white py-3 px-8 rounded-xl font-semibold hover:from-zuppie-700 hover:to-zuppie-pink-700 transition-all duration-300">
+                                        class="inline-block bg-gradient-to-r from-purple-600 to-pink-600 text-white py-3 px-8 rounded-xl font-semibold hover:from-purple-700 hover:to-pink-700 transition-all duration-300">
                                         <i class="fas fa-search mr-2"></i>
                                         Browse Packages
                                     </a>
@@ -267,7 +267,7 @@
                                         <div class="flex items-center justify-between mb-4">
                                             <div class="flex items-center space-x-4">
                                                 <div
-                                                    class="w-16 h-16 bg-gradient-to-r from-zuppie-500 to-zuppie-pink-500 rounded-full flex items-center justify-center text-white font-bold text-lg capitalize">
+                                                    class="w-16 h-16 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full flex items-center justify-center text-white font-bold text-lg capitalize">
                                                     {{ substr($upBooking->eventPackage->name, 0, 1) }}
                                                 </div>
                                                 <div>
@@ -350,7 +350,7 @@
                                         <div class="flex justify-between items-center">
                                             <div class="flex space-x-3">
                                                 <button wire:click="openViewModal({{ $booking->id }})"
-                                                    class="bg-gradient-to-r from-zuppie-600 to-zuppie-pink-600 text-white px-4 py-2 rounded-lg font-semibold hover:from-zuppie-700 hover:to-zuppie-pink-700 transition-all duration-300">
+                                                    class="bg-gradient-to-r from-purple-600 to-pink-600 text-white px-4 py-2 rounded-lg font-semibold hover:from-purple-700 hover:to-pink-700 transition-all duration-300">
                                                     <i class="fas fa-eye mr-2"></i>
                                                     View Details
                                                 </button>
@@ -408,7 +408,7 @@
                                         <div class="flex items-center justify-between mb-4">
                                             <div class="flex items-center space-x-4">
                                                 <div
-                                                    class="w-16 h-16 bg-gradient-to-r from-zuppie-500 to-zuppie-pink-500 rounded-full flex items-center justify-center text-white font-bold text-lg capitalize">
+                                                    class="w-16 h-16 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full flex items-center justify-center text-white font-bold text-lg capitalize">
                                                     {{ substr($pastBooking->eventPackage->name, 0, 1) }}
                                                 </div>
                                                 <div>
@@ -491,14 +491,14 @@
                                         <div class="flex justify-between items-center">
                                             <div class="flex space-x-3">
                                                 <button wire:click="openViewModal({{ $booking->id }})"
-                                                    class="bg-gradient-to-r from-zuppie-600 to-zuppie-pink-600 text-white px-4 py-2 rounded-lg font-semibold hover:from-zuppie-700 hover:to-zuppie-pink-700 transition-all duration-300">
+                                                    class="bg-gradient-to-r from-purple-600 to-pink-600 text-white px-4 py-2 rounded-lg font-semibold hover:from-purple-700 hover:to-pink-700 transition-all duration-300">
                                                     <i class="fas fa-eye mr-2"></i>
                                                     View Details
                                                 </button>
 
                                                 @if ($pastBooking->is_completed == 1)
                                                     <button wire:click="downloadInvoice({{ $booking->id }})"
-                                                        class="border border-zuppie-300 text-zuppie-600 px-4 py-2 rounded-lg font-semibold hover:bg-zuppie-50 transition-all duration-300">
+                                                        class="border border-purple-300 text-purple-600 px-4 py-2 rounded-lg font-semibold hover:bg-purple-50 transition-all duration-300">
                                                         <i class="fas fa-download mr-2"></i>
                                                          Download Invoice
                                                     </button>
@@ -557,7 +557,7 @@
                                         <div class="flex items-center justify-between mb-4">
                                             <div class="flex items-center space-x-4">
                                                 <div
-                                                    class="w-16 h-16 bg-gradient-to-r from-zuppie-500 to-zuppie-pink-500 rounded-full flex items-center justify-center text-white font-bold text-lg capitalize">
+                                                    class="w-16 h-16 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full flex items-center justify-center text-white font-bold text-lg capitalize">
                                                     {{ substr($cancelBooking->eventPackage->name, 0, 1) }}
                                                 </div>
                                                 <div>
@@ -636,7 +636,7 @@
                                         <div class="flex justify-between items-center">
                                             <div class="flex space-x-3">
                                                 <button wire:click="openViewModal({{ $booking->id }})"
-                                                    class="bg-gradient-to-r from-zuppie-600 to-zuppie-pink-600 text-white px-4 py-2 rounded-lg font-semibold hover:from-zuppie-700 hover:to-zuppie-pink-700 transition-all duration-300">
+                                                    class="bg-gradient-to-r from-purple-600 to-pink-600 text-white px-4 py-2 rounded-lg font-semibold hover:from-purple-700 hover:to-pink-700 transition-all duration-300">
                                                     <i class="fas fa-eye mr-2"></i>
                                                     View Details
                                                 </button>
@@ -677,7 +677,7 @@
                                         <!-- Category Badge -->
                                         <div class="absolute top-4 left-4">
                                             <span
-                                                class="bg-zuppie-600/80 text-white px-3 py-1 rounded-full text-sm font-semibold shadow-md">
+                                                class="bg-purple-600/80 text-white px-3 py-1 rounded-full text-sm font-semibold shadow-md">
                                                 {{ $package->category->name }}
                                             </span>
                                         </div>
@@ -690,14 +690,14 @@
                                     <!-- Content Section -->
                                     <div class="p-6">
                                         <h3
-                                            class="text-xl font-bold text-gray-800 mb-3 group-hover:text-zuppie-600 transition-colors duration-300">
+                                            class="text-xl font-bold text-gray-800 mb-3 group-hover:text-purple-600 transition-colors duration-300">
                                             {{ $package->name }}
                                         </h3>
                                         <p class="text-gray-600 mb-4 leading-relaxed line-clamp-2">
                                             {{ $package->description }}
                                         </p>
                                         <div class="flex items-center space-x-2 mb-4">
-                                            <i class="fas fa-clock text-zuppie-500"></i>
+                                            <i class="fas fa-clock text-purple-500"></i>
                                             <span class="text-gray-700 text-sm">
                                                 Duration: {{ $package->getFormattedDurationAttribute() }}
                                             </span>
@@ -705,7 +705,7 @@
                                         <!-- CTA Button -->
                                         <div class="flex gap-3">
                                             <a href="{{ route('package-detail', ['id' => $package->id]) }}"
-                                                class="flex-1 bg-gradient-to-r from-zuppie-600 to-zuppie-pink-600 text-white py-3 px-6 rounded-2xl font-bold hover:from-zuppie-700 hover:to-zuppie-pink-700 transform hover:scale-105 transition-all duration-300 shadow-lg text-center">
+                                                class="flex-1 bg-gradient-to-r from-purple-600 to-pink-600 text-white py-3 px-6 rounded-2xl font-bold hover:from-purple-700 hover:to-pink-700 transform hover:scale-105 transition-all duration-300 shadow-lg text-center">
                                                 <i class="fas fa-eye mr-2"></i>
                                                 View Package
                                             </a>
@@ -724,7 +724,7 @@
                                         Start adding your favorite event packages to your wishlist!
                                     </p>
                                     <a href="{{ route('event-packages') }}"
-                                        class="bg-zuppie-600 text-white px-6 py-3 rounded-lg font-medium hover:bg-zuppie-700 transition-colors duration-300">
+                                        class="bg-purple-600 text-white px-6 py-3 rounded-lg font-medium hover:bg-purple-700 transition-colors duration-300">
                                         Browse Packages
                                     </a>
                                 </div>

@@ -5,18 +5,15 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{ $title ?? 'Admin Dashboard' }}</title>
-    @vite(['resources/css/app.css', 'resources/js/app.js'])
-    @livewireStyles
-     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/trix/1.3.1/trix.min.css" />
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/trix/1.3.1/trix.min.js"></script>
-
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
     <script>
         tailwind.config = {
             theme: {
                 extend: {
                     colors: {
-                        primary: '#8b5cf6',  // zuppie-500
-                        secondary: '#ec4899',  // zuppie-pink-500
+                        primary: '#a855f7',  // purple-500
+                        secondary: '#ec4899',  // pink-500
                         dark: '#1F2937',
                         light: '#F9FAFB',
                     }
@@ -24,6 +21,15 @@
             }
         }
     </script>
+    
+    <!-- Custom CSS -->
+    @vite(['resources/css/app.css', 'resources/js/app.js'])
+    @livewireStyles
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/trix/1.3.1/trix.min.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/trix/1.3.1/trix.min.js"></script>
+    
+    <!-- Chart.js for dashboard charts -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style>
         [x-cloak] {
             display: none !important;
@@ -72,7 +78,6 @@
 <body class="bg-gray-50 font-sans antialiased min-h-screen">
     <!-- Main Layout Container -->
     <div class="flex h-screen ">
-        <!-- Sidebar -->
         <x-admin.sidebar />
 
         <!-- Main Content Area -->
@@ -86,6 +91,3 @@
 </body>
 
 </html>
-
-
-

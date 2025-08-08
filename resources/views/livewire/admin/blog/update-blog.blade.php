@@ -1,10 +1,10 @@
 <div>
     @if ($showModal)
         <div class="fixed inset-0 backdrop-blur-sm bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
-            <div class="bg-white rounded-lg shadow-xl max-w-4xl w-full max-h-[90vh] overflow-y-auto border-2 border-zuppie-300">
+            <div class="bg-white rounded-lg shadow-xl max-w-4xl w-full max-h-[90vh] overflow-y-auto border-2 border-purple-300">
                 <div class="sticky top-0 bg-white p-6 border-b border-gray-200 rounded-t-lg">
                     <div class="flex justify-between items-center">
-                        <h3 class="text-xl font-bold text-zuppie-700">Edit Blog Post</h3>
+                        <h3 class="text-xl font-bold text-purple-700">Edit Blog Post</h3>
                         <button wire:click="closeModal" class="text-gray-500 hover:text-gray-700 transition-colors">
                             <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
@@ -21,7 +21,7 @@
                             <input type="text" 
                                    wire:model.live="form.title" 
                                    id="title"
-                                   class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-zuppie-500 focus:border-zuppie-500 transition-colors"
+                                   class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-purple-500 transition-colors"
                                    placeholder="Enter blog title">
                             @error('form.title') 
                                 <p class="mt-1 text-sm text-red-600">{{ $message }}</p> 
@@ -33,7 +33,7 @@
                             <label for="category" class="block text-sm font-medium text-gray-700 mb-2">Category</label>
                             <select wire:model="form.category_id" 
                                     id="category"
-                                    class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-zuppie-500 focus:border-zuppie-500 transition-colors">
+                                    class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-purple-500 transition-colors">
                                 <option value="">Select Category</option>
                                 @foreach($categories as $category)
                                     <option value="{{ $category->id }}">{{ $category->name }}</option>
@@ -50,7 +50,7 @@
                             <div class="flex items-center space-x-3">
                                 <span class="text-sm text-gray-500">Draft</span>
                                 <button type="button" wire:click="toggleStatus" 
-                                    class="relative inline-flex h-6 w-11 items-center rounded-full transition-colors focus:outline-none focus:ring-2 focus:ring-zuppie-500 focus:ring-offset-2 {{ $form['status'] === 'published' ? 'bg-zuppie-600' : 'bg-gray-200' }}">
+                                    class="relative inline-flex h-6 w-11 items-center rounded-full transition-colors focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-offset-2 {{ $form['status'] === 'published' ? 'bg-purple-600' : 'bg-gray-200' }}">
                                     <span class="sr-only">Toggle status</span>
                                     <span class="inline-block h-4 w-4 transform rounded-full bg-white transition {{ $form['status'] === 'published' ? 'translate-x-6' : 'translate-x-1' }}"></span>
                                 </button>
@@ -99,7 +99,7 @@
                                    id="images"
                                    accept="image/*"
                                    multiple
-                                   class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-zuppie-500 focus:border-zuppie-500 transition-colors">
+                                   class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-purple-500 transition-colors">
                             <p class="text-sm text-gray-600 mt-1">Upload new images to add to existing gallery.</p>
                             @error('images.*') 
                                 <p class="mt-1 text-sm text-red-600">{{ $message }}</p> 
@@ -145,7 +145,7 @@
                             Cancel
                         </button>
                         <button type="submit" 
-                                class="w-full sm:w-auto bg-gradient-to-r from-zuppie-pink-500 to-zuppie-600 hover:from-zuppie-600 hover:to-zuppie-pink-500 text-white font-bold py-3 px-6 rounded-lg transition-all shadow-lg">
+                                class="w-full sm:w-auto bg-gradient-to-r from-pink-500 to-purple-600 hover:from-purple-600 hover:to-pink-500 text-white font-bold py-3 px-6 rounded-lg transition-all shadow-lg">
                             Update Blog Post
                         </button>
                     </div>

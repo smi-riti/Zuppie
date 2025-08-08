@@ -91,6 +91,11 @@
                     <span class="ml-2 text-purple-600 font-bold text-lg">({{ count($packages) }} packages found)</span>
                 </div>
                 <div class="flex items-center space-x-4">
+                    <a href="{{ route('event-packages') }}"
+                        class="inline-flex items-center px-4 py-2 bg-gray-100 hover:bg-gray-200 text-gray-700 rounded-lg font-medium transition-all duration-300">
+                        <i class="fas fa-arrow-left mr-2"></i>
+                        Back to Browse
+                    </a>
                     @if($selectedCategory || $selectedSubCategory || $searchQuery)
                         <button wire:click="clearFilters" 
                                 class="inline-flex items-center px-4 py-2 bg-red-100 hover:bg-red-200 text-red-700 rounded-lg font-medium transition-all duration-300">
@@ -130,7 +135,7 @@
                                     @endif
                                 </div>
                                 <p class="text-gray-600 mb-4 text-sm">{{ Str::limit($package->description, 100) }}</p>
-                                @if($package->features && is_array($package->features) && !empty($package->features))
+                                @if($package->features)
                                     <ul class="text-gray-600 mb-4 text-sm space-y-1">
                                         @foreach(array_slice($package->features, 0, 3) as $feature)
                                             <li class="flex items-center">
@@ -143,21 +148,6 @@
                                                 +{{ count($package->features) - 3 }} more features
                                             </li>
                                         @endif
-                                    </ul>
-                                @else
-                                    <ul class="text-gray-600 mb-4 text-sm space-y-1">
-                                        <li class="flex items-center">
-                                            <i class="fas fa-check text-green-500 mr-2 text-xs"></i>
-                                            Professional Event Planning
-                                        </li>
-                                        <li class="flex items-center">
-                                            <i class="fas fa-check text-green-500 mr-2 text-xs"></i>
-                                            Venue Decoration
-                                        </li>
-                                        <li class="flex items-center">
-                                            <i class="fas fa-check text-green-500 mr-2 text-xs"></i>
-                                            Photography Services
-                                        </li>
                                     </ul>
                                 @endif
                                 <div class="flex items-center text-gray-500 mb-4 text-sm">

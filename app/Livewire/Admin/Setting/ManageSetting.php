@@ -53,7 +53,6 @@ class ManageSetting extends Component
 
     public function loadSettings()
     {
-        // The Setting::get() method now automatically falls back to defaults
         $this->site_name = Setting::get('site_name');
         $this->site_description = Setting::get('site_description');
         $this->current_logo = Setting::get('site_logo');
@@ -88,7 +87,6 @@ class ManageSetting extends Component
         $this->validate();
 
         try {
-            // Handle logo upload if new file is provided
             if ($this->logo_file) {
                 $upload = Setting::uploadLogo($this->logo_file);
                 if (!$upload) {
@@ -97,7 +95,6 @@ class ManageSetting extends Component
                 }
             }
 
-            // Save other settings
             Setting::set('site_name', $this->site_name, 'general', 'string', 'Website name');
             Setting::set('site_description', $this->site_description, 'general', 'textarea', 'Website description');
             Setting::set('email', $this->email, 'general', 'email', 'Contact email');
@@ -108,7 +105,6 @@ class ManageSetting extends Component
             Setting::set('twitter_link', $this->twitter_link, 'general', 'url', 'Twitter profile link');
             Setting::set('linkedin_link', $this->linkedin_link, 'general', 'url', 'LinkedIn profile link');
 
-            // Reload settings
             $this->loadSettings();
             $this->preview_logo = null;
             $this->logo_file = null;

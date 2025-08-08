@@ -15,6 +15,14 @@ class CategoryPopup extends Component
     public function openCategoryModal($categorySlug)
     {
         $this->modalCategory = Category::with('children')->where('slug', $categorySlug)->first();
+        
+        // If no subcategories, redirect directly to filter page
+        if (!$this->modalCategory || $this->modalCategory->children->count() === 0) {
+            return redirect()->route('event-package.filter', [
+                'category' => $categorySlug
+            ]);
+        }
+        
         $this->showModal = true;
     }
 

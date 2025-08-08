@@ -1,32 +1,32 @@
-<div class="p-6 bg-gradient-to-br from-zuppie-50 to-zuppie-pink-50 min-h-screen">
+<div class="p-6 bg-gradient-to-br from-purple-50 to-pink-50 min-h-screen">
     <!-- Stats Cards -->
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
         <!-- Upcoming Events Card -->
-        <div class="bg-white rounded-xl shadow-sm p-6 border-t-4 border-zuppie-pink-400 hover:shadow-md transition">
-            <div class="text-3xl font-bold text-zuppie-700">24</div>
-            <div class="text-sm text-zuppie-500">Upcoming Events</div>
-            <div class="mt-2 h-1 bg-gradient-to-r from-zuppie-pink-300 to-zuppie-300 rounded-full"></div>
+        <div class="bg-white rounded-xl shadow-sm p-6 border-t-4 border-pink-400 hover:shadow-md transition">
+            <div class="text-3xl font-bold text-purple-700">24</div>
+            <div class="text-sm text-purple-500">Upcoming Events</div>
+            <div class="mt-2 h-1 bg-gradient-to-r from-pink-300 to-purple-300 rounded-full"></div>
         </div>
 
         <!-- Birthdays Card -->
-        <div class="bg-white rounded-xl shadow-sm p-6 border-t-4 border-zuppie-400 hover:shadow-md transition">
-            <div class="text-3xl font-bold text-zuppie-700">18</div>
-            <div class="text-sm text-zuppie-500">Birthdays</div>
-            <div class="mt-2 h-1 bg-gradient-to-r from-zuppie-300 to-zuppie-pink-300 rounded-full"></div>
+        <div class="bg-white rounded-xl shadow-sm p-6 border-t-4 border-purple-400 hover:shadow-md transition">
+            <div class="text-3xl font-bold text-purple-700">18</div>
+            <div class="text-sm text-purple-500">Birthdays</div>
+            <div class="mt-2 h-1 bg-gradient-to-r from-purple-300 to-pink-300 rounded-full"></div>
         </div>
 
         <!-- Baby Showers Card -->
-        <div class="bg-white rounded-xl shadow-sm p-6 border-t-4 border-zuppie-pink-300 hover:shadow-md transition">
-            <div class="text-3xl font-bold text-zuppie-700">6</div>
-            <div class="text-sm text-zuppie-500">Baby Showers</div>
-            <div class="mt-2 h-1 bg-gradient-to-r from-zuppie-pink-200 to-zuppie-200 rounded-full"></div>
+        <div class="bg-white rounded-xl shadow-sm p-6 border-t-4 border-pink-300 hover:shadow-md transition">
+            <div class="text-3xl font-bold text-purple-700">6</div>
+            <div class="text-sm text-purple-500">Baby Showers</div>
+            <div class="mt-2 h-1 bg-gradient-to-r from-pink-200 to-purple-200 rounded-full"></div>
         </div>
 
         <!-- Revenue Card -->
-        <div class="bg-white rounded-xl shadow-sm p-6 border-t-4 border-zuppie-300 hover:shadow-md transition">
-            <div class="text-3xl font-bold text-zuppie-700"> ₹ {{ number_format($totalRevenue, 2, '.', ',') }}</div>
-            <div class="text-sm text-zuppie-500">Total Revenue</div>
-            <div class="mt-2 h-1 bg-gradient-to-r from-zuppie-200 to-zuppie-pink-200 rounded-full"></div>
+        <div class="bg-white rounded-xl shadow-sm p-6 border-t-4 border-purple-300 hover:shadow-md transition">
+            <div class="text-3xl font-bold text-purple-700"> ₹ {{ number_format($totalRevenue, 2, '.', ',') }}</div>
+            <div class="text-sm text-purple-500">Total Revenue</div>
+            <div class="mt-2 h-1 bg-gradient-to-r from-purple-200 to-pink-200 rounded-full"></div>
         </div>
     </div>
 
@@ -34,22 +34,22 @@
     <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
         <!-- Upcoming Events (2/3 width) -->
         <div class="lg:col-span-2 bg-white rounded-xl shadow-sm p-6 hover:shadow-md transition">
-            <div class="flex justify-between items-center border-b border-zuppie-100 pb-4 mb-6">
-                <h2 class="text-lg font-semibold text-zuppie-800">Upcoming Events</h2>
+            <div class="flex justify-between items-center border-b border-purple-100 pb-4 mb-6">
+                <h2 class="text-lg font-semibold text-purple-800">Upcoming Events</h2>
                 <!-- Removed "View All" button since we have pagination -->
             </div>
 
             <div class="space-y-4">
                 @foreach ($upComingBookings as $booking)
                     <div
-                        class="flex items-center py-3 border-b border-zuppie-100 hover:bg-zuppie-50 transition rounded-lg px-2">
+                        class="flex items-center py-3 border-b border-purple-100 hover:bg-purple-50 transition rounded-lg px-2">
                         <div
-                            class="flex-shrink-0 w-12 h-12 rounded-full bg-gradient-to-r from-zuppie-500 to-zuppie-pink-500 flex items-center justify-center text-white font-bold mr-4">
+                            class="flex-shrink-0 w-12 h-12 rounded-full bg-gradient-to-r from-purple-500 to-pink-500 flex items-center justify-center text-white font-bold mr-4">
                             {{ substr($booking->eventPackage->name, 0, 1) }}
                         </div>
                         <div class="flex-grow">
-                            <div class="font-semibold text-zuppie-800">{{ $booking->eventPackage->name }}</div>
-                            <div class="text-xs text-zuppie-500">
+                            <div class="font-semibold text-purple-800">{{ $booking->eventPackage->name }}</div>
+                            <div class="text-xs text-purple-500">
                                 {{ $booking->event_date->format('M d, Y') }} •
                                 {{ $booking->guest_count ?? 'N/A' }} Guests
                             </div>
@@ -114,13 +114,13 @@
                 <!-- Calendar Grid -->
                 <div class="grid grid-cols-7 gap-1 text-center">
                     <!-- Day headers -->
-                    <div class="text-xs text-zuppie-500 py-1">Sun</div>
-                    <div class="text-xs text-zuppie-500 py-1">Mon</div>
-                    <div class="text-xs text-zuppie-500 py-1">Tue</div>
-                    <div class="text-xs text-zuppie-500 py-1">Wed</div>
-                    <div class="text-xs text-zuppie-500 py-1">Thu</div>
-                    <div class="text-xs text-zuppie-500 py-1">Fri</div>
-                    <div class="text-xs text-zuppie-500 py-1">Sat</div>
+                    <div class="text-xs text-purple-500 py-1">Sun</div>
+                    <div class="text-xs text-purple-500 py-1">Mon</div>
+                    <div class="text-xs text-purple-500 py-1">Tue</div>
+                    <div class="text-xs text-purple-500 py-1">Wed</div>
+                    <div class="text-xs text-purple-500 py-1">Thu</div>
+                    <div class="text-xs text-purple-500 py-1">Fri</div>
+                    <div class="text-xs text-purple-500 py-1">Sat</div>
 
                     <!-- Calendar days -->
                     @php
@@ -173,7 +173,7 @@
             </div>
 
             <div class="bg-white rounded-xl shadow-sm p-6 hover:shadow-md transition">
-                <h2 class="text-lg font-semibold text-zuppie-800 mb-4">Quick Actions</h2>
+                <h2 class="text-lg font-semibold text-purple-800 mb-4">Quick Actions</h2>
                 <div class="grid grid-cols-2 gap-3">
                     <a href="{{ route('admin.event-packages.create') }}" wire:navigate
                         class="bg-gradient-to-r text-center from-purple-500 to-pink-500 text-white py-2 px-3 rounded-md text-sm font-medium hover:opacity-90 transition shadow-md hover:shadow-lg">

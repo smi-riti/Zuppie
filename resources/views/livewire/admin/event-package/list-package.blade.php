@@ -1,11 +1,11 @@
-<div class="p-4 bg-gradient-to-br from-zuppie-50 to-zuppie-pink-50 ">
+<div class="p-4 bg-gradient-to-br from-purple-50 to-pink-50 ">
     <div class="">
         <div class="flex justify-between items-center mb-8">
             <div>
-                <h2 class="text-3xl font-bold text-zuppie-800">Event Packages</h2>
-                <p class="text-sm text-zuppie-600 mt-1">Manage all your event packages</p>
+                <h2 class="text-3xl font-bold text-purple-800">Event Packages</h2>
+                <p class="text-sm text-purple-600 mt-1">Manage all your event packages</p>
             </div>
-            <a href="{{ route('admin.event-packages.create') }}" class="px-4 py-2 bg-gradient-to-r from-zuppie-500 to-zuppie-pink-500 text-white rounded-lg hover:from-zuppie-600 hover:to-zuppie-pink-600 transition flex items-center shadow-lg">
+            <a href="{{ route('admin.event-packages.create') }}" class="px-4 py-2 bg-gradient-to-r from-purple-500 to-pink-500 text-white rounded-lg hover:from-purple-600 hover:to-pink-600 transition flex items-center shadow-lg">
                 <svg class="w-5 h-5 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path>
                 </svg>
@@ -26,38 +26,38 @@
         <div class="mb-8 grid grid-cols-1 md:grid-cols-2 gap-6">
             <div class="relative">
                 <input wire:model.live.debounce.300ms="search" type="text" placeholder="Search packages..." 
-                       class="pl-10 pr-4 py-2 w-full border border-zuppie-200 rounded-lg focus:ring-2 focus:ring-zuppie-300 focus:border-zuppie-400 bg-white shadow-sm transition">
+                       class="pl-10 pr-4 py-2 w-full border border-purple-200 rounded-lg focus:ring-2 focus:ring-purple-300 focus:border-purple-400 bg-white shadow-sm transition">
                 <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                    <svg class="w-5 h-5 text-zuppie-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <svg class="w-5 h-5 text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
                     </svg>
                 </div>
             </div>
             
             <div class="relative">
-                <select wire:model="categoryFilter" class="pl-10 pr-4 py-2 w-full border border-zuppie-200 rounded-lg focus:ring-2 focus:ring-zuppie-300 focus:border-zuppie-400 bg-white shadow-sm transition">
+                <select wire:model="categoryFilter" class="pl-10 pr-4 py-2 w-full border border-purple-200 rounded-lg focus:ring-2 focus:ring-purple-300 focus:border-purple-400 bg-white shadow-sm transition">
                     <option value="">All Categories</option>
                     @foreach($categories as $category)
                         <option value="{{ $category->id }}">{{ $category->name }}</option>
                     @endforeach
                 </select>
                 <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                    <svg class="w-5 h-5 text-zuppie-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <svg class="w-5 h-5 text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h7"></path>
                     </svg>
                 </div>
             </div>
         </div>
         
-        <div class="overflow-x-auto bg-white rounded-2xl shadow-xl border border-zuppie-100">
-            <div class="p-4 border-b border-zuppie-100 bg-gradient-to-r from-zuppie-50 to-zuppie-pink-50">
+        <div class="overflow-x-auto bg-white rounded-2xl shadow-xl border border-purple-100">
+            <div class="p-4 border-b border-purple-100 bg-gradient-to-r from-purple-50 to-pink-50">
                 <div class="flex items-center justify-between">
-                    <div class="text-sm text-zuppie-700">
+                    <div class="text-sm text-purple-700">
                         <span class="font-medium">{{ $packages->total() }}</span> packages found
                         @if(!empty($search) || !empty($categoryFilter))
                             <span class="ml-1">
                                 with current filters
-                                <button wire:click="$set('search', ''); $set('categoryFilter', '');" class="ml-2 text-zuppie-600 hover:text-zuppie-800 underline text-xs focus:outline-none">
+                                <button wire:click="$set('search', ''); $set('categoryFilter', '');" class="ml-2 text-purple-600 hover:text-purple-800 underline text-xs focus:outline-none">
                                     Clear filters
                                 </button>
                             </span>
@@ -66,38 +66,38 @@
                 </div>
             </div>
             
-            <table class="min-w-full divide-y divide-zuppie-100">
-                <thead class="bg-zuppie-50">
+            <table class="min-w-full divide-y divide-purple-100">
+                <thead class="bg-purple-50">
                     <tr>
-                        <th class="px-6 py-3 text-left text-xs font-medium text-zuppie-700 uppercase tracking-wider">Name</th>
-                        <th class="px-6 py-3 text-left text-xs font-medium text-zuppie-700 uppercase tracking-wider">Category</th>
-                        <th class="px-6 py-3 text-left text-xs font-medium text-zuppie-700 uppercase tracking-wider">Price</th>
-                        <th class="px-6 py-3 text-left text-xs font-medium text-zuppie-700 uppercase tracking-wider">Discounted Price</th>
-                        <th class="px-6 py-3 text-left text-xs font-medium text-zuppie-700 uppercase tracking-wider">Duration</th>
-                        <th class="px-6 py-3 text-left text-xs font-medium text-zuppie-700 uppercase tracking-wider">Images</th>
-                        <th class="px-6 py-3 text-left text-xs font-medium text-zuppie-700 uppercase tracking-wider">Status</th>
-                        <th class="px-6 py-3 text-left text-xs font-medium text-zuppie-700 uppercase tracking-wider">Actions</th>
+                        <th class="px-6 py-3 text-left text-xs font-medium text-purple-700 uppercase tracking-wider">Name</th>
+                        <th class="px-6 py-3 text-left text-xs font-medium text-purple-700 uppercase tracking-wider">Category</th>
+                        <th class="px-6 py-3 text-left text-xs font-medium text-purple-700 uppercase tracking-wider">Price</th>
+                        <th class="px-6 py-3 text-left text-xs font-medium text-purple-700 uppercase tracking-wider">Discounted Price</th>
+                        <th class="px-6 py-3 text-left text-xs font-medium text-purple-700 uppercase tracking-wider">Duration</th>
+                        <th class="px-6 py-3 text-left text-xs font-medium text-purple-700 uppercase tracking-wider">Images</th>
+                        <th class="px-6 py-3 text-left text-xs font-medium text-purple-700 uppercase tracking-wider">Status</th>
+                        <th class="px-6 py-3 text-left text-xs font-medium text-purple-700 uppercase tracking-wider">Actions</th>
                     </tr>
                 </thead>
-                <tbody class="bg-white divide-y divide-zuppie-50">
+                <tbody class="bg-white divide-y divide-purple-50">
                     @foreach($packages as $package)
-                        <tr class="hover:bg-zuppie-50 transition-colors duration-150">
-                            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-zuppie-900">{{ $package->name }}</td>
-                            <td class="px-6 py-4 whitespace-nowrap text-sm text-zuppie-700">{{ $package->category->name ?? 'None' }}</td>
-                            <td class="px-6 py-4 whitespace-nowrap text-sm text-zuppie-700">₹{{ number_format($package->price, 2) }}</td>
-                            <td class="px-6 py-4 whitespace-nowrap text-sm text-zuppie-700">₹{{ number_format($package->discounted_price, 2) }}</td>
-                            <td class="px-6 py-4 whitespace-nowrap text-sm text-zuppie-700">{{ $package->formatted_duration }}</td>
+                        <tr class="hover:bg-purple-50 transition-colors duration-150">
+                            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-purple-900">{{ $package->name }}</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-purple-700">{{ $package->category->name ?? 'None' }}</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-purple-700">₹{{ number_format($package->price, 2) }}</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-purple-700">₹{{ number_format($package->discounted_price, 2) }}</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-purple-700">{{ $package->formatted_duration }}</td>
                             <td class="px-6 py-4 whitespace-nowrap">
                                 @if (count($package->images) > 0)
                                     <div class="flex space-x-2">
                                         <div class="relative">
-                                            <img src="{{ $package->images->first()->image_url }}" alt="Package Image" class="h-14 w-14 object-cover rounded-lg shadow-sm border border-zuppie-200">
+                                            <img src="{{ $package->images->first()->image_url }}" alt="Package Image" class="h-14 w-14 object-cover rounded-lg shadow-sm border border-purple-200">
                                         </div>
                                         @if (count($package->images) > 1)
                                             <div class="relative">
-                                                <img src="{{ $package->images[1]->image_url }}" alt="Package Image" class="h-14 w-14 object-cover rounded-lg shadow-sm border border-zuppie-200">
+                                                <img src="{{ $package->images[1]->image_url }}" alt="Package Image" class="h-14 w-14 object-cover rounded-lg shadow-sm border border-purple-200">
                                                 @if (count($package->images) > 2)
-                                                    <div class="absolute -top-2 -right-2 h-6 w-6 bg-zuppie-500 text-white rounded-full flex items-center justify-center text-xs font-semibold shadow">
+                                                    <div class="absolute -top-2 -right-2 h-6 w-6 bg-purple-500 text-white rounded-full flex items-center justify-center text-xs font-semibold shadow">
                                                         +{{ count($package->images) - 2 }}
                                                     </div>
                                                 @endif
@@ -105,7 +105,7 @@
                                         @endif
                                     </div>
                                 @else
-                                    <span class="text-zuppie-300 italic">No images</span>
+                                    <span class="text-purple-300 italic">No images</span>
                                 @endif
                             </td>
                             <td class="px-6 py-4 whitespace-nowrap">
@@ -113,10 +113,10 @@
                                     <div>
                                         <label class="flex items-center cursor-pointer" wire:click.prevent="toggleActive({{ $package->id }})" wire:loading.class="opacity-50" wire:target="toggleActive({{ $package->id }})">
                                             <div class="relative inline-block w-10 mr-2 align-middle select-none transition duration-200 ease-in">
-                                                <div class="block w-10 h-6 rounded-full shadow-inner {{ $package->is_active ? 'bg-zuppie-400' : 'bg-zuppie-200' }}"></div>
+                                                <div class="block w-10 h-6 rounded-full shadow-inner {{ $package->is_active ? 'bg-purple-400' : 'bg-purple-200' }}"></div>
                                                 <div class="absolute inset-y-0 left-0 w-6 h-6 bg-white rounded-full shadow transform transition-transform duration-200 ease-in-out {{ $package->is_active ? 'translate-x-full' : '' }}"></div>
                                             </div>
-                                            <span class="text-xs {{ $package->is_active ? 'text-zuppie-700 font-medium' : 'text-zuppie-500' }}">
+                                            <span class="text-xs {{ $package->is_active ? 'text-purple-700 font-medium' : 'text-purple-500' }}">
                                                 {{ $package->is_active ? 'Active' : 'Inactive' }}
                                             </span>
                                         </label>
@@ -124,10 +124,10 @@
                                     <div>
                                         <label class="flex items-center cursor-pointer" wire:click.prevent="toggleSpecial({{ $package->id }})" wire:loading.class="opacity-50" wire:target="toggleSpecial({{ $package->id }})">
                                             <div class="relative inline-block w-10 mr-2 align-middle select-none transition duration-200 ease-in">
-                                                <div class="block w-10 h-6 rounded-full shadow-inner {{ $package->is_special ? 'bg-zuppie-pink-400' : 'bg-zuppie-pink-200' }}"></div>
+                                                <div class="block w-10 h-6 rounded-full shadow-inner {{ $package->is_special ? 'bg-pink-400' : 'bg-pink-200' }}"></div>
                                                 <div class="absolute inset-y-0 left-0 w-6 h-6 bg-white rounded-full shadow transform transition-transform duration-200 ease-in-out {{ $package->is_special ? 'translate-x-full' : '' }}"></div>
                                             </div>
-                                            <span class="text-xs {{ $package->is_special ? 'text-zuppie-pink-700 font-medium' : 'text-zuppie-pink-500' }}">
+                                            <span class="text-xs {{ $package->is_special ? 'text-pink-700 font-medium' : 'text-pink-500' }}">
                                                 {{ $package->is_special ? 'Special' : 'Regular' }}
                                             </span>
                                         </label>
@@ -136,14 +136,14 @@
                             </td>
                             <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
                                 <div class="flex space-x-2">
-                                    <button wire:click="openViewModal({{ $package->id }})" class="px-3 py-1.5 bg-zuppie-100 text-zuppie-700 rounded-lg hover:bg-zuppie-200 transition shadow-sm flex items-center">
+                                    <button wire:click="openViewModal({{ $package->id }})" class="px-3 py-1.5 bg-purple-100 text-purple-700 rounded-lg hover:bg-purple-200 transition shadow-sm flex items-center">
                                         <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path>
                                         </svg>
                                         View
                                     </button>
-                                    <a href="{{ route('admin.event-packages.edit', $package->id) }}" class="px-3 py-1.5 bg-zuppie-pink-100 text-zuppie-pink-700 rounded-lg hover:bg-zuppie-pink-200 transition shadow-sm flex items-center">
+                                    <a href="{{ route('admin.event-packages.edit', $package->id) }}" class="px-3 py-1.5 bg-pink-100 text-pink-700 rounded-lg hover:bg-pink-200 transition shadow-sm flex items-center">
                                         <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path>
                                         </svg>
@@ -161,7 +161,7 @@
                     @endforeach
                 </tbody>
             </table>
-            <div class="px-6 py-4 border-t border-zuppie-100 bg-gradient-to-r from-zuppie-50 to-zuppie-pink-50">
+            <div class="px-6 py-4 border-t border-purple-100 bg-gradient-to-r from-purple-50 to-pink-50">
                 {{ $packages->links() }}
             </div>
         </div>

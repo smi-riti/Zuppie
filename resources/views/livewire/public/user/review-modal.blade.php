@@ -17,7 +17,7 @@
             <div class="bg-white rounded-xl shadow-2xl overflow-hidden" wire:click.stop>
                 <!-- Close button -->
                 <button wire:click="closeReviewModal"
-                    class="absolute top-4 right-4 text-gray-500 hover:text-zuppie-600 transition-colors z-10">
+                    class="absolute top-4 right-4 text-gray-500 hover:text-purple-600 transition-colors z-10">
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
                         stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -29,7 +29,7 @@
                 <div class="p-6 md:p-8 space-y-6 max-h-[80vh] overflow-y-auto bg-gray-50 rounded-lg shadow-sm">
                     <form class="space-y-5" wire:submit.prevent="submitReview">
                         <div>
-                            <label class="block text-sm font-medium text-zuppie-700 mb-1">Rating</label>
+                            <label class="block text-sm font-medium text-purple-700 mb-1">Rating</label>
                             <div class="flex flex-row-reverse justify-end">
                                 <input type="radio" id="star5" name="rating" value="5" class="hidden peer"
                                     wire:model="rating" />
@@ -58,20 +58,20 @@
                         </div>
                         <!-- Comment -->
                         <div>
-                            <label for="comment" class="block text-sm font-medium text-zuppie-700 mb-1">Your
+                            <label for="comment" class="block text-sm font-medium text-purple-700 mb-1">Your
                                 Review</label>
                             <textarea id="comment" wire:model.live="comment" rows="3"
-                                class="w-full px-3 py-2 border border-zuppie-100 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-zuppie-pink-200 focus:border-zuppie-300 bg-white text-zuppie-900"></textarea>
+                                class="w-full px-3 py-2 border border-purple-100 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-pink-200 focus:border-purple-300 bg-white text-purple-900"></textarea>
                         </div>
                         <div>
-                            <label class="block text-sm font-medium text-zuppie-700 mb-1">Add Images</label>
+                            <label class="block text-sm font-medium text-purple-700 mb-1">Add Images</label>
                             <input type="file" accept="image/*" multiple wire:model="images"
-                                class="block w-full text-sm text-zuppie-700 border border-zuppie-100 rounded-lg shadow-sm">
+                                class="block w-full text-sm text-purple-700 border border-purple-100 rounded-lg shadow-sm">
                             <div class="flex flex-wrap gap-2 mt-2">
                                 @if($images)
                                     @foreach($images as $image)
                                         <img src="{{ $image->temporaryUrl() }}"
-                                            class="h-24 w-24 object-cover rounded border border-zuppie-pink-200 shadow" alt="Preview">
+                                            class="h-24 w-24 object-cover rounded border border-pink-200 shadow" alt="Preview">
                                     @endforeach
                                 @endif
                             </div>
@@ -81,7 +81,7 @@
                         </div>
 
                         <button type="submit" id="submitReview"
-                            class="w-full bg-zuppie-pink-500 hover:bg-zuppie-600 text-white font-bold py-2 px-4 rounded-lg shadow transition">
+                            class="w-full bg-pink-500 hover:bg-purple-600 text-white font-bold py-2 px-4 rounded-lg shadow transition">
                             Submit Review
                         </button>
                     </form>

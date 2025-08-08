@@ -1,16 +1,16 @@
-<div class="min-h-screen bg-gradient-to-br from-slate-100 via-zuppie-50 to-zuppie-pink-50">
+<div class="bg-gradient-to-br from-slate-100 via-pink-20 to-pink-50">
     <!-- Animated Background Elements -->
     <div class="fixed inset-0 overflow-hidden pointer-events-none">
-        <div class="absolute -top-40 -right-40 w-80 h-80 bg-zuppie-400 rounded-full mix-blend-multiply filter blur-xl opacity-20 animate-blob"></div>
-        <div class="absolute -bottom-40 -left-40 w-80 h-80 bg-zuppie-pink-400 rounded-full mix-blend-multiply filter blur-xl opacity-20 animate-blob animation-delay-2000"></div>
-        <div class="absolute top-40 left-40 w-80 h-80 bg-info-400 rounded-full mix-blend-multiply filter blur-xl opacity-20 animate-blob animation-delay-4000"></div>
+        <div class="absolute -top-40 -right-40 w-80 h-80 bg-pink-400 rounded-full mix-blend-multiply filter blur-xl opacity-20 animate-blob"></div>
+        <div class="absolute -bottom-40 -left-40 w-80 h-80 bg-pink-400 rounded-full mix-blend-multiply filter blur-xl opacity-20 animate-blob animation-delay-2000"></div>
+        <div class="absolute top-40 left-40 w-80 h-80 bg-pink-300 rounded-full mix-blend-multiply filter blur-xl opacity-20 animate-blob animation-delay-4000"></div>
     </div>
 
     <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <!-- Modern Header with Glass Effect -->
         <div class="mb-8">
             <div class="bg-white/70 backdrop-blur-lg rounded-2xl shadow-xl border border-white/20 overflow-hidden">
-                <div class="bg-gradient-to-r from-zuppie-600 via-zuppie-pink-600 to-info-600 px-8 py-6">
+                <div class="bg-gradient-to-r from-pink-300 via-pink-200 to-pink-100 px-8 py-6">
                     <div class="flex items-center justify-between">
                         <div>
                             <h1 class="text-3xl font-bold text-white flex items-center">
@@ -22,7 +22,7 @@
                                 </div>
                                 <div>
                                     <span class="block">Website Settings</span>
-                                    <span class="text-zuppie-100 text-lg font-normal">Configure your brand identity</span>
+                                    <span class="text-pink-100 text-lg font-normal">Configure your brand identity</span>
                                 </div>
                             </h1>
                         </div>
@@ -95,7 +95,7 @@
                 <!-- Logo Section - Enhanced -->
                 <div class="lg:col-span-1">
                     <div class="bg-white/80 backdrop-blur-lg rounded-2xl shadow-xl border border-white/20 overflow-hidden h-fit">
-                        <div class="bg-gradient-to-r from-info-500 to-zuppie-600 px-6 py-5">
+                        <div class="bg-gradient-to-r from-pink-300 to-pink-200 px-6 py-5">
                             <h2 class="text-xl font-bold text-white flex items-center">
                                 <div class="w-10 h-10 bg-white/20 rounded-lg flex items-center justify-center mr-3">
                                     <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -104,7 +104,7 @@
                                 </div>
                                 Brand Logo
                             </h2>
-                            <p class="text-info-100 text-sm mt-1">Upload your brand identity</p>
+                            <p class="text-pink-100 text-sm mt-1">Upload your brand identity</p>
                         </div>
                         <div class="p-6 space-y-6">
                             <!-- Current Logo Display -->
@@ -120,7 +120,7 @@
                             <!-- Logo Upload -->
                             <div>
                                 <label class="block text-sm font-semibold text-gray-700 mb-3">Upload New Logo</label>
-                                <div class="mt-1 flex justify-center px-6 pt-8 pb-8 border-2 border-gray-300 border-dashed rounded-xl hover:border-zuppie-400 transition-all duration-300 bg-gradient-to-br from-zuppie-50 to-zuppie-pink-50 hover:from-zuppie-100 hover:to-zuppie-pink-100">
+                                <div class="mt-1 flex justify-center px-6 pt-8 pb-8 border-2 border-gray-300 border-dashed rounded-xl hover:border-pink-400 transition-all duration-300 bg-gradient-to-br from-pink-50 to-pink-100 hover:from-pink-100 hover:to-pink-200">
                                     <div class="space-y-4 text-center">
                                         @if ($preview_logo)
                                             <div class="mb-6">
@@ -135,14 +135,14 @@
                                             </div>
                                         @endif
                                         
-                                        <div class="w-16 h-16 bg-gradient-to-br from-zuppie-500 to-zuppie-pink-500 rounded-full flex items-center justify-center mx-auto mb-4">
+                                        <div class="w-16 h-16 bg-gradient-to-br from-pink-500 to-pink-600 rounded-full flex items-center justify-center mx-auto mb-4">
                                             <svg class="w-8 h-8 text-white" stroke="currentColor" fill="none" viewBox="0 0 48 48">
                                                 <path d="M28 8H12a4 4 0 00-4 4v20m32-12v8m0 0v8a4 4 0 01-4 4H12a4 4 0 01-4-4v-4m32-4l-3.172-3.172a4 4 0 00-5.656 0L28 28M8 32l9.172-9.172a4 4 0 015.656 0L28 28m0 0l4 4m4-24h8m-4-4v8m-12 4h.02" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
                                             </svg>
                                         </div>
                                         <div class="text-center">
                                             <label for="logo-upload" class="cursor-pointer">
-                                                <span class="inline-flex items-center px-6 py-3 bg-gradient-to-r from-zuppie-600 to-zuppie-pink-600 text-white rounded-xl font-semibold hover:from-zuppie-700 hover:to-zuppie-pink-700 transition-all duration-200 shadow-lg hover:shadow-xl transform hover:-translate-y-0.5">
+                                                <span class="inline-flex items-center px-6 py-3 bg-gradient-to-r from-pink-600 to-pink-500 text-white rounded-xl font-semibold hover:from-pink-700 hover:to-pink-600 transition-all duration-200 shadow-lg hover:shadow-xl transform hover:-translate-y-0.5">
                                                     <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"></path>
                                                     </svg>
@@ -165,9 +165,9 @@
                             </div>
 
                             <!-- Logo Guidelines -->
-                            <div class="bg-gradient-to-r from-info-50 to-zuppie-50 rounded-xl p-5 border border-info-100">
+                            <div class="bg-gradient-to-r from-pink-50 to-pink-100 rounded-xl p-5 border border-pink-200">
                                 <h4 class="text-sm font-bold text-gray-800 mb-3 flex items-center">
-                                    <svg class="w-4 h-4 mr-2 text-info-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <svg class="w-4 h-4 mr-2 text-pink-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
                                     </svg>
                                     Logo Guidelines
@@ -200,7 +200,7 @@
                 <!-- Settings Form Section - Enhanced -->
                 <div class="lg:col-span-2">
                     <div class="bg-white/80 backdrop-blur-lg rounded-2xl shadow-xl border border-white/20 overflow-hidden">
-                        <div class="bg-gradient-to-r from-green-500 to-teal-600 px-6 py-5">
+                        <div class="bg-gradient-to-r from-purple-300 to-pink-200 px-6 py-5">
                             <h2 class="text-xl font-bold text-white flex items-center">
                                 <div class="w-10 h-10 bg-white/20 rounded-lg flex items-center justify-center mr-3">
                                     <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -216,9 +216,9 @@
                             <div class="space-y-8">
                                 
                                 <!-- Basic Information Section -->
-                                <div class="bg-gradient-to-r from-info-50 to-zuppie-50 rounded-xl p-6 border border-info-100">
+                                <div class="bg-gradient-to-r from-pink-50 to-pink-100 rounded-xl p-6 border border-pink-200">
                                     <h3 class="text-lg font-bold text-gray-800 mb-6 flex items-center">
-                                        <div class="w-8 h-8 bg-gradient-to-r from-info-500 to-zuppie-500 rounded-lg flex items-center justify-center mr-3">
+                                        <div class="w-8 h-8 bg-gradient-to-r from-pink-500 to-pink-600 rounded-lg flex items-center justify-center mr-3">
                                             <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"></path>
                                             </svg>
@@ -241,7 +241,7 @@
                                                 <input type="text" 
                                                        id="site_name"
                                                        wire:model="site_name" 
-                                                       class="w-full pl-12 pr-4 py-4 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-zuppie-500 focus:border-zuppie-500 transition-all duration-200 text-base bg-white shadow-sm"
+                                                       class="w-full pl-12 pr-4 py-4 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-pink-500 focus:border-pink-500 transition-all duration-200 text-base bg-white shadow-sm"
                                                        placeholder="Enter your website name">
                                             </div>
                                             @error('site_name') 
@@ -253,7 +253,7 @@
                                 </div>
 
                                 <!-- Contact Information Section -->
-                                <div class="bg-gradient-to-r from-green-50 to-info-50 rounded-xl p-6 border border-green-100">
+                                <div class="bg-gradient-to-r from-purple-50 to-info-50 rounded-xl p-6 border border-green-100">
                                     <h3 class="text-lg font-bold text-gray-800 mb-6 flex items-center">
                                         <div class="w-8 h-8 bg-gradient-to-r from-green-500 to-info-500 rounded-lg flex items-center justify-center mr-3">
                                             <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -334,9 +334,9 @@
                                 </div>
 
                                 <!-- Social Media Section -->
-                                <div class="bg-gradient-to-r from-zuppie-pink-50 to-zuppie-50 rounded-xl p-6 border border-zuppie-pink-100">
+                                <div class="bg-gradient-to-r from-pink-50 to-pink-100 rounded-xl p-6 border border-pink-200">
                                     <h3 class="text-lg font-bold text-gray-800 mb-6 flex items-center">
-                                        <div class="w-8 h-8 bg-gradient-to-r from-zuppie-pink-500 to-zuppie-500 rounded-lg flex items-center justify-center mr-3">
+                                        <div class="w-8 h-8 bg-gradient-to-r from-pink-500 to-pink-600 rounded-lg flex items-center justify-center mr-3">
                                             <svg class="w-4 h-4 text-white" fill="currentColor" viewBox="0 0 20 20">
                                                 <path fill-rule="evenodd" d="M3 5a2 2 0 012-2h10a2 2 0 012 2v8a2 2 0 01-2 2h-2.22l.123.489.804.804A1 1 0 0113 18H7a1 1 0 01-.707-1.707l.804-.804L7.22 15H5a2 2 0 01-2-2V5zm5.771 7H9a1 1 0 010 2H7.771l.062-.245L8.17 12h.601zm1.416-3H10a1 1 0 110 2H9.187l.062-.245L9.586 9z" clip-rule="evenodd"></path>
                                             </svg>
@@ -352,14 +352,14 @@
                                             </label>
                                             <div class="relative">
                                                 <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
-                                                    <svg class="h-5 w-5 text-zuppie-pink-500" fill="currentColor" viewBox="0 0 24 24">
+                                                    <svg class="h-5 w-5 text-pink-500" fill="currentColor" viewBox="0 0 24 24">
                                                         <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
                                                     </svg>
                                                 </div>
                                                 <input type="url" 
                                                        id="instagram_link"
                                                        wire:model="instagram_link" 
-                                                       class="w-full pl-12 pr-4 py-4 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-zuppie-pink-500 focus:border-zuppie-pink-500 transition-all duration-200 text-base bg-white shadow-sm"
+                                                       class="w-full pl-12 pr-4 py-4 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-pink-500 focus:border-pink-500 transition-all duration-200 text-base bg-white shadow-sm"
                                                        placeholder="https://instagram.com/yourhandle">
                                             </div>
                                             @error('instagram_link') 
@@ -422,7 +422,7 @@
             <!-- Save Button -->
             <div class="flex justify-center">
                 <button type="submit" 
-                        class="group relative inline-flex items-center px-12 py-4 bg-gradient-to-r from-zuppie-600 via-zuppie-pink-600 to-info-600 text-white text-lg font-bold rounded-2xl hover:from-zuppie-700 hover:via-zuppie-pink-700 hover:to-info-700 focus:outline-none focus:ring-4 focus:ring-zuppie-300 shadow-2xl transform hover:scale-105 transition-all duration-300">
+                        class="group relative inline-flex items-center px-12 py-4 bg-gradient-to-r from-pink-600 via-pink-500 to-pink-400 text-white text-lg font-bold rounded-2xl hover:from-pink-700 hover:via-pink-600 hover:to-pink-500 focus:outline-none focus:ring-4 focus:ring-pink-300 shadow-2xl transform hover:scale-105 transition-all duration-300">
                     <svg class="w-6 h-6 mr-3 group-hover:rotate-12 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
                     </svg>
@@ -479,13 +479,13 @@
         }
 
         .custom-scrollbar::-webkit-scrollbar-thumb {
-            background: linear-gradient(135deg, #8B5CF6, #EC4899);
+            background: linear-gradient(135deg, #f472b6, #ec4899);
             border-radius: 8px;
             border: 2px solid rgba(243, 244, 246, 0.5);
         }
 
         .custom-scrollbar::-webkit-scrollbar-thumb:hover {
-            background: linear-gradient(135deg, #7C3AED, #DB2777);
+            background: linear-gradient(135deg, #ec4899, #db2777);
         }
 
         /* Enhanced input focus effects */
@@ -501,7 +501,7 @@
 
         /* Gradient text effect */
         .gradient-text {
-            background: linear-gradient(135deg, #8B5CF6, #EC4899, #3B82F6);
+            background: linear-gradient(135deg, #f472b6, #ec4899, #3B82F6);
             background-size: 200% 200%;
             animation: gradient 3s ease infinite;
             -webkit-background-clip: text;
@@ -523,7 +523,7 @@
         input[type="file"]::before {
             content: 'Select Logo';
             display: inline-block;
-            background: linear-gradient(to right, #8B5CF6, #EC4899);
+            background: linear-gradient(to right, #f472b6, #ec4899);
             color: white;
             border: none;
             border-radius: 6px;
@@ -536,7 +536,7 @@
         }
 
         input[type="file"]:hover::before {
-            background: linear-gradient(to right, #7C3AED, #DB2777);
+            background: linear-gradient(to right, #ec4899, #db2777);
         }
 
         /* Loading animation */
@@ -564,13 +564,12 @@
         }
 
         ::-webkit-scrollbar-thumb {
-            background: linear-gradient(to bottom, #8B5CF6, #EC4899);
+            background: linear-gradient(to bottom, #f472b6, #ec4899);
             border-radius: 3px;
         }
 
         ::-webkit-scrollbar-thumb:hover {
-            background: linear-gradient(to bottom, #7C3AED, #DB2777);
+            background: linear-gradient(to bottom, #ec4899, #db2777);
         }
     </style>
 </div>
-                                               

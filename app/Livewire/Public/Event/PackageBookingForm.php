@@ -55,7 +55,7 @@ class PackageBookingForm extends Component
 
     protected $rules = [
         'name' => 'required|string|min:2|max:255',
-        'phone' => 'required|string|min:10|max:15',
+        'phone' => 'required|digits:10',
         'email' => 'nullable|email|max:255',
         'eventDate' => 'required|date|after:today',
         'eventTime' => 'nullable|date_format:H:i',
@@ -92,9 +92,9 @@ class PackageBookingForm extends Component
         'acceptTerms.accepted' => 'You must accept the terms and conditions to proceed'
     ];
 
-    public function mount($package_id = null, $pin_code = null)
+    public function mount($package_slug = null, $pin_code = null)
     {
-        $this->packageId = $package_id ?: session('booking_package_id') ?: session('package_id') ?: request('package_id');
+        $this->packageId = $package_slug ?: session('booking_package_id') ?: session('package_id') ?: request('package_id');
         $this->pinCode = $pin_code ?: session('booking_pin_code') ?: session('pin_code') ?: request('pin_code');
         
         // Validate pin code exists in services
@@ -135,7 +135,10 @@ class PackageBookingForm extends Component
     public function loadPackage()
     {
         $this->package = EventPackage::with(['category', 'images'])
-            ->where('id', $this->packageId)
+            ->where(function($query) {
+                $query->where('slug', $this->packageId)
+                      ->orWhere('id', $this->packageId);
+            })
             ->where('is_active', true)
             ->first();
 

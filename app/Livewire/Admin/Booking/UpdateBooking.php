@@ -92,7 +92,6 @@ class UpdateBooking extends Component
             ]
         ]));
 
-        // Update user
         $user = User::findOrFail($this->user_id);
         $user->update([
             'name' => $this->name,
@@ -100,7 +99,6 @@ class UpdateBooking extends Component
             'phone_no' => $this->phone_no,
         ]);
 
-        // Update booking (also update booking_name, booking_email, booking_phone_no)
         $booking = Booking::findOrFail($this->bookingId);
         $booking->update([
             'event_package_id' => $this->event_package_id,

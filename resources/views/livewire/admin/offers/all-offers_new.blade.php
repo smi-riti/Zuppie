@@ -14,8 +14,8 @@
     <!-- Header Section -->
     <div class="flex flex-col lg:flex-row justify-between items-start lg:items-center mb-6 gap-4">
         <div>
-            <h2 class="text-2xl font-bold text-zuppie-800">All Offers</h2>
-            <p class="text-sm text-zuppie-500 mt-1">
+            <h2 class="text-2xl font-bold text-purple-800">All Offers</h2>
+            <p class="text-sm text-purple-500 mt-1">
                 {{ $offers->total() }} {{ Str::plural('offer', $offers->total()) }} available
             </p>
         </div>
@@ -24,14 +24,14 @@
             <div class="relative">
                 <input type="text" wire:model.live.debounce.300ms="search" 
                        placeholder="Search offers..." 
-                       class="w-full sm:w-64 px-4 py-2 pl-10 border border-zuppie-200 rounded-lg focus:ring-2 focus:ring-zuppie-pink-300 focus:border-zuppie-pink-400 transition">
-                <svg class="absolute left-3 top-2.5 h-5 w-5 text-zuppie-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                       class="w-full sm:w-64 px-4 py-2 pl-10 border border-purple-200 rounded-lg focus:ring-2 focus:ring-pink-300 focus:border-pink-400 transition">
+                <svg class="absolute left-3 top-2.5 h-5 w-5 text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
                 </svg>
             </div>
             <!-- Add Button -->
             <button wire:click="$dispatch('open-create-offer-modal')"
-                class="flex items-center justify-center gap-2 bg-gradient-to-r from-zuppie-pink-500 to-zuppie-600 hover:from-zuppie-pink-600 hover:to-zuppie-700 text-white font-medium py-2.5 px-5 rounded-lg transition shadow-md">
+                class="flex items-center justify-center gap-2 bg-gradient-to-r from-pink-500 to-purple-600 hover:from-pink-600 hover:to-purple-700 text-white font-medium py-2.5 px-5 rounded-lg transition shadow-md">
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
                 </svg>
@@ -41,50 +41,50 @@
     </div>
 
     <!-- Offers Table -->
-    <div class="overflow-x-auto rounded-lg border border-zuppie-100 shadow-sm">
+    <div class="overflow-x-auto rounded-lg border border-purple-100 shadow-sm">
         <table class="w-full">
-            <thead class="bg-gradient-to-r from-zuppie-pink-50 to-zuppie-50">
+            <thead class="bg-gradient-to-r from-pink-50 to-purple-50">
                 <tr>
-                    <th class="px-4 lg:px-6 py-3 text-left text-xs font-semibold text-zuppie-700 uppercase tracking-wider">Image</th>
-                    <th class="px-4 lg:px-6 py-3 text-left text-xs font-semibold text-zuppie-700 uppercase tracking-wider">Title</th>
-                    <th class="px-4 lg:px-6 py-3 text-left text-xs font-semibold text-zuppie-700 uppercase tracking-wider">Code</th>
-                    <th class="px-4 lg:px-6 py-3 text-left text-xs font-semibold text-zuppie-700 uppercase tracking-wider">Discount</th>
-                    <th class="px-4 lg:px-6 py-3 text-left text-xs font-semibold text-zuppie-700 uppercase tracking-wider">Period</th>
-                    <th class="px-4 lg:px-6 py-3 text-left text-xs font-semibold text-zuppie-700 uppercase tracking-wider">Status</th>
-                    <th class="px-4 lg:px-6 py-3 text-right text-xs font-semibold text-zuppie-700 uppercase tracking-wider">Actions</th>
+                    <th class="px-4 lg:px-6 py-3 text-left text-xs font-semibold text-purple-700 uppercase tracking-wider">Image</th>
+                    <th class="px-4 lg:px-6 py-3 text-left text-xs font-semibold text-purple-700 uppercase tracking-wider">Title</th>
+                    <th class="px-4 lg:px-6 py-3 text-left text-xs font-semibold text-purple-700 uppercase tracking-wider">Code</th>
+                    <th class="px-4 lg:px-6 py-3 text-left text-xs font-semibold text-purple-700 uppercase tracking-wider">Discount</th>
+                    <th class="px-4 lg:px-6 py-3 text-left text-xs font-semibold text-purple-700 uppercase tracking-wider">Period</th>
+                    <th class="px-4 lg:px-6 py-3 text-left text-xs font-semibold text-purple-700 uppercase tracking-wider">Status</th>
+                    <th class="px-4 lg:px-6 py-3 text-right text-xs font-semibold text-purple-700 uppercase tracking-wider">Actions</th>
                 </tr>
             </thead>
-            <tbody class="divide-y divide-zuppie-100">
+            <tbody class="divide-y divide-purple-100">
                 @forelse($offers as $offer)
-                    <tr class="hover:bg-zuppie-pink-25 transition-colors">
+                    <tr class="hover:bg-pink-50 transition-colors">
                         <td class="px-4 lg:px-6 py-4 whitespace-nowrap">
                             @if($offer->image)
-                                <img src="{{ $offer->image }}" alt="{{ $offer->title }}" class="h-12 w-12 rounded-lg object-cover border border-zuppie-200">
+                                <img src="{{ $offer->image }}" alt="{{ $offer->title }}" class="h-12 w-12 rounded-lg object-cover border border-purple-200">
                             @else
-                                <div class="h-12 w-12 rounded-lg bg-zuppie-100 flex items-center justify-center">
-                                    <svg class="h-6 w-6 text-zuppie-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <div class="h-12 w-12 rounded-lg bg-purple-100 flex items-center justify-center">
+                                    <svg class="h-6 w-6 text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
                                     </svg>
                                 </div>
                             @endif
                         </td>
                         <td class="px-4 lg:px-6 py-4">
-                            <div class="text-sm font-medium text-zuppie-900">{{ $offer->title }}</div>
-                            <div class="text-sm text-zuppie-500">ID: #{{ $offer->id }}</div>
+                            <div class="text-sm font-medium text-purple-900">{{ $offer->title }}</div>
+                            <div class="text-sm text-purple-500">ID: #{{ $offer->id }}</div>
                         </td>
                         <td class="px-4 lg:px-6 py-4 whitespace-nowrap">
-                            <span class="px-3 py-1 text-xs font-medium bg-zuppie-100 text-zuppie-800 rounded-full">
+                            <span class="px-3 py-1 text-xs font-medium bg-purple-100 text-purple-800 rounded-full">
                                 {{ $offer->offer_code }}
                             </span>
                         </td>
-                        <td class="px-4 lg:px-6 py-4 whitespace-nowrap text-sm text-zuppie-900">
+                        <td class="px-4 lg:px-6 py-4 whitespace-nowrap text-sm text-purple-900">
                             @if($offer->discount_type === 'percent')
                                 {{ $offer->discount_value }}%
                             @else
                                 ₹{{ number_format($offer->discount_value, 0) }}
                             @endif
                         </td>
-                        <td class="px-4 lg:px-6 py-4 whitespace-nowrap text-sm text-zuppie-500">
+                        <td class="px-4 lg:px-6 py-4 whitespace-nowrap text-sm text-purple-500">
                             <div>{{ \Carbon\Carbon::parse($offer->start_date)->format('M d, Y') }}</div>
                             <div>{{ \Carbon\Carbon::parse($offer->end_date)->format('M d, Y') }}</div>
                         </td>
@@ -106,7 +106,7 @@
                         <td class="px-4 lg:px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
                             <div class="flex justify-end space-x-2">
                                 <button wire:click="$dispatch('edit-offer', { id: {{ $offer->id }} })" 
-                                        class="text-zuppie-600 hover:text-zuppie-900 transition-colors">
+                                        class="text-purple-600 hover:text-purple-900 transition-colors">
                                     <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
                                     </svg>
@@ -124,13 +124,13 @@
                     <tr>
                         <td colspan="7" class="px-6 py-12 text-center">
                             <div class="flex flex-col items-center">
-                                <div class="w-16 h-16 bg-zuppie-100 rounded-full flex items-center justify-center mb-4">
-                                    <svg class="w-8 h-8 text-zuppie-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <div class="w-16 h-16 bg-purple-100 rounded-full flex items-center justify-center mb-4">
+                                    <svg class="w-8 h-8 text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A1.994 1.994 0 013 12V7a4 4 0 014-4z" />
                                     </svg>
                                 </div>
-                                <h3 class="text-lg font-medium text-zuppie-700 mb-2">No offers found</h3>
-                                <p class="text-zuppie-500 mb-4">
+                                <h3 class="text-lg font-medium text-purple-700 mb-2">No offers found</h3>
+                                <p class="text-purple-500 mb-4">
                                     @if($search)
                                         No offers match your search criteria.
                                     @else
@@ -139,7 +139,7 @@
                                 </p>
                                 @if(!$search)
                                     <button wire:click="$dispatch('open-create-offer-modal')"
-                                        class="bg-gradient-to-r from-zuppie-pink-500 to-zuppie-600 hover:from-zuppie-pink-600 hover:to-zuppie-700 text-white font-medium py-2 px-4 rounded-lg transition">
+                                        class="bg-gradient-to-r from-pink-500 to-purple-600 hover:from-pink-600 hover:to-purple-700 text-white font-medium py-2 px-4 rounded-lg transition">
                                         Create Your First Offer
                                     </button>
                                 @endif
@@ -160,7 +160,7 @@
     <!-- Delete Confirmation Modal -->
     @if ($confirmingDeletion)
         <div class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
-            <div class="bg-white rounded-lg shadow-xl max-w-md w-full p-6 border-2 border-zuppie-pink-300">
+            <div class="bg-white rounded-lg shadow-xl max-w-md w-full p-6 border-2 border-pink-300">
                 <div class="text-center">
                     <div class="mx-auto flex items-center justify-center h-12 w-12 rounded-full bg-red-100 mb-4">
                         <svg class="h-6 w-6 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
