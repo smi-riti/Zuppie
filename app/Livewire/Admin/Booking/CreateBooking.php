@@ -7,6 +7,7 @@ use App\Models\Booking;
 use App\Models\EventPackage;
 use App\Models\Service;
 use App\Services\RazorpayService;
+use App\Models\Payment;
 use Illuminate\Validation\ValidationException;
 use Illuminate\Support\Facades\Log;
 
@@ -37,7 +38,7 @@ class CreateBooking extends Component
     public $razorpayPaymentId = null;
     public $razorpaySignature = null;
     public $isSubmitting = false;
-    public $payment_method = 'online'; // Initialize payment method
+    public $payment_method = 'online'; // Use underscore consistently
 
     protected $rules = [
         'event_package_id' => 'required',
@@ -215,13 +216,19 @@ class CreateBooking extends Component
         }
     }
 
-    public function completeRazorpayPayment($paymentId, $orderId, $signature)
+        public function completeRazorpayPayment($paymentId, $orderId, $signature)
     {
         try {
+            Log::info('Payment completion started', [
+                'paymentId' => $paymentId,
+                'orderId' => $orderId,
+                'signature' => $signature
+            ]);
+            
             $razorpayService = new RazorpayService();
             
             if (!$razorpayService->verifyPaymentSignature($orderId, $paymentId, $signature)) {
-                throw new \Exception('Payment verification failed');
+                throw new \Exception('Payment signature verification failed');
             }
 
             // Calculate advance for cash payments
@@ -229,7 +236,8 @@ class CreateBooking extends Component
                 ? $this->total_price * 0.2 
                 : $this->total_price;
 
-            Booking::create([
+            // Create booking
+            $booking = Booking::create([
                 'event_package_id' => $this->event_package_id,
                 'guest_count' => $this->guest_count,
                 'event_date' => $this->event_date_date . ' ' . $this->event_date_time,
@@ -249,19 +257,42 @@ class CreateBooking extends Component
                 'razorpay_payment_id' => $paymentId,
                 'razorpay_signature' => $signature,
                 'advance_amount' => $advance_amount,
-                'balance_amount' => $this->total_price - $advance_amount,
+                'balance_amount' => $this->payment_method === 'cash' ? ($this->total_price - $advance_amount) : 0,
                 'status' => 'confirmed',
+                'admin_created' => true,
+            ]);
+
+            // Create payment record
+            Payment::create([
+                'booking_id' => $booking->id,
+                'razorpay_payment_id' => $paymentId,
+                'razorpay_order_id' => $orderId,
+                'razorpay_signature' => $signature,
+                'amount' => $advance_amount,
+                'currency' => 'INR',
+                'status' => 'paid',
+                'payment_method' => 'online',
+                'payment_date' => now('Asia/Kolkata'),
+                'notes' => ($this->payment_method === 'cash') 
+                    ? '20% advance payment for cash booking (Balance ₹' . number_format($this->total_price - $advance_amount, 2) . ' to be paid in cash)' 
+                    : 'Full payment via Razorpay'
+            ]);
+
+            Log::info('Booking and payment created successfully', [
+                'booking_id' => $booking->id,
+                'payment_id' => $paymentId
             ]);
 
             session()->flash('message', 'Booking created and payment successful!');
             $this->closeModal();
             
         } catch (\Exception $e) {
+            Log::error('Payment completion failed: ' . $e->getMessage());
             $this->isSubmitting = false;
             session()->flash('error', 'Payment failed: ' . $e->getMessage());
-            Log::error('Payment error: '.$e->getMessage());
         }
     }
+
 
     public function render()
     {

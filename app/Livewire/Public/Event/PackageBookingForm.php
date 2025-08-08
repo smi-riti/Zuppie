@@ -20,10 +20,6 @@ class PackageBookingForm extends Component
     public $packageId;
     public $pinCode;
     public $package;
-    
-  
-    
-    // Form fields
     public $name = '';
     public $email = '';
     public $phone = '';
@@ -35,20 +31,12 @@ class PackageBookingForm extends Component
     public $specialRequests = '';
     public $paymentMethod = 'cash';
     public $acceptTerms = false;
-    
-    // Multi-step form
     public $currentStep = 1;
     public $showPackageDetails = false;
-    
-    // User state
     public $isLoggedIn = false;
     public $existingUser = null;
     public $userMessage = '';
-    
-    // Validation state
     public $isSubmitting = false;
-    
-    // Razorpay specific properties
     public $razorpayOrderId = null;
     public $razorpayPaymentId = null;
     public $razorpaySignature = null;
@@ -294,7 +282,6 @@ class PackageBookingForm extends Component
             
             $this->razorpayOrderId = $order->id;
             
-            // Store advance payment info in session
             session([
                 'advance_payment_data' => [
                     'user_id' => $user->id,

@@ -479,7 +479,7 @@
                             } else {
                                 document.querySelector(`[data-category="${categorySlug}"].category-next`).click();
                             }
-                        } else { // swipe right
+                        } else { // swipe rightwish
                             if (carouselId === 'popular-carousel') {
                                 document.getElementById('popular-prev').click();
                             } else {
@@ -573,7 +573,7 @@
                 padding-bottom: 3rem;
             }
             
-            .text-3xl.md\:text-4xl {
+            .text-3xl.md\:text-4xl {wish
                 font-size: 1.875rem;
             }
         }
