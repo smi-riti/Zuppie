@@ -20,10 +20,6 @@ class PackageBookingForm extends Component
     public $packageId;
     public $pinCode;
     public $package;
-    
-  
-    
-    // Form fields
     public $name = '';
     public $email = '';
     public $phone = '';
@@ -35,20 +31,12 @@ class PackageBookingForm extends Component
     public $specialRequests = '';
     public $paymentMethod = 'cash';
     public $acceptTerms = false;
-    
-    // Multi-step form
     public $currentStep = 1;
     public $showPackageDetails = false;
-    
-    // User state
     public $isLoggedIn = false;
     public $existingUser = null;
     public $userMessage = '';
-    
-    // Validation state
     public $isSubmitting = false;
-    
-    // Razorpay specific properties
     public $razorpayOrderId = null;
     public $razorpayPaymentId = null;
     public $razorpaySignature = null;
@@ -294,7 +282,6 @@ class PackageBookingForm extends Component
             
             $this->razorpayOrderId = $order->id;
             
-            // Store advance payment info in session
             session([
                 'advance_payment_data' => [
                     'user_id' => $user->id,
@@ -348,7 +335,7 @@ class PackageBookingForm extends Component
             // Store booking data in session for completion after payment
             session(['pending_booking_data' => [
                 'user_id' => $user->id,
-                'package_id' => $this->packageId,
+                'package_id' => $this->package->id,
                 'pin_code' => $this->pinCode,
                 'event_date' => $this->eventDate,
                 'event_time' => !empty($this->eventTime) ? $this->eventTime : null,
@@ -535,7 +522,7 @@ class PackageBookingForm extends Component
             return redirect()->route('profile');
             
         } catch (Exception $e) {
-            session()->flash('error', 'Payment verification failed: ' . $e->getMessage());
+            session()->flash('error', 'Payment ver,ification failed: ' . $e->getMessage());
             \Log::error('Razorpay payment completion error: ' . $e->getMessage());
         }
     }

@@ -1,5 +1,4 @@
-<div
-    class="fixed inset-0 backdrop-blur-sm bg-black/30 transition-opacity duration-300 flex items-center justify-center z-50 p-4">
+<div class="fixed inset-0 backdrop-blur-sm bg-black/30 transition-opacity duration-300 flex items-center justify-center z-50 p-4 h-scroll overflow-y-auto">
     <div class="bg-white rounded-2xl shadow-xl overflow-hidden w-full max-w-3xl">
         <!-- Gradient Header -->
         <div class="bg-gradient-to-r from-purple-400 to-pink-400 p-6 text-white">
@@ -298,7 +297,7 @@
                                         <div class="space-y-3">
                                             <!-- Cash Option -->
                                             <div class="flex items-center">
-                                                <input type="radio" wire:model="paymentMethod" value="cash"
+                                                <input type="radio" wire:model="payment_method" value="cash"
                                                     id="cash" class="mr-3">
                                                 <label for="cash" class="flex-1">
                                                     <div class="font-medium text-gray-800 flex items-center">
@@ -314,7 +313,7 @@
 
                                             <!-- Online Option -->
                                             <div class="flex items-center">
-                                                <input type="radio" wire:model="paymentMethod" value="online"
+                                                <input type="radio" wire:model="payment_method" value="online"
                                                     id="online" class="mr-3">
                                                 <label for="online" class="flex-1">
                                                     <div class="font-medium text-gray-800 flex items-center">
@@ -329,7 +328,7 @@
                                         </div>
 
                                         <!-- Payment Details -->
-                                        @if ($paymentMethod === 'cash')
+                                        @if ($payment_method === 'cash')
                                             <div class="mt-3 p-3 bg-orange-50 rounded-lg border border-orange-100">
                                                 <p class="text-sm text-orange-800">
                                                     <i class="fas fa-info-circle mr-1"></i>
@@ -362,7 +361,7 @@
                                             </div>
                                         @endif
 
-                                        @error('paymentMethod')
+                                        @error('payment_method')
                                             <span class="text-xs text-red-600 mt-2 block">{{ $message }}</span>
                                         @enderror
                                     </div>
@@ -452,18 +451,17 @@
                             </span>
                         </button>
                     </div>
-                </div>c 
+                </div>
+            @endif
         </div>
-        @endif
     </div>
-</div>
 </div>
 
 <!-- Razorpay Integration -->
 <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
 <script>
     document.addEventListener('livewire:initialized', () => {
-        // Fix for "childNodes" error - ensure elements exist before accessing
+        // Fix for "childNodes" error
         const hideMessages = () => {
             const messages = ['success-message', 'error-message', 'info-message'];
             messages.forEach(id => {
@@ -481,6 +479,7 @@
 
         // Razorpay payment handler
         Livewire.on('initiate-razorpay-payment', (data) => {
+            console.log('Razorpay init received:', data);
             try {
                 // Validate data
                 if (!data || !data.order_id || !data.amount) {
@@ -493,13 +492,15 @@
                     amount: data.amount,
                     currency: data.currency || 'INR',
                     name: data.name || '{{ config('app.name') }}',
-                    description: data.description || 'Booking Payment',
+                    description: data.description || 'Admin Booking Payment',
                     order_id: data.order_id,
                     prefill: data.prefill || {},
                     theme: {
                         color: '#9333ea'
                     },
                     handler: function(response) {
+                        console.log('Razorpay success:', response);
+                        // CORRECTED: Use kebab-case event name
                         Livewire.dispatch('complete-razorpay-payment', [
                             response.razorpay_payment_id,
                             response.razorpay_order_id,
@@ -508,6 +509,7 @@
                     },
                     modal: {
                         ondismiss: function() {
+                            console.log('Payment modal dismissed');
                             Livewire.dispatch('enable-submit-button');
                         }
                     }
@@ -534,10 +536,18 @@
 
         // Enable submit button when payment fails
         Livewire.on('enable-submit-button', () => {
+            console.log('Enabling submit button');
             const button = document.getElementById('submit-button');
             if (button) {
                 button.disabled = false;
             }
+        });
+
+        // Handle payment failures
+        Livewire.on('payment-failed', (data) => {
+            console.error('Payment failed:', data.error);
+            alert('Payment failed: ' + (data.error.description || 'Unknown error'));
+            Livewire.dispatch('enable-submit-button');
         });
     });
 </script>
