@@ -407,7 +407,6 @@
 
     <livewire:public.section.enquiry-form />
     <livewire:public.components.bottom-navigation />
-    <!-- Custom Styles -->
     <style>
         /* Custom Animations */
         .animate-fade-in-right {
@@ -468,23 +467,20 @@
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             const mainImage = document.getElementById('main-package-image');
-            const imageCounter = document.querySelector('.image-counter'); // Add a class to the counter div
-            const thumbnails = document.querySelectorAll('.thumbnail-image'); // Add a class to thumbnail images
+            const imageCounter = document.querySelector('.image-counter');
+            const thumbnails = document.querySelectorAll('.thumbnail-image'); 
             let currentIndex = {{ $currentImageIndex }};
             const images = @json($this->packageImages);
             const totalImages = images.length;
 
-            // Function to update the main image and counter
             function updateImage(index) {
-                currentIndex = (index + totalImages) % totalImages; // Ensure index stays in bounds
+                currentIndex = (index + totalImages) % totalImages; 
                 mainImage.src = images[currentIndex];
                 mainImage.style.opacity = '0';
                 setTimeout(() => {
                     mainImage.style.opacity = '1';
                 }, 150);
                 imageCounter.textContent = `${currentIndex + 1} / ${totalImages}`;
-
-                // Update thumbnail selection
                 thumbnails.forEach((thumb, i) => {
                     thumb.parentElement.classList.toggle('ring-2', i === currentIndex);
                     thumb.parentElement.classList.toggle('ring-4', i === currentIndex);
