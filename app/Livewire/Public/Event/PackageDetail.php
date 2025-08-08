@@ -26,27 +26,27 @@ class PackageDetail extends Component
         $reviewCount = reviews::where('event_package_id', $this->packageId)->count();
         $this->totalReview = $reviewCount;
         $this->average_review = $reviewCount > 0
-            ? round($totalRating / $reviewCount, 2) 
+            ? round($totalRating / $reviewCount, 2)
             : 0; // Default when no reviews
     }
     public function mount($slug = null)
-{
-    $this->packageId = $slug;
-    $this->loadPackage();
-    
-    // Initialize pin code from session if available
-    if(session()->has('pin_code')) {
-        $this->pinCode = session('pin_code');
-        $this->checkPinCodeAvailability();
+    {
+        $this->packageId = $slug;
+        $this->loadPackage();
+
+        // Initialize pin code from session if available
+        if (session()->has('pin_code')) {
+            $this->pinCode = session('pin_code');
+            $this->checkPinCodeAvailability();
+        }
     }
-}
     public function loadPackage()
     {
         // Try to find by slug first, then by ID for backward compatibility
         $this->package = EventPackage::with(['category', 'images'])
-            ->where(function($query) {
+            ->where(function ($query) {
                 $query->where('slug', $this->packageId)
-                      ->orWhere('id', $this->packageId);
+                    ->orWhere('id', $this->packageId);
             })
             ->where('is_active', true)
             ->first();
@@ -55,35 +55,35 @@ class PackageDetail extends Component
             session()->flash('error', 'Package not found or no longer available.');
             return redirect()->route('event-packages');
         }
-        
+
         $this->countAvgReview();
     }
 
     public function checkPinCodeAvailability()
-{
-    $this->validate([
-        'pinCode' => 'required|numeric|digits:6'
-    ]);
+    {
+        $this->validate([
+            'pinCode' => 'required|numeric|digits:6'
+        ]);
 
-    $this->checkingPinCode = true;
-    $this->resetErrorBag(); // Clear previous errors
+        $this->checkingPinCode = true;
+        $this->resetErrorBag(); // Clear previous errors
 
-    try {
-        // Check if pin code exists in service model
-        $service = Service::where('pin_code', $this->pinCode)->first();
-        $this->isPinCodeAvailable = $service ? true : false;
+        try {
+            // Check if pin code exists in service model
+            $service = Service::where('pin_code', $this->pinCode)->first();
+            $this->isPinCodeAvailable = $service ? true : false;
 
-        if ($this->isPinCodeAvailable) {
-            session()->flash('pin_message', 'Great! We provide services in your area.');
-        } else {
-            session()->flash('pin_error', 'Sorry, we don\'t provide services in this area yet.');
+            if ($this->isPinCodeAvailable) {
+                session()->flash('pin_message', 'Great! We provide services in your area.');
+            } else {
+                session()->flash('pin_error', 'Sorry, we don\'t provide services in this area yet.');
+            }
+        } catch (\Exception $e) {
+            session()->flash('pin_error', 'Error checking pin code availability');
+        } finally {
+            $this->checkingPinCode = false;
         }
-    } catch (\Exception $e) {
-        session()->flash('pin_error', 'Error checking pin code availability');
-    } finally {
-        $this->checkingPinCode = false;
     }
-}
 
     public function bookNow()
     {
