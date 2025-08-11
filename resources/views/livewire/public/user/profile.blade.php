@@ -704,7 +704,7 @@
                                         </div>
                                         <!-- CTA Button -->
                                         <div class="flex gap-3">
-                                            <a href="{{ route('package-detail', ['id' => $package->id]) }}"
+                                            <a href="{{ route('package-detail', $package['slug']) }}"
                                                 class="flex-1 bg-gradient-to-r from-purple-600 to-pink-600 text-white py-3 px-6 rounded-2xl font-bold hover:from-purple-700 hover:to-pink-700 transform hover:scale-105 transition-all duration-300 shadow-lg text-center">
                                                 <i class="fas fa-eye mr-2"></i>
                                                 View Package
