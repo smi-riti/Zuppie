@@ -16,19 +16,17 @@ class PackageDetail extends Component
     public $checkingPinCode = false;
     public $showBookingForm = false;
     public $currentImageIndex = 0;
+    public $pinCodeStatus = null; // null, 'checking', 'available', 'unavailable', 'error'
+    public $pinCodeMessage = '';
 
     public $average_review = 0;
     public $totalReview;
     public $reviewImages;
-    public function countAvgReview()
-    {
-        $totalRating = reviews::where('event_package_id', $this->packageId)->sum('rating');
-        $reviewCount = reviews::where('event_package_id', $this->packageId)->count();
-        $this->totalReview = $reviewCount;
-        $this->average_review = $reviewCount > 0
-            ? round($totalRating / $reviewCount, 2)
-            : 0; // Default when no reviews
-    }
+
+    protected $rules = [
+        'pinCode' => 'required|numeric|digits:6',
+    ];
+
     public function mount($slug = null)
     {
         $this->packageId = $slug;
@@ -40,66 +38,87 @@ class PackageDetail extends Component
             $this->checkPinCodeAvailability();
         }
     }
+
     public function loadPackage()
     {
-        // Try to find by slug first, then by ID for backward compatibility
         $this->package = EventPackage::with(['category', 'images'])
             ->where(function ($query) {
                 $query->where('slug', $this->packageId)
                     ->orWhere('id', $this->packageId);
             })
             ->where('is_active', true)
-            ->first();
-
-        if (!$this->package) {
-            session()->flash('error', 'Package not found or no longer available.');
-            return redirect()->route('event-packages');
-        }
+            ->firstOrFail();
 
         $this->countAvgReview();
     }
 
+    public function updatedPinCode($value)
+    {
+        $this->resetPinCodeStatus();
+        
+        if (strlen($value) === 6) {
+            $this->checkPinCodeAvailability();
+        }
+    }
+
+    public function resetPinCodeStatus()
+    {
+        $this->pinCodeStatus = null;
+        $this->pinCodeMessage = '';
+        $this->isPinCodeAvailable = null;
+    }
+
     public function checkPinCodeAvailability()
     {
-        $this->validate([
-            'pinCode' => 'required|numeric|digits:6'
-        ]);
-
+        $this->validateOnly('pinCode');
+        $this->pinCodeStatus = 'checking';
+        $this->pinCodeMessage = 'Checking pincode availability...';
         $this->checkingPinCode = true;
-        $this->resetErrorBag(); // Clear previous errors
 
         try {
-            // Check if pin code exists in service model
             $service = Service::where('pin_code', $this->pinCode)->first();
-            $this->isPinCodeAvailable = $service ? true : false;
+            $this->isPinCodeAvailable = (bool) $service;
 
             if ($this->isPinCodeAvailable) {
-                session()->flash('pin_message', 'Great! We provide services in your area.');
+                $this->pinCodeStatus = 'available';
+                $this->pinCodeMessage = 'Great! We provide services in your area.';
+                session(['pin_code' => $this->pinCode]);
             } else {
-                session()->flash('pin_error', 'Sorry, we don\'t provide services in this area yet.');
+                $this->pinCodeStatus = 'unavailable';
+                $this->pinCodeMessage = 'Sorry, we don\'t provide services in this area yet.';
             }
         } catch (\Exception $e) {
-            session()->flash('pin_error', 'Error checking pin code availability');
+            $this->pinCodeStatus = 'error';
+            $this->pinCodeMessage = 'Error checking pincode availability';
+            $this->isPinCodeAvailable = false;
         } finally {
             $this->checkingPinCode = false;
         }
     }
 
+    public function countAvgReview()
+    {
+        $totalRating = reviews::where('event_package_id', $this->packageId)->sum('rating');
+        $reviewCount = reviews::where('event_package_id', $this->packageId)->count();
+        
+        $this->totalReview = $reviewCount;
+        $this->average_review = $reviewCount > 0 ? round($totalRating / $reviewCount, 2) : 0;
+    }
+
     public function bookNow()
     {
         if (!$this->isPinCodeAvailable) {
-            session()->flash('error', 'Please check pin code availability first.');
+            $this->pinCodeStatus = 'error';
+            $this->pinCodeMessage = 'Please check pincode availability first.';
             return;
         }
 
-        // Store package and pin code data in session for booking form
         session([
             'package_id' => $this->packageId,
             'pin_code' => $this->pinCode,
             'pin_code_checked' => true
         ]);
 
-        // Redirect to booking form with package and pin code data
         return redirect()->route('package-booking-form', [
             'package_id' => $this->packageId,
             'pin_code' => $this->pinCode
@@ -108,27 +127,20 @@ class PackageDetail extends Component
 
     public function getPackageImagesProperty()
     {
-        if (!$this->package)
-            return [];
+        if (!$this->package) return [];
 
         $images = $this->package->images->pluck('image_url')->toArray();
 
-        // Add default images if no images available
-        if (empty($images)) {
-            $images = [
-                'https://images.unsplash.com/photo-1519225421980-715cb0215aed?w=800&h=600&fit=crop',
-                'https://images.unsplash.com/photo-1511578314322-379afb476865?w=800&h=600&fit=crop',
-                'https://images.unsplash.com/photo-1530103862676-de8c9debad1d?w=800&h=600&fit=crop'
-            ];
-        }
-
-        // Show all images in package detail
-        return $images;
+        return empty($images) ? [
+            'https://images.unsplash.com/photo-1519225421980-715cb0215aed?w=800&h=600&fit=crop',
+            'https://images.unsplash.com/photo-1511578314322-379afb476865?w=800&h=600&fit=crop',
+            'https://images.unsplash.com/photo-1530103862676-de8c9debad1d?w=800&h=600&fit=crop'
+        ] : $images;
     }
 
     public function getPackageFeaturesProperty()
     {
-        return [
+        return $this->package->features ?? [
             'Professional Event Planning & Coordination',
             'Complete Venue Setup & Decoration',
             'High-Quality Photography & Videography',
@@ -148,41 +160,38 @@ class PackageDetail extends Component
             return collect([]);
         }
 
-        $similarPackages = EventPackage::with(['category', 'images'])
+        return EventPackage::with(['category', 'images'])
             ->where('category_id', $this->package->category_id)
             ->where('id', '!=', $this->packageId)
             ->where('is_active', true)
             ->take(6)
-            ->get();
-
-        return $similarPackages->map(function ($package) {
-            return [
-                'id' => $package->id,
-                'slug' => $package->slug,
-                'name' => $package->name,
-                'price' => $package->discounted_price,
-                'original_price' => $package->price,
-                'description' => $package->description,
-                'duration' => $package->formatted_duration,
-                'category' => $package->category->name ?? 'General',
-                'image' => $package->images->first()->image_url ?? 'https://images.unsplash.com/photo-1519225421980-715cb0215aed?w=400&h=300&fit=crop',
-                'rating' => rand(40, 50) / 10,
-                'popular' => $package->is_special
-            ];
-        });
+            ->get()
+            ->map(function ($package) {
+                return [
+                    'id' => $package->id,
+                    'slug' => $package->slug,
+                    'name' => $package->name,
+                    'price' => $package->discounted_price,
+                    'original_price' => $package->price,
+                    'description' => $package->description,
+                    'duration' => $package->formatted_duration,
+                    'category' => $package->category->name ?? 'General',
+                    'image' => $package->images->first()->image_url ?? 'https://images.unsplash.com/photo-1519225421980-715cb0215aed?w=400&h=300&fit=crop',
+                    'rating' => rand(40, 50) / 10,
+                    'popular' => $package->is_special
+                ];
+            });
     }
 
     public function nextImage()
     {
-        $totalImages = count($this->packageImages);
-        $this->currentImageIndex = ($this->currentImageIndex + 1) % $totalImages;
+        $this->currentImageIndex = ($this->currentImageIndex + 1) % count($this->packageImages);
     }
 
     public function previousImage()
     {
-        $totalImages = count($this->packageImages);
-        $this->currentImageIndex = $this->currentImageIndex === 0
-            ? $totalImages - 1
+        $this->currentImageIndex = $this->currentImageIndex === 0 
+            ? count($this->packageImages) - 1 
             : $this->currentImageIndex - 1;
     }
 
@@ -193,8 +202,8 @@ class PackageDetail extends Component
 
     public function render()
     {
-        $reviews = reviews::all();
-        $this->countAvgReview();
-        return view('livewire.public.event.package-detail', compact('reviews'));
+        return view('livewire.public.event.package-detail', [
+            'reviews' => reviews::where('event_package_id', $this->packageId)->get()
+        ]);
     }
 }
