@@ -30,6 +30,22 @@
                             </span>
                         </div>
 
+
+                    </div>
+
+                    <!-- Message Card -->
+                    <div class="bg-gray-50 p-4 rounded-lg border border-gray-200">
+                        <p class="text-gray-700 whitespace-pre-line">{{ $enquiryDetails->message }}</p>
+                    </div>
+
+                    <!-- Metadata -->
+                    <div class="flex justify-between items-center">
+                        <div class="text-xs text-gray-500">
+                            <p>Submitted On: {{ $enquiryDetails->created_at->format('M j, Y \a\t g:i A') }}</p>
+                            @if($enquiryDetails->status == 'resolved')
+                                <p>Resolved On: {{ $enquiryDetails->updated_at->format('M j, Y \a\t g:i A') }}</p>
+                            @endif
+                        </div>
                         @if ($enquiryDetails->status == 'pending')
                             <button wire:click="markResolved({{ $enquiryDetails->id }})"
                                 class="bg-green-600 hover:bg-green-700 text-white text-sm font-medium py-2 px-3 rounded-lg transition-colors duration-150 flex items-center gap-2">
@@ -40,19 +56,6 @@
                                 </svg>
                                 Mark Resolved
                             </button>
-                        @endif
-                    </div>
-
-                    <!-- Message Card -->
-                    <div class="bg-gray-50 p-4 rounded-lg border border-gray-200">
-                        <p class="text-gray-700 whitespace-pre-line">{{ $enquiryDetails->message }}</p>
-                    </div>
-
-                    <!-- Metadata -->
-                    <div class="text-xs text-gray-500">
-                        <p>Submitted On: {{ $enquiryDetails->created_at->format('M j, Y \a\t g:i A') }}</p>
-                        @if($enquiryDetails->status == 'resolved')
-                            <p>Resolved On: {{ $enquiryDetails->updated_at->format('M j, Y \a\t g:i A') }}</p>
                         @endif
                     </div>
                 </div>
