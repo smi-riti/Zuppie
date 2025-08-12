@@ -14,14 +14,15 @@ class ViewEnquiry extends Component
         $this->enquiryDetails = Enquiry::find($enquiryId);
     }
 
-    public function markResolved($queryId){
-        $enquiry = Enquiry::find($queryId);
-        if ($enquiry) {
-            $enquiry->status = 'resolved';
-            $enquiry->save();
-            $this->dispatch('closeViewModal');
-        }
+public function markResolved($queryId){
+    $enquiry = Enquiry::find($queryId);
+    if ($enquiry) {
+        $enquiry->status = 'resolved';
+        $enquiry->save();
+        $this->dispatch('closeViewModal');
+        $this->dispatch('enquiryUpdated', $enquiry->id);
     }
+}
     public function closeViewModal()
     {
         $this->dispatch('closeViewModal');

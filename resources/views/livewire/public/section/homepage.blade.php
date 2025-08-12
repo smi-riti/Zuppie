@@ -482,7 +482,7 @@
                         <p class="text-gray-600 mb-4">{{ str($blog->content)->words(25) }}</p>
                         <div class="flex items-center justify-between">
                             <span class="text-sm text-gray-500">{{ $blog->created_at->format('M D, Y') }}</span>
-                            <a href="#" class="text-purple-600 font-semibold hover:underline">Read More →</a>
+                            <a href="{{ route('blog.detail', $blog->slug) }}" class="text-purple-600 font-semibold hover:underline">Read More →</a>
                         </div>
                     </div>
                 </article>
