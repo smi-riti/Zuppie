@@ -106,7 +106,7 @@
             <x-admin.sidebar />
         </div>
         <!-- Main Content Area -->
-        <div class="flex-1 ml-[15%] flex flex-col">
+        <div class="flex-1 ml-[15%] flex flex-col bg-gradient-to-br from-purple-50 to-pink-50">
             {{ $slot }}
         </div>
     </div>
