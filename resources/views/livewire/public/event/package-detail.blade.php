@@ -487,7 +487,6 @@
 
     <livewire:public.section.enquiry-form />
     <livewire:public.components.bottom-navigation />
-    <!-- Custom Styles -->
     <style>
         /* Custom Animations */
         .animate-fade-in-right {
