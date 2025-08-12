@@ -66,7 +66,7 @@ class Show extends Component
         $categories = Category::when($this->search, function ($query) {
             $query->where('name', 'like', '%' . $this->search . '%')
                   ->orWhere('description', 'like', '%' . $this->search . '%');
-        })->with('parent')->latest()->paginate(8);
+        })->with('parent')->latest()->paginate(7);
 
         return view('livewire.admin.category.show', compact('categories'));
     }
