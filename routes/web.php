@@ -89,22 +89,22 @@ Route::middleware(['auth'])->group(function () {
 
 
 Route::prefix('admin')->middleware(['auth', 'admin'])->group(function () {
-    Route::get('/dashboard', Dashboard::class)->name('admin.dashboard');
+    Route::get('/', Dashboard::class)->name('admin.dashboard');
     Route::get('/categories', Show::class)->name('admin.categories');
-    Route::get('/category/show', Show::class)->name('admin.category.show');
+    Route::get('/category', Show::class)->name('admin.category.show');
     Route::get('/event-packages', ListPackage::class)->name('admin.event-packages');
     Route::get('/event-packages/create', CreatePackage::class)->name('admin.event-packages.create');
     Route::get('/event-packages/edit/{packageId}', UpdatePackage::class)->name('admin.event-packages.edit');
-    Route::get('/reviews/show', All::class)->name('admin.reviews.show');
-    Route::get('/offers/all', AllOffers::class)->name('admin.offers.show');
-    Route::get('/enquiries/all', AllEnquiry::class)->name('admin.enquiries.all');
-    Route::get('/booking/manage', ManageBooking::class)->name('admin.booking.manage');
+    Route::get('/reviews', All::class)->name('admin.reviews.show');
+    Route::get('/offers', AllOffers::class)->name('admin.offers.show');
+    Route::get('/enquiries', AllEnquiry::class)->name('admin.enquiries.all');
+    Route::get('/booking', ManageBooking::class)->name('admin.booking.manage');
     Route::get('/booking/view/{bookingId}', ViewBooking::class)->name('admin.booking.view');
-    Route::get('/users/manage', ManageUser::class)->name('admin.users.manage');
-    Route::get('/services/manage', ShowService::class)->name('admin.services.manage');
-    Route::get('/manage/blogs', ManageBlog::class)->name('admin.blogs.manage');
+    Route::get('/users', ManageUser::class)->name('admin.users.manage');
+    Route::get('/services', ShowService::class)->name('admin.services.manage');
+    Route::get('/manage', ManageBlog::class)->name('admin.blogs.manage');
     Route::get('/settings', ManageSetting::class)->name('admin.settings');
-    Route::get('/admin/gallery', ManageGallery::class)->name('gallery.manage');
+    Route::get('/gallery', ManageGallery::class)->name('gallery.manage');
 
 });
 
