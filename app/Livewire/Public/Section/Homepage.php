@@ -2,6 +2,7 @@
 
 namespace App\Livewire\Public\Section;
 
+use App\Models\Blog;
 use App\Models\Category;
 use App\Models\EventPackage;
 use Livewire\Component;
@@ -53,12 +54,14 @@ class Homepage extends Component
             'fas fa-mask',
             'fas fa-hands-helping'
         ];
+        $blogs = Blog::latest()->take(3)->get();
 
         return view('livewire.public.section.homepage', [
             'categories' => $categories,
             'packages' => $packages,
             'gradientColors' => $gradientColors,
-            'categoryIcons' => $categoryIcons
+            'categoryIcons' => $categoryIcons,
+            'blogs' => $blogs
         ]);
     }
 }

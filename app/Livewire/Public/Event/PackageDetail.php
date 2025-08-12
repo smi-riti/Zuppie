@@ -3,6 +3,7 @@
 namespace App\Livewire\Public\Event;
 
 use App\Models\reviews;
+use Livewire\Attributes\On;
 use Livewire\Component;
 use App\Models\EventPackage;
 use App\Models\Service;
@@ -22,6 +23,13 @@ class PackageDetail extends Component
     public $average_review = 0;
     public $totalReview;
     public $reviewImages;
+    public $openModal = false;
+
+
+    #[On('viewAllReviews')]
+    public function openModal(){
+        $this->openModal = true;
+    }
 
     protected $rules = [
         'pinCode' => 'required|numeric|digits:6',
@@ -51,23 +59,20 @@ class PackageDetail extends Component
 
         $this->countAvgReview();
     }
-
     public function updatedPinCode($value)
     {
         $this->resetPinCodeStatus();
-        
+
         if (strlen($value) === 6) {
             $this->checkPinCodeAvailability();
         }
     }
-
     public function resetPinCodeStatus()
     {
         $this->pinCodeStatus = null;
         $this->pinCodeMessage = '';
         $this->isPinCodeAvailable = null;
     }
-
     public function checkPinCodeAvailability()
     {
         $this->validateOnly('pinCode');
@@ -95,16 +100,14 @@ class PackageDetail extends Component
             $this->checkingPinCode = false;
         }
     }
-
     public function countAvgReview()
     {
-        $totalRating = reviews::where('event_package_id', $this->packageId)->sum('rating');
-        $reviewCount = reviews::where('event_package_id', $this->packageId)->count();
-        
+        $totalRating = reviews::where('event_package_id', $this->package->id)->sum('rating');
+        $reviewCount = reviews::where('event_package_id', $this->package->id)->count();
+
         $this->totalReview = $reviewCount;
         $this->average_review = $reviewCount > 0 ? round($totalRating / $reviewCount, 2) : 0;
     }
-
     public function bookNow()
     {
         if (!$this->isPinCodeAvailable) {
@@ -124,10 +127,10 @@ class PackageDetail extends Component
             'pin_code' => $this->pinCode
         ]);
     }
-
     public function getPackageImagesProperty()
     {
-        if (!$this->package) return [];
+        if (!$this->package)
+            return [];
 
         $images = $this->package->images->pluck('image_url')->toArray();
 
@@ -137,7 +140,6 @@ class PackageDetail extends Component
             'https://images.unsplash.com/photo-1530103862676-de8c9debad1d?w=800&h=600&fit=crop'
         ] : $images;
     }
-
     public function getPackageFeaturesProperty()
     {
         return $this->package->features ?? [
@@ -153,7 +155,6 @@ class PackageDetail extends Component
             '24/7 Event Support'
         ];
     }
-
     public function getSimilarPackagesProperty()
     {
         if (!$this->package || !$this->package->category) {
@@ -182,28 +183,27 @@ class PackageDetail extends Component
                 ];
             });
     }
-
     public function nextImage()
     {
         $this->currentImageIndex = ($this->currentImageIndex + 1) % count($this->packageImages);
     }
-
     public function previousImage()
     {
-        $this->currentImageIndex = $this->currentImageIndex === 0 
-            ? count($this->packageImages) - 1 
+        $this->currentImageIndex = $this->currentImageIndex === 0
+            ? count($this->packageImages) - 1
             : $this->currentImageIndex - 1;
     }
-
     public function selectImage($index)
     {
         $this->currentImageIndex = $index;
     }
-
     public function render()
     {
-        return view('livewire.public.event.package-detail', [
-            'reviews' => reviews::where('event_package_id', $this->packageId)->get()
-        ]);
+        $reviews = reviews::where('event_package_id', $this->package->id)
+        ->where('approved', true)
+        ->where('rating', '>=', 3)
+            ->limit(3)->get();
+        $this->countAvgReview();
+        return view('livewire.public.event.package-detail', compact('reviews'));
     }
 }

@@ -71,15 +71,15 @@
             >
                 View Event Packages
             </a>
-            <a 
-                href="#contact"
+            <button 
+                wire:click="$dispatch('open-enquiry-form')"
                 class="inline-block px-8 py-3 bg-white/20 backdrop-blur-sm border border-white/30 text-white font-semibold rounded-full shadow-lg hover:shadow-xl transition-all hover:scale-105"
                 x-transition:enter="transition ease-out duration-500 delay-400"
                 x-transition:enter-start="opacity-0 translate-y-10"
                 x-transition:enter-end="opacity-100 translate-y-0"
             >
                 Book Consultation
-            </a>
+            </button>
         </div>
     </div>
 </div>

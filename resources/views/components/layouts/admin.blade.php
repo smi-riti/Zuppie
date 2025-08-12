@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{ $title ?? 'Admin Dashboard' }}</title>
-    
+
 
     <!-- Custom CSS -->
     @vite(['resources/css/app.css', 'resources/js/app.js'])
@@ -102,10 +102,11 @@
 <body class="bg-gray-50 font-sans antialiased min-h-screen">
     <!-- Main Layout Container -->
     <div class="flex h-screen ">
-        <x-admin.sidebar />
-
+        <div class="fixed ">
+            <x-admin.sidebar />
+        </div>
         <!-- Main Content Area -->
-        <div class="flex-1 flex flex-col">
+        <div class="flex-1 ml-[15%] flex flex-col">
             {{ $slot }}
         </div>
     </div>

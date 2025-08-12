@@ -461,83 +461,33 @@
             </div>
 
             <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
+                @foreach ($blogs as $blog)
                 <article
                     class="bg-white rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden group"
                     data-aos="fade-up" data-aos-delay="100">
                     <div class="relative overflow-hidden">
-                        <img src="https://images.unsplash.com/photo-1464207687429-7505649dae38?w=400&h=250&fit=crop"
+                        <img src="{{ $blog->image }}"
                             alt="Blog Post"
                             class="w-full h-48 object-cover group-hover:scale-110 transition-transform duration-300">
                         <div
                             class="absolute top-4 left-4 bg-purple-600 text-white px-3 py-1 rounded-full text-sm font-semibold">
-                            Tips
+                            {{ $blog->category->name }}
                         </div>
                     </div>
                     <div class="p-6">
                         <h3
                             class="text-xl font-bold text-gray-800 mb-3 group-hover:text-purple-600 transition-colors duration-300">
-                            10 Birthday Party Ideas That Will Wow Your Guests
+                            {{ str($blog->title)->words(7) }}
                         </h3>
-                        <p class="text-gray-600 mb-4">Discover creative and magical birthday party themes that will make
-                            your celebration unforgettable...</p>
+                        <p class="text-gray-600 mb-4">{{ str($blog->content)->words(25) }}</p>
                         <div class="flex items-center justify-between">
-                            <span class="text-sm text-gray-500">Jan 15, 2025</span>
+                            <span class="text-sm text-gray-500">{{ $blog->created_at->format('M D, Y') }}</span>
                             <a href="#" class="text-purple-600 font-semibold hover:underline">Read More →</a>
                         </div>
                     </div>
                 </article>
-
-                <article
-                    class="bg-white rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden group"
-                    data-aos="fade-up" data-aos-delay="200">
-                    <div class="relative overflow-hidden">
-                        <img src="https://images.unsplash.com/photo-1511578314322-379afb476865?w=400&h=250&fit=crop"
-                            alt="Blog Post"
-                            class="w-full h-48 object-cover group-hover:scale-110 transition-transform duration-300">
-                        <div
-                            class="absolute top-4 left-4 bg-pink-600 text-white px-3 py-1 rounded-full text-sm font-semibold">
-                            Trends
-                        </div>
-                    </div>
-                    <div class="p-6">
-                        <h3
-                            class="text-xl font-bold text-gray-800 mb-3 group-hover:text-purple-600 transition-colors duration-300">
-                            2025 Wedding Trends You Need to Know
-                        </h3>
-                        <p class="text-gray-600 mb-4">Stay ahead with the latest wedding trends that are taking 2025 by
-                            storm...</p>
-                        <div class="flex items-center justify-between">
-                            <span class="text-sm text-gray-500">Jan 10, 2025</span>
-                            <a href="#" class="text-purple-600 font-semibold hover:underline">Read More →</a>
-                        </div>
-                    </div>
-                </article>
-
-                <article
-                    class="bg-white rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden group"
-                    data-aos="fade-up" data-aos-delay="300">
-                    <div class="relative overflow-hidden">
-                        <img src="https://images.unsplash.com/photo-1464366400600-7168b8af9bc3?w=400&h=250&fit=crop"
-                            alt="Blog Post"
-                            class="w-full h-48 object-cover group-hover:scale-110 transition-transform duration-300">
-                        <div
-                            class="absolute top-4 left-4 bg-accent-500 text-white px-3 py-1 rounded-full text-sm font-semibold">
-                            Guide
-                        </div>
-                    </div>
-                    <div class="p-6">
-                        <h3
-                            class="text-xl font-bold text-gray-800 mb-3 group-hover:text-purple-600 transition-colors duration-300">
-                            Corporate Event Planning: A Complete Guide
-                        </h3>
-                        <p class="text-gray-600 mb-4">Everything you need to know about planning successful corporate
-                            events...</p>
-                        <div class="flex items-center justify-between">
-                            <span class="text-sm text-gray-500">Jan 5, 2025</span>
-                            <a href="#" class="text-purple-600 font-semibold hover:underline">Read More →</a>
-                        </div>
-                    </div>
-                </article>
+                @endforeach
+                
             </div>
 
             <div class="text-center mt-12" data-aos="fade-up" data-aos-delay="400">
