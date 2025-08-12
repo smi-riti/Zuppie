@@ -1,5 +1,5 @@
 <div>
-   <div x-data="{ isWishlisted: @entangle('isWishlisted'), isLoading: false }" class="relative inline-block">
+   <div x-data="{ isWishlisted: @entangle('isWishlisted'), isLoading: false }" class="relative bg-black/40  rounded-full inline-block">
     <button id="submitReview"
         wire:click="toggle" 
         @click="isLoading = true; setTimeout(() => isLoading = false, 1000)" 
