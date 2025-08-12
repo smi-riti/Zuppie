@@ -16,7 +16,7 @@
                         class="w-full mt-10 lg:w-5/12 lg:sticky xl:sticky md:sticky top-4 lg:top-20 h-auto lg:h-[calc(100vh-5rem)] overflow-y-auto space-y-3 md:space-y-4 lg:space-y-6">
                         <!-- Main Image with Auto-Change -->
                         <div class="relative group">
-                            <div class="aspect-w-16 aspect-h-12 rounded-2xl md:rounded-3xl overflow-hidden bg-black">
+                            <div class="aspect-w-16 aspect-h-12 rounded-2xl md:rounded-3xl overflow-x-scroll bg-black">
                                 <img src="{{ $this->packageImages[$currentImageIndex] ?? 'https://cherishx.com/images/metallic-elegance-ring.jpg' }}"
                                     alt="{{ $package->name }}"
                                     class="w-full h-full object-cover transition-opacity duration-500"
@@ -41,7 +41,7 @@
                         </div>
 
                         <!-- Thumbnail Gallery -->
-                        <div class="grid grid-cols-4 gap-2 md:gap-3">
+                        <div class="grid grid-cols-4 p-1 gap-2 md:gap-3">
                             @foreach ($this->packageImages as $index => $image)
                                 <div wire:click="selectImage({{ $index }})" wire:key="thumb-{{ $index }}"
                                     class="aspect-w-4 aspect-h-3 rounded-lg md:rounded-xl overflow-hidden cursor-pointer transition-all duration-300 {{ $index === $currentImageIndex ? 'ring-2 ring-black' : 'hover:ring-2 hover:ring-purple-300' }}">
@@ -52,7 +52,6 @@
                         </div>
 
                     </div>
-
                     <!-- Package Details -->
                     <div class="w-full lg:w-7/12 space-y-8 animate-fade-in-left">
                         <!-- Package Header -->
@@ -387,9 +386,9 @@
                             </div>
 
                             <!-- View More Button -->
-                            @if ($reviews->count() > 3)
+                            @if ($reviews->count() > 2)
                                 <div class="mt-8 text-center">
-                                    <button
+                                    <button wire:click="$dispatch('viewAllReviews')"
                                         class="px-6 py-2 bg-gradient-to-r from-purple-500 to-pink-500 text-white rounded-full hover:shadow-lg transition-all">
                                         View All Reviews
                                     </button>
