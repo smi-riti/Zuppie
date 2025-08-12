@@ -1,9 +1,5 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
-
 /* Zuppie Custom Styles - Pure CSS */
-
+@import "tailwindcss";
 /* Reset and Base Styles */
 * {
     box-sizing: border-box;
@@ -18,7 +14,7 @@ body {
 
 /* Color Variables */
 :root {
-    /* Standard Purple Colors (using Tailwind purple-500) */
+    /* Standard Purple Colors */
     --purple-50: #faf5ff;
     --purple-100: #f3e8ff;
     --purple-200: #e9d5ff;

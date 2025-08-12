@@ -5,22 +5,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{ $title ?? 'Admin Dashboard' }}</title>
-    <!-- Tailwind CSS CDN -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        primary: '#a855f7',  // purple-500
-                        secondary: '#ec4899',  // pink-500
-                        dark: '#1F2937',
-                        light: '#F9FAFB',
-                    }
-                }
-            }
-        }
-    </script>
+    
 
     <!-- Custom CSS -->
     @vite(['resources/css/app.css', 'resources/js/app.js'])
