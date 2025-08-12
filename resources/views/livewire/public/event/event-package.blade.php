@@ -221,9 +221,7 @@
                                             Special
                                         </div>
                                     @endif
-                                    <button class="absolute top-4 left-4 text-white bg-black/40 p-2 rounded-full hover:bg-black/60 transition-all duration-300 wishlist-btn">
-                                        <i class="far fa-heart"></i>
-                                    </button>
+                                    <livewire:public.components.wishlist-button :packageId="$package['id']" />
                                 </div>
                                 <div class="p-6">
                                     <h3 class="text-xl font-bold text-gray-900 mb-2">{{ $package['name'] }}</h3>
