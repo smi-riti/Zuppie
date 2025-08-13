@@ -25,7 +25,7 @@ class ViewPackage extends Component
 
     public function deleteImage()
     {
-        $image = \App\Models\EventPackageImage::find($this->imageToDelete);
+        $image = EventPackageImage::find($this->imageToDelete);
         if ($image) {
             $image->delete();
             
