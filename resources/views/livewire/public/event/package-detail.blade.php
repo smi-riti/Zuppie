@@ -223,27 +223,28 @@
                                 What's Included
                             </h3>
 
-                            <ul class="">
-                                @php
-                                    $features = [];
-                                    if (is_array($package->features)) {
-                                        $features = $package->features;
-                                    } elseif (is_string($package->features)) {
-                                        $decoded = json_decode($package->features, true);
-                                        $features = json_last_error() === JSON_ERROR_NONE
-                                            ? $decoded
-                                            : array_filter(array_map('trim', explode(',', $package->features)));
-                                    }
-                                    $features = is_array($features) ? $features : [];
-                                @endphp
+                            <ul class="space-y-2">
+    @php
+        // Process features into a valid array
+        $features = [];
+        if (is_array($package->features)) {
+            $features = $package->features;
+        } elseif (is_string($package->features)) {
+            $features = json_decode($package->features, true) ?? 
+                        array_filter(array_map('trim', explode(',', $package->features)));
+        }
+        // Ensure we have an array and remove empty entries
+        $features = array_filter((array)$features, 'trim');
+    @endphp
 
-                                @foreach ($features as $inclusion)
-                                    <li class="flex gap-3 items-center p-2 hover:bg-purple-50 rounded-lg transition-colors">
-                                        <i class="fa-solid fa-check text-xl" style="color: #00a303;"></i>
-                                        <span class="text-gray-700">{!! $inclusion !!}</span>
-                                    </li>
-                                @endforeach
-                            </ul>
+    @foreach ($features as $inclusion)
+        <li class="flex gap-3 items-start p-2 hover:bg-purple-50 rounded-lg transition-colors">
+            <!-- Checkmark icon for every valid feature -->
+            <i class="fa-solid fa-check text-xl mt-0.5 flex-shrink-0" style="color: #00a303;"></i>
+            <span class="text-gray-700">{!! $inclusion !!}</span>
+        </li>
+    @endforeach
+</ul>
                         </div>
 
                         <!-- Description -->
@@ -313,7 +314,7 @@
                             </div>
                         </div>
                         <!-- Review Section -->
-                        <div class="max-w-3xl mx-auto p-3 bg-white rounded-xl shadow-lg border border-purple-50">
+                        <div class="bg-white rounded-3xl p-3 md:p-8 shadow-xl border border-gray-100">
                             <!-- Section Header -->
                             <div class="flex justify-between items-center mb-8">
                                 <h2
