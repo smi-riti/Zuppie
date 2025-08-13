@@ -21,8 +21,7 @@ class ListPackage extends Component
     public $packageIdToView;
     public $search = '';
     public $categoryFilter = '';
-    public $categories = [];
-    
+    public $categories = [];    
     public $updatingStatus = false;
     public $updatingSpecial = false;
 
@@ -51,6 +50,11 @@ class ListPackage extends Component
         $this->packageToDelete = $packageId;
         $this->showDeleteModal = true;
     }
+    protected $queryString = [
+        'search' => ['except' => '', 'as' => 's'],
+        'categoryFilter' => ['except' => '', 'as' => 'category']
+    ];
+
 
     public function closeViewModal()
     {
