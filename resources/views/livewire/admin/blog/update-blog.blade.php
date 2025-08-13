@@ -1,6 +1,6 @@
 <div>
     @if ($showModal)
-        <div class="fixed inset-0 backdrop-blur-sm bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
+        <div class="fixed inset-0 backdrop-blur-sm flex items-center justify-center z-50 p-4">
             <div class="bg-white rounded-lg shadow-xl max-w-4xl w-full max-h-[90vh] overflow-y-auto border-2 border-purple-300">
                 <div class="sticky top-0 bg-white p-6 border-b border-gray-200 rounded-t-lg">
                     <div class="flex justify-between items-center">

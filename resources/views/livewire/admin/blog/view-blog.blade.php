@@ -1,6 +1,6 @@
 <div>
     @if ($showModal && $blog)
-        <div class="fixed inset-0 backdrop-blur-sm bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
+        <div class="fixed inset-0 backdrop-blur-sm flex items-center justify-center z-50 p-4">
             <div class="bg-white rounded-lg shadow-xl max-w-5xl w-full max-h-[90vh] overflow-hidden border-2 border-purple-300">
                 <!-- Header -->
                 <div class="sticky top-0 bg-white p-6 border-b border-gray-200 rounded-t-lg">
