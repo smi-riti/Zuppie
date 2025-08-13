@@ -336,7 +336,7 @@
                             <i class="fas fa-calendar-plus"></i>
                             <span>Start Planning</span>
                         </a>
-                        <a href="/packages" class="border-2 border-purple-600 text-purple-600 px-8 py-4 rounded-full font-semibold text-lg hover:bg-purple-600 hover:text-white transition-all duration-300 flex items-center space-x-2">
+                        <a href="/event-packages" class="border-2 border-purple-600 text-purple-600 px-8 py-4 rounded-full font-semibold text-lg hover:bg-purple-600 hover:text-white transition-all duration-300 flex items-center space-x-2">
                             <i class="fas fa-eye"></i>
                             <span>View Packages</span>
                         </a>
