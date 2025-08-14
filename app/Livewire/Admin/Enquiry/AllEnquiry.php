@@ -6,10 +6,10 @@ use App\Models\Enquiry;
 use Livewire\Attributes\Layout;
 use Livewire\Attributes\On;
 use Livewire\Component;
+#[Title('All Enquiries')]
 
 class AllEnquiry extends Component
 {
-    
     public $showViewModal = false;
     public $enquiryIdToView;
 

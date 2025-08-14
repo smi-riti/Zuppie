@@ -10,7 +10,7 @@ use App\Services\RazorpayService;
 use App\Models\Payment;
 use Illuminate\Validation\ValidationException;
 use Illuminate\Support\Facades\Log;
-
+#[Title('Create Booking')]
 class CreateBooking extends Component
 {
     public $currentStep = 1;

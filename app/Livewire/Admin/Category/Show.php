@@ -9,8 +9,8 @@ use Livewire\Attributes\On;
 use Livewire\Attributes\Title;
 use Livewire\Component;
 use Livewire\WithPagination;
+#[Title('Show Category')]
 
-#[Title('Show')]
 class Show extends Component
 {
     use WithPagination;

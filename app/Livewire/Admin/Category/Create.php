@@ -7,6 +7,7 @@ use App\Models\Category;
 use Livewire\Attributes\On;
 use Livewire\Component;
 use Livewire\WithFileUploads;
+#[Title('Create Category')]
 
 class Create extends Component
 {

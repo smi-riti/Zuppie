@@ -4,6 +4,7 @@ namespace App\Livewire\Admin\Enquiry;
 
 use App\Models\Enquiry;
 use Livewire\Component;
+#[Title('View Enquiry')]
 
 class ViewEnquiry extends Component
 {

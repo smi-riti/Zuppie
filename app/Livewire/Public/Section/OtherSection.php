@@ -4,12 +4,12 @@ namespace App\Livewire\Public\Section;
 
 use App\Models\EventPackage;
 use Livewire\Component;
+#[Title('Other Section')]
 
 class OtherSection extends Component
 {
     public function render()
     {
-        // Get 6 event packages (first special ones, then regular ones)
         $packages = EventPackage::with(['category', 'images'])
             ->where('is_active', true)
             ->orderByDesc('is_special')

@@ -4,6 +4,7 @@ namespace App\Livewire\Public\Components;
 
 use App\Services\WishlistService;
 use Livewire\Component;
+#[Title('Wishlist Button')]
 
 class WishlistButton extends Component
 {

@@ -4,6 +4,7 @@ namespace App\Livewire\Public\Section;
 
 use App\Traits\HasSettings;
 use Livewire\Component;
+#[Title('About Us')]
 
 class About extends Component
 {

@@ -43,20 +43,14 @@ use App\Livewire\Public\Pages\PrivacyPolicy;
 use App\Livewire\Public\Event\EventPackageFilter;
 use Illuminate\Support\Facades\Auth;
 use App\Mail\LoginNotificationMail;
-// use App\Livewire\Auth\OtpLogin;
-// use App\Livewire\Auth\OtpVerify;
 use App\Livewire\Auth\PhoneOtpLogin;
 use App\Livewire\Auth\PhoneOtpVerify;
 
 Route::get('/', Homepage::class)->name('home');
 Route::get('/register', Register::class)->name('register');
 Route::get('/login', Login::class)->name('login');
-
-// Phone OTP Routes
 Route::get('/phone-otp-login', PhoneOtpLogin::class)->name('phone.otp.login');
 Route::get('/phone-otp-verify/{phone_no}', PhoneOtpVerify::class)->name('phone.otp.verify');
-// Route::get('/otp-login', OtpLogin::class)->name('otp.login');
-// Route::get('/otp-verify/{email}', OtpVerify::class)->name('otp.verify');
 Route::get('/forgot-password', ForgotPass::class)->name('password.request');
 Route::get('/reset-password/{token}', ResetPass::class)->name('password.reset');
 Route::post('/logout', function () {
@@ -66,7 +60,6 @@ Route::post('/logout', function () {
 
 Route::get('/about', About::class)->name('about');
 Route::get('/contact', Contact::class)->name('contact');
-Route::get('/booking', Bookingform::class)->name('booking');
 Route::get('/terms-of-service', TermsOfService::class)->name('terms-of-service');
 Route::get('/privacy-policy', PrivacyPolicy::class)->name('privacy-policy');
 
@@ -85,7 +78,6 @@ Route::get('/blog/{slug}', BlogDetailPage::class)->name('blog.detail');
 Route::middleware(['auth'])->group(function () {
     Route::get('/profile', Profile::class)->name('profile');
 });
-// Route::get('/profile/manage-booking/{booking_id?}', PublicManageBooking::class)->name('manage-booking');
 
 
 Route::prefix('admin')->middleware(['auth', 'admin'])->group(function () {

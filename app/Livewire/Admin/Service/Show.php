@@ -6,7 +6,9 @@ use App\Models\Service;
 use Livewire\Component;
 use Livewire\WithPagination;
 use Livewire\Attributes\Layout;
- #[Layout('components.layouts.admin')]
+#[Layout('components.layouts.admin')]
+#[Title('Show Service')]
+
 class Show extends Component
 {
     use WithPagination;

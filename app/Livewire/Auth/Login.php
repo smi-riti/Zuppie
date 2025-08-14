@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
 use App\Mail\LoginNotificationMail;
 use Illuminate\Support\Facades\Mail;
+#[Title('Login')]
 
 #[Layout("components.layouts.app")]
 class Login extends Component
@@ -18,7 +19,6 @@ class Login extends Component
 
     public function mount()
     {
-        // Pre-fill email if coming from booking
         $bookingData = session('booking_step3_data');
         if ($bookingData && $bookingData['email']) {
             $this->email = $bookingData['email'];
@@ -37,10 +37,8 @@ class Login extends Component
         if (Auth::attempt(['email' => $this->email, 'password' => $this->password])) {
             $user = Auth::user();
             
-            // Send login notification email
             // Mail::to($user->email)->send(new LoginNotificationMail($user));
             
-            // Check if coming from booking flow
             $bookingData = session('booking_form_data');
             $packageId = session('booking_package_id');
             $pinCode = session('booking_pin_code');
@@ -53,7 +51,6 @@ class Login extends Component
                 ]);
             }
             
-            // Check if user is admin
             if ($user->is_admin) {
                 return redirect()->route('admin.dashboard');
             }

@@ -6,7 +6,7 @@ use Livewire\Component;
 use App\Models\User;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\SendOtp;
-
+#[Title('Phone OTP Login')]
 
 class PhoneOtpLogin extends Component
 {
@@ -22,7 +22,6 @@ class PhoneOtpLogin extends Component
     public function sendOtp()
     {
         try {
-            // Clean input
             $this->phone_no = preg_replace('/[^0-9]/', '', $this->phone_no);
             
             $this->validate();
@@ -34,7 +33,6 @@ class PhoneOtpLogin extends Component
                 throw new \Exception('The phone number is not registered.');
             }
             
-            // Generate OTP
             $otpCode = rand(100000, 999999);
             
             $user->update([
@@ -42,7 +40,6 @@ class PhoneOtpLogin extends Component
                 'otp_expires_at' => now()->addMinutes(10)
             ]);
             
-            // Send email
             Mail::to($user->email)->send(new SendOtp($otpCode));
             
             $this->sent = true;
@@ -58,8 +55,6 @@ class PhoneOtpLogin extends Component
         $this->sendOtp();
         $this->message = $this->message ?: 'New OTP sent!';
     }
-
-
     public function render()
     {
         return view('livewire.auth.phone-otp-login');

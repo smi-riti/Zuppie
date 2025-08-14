@@ -3,6 +3,7 @@
 namespace App\Livewire\Public\Section;
 
 use Livewire\Component;
+#[Title('Hero Section')]
 
 class HeroSection extends Component
 {
