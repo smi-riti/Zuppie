@@ -1,7 +1,7 @@
 <div x-data="{ show: @entangle('showModal') }" x-show="show" class="fixed z-50 inset-0 top-28 overflow-y-auto">
     <div class="flex items-center justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
         <!-- Backdrop -->
-        <div x-show="show" class="fixed inset-0 bg-black/40 backdrop-blur-sm transition-opacity" @click="show = false">
+        <div x-show="show" class="fixed inset-0  backdrop-blur-sm transition-opacity" @click="show = false">
         </div>
 
         <!-- Modal panel -->
