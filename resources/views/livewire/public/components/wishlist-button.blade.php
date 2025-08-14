@@ -3,7 +3,7 @@
     <button id="submitReview"
         wire:click="toggle" 
         @click="isLoading = true; setTimeout(() => isLoading = false, 1000)" 
-        class="relative flex items-center justify-center w-12 h-12 rounded-full transition-all duration-300 transform hover:scale-110 focus:outline-none group"
+        class="relative flex items-center justify-center w-11 h-11 rounded-full transition-all duration-300 transform hover:scale-110 focus:outline-none group"
         :class="{ 'pointer-events-none': isLoading }"
         x-transition:enter="transition ease-out duration-300"
         x-transition:enter-start="opacity-0 scale-75"
@@ -19,7 +19,7 @@
                   x-transition:leave="transition ease-in duration-200"
                   x-transition:leave-start="opacity-100 scale-100"
                   x-transition:leave-end="opacity-0 scale-50">
-                <i class="fa-solid fa-heart text-2xl  text-pink-600"></i>
+                <i class="fa-solid fa-heart text-xl  text-pink-600"></i>
             </span>
         </template>
         <template x-if="!isLoading">
@@ -31,7 +31,7 @@
                   x-transition:leave="transition ease-in duration-200"
                   x-transition:leave-start="opacity-100 scale-100"
                   x-transition:leave-end="opacity-0 scale-50">
-                <i class="fa-regular fa-heart text-black"></i>
+                <i class="fa-regular fa-heart text-xl text-white"></i>
             </span>
         </template>
 
