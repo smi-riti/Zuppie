@@ -22,7 +22,7 @@
                     <!-- Header -->
                     <div class="flex items-start justify-between">
                         <div>
-                            <h2 class="text-xl font-bold text-gray-800">User Enquiry</h2>
+                            <h2 class="text-xl text-gray-800">User Enquiry</h2>
                             <span class="text-xs font-medium px-2 py-1 rounded-full 
                                 @if($enquiryDetails->status == 'pending') bg-amber-100 text-amber-800
                                 @else bg-green-100 text-green-800 @endif">

@@ -40,14 +40,14 @@
     @endif
 
     <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-8 gap-4">
-        <h2 class="text-3xl font-bold text-purple-700">Blog Posts ({{ $blogs->total() }})</h2>
+        <h2 class="text-3xl text-purple-700">Blog Posts ({{ $blogs->total() }})</h2>
         <div class="flex flex-col sm:flex-row gap-3 items-stretch sm:items-center w-full md:w-auto">
             <div class="flex-1 md:flex-none">
                 <input type="text" wire:model.live.debounce.300ms="search" placeholder="Search blogs..."
                     class="w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-purple-500 bg-white text-gray-900" />
             </div>
             <button wire:click="$dispatch('open-create-blog-modal')"
-                class="bg-gradient-to-r from-pink-500 to-purple-600 hover:from-purple-600 hover:to-pink-500 text-white font-bold py-3 px-6 rounded-lg flex items-center justify-center shadow-lg transition">
+                class="bg-gradient-to-r from-pink-500 to-purple-600 hover:from-purple-600 hover:to-pink-500 text-white py-3 px-6 rounded-lg flex items-center justify-center shadow-lg transition">
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" viewBox="0 0 20 20" fill="currentColor">
                     <path fill-rule="evenodd"
                         d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z"
@@ -149,12 +149,12 @@
                 <table class="w-full min-w-full">
                     <thead class="bg-gradient-to-r from-purple-50 to-purple-100">
                         <tr>
-                            <th class="py-4 px-6 text-left text-xs font-bold text-purple-700 uppercase tracking-wider">Image</th>
-                            <th class="py-4 px-6 text-left text-xs font-bold text-purple-700 uppercase tracking-wider">Title</th>
-                            <th class="py-4 px-6 text-left text-xs font-bold text-purple-700 uppercase tracking-wider">Category</th>
-                            <th class="py-4 px-6 text-left text-xs font-bold text-purple-700 uppercase tracking-wider">Status</th>
-                            <th class="py-4 px-6 text-left text-xs font-bold text-purple-700 uppercase tracking-wider">Created</th>
-                            <th class="py-4 px-6 text-right text-xs font-bold text-purple-700 uppercase tracking-wider">Actions</th>
+                            <th class="py-4 px-6 text-left text-xs text-purple-700 uppercase tracking-wider">Image</th>
+                            <th class="py-4 px-6 text-left text-xs text-purple-700 uppercase tracking-wider">Title</th>
+                            <th class="py-4 px-6 text-left text-xs text-purple-700 uppercase tracking-wider">Category</th>
+                            <th class="py-4 px-6 text-left text-xs text-purple-700 uppercase tracking-wider">Status</th>
+                            <th class="py-4 px-6 text-left text-xs text-purple-700 uppercase tracking-wider">Created</th>
+                            <th class="py-4 px-6 text-right text-xs text-purple-700 uppercase tracking-wider">Actions</th>
                         </tr>
                     </thead>
                     <tbody class="bg-white divide-y divide-gray-100">                        

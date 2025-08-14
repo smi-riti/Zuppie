@@ -6,7 +6,7 @@
                 <div class="sticky top-0 bg-white p-6 border-b border-gray-200 rounded-t-lg">
                     <div class="flex justify-between items-start">
                         <div class="flex-1">
-                            <h3 class="text-2xl font-bold text-purple-700 mb-2">{{ $blog->title }}</h3>
+                            <h3 class="text-2xl text-purple-700 mb-2">{{ $blog->title }}</h3>
                             <div class="flex items-center space-x-4 text-sm text-gray-500">
                                 <span>By {{ $blog->author->name }}</span>
                                 <span>•</span>

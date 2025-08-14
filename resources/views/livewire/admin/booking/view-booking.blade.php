@@ -1,12 +1,12 @@
 <div class="w-full min-h-screen bg-gradient-to-br from-purple-50 to-pink-50 flex flex-col items-center py-10">
     <div class="bg-white rounded-2xl shadow-xl overflow-hidden w-full max-w-5xl border border-purple-200">
         <div class="bg-gradient-to-r from-purple-400 to-pink-400 p-8 text-white flex flex-col md:flex-row md:items-center md:justify-between">
-            <h2 class="text-3xl font-bold text-center md:text-left">Booking Details</h2>
+            <h2 class="text-3xl text-center md:text-left">Booking Details</h2>
             <span class="mt-2 md:mt-0 text-purple-100 text-base">ID: {{ $booking->id }}</span>
 <div class="fixed inset-0 backdrop-blur-sm bg-black/30 flex items-center justify-center z-50 p-4">
     <div class="bg-white rounded-2xl shadow-xl overflow-hidden w-full max-w-3xl">
         <div class="bg-gradient-to-r from-purple-400 to-pink-400 p-6 text-white">
-            <h2 class="text-2xl font-bold text-center">Booking Details</h2>
+            <h2 class="text-2xl text-center">Booking Details</h2>
         </div>
         <div class="p-8 space-y-8">
             <!-- Booking details are shown below -->

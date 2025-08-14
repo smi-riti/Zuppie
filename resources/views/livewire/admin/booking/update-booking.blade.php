@@ -2,11 +2,11 @@
     <div class="bg-white rounded-2xl shadow-xl overflow-hidden w-full max-w-4xl max-h-[90vh] overflow-y-auto">
         <!-- Gradient Header -->
         <div class="bg-gradient-to-r from-purple-400 to-pink-400 p-8 text-white">
-            <h2 class="text-3xl font-bold text-center">Update Booking</h2>
+            <h2 class="text-3xl text-center">Update Booking</h2>
             <p class="mt-2 text-center text-purple-100">Update the booking details</p>
         </div>
 
-        <!-- Form Content -->
+        <!-- Form Content --> 
         <div class="p-8">
             @if (session('message'))
                 <div class="mb-6 p-4 bg-green-100 border-l-4 border-green-500 text-green-700 rounded">

@@ -4,7 +4,7 @@
             <div class="bg-white rounded-lg shadow-xl max-w-4xl w-full max-h-[90vh] overflow-y-auto border-2 border-purple-300">
                 <div class="sticky top-0 bg-white p-6 border-b border-gray-200 rounded-t-lg">
                     <div class="flex justify-between items-center">
-                        <h3 class="text-xl font-bold text-purple-700">Create New Blog Post</h3>
+                        <h3 class="text-xl text-purple-700">Create New Blog Post</h3>
                         <button wire:click="closeModal" class="text-gray-500 hover:text-gray-700 transition-colors">
                             <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
@@ -112,7 +112,7 @@
                             Cancel
                         </button>
                         <button type="submit" 
-                                class="w-full sm:w-auto bg-gradient-to-r from-pink-500 to-purple-600 hover:from-purple-600 hover:to-pink-500 text-white font-bold py-3 px-6 rounded-lg transition-all shadow-lg">
+                                class="w-full sm:w-auto bg-gradient-to-r from-pink-500 to-purple-600 hover:from-purple-600 hover:to-pink-500 text-white py-3 px-6 rounded-lg transition-all shadow-lg">
                             Create Blog Post
                         </button>
                     </div>
