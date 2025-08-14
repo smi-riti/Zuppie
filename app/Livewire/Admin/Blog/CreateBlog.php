@@ -7,12 +7,9 @@ use App\Models\BlogImage;
 use App\Models\Category;
 use App\Helpers\ImageKitHelper;
 use Livewire\Component;
-use ImageKit\ImageKit;
 use Livewire\WithFileUploads;
-use Illuminate\Support\Str;
 use Livewire\Attributes\On;
-#[Title('Create Blog')]
-#[Layout('components.layouts.admin')]
+
 class CreateBlog extends Component
 {
     use WithFileUploads;
@@ -75,18 +72,20 @@ class CreateBlog extends Component
     {
         $this->resetForm();
         $this->showModal = true;
+        $this->dispatch('initQuill'); // Initialize editor
     }
 
     public function closeModal()
     {
         $this->showModal = false;
         $this->resetForm();
+        $this->dispatch('destroyQuill'); // Destroy editor
     }
 
     public function saveBlog()
     {
         $this->validate();
-        // dd($this->validate());
+        
         try {
             // Create the blog
             $blog = Blog::create([
@@ -97,7 +96,7 @@ class CreateBlog extends Component
                 'category_id' => $this->form['category_id'] ?: null,
             ]);
 
-            // Handle image uploadsshuruchi0508@gmail.com
+            // Handle image uploads
             if (!empty($this->images)) {
                 foreach ($this->images as $index => $image) {
                     $uploadResult = ImageKitHelper::uploadImage($image, 'Zuppie/Blogs');
