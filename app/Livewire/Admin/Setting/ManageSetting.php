@@ -7,7 +7,9 @@ use Livewire\WithFileUploads;
 use App\Models\Setting;
 use Livewire\Attributes\Validate;
 use Livewire\Attributes\Layout;
- #[Layout('components.layouts.admin')]
+#[Title('Manage Settings')]
+
+#[Layout('components.layouts.admin')]
 class ManageSetting extends Component
 {
     use WithFileUploads;

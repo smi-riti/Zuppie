@@ -5,6 +5,7 @@ namespace App\Livewire\Admin\Reviews;
 use App\Models\reviews;
 use Livewire\Attributes\Layout;
 use Livewire\Component;
+#[Title('All Reviews')]
 
 class All extends Component
 {

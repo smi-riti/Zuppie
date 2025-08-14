@@ -6,14 +6,14 @@ use Livewire\Component;
 use Livewire\Attributes\Layout;
 use Livewire\WithPagination;
 use App\Models\User;
-
+#[Title('Manage Users')]
 
 class ManageUser extends Component
 {
     use WithPagination;
     public $search = '';
     #[Layout('components.layouts.admin')]
-     public function render()
+    public function render()
     {
         $users = User::when($this->search, function ($query) {
                 return $query->where('name', 'like', '%'.$this->search.'%')

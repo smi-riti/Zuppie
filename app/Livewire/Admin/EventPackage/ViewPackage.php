@@ -5,6 +5,7 @@ namespace App\Livewire\Admin\EventPackage;
 use App\Models\EventPackage;
 use Livewire\Component;
 use App\Helpers\ImageKitHelper;
+#[Title('View Packages')]
 
 class ViewPackage extends Component
 {

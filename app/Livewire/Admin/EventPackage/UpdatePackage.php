@@ -8,10 +8,11 @@ use App\Models\Category;
 use Livewire\WithFileUploads; 
 use App\Helpers\ImageKitHelper;
 use Livewire\Attributes\Layout;
+#[Title('Update Packages')]
+
 
 class UpdatePackage extends Component
 { 
-  
     use WithFileUploads;
 
     public $packageId, $category_id, $name, $price, $discount_type, $discount_value, $description, $features, $is_active, $is_special;

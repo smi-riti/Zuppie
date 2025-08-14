@@ -9,18 +9,17 @@ use Livewire\Component;
 use Livewire\WithPagination;
 use Livewire\Attributes\Layout;
 use Carbon\Carbon;
+#[Title('Dashboard')]
 
 #[Layout('components.layouts.admin')]
 class Dashboard extends Component
 {
     use WithPagination;
     
-    public $perPage = 3; // Number of events per page
+    public $perPage = 3; 
     public $currentMonth;
     public $currentYear;
     public $selectedDate = null;
-
-    // Statistics properties
     public $upcomingEventsCount = 0;
     public $pastEventsCount = 0;
     public $cancelledEventsCount = 0;
@@ -35,21 +34,17 @@ class Dashboard extends Component
 
     public function calculateStatistics()
     {
-        // Upcoming Events (confirmed events from today onwards)
         $this->upcomingEventsCount = Booking::where('status', 'confirmed')
             ->whereDate('event_date', '>=', now()->toDateString())
             ->count();
 
-        // Past Events (completed events)
         $this->pastEventsCount = Booking::where('status', 'confirmed')
             ->where('is_completed', 1)
             ->whereDate('event_date', '<', now()->toDateString())
             ->count();
 
-        // Cancelled Events
         $this->cancelledEventsCount = Booking::where('status', 'cancelled')->count();
 
-        // Total Revenue (online payments + completed cash payments)
         $onlinePayment = Payment::where('status', 'paid')->sum('amount');
         $cashPayment = Booking::where('is_completed', 1)->sum('due_amount');
         $this->totalRevenue = $onlinePayment + $cashPayment;
@@ -118,12 +113,8 @@ class Dashboard extends Component
     public function getMonthlyRevenueData()
     {
         $monthlyData = [];
-        
-        // Use current year and show all 12 months
         $currentYear = \Carbon\Carbon::now(config('app.timezone', 'UTC'))->year;
-        
-        // Generate all 12 months of current year (January to December)
-        for ($month = 1; $month <= 12; $month++) {
+            for ($month = 1; $month <= 12; $month++) {
             $targetDate = \Carbon\Carbon::create($currentYear, $month, 1);
             $monthName = $targetDate->format('M');
             
@@ -145,7 +136,6 @@ class Dashboard extends Component
             ];
         }
         
-        // Debug: Log the current year and generated months for verification
         \Log::info('Chart Full Year Debug:', [
             'current_year' => $currentYear,
             'chart_months' => collect($monthlyData)->pluck('month')->toArray(),

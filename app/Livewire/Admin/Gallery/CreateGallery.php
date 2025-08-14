@@ -8,6 +8,7 @@ use Livewire\Component;
 use Livewire\WithFileUploads;
 use ImageKit\ImageKit;
 use App\Helpers\ImageKitHelper;
+#[Title('Create Gallery')]
 
 class CreateGallery extends Component
 {
@@ -72,7 +73,6 @@ class CreateGallery extends Component
         unset($this->images[$index]);
         $this->images = array_values($this->images);
     }
-
 
     public function render()
     {
