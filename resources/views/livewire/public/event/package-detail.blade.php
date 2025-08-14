@@ -388,7 +388,7 @@
                             <!-- View More Button -->
                             @if ($reviews->count() > 2)
                                 <div class="mt-8 text-center">
-                                    <button wire:click="$dispatch('viewAllReviews', {{ $package->id }})"
+                                    <button wire:click="openAllReviewsModal({{ $package->id }})"
                                         class="px-6 py-2 bg-gradient-to-r from-purple-500 to-pink-500 text-white rounded-full hover:shadow-lg transition-all">
                                         View All Reviews
                                     </button>
@@ -486,8 +486,8 @@
 
     <livewire:public.section.enquiry-form />
     <livewire:public.components.bottom-navigation />
-    @if ($showModal)
-        <livewire:public.components.review-modal :packageId="$package->id" />
+    @if ($showAllReviewsModal)
+        <livewire:public.components.review-modal :packageId="$packageIdOfReview"/>
     @endif
     <style>
         /* Custom Animations */

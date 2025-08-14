@@ -24,16 +24,19 @@ class PackageDetail extends Component
     public $average_review = 0;
     public $totalReview;
     public $reviewImages;
-    public $showModal = false;
-    public $packageIdToViewReviews;
-
-
-    #[On('viewAllReviews')]
-    public function openModal($packageId){
-        $this->showModal = true;
+    public $showAllReviewsModal = false;
+    public $packageIdOfReview;
+    protected $listeners = [
+        'closeAllReviewsModal' => 'closeAllReviewsModal',
+    ];
+    public function openAllReviewsModal($packageId)
+    {
+        $this->packageIdOfReview = $packageId;
+        $this->showAllReviewsModal = true;
     }
-    public function closeModal(){
-        $this->showModal = false;
+    public function closeAllReviewsModal()
+    {
+        $this->showAllReviewsModal = false;
     }
 
     protected $rules = [
@@ -205,8 +208,8 @@ class PackageDetail extends Component
     public function render()
     {
         $reviews = reviews::where('event_package_id', $this->package->id)
-        ->where('approved', true)
-        ->where('rating', '>=', 3)
+            ->where('approved', true)
+            ->where('rating', '>=', 3)
             ->limit(3)->get();
         $this->countAvgReview();
         return view('livewire.public.event.package-detail', compact('reviews'));
