@@ -3,28 +3,28 @@
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
         <!-- Upcoming Events Card -->
         <div class="bg-white rounded-xl shadow-sm p-6 border-t-4 border-pink-400 hover:shadow-md transition">
-            <div class="text-3xl font-bold text-purple-700">24</div>
+            <div class="text-3xl text-purple-700">24</div>
             <div class="text-sm text-purple-500">Upcoming Events</div>
             <div class="mt-2 h-1 bg-gradient-to-r from-pink-300 to-purple-300 rounded-full"></div>
         </div>
 
         <!-- Birthdays Card -->
         <div class="bg-white rounded-xl shadow-sm p-6 border-t-4 border-purple-400 hover:shadow-md transition">
-            <div class="text-3xl font-bold text-purple-700">18</div>
+            <div class="text-3xl text-purple-700">18</div>
             <div class="text-sm text-purple-500">Birthdays</div>
             <div class="mt-2 h-1 bg-gradient-to-r from-purple-300 to-pink-300 rounded-full"></div>
         </div>
 
         <!-- Baby Showers Card -->
         <div class="bg-white rounded-xl shadow-sm p-6 border-t-4 border-pink-300 hover:shadow-md transition">
-            <div class="text-3xl font-bold text-purple-700">6</div>
+            <div class="text-3xl text-purple-700">6</div>
             <div class="text-sm text-purple-500">Baby Showers</div>
             <div class="mt-2 h-1 bg-gradient-to-r from-pink-200 to-purple-200 rounded-full"></div>
         </div>
 
         <!-- Revenue Card -->
         <div class="bg-white rounded-xl shadow-sm p-6 border-t-4 border-purple-300 hover:shadow-md transition">
-            <div class="text-3xl font-bold text-purple-700"> ₹ {{ number_format($totalRevenue, 2, '.', ',') }}</div>
+            <div class="text-3xl text-purple-700"> ₹ {{ number_format($totalRevenue, 2, '.', ',') }}</div>
             <div class="text-sm text-purple-500">Total Revenue</div>
             <div class="mt-2 h-1 bg-gradient-to-r from-purple-200 to-pink-200 rounded-full"></div>
         </div>
@@ -35,7 +35,7 @@
         <!-- Upcoming Events (2/3 width) -->
         <div class="lg:col-span-2 bg-white rounded-xl shadow-sm p-6 hover:shadow-md transition">
             <div class="flex justify-between items-center border-b border-purple-100 pb-4 mb-6">
-                <h2 class="text-lg font-semibold text-purple-800">Upcoming Events</h2>
+                <h2 class="text-lg text-purple-800">Upcoming Events</h2>
                 <!-- Removed "View All" button since we have pagination -->
             </div>
 
@@ -48,7 +48,7 @@
                             {{ substr($booking->eventPackage->name, 0, 1) }}
                         </div>
                         <div class="flex-grow">
-                            <div class="font-semibold text-purple-800">{{ $booking->eventPackage->name }}</div>
+                            <div class="text-purple-800">{{ $booking->eventPackage->name }}</div>
                             <div class="text-xs text-purple-500">
                                 {{ $booking->event_date->format('M d, Y') }} •
                                 {{ $booking->guest_count ?? 'N/A' }} Guests
@@ -72,7 +72,7 @@
             <!-- Calendar -->
             <div class="bg-white rounded-xl shadow-sm p-6 hover:shadow-md transition" id="admin-calendar">
                 <div class="flex justify-between items-center mb-4">
-                    <h2 class="text-lg font-semibold text-purple-800" id="calendar-month-year">
+                    <h2 class="text-lg text-purple-800" id="calendar-month-year">
                         {{ \Carbon\Carbon::create($currentYear, $currentMonth, 1)->format('F Y') }}
                     </h2>
                     <div class="flex space-x-2">
@@ -101,7 +101,7 @@
                                     <span class="text-sm font-medium text-purple-800">Total Events</span>
                                 </div>
                                 <span
-                                    class="text-lg font-bold text-purple-700">{{ $this->getEventsCountForSelectedDate() }}</span>
+                                    class="text-lg text-purple-700">{{ $this->getEventsCountForSelectedDate() }}</span>
                             </div>
                         @else
                             <div class="p-3 bg-purple-50 rounded-lg text-center">
@@ -173,7 +173,7 @@
             </div>
 
             <div class="bg-white rounded-xl shadow-sm p-6 hover:shadow-md transition">
-                <h2 class="text-lg font-semibold text-purple-800 mb-4">Quick Actions</h2>
+                <h2 class="text-lg  text-purple-800 mb-4">Quick Actions</h2>
                 <div class="grid grid-cols-2 gap-3">
                     <a href="{{ route('admin.event-packages.create') }}" wire:navigate
                         class="bg-gradient-to-r text-center from-purple-500 to-pink-500 text-white py-2 px-3 rounded-md text-sm font-medium hover:opacity-90 transition shadow-md hover:shadow-lg">

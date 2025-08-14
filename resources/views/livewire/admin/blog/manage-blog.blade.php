@@ -157,7 +157,8 @@
                             <th class="py-4 px-6 text-right text-xs font-bold text-purple-700 uppercase tracking-wider">Actions</th>
                         </tr>
                     </thead>
-                    <tbody class="bg-white divide-y divide-gray-100">                        @foreach ($blogs as $blog)
+                    <tbody class="bg-white divide-y divide-gray-100">                        
+                        @foreach ($blogs as $blog)
                             <tr class="hover:bg-purple-50 transition-colors duration-200" wire:key="blog-{{ $blog->id }}">
                                 <td class="py-6 px-6 whitespace-nowrap">
                                     @if ($blog->featuredImage)
