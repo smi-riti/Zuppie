@@ -23,12 +23,16 @@ class PackageDetail extends Component
     public $average_review = 0;
     public $totalReview;
     public $reviewImages;
-    public $openModal = false;
+    public $showModal = false;
+    public $packageIdToViewReviews;
 
 
     #[On('viewAllReviews')]
-    public function openModal(){
-        $this->openModal = true;
+    public function openModal($packageId){
+        $this->showModal = true;
+    }
+    public function closeModal(){
+        $this->showModal = false;
     }
 
     protected $rules = [

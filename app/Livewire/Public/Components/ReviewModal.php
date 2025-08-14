@@ -2,12 +2,17 @@
 
 namespace App\Livewire\Public\Components;
 
+use App\Models\reviews;
 use Livewire\Component;
 
 class ReviewModal extends Component
 {
+    public $showModal = false;
+    public $packageId;
+
     public function render()
     {
-        return view('livewire.public.components.review-modal');
+        $reviews = reviews::all();
+        return view('livewire.public.components.review-modal', ['reviews' => $reviews]);
     }
 }
