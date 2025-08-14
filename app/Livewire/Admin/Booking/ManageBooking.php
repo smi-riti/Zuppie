@@ -8,7 +8,7 @@ use App\Models\Booking;
 use App\Models\User;
 use App\Models\EventPackage;
 use Livewire\WithPagination;
-
+#[Title('Manage Booking')]
 class ManageBooking extends Component
 {
     use WithPagination;

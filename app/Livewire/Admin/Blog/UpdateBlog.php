@@ -11,7 +11,7 @@ use ImageKit\ImageKit;
 use Livewire\WithFileUploads;
 use Illuminate\Support\Str;
 use Livewire\Attributes\On;
-
+#[Title('Update Blog')]
 #[Layout('components.layouts.admin')]
 class UpdateBlog extends Component
 {

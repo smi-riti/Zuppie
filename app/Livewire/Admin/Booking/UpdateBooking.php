@@ -7,7 +7,7 @@ use App\Models\EventPackage;
 use App\Models\User;
 use App\Models\Service;
 use Illuminate\Validation\ValidationException;
-
+#[Title('Update Booking')]
 class UpdateBooking extends Component
 {
     public $bookingId;
