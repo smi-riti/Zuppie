@@ -5,6 +5,7 @@ namespace App\Livewire\Public\Blog;
 use App\Models\Blog;
 use Livewire\Component;
 use Livewire\Attributes\Layout;
+#[Title('Blog Detail')]
 
 class BlogDetailPage extends Component
 {

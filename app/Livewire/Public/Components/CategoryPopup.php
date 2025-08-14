@@ -4,6 +4,7 @@ namespace App\Livewire\Public\Components;
 
 use App\Models\Category;
 use Livewire\Component;
+#[Title('Category Popup')]
 
 class CategoryPopup extends Component
 {

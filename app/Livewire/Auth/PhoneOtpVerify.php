@@ -3,8 +3,8 @@
 namespace App\Livewire\Auth;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
-
 use Livewire\Component;
+#[Title('Phone OTP Login')]
 
 class PhoneOtpVerify extends Component
 {

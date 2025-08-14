@@ -7,6 +7,7 @@ use App\Models\Category;
 use Livewire\Component;
 use Livewire\WithPagination;
 use Livewire\Attributes\Layout;
+#[Title('Blog Page')]
 
 class BlogPage extends Component
 {

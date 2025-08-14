@@ -7,6 +7,7 @@ use Livewire\Attributes\On;
 use Livewire\Component;
 use App\Models\EventPackage;
 use App\Models\Service;
+#[Title('Package Detail')]
 
 class PackageDetail extends Component
 {

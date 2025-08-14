@@ -4,6 +4,7 @@ namespace App\Livewire\Public\Pages;
 
 use App\Traits\HasSettings;
 use Livewire\Component;
+#[Title('Privacy Policy')]
 
 class PrivacyPolicy extends Component
 {
