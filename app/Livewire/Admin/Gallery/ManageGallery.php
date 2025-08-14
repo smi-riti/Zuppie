@@ -6,6 +6,7 @@ use Livewire\Component;
 use Livewire\WithPagination;
 use Livewire\Attributes\Layout;
 use Livewire\Attributes\On;
+#[Title('Manage Gallery')]
 
 class ManageGallery extends Component
 {

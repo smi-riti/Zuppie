@@ -6,6 +6,7 @@ use App\Models\Category;
 use App\Models\Enquiry;
 use Livewire\Attributes\On;
 use Livewire\Component;
+#[Title('Enquiry Form')]
 
 class EnquiryForm extends Component
 {

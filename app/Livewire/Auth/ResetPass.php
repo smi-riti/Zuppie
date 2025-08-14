@@ -6,6 +6,7 @@ use Livewire\Component;
 use Illuminate\Support\Facades\Password;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Hash;
+#[Title('Reset Password')]
 
 class ResetPass extends Component
 {

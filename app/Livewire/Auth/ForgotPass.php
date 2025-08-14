@@ -4,7 +4,7 @@ namespace App\Livewire\Auth;
 
 use Illuminate\Support\Facades\Password;
 use Livewire\Component;
-
+#[Title('Forgot Password')]
 class ForgotPass extends Component
 {
     public $email;

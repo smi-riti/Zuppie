@@ -4,6 +4,7 @@ namespace App\Livewire\Public\Components;
 
 use App\Models\reviews;
 use Livewire\Component;
+#[Title('Review Modal')]
 
 class ReviewModal extends Component
 {

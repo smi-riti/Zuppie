@@ -6,22 +6,18 @@ use App\Models\Blog;
 use App\Models\Category;
 use App\Models\EventPackage;
 use Livewire\Component;
+#[Title('Homepage')]
 
 class Homepage extends Component
 {
-    
-
-    
     public function render()
     {
-        // Get 9 categories (first special ones, then regular ones)
         $categories = Category::where('parent_id', null)
             ->orderByDesc('is_special')
             ->orderBy('created_at')
             ->limit(9)
             ->get();
 
-        // Get 6 event packages (first special ones, then regular ones)
         $packages = EventPackage::with(['category', 'images'])
             ->where('is_active', true)
             ->orderByDesc('is_special')
@@ -29,7 +25,6 @@ class Homepage extends Component
             ->limit(6)
             ->get();
 
-        // Define gradient colors for categories
         $gradientColors = [
             'from-pink-600 to-purple-600',
             'from-blue-600 to-indigo-600',

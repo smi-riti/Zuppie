@@ -6,6 +6,7 @@ use App\Models\EventPackage;
 use App\Models\Category;
 use Livewire\Component;
 use Livewire\WithPagination;
+#[Title('Event Package Filter')]
 
 class EventPackageFilter extends Component
 {

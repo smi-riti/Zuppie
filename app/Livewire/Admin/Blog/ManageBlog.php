@@ -8,7 +8,7 @@ use Livewire\WithPagination;
 use Illuminate\Support\Str;
 use Livewire\Attributes\Layout;
 use Livewire\Attributes\On;
-
+#[Title('Manage Blog')]
 class ManageBlog extends Component
 {
     use WithPagination;

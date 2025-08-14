@@ -7,6 +7,7 @@ use Livewire\WithFileUploads;
 use ImageKit\ImageKit;
 use App\Models\Category; // Add this
 use App\Helpers\ImageKitHelper;
+#[Title('Update Gallery')]
 
 class UpdateGallery extends Component
 {

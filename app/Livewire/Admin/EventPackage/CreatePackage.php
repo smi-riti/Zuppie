@@ -7,12 +7,11 @@ use App\Models\Category;
 use Livewire\WithFileUploads;
 use App\Helpers\ImageKitHelper;
 use Livewire\Attributes\Layout;
+#[Title('Create Package')]
 
 class CreatePackage extends Component
 {
-  
     use WithFileUploads;
-
     public $category_id, $name, $price, $discount_type, $discount_value, $description, $features, $is_active = true, $is_special = false;
     public $duration_hours = 0;
     public $duration_minutes = 0;

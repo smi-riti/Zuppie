@@ -8,6 +8,7 @@ use Livewire\Attributes\On;
 use Livewire\Component;
 use Livewire\WithFileUploads;
 use Illuminate\Support\Str;
+#[Title('Create Offer')]
 
 class CreateOffer extends Component
 {
@@ -35,7 +36,6 @@ class CreateOffer extends Component
                 $code = $baseCode . $counter;
                 $counter++;
             }
-            
             $this->offer_code = $code;
         }
     }

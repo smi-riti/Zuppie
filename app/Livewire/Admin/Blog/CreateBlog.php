@@ -11,8 +11,8 @@ use ImageKit\ImageKit;
 use Livewire\WithFileUploads;
 use Illuminate\Support\Str;
 use Livewire\Attributes\On;
-
- #[Layout('components.layouts.admin')]
+#[Title('Create Blog')]
+#[Layout('components.layouts.admin')]
 class CreateBlog extends Component
 {
     use WithFileUploads;
@@ -97,7 +97,7 @@ class CreateBlog extends Component
                 'category_id' => $this->form['category_id'] ?: null,
             ]);
 
-            // Handle image uploads
+            // Handle image uploadsshuruchi0508@gmail.com
             if (!empty($this->images)) {
                 foreach ($this->images as $index => $image) {
                     $uploadResult = ImageKitHelper::uploadImage($image, 'Zuppie/Blogs');

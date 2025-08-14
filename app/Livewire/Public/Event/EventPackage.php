@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
 use App\Models\EventPackage as EventPackageModel;
 use App\Models\Category;
+#[Title('Event Package')]
 
 class EventPackage extends Component
 {

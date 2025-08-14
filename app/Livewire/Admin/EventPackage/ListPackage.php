@@ -8,8 +8,8 @@ use App\Models\Category;
 use Livewire\Component;
 use Livewire\WithPagination;
 use Livewire\Attributes\Layout;
-
 use App\Helpers\ImageKitHelper;
+#[Title('List Packages')]
 
 class ListPackage extends Component
 {
