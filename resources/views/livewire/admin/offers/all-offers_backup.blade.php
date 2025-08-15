@@ -2,7 +2,7 @@
     <!-- Header Section -->
     <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-6 gap-4">
         <div>
-            <h2 class="text-2xl font-bold text-purple-800">All Offers</h2>
+            <h2 class="text-2xl text-purple-800">All Offers</h2>
             <p class="text-sm text-purple-500 mt-1">
                 {{ count($offers) }} {{ Str::plural('offer', count($offers)) }} available
             </p>

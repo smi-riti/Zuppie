@@ -45,12 +45,12 @@
             <table class="w-full bg-white">
                 <thead class="bg-gradient-to-r from-pink-50 to-purple-50">
                     <tr>
-                        <th class="px-6 lg:px-8 py-4 text-left text-xs font-semibold text-purple-700 uppercase tracking-wider">Image</th>
-                        <th class="px-6 lg:px-8 py-4 text-left text-xs font-semibold text-purple-700 uppercase tracking-wider">Name</th>
-                        <th class="px-6 lg:px-8 py-4 text-left text-xs font-semibold text-purple-700 uppercase tracking-wider">Parent</th>
-                        <th class="px-6 lg:px-8 py-4 text-left text-xs font-semibold text-purple-700 uppercase tracking-wider">Description</th>
-                        <th class="px-6 lg:px-8 py-4 text-left text-xs font-semibold text-purple-700 uppercase tracking-wider">Special</th>
-                        <th class="px-6 lg:px-8 py-4 text-right text-xs font-semibold text-purple-700 uppercase tracking-wider">Actions</th>
+                        <th class="px-6 lg:px-8 py-4 text-left text-xs text-purple-700 uppercase">Image</th>
+                        <th class="px-6 lg:px-8 py-4 text-left text-xs text-purple-700 uppercase">Name</th>
+                        <th class="px-6 lg:px-8 py-4 text-left text-xs text-purple-700 uppercase">Parent</th>
+                        <th class="px-6 lg:px-8 py-4 text-left text-xs text-purple-700 uppercase">Description</th>
+                        <th class="px-6 lg:px-8 py-4 text-left text-xs text-purple-700 uppercase">Special</th>
+                        <th class="px-6 lg:px-8 py-4 text-right text-xs text-purple-700 uppercase">Actions</th>
                     </tr>
                 </thead>
                 <tbody class="divide-y divide-purple-100">

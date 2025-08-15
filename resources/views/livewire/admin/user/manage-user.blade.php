@@ -2,7 +2,7 @@
     <div class="">
         <!-- Header -->
         <div class="mb-8">
-            <h1 class="text-3xl font-bold text-purple-800">User Management</h1>
+            <h1 class="text-3xl text-purple-800">User Management</h1>
             <p class="text-purple-600">Manage all registered users</p>
         </div>
 
@@ -41,7 +41,7 @@
                             <tr class="hover:bg-purple-50 transition">
                                 <td class="px-6 py-4 whitespace-nowrap">
                                     <div class="flex items-center">
-                                        <div class="flex-shrink-0 h-10 w-10 rounded-full bg-gradient-to-r from-purple-400 to-pink-400 flex items-center justify-center text-white font-bold">
+                                        <div class="flex-shrink-0 h-10 w-10 rounded-full bg-gradient-to-r from-purple-400 to-pink-400 flex items-center justify-center text-white">
                                             {{ strtoupper(substr($user->name, 0, 1)) }}
                                         </div>
                                         <div class="ml-4">

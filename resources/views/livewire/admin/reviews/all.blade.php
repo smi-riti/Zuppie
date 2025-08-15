@@ -37,7 +37,7 @@
                                     {{ $review->eventPackage->name ?? '-' }}
                                 </td>
                                 <td class="px-6 py-4">
-                                    <span class="text-yellow-500 font-bold">{{ $review->rating }} &#9733;</span>
+                                    <span class="text-yellow-500">{{ $review->rating }} &#9733;</span>
                                 </td>
                                 <td class="px-6 py-4">{{ $review->comment }}</td>
                                 <td class="px-6 py-4 flex gap-2">
@@ -82,7 +82,7 @@
                                     {{ $apvr->eventPackage->name ?? '-' }}
                                 </td>
                                 <td class="px-6 py-4">
-                                    <span class="text-yellow-500 font-bold">{{ $apvr->rating }} &#9733;</span>
+                                    <span class="text-yellow-500">{{ $apvr->rating }} &#9733;</span>
                                 </td>
                                 <td class="px-6 py-4">{{ $apvr->comment }}</td>
                                 <td class="px-6 py-4 flex gap-2">

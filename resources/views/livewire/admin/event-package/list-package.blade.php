@@ -2,7 +2,7 @@
     <div class="">
         <div class="flex justify-between items-center mb-8">
             <div>
-                <h2 class="text-3xl font-bold text-purple-800">Event Packages</h2>
+                <h2 class="text-3xl text-purple-800">Event Packages</h2>
                 <p class="text-sm text-purple-600 mt-1">Manage all your event packages</p>
             </div>
             <a href="{{ route('admin.event-packages.create') }}"

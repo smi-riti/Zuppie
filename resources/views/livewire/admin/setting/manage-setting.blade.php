@@ -13,7 +13,7 @@
                 <div class="bg-gradient-to-r from-pink-300 via-pink-200 to-pink-100 px-8 py-6">
                     <div class="flex items-center justify-between">
                         <div>
-                            <h1 class="text-3xl font-bold text-white flex items-center">
+                            <h1 class="text-3xl text-white flex items-center">
                                 <div class="w-12 h-12 bg-white/20 rounded-xl flex items-center justify-center mr-4">
                                     <svg class="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"></path>
@@ -96,7 +96,7 @@
                 <div class="lg:col-span-1">
                     <div class="bg-white/80 backdrop-blur-lg rounded-2xl shadow-xl border border-white/20 overflow-hidden h-fit">
                         <div class="bg-gradient-to-r from-pink-300 to-pink-200 px-6 py-5">
-                            <h2 class="text-xl font-bold text-white flex items-center">
+                            <h2 class="text-xl text-white flex items-center">
                                 <div class="w-10 h-10 bg-white/20 rounded-lg flex items-center justify-center mr-3">
                                     <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
@@ -166,7 +166,7 @@
 
                             <!-- Logo Guidelines -->
                             <div class="bg-gradient-to-r from-pink-50 to-pink-100 rounded-xl p-5 border border-pink-200">
-                                <h4 class="text-sm font-bold text-gray-800 mb-3 flex items-center">
+                                <h4 class="text-sm text-gray-800 mb-3 flex items-center">
                                     <svg class="w-4 h-4 mr-2 text-pink-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
                                     </svg>
@@ -201,7 +201,7 @@
                 <div class="lg:col-span-2">
                     <div class="bg-white/80 backdrop-blur-lg rounded-2xl shadow-xl border border-white/20 overflow-hidden">
                         <div class="bg-gradient-to-r from-purple-300 to-pink-200 px-6 py-5">
-                            <h2 class="text-xl font-bold text-white flex items-center">
+                            <h2 class="text-xl text-white flex items-center">
                                 <div class="w-10 h-10 bg-white/20 rounded-lg flex items-center justify-center mr-3">
                                     <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path>
@@ -217,7 +217,7 @@
                                 
                                 <!-- Basic Information Section -->
                                 <div class="bg-gradient-to-r from-pink-50 to-pink-100 rounded-xl p-6 border border-pink-200">
-                                    <h3 class="text-lg font-bold text-gray-800 mb-6 flex items-center">
+                                    <h3 class="text-lg text-gray-800 mb-6 flex items-center">
                                         <div class="w-8 h-8 bg-gradient-to-r from-pink-500 to-pink-600 rounded-lg flex items-center justify-center mr-3">
                                             <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"></path>
@@ -229,7 +229,7 @@
                                     <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
                                         <!-- Site Name -->
                                         <div class="lg:col-span-2">
-                                            <label for="site_name" class="block text-sm font-bold text-gray-700 mb-3">
+                                            <label for="site_name" class="block text-sm  text-gray-700 mb-3">
                                                 Website Name <span class="text-red-500">*</span>
                                             </label>
                                             <div class="relative">
@@ -254,7 +254,7 @@
 
                                 <!-- Contact Information Section -->
                                 <div class="bg-gradient-to-r from-purple-50 to-info-50 rounded-xl p-6 border border-green-100">
-                                    <h3 class="text-lg font-bold text-gray-800 mb-6 flex items-center">
+                                    <h3 class="text-lg text-gray-800 mb-6 flex items-center">
                                         <div class="w-8 h-8 bg-gradient-to-r from-green-500 to-info-500 rounded-lg flex items-center justify-center mr-3">
                                             <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 4.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
@@ -266,7 +266,7 @@
                                     <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
                                         <!-- Email -->
                                         <div>
-                                            <label for="email" class="block text-sm font-bold text-gray-700 mb-3">
+                                            <label for="email" class="block text-sm text-gray-700 mb-3">
                                                 Email Address <span class="text-red-500">*</span>
                                             </label>
                                             <div class="relative">
@@ -288,7 +288,7 @@
 
                                         <!-- Phone -->
                                         <div>
-                                            <label for="phone_no" class="block text-sm font-bold text-gray-700 mb-3">
+                                            <label for="phone_no" class="block text-sm text-gray-700 mb-3">
                                                 Phone Number <span class="text-red-500">*</span>
                                             </label>
                                             <div class="relative">
@@ -310,7 +310,7 @@
 
                                         <!-- Address -->
                                         <div class="lg:col-span-2">
-                                            <label for="address" class="block text-sm font-bold text-gray-700 mb-3">
+                                            <label for="address" class="block text-sm text-gray-700 mb-3">
                                                 Business Address <span class="text-red-500">*</span>
                                             </label>
                                             <div class="relative">
@@ -335,7 +335,7 @@
 
                                 <!-- Social Media Section -->
                                 <div class="bg-gradient-to-r from-pink-50 to-pink-100 rounded-xl p-6 border border-pink-200">
-                                    <h3 class="text-lg font-bold text-gray-800 mb-6 flex items-center">
+                                    <h3 class="text-lg text-gray-800 mb-6 flex items-center">
                                         <div class="w-8 h-8 bg-gradient-to-r from-pink-500 to-pink-600 rounded-lg flex items-center justify-center mr-3">
                                             <svg class="w-4 h-4 text-white" fill="currentColor" viewBox="0 0 20 20">
                                                 <path fill-rule="evenodd" d="M3 5a2 2 0 012-2h10a2 2 0 012 2v8a2 2 0 01-2 2h-2.22l.123.489.804.804A1 1 0 0113 18H7a1 1 0 01-.707-1.707l.804-.804L7.22 15H5a2 2 0 01-2-2V5zm5.771 7H9a1 1 0 010 2H7.771l.062-.245L8.17 12h.601zm1.416-3H10a1 1 0 110 2H9.187l.062-.245L9.586 9z" clip-rule="evenodd"></path>
@@ -347,7 +347,7 @@
                                     <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
                                         <!-- Instagram -->
                                         <div>
-                                            <label for="instagram_link" class="block text-sm font-bold text-gray-700 mb-3">
+                                            <label for="instagram_link" class="block text-sm text-gray-700 mb-3">
                                                 Instagram Profile
                                             </label>
                                             <div class="relative">
@@ -369,7 +369,7 @@
 
                                         <!-- Facebook -->
                                         <div>
-                                            <label for="facebook_link" class="block text-sm font-bold text-gray-700 mb-3">
+                                            <label for="facebook_link" class="block text-sm text-gray-700 mb-3">
                                                 Facebook Page
                                             </label>
                                             <div class="relative">
@@ -391,7 +391,7 @@
 
                                         <!-- Twitter -->
                                         <div>
-                                            <label for="twitter_link" class="block text-sm font-bold text-gray-700 mb-3">
+                                            <label for="twitter_link" class="block text-sm text-gray-700 mb-3">
                                                 Twitter Profile
                                             </label>
                                             <div class="relative">
@@ -422,7 +422,7 @@
             <!-- Save Button -->
             <div class="flex justify-center">
                 <button type="submit" 
-                        class="group relative inline-flex items-center px-12 py-4 bg-gradient-to-r from-pink-600 via-pink-500 to-pink-400 text-white text-lg font-bold rounded-2xl hover:from-pink-700 hover:via-pink-600 hover:to-pink-500 focus:outline-none focus:ring-4 focus:ring-pink-300 shadow-2xl transform hover:scale-105 transition-all duration-300">
+                        class="group relative inline-flex items-center px-12 py-4 bg-gradient-to-r from-pink-600 via-pink-500 to-pink-400 text-white text-lg rounded-2xl hover:from-pink-700 hover:via-pink-600 hover:to-pink-500 focus:outline-none focus:ring-4 focus:ring-pink-300 shadow-2xl transform hover:scale-105 transition-all duration-300">
                     <svg class="w-6 h-6 mr-3 group-hover:rotate-12 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
                     </svg>
