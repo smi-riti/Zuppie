@@ -2,7 +2,7 @@
     <div class="bg-white rounded-2xl shadow-xl overflow-hidden w-full max-w-3xl">
         <!-- Gradient Header -->
         <div class="bg-gradient-to-r from-purple-400 to-pink-400 p-6 text-white">
-            <h2 class="text-2xl font-bold text-center">Create New Booking</h2>
+            <h2 class="text-2xl text-center">Create New Booking</h2>
             <p class="mt-1 text-center text-purple-100 text-sm">Multi-step booking form (Admin)</p>
         </div>
 
@@ -18,7 +18,7 @@
                 @foreach ([1 => 'Location', 2 => 'Event Details', 3 => 'Requirements', 4 => 'Your Info', 5 => 'Confirmation'] as $step => $label)
                     <div class="flex-1 flex flex-col items-center">
                         <div
-                            class="w-10 h-10 flex items-center justify-center rounded-full font-bold text-lg
+                            class="w-10 h-10 flex items-center justify-center rounded-full text-lg
                             {{ $currentStep == $step ? 'bg-purple-600 text-white shadow-lg' : ($currentStep > $step ? 'bg-green-200 text-green-700' : 'bg-gray-200 text-gray-500') }}">
                             {{ $currentStep > $step ? '✓' : $step }}
                         </div>
@@ -34,7 +34,7 @@
             <!-- Step 1: Location -->
             @if ($currentStep === 1)
                 <div class="mb-6 p-4 bg-info-50 rounded-2xl">
-                    <h4 class="font-bold text-gray-800 mb-3 flex items-center justify-center">
+                    <h4 class="text-gray-800 mb-3 flex items-center justify-center">
                         <i class="fas fa-map-marker-alt text-info-600 mr-2"></i>
                         Event Location
                     </h4>
@@ -287,7 +287,7 @@
                         Confirmation</h3>
 
                     <div class="bg-gray-50 rounded-xl p-4 mb-6">
-                        <h4 class="font-bold text-gray-700 mb-3">Booking Summary</h4>
+                        <h4 class="text-gray-700 mb-3">Booking Summary</h4>
 
                         <div class="space-y-2 text-sm">
                             <div class="mb-6">
@@ -404,7 +404,7 @@
                                 <div class="w-2/3">{{ $name }} ({{ $phone_no }})</div>
                             </div>
 
-                            <div class="flex pt-2 font-bold">
+                            <div class="flex pt-2">
                                 <div class="w-1/3 text-gray-700">Total Price:</div>
                                 <div class="w-2/3 text-purple-600">₹{{ number_format($total_price, 2) }}</div>
                             </div>
@@ -428,11 +428,11 @@
 
                     <div class="grid grid-cols-2 gap-4 pt-4">
                         <button type="button" wire:click="previousStep"
-                            class="bg-gray-200 text-gray-800 py-3 rounded-xl font-bold hover:bg-gray-300 transition-all duration-300">
+                            class="bg-gray-200 text-gray-800 py-3 rounded-xl hover:bg-gray-300 transition-all duration-300">
                             <i class="fas fa-arrow-left mr-2"></i> Back
                         </button>
                         <button type="button" wire:click="saveBooking" wire:loading.attr="disabled" id="submit-button"
-                            class="bg-gradient-to-r from-zuppie-600 to-zuppie-pink-600 text-white py-3 rounded-xl font-bold hover:from-zuppie-700 hover:to-zuppie-pink-700 transition-all duration-300 disabled:opacity-50">
+                            class="bg-gradient-to-r from-zuppie-600 to-zuppie-pink-600 text-white py-3 rounded-xl hover:from-zuppie-700 hover:to-zuppie-pink-700 transition-all duration-300 disabled:opacity-50">
                             <span wire:loading.remove>
                                 @if ($payment_method === 'online')
                                     <i class="fas fa-credit-card mr-2"></i> Pay Now

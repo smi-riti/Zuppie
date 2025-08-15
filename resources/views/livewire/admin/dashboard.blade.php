@@ -17,7 +17,7 @@
         <div class="bg-white rounded-xl shadow-sm p-4 lg:p-6 border-t-4 border-pink-400 hover:shadow-md transition-all duration-300 hover:-translate-y-1">
             <div class="flex items-center justify-between">
                 <div>
-                    <div class="text-2xl lg:text-3xl font-bold text-purple-700">{{ $upcomingEventsCount }}</div>
+                    <div class="text-2xl lg:text-3xl text-purple-700">{{ $upcomingEventsCount }}</div>
                     <div class="text-xs lg:text-sm text-purple-500 font-medium">Upcoming Events</div>
                 </div>
                 <div class="p-3 rounded-full bg-gradient-to-r from-pink-100 to-purple-100">
@@ -33,7 +33,7 @@
         <div class="bg-white rounded-xl shadow-sm p-4 lg:p-6 border-t-4 border-purple-400 hover:shadow-md transition-all duration-300 hover:-translate-y-1">
             <div class="flex items-center justify-between">
                 <div>
-                    <div class="text-2xl lg:text-3xl font-bold text-purple-700">{{ $pastEventsCount }}</div>
+                    <div class="text-2xl lg:text-3xl text-purple-700">{{ $pastEventsCount }}</div>
                     <div class="text-xs lg:text-sm text-purple-500 font-medium">Past Events</div>
                 </div>
                 <div class="p-3 rounded-full bg-gradient-to-r from-purple-100 to-pink-100">
@@ -49,7 +49,7 @@
         <div class="bg-white rounded-xl shadow-sm p-4 lg:p-6 border-t-4 border-red-400 hover:shadow-md transition-all duration-300 hover:-translate-y-1">
             <div class="flex items-center justify-between">
                 <div>
-                    <div class="text-2xl lg:text-3xl font-bold text-purple-700">{{ $cancelledEventsCount }}</div>
+                    <div class="text-2xl lg:text-3xl text-purple-700">{{ $cancelledEventsCount }}</div>
                     <div class="text-xs lg:text-sm text-purple-500 font-medium">Cancelled Events</div>
                 </div>
                 <div class="p-3 rounded-full bg-red-100">
@@ -65,7 +65,7 @@
         <div class="bg-white rounded-xl shadow-sm p-4 lg:p-6 border-t-4 border-green-400 hover:shadow-md transition-all duration-300 hover:-translate-y-1">
             <div class="flex items-center justify-between">
                 <div>
-                    <div class="text-xl lg:text-2xl font-bold text-purple-700">₹{{ number_format($totalRevenue, 0, '.', ',') }}</div>
+                    <div class="text-xl lg:text-2xl text-purple-700">₹{{ number_format($totalRevenue, 0, '.', ',') }}</div>
                     <div class="text-xs lg:text-sm text-purple-500 font-medium">Total Revenue</div>
                 </div>
                 <div class="p-3 rounded-full bg-green-100">
@@ -84,7 +84,7 @@
         <div class="lg:col-span-2 bg-white rounded-xl shadow-sm p-4 lg:p-6 hover:shadow-md transition-shadow">
             <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center border-b border-purple-100 pb-4 mb-6">
                 <div>
-                    <h2 class="text-lg lg:text-xl font-semibold text-purple-800">Revenue Trend</h2>
+                    <h2 class="text-lg lg:text-xl text-purple-800">Revenue Trend</h2>
                     <p class="text-sm text-purple-500 mt-1">Last 12 months performance</p>
                 </div>
             </div>
@@ -109,7 +109,7 @@
         <div class="space-y-6">
             <!-- Quick Links -->
             <div class="bg-white rounded-xl shadow-sm p-4 lg:p-6 hover:shadow-md transition-shadow">
-                <h3 class="text-lg font-semibold text-purple-800 mb-4 flex items-center">
+                <h3 class="text-lg text-purple-800 mb-4 flex items-center">
                     <svg class="w-5 h-5 mr-2 text-pink-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1" />
                     </svg>
@@ -146,7 +146,7 @@
             <!-- Calendar -->
             <div class="bg-white rounded-xl shadow-sm p-4 lg:p-6 hover:shadow-md transition-shadow" id="admin-calendar">
                 <div class="flex justify-between items-center mb-4">
-                    <h2 class="text-lg font-semibold text-purple-800" id="calendar-month-year">
+                    <h2 class="text-lg text-purple-800" id="calendar-month-year">
                         {{ \Carbon\Carbon::create($currentYear, $currentMonth, 1)->format('F Y') }}
                     </h2>
                     <div class="flex space-x-2">
@@ -161,7 +161,7 @@
                 <div class="grid grid-cols-7 gap-1 text-center text-xs lg:text-sm">
                     <!-- Days of week header -->
                     @foreach(['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'] as $day)
-                        <div class="p-2 font-semibold text-purple-600">{{ $day }}</div>
+                        <div class="p-2  text-purple-600">{{ $day }}</div>
                     @endforeach
 
                     <!-- Calendar days -->
@@ -209,7 +209,7 @@
     <div class="mt-8 bg-white rounded-xl shadow-sm p-4 lg:p-6 hover:shadow-md transition-shadow max-w-7xl mx-auto">
         <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center border-b border-purple-100 pb-4 mb-6">
             <div>
-                <h2 class="text-lg lg:text-xl font-semibold text-purple-800">Latest Upcoming Events</h2>
+                <h2 class="text-lg lg:text-xl text-purple-800">Latest Upcoming Events</h2>
                 <p class="text-sm text-purple-500 mt-1">Next {{ $perPage }} events scheduled</p>
             </div>
         </div>
@@ -222,7 +222,7 @@
                             {{ substr($booking->eventPackage->name ?? 'Event', 0, 1) }}
                         </div>
                         <div class="flex-grow">
-                            <div class="font-semibold text-purple-800 text-lg">{{ $booking->eventPackage->name ?? 'N/A' }}</div>
+                            <div class=" text-purple-800 text-lg">{{ $booking->eventPackage->name ?? 'N/A' }}</div>
                             <div class="text-sm text-purple-500 mt-1">
                                 <span class="inline-flex items-center">
                                     <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">

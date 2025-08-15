@@ -14,7 +14,7 @@
     <!-- Header Section -->
     <div class="flex flex-col lg:flex-row justify-between items-start lg:items-center mb-6 gap-4">
         <div>
-            <h2 class="text-2xl font-bold text-purple-800">All Offers</h2>
+            <h2 class="text-2xl text-purple-800">All Offers</h2>
             <p class="text-sm text-purple-500 mt-1">
                 {{ $offers->total() }} {{ Str::plural('offer', $offers->total()) }} available
             </p>
@@ -167,7 +167,7 @@
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.964-.833-2.732 0L4.082 16.5c-.77.833.192 2.5 1.732 2.5z" />
                         </svg>
                     </div>
-                    <h3 class="text-lg font-bold text-gray-900 mb-2">Delete Offer</h3>
+                    <h3 class="text-lg text-gray-900 mb-2">Delete Offer</h3>
                     <p class="text-sm text-gray-500 mb-6">
                         Are you sure you want to delete this offer? This action cannot be undone.
                     </p>

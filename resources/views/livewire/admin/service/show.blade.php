@@ -2,7 +2,7 @@
     <div class="max-w-7xl">
         <!-- Header -->
         <div class="mb-8 text-center">
-            <h1 class="text-3xl md:text-4xl font-bold text-purple-800">Services Management</h1>
+            <h1 class="text-3xl md:text-4xl text-purple-800">Services Management</h1>
             <p class="mt-2 text-purple-600">Manage your pin code services</p>
         </div>
 
@@ -24,7 +24,7 @@
                 <div class="bg-white rounded-2xl shadow-lg overflow-hidden h-full">
                     <div class="p-4 bg-gradient-to-r from-purple-400 to-pink-400">
                         <div class="flex flex-col sm:flex-row justify-between items-center gap-3">
-                            <h2 class="text-xl font-bold text-white">Service List</h2>
+                            <h2 class="text-xl text-white">Service List</h2>
                             <div class="relative w-full sm:w-64">
                                 <input 
                                     wire:model.live.debounce.300ms="search"
@@ -105,7 +105,7 @@
             <!-- Right Panel - Service List -->
             <div class="w-full lg:w-1/3">
                 <div class="bg-white rounded-2xl shadow-lg p-6 h-full">
-                    <h2 class="text-xl font-bold text-purple-700 mb-4 pb-2 border-b border-purple-100">
+                    <h2 class="text-xl text-purple-700 mb-4 pb-2 border-b border-purple-100">
                         {{ $formTitle }}
                     </h2>
                     

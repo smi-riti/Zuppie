@@ -16,7 +16,7 @@
             
             <!-- Header -->
             <div class="bg-gradient-to-r from-pink-500 to-purple-600 px-8 py-6">
-                <h3 class="text-2xl font-bold text-white text-center">
+                <h3 class="text-2xl  text-white text-center">
                     {{ $editingId ? 'Edit Category' : 'Create New Category' }}
                 </h3>
                 <p class="text-pink-100 text-center mt-1">
@@ -175,7 +175,7 @@
                     Cancel
                 </button>
                 <button wire:click="saveCategory" wire:loading.attr="disabled" type="button"
-                    class="w-full sm:w-auto px-6 py-3 text-sm font-bold text-white bg-gradient-to-r from-pink-500 to-purple-600 hover:from-pink-600 hover:to-purple-700 rounded-xl focus:outline-none focus:ring-2 focus:ring-pink-300 transition disabled:opacity-50 shadow-lg">
+                    class="w-full sm:w-auto px-6 py-3 text-sm text-white bg-gradient-to-r from-pink-500 to-purple-600 hover:from-pink-600 hover:to-purple-700 rounded-xl focus:outline-none focus:ring-2 focus:ring-pink-300 transition disabled:opacity-50 shadow-lg">
                     <span wire:loading.remove>
                         {{ $editingId ? 'Update Category' : 'Create Category' }}
                     </span>

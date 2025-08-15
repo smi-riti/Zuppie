@@ -3,7 +3,7 @@
     <div class="max-w-md w-full space-y-8 bg-white rounded-2xl shadow-xl p-8">
         @if(!$emailSent)
             <div>
-                <h2 class="text-center text-2xl font-bold text-purple-900">Forgot Your Password?</h2>
+                <h2 class="text-center text-2xl text-purple-900">Forgot Your Password?</h2>
                 <p class="mt-2 text-center text-sm text-pink-600">
                     No problem. Enter your email address, and we'll send you a password reset link.
                 </p>
@@ -47,7 +47,7 @@
             </form>
         @else
             <div class="text-center">
-                <h2 class="text-2xl font-bold text-purple-900">Check Your Email</h2>
+                <h2 class="text-2xl text-purple-900">Check Your Email</h2>
                 <p class="mt-2 text-sm text-green-600 bg-green-50 border border-green-200 rounded-lg p-3">
                     We've emailed your password reset link!
                 </p>
