@@ -99,14 +99,14 @@
     @stack('styles')
 </head>
 
-<body class="bg-gray-50 font-sans antialiased min-h-screen">
+<body class="bg-gray-50 font-sans antialiased">
     <!-- Main Layout Container -->
     <div class="flex h-screen ">
         <div class="fixed ">
             <x-admin.sidebar />
         </div>
         <!-- Main Content Area -->
-        <div class="flex-1 ml-[15%] flex flex-col bg-gradient-to-br from-purple-50 to-pink-50 p-2">
+        <div class="flex-1 ml-[15%] flex flex-col bg-gradient-to-br from-purple-50 to-pink-50">
             {{ $slot }}
         </div>
     </div>
