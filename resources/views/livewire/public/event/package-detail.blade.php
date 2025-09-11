@@ -2,8 +2,7 @@
     @if (!$package)
         <div class="text-center py-20">
             <h2 class="text-2xl font-bold text-gray-800">Package not found</h2>
-            <a href="{{ route('event-packages') }}"
-                class="mt-4 inline-block bg-purple-600 text-white px-6 py-3 rounded-lg">
+            <a href="{{ route('event-packages') }}" class="mt-4 inline-block bg-purple-600 text-white px-6 py-3 rounded-lg">
                 Back to Packages
             </a>
         </div>
@@ -121,8 +120,7 @@
                                 @enderror
 
                                 @if (session('pin_error'))
-                                    <div
-                                        class="mt-3 p-3 bg-red-100 border border-red-400 text-red-700 rounded-lg text-sm">
+                                    <div class="mt-3 p-3 bg-red-100 border border-red-400 text-red-700 rounded-lg text-sm">
                                         <i class="fas fa-exclamation-circle mr-2"></i>{{ session('pin_error') }}
                                     </div>
                                 @endif
@@ -134,8 +132,7 @@
                             </div>
 
                             <!-- Book Now Button -->
-                            <button
-                                wire:click="{{ $isPinCodeAvailable === true ? 'bookNow' : 'checkPinCodeAvailability' }}"
+                            <button wire:click="{{ $isPinCodeAvailable === true ? 'bookNow' : 'checkPinCodeAvailability' }}"
                                 wire:loading.attr="disabled"
                                 class="w-full bg-gradient-to-r from-purple-600 to-pink-600 text-white px-6 py-3 md:px-8 md:py-4 rounded-2xl font-bold text-lg hover:shadow-lg transition-all duration-300 relative overflow-hidden">
 
@@ -159,10 +156,9 @@
                                         <div
                                             class="w-14 h-14 rounded-full bg-gray-100 flex items-center justify-center mb-3">
                                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                                                viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                                stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                                <rect x="3" y="11" width="18" height="11" rx="2"
-                                                    ry="2"></rect>
+                                                viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                                stroke-linecap="round" stroke-linejoin="round">
+                                                <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
                                                 <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
                                             </svg>
                                         </div>
@@ -176,10 +172,9 @@
                                         <div
                                             class="w-14 h-14 rounded-full bg-gray-100 flex items-center justify-center mb-3">
                                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                                                viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                                stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                                <rect x="3" y="3" width="18" height="18" rx="2"
-                                                    ry="2"></rect>
+                                                viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                                stroke-linecap="round" stroke-linejoin="round">
+                                                <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
                                                 <circle cx="8.5" cy="8.5" r="1.5"></circle>
                                                 <polyline points="21 15 16 10 5 21"></polyline>
                                             </svg>
@@ -192,8 +187,8 @@
                                         <div
                                             class="w-14 h-14 rounded-full bg-gray-100 flex items-center justify-center mb-3">
                                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                                                viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                                stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                                viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                                stroke-linecap="round" stroke-linejoin="round">
                                                 <polygon
                                                     points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2">
                                                 </polygon>
@@ -207,8 +202,8 @@
                                         <div
                                             class="w-14 h-14 rounded-full bg-gray-100 flex items-center justify-center mb-3">
                                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                                                viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                                stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                                viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                                stroke-linecap="round" stroke-linejoin="round">
                                                 <path
                                                     d="M12 2v4M6 6l-3 3M3 11v2M21 11v2M18 6l3 3M12 18v4M18 18l3-3M6 18l-3-3">
                                                 </path>
@@ -244,10 +239,8 @@
                                 @endphp
 
                                 @foreach ($features as $inclusion)
-                                    <li
-                                        class="flex gap-3 items-start p-2 hover:bg-purple-50 rounded-lg transition-colors">
-                                        <i class="fa-solid fa-check text-xl mt-0.5 flex-shrink-0"
-                                            style="color: #00a303;"></i>
+                                    <li class="flex gap-3 items-start p-2 hover:bg-purple-50 rounded-lg transition-colors">
+                                        <i class="fa-solid fa-check text-xl mt-0.5 flex-shrink-0" style="color: #00a303;"></i>
                                         <span class="text-gray-700">{!! $inclusion !!}</span>
                                     </li>
                                 @endforeach
@@ -330,8 +323,7 @@
                             </div>
 
                             <!-- Rating Summary -->
-                            <div
-                                class="flex items-center mb-10 p-6 bg-gradient-to-r from-purple-50 to-pink-50 rounded-lg">
+                            <div class="flex items-center mb-10 p-6 bg-gradient-to-r from-purple-50 to-pink-50 rounded-lg">
                                 <div
                                     class="text-5xl font-bold mr-6 bg-gradient-to-r from-purple-600 to-pink-500 bg-clip-text text-transparent">
                                     {{ number_format($average_review, 1) }}
@@ -342,11 +334,9 @@
                                             @if ($i <= $average_review)
                                                 <i class="fa-solid fa-star text-xl mr-1" style="color: #9333ea;"></i>
                                             @elseif($i - 0.5 <= $average_review)
-                                                <i class="fa-solid fa-star-half-stroke text-xl mr-1"
-                                                    style="color: #9333ea;"></i>
+                                                <i class="fa-solid fa-star-half-stroke text-xl mr-1" style="color: #9333ea;"></i>
                                             @else
-                                                <i class="fa-regular fa-star text-xl mr-1"
-                                                    style="color: #d8b4fe;"></i>
+                                                <i class="fa-regular fa-star text-xl mr-1" style="color: #d8b4fe;"></i>
                                             @endif
                                         @endfor
                                     </div>
@@ -359,8 +349,7 @@
                             <!-- Reviews List -->
                             <div class="space-y-8">
                                 @foreach ($reviews as $review)
-                                    <div
-                                        class="p-6 border border-purple-100 rounded-lg hover:shadow-md transition-shadow">
+                                    <div class="p-6 border border-purple-100 rounded-lg hover:shadow-md transition-shadow">
                                         <div class="flex justify-between items-start mb-3">
                                             <div class="flex items-center">
                                                 <div
@@ -379,23 +368,19 @@
                                             <div class="flex mr-3">
                                                 @for ($i = 1; $i <= 5; $i++)
                                                     @if ($i <= $review->rating)
-                                                        <i class="fa-solid fa-star text-sm mr-0.5"
-                                                            style="color: #9333ea;"></i>
+                                                        <i class="fa-solid fa-star text-sm mr-0.5" style="color: #9333ea;"></i>
                                                     @else
-                                                        <i class="fa-regular fa-star text-sm mr-0.5"
-                                                            style="color: #d8b4fe;"></i>
+                                                        <i class="fa-regular fa-star text-sm mr-0.5" style="color: #d8b4fe;"></i>
                                                     @endif
                                                 @endfor
                                             </div>
-                                            <span
-                                                class="text-xs bg-pink-100 text-pink-800 px-2 py-1 rounded-full">Verified
+                                            <span class="text-xs bg-pink-100 text-pink-800 px-2 py-1 rounded-full">Verified
                                                 Purchase</span>
                                         </div>
 
                                         <p class="text-gray-700 mb-4">
                                             {{ $review->comment ?? 'This user did not leave a comment' }}
                                         </p>
-
                                     </div>
                                 @endforeach
                             </div>
@@ -403,7 +388,7 @@
                             <!-- View More Button -->
                             @if ($reviews->count() > 2)
                                 <div class="mt-8 text-center">
-                                    <button wire:click="$dispatch('viewAllReviews')"
+                                    <button wire:click="openAllReviewsModal({{ $package->id }})"
                                         class="px-6 py-2 bg-gradient-to-r from-purple-500 to-pink-500 text-white rounded-full hover:shadow-lg transition-all">
                                         View All Reviews
                                     </button>
@@ -501,6 +486,9 @@
 
     <livewire:public.section.enquiry-form />
     <livewire:public.components.bottom-navigation />
+    @if ($showAllReviewsModal)
+        <livewire:public.components.review-modal :packageId="$packageIdOfReview"/>
+    @endif
     <style>
         /* Custom Animations */
         .animate-fade-in-right {
@@ -559,7 +547,7 @@
     </style>
 
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
+        document.addEventListener('DOMContentLoaded', function () {
             const mainImage = document.getElementById('main-package-image');
             const thumbnails = document.querySelectorAll('[wire\\:click^="selectImage"]');
             let autoChangeInterval;
@@ -601,7 +589,7 @@
 
             // Handle thumbnail clicks
             thumbnails.forEach(thumb => {
-                thumb.addEventListener('click', function() {
+                thumb.addEventListener('click', function () {
                     clearInterval(autoChangeInterval);
                     setTimeout(startAutoChange,
                         10000); // Restart auto-change after 10 seconds of inactivity
