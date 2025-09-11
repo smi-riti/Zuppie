@@ -1,5 +1,5 @@
-<div class="min-h-screen bg-gradient-to-br from-purple-50 to-pink-100 p-4">
-    <div class="max-w-7xl">
+<div class="min-h-screen bg-gradient-to-br from-purple-50 to-pink-100 p-8">
+    <div class="">
         <!-- Header -->
         <div class="mb-8 text-center">
             <h1 class="text-3xl md:text-4xl text-purple-800">Services Management</h1>
