@@ -15,7 +15,7 @@
 
                     <!-- Header -->
                     <div class="bg-gradient-to-r from-purple-600 to-pink-500 text-white p-6 rounded-t-2xl">
-                        <h2 class="text-2xl font-bold">{{ $modalCategory->name }}</h2>
+                        <h2 class="text-2xl">{{ $modalCategory->name }}</h2>
                         <p class="text-purple-100 opacity-90 mt-1">Choose a subcategory to explore our amazing packages
                         </p>
                     </div>

@@ -12,7 +12,7 @@
                         Back to Packages
                     </a>
                     <div>
-                        <h1 class="text-3xl font-bold text-gray-900">Create New Package</h1>
+                        <h1 class="text-3xl  text-gray-900">Create New Package</h1>
                         <p class="text-gray-600 mt-1">Add a new event package to your collection</p>
                     </div>
                 </div>

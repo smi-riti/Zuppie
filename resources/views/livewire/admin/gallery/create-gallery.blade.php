@@ -1,7 +1,7 @@
 <div class="fixed inset-0 backdrop-blur-sm bg-opacity-50 flex items-center justify-center z-50 p-4">
     <div class="bg-white rounded-lg shadow-xl max-w-4xl w-full p-6 border-2 border-purple-300">
         <div class="flex justify-between items-center mb-4">
-            <h3 class="text-xl font-bold text-purple-700">Upload Gallery Images</h3>
+            <h3 class="text-xl text-purple-700">Upload Gallery Images</h3>
             <button wire:click="$dispatch('closeModal')" class="text-gray-500 hover:text-gray-700">
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
                     stroke="currentColor">

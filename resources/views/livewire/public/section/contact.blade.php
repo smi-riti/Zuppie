@@ -162,10 +162,10 @@
                                 </div>
                                 <div>
                                     <h3 class="text-2xl font-bold text-gray-800 mb-2">WhatsApp</h3>
-                                    <a href="https://wa.me/{{ str_replace(['+', ' ', '-'], '', $settings['whatsapp_number']) }}" 
+                                    <a href="https://wa.me/{{ str_replace(['+', ' ', '-'], '', $settings['phone_no']) }}" 
                                        target="_blank"
                                        class="text-lg text-green-600 hover:text-green-700 font-semibold transition-colors">
-                                        {{ $settings['whatsapp_number'] }}
+                                        {{ $settings['phone_no'] }}
                                     </a>
                                     <p class="text-gray-600 mt-1">Chat with us instantly</p>
                                 </div>

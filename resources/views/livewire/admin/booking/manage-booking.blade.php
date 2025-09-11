@@ -3,7 +3,7 @@
         <!-- Header -->
         <div class="flex justify-between items-center mb-6">
             <div>
-                <h1 class="text-3xl font-bold text-purple-800">Manage Bookings</h1>
+                <h1 class="text-3xl text-purple-800">Manage Bookings</h1>
                 <p class="text-purple-600">View and manage all event bookings</p>
             </div>
             <button wire:click="openCreateModal"
@@ -129,7 +129,7 @@
                                 <td class="px-6 py-4 whitespace-nowrap">
                                     <div class="flex items-center">
                                         <div
-                                            class="flex-shrink-0 h-10 w-10 rounded-full bg-gradient-to-r from-purple-400 to-pink-400 flex items-center justify-center text-white font-bold">
+                                            class="flex-shrink-0 h-10 w-10 rounded-full bg-gradient-to-r from-purple-400 to-pink-400 flex items-center justify-center text-white">
                                             {{ strtoupper(substr($booking->booking_name, 0, 1)) }}
                                         </div>
                                         <div class="ml-4">

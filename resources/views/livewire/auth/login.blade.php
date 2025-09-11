@@ -10,11 +10,11 @@
                         d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
                 </svg>
                 <span
-                    class="text-3xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-pink-600 to-purple-600 group-hover:from-pink-700 group-hover:to-purple-700 transition">
+                    class="text-3xl bg-clip-text text-transparent bg-gradient-to-r from-pink-600 to-purple-600 group-hover:from-pink-700 group-hover:to-purple-700 transition">
                     Zuppie
                 </span>
             </a>
-            <h1 class="text-2xl font-bold text-gray-800 mt-4">Welcome back!</h1>
+            <h1 class="text-2xl text-gray-800 mt-4">Welcome back!</h1>
             <p class="text-gray-600">
                 @if (session('booking_step3_data'))
                     Sign in to continue with your booking
