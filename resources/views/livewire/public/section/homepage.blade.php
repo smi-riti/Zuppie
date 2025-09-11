@@ -448,7 +448,7 @@
     </section>
 
     <!-- Blog Section -->
-    <section class="py-20 bg-gradient-to-br from-pink-50 to-purple-50">
+    {{-- <section class="py-20 bg-gradient-to-br from-pink-50 to-purple-50">
         <div class="container mx-auto px-4">
             <div class="text-center mb-16">
                 <h2 class="text-4xl md:text-5xl py-2 font-bold font-display gradient-text mb-6" data-aos="fade-up">
@@ -497,7 +497,7 @@
                 </button>
             </div>
         </div>
-    </section>
+    </section> --}}
 
     <!-- Contact Form Section -->
 
