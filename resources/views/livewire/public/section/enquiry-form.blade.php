@@ -112,10 +112,10 @@
             <label class="block text-gray-800 font-semibold mb-4 text-lg">What's your estimated budget range? *</label>
             <div class="px-2">
               <input wire:model="formData.budget_index" type="range"
-    x-model="formData.budget"
-    x-on:input="updateBudgetRange($event.target.value); autoNext('message')"
-    min="0" max="5" step="1"
-    class="w-full h-3 bg-gray-200 rounded-full appearance-none cursor-pointer accent-purple-600">
+                    x-model="formData.budget"
+                    x-on:input="updateBudgetRange($event.target.value); autoNext('message')"
+                    min="0" max="5" step="1"
+                    class="w-full h-3 bg-gray-200 rounded-full appearance-none cursor-pointer accent-purple-600">
                 <div class="flex justify-between text-xs text-gray-500 mt-3 px-1">
                     <span class="text-center">₹1000</span>
                     <span class="text-center">₹2500</span>
@@ -198,6 +198,22 @@
                     <span class="text-red-500 text-sm mt-2">{{ $message }}</span>
                 @enderror
             </div>
+            <div>
+                            <label class="block text-sm font-medium text-purple-700 mb-1">Add Images</label>
+                            <input type="file" accept="image/*" multiple wire:model="images"
+                                class="block w-full text-sm text-purple-700 border border-purple-100 rounded-lg shadow-sm">
+                            <div class="flex flex-wrap gap-2 mt-2">
+                                @if($images)
+                                    @foreach($images as $image)
+                                        <img src="{{ $image->temporaryUrl() }}"
+                                            class="h-24 w-24 object-cover rounded border border-pink-200 shadow" alt="Preview">
+                                    @endforeach
+                                @endif
+                            </div>
+                            @error('images.*')
+                                <span class="text-red-500 text-sm mt-1">{{ $message }}</span>
+                            @enderror
+                        </div>
         </div>
         
         <div class="flex justify-between items-center">
