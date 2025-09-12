@@ -22,8 +22,10 @@ class SendOtp extends Mailable
 
     public function build()
     {
-        return $this->subject('Your Login OTP Code')
-                    ->view('emails.otp');
+    // Deprecated when using content()/envelope() methods in newer Laravel versions.
+    // Keep for backward compatibility but prefer content() below.
+    return $this->subject('Your Login OTP Code')
+            ->view('emails.otp');
     }
     
     public function envelope(): Envelope
@@ -39,7 +41,7 @@ class SendOtp extends Mailable
     public function content(): Content
     {
         return new Content(
-            view: 'view.name',
+            view: 'emails.otp',
         );
     }
 

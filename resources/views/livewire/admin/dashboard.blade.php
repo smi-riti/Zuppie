@@ -1,4 +1,4 @@
-<div class="p-4 lg:p-6 bg-gradient-to-br from-purple-50 to-pink-50 min-h-screen">
+<div class="p-4 lg:p-6 bg-gradient-to-br from-purple-50 to-pink-50 w-full">
     <!-- Flash Messages -->
     @if (session('message'))
         <div class="mb-6 mx-auto max-w-7xl">
@@ -12,7 +12,7 @@
     @endif
 
     <!-- Stats Cards -->
-    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 lg:gap-6 mb-8 max-w-7xl mx-auto">
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 lg:gap-6 mb-8">
         <!-- Upcoming Events Card -->
         <div class="bg-white rounded-xl shadow-sm p-4 lg:p-6 border-t-4 border-pink-400 hover:shadow-md transition-all duration-300 hover:-translate-y-1">
             <div class="flex items-center justify-between">
@@ -79,7 +79,7 @@
     </div>
 
     <!-- Main Content Grid -->
-    <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 max-w-7xl mx-auto">
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
         <!-- Revenue Chart (2/3 width on large screens) -->
         <div class="lg:col-span-2 bg-white rounded-xl shadow-sm p-4 lg:p-6 hover:shadow-md transition-shadow">
             <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center border-b border-purple-100 pb-4 mb-6">
@@ -206,7 +206,7 @@
     </div>
 
     <!-- Latest Upcoming Events -->
-    <div class="mt-8 bg-white rounded-xl shadow-sm p-4 lg:p-6 hover:shadow-md transition-shadow max-w-7xl mx-auto">
+    <div class="mt-8 bg-white rounded-xl shadow-sm p-4 lg:p-6 hover:shadow-md transition-shadow">
         <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center border-b border-purple-100 pb-4 mb-6">
             <div>
                 <h2 class="text-lg lg:text-xl text-purple-800">Latest Upcoming Events</h2>
