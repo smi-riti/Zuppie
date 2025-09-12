@@ -1,7 +1,6 @@
-<div class="min-h-screen bg-gradient-to-br from-slate-50 via-white to-purple-50">
-    <!-- Breadcrumb Section -->
+<div class="bg-gradient-to-br from-slate-50 via-white to-purple-50 p-12">
     <section class="py-8 bg-white border-b border-gray-200">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class=" px-4 sm:px-6 lg:px-8">
             <nav class="flex" aria-label="Breadcrumb">
                 <ol class="inline-flex items-center space-x-1 md:space-x-3">
                     <li class="inline-flex items-center">
@@ -47,7 +46,7 @@
     </section>
 
     <section class="py-12 md:py-16">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="px-4 sm:px-6 lg:px-8">
             <!-- Header Section -->
             <div class="text-center mb-12">
                 <h1 class="text-3xl md:text-5xl font-bold text-gray-800 mb-4">
