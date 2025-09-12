@@ -23,7 +23,7 @@
             </button>
             
             <!-- Mail Us -->
-            <a href="mailto:info@zuppie.com" class="flex flex-col items-center space-y-1 p-3 rounded-xl transition-all duration-300 hover:bg-purple-50 group active:scale-95">
+            <a href="mailto:{{ $settings['email'] }}" class="flex flex-col items-center space-y-1 p-3 rounded-xl transition-all duration-300 hover:bg-purple-50 group active:scale-95">
                 <div class="w-10 h-10 flex items-center justify-center rounded-xl bg-gradient-to-r from-purple-400 to-pink-400 text-white shadow-lg group-hover:scale-110 transition-transform duration-300">
                     <i class="fas fa-envelope text-sm"></i>
                 </div>
@@ -31,7 +31,7 @@
             </a>
             
             <!-- Call Us -->
-            <a href="tel:+919876543210" class="flex flex-col items-center space-y-1 p-3 rounded-xl transition-all duration-300 hover:bg-purple-50 group active:scale-95">
+            <a href="tel:{{ $settings['phone_no'] }}" class="flex flex-col items-center space-y-1 p-3 rounded-xl transition-all duration-300 hover:bg-purple-50 group active:scale-95">
                 <div class="w-10 h-10 flex items-center justify-center rounded-xl bg-gradient-to-r from-purple-400 to-pink-400 text-white shadow-lg group-hover:scale-110 transition-transform duration-300">
                     <i class="fas fa-phone text-sm"></i>
                 </div>
