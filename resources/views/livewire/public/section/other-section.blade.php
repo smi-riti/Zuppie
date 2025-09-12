@@ -1,6 +1,6 @@
-<div>
-    <section id="packages" class="py-16 sm:py-24 bg-gradient-to-b from-gray-50 to-white relative z-10">
-        <div class="container mx-auto px-6 sm:px-8">
+<div class="px-14 mx-auto bg-gradient-to-b from-gray-50 to-white relative">
+    <section id="packages" class="sm:py-24 ">
+        <div class=" sm:px-8">
             <!-- Header -->
             <div class="text-center mb-12 sm:mb-16" x-data="{ animate: true }" x-intersect="animate = true">
                 <h2 class="text-3xl sm:text-4xl py-2 md:text-5xl font-extrabold font-display text-transparent bg-clip-text bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600 mb-6"
@@ -16,13 +16,12 @@
                     Discover tailored packages to elevate your event with seamless planning and unforgettable moments.
                 </p>
             </div>
-
             <!-- Scrollable Packages Container -->
-            <div class="relative max-w-full mx-auto" x-data="scrollControl">
+            <div class="relative" x-data="scrollControl">
                 <!-- Scroll Container -->
                 <div class="relative overflow-x-auto scrollbar-hide snap-x snap-mandatory" x-ref="scrollContainer"
                     @scroll.debounce.100ms="updateScrollState">
-                    <div class="flex space-x-6 pb-6 px-2" id="packages-scroll">
+                    <div class="flex space-x-6 pb-6" id="packages-scroll">
                         @foreach ($packages as $package)
                             <div class="flex-none w-80 sm:w-96">
                                 <div
@@ -32,8 +31,6 @@
                                         <img src="{{ $package->images->first()?->image_url ?? 'https://via.placeholder.com/400x300' }}"
                                             alt="{{ $package->name }}"
                                             class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
-
-                                        <!-- Gradient Overlay -->
                                         <div
                                             class="absolute inset-0 bg-gradient-to-t from-black/60 via-black/30 to-transparent">
                                         </div>

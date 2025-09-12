@@ -1,11 +1,7 @@
-<!-- Hero Section with Floating Balloons and Changing Text -->
 <div>
-    <!-- Hero Section -->
     <livewire:public.section.hero-section />
-
-    <!-- Categories Section with SEO Keywords -->
-    <section id="categories" class="py-12 sm:py-20 bg-gradient-to-br from-purple-50 to-pink-50 relative z-10">
-        <div class="container mx-auto px-4">
+    <section id="categories" class="sm:py-20">
+        <div class="mx-auto px-20">
             <div class="text-center mb-12 sm:mb-16">
                 <h2 class="text-3xl py-2 sm:text-4xl md:text-5xl font-bold font-display text-transparent bg-clip-text bg-gradient-to-r from-purple-600 to-pink-600 mb-6"
                     data-aos="fade-up">
@@ -19,19 +15,20 @@
                 </p>
             </div>
 
-            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 sm:gap-8 max-w-7xl mx-auto">
+            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 sm:gap-8">
                 @foreach ($categories as $index => $category)
                     <div class="group relative overflow-hidden rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-500 hover:scale-105 cursor-pointer"
-                        data-aos="fade-up" data-aos-delay="{{ 100 * ($index + 1) }}" @if ($category->children->count())
-                        wire:click="$dispatch('openCategoryModal', { categorySlug: '{{ $category->slug }}' })" @else
-                            onclick="window.location.href='{{ route('event-package.filter', ['category' => $category->slug]) }}'"
-                        @endif>
+                        data-aos="fade-up" data-aos-delay="{{ 100 * ($index + 1) }}"
+                        @if ($category->children->count()) wire:click="$dispatch('openCategoryModal', { categorySlug: '{{ $category->slug }}' })" @else
+                            onclick="window.location.href='{{ route('event-package.filter', ['category' => $category->slug]) }}'" @endif>
                         <div class="relative h-64 sm:h-80">
                             <!-- Category Image with fallback -->
-                            @if($category->image)
+                            @if ($category->image)
                                 <img src="{{ $category->image }}" alt="{{ $category->name }}"
                                     class="absolute inset-0 w-full h-full object-cover">
-                                <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent"></div>
+                                <div
+                                    class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent">
+                                </div>
                             @else
                                 <!-- Dynamic Gradient Background -->
                                 <div
@@ -46,18 +43,18 @@
                                         <pattern id="eventPattern" x="0" y="0" width="20" height="20"
                                             patternUnits="userSpaceOnUse">
                                             <!-- Event celebration elements -->
-                                            <circle cx="5" cy="5" r="1.5" fill="white" opacity="0.4" />
+                                            <circle cx="5" cy="5" r="1.5" fill="white"
+                                                opacity="0.4" />
                                             <circle cx="15" cy="15" r="1" fill="white" opacity="0.3" />
                                             <path d="M8,8 Q10,6 12,8 Q10,10 8,8" fill="white" opacity="0.3" />
                                             <path d="M3,15 L5,13 L7,15 L5,17 Z" fill="white" opacity="0.2" />
-                                            <circle cx="18" cy="3" r="0.8" fill="white" opacity="0.4" />
+                                            <circle cx="18" cy="3" r="0.8" fill="white"
+                                                opacity="0.4" />
                                         </pattern>
                                     </defs>
                                     <rect width="100%" height="100%" fill="url(#eventPattern)" />
                                 </svg>
                             </div>
-
-                            <!-- Content -->
                             <div
                                 class="absolute inset-0 p-6 sm:p-8 text-white flex flex-col justify-center items-center text-center">
                                 <div
@@ -67,13 +64,11 @@
                                 </div>
                                 <h3
                                     class="text-xl sm:text-2xl font-bold mb-2 group-hover:scale-105 transition-transform duration-300 drop-shadow-md">
-                                    {{$category->name}}
+                                    {{ $category->name }}
                                 </h3>
                                 <p
                                     class="text-sm opacity-90 group-hover:opacity-100 transition-opacity duration-300 drop-shadow-sm">
                                     Click to explore subcategories</p>
-
-                                <!-- Hover Effect -->
                                 <div
                                     class="absolute inset-0 bg-white/0 group-hover:bg-white/10 transition-all duration-300 rounded-2xl">
                                 </div>
@@ -89,8 +84,7 @@
     <livewire:public.section.other-section />
 
     <!-- Enhanced Birthday Special Section -->
-    <section class="py-12 sm:py-20 bg-gradient-to-br from-pink-50 via-purple-50 to-purple-100 relative overflow-hidden">
-        <!-- Background Decorations -->
+    <section class="py-12 sm:py-20 relative overflow-hidden">
         <div class="absolute inset-0 opacity-10">
             <div class="absolute top-20 left-10 w-32 h-32 bg-pink-300 rounded-full blur-3xl"></div>
             <div class="absolute bottom-20 right-10 w-40 h-40 bg-purple-300 rounded-full blur-3xl"></div>
@@ -99,8 +93,8 @@
             </div>
         </div>
 
-        <div class="container mx-auto px-4 relative z-10">
-            <div class="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center max-w-7xl mx-auto">
+        <div class=" px-20 relative">
+            <div class="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
                 <!-- Image Section -->
                 <div data-aos="fade-right" class="relative">
                     <div class="relative rounded-3xl overflow-hidden shadow-2xl group">
@@ -201,8 +195,8 @@
     </section>
 
     <!-- Gallery Collage Section -->
-    <section id="gallery" class="py-20 bg-gradient-to-br from-pink-50 to-purple-50">
-        <div class="container mx-auto px-4">
+    <section id="gallery">
+        <div class="">
             <div class="text-center mb-16">
                 <h2 class="text-4xl md:text-5xl py-2 font-bold font-display gradient-text mb-6" data-aos="fade-up">
                     Our Magic Gallery
@@ -212,7 +206,7 @@
                 </p>
             </div>
 
-            <div class="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-6xl mx-auto">
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4 px-20">
                 <!-- Gallery Items with Unsplash Images -->
                 <div class="col-span-1 row-span-2" data-aos="fade-up" data-aos-delay="100">
                     <div
@@ -228,7 +222,7 @@
 
                 <div class="col-span-1" data-aos="fade-up" data-aos-delay="200">
                     <div
-                        class="relative overflow-hidden rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 hover-scale h-48">
+                        class="relative overflow-hidden rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 hover-scale h-full">
                         <img src="https://images.unsplash.com/photo-1519225421980-715cb0215aed?w=400&h=300&fit=crop"
                             alt="Wedding Setup" class="w-full h-full object-cover">
                         <div
@@ -240,7 +234,7 @@
 
                 <div class="col-span-1" data-aos="fade-up" data-aos-delay="300">
                     <div
-                        class="relative overflow-hidden rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 hover-scale h-48">
+                        class="relative overflow-hidden rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 hover-scale h-full">
                         <img src="https://images.unsplash.com/photo-1464366400600-7168b8af9bc3?w=400&h=300&fit=crop"
                             alt="Corporate Event" class="w-full h-full object-cover">
                         <div
@@ -252,7 +246,7 @@
 
                 <div class="col-span-1" data-aos="fade-up" data-aos-delay="400">
                     <div
-                        class="relative overflow-hidden rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 hover-scale h-48">
+                        class="relative overflow-hidden rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 hover-scale h-full">
                         <img src="https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=400&h=300&fit=crop"
                             alt="Anniversary" class="w-full h-full object-cover">
                         <div
@@ -264,7 +258,7 @@
 
                 <div class="col-span-1" data-aos="fade-up" data-aos-delay="500">
                     <div
-                        class="relative overflow-hidden rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 hover-scale h-48">
+                        class="relative overflow-hidden rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 hover-scale h-full">
                         <img src="https://images.unsplash.com/photo-1511795409834-ef04bbd61622?w=400&h=300&fit=crop"
                             alt="Baby Shower" class="w-full h-full object-cover">
                         <div
@@ -276,7 +270,7 @@
 
                 <div class="col-span-2 row-span-1" data-aos="fade-up" data-aos-delay="600">
                     <div
-                        class="relative overflow-hidden rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 hover-scale h-48">
+                        class="relative overflow-hidden rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 hover-scale h-full">
                         <img src="https://images.unsplash.com/photo-1492684223066-81342ee5ff30?w=800&h=300&fit=crop"
                             alt="Event Setup" class="w-full h-full object-cover">
                         <div
@@ -298,7 +292,7 @@
 
     <!-- Why Choose Us Section -->
     <section id="about" class="py-20 bg-gradient-to-br from-purple-50 to-pink-50">
-        <div class="container mx-auto px-4">
+        <div class="container mx-auto">
             <div class="text-center mb-16">
                 <h2 class="text-4xl md:text-5xl py-2 font-bold font-display gradient-text mb-6" data-aos="fade-up">
                     Why Choose Zuppie for Event Planning in Bihar?
@@ -310,7 +304,7 @@
                 </p>
             </div>
 
-            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
                 <div class="text-center group" data-aos="fade-up" data-aos-delay="100">
                     <div
                         class="w-20 h-20 gradient-bg rounded-full flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform duration-300">
@@ -337,7 +331,8 @@
                         <i class="fas fa-heart text-white text-3xl"></i>
                     </div>
                     <h3 class="text-2xl font-bold text-gray-800 mb-4">Personal Touch</h3>
-                    <p class="text-gray-600">Every event is tailored to your unique vision, preferences, and budget.</p>
+                    <p class="text-gray-600">Every event is tailored to your unique vision, preferences, and budget.
+                    </p>
                 </div>
 
                 <div class="text-center group" data-aos="fade-up" data-aos-delay="400">
@@ -356,7 +351,8 @@
                         <i class="fas fa-dollar-sign text-white text-3xl"></i>
                     </div>
                     <h3 class="text-2xl font-bold text-gray-800 mb-4">Transparent Pricing</h3>
-                    <p class="text-gray-600">No hidden costs or surprises. We provide clear, upfront pricing for all our
+                    <p class="text-gray-600">No hidden costs or surprises. We provide clear, upfront pricing for all
+                        our
                         services.</p>
                 </div>
 
@@ -374,8 +370,8 @@
     </section>
 
     <!-- Testimonials Section -->
-    <section class="py-20 bg-white">
-        <div class="container mx-auto px-4">
+    <section class="py-20">
+        <div class="px-20 mx-auto">
             <div class="text-center mb-16">
                 <h2 class="text-4xl py-2 md:text-5xl font-bold font-display gradient-text mb-6" data-aos="fade-up">
                     Reviews from Our Satisfied Clients
@@ -386,7 +382,7 @@
                 </p>
             </div>
 
-            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-20 max-w-8xl mx-auto">
                 <div class="bg-gradient-to-br from-purple-50 to-pink-50 rounded-2xl p-8 shadow-lg hover:shadow-xl transition-all duration-300"
                     data-aos="fade-up" data-aos-delay="100">
                     <div class="flex items-center mb-4">
@@ -406,7 +402,7 @@
                     </div>
                 </div>
 
-                <div class="bg-gradient-to-br from-purple-50 to-pink-50 rounded-2xl p-8 shadow-lg hover:shadow-xl transition-all duration-300"
+                <div class="bg-gradient-to-br from-purple-50 to-pink-50 rounded-2xl p-4 shadow-lg hover:shadow-xl transition-all duration-300"
                     data-aos="fade-up" data-aos-delay="200">
                     <div class="flex items-center mb-4">
                         <div class="flex text-accent-400 text-xl">
