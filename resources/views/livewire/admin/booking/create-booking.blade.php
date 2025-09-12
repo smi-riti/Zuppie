@@ -431,8 +431,8 @@
                             class="bg-gray-200 text-gray-800 py-3 rounded-xl hover:bg-gray-300 transition-all duration-300">
                             <i class="fas fa-arrow-left mr-2"></i> Back
                         </button>
-                        <button type="button" wire:click="saveBooking" wire:loading.attr="disabled" id="submit-button"
-                            class="bg-gradient-to-r from-zuppie-600 to-zuppie-pink-600 text-white py-3 rounded-xl hover:from-zuppie-700 hover:to-zuppie-pink-700 transition-all duration-300 disabled:opacity-50">
+                        <button type="button" wire:click="saveBooking" wire:loading.attr="disabled" id="submit-button" class="bg-gradient-to-r from-purple-600 to-pink-500 text-white py-3 px-6 rounded-xl font-semibold shadow-lg transition-all duration-200 disabled:opacity-50" @if(!$acceptTerms) disabled @endif>
+                            {{-- class="bg-purple-800 text-white py-3 rounded-xltransition-all duration-300 disabled:opacity-50"> --}}
                             <span wire:loading.remove>
                                 @if ($payment_method === 'online')
                                     <i class="fas fa-credit-card mr-2"></i> Pay Now
@@ -500,12 +500,8 @@
                     },
                     handler: function(response) {
                         console.log('Razorpay success:', response);
-                        // CORRECTED: Use kebab-case event name
-                        Livewire.dispatch('complete-razorpay-payment', [
-                            response.razorpay_payment_id,
-                            response.razorpay_order_id,
-                            response.razorpay_signature
-                        ]);
+                        // Emit Livewire event to call server method
+                        Livewire.emit('completeRazorpayPayment', response.razorpay_payment_id, response.razorpay_order_id, response.razorpay_signature);
                     },
                     modal: {
                         ondismiss: function() {
