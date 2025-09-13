@@ -32,8 +32,8 @@
             <!-- Search Bar -->
             <div class="w-full max-w-lg mx-auto mb-8">
                 <div class="relative group">
-                    <input type="text" wire:model.live.debounce.500ms="searchQuery" wire:keydown.enter="searchPackages"
-                        placeholder="Search packages, categories, events..."
+                    <input type="text" wire:model.live.debounce.500ms="searchQuery"
+                        wire:keydown.enter="searchPackages" placeholder="Search packages, categories, events..."
                         class="w-full pl-6 pr-16 py-5 rounded-2xl bg-white/15 backdrop-blur-lg border border-white/30 text-white placeholder-gray-200 text-lg focus:outline-none focus:ring-4 focus:ring-pink-400/50 focus:border-pink-400 transition-all duration-300 shadow-xl group-hover:bg-white/20">
                     <button wire:click="searchPackages"
                         class="absolute right-6 top-1/2 -translate-y-1/2 transition-colors duration-300 group-hover:text-pink-300">
@@ -59,8 +59,8 @@
             </div>
 
             <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4 sm:gap-6">
-                @if($showAllCategoriesMode)
-                    @foreach($this->allCategories as $category)
+                @if ($showAllCategoriesMode)
+                    @foreach ($this->allCategories as $category)
                         <div wire:click="openCategoryModal('{{ $category->slug }}')"
                             class="bg-white rounded-xl shadow-lg p-4 sm:p-6 text-center transition-all duration-300 cursor-pointer hover:-translate-y-2 hover:shadow-xl group">
                             <div
@@ -72,15 +72,16 @@
                                 class="text-sm sm:text-base font-semibold text-gray-800 group-hover:text-purple-600 transition-colors">
                                 {{ $category->name }}
                             </h3>
-                            @if($category->description)
-                                <p class="text-xs text-gray-500 mt-1 opacity-0 group-hover:opacity-100 transition-opacity">
+                            @if ($category->description)
+                                <p
+                                    class="text-xs text-gray-500 mt-1 opacity-0 group-hover:opacity-100 transition-opacity">
                                     {{ Str::limit($category->description, 50) }}
                                 </p>
                             @endif
                         </div>
                     @endforeach
                 @else
-                    @foreach($this->specialCategories as $category)
+                    @foreach ($this->specialCategories as $category)
                         <div wire:click="openCategoryModal('{{ $category['slug'] }}')"
                             class="bg-white rounded-xl shadow-lg p-4 sm:p-6 text-center transition-all duration-300 cursor-pointer hover:-translate-y-2 hover:shadow-xl group">
                             <div
@@ -92,8 +93,9 @@
                                 class="text-sm sm:text-base font-semibold text-gray-800 group-hover:text-purple-600 transition-colors">
                                 {{ $category['name'] }}
                             </h3>
-                            @if($category['description'])
-                                <p class="text-xs text-gray-500 mt-1 opacity-0 group-hover:opacity-100 transition-opacity">
+                            @if ($category['description'])
+                                <p
+                                    class="text-xs text-gray-500 mt-1 opacity-0 group-hover:opacity-100 transition-opacity">
                                     {{ Str::limit($category['description'], 50) }}
                                 </p>
                             @endif
@@ -127,13 +129,13 @@
             <div class="relative">
                 <div id="popular-carousel" class="flex overflow-x-auto space-x-6 scrollbar-hide scroll-smooth"
                     style="scrollbar-width: none; -ms-overflow-style: none;">
-                    @foreach($this->popularPackages as $package)
+                    @foreach ($this->popularPackages as $package)
                         <div
                             class="flex-shrink-0 w-80 bg-white rounded-2xl shadow-xl overflow-hidden transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl">
                             <div class="relative h-48">
                                 <img src="{{ $package['image'] }}" alt="{{ $package['name'] }}"
                                     class="w-full h-full object-cover">
-                                @if($package['is_special'])
+                                @if ($package['is_special'])
                                     <div
                                         class="absolute top-4 right-4 bg-gradient-to-r from-purple-600 to-pink-600 text-white px-3 py-1 rounded-full text-xs font-medium">
                                         Special
@@ -141,7 +143,7 @@
                                 @endif
                                 <div
                                     class="absolute top-3 left-3 text-white px-3 py-1 rounded-full text-xs font-medium">
-                                    <livewire:public.components.wishlist-button :packageId="$package['id']" />
+                                    {{-- <livewire:public.components.wishlist-button :packageId="$package['id']" /> --}}
                                 </div>
                             </div>
                             <div class="p-6">
@@ -149,15 +151,15 @@
                                 <div class="flex items-center mb-3">
                                     <span
                                         class="text-2xl font-bold text-purple-600">₹{{ number_format($package['discounted_price']) }}</span>
-                                    @if($package['price'] != $package['discounted_price'])
+                                    @if ($package['price'] != $package['discounted_price'])
                                         <span
                                             class="text-lg text-gray-500 line-through ml-2">₹{{ number_format($package['price']) }}</span>
                                     @endif
                                 </div>
                                 <p class="text-gray-600 mb-4 text-sm">{{ Str::limit($package['description'], 80) }}</p>
-                                @if($package['features'] && is_array($package['features']) && !empty($package['features']))
+                                @if ($package['features'] && is_array($package['features']) && !empty($package['features']))
                                     <ul class="text-gray-600 mb-4 text-sm space-y-1">
-                                        @foreach(array_slice($package['features'], 0, 3) as $feature)
+                                        @foreach (array_slice($package['features'], 0, 3) as $feature)
                                             <li class="flex items-center">
                                                 <i class="fas fa-check text-green-500 mr-2 text-xs"></i>
                                                 {{ $feature }}
@@ -180,10 +182,16 @@
                                         </li>
                                     </ul>
                                 @endif
-                                <a href="{{ route('package-detail', $package['slug']) }}"
-                                    class="block w-full py-3 bg-gradient-to-r from-purple-500 to-pink-500 text-white rounded-lg font-medium hover:opacity-90 transition-all duration-300 text-center transform hover:scale-105">
-                                    View Details
-                                </a>
+                                <div class="mt-6 flex items-center justify-between gap-3">
+                                    <a href="{{ route('package-detail', ['slug' => $package['slug'] ?? ($package->slug ?? '')]) }}"
+                                        class="flex-1 text-white text-center px-4 py-3  bg-gradient-to-r from-purple-600 to-pink-600 rounded-xl font-medium hover:from-purple-700 hover:to-pink-700 transition ">
+                                        View
+                                    </a>
+                                    <a href="tel:{{ $settings['phone_no'] ?? '' }}"
+                                        class="flex-1 block text-center px-4 py-3 bg-gradient-to-r from-purple-600 to-pink-600 text-white rounded-xl font-2xl hover:from-purple-700 hover:to-pink-700 transition">
+                                        Call us
+                                    </a>
+                                </div>
                             </div>
                         </div>
                     @endforeach
@@ -207,12 +215,13 @@
     @endphp
 
     {{-- Special Categories Packages --}}
-    @foreach($specialCategories as $category)
+    @foreach ($specialCategories as $category)
         <section class="py-16 {{ $loop->even ? 'bg-white' : 'bg-gray-50' }}">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div class="flex flex-col md:flex-row justify-between items-center mb-10">
                     <div>
-                        <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-2">{{ $category['name'] }} Packages</h2>
+                        <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-2">{{ $category['name'] }} Packages
+                        </h2>
                         <p class="text-gray-600">Discover amazing {{ strtolower($category['name']) }} packages</p>
                     </div>
                     <div class="flex items-center mt-4 md:mt-0 space-x-2">
@@ -233,34 +242,35 @@
                     <div id="category-{{ $category['slug'] }}-carousel"
                         class="flex overflow-x-auto space-x-6 scrollbar-hide scroll-smooth category-carousel"
                         style="scrollbar-width: none; -ms-overflow-style: none;">
-                        @foreach($category['packages'] as $package)
+                        @foreach ($category['packages'] as $package)
                             <div
                                 class="flex-shrink-0 w-80 bg-white rounded-2xl shadow-xl overflow-hidden transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl">
                                 <div class="relative h-48">
                                     <img src="{{ $package['image'] }}" alt="{{ $package['name'] }}"
                                         class="w-full h-full object-cover">
-                                    @if($package['is_special'])
+                                    @if ($package['is_special'])
                                         <div
                                             class="absolute top-4 right-4 bg-gradient-to-r from-purple-600 to-pink-600 text-white px-3 py-1 rounded-full text-xs font-medium">
                                             Special
                                         </div>
                                     @endif
-                                    <livewire:public.components.wishlist-button :packageId="$package['id']" />
+                                    {{-- <livewire:public.components.wishlist-button :packageId="$package['id']" /> --}}
                                 </div>
                                 <div class="p-6">
                                     <h3 class="text-xl font-bold text-gray-900 mb-2">{{ $package['name'] }}</h3>
                                     <div class="flex items-center mb-3">
                                         <span
                                             class="text-2xl font-bold text-purple-600">₹{{ number_format($package['discounted_price']) }}</span>
-                                        @if($package['price'] != $package['discounted_price'])
+                                        @if ($package['price'] != $package['discounted_price'])
                                             <span
                                                 class="text-lg text-gray-500 line-through ml-2">₹{{ number_format($package['price']) }}</span>
                                         @endif
                                     </div>
-                                    <p class="text-gray-600 mb-4 text-sm">{{ Str::limit($package['description'], 80) }}</p>
-                                    @if($package['features'] && is_array($package['features']) && !empty($package['features']))
+                                    <p class="text-gray-600 mb-4 text-sm">
+                                        {{ Str::limit($package['description'], 80) }}</p>
+                                    @if ($package['features'] && is_array($package['features']) && !empty($package['features']))
                                         <ul class="text-gray-600 mb-4 text-sm space-y-1">
-                                            @foreach(array_slice($package['features'], 0, 3) as $feature)
+                                            @foreach (array_slice($package['features'], 0, 3) as $feature)
                                                 <li class="flex items-center">
                                                     <i class="fas fa-check text-green-500 mr-2 text-xs"></i>
                                                     {{ $feature }}
@@ -283,10 +293,16 @@
                                             </li>
                                         </ul>
                                     @endif
-                                    <a href="{{ route('package-detail', $package['slug']) }}"
-                                        class="block w-full py-3 bg-gradient-to-r from-purple-500 to-pink-500 text-white rounded-lg font-medium hover:opacity-90 transition-all duration-300 text-center transform hover:scale-105">
-                                        View Details
-                                    </a>
+                                    <div class="mt-6 flex items-center justify-between gap-3">
+                                        <a href="{{ route('package-detail', ['slug' => $package['slug'] ?? ($package->slug ?? '')]) }}"
+                                            class="flex-1 block  text-center px-4 py-3 bg-gradient-to-r from-purple-600 to-pink-600 text-white rounded-xl font-medium hover:from-purple-700 hover:to-pink-700 transition transition">
+                                            View
+                                        </a>
+                                        <a href="tel:{{ $settings['phone_no'] ?? '' }}"
+                                            class="flex-1 block text-center px-4 py-3 bg-gradient-to-r from-purple-600 to-pink-600 text-white rounded-xl font-2xl hover:from-purple-700 hover:to-pink-700 transition">
+                                            Call us
+                                        </a>
+                                    </div>
                                 </div>
                             </div>
                         @endforeach
@@ -304,18 +320,21 @@
     @endforeach
 
     {{-- Normal Categories Packages (Only when showing all categories) --}}
-    @if($showAllCategoriesMode)
-        @foreach($normalCategories as $category)
+    @if ($showAllCategoriesMode)
+        @foreach ($normalCategories as $category)
             @php
                 $categoryPackages = $this->getCategoryPackages($category->id);
             @endphp
-            @if(count($categoryPackages) > 0)
-                <section class="py-16 {{ ($specialCategories->count() + $loop->index) % 2 == 0 ? 'bg-gray-50' : 'bg-white' }}">
+            @if (count($categoryPackages) > 0)
+                <section
+                    class="py-16 {{ ($specialCategories->count() + $loop->index) % 2 == 0 ? 'bg-gray-50' : 'bg-white' }}">
                     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                         <div class="flex flex-col md:flex-row justify-between items-center mb-10">
                             <div>
-                                <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-2">{{ $category->name }} Packages</h2>
-                                <p class="text-gray-600">Discover amazing {{ strtolower($category->name) }} packages</p>
+                                <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-2">{{ $category->name }}
+                                    Packages</h2>
+                                <p class="text-gray-600">Discover amazing {{ strtolower($category->name) }} packages
+                                </p>
                             </div>
                             <div class="flex items-center mt-4 md:mt-0 space-x-2">
                                 <button
@@ -335,13 +354,13 @@
                             <div id="category-{{ $category->slug }}-carousel"
                                 class="flex overflow-x-auto space-x-6 scrollbar-hide scroll-smooth category-carousel"
                                 style="scrollbar-width: none; -ms-overflow-style: none;">
-                                @foreach($categoryPackages as $package)
+                                @foreach ($categoryPackages as $package)
                                     <div
                                         class="flex-shrink-0 w-80 bg-white rounded-2xl shadow-xl overflow-hidden transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl">
                                         <div class="relative h-48">
                                             <img src="{{ $package['image'] }}" alt="{{ $package['name'] }}"
                                                 class="w-full h-full object-cover">
-                                            @if($package['is_special'])
+                                            @if ($package['is_special'])
                                                 <div
                                                     class="absolute top-4 right-4 bg-gradient-to-r from-purple-600 to-pink-600 text-white px-3 py-1 rounded-full text-xs font-medium">
                                                     Special
@@ -353,19 +372,21 @@
                                             </button>
                                         </div>
                                         <div class="p-6">
-                                            <h3 class="text-xl font-bold text-gray-900 mb-2">{{ $package['name'] }}</h3>
+                                            <h3 class="text-xl font-bold text-gray-900 mb-2">{{ $package['name'] }}
+                                            </h3>
                                             <div class="flex items-center mb-3">
                                                 <span
                                                     class="text-2xl font-bold text-purple-600">₹{{ number_format($package['discounted_price']) }}</span>
-                                                @if($package['price'] != $package['discounted_price'])
+                                                @if ($package['price'] != $package['discounted_price'])
                                                     <span
                                                         class="text-lg text-gray-500 line-through ml-2">₹{{ number_format($package['price']) }}</span>
                                                 @endif
                                             </div>
-                                            <p class="text-gray-600 mb-4 text-sm">{{ Str::limit($package['description'], 80) }}</p>
-                                            @if($package['features'] && is_array($package['features']) && !empty($package['features']))
+                                            <p class="text-gray-600 mb-4 text-sm">
+                                                {{ Str::limit($package['description'], 80) }}</p>
+                                            @if ($package['features'] && is_array($package['features']) && !empty($package['features']))
                                                 <ul class="text-gray-600 mb-4 text-sm space-y-1">
-                                                    @foreach(array_slice($package['features'], 0, 3) as $feature)
+                                                    @foreach (array_slice($package['features'], 0, 3) as $feature)
                                                         <li class="flex items-center">
                                                             <i class="fas fa-check text-green-500 mr-2 text-xs"></i>
                                                             {{ $feature }}
@@ -388,10 +409,16 @@
                                                     </li>
                                                 </ul>
                                             @endif
-                                            <a href="{{ route('package-detail', $package['slug']) }}"
-                                                class="block w-full py-3 bg-gradient-to-r from-purple-500 to-pink-500 text-white rounded-lg font-medium hover:opacity-90 transition-all duration-300 text-center transform hover:scale-105">
-                                                View Details
-                                            </a>
+                                            <div class="mt-6 flex items-center justify-between gap-3">
+                                                <a href="{{ route('package-detail', ['slug' => $package['slug'] ?? ($package->slug ?? '')]) }}"
+                                                    class="flex-1 block  text-center px-4 py-3 bg-gradient-to-r from-purple-600 to-pink-600 text-gray-700 rounded-xl font-medium hover:from-purple-700 hover:to-pink-700 transition">
+                                                    View
+                                                </a>
+                                                <a href="tel:{{ $settings['phone_no'] ?? '' }}"
+                                                    class="flex-1 block text-center px-4 py-3 bg-gradient-to-r from-purple-600 to-pink-600 text-white rounded-xl font-2xl hover:from-purple-700 hover:to-pink-700 transition">
+                                                    Call us
+                                                </a>
+                                            </div>
                                         </div>
                                     </div>
                                 @endforeach
@@ -415,10 +442,10 @@
 
     <!-- JavaScript for Enhanced Functionality -->
     <script>
-        document.addEventListener('DOMContentLoaded', function () {
+        document.addEventListener('DOMContentLoaded', function() {
             // Wishlist functionality
             document.querySelectorAll('.wishlist-btn').forEach(button => {
-                button.addEventListener('click', function (e) {
+                button.addEventListener('click', function(e) {
                     e.stopPropagation();
                     e.preventDefault();
                     const icon = this.querySelector('i');
@@ -440,7 +467,8 @@
             // Category carousels with overflow-x-auto
             document.querySelectorAll('.category-carousel').forEach(carousel => {
                 const categorySlug = carousel.id.replace('category-', '').replace('-carousel', '');
-                setupOverflowCarousel(carousel.id, `[data-category="${categorySlug}"].category-prev`, `[data-category="${categorySlug}"].category-next`);
+                setupOverflowCarousel(carousel.id, `[data-category="${categorySlug}"].category-prev`,
+                    `[data-category="${categorySlug}"].category-next`);
             });
 
             function setupOverflowCarousel(carouselId, prevSelector, nextSelector) {
@@ -470,9 +498,15 @@
                 if (carouselId === 'popular-carousel') {
                     setInterval(() => {
                         if (carousel.scrollLeft >= carousel.scrollWidth - carousel.clientWidth) {
-                            carousel.scrollTo({ left: 0, behavior: 'smooth' });
+                            carousel.scrollTo({
+                                left: 0,
+                                behavior: 'smooth'
+                            });
                         } else {
-                            carousel.scrollBy({ left: itemWidth, behavior: 'smooth' });
+                            carousel.scrollBy({
+                                left: itemWidth,
+                                behavior: 'smooth'
+                            });
                         }
                     }, 5000);
                 }
@@ -482,9 +516,15 @@
             let startX, startY, currentX, currentY;
 
             document.querySelectorAll('[id$="-carousel"]').forEach(carousel => {
-                carousel.addEventListener('touchstart', handleTouchStart, { passive: true });
-                carousel.addEventListener('touchmove', handleTouchMove, { passive: true });
-                carousel.addEventListener('touchend', handleTouchEnd, { passive: true });
+                carousel.addEventListener('touchstart', handleTouchStart, {
+                    passive: true
+                });
+                carousel.addEventListener('touchmove', handleTouchMove, {
+                    passive: true
+                });
+                carousel.addEventListener('touchend', handleTouchEnd, {
+                    passive: true
+                });
 
                 function handleTouchStart(e) {
                     startX = e.touches[0].clientX;
@@ -511,13 +551,15 @@
                             if (carouselId === 'popular-carousel') {
                                 document.getElementById('popular-next').click();
                             } else {
-                                document.querySelector(`[data-category="${categorySlug}"].category-next`).click();
+                                document.querySelector(`[data-category="${categorySlug}"].category-next`)
+                                    .click();
                             }
                         } else { // swipe rightwish
                             if (carouselId === 'popular-carousel') {
                                 document.getElementById('popular-prev').click();
                             } else {
-                                document.querySelector(`[data-category="${categorySlug}"].category-prev`).click();
+                                document.querySelector(`[data-category="${categorySlug}"].category-prev`)
+                                    .click();
                             }
                         }
                     }

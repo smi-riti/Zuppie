@@ -4,10 +4,18 @@ namespace App\Livewire\Public\Section;
 
 use App\Models\EventPackage;
 use Livewire\Component;
+use App\Traits\HasSettings;
 #[Title('Other Section')]
 
 class OtherSection extends Component
 {
+    use HasSettings;
+
+    public function mount()
+    {
+        $this->loadSiteSettings();
+    }
+
     public function render()
     {
         $packages = EventPackage::with(['category', 'images'])

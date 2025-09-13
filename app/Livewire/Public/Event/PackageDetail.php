@@ -7,10 +7,12 @@ use Livewire\Attributes\On;
 use Livewire\Component;
 use App\Models\EventPackage;
 use App\Models\Service;
+use App\Traits\HasSettings;
 #[Title('Package Detail')]
 
 class PackageDetail extends Component
 {
+    use HasSettings;
     public $packageId;
     public $package;
     public $pinCode = '';
@@ -45,6 +47,7 @@ class PackageDetail extends Component
 
     public function mount($slug = null)
     {
+        $this->loadSiteSettings();
         $this->packageId = $slug;
         $this->loadPackage();
 

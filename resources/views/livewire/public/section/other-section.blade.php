@@ -87,12 +87,16 @@
                                         <p class="text-gray-600 text-sm mb-4 text-center leading-relaxed flex-grow">
                                             {{ Str::limit($package->description, 120) }}
                                         </p>
-
+                                         
+                                         <a href=" tel:{{ $settings['phone_no'] }}"
+                                            class="block w-full bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white py-3 px-4 rounded-xl text-center font-semibold transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl mt-auto">
+                                            <i class="fas fa-calendar-check mr-2"></i>Call us 
+                                        </a>
                                         <!-- Action Button -->
-                                        <a href="{{ route('package-detail', $package['slug']) }}"
+                                        {{-- <a href="{{ route('package-detail', $package['slug']) }}"
                                             class="block w-full bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white py-3 px-4 rounded-xl text-center font-semibold transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl mt-auto">
                                             <i class="fas fa-calendar-check mr-2"></i>Book Now
-                                        </a>
+                                        </a> --}}
                                     </div>
                                 </div>
                             </div>
@@ -102,7 +106,6 @@
             </div>
         </div>
     </section>
-
     <!-- Alpine.js Auto-Scroll Control -->
     <script>
         document.addEventListener('alpine:init', () => {
