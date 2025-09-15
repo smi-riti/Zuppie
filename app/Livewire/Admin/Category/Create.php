@@ -83,20 +83,30 @@ class Create extends Component
         $message = '';
 
         if ($this->image) {
-            $imageData = ImageKitHelper::uploadImage($this->image, '/Zuppie/CategoryImages');
-            
-            if ($imageData) {
-                if ($this->editingId) {
-                    $oldCategory = Category::find($this->editingId);
-                    if ($oldCategory && $oldCategory->image_file_id) {
-                        ImageKitHelper::deleteImage($oldCategory->image_file_id);
-                    }
-                }
+            try {
+                $imageData = ImageKitHelper::uploadImage($this->image, '/Zuppie/CategoryImages');
                 
-                $data['image'] = $imageData['url'];
-                $data['image_file_id'] = $imageData['fileId'];
-            } else {
-                session()->flash('error', 'Failed to upload image. Please try again.');
+                if ($imageData) {
+                    if ($this->editingId) {
+                        $oldCategory = Category::find($this->editingId);
+                        if ($oldCategory && $oldCategory->image_file_id) {
+                            try {
+                                ImageKitHelper::deleteImage($oldCategory->image_file_id);
+                            } catch (\Exception $e) {
+                                \Log::error('Failed to delete old image: ' . $e->getMessage());
+                                // Continue with the update even if old image deletion fails
+                            }
+                        }
+                    }
+                    
+                    $data['image'] = $imageData['url'];
+                    $data['image_file_id'] = $imageData['fileId'];
+                } else {
+                    session()->flash('error', 'Failed to upload image. Please try again.');
+                    return;
+                }
+            } catch (\Exception $e) {
+                session()->flash('error', 'Failed to process image: ' . $e->getMessage());
                 return;
             }
         }
@@ -122,6 +132,18 @@ class Create extends Component
         }
     }
 
+    public function updatedImage()
+    {
+        try {
+            if ($this->image) {
+                $this->currentImageUrl = $this->image->temporaryUrl();
+            }
+        } catch (\Exception $e) {
+            $this->currentImageUrl = null;
+            session()->flash('error', 'Error creating preview: ' . $e->getMessage());
+        }
+    }
+
     public function resetForm()
     {
         $this->form = [
@@ -134,6 +156,29 @@ class Create extends Component
         $this->currentImageUrl = null;
         $this->editingId = null;
         $this->resetValidation();
+    }
+
+    #[On('delete-category')]
+    public function deleteCategory($categoryId)
+    {
+        try {
+            $category = Category::find($categoryId);
+            
+            if ($category) {
+                // Delete image from ImageKit if exists
+                if ($category->image_file_id) {
+                    ImageKitHelper::deleteImage($category->image_file_id);
+                }
+                
+                // Delete the category
+                $category->delete();
+                
+                session()->flash('message', 'Category deleted successfully!');
+                $this->dispatch('category-deleted');
+            }
+        } catch (\Exception $e) {
+            session()->flash('error', 'Error deleting category: ' . $e->getMessage());
+        }
     }
 
     public function render()
