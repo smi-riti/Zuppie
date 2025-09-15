@@ -32,7 +32,7 @@
 
         <!-- Our Story Section -->
         <section class="py-20 bg-gradient-to-br from-purple-50 to-pink-50">
-            <div class="container mx-auto px-4 max-w-6xl">
+            <div class="px-20">
                 <div class="grid lg:grid-cols-2 gap-16 items-center">
                     <div class="space-y-6">
                         <h2 class="text-4xl md:text-5xl font-bold font-display gradient-text mb-6">
@@ -67,17 +67,9 @@
                     </div>
                     
                     <div class="relative">
-                        <div class="relative rounded-2xl overflow-hidden shadow-2xl transform hover:scale-105 transition-transform duration-500">
-                            <img src="https://images.unsplash.com/photo-1522543558187-768b6df7c25c?w=600&h=600&fit=crop" alt="Our Team" class="w-full h-full object-cover">
+                        <div class="relative rounded-2xl overflow-hidden shadow-2xl transform hover:scale-105 transition-transform duration-500 w-2/3 mx-auto">
+                            <img src="https://images.unsplash.com/photo-1522543558187-768b6df7c25c?w=600&h=600&fit=crop" alt="Our Team" class="object-cover">
                             <div class="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent"></div>
-                        </div>
-                        
-                        <!-- Floating decorative elements -->
-                        <div class="absolute -top-6 -right-6 w-20 h-20 bg-yellow-400 rounded-full flex items-center justify-center animate-bounce-slow">
-                            ✨
-                        </div>
-                        <div class="absolute -bottom-4 -left-4 w-16 h-16 bg-pink-400 rounded-full flex items-center justify-center animate-pulse-slow">
-                            🎉
                         </div>
                     </div>
                 </div>
@@ -86,7 +78,7 @@
 
         <!-- Our Mission & Vision -->
         <section class="py-20 bg-white">
-            <div class="container mx-auto px-4 max-w-6xl">
+            <div class="px-20">
                 <div class="text-center mb-16">
                     <h2 class="text-4xl md:text-5xl font-bold font-display gradient-text mb-6">
                         Mission & Vision
@@ -132,7 +124,7 @@
 
         <!-- Our Values -->
         <section class="py-20 bg-gradient-to-br from-purple-50 to-pink-50">
-            <div class="container mx-auto px-4 max-w-6xl">
+            <div class="px-20">
                 <div class="text-center mb-16">
                     <h2 class="text-4xl md:text-5xl font-bold font-display gradient-text mb-6">
                         Our Values
@@ -202,7 +194,7 @@
 
         <!-- Meet Our Team -->
         <section class="py-20 bg-white">
-            <div class="container mx-auto px-4 max-w-6xl">
+            <div class="px-20">
                 <div class="text-center mb-16">
                     <h2 class="text-4xl md:text-5xl font-bold font-display gradient-text mb-6">
                         Meet Our Amazing Team
@@ -257,7 +249,7 @@
 
         <!-- Our Journey Timeline -->
         <section class="py-20 bg-gradient-to-br from-purple-50 to-pink-50">
-            <div class="container mx-auto px-4 max-w-4xl">
+            <div class="px-20">
                 <div class="text-center mb-16">
                     <h2 class="text-4xl md:text-5xl font-bold font-display gradient-text mb-6">
                         Our Journey
@@ -322,7 +314,7 @@
 
         <!-- Call to Action -->
         <section class="py-20 bg-white">
-            <div class="container mx-auto px-4 text-center">
+            <div class="px-20 text-center">
                 <div class="max-w-4xl mx-auto">
                     <h2 class="text-4xl md:text-5xl font-bold font-display gradient-text mb-6">
                         Ready to Create Magic Together?

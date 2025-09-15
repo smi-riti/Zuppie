@@ -386,17 +386,15 @@
                 <div class="bg-gradient-to-br from-purple-50 to-pink-50 rounded-2xl p-8 shadow-lg hover:shadow-xl transition-all duration-300"
                     data-aos="fade-up" data-aos-delay="100">
                     <div class="flex items-center mb-4">
-                        <div class="flex text-accent-400 text-xl">
+                        <div class="flex text-pink-400 text-xl">
                             ★★★★★
                         </div>
                     </div>
                     <p class="text-gray-700 mb-6 italic">"Zuppie made my daughter's 5th birthday absolutely magical!
                         Every detail was perfect, and the kids were enchanted. Highly recommended!"</p>
                     <div class="flex items-center">
-                        <img src="https://images.unsplash.com/photo-1494790108755-2616b612b786?w=50&h=50&fit=crop&crop=face"
-                            alt="Sarah Johnson" class="w-12 h-12 rounded-full mr-4">
                         <div>
-                            <div class="font-semibold text-gray-800">Sarah Johnson</div>
+                            <div class="font-semibold text-gray-800">Bharti Gupta</div>
                             <div class="text-sm text-gray-500">Mother of Birthday Girl</div>
                         </div>
                     </div>
@@ -405,18 +403,16 @@
                 <div class="bg-gradient-to-br from-purple-50 to-pink-50 rounded-2xl p-4 shadow-lg hover:shadow-xl transition-all duration-300"
                     data-aos="fade-up" data-aos-delay="200">
                     <div class="flex items-center mb-4">
-                        <div class="flex text-accent-400 text-xl">
+                        <div class="flex text-pink-400 text-xl">
                             ★★★★★
                         </div>
                     </div>
                     <p class="text-gray-700 mb-6 italic">"Our wedding was a dream come true thanks to Zuppie. They
                         handled everything with such professionalism and creativity!"</p>
                     <div class="flex items-center">
-                        <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=50&h=50&fit=crop&crop=face"
-                            alt="Michael Chen" class="w-12 h-12 rounded-full mr-4">
                         <div>
-                            <div class="font-semibold text-gray-800">Michael Chen</div>
-                            <div class="text-sm text-gray-500">Newlywed</div>
+                            <div class="font-semibold text-gray-800">Shivam Kumar</div>
+                            <div class="text-sm text-gray-500">groom</div>
                         </div>
                     </div>
                 </div>
@@ -424,20 +420,21 @@
                 <div class="bg-gradient-to-br from-purple-50 to-pink-50 rounded-2xl p-8 shadow-lg hover:shadow-xl transition-all duration-300"
                     data-aos="fade-up" data-aos-delay="300">
                     <div class="flex items-center mb-4">
-                        <div class="flex text-accent-400 text-xl">
+                        <div class="flex text-pink-400 text-xl">
                             ★★★★★
                         </div>
                     </div>
-                    <p class="text-gray-700 mb-6 italic">"The corporate event they organized for us was flawless. Our
-                        clients were impressed, and it exceeded all expectations!"</p>
+                    <p class="text-gray-700 mb-6 italic">
+                        "The birthday event was beautifully organized. Everything was well managed,
+                        and it created unforgettable memories for our family and friends!"
+                    </p>
                     <div class="flex items-center">
-                        <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=50&h=50&fit=crop&crop=face"
-                            alt="Emily Rodriguez" class="w-12 h-12 rounded-full mr-4">
                         <div>
-                            <div class="font-semibold text-gray-800">Emily Rodriguez</div>
-                            <div class="text-sm text-gray-500">CEO, Tech Solutions</div>
+                            <div class="font-semibold text-gray-800">Ravi Sharma</div>
+                            <div class="text-sm text-gray-500">Father of Birthday Boy</div>
                         </div>
                     </div>
+
                 </div>
             </div>
         </div>

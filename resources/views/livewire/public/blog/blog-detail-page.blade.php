@@ -13,7 +13,7 @@
     </div>
 
     <!-- Main Layout -->
-    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8 flex flex-col lg:flex-row gap-8">
+    <div class="px-4 sm:px-6 lg:px-20 py-8 flex flex-col lg:flex-row gap-8">
         <!-- Article -->
         <article class="w-full lg:w-2/3">
             <header class="mb-10">
@@ -149,7 +149,7 @@
     <!-- Related Posts -->
     @if($relatedBlogs->count() > 0)
     <section class="bg-white border-t border-gray-200">
-        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        <div class="sm:px-6 lg:px-20 py-12">
             <h2 class="text-2xl font-bold text-gray-900 mb-8">You Might Also Like</h2>
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                 @foreach($relatedBlogs as $relatedBlog)

@@ -45,7 +45,7 @@
     </div>
 
     <!-- Categories Section - Mobile/Tablet: Horizontal Scroll, Desktop: Sidebar -->
-    <div class="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8 lg:py-12">
+    <div class="sm:px-6 lg:px-20 py-6 sm:py-8 lg:py-12">
         <!-- Mobile & Tablet: Horizontal Scrollable Categories -->
         <div class="block lg:hidden mb-8">
             <div class="flex items-center justify-between mb-4">
@@ -344,7 +344,7 @@
                     </div>
 
                     <!-- Enhanced Pagination -->
-                    <div class="flex justify-center">
+                    <div class="flex justify-center button-left">
                         {{ $blogs->links() }}
                     </div>
 
