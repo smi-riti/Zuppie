@@ -18,7 +18,7 @@
                 <a wire:navigate href="{{route('event-packages')}}" class="text-pink-700 hover:text-pink-600 font-medium transition">EventPackage</a>
                 <a wire:navigate href="{{route('blog')}}" class="text-pink-700 hover:text-pink-600 font-medium transition">Blog</a>
                 <a wire:navigate href="{{route('about')}}" class="text-pink-700 hover:text-pink-600 font-medium transition">About</a>
-                <!-- <a wire:navigate href="{{route('contact')}}" class="text-pink-700 hover:text-pink-600 font-medium transition">Contact</a> -->
+                <a wire:navigate href="{{route('contact')}}" class="text-pink-700 hover:text-pink-600 font-medium transition">Contact</a>
             </nav>
 
             <!-- Auth Buttons -->
