@@ -45,8 +45,8 @@
     </section>
 
     <!-- Special Categories Section -->
-    <section class="py-16 bg-white">
-        <div class="mx-auto px-4 sm:px-6 lg:px-8">
+    <section class="px-20 py-12">
+        <div class="px-4 sm:px-6 lg:px-8">
             <div class="flex flex-col md:flex-row justify-between items-center mb-10">
                 <div>
                     <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-2">Browse Categories</h2>
@@ -107,8 +107,8 @@
     </section>
 
     <!-- Popular Packages Section -->
-    <section class="py-16 bg-gray-50">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section class="px-20  py-2">
+        <div class="px-4 sm:px-6 lg:px-8">
             <div class="flex flex-col md:flex-row justify-between items-center mb-10">
                 <div>
                     <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-2">Popular Packages</h2>
@@ -131,7 +131,7 @@
                     style="scrollbar-width: none; -ms-overflow-style: none;">
                     @foreach ($this->popularPackages as $package)
                         <div
-                            class="flex-shrink-0 w-80 bg-white rounded-2xl shadow-xl overflow-hidden transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl">
+                            class="flex-shrink-0 w-80 rounded-2xl shadow-xl overflow-hidden transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl">
                             <div class="relative h-48">
                                 <img src="{{ $package['image'] }}" alt="{{ $package['name'] }}"
                                     class="w-full h-full object-cover">
@@ -141,10 +141,10 @@
                                         Special
                                     </div>
                                 @endif
-                                <div
+                                {{-- <div
                                     class="absolute top-3 left-3 text-white px-3 py-1 rounded-full text-xs font-medium">
-                                    {{-- <livewire:public.components.wishlist-button :packageId="$package['id']" /> --}}
-                                </div>
+                                    <livewire:public.components.wishlist-button :packageId="$package['id']" />
+                                </div>  --}}
                             </div>
                             <div class="p-6">
                                 <h3 class="text-xl font-bold text-gray-900 mb-2">{{ $package['name'] }}</h3>
@@ -216,8 +216,8 @@
 
     {{-- Special Categories Packages --}}
     @foreach ($specialCategories as $category)
-        <section class="py-16 {{ $loop->even ? 'bg-white' : 'bg-gray-50' }}">
-            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <section class="py-6 px-20 {{ $loop->even}}">
+            <div class="sm:px-6 lg:px-8">
                 <div class="flex flex-col md:flex-row justify-between items-center mb-10">
                     <div>
                         <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-2">{{ $category['name'] }} Packages
@@ -244,7 +244,7 @@
                         style="scrollbar-width: none; -ms-overflow-style: none;">
                         @foreach ($category['packages'] as $package)
                             <div
-                                class="flex-shrink-0 w-80 bg-white rounded-2xl shadow-xl overflow-hidden transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl">
+                                class="flex-shrink-0 w-80 rounded-2xl shadow-xl overflow-hidden transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl">
                                 <div class="relative h-48">
                                     <img src="{{ $package['image'] }}" alt="{{ $package['name'] }}"
                                         class="w-full h-full object-cover">

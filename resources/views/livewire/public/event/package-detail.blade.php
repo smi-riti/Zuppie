@@ -9,8 +9,8 @@
         </div>
     @else
         <!-- Main Content -->
-        <section class="py-8 md:py-20">
-            <div class="max-w-[95%] lg:max-w-[80%] mx-auto px-1 sm:px-6 lg:px-8">
+        <section class="py-8 px-20 md:py-20">
+            <div class="px-1 sm:px-6 lg:px-8">
                 <div class="flex flex-col lg:flex-row gap-5">
                     <!-- Image Gallery -->
                     <div
@@ -416,8 +416,8 @@
 
         <!-- Similar Packages Section -->
         @if ($this->similarPackages->count() > 0)
-            <section class="py-20 bg-white">
-                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <section class="bg-white px-20">
+                <div class="sm:px-6 lg:px-8">
                     <div class="text-center mb-16">
                         <h2 class="text-4xl md:text-5xl font-bold text-gray-800 mb-6">
                             Similar Packages You Might Like
@@ -491,7 +491,7 @@
                         @endforeach
                     </div>
 
-                    <div class="text-center mt-12">
+                    <div class="text-center mt-12 pb-4">
                         <a href="{{ route('event-packages') }}"
                             class="inline-flex items-center space-x-2 bg-white border-2 border-purple-600 text-purple-600 px-8 py-3 rounded-2xl font-bold hover:bg-purple-600 hover:text-white transition-all duration-300">
                             <i class="fas fa-th-large"></i>

@@ -21,7 +21,7 @@
                     <div class="absolute top-1/2 right-1/4 w-16 h-16 bg-purple-300/15 rounded-full blur-xl animate-float-fast"></div>
                 </div>
 
-                <div class="max-w-5xl mx-auto relative">
+                <div class="px-20 relative">
                    
                     <!-- Enhanced Description -->
                     <div class="mb-12 animate-fade-in-up animation-delay-300">
@@ -92,7 +92,7 @@
 
         <!-- Contact Information & Form Section -->
         <section class="py-20 bg-gradient-to-br from-purple-50 to-pink-50">
-            <div class="container mx-auto px-4 max-w-7xl">
+            <div class="px-20">
                 <div class="text-center mb-16">
                     <h2 class="text-4xl md:text-5xl font-bold gradient-text mb-6">Contact Information</h2>
                     <p class="text-xl text-gray-600 max-w-3xl mx-auto">{{ $settings['site_description'] }}</p>
@@ -206,7 +206,7 @@
 
         <!-- Social Media & Additional Contact -->
         <section class="py-20 bg-white">
-            <div class="container mx-auto px-4 text-center">
+            <div class=" px-20 text-center">
                 <h2 class="text-4xl font-bold gradient-text mb-12">Follow Us & Connect</h2>
                 
                 <div class="flex flex-wrap justify-center gap-6 mb-12">
