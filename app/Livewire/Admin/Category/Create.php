@@ -30,7 +30,7 @@ class Create extends Component
         'form.description' => 'nullable|string',
         'form.parent_id' => 'nullable|exists:categories,id',
         'form.is_special' => 'boolean', 
-        'image' => 'nullable|image|max:2048',
+        'image' => 'required|image|max:2048',
     ];
 
     protected $messages = [
@@ -76,8 +76,13 @@ class Create extends Component
         if ($this->editingId) {
             $this->rules['form.name'] = 'required|string|max:255|unique:categories,name,' . $this->editingId;
         }
-        
-        $this->validate();
+
+        // Validate before proceeding
+        try {
+            $this->validate();
+        } catch (\Illuminate\Validation\ValidationException $e) {
+            return;
+        }
 
         $data = $this->form;
         $message = '';
@@ -94,7 +99,6 @@ class Create extends Component
                                 ImageKitHelper::deleteImage($oldCategory->image_file_id);
                             } catch (\Exception $e) {
                                 \Log::error('Failed to delete old image: ' . $e->getMessage());
-                                // Continue with the update even if old image deletion fails
                             }
                         }
                     }
@@ -134,13 +138,25 @@ class Create extends Component
 
     public function updatedImage()
     {
+        if (!$this->image) {
+            return;
+        }
+
         try {
-            if ($this->image) {
+            $this->validate([
+                'image' => 'image|max:2048'
+            ]);
+            
+            if (method_exists($this->image, 'temporaryUrl')) {
                 $this->currentImageUrl = $this->image->temporaryUrl();
+            } else {
+                $this->currentImageUrl = null;
+                session()->flash('warning', 'Image preview not available in production. Image will be uploaded when saved.');
             }
         } catch (\Exception $e) {
             $this->currentImageUrl = null;
-            session()->flash('error', 'Error creating preview: ' . $e->getMessage());
+            $this->image = null;
+            session()->flash('error', 'Error processing image: ' . $e->getMessage());
         }
     }
 
