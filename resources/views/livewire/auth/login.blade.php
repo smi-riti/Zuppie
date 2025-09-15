@@ -142,12 +142,6 @@
                     <a href="/register" class="font-medium text-pink-600 hover:text-pink-500">Sign up</a>
                 </p>
             </div>
-            <div class="mt-4 text-center">
-                <a href="{{ route('phone.otp.login') }}" class="text-sm text-purple-600 hover:underline">
-                    Login with Phone OTP
-                </a>
-            </div>
-
         </div>
     </div>
 </div>

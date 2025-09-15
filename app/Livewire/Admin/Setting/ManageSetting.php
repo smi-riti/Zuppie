@@ -22,9 +22,7 @@ class ManageSetting extends Component
 
     #[Validate('nullable|image|max:2048')]
     public $logo_file;
-
     public $current_logo = '';
-
     #[Validate('required|email|max:255')]
     public $email = '';
 
