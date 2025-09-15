@@ -43,14 +43,10 @@ use App\Livewire\Public\Pages\PrivacyPolicy;
 use App\Livewire\Public\Event\EventPackageFilter;
 use Illuminate\Support\Facades\Auth;
 use App\Mail\LoginNotificationMail;
-use App\Livewire\Auth\PhoneOtpLogin;
-use App\Livewire\Auth\PhoneOtpVerify;
 
 Route::get('/', Homepage::class)->name('home');
 Route::get('/register', Register::class)->name('register');
 Route::get('/login', Login::class)->name('login');
-Route::get('/phone-otp-login', PhoneOtpLogin::class)->name('phone.otp.login');
-Route::get('/phone-otp-verify/{phone_no}', PhoneOtpVerify::class)->name('phone.otp.verify');
 Route::get('/forgot-password', ForgotPass::class)->name('password.request');
 Route::get('/reset-password/{token}', ResetPass::class)->name('password.reset');
 Route::post('/logout', function () {
@@ -75,9 +71,9 @@ Route::get('/blog', BlogPage::class)->name('blog');
 Route::get('/blog/{slug}', BlogDetailPage::class)->name('blog.detail');
 
 // User profile routes
-Route::middleware(['auth'])->group(function () {
-    Route::get('/profile', Profile::class)->name('profile');
-});
+// Route::middleware(['auth'])->group(function () {
+//     Route::get('/profile', Profile::class)->name('profile');
+// });
 
 
 Route::prefix('admin')->middleware(['auth', 'admin'])->group(function () {

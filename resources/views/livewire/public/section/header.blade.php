@@ -24,11 +24,6 @@
             <!-- Auth Buttons -->
             <div class="hidden md:flex items-center space-x-4">
                 @auth
-                    <a href="{{ route('profile') }}"
-                        class="px-4 py-2 text-pink-700 font-medium hover:text-pink-600 transition flex items-center space-x-2">
-                        <i class="fas fa-calendar-check"></i>
-                        <span>My Bookings</span>
-                    </a>
                     <form method="POST" action="{{ route('logout') }}" class="inline">
                         @csrf
                         <button type="submit"
@@ -67,11 +62,6 @@
             <a wire:navigate href="{{ route('contact') }}" class="block px-3 py-2 text-pink-700 font-medium hover:bg-pink-50 rounded">Contact</a>
             <div class="pt-2 border-t border-pink-200 space-y-2">
                 @auth
-                    <a href="{{ route('profile') }}"
-                        class="block px-3 py-2 text-center text-pink-700 font-medium hover:bg-pink-50 rounded flex items-center justify-center space-x-2">
-                        <i class="fas fa-calendar-check"></i>
-                        <span>My Bookings</span>
-                    </a>
                     <form method="POST" action="{{ route('logout') }}" class="block">
                         @csrf
                         <button type="submit"
