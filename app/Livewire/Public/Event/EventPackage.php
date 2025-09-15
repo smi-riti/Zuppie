@@ -8,11 +8,12 @@ use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
 use App\Models\EventPackage as EventPackageModel;
 use App\Models\Category;
+use App\Traits\HasSettings;
 #[Title('Event Package')]
 
 class EventPackage extends Component
 {
-
+    use HasSettings;
     public $searchQuery = '';
     public $selectedCategory = null;
     public $selectedSubCategory = null;
@@ -25,6 +26,7 @@ class EventPackage extends Component
 
     public function mount()
     {
+        $this->loadSiteSettings();
         $this->selectedCategory = request()->query('category');
         $this->selectedSubCategory = request()->query('subcategory');
     }
