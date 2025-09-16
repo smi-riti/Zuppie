@@ -17,28 +17,6 @@ class ViewPackage extends Component
     {
         $this->package = EventPackage::with(['category', 'images'])->findOrFail($packageId);
     }
-
-    public function confirmDeleteImage($imageId)
-    {
-        $this->imageToDelete = $imageId;
-        $this->showDeleteImageModal = true;
-    }
-
-    public function deleteImage()
-    {
-        $image = EventPackageImage::find($this->imageToDelete);
-        if ($image) {
-            $image->delete();
-            
-            if ($this->package && $this->package->id) {
-                $this->package = EventPackage::with(['category', 'images'])->find($this->package->id);
-            }
-            $this->showDeleteImageModal = false;
-            
-            session()->flash('message', 'Image deleted successfully!');
-        }
-    }
-
     public function closeViewModal()
     {
         $this->dispatch('closeViewModal');
