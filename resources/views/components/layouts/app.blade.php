@@ -357,19 +357,12 @@
     <livewire:public.section.header />
     {{ $slot }}
     <livewire:public.section.footer />
-    
-    <!-- Livewire Scripts -->
     @livewireScripts
     
-    <!-- AOS Animation Script -->
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js" defer></script>
     
-    <!-- Canvas Confetti -->
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js" defer></script>
-
-    <!-- Initialize AOS -->
     <script>
-        // Optimized AOS initialization
         document.addEventListener('DOMContentLoaded', function() {
             if (typeof AOS !== 'undefined') {
                 AOS.init({
@@ -384,12 +377,8 @@
             }
         });
     </script>
-
-    <!-- Enhanced Custom JavaScript -->
     <script>
-        // Critical performance optimizations
         document.addEventListener('DOMContentLoaded', function() {
-            // Smooth scrolling for anchor links
             document.querySelectorAll('a[href^="#"]').forEach(anchor => {
                 anchor.addEventListener('click', function (e) {
                     e.preventDefault();
@@ -402,8 +391,6 @@
                     }
                 });
             });
-
-            // Optimized parallax effect
             let ticking = false;
             function updateParallax() {
                 const scrolled = window.pageYOffset;
@@ -422,7 +409,6 @@
                 }
             });
 
-            // Lazy loading for images
             const images = document.querySelectorAll('img[data-src]');
             const imageObserver = new IntersectionObserver((entries, observer) => {
                 entries.forEach(entry => {
@@ -441,7 +427,6 @@
                 imageObserver.observe(img);
             });
 
-            // Auto-swipe functionality for packages
             let currentSlide = 0;
             const slides = document.querySelectorAll('.package-slide');
             const totalSlides = slides.length;
@@ -456,12 +441,10 @@
                 }
             }
 
-            // Auto-swipe every 5 seconds
             if (totalSlides > 0) {
                 setInterval(nextSlide, 5000);
             }
 
-            // Performance monitoring
             if ('performance' in window && 'measure' in performance) {
                 performance.mark('zuppie-load-start');
                 window.addEventListener('load', function() {
@@ -470,7 +453,6 @@
                 });
             }
 
-            // Service Worker registration for PWA
             if ('serviceWorker' in navigator) {
                 navigator.serviceWorker.register('/sw.js')
                     .then(registration => {
@@ -498,11 +480,9 @@
             });
         }
 
-        // Execute preload on page load
         document.addEventListener('DOMContentLoaded', preloadCriticalResources);
     </script>
 
-    <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-PCX15ZTQQ3"></script>
     <script>
       window.dataLayer = window.dataLayer || [];

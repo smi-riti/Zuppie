@@ -3,7 +3,7 @@ namespace App\Livewire;
 
 use Livewire\Component;
 use Illuminate\Support\Facades\Http;
-
+#[Title('Location Fetcher')]
 class LocationFetcher extends Component
 {
     public $latitude, $longitude;

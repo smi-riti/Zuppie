@@ -5,7 +5,7 @@ namespace App\Livewire\Public\User;
 use App\Models\Booking;
 use Livewire\Attributes\On;
 use Livewire\Component;
-
+#[Title('My Package Modal')]
 class MyPackageModal extends Component
 {
     public $showViewModal = false;

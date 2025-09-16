@@ -10,7 +10,7 @@ use App\Models\reviews;
 use ImageKit\ImageKit;
 use Livewire\WithFileUploads;
 use Livewire\Component;
-
+#[Title('Review Modal')]
 class ReviewModal extends Component
 {
     use WithFileUploads;
