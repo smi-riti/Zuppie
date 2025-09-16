@@ -17,7 +17,7 @@ class CreatePackage extends Component
     public $duration_minutes = 0;
     public $categories = [];
     public $newImages = [];
-
+    public $uploadedImages = [];
     protected function rules()
     {
         return [
@@ -49,6 +49,14 @@ class CreatePackage extends Component
     {
         $this->categories = Category::all();
     }
+
+    public function removeImage($key)
+    {
+        if (isset($this->newImages[$key])) {
+            unset($this->newImages[$key]);
+     }
+    }
+
 
     public function updated($propertyName)
     {

@@ -1,9 +1,9 @@
 <div class="min-h-screen bg-gradient-to-br from-purple-50 to-pink-50 p-4 sm:p-6">
     <div class="">
         <!-- Header -->
-        <div class="mb-8">
-            <h1 class="text-3xl text-purple-800">User Management</h1>
-            <p class="text-purple-600">Manage all registered users</p>
+        <div class="mx-auto mb-6 justify-between items-center sm:flex">
+            <div class="mb-8">
+            <h1 class="text-3xl text-purple-800">Manage and view all registered users</h1>
         </div>
 
         <!-- Search and Actions -->
@@ -21,6 +21,7 @@
                     </svg>
                 </div>
             </div>
+        </div>
         </div>
 
         <!-- Users Table -->

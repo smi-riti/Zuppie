@@ -1,12 +1,12 @@
 <div>
     <!-- Modal Backdrop -->
     @if($showModal)
-        <div class="fixed inset-0 bg-white/80 backdrop-blur-sm z-40 transition-opacity" wire:click="closeModal"></div>
+        <div class="fixed inset-0  backdrop-blur z-40 transition-opacity" wire:click="closeModal"></div>
     @endif
 
     <!-- Modal Container -->
     <div class="@if(!$showModal) hidden @endif fixed inset-0 z-50 flex items-start justify-center pt-16 overflow-y-auto">
-        <div class="relative mx-auto p-6 w-full max-w-2xl">
+        <div class="relative mx-auto p-6 max-w-3xl">
             <!-- Modal Content -->
             <div class="bg-white rounded-xl shadow-xl border border-purple-100 overflow-hidden transform transition-all">
                 <!-- Modal Header -->
