@@ -3,7 +3,7 @@
         <!-- Header -->
         <div class="mx-auto mb-6 justify-between items-center sm:flex">
             <div class="mb-8">
-            <h1 class="text-3xl text-purple-800">Manage and view all registered users</h1>
+            <h1 class="text-3xl text-purple-800">View all registered users</h1>
         </div>
 
         <!-- Search and Actions -->

@@ -24,7 +24,7 @@
 
         <!-- Terms Content -->
         <section class="py-20 bg-white">
-            <div class="container mx-auto px-4 max-w-4xl">
+            <div class="px-20">
                 <div class="prose prose-lg max-w-none">
                     <!-- Last Updated -->
                     <div class="bg-gradient-to-r from-purple-50 to-pink-50 rounded-lg p-6 mb-8">

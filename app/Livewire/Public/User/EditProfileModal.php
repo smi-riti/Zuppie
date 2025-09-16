@@ -4,6 +4,7 @@ namespace App\Livewire\Public\User;
 
 use App\Models\User;
 use Livewire\Component;
+#[Title('Edit Profile Modal')]
 
 class EditProfileModal extends Component
 {

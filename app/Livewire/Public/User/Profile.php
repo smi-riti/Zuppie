@@ -9,7 +9,7 @@ use App\Services\WishlistService;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Payment;
 use Livewire\Component;
-
+#[Title('User Profile')]
 class Profile extends Component
 {
     public $activeTab = 'All Bookings';
