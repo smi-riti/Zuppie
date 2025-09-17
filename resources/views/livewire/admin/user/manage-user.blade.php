@@ -57,7 +57,7 @@
                                     <div class="text-sm text-purple-800">{{ $user->phone_no ?? 'N/A' }}</div>
                                 </td>
                                 <td class="px-6 py-4 whitespace-nowrap">
-                                    <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full {{ $user->is_admin ? 'bg-purple-100 text-purple-800' : 'bg-pink-100 text-pink-800' }}">
+                                    <span class="px-2 inline-flex text-xs leading-5 font-2xl rounded-full {{ $user->is_admin ? 'bg-purple-100 text-purple-800' : 'bg-pink-100 text-pink-800' }}">
                                         {{ $user->is_admin ? 'Admin' : 'User' }}
                                     </span>
                                 </td>

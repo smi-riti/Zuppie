@@ -86,7 +86,7 @@
                             </div>
                         @endif
                         <div class="flex-1 min-w-0">
-                            <h3 class="text-lg font-semibold text-gray-900 truncate mb-1">{{ $blog->title }}</h3>
+                            <h3 class="text-lg font-2xl text-gray-900 truncate mb-1">{{ $blog->title }}</h3>
                            
                             @if($blog->category)
                                 <span class="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-blue-100 text-blue-800 mb-3">
@@ -174,7 +174,7 @@
                                 </td>
                                 <td class="py-6 px-6">
                                     <div class="max-w-sm">
-                                        <div class="text-sm font-semibold text-gray-900 truncate mb-1">{{ $blog->title }}</div>
+                                        <div class="text-sm font-2xl text-gray-900 truncate mb-1">{{ $blog->title }}</div>
                                         <div class="text-xs text-gray-500 truncate">{{ $blog->slug }}</div>
                                     </div>
                                 </td>

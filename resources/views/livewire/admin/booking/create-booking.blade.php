@@ -77,7 +77,7 @@
             <!-- Step 2: Event Details -->
             @if ($currentStep === 2)
                 <form wire:submit.prevent="nextStep" class="space-y-4">
-                    <h3 class="text-lg font-semibold text-purple-800 border-b border-purple-200 pb-2 mb-3">Event Details
+                    <h3 class="text-lg font-2xl text-purple-800 border-b border-purple-200 pb-2 mb-3">Event Details
                     </h3>
 
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -165,7 +165,7 @@
             <!-- Step 3: Requirements -->
             @if ($currentStep === 3)
                 <form wire:submit.prevent="nextStep" class="space-y-4">
-                    <h3 class="text-lg font-semibold text-purple-800 border-b border-purple-200 pb-2 mb-3">Event
+                    <h3 class="text-lg font-2xl text-purple-800 border-b border-purple-200 pb-2 mb-3">Event
                         Requirements</h3>
 
                     <div>
@@ -203,7 +203,7 @@
             <!-- Step 4: Customer Information -->
             @if ($currentStep === 4)
                 <form wire:submit.prevent="nextStep" class="space-y-4">
-                    <h3 class="text-lg font-semibold text-purple-800 border-b border-purple-200 pb-2 mb-3">Customer
+                    <h3 class="text-lg font-2xl text-purple-800 border-b border-purple-200 pb-2 mb-3">Customer
                         Information</h3>
 
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -283,7 +283,7 @@
             <!-- Step 5: Confirmation -->
             @if ($currentStep === 5)
                 <div>
-                    <h3 class="text-lg font-semibold text-purple-800 border-b border-purple-200 pb-2 mb-4">Booking
+                    <h3 class="text-lg font-2xl text-purple-800 border-b border-purple-200 pb-2 mb-4">Booking
                         Confirmation</h3>
 
                     <div class="bg-gray-50 rounded-xl p-4 mb-6">
@@ -431,7 +431,7 @@
                             class="bg-gray-200 text-gray-800 py-3 rounded-xl hover:bg-gray-300 transition-all duration-300">
                             <i class="fas fa-arrow-left mr-2"></i> Back
                         </button>
-                        <button type="button" wire:click="saveBooking" wire:loading.attr="disabled" id="submit-button" class="bg-gradient-to-r from-purple-600 to-pink-500 text-white py-3 px-6 rounded-xl font-semibold shadow-lg transition-all duration-200 disabled:opacity-50" @if(!$acceptTerms) disabled @endif>
+                        <button type="button" wire:click="saveBooking" wire:loading.attr="disabled" id="submit-button" class="bg-gradient-to-r from-purple-600 to-pink-500 text-white py-3 px-6 rounded-xl font-2xl shadow-lg transition-all duration-200 disabled:opacity-50" @if(!$acceptTerms) disabled @endif>
                             {{-- class="bg-purple-800 text-white py-3 rounded-xltransition-all duration-300 disabled:opacity-50"> --}}
                             <span wire:loading.remove>
                                 @if ($payment_method === 'online')

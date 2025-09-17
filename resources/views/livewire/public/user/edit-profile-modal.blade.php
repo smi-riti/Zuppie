@@ -16,7 +16,7 @@
 
                 <!-- Profile Edit Form -->
                 <div class="p-6 sm:p-8 space-y-6 bg-gradient-to-br from-pink-50 to-purple-50 rounded-2xl">
-                    <h2 class="text-2xl font-semibold text-purple-900">Edit Profile</h2>
+                    <h2 class="text-2xl font-2xl text-purple-900">Edit Profile</h2>
                     <form wire:submit.prevent="updateProfile" class="space-y-5">
                         <!-- Name Field -->
                         <div class="space-y-2">

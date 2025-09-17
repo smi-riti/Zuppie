@@ -2,7 +2,7 @@
     <div class="max-w-md mx-auto bg-white rounded-xl shadow-md overflow-hidden md:max-w-2xl">
         <!-- Decorative header with gradient -->
         <div class="bg-gradient-to-r from-pink-400 to-purple-500 p-6 text-center">
-            <h1 class="text-3xl font-bold text-white">Join Our Event Community</h1>
+            <h1 class="text-3xl font-2xl text-white">Join Our Event Community</h1>
             <p class="mt-2 text-pink-100">
                 @if(session('booking_step3_data'))
                     Complete your registration to continue with your booking

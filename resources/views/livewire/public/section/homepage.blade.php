@@ -1,9 +1,9 @@
 <div>
     <livewire:public.section.hero-section />
-    <section id="categories" class="sm:py-20">
-        <div class="mx-auto px-20">
-            <div class="text-center mb-12 sm:mb-16">
-                <h2 class="text-3xl py-2 sm:text-4xl md:text-5xl font-bold font-display text-transparent bg-clip-text bg-gradient-to-r from-purple-600 to-pink-600 mb-6"
+    <section id="categories" class="sm:py-20 sm:px-10">
+        <div class="lg:px-20 p-8">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl py-2 sm:text-4xl md:text-5xl font-semibold font-display text-transparent bg-clip-text bg-gradient-to-r from-purple-600 to-pink-600 mb-6"
                     data-aos="fade-up">
                     Event Planning Services in Purnia, Bihar
                 </h2>
@@ -63,7 +63,7 @@
                                         class="{{ $categoryIcons[$index % count($categoryIcons)] }} text-2xl sm:text-3xl drop-shadow-md"></i>
                                 </div>
                                 <h3
-                                    class="text-xl sm:text-2xl font-bold mb-2 group-hover:scale-105 transition-transform duration-300 drop-shadow-md">
+                                    class="text-xl sm:text-2xl font-2xl mb-2 group-hover:scale-105 transition-transform duration-300 drop-shadow-md">
                                     {{ $category->name }}
                                 </h3>
                                 <p
@@ -131,7 +131,7 @@
                     </div>
 
                     <h2
-                        class="text-3xl sm:text-4xl lg:text-5xl font-bold font-display bg-gradient-to-r from-purple-600 via-pink-600 to-purple-700 bg-clip-text text-transparent leading-tight">
+                        class="text-3xl sm:text-4xl lg:text-5xl font-semibold font-display bg-gradient-to-r from-purple-600 via-pink-600 to-purple-700 bg-clip-text text-transparent leading-tight">
                         Make Birthdays Unforgettable
                     </h2>
 
@@ -151,7 +151,7 @@
                                 <i class="fas fa-magic text-white text-lg"></i>
                             </div>
                             <div>
-                                <h4 class="font-semibold text-gray-800 text-lg">Magical Decorations</h4>
+                                <h4 class="font-2xl text-gray-800 text-lg">Magical Decorations</h4>
                                 <p class="text-gray-600">Themed decorations that bring dreams to life</p>
                             </div>
                         </div>
@@ -162,7 +162,7 @@
                                 <i class="fas fa-gamepad text-white text-lg"></i>
                             </div>
                             <div>
-                                <h4 class="font-semibold text-gray-800 text-lg">Fun Activities</h4>
+                                <h4 class="font-2xl text-gray-800 text-lg">Fun Activities</h4>
                                 <p class="text-gray-600">Engaging games and entertainment for all ages</p>
                             </div>
                         </div>
@@ -173,7 +173,7 @@
                                 <i class="fas fa-birthday-cake text-white text-lg"></i>
                             </div>
                             <div>
-                                <h4 class="font-semibold text-gray-800 text-lg">Custom Cakes</h4>
+                                <h4 class="font-2xl text-gray-800 text-lg">Custom Cakes</h4>
                                 <p class="text-gray-600">Delicious cakes designed to match your theme</p>
                             </div>
                         </div>
@@ -182,7 +182,7 @@
                     <!-- Action Buttons -->
                     <div class="flex flex-col sm:flex-row gap-4 pt-4">
                         <a href="{{ route('event-packages') }}"
-                            class="inline-flex items-center justify-center bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white px-8 py-4 rounded-full font-semibold text-lg transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl">
+                            class="inline-flex items-center justify-center bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white px-8 py-4 rounded-full font-2xl text-lg transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl">
                             <i class="fas fa-gift mr-3"></i>
                             View Birthday Packages
                         </a>
@@ -198,7 +198,7 @@
     <section id="gallery">
         <div class="">
             <div class="text-center mb-16">
-                <h2 class="text-4xl md:text-5xl py-2 font-bold font-display gradient-text mb-6" data-aos="fade-up">
+                <h2 class="text-4xl md:text-5xl py-2 font-semibold font-display gradient-text mb-6" data-aos="fade-up">
                     Our Magic Gallery
                 </h2>
                 <p class="text-xl text-gray-600 max-w-3xl mx-auto" data-aos="fade-up" data-aos-delay="200">
@@ -215,7 +215,7 @@
                             alt="Birthday Party" class="w-full h-full object-cover">
                         <div
                             class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 hover:opacity-100 transition-opacity duration-300 flex items-end p-4">
-                            <span class="text-white font-semibold">Birthday Celebration</span>
+                            <span class="text-white font-2xl">Birthday Celebration</span>
                         </div>
                     </div>
                 </div>
@@ -227,7 +227,7 @@
                             alt="Wedding Setup" class="w-full h-full object-cover">
                         <div
                             class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 hover:opacity-100 transition-opacity duration-300 flex items-end p-4">
-                            <span class="text-white font-semibold">Wedding Magic</span>
+                            <span class="text-white font-2xl">Wedding Magic</span>
                         </div>
                     </div>
                 </div>
@@ -239,7 +239,7 @@
                             alt="Corporate Event" class="w-full h-full object-cover">
                         <div
                             class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 hover:opacity-100 transition-opacity duration-300 flex items-end p-4">
-                            <span class="text-white font-semibold">Corporate Event</span>
+                            <span class="text-white font-2xl">Corporate Event</span>
                         </div>
                     </div>
                 </div>
@@ -251,7 +251,7 @@
                             alt="Anniversary" class="w-full h-full object-cover">
                         <div
                             class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 hover:opacity-100 transition-opacity duration-300 flex items-end p-4">
-                            <span class="text-white font-semibold">Anniversary</span>
+                            <span class="text-white font-2xl">Anniversary</span>
                         </div>
                     </div>
                 </div>
@@ -263,7 +263,7 @@
                             alt="Baby Shower" class="w-full h-full object-cover">
                         <div
                             class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 hover:opacity-100 transition-opacity duration-300 flex items-end p-4">
-                            <span class="text-white font-semibold">Baby Shower</span>
+                            <span class="text-white font-2xl">Baby Shower</span>
                         </div>
                     </div>
                 </div>
@@ -275,7 +275,7 @@
                             alt="Event Setup" class="w-full h-full object-cover">
                         <div
                             class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 hover:opacity-100 transition-opacity duration-300 flex items-end p-4">
-                            <span class="text-white font-semibold">Event Planning</span>
+                            <span class="text-white font-2xl">Event Planning</span>
                         </div>
                     </div>
                 </div>
@@ -283,7 +283,7 @@
 
             <div class="text-center mt-12" data-aos="fade-up" data-aos-delay="700">
                 <button
-                    class="gradient-bg text-white px-8 py-4 rounded-full font-semibold text-lg hover:shadow-lg hover:scale-105 transition-all duration-300">
+                    class="gradient-bg text-white px-8 py-4 rounded-full font-2xl text-lg hover:shadow-lg hover:scale-105 transition-all duration-300">
                     View Full Gallery
                 </button>
             </div>
@@ -294,7 +294,7 @@
     <section id="about" class="py-20 bg-gradient-to-br from-purple-50 to-pink-50">
         <div class="container mx-auto">
             <div class="text-center mb-16">
-                <h2 class="text-4xl md:text-5xl py-2 font-bold font-display gradient-text mb-6" data-aos="fade-up">
+                <h2 class="text-4xl md:text-5xl py-2 font-semibold font-display gradient-text mb-6" data-aos="fade-up">
                     Why Choose Zuppie for Event Planning in Bihar?
                 </h2>
                 <p class="text-xl text-gray-600 max-w-3xl mx-auto" data-aos="fade-up" data-aos-delay="200">
@@ -310,7 +310,7 @@
                         class="w-20 h-20 gradient-bg rounded-full flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform duration-300">
                         <i class="fas fa-magic text-white text-3xl"></i>
                     </div>
-                    <h3 class="text-2xl font-bold text-gray-800 mb-4">Magical Touch</h3>
+                    <h3 class="text-2xl font-2xl text-gray-800 mb-4">Magical Touch</h3>
                     <p class="text-gray-600">We add that special something that transforms ordinary events into
                         extraordinary experiences.</p>
                 </div>
@@ -320,7 +320,7 @@
                         class="w-20 h-20 gradient-bg rounded-full flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform duration-300">
                         <i class="fas fa-users text-white text-3xl"></i>
                     </div>
-                    <h3 class="text-2xl font-bold text-gray-800 mb-4">Expert Team</h3>
+                    <h3 class="text-2xl font-2xl text-gray-800 mb-4">Expert Team</h3>
                     <p class="text-gray-600">Our passionate team of event specialists brings years of experience and
                         creativity to every project.</p>
                 </div>
@@ -330,7 +330,7 @@
                         class="w-20 h-20 gradient-bg rounded-full flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform duration-300">
                         <i class="fas fa-heart text-white text-3xl"></i>
                     </div>
-                    <h3 class="text-2xl font-bold text-gray-800 mb-4">Personal Touch</h3>
+                    <h3 class="text-2xl font-2xl text-gray-800 mb-4">Personal Touch</h3>
                     <p class="text-gray-600">Every event is tailored to your unique vision, preferences, and budget.
                     </p>
                 </div>
@@ -340,7 +340,7 @@
                         class="w-20 h-20 gradient-bg rounded-full flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform duration-300">
                         <i class="fas fa-clock text-white text-3xl"></i>
                     </div>
-                    <h3 class="text-2xl font-bold text-gray-800 mb-4">On-Time Delivery</h3>
+                    <h3 class="text-2xl font-2xl text-gray-800 mb-4">On-Time Delivery</h3>
                     <p class="text-gray-600">We ensure everything is perfectly executed on schedule, so you can relax
                         and enjoy.</p>
                 </div>
@@ -350,7 +350,7 @@
                         class="w-20 h-20 gradient-bg rounded-full flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform duration-300">
                         <i class="fas fa-dollar-sign text-white text-3xl"></i>
                     </div>
-                    <h3 class="text-2xl font-bold text-gray-800 mb-4">Transparent Pricing</h3>
+                    <h3 class="text-2xl font-2xl text-gray-800 mb-4">Transparent Pricing</h3>
                     <p class="text-gray-600">No hidden costs or surprises. We provide clear, upfront pricing for all
                         our
                         services.</p>
@@ -361,7 +361,7 @@
                         class="w-20 h-20 gradient-bg rounded-full flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform duration-300">
                         <i class="fas fa-medal text-white text-3xl"></i>
                     </div>
-                    <h3 class="text-2xl font-bold text-gray-800 mb-4">Award Winning</h3>
+                    <h3 class="text-2xl font-2xl text-gray-800 mb-4">Award Winning</h3>
                     <p class="text-gray-600">Recognized as the best event management company with numerous industry
                         awards.</p>
                 </div>
@@ -373,7 +373,7 @@
     <section class="py-20">
         <div class="px-20 mx-auto">
             <div class="text-center mb-16">
-                <h2 class="text-4xl py-2 md:text-5xl font-bold font-display gradient-text mb-6" data-aos="fade-up">
+                <h2 class="text-4xl py-2 md:text-5xl font-semibold font-display gradient-text mb-6" data-aos="fade-up">
                     Reviews from Our Satisfied Clients
                 </h2>
                 <p class="text-xl text-gray-600 max-w-3xl mx-auto" data-aos="fade-up" data-aos-delay="200">
@@ -394,7 +394,7 @@
                         Every detail was perfect, and the kids were enchanted. Highly recommended!"</p>
                     <div class="flex items-center">
                         <div>
-                            <div class="font-semibold text-gray-800">Bharti Gupta</div>
+                            <div class="font-2xl text-gray-800">Bharti Gupta</div>
                             <div class="text-sm text-gray-500">Mother of Birthday Girl</div>
                         </div>
                     </div>
@@ -411,7 +411,7 @@
                         handled everything with such professionalism and creativity!"</p>
                     <div class="flex items-center">
                         <div>
-                            <div class="font-semibold text-gray-800">Shivam Kumar</div>
+                            <div class="font-2xl text-gray-800">Shivam Kumar</div>
                             <div class="text-sm text-gray-500">groom</div>
                         </div>
                     </div>
@@ -430,7 +430,7 @@
                     </p>
                     <div class="flex items-center">
                         <div>
-                            <div class="font-semibold text-gray-800">Ravi Sharma</div>
+                            <div class="font-2xl text-gray-800">Ravi Sharma</div>
                             <div class="text-sm text-gray-500">Father of Birthday Boy</div>
                         </div>
                     </div>
@@ -444,7 +444,7 @@
     {{-- <section class="py-20 bg-gradient-to-br from-pink-50 to-purple-50">
         <div class="container mx-auto px-4">
             <div class="text-center mb-16">
-                <h2 class="text-4xl md:text-5xl py-2 font-bold font-display gradient-text mb-6" data-aos="fade-up">
+                <h2 class="text-4xl md:text-5xl py-2 font-2xl font-display gradient-text mb-6" data-aos="fade-up">
                     Event Planning Tips & Decoration Ideas
                 </h2>
                 <p class="text-xl text-gray-600 max-w-3xl mx-auto" data-aos="fade-up" data-aos-delay="200">
@@ -463,19 +463,19 @@
                             alt="Blog Post"
                             class="w-full h-48 object-cover group-hover:scale-110 transition-transform duration-300">
                         <div
-                            class="absolute top-4 left-4 bg-purple-600 text-white px-3 py-1 rounded-full text-sm font-semibold">
+                            class="absolute top-4 left-4 bg-purple-600 text-white px-3 py-1 rounded-full text-sm font-2xl">
                             {{ $blog->category->name }}
                         </div>
                     </div>
                     <div class="p-6">
                         <h3
-                            class="text-xl font-bold text-gray-800 mb-3 group-hover:text-purple-600 transition-colors duration-300">
+                            class="text-xl font-2xl text-gray-800 mb-3 group-hover:text-purple-600 transition-colors duration-300">
                             {{ str($blog->title)->words(7) }}
                         </h3>
                         <p class="text-gray-600 mb-4">{{ str($blog->content)->words(25) }}</p>
                         <div class="flex items-center justify-between">
                             <span class="text-sm text-gray-500">{{ $blog->created_at->format('M D, Y') }}</span>
-                            <a href="{{ route('blog.detail', $blog->slug) }}" class="text-purple-600 font-semibold hover:underline">Read More →</a>
+                            <a href="{{ route('blog.detail', $blog->slug) }}" class="text-purple-600 font-2xl hover:underline">Read More →</a>
                         </div>
                     </div>
                 </article>
@@ -485,7 +485,7 @@
 
             <div class="text-center mt-12" data-aos="fade-up" data-aos-delay="400">
                 <button
-                    class="gradient-bg text-white px-8 py-4 rounded-full font-semibold text-lg hover:shadow-lg hover:scale-105 transition-all duration-300">
+                    class="gradient-bg text-white px-8 py-4 rounded-full font-2xl text-lg hover:shadow-lg hover:scale-105 transition-all duration-300">
                     Visit Our Blog
                 </button>
             </div>
