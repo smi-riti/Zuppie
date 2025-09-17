@@ -12,7 +12,7 @@
         
         <div class="relative z-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center mt-2">
-                <h1 class="text-4xl sm:text-3xl md:text-5xl font-bold mt-4 bg-gradient-to-r from-white to-purple-100 bg-clip-text text-transparent">
+                <h1 class="text-4xl sm:text-3xl md:text-5xl font-2xl mt-4 bg-gradient-to-r from-white to-purple-100 bg-clip-text text-transparent">
                     Our Blog
                 </h1>
                 <p class="text-lg sm:text-xl md:text-2xl text-white/90 mb-6 sm:mb-8 max-w-3xl mx-auto">
@@ -49,7 +49,7 @@
         <!-- Mobile & Tablet: Horizontal Scrollable Categories -->
         <div class="block lg:hidden mb-8">
             <div class="flex items-center justify-between mb-4">
-                <h2 class="text-xl font-bold text-gray-900">
+                <h2 class="text-xl font-2xl text-gray-900">
                     <span class="bg-gradient-to-r from-purple-500 to-pink-500 bg-clip-text text-transparent">Categories</span>
                 </h2>
                 @if($search || $selectedCategory)
@@ -92,7 +92,7 @@
             <!-- Active Filters for Mobile -->
             @if($search || $selectedCategory)
                 <div class="mt-4 p-4 bg-white rounded-xl shadow-sm border border-gray-100">
-                    <h3 class="text-sm font-bold text-gray-900 mb-2">Active Filters</h3>
+                    <h3 class="text-sm font-2xl text-gray-900 mb-2">Active Filters</h3>
                     <div class="flex flex-wrap gap-2">
                         @if($search)
                             <span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-purple-100 text-purple-800">
@@ -133,7 +133,7 @@
                 <div class="sticky top-8">
                     <div class="bg-white rounded-2xl shadow-lg border border-gray-100 p-6">
                         <div class="flex items-center justify-between mb-6">
-                            <h2 class="text-xl font-bold text-gray-900">
+                            <h2 class="text-xl font-2xl text-gray-900">
                                 <span class="bg-gradient-to-r from-purple-500 to-pink-500 bg-clip-text text-transparent">Categories</span>
                             </h2>
                             @if($search || $selectedCategory)
@@ -185,7 +185,7 @@
                         <!-- Active Filters Display -->
                         @if($search || $selectedCategory)
                             <div class="mt-6 pt-6 border-t border-gray-200">
-                                <h3 class="text-sm font-bold text-gray-900 mb-3">Active Filters</h3>
+                                <h3 class="text-sm font-2xl text-gray-900 mb-3">Active Filters</h3>
                                 <div class="space-y-2">
                                     @if($search)
                                         <div class="inline-flex items-center px-3 py-2 rounded-lg text-sm font-medium bg-purple-100 text-purple-800">
@@ -225,7 +225,7 @@
             <div class="lg:col-span-3" id="blog-results">
                 <!-- Results Header -->
                 <div class="mb-6 sm:mb-8">
-                    <h2 class="text-xl sm:text-2xl font-bold text-gray-900 mb-2">
+                    <h2 class="text-xl sm:text-2xl font-2xl text-gray-900 mb-2">
                         @if($search)
                             Search Results for "{{ $search }}"
                         @elseif($selectedCategory)
@@ -300,7 +300,7 @@
                                     </div>
 
                                     <!-- Title -->
-                                    <h3 class="text-base sm:text-lg font-bold text-gray-900 mb-2 sm:mb-3 line-clamp-2 group-hover:text-purple-600 transition-colors duration-300">
+                                    <h3 class="text-base sm:text-lg font-2xl text-gray-900 mb-2 sm:mb-3 line-clamp-2 group-hover:text-purple-600 transition-colors duration-300">
                                         <a href="/blog/{{ $blog->slug }}" class="hover:text-purple-600">
                                             {{ $blog->title }}
                                         </a>
@@ -357,7 +357,7 @@
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
                                 </svg>
                             </div>
-                            <h3 class="text-lg sm:text-xl font-bold text-gray-900 mb-4">No blogs found</h3>
+                            <h3 class="text-lg sm:text-xl font-2xl text-gray-900 mb-4">No blogs found</h3>
                             @if($search || $selectedCategory)
                                 <p class="text-gray-600 mb-6">
                                     We couldn't find any blogs matching your current filters. Try adjusting your search terms or browse all categories.

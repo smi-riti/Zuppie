@@ -17,7 +17,7 @@
             <form wire:submit.prevent="update" class="space-y-6">
                 <!-- User Information Section -->
                 <div class="space-y-6">
-                    <h3 class="text-xl font-semibold text-purple-800 border-b-2 border-purple-100 pb-2">
+                    <h3 class="text-xl font-2xl text-purple-800 border-b-2 border-purple-100 pb-2">
                         Customer Information
                     </h3>
 
@@ -63,7 +63,7 @@
                     </div>
                 </div>
                 <div class="space-y-6">
-                    <h3 class="text-xl font-semibold text-purple-800 border-b-2 border-purple-100 pb-2">
+                    <h3 class="text-xl font-2xl text-purple-800 border-b-2 border-purple-100 pb-2">
                         Event Details
                     </h3>
 
@@ -160,11 +160,11 @@
                 <!-- Action Buttons -->
                 <div class="pt-4 flex justify-end space-x-4">
                     <button type="button" wire:click="closeModal"
-                        class="px-6 py-3 bg-gray-200 text-gray-700 font-semibold rounded-lg shadow-md transition">
+                        class="px-6 py-3 bg-gray-200 text-gray-700 font-2xl rounded-lg shadow-md transition">
                         Cancel
                 </button>
                     <button type="submit"
-                        class="px-6 py-3 bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 text-white font-semibold rounded-lg shadow-md transition">
+                        class="px-6 py-3 bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 text-white font-2xl rounded-lg shadow-md transition">
                         Update Booking
                     </button>
                 </div>

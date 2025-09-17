@@ -14,7 +14,7 @@
             <!-- Content -->
             <div class="relative z-10 flex items-center justify-center h-full text-center text-white px-4">
                 <div class="max-w-4xl mx-auto">
-                    <h1 class="text-4xl md:text-6xl font-bold mb-6 sparkle-text drop-shadow-2xl">Terms of Service</h1>
+                    <h1 class="text-4xl md:text-6xl font-2xl mb-6 sparkle-text drop-shadow-2xl">Terms of Service</h1>
                     <p class="text-xl md:text-2xl text-purple-100 max-w-2xl mx-auto leading-relaxed drop-shadow-lg">
                         Our terms and conditions for using {{ $settings['site_name'] }} services
                     </p>
@@ -34,13 +34,13 @@
                     </div>
 
                     <!-- Introduction -->
-                    <h2 class="text-3xl font-bold gradient-text mb-6">1. Introduction</h2>
+                    <h2 class="text-3xl font-2xl gradient-text mb-6">1. Introduction</h2>
                     <p class="text-gray-700 mb-6 leading-relaxed">
                         Welcome to {{ $settings['site_name'] }}. These Terms of Service ("Terms") govern your use of our event planning and management services. By engaging our services, you agree to be bound by these Terms.
                     </p>
 
                     <!-- Services -->
-                    <h2 class="text-3xl font-bold gradient-text mb-6">2. Our Services</h2>
+                    <h2 class="text-3xl font-2xl gradient-text mb-6">2. Our Services</h2>
                     <div class="bg-gray-50 rounded-lg p-6 mb-6">
                         <p class="text-gray-700 mb-4 leading-relaxed">
                             {{ $settings['site_name'] }} provides comprehensive event planning and management services including:
@@ -56,10 +56,10 @@
                     </div>
 
                     <!-- Booking and Payments -->
-                    <h2 class="text-3xl font-bold gradient-text mb-6">3. Booking and Payments</h2>
+                    <h2 class="text-3xl font-2xl gradient-text mb-6">3. Booking and Payments</h2>
                     <div class="grid md:grid-cols-2 gap-6 mb-6">
                         <div class="bg-purple-50 rounded-lg p-6">
-                            <h3 class="text-xl font-bold text-purple-800 mb-3">Booking Process</h3>
+                            <h3 class="text-xl font-2xl text-purple-800 mb-3">Booking Process</h3>
                             <ul class="text-gray-700 space-y-2 text-sm">
                                 <li>• Initial consultation and proposal</li>
                                 <li>• Contract signing and deposit payment</li>
@@ -68,7 +68,7 @@
                             </ul>
                         </div>
                         <div class="bg-pink-50 rounded-lg p-6">
-                            <h3 class="text-xl font-bold text-pink-800 mb-3">Payment Terms</h3>
+                            <h3 class="text-xl font-2xl text-pink-800 mb-3">Payment Terms</h3>
                             <ul class="text-gray-700 space-y-2 text-sm">
                                 <li>• 50% deposit required to secure booking</li>
                                 <li>• Balance due 7 days before event</li>
@@ -79,9 +79,9 @@
                     </div>
 
                     <!-- Cancellation Policy -->
-                    <h2 class="text-3xl font-bold gradient-text mb-6">4. Cancellation and Refund Policy</h2>
+                    <h2 class="text-3xl font-2xl gradient-text mb-6">4. Cancellation and Refund Policy</h2>
                     <div class="bg-yellow-50 border-l-4 border-yellow-400 p-6 mb-6">
-                        <h3 class="text-lg font-bold text-yellow-800 mb-3">Cancellation by Client:</h3>
+                        <h3 class="text-lg font-2xl text-yellow-800 mb-3">Cancellation by Client:</h3>
                         <ul class="text-gray-700 space-y-2">
                             <li><strong>More than 30 days:</strong> 75% refund of deposit</li>
                             <li><strong>15-30 days:</strong> 50% refund of deposit</li>
@@ -91,7 +91,7 @@
                     </div>
 
                     <!-- Client Responsibilities -->
-                    <h2 class="text-3xl font-bold gradient-text mb-6">5. Client Responsibilities</h2>
+                    <h2 class="text-3xl font-2xl gradient-text mb-6">5. Client Responsibilities</h2>
                     <p class="text-gray-700 mb-4 leading-relaxed">As our client, you agree to:</p>
                     <div class="bg-gray-50 rounded-lg p-6 mb-6">
                         <ul class="list-disc list-inside text-gray-700 space-y-2">
@@ -105,7 +105,7 @@
                     </div>
 
                     <!-- Liability Limitations -->
-                    <h2 class="text-3xl font-bold gradient-text mb-6">6. Liability and Insurance</h2>
+                    <h2 class="text-3xl font-2xl gradient-text mb-6">6. Liability and Insurance</h2>
                     <div class="bg-red-50 border border-red-200 rounded-lg p-6 mb-6">
                         <p class="text-gray-700 mb-4 leading-relaxed">
                             {{ $settings['site_name'] }} maintains professional liability insurance. However, our liability is limited to the total amount paid for our services. We are not responsible for:
@@ -119,32 +119,32 @@
                     </div>
 
                     <!-- Intellectual Property -->
-                    <h2 class="text-3xl font-bold gradient-text mb-6">7. Intellectual Property</h2>
+                    <h2 class="text-3xl font-2xl gradient-text mb-6">7. Intellectual Property</h2>
                     <p class="text-gray-700 mb-6 leading-relaxed">
                         All event concepts, designs, and materials created by {{ $settings['site_name'] }} remain our intellectual property. You grant us permission to use photos and videos of your event for marketing purposes unless explicitly requested otherwise.
                     </p>
 
                     <!-- Privacy and Confidentiality -->
-                    <h2 class="text-3xl font-bold gradient-text mb-6">8. Privacy and Confidentiality</h2>
+                    <h2 class="text-3xl font-2xl gradient-text mb-6">8. Privacy and Confidentiality</h2>
                     <p class="text-gray-700 mb-6 leading-relaxed">
                         We respect your privacy and maintain confidentiality of all personal information. Please refer to our <a href="/privacy-policy" class="text-purple-600 hover:text-purple-700 underline">Privacy Policy</a> for detailed information about data handling.
                     </p>
 
                     <!-- Modifications -->
-                    <h2 class="text-3xl font-bold gradient-text mb-6">9. Terms Modification</h2>
+                    <h2 class="text-3xl font-2xl gradient-text mb-6">9. Terms Modification</h2>
                     <p class="text-gray-700 mb-6 leading-relaxed">
                         {{ $settings['site_name'] }} reserves the right to modify these Terms at any time. Changes will be effective immediately upon posting on our website. Continued use of our services constitutes acceptance of modified Terms.
                     </p>
 
                     <!-- Governing Law -->
-                    <h2 class="text-3xl font-bold gradient-text mb-6">10. Governing Law</h2>
+                    <h2 class="text-3xl font-2xl gradient-text mb-6">10. Governing Law</h2>
                     <p class="text-gray-700 mb-6 leading-relaxed">
                         These Terms are governed by the laws of India. Any disputes will be subject to the jurisdiction of courts in Purnia, Bihar.
                     </p>
 
                     <!-- Contact Information -->
                     <div class="bg-gradient-to-r from-purple-50 to-pink-50 rounded-2xl p-8 mt-12">
-                        <h2 class="text-3xl font-bold gradient-text mb-6">Contact Us</h2>
+                        <h2 class="text-3xl font-2xl gradient-text mb-6">Contact Us</h2>
                         <p class="text-gray-700 mb-6 leading-relaxed">
                             If you have any questions about these Terms of Service, please contact us:
                         </p>
@@ -153,7 +153,7 @@
                                 <div class="w-12 h-12 bg-gradient-to-r from-purple-500 to-purple-600 rounded-full flex items-center justify-center mx-auto mb-3">
                                     <i class="fas fa-envelope text-white"></i>
                                 </div>
-                                <h3 class="font-bold text-gray-800 mb-1">Email</h3>
+                                <h3 class="font-2xl text-gray-800 mb-1">Email</h3>
                                 <a href="mailto:{{ $settings['email'] }}" class="text-purple-600 hover:text-purple-700">
                                     {{ $settings['email'] }}
                                 </a>
@@ -162,7 +162,7 @@
                                 <div class="w-12 h-12 bg-gradient-to-r from-pink-500 to-pink-600 rounded-full flex items-center justify-center mx-auto mb-3">
                                     <i class="fas fa-phone text-white"></i>
                                 </div>
-                                <h3 class="font-bold text-gray-800 mb-1">Phone</h3>
+                                <h3 class="font-2xl text-gray-800 mb-1">Phone</h3>
                                 <a href="tel:{{ $settings['phone_no'] }}" class="text-pink-600 hover:text-pink-700">
                                     {{ $settings['phone_no'] }}
                                 </a>
@@ -171,7 +171,7 @@
                                 <div class="w-12 h-12 bg-gradient-to-r from-info-500 to-info-600 rounded-full flex items-center justify-center mx-auto mb-3">
                                     <i class="fas fa-map-marker-alt text-white"></i>
                                 </div>
-                                <h3 class="font-bold text-gray-800 mb-1">Address</h3>
+                                <h3 class="font-2xl text-gray-800 mb-1">Address</h3>
                                 <p class="text-info-600">{{ $settings['address'] }}</p>
                             </div>
                         </div>

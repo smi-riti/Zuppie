@@ -8,7 +8,7 @@
                     <img src="{{ $settings['site_logo'] }}" alt="{{ $settings['site_name'] }} Logo" class="h-10 w-12">
                 </div>
                 <span
-                    class="text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-pink-600 to-purple-600 group-hover:from-purple-700 group-hover:to-pink-700 transition">
+                    class="text-2xl font-2xl bg-clip-text text-transparent bg-gradient-to-r from-pink-600 to-purple-600 group-hover:from-purple-700 group-hover:to-pink-700 transition">
                     {{ $settings['site_name'] }}
                 </span>
             </a>

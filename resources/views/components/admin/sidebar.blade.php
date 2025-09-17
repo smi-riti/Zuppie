@@ -18,7 +18,7 @@
       <div class="flex items-center h-16 px-4 border-b border-purple-200 bg-purple-100">
         <a href="/admin" class="flex items-center space-x-3">
           <img src="/images/logo.jpeg" alt="Admin Logo" class="h-10 w-10 rounded-full">
-          <span class="text-2xl font-bold text-purple-600">
+          <span class="text-2xl font-2xl text-purple-600">
             AdminPanel
           </span>
         </a>

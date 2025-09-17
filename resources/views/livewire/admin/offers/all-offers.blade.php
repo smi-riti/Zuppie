@@ -45,13 +45,13 @@
         <table class="w-full">
             <thead class="bg-gradient-to-r from-pink-50 to-purple-50">
                 <tr>
-                    <th class="px-4 lg:px-6 py-3 text-left text-xs font-semibold text-purple-700 uppercase tracking-wider">Image</th>
-                    <th class="px-4 lg:px-6 py-3 text-left text-xs font-semibold text-purple-700 uppercase tracking-wider">Title</th>
-                    <th class="px-4 lg:px-6 py-3 text-left text-xs font-semibold text-purple-700 uppercase tracking-wider">Code</th>
-                    <th class="px-4 lg:px-6 py-3 text-left text-xs font-semibold text-purple-700 uppercase tracking-wider">Discount</th>
-                    <th class="px-4 lg:px-6 py-3 text-left text-xs font-semibold text-purple-700 uppercase tracking-wider">Period</th>
-                    <th class="px-4 lg:px-6 py-3 text-left text-xs font-semibold text-purple-700 uppercase tracking-wider">Status</th>
-                    <th class="px-4 lg:px-6 py-3 text-right text-xs font-semibold text-purple-700 uppercase tracking-wider">Actions</th>
+                    <th class="px-4 lg:px-6 py-3 text-left text-xs font-2xl text-purple-700 uppercase tracking-wider">Image</th>
+                    <th class="px-4 lg:px-6 py-3 text-left text-xs font-2xl text-purple-700 uppercase tracking-wider">Title</th>
+                    <th class="px-4 lg:px-6 py-3 text-left text-xs font-2xl text-purple-700 uppercase tracking-wider">Code</th>
+                    <th class="px-4 lg:px-6 py-3 text-left text-xs font-2xl text-purple-700 uppercase tracking-wider">Discount</th>
+                    <th class="px-4 lg:px-6 py-3 text-left text-xs font-2xl text-purple-700 uppercase tracking-wider">Period</th>
+                    <th class="px-4 lg:px-6 py-3 text-left text-xs font-2xl text-purple-700 uppercase tracking-wider">Status</th>
+                    <th class="px-4 lg:px-6 py-3 text-right text-xs font-2xl text-purple-700 uppercase tracking-wider">Actions</th>
                 </tr>
             </thead>
             <tbody class="divide-y divide-purple-100">

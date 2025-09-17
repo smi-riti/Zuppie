@@ -38,13 +38,13 @@
         <div class="flex flex-col sm:flex-row gap-4 justify-center">
             <a 
                 href="{{ route('event-packages') }}"
-                class="inline-block px-8 py-3 bg-gradient-to-r from-purple-600 to-pink-500 text-white font-semibold rounded-full shadow-lg hover:shadow-xl transition-all hover:scale-105"
+                class="inline-block px-8 py-3 bg-gradient-to-r from-purple-600 to-pink-500 text-white font-2xl rounded-full shadow-lg hover:shadow-xl transition-all hover:scale-105"
             >
                 View Event Packages
             </a>
             <button 
                 wire:click="$dispatch('open-enquiry-form')"
-                class="inline-block px-8 py-3 bg-white/20 backdrop-blur-sm border border-white/30 text-white font-semibold rounded-full shadow-lg hover:shadow-xl transition-all hover:scale-105"
+                class="inline-block px-8 py-3 bg-white/20 backdrop-blur-sm border border-white/30 text-white font-2xl rounded-full shadow-lg hover:shadow-xl transition-all hover:scale-105"
             >
                 Book Consultation
             </button>

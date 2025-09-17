@@ -49,7 +49,7 @@
         <div class="px-4 sm:px-6 lg:px-8">
             <div class="flex flex-col md:flex-row justify-between items-center mb-10">
                 <div>
-                    <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-2">Browse Categories</h2>
+                    <h2 class="text-3xl md:text-4xl font-2xl text-gray-900 mb-2">Browse Categories</h2>
                     <p class="text-gray-600">Discover the perfect event package for your celebration</p>
                 </div>
                 <button wire:click="showAllCategories"
@@ -69,7 +69,7 @@
                                     class="{{ $this->getCategoryIcon($category->slug) }} text-lg sm:text-2xl text-purple-600 group-hover:text-pink-600"></i>
                             </div>
                             <h3
-                                class="text-sm sm:text-base font-semibold text-gray-800 group-hover:text-purple-600 transition-colors">
+                                class="text-sm sm:text-base font-2xl text-gray-800 group-hover:text-purple-600 transition-colors">
                                 {{ $category->name }}
                             </h3>
                             @if ($category->description)
@@ -90,7 +90,7 @@
                                     class="{{ $category['icon'] }} text-lg sm:text-2xl text-purple-600 group-hover:text-pink-600"></i>
                             </div>
                             <h3
-                                class="text-sm sm:text-base font-semibold text-gray-800 group-hover:text-purple-600 transition-colors">
+                                class="text-sm sm:text-base font-2xl text-gray-800 group-hover:text-purple-600 transition-colors">
                                 {{ $category['name'] }}
                             </h3>
                             @if ($category['description'])
@@ -111,7 +111,7 @@
         <div class="px-4 sm:px-6 lg:px-8">
             <div class="flex flex-col md:flex-row justify-between items-center mb-10">
                 <div>
-                    <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-2">Popular Packages</h2>
+                    <h2 class="text-3xl md:text-4xl font-2xl text-gray-900 mb-2">Popular Packages</h2>
                     <p class="text-gray-600">Most booked and highly rated event packages</p>
                 </div>
                 <div class="flex items-center mt-4 md:mt-0 space-x-2">
@@ -147,10 +147,10 @@
                                 </div>  --}}
                             </div>
                             <div class="p-6">
-                                <h3 class="text-xl font-bold text-gray-900 mb-2">{{ $package['name'] }}</h3>
+                                <h3 class="text-xl font-2xl text-gray-900 mb-2">{{ $package['name'] }}</h3>
                                 <div class="flex items-center mb-3">
                                     <span
-                                        class="text-2xl font-bold text-purple-600">₹{{ number_format($package['discounted_price']) }}</span>
+                                        class="text-2xl font-2xl text-purple-600">₹{{ number_format($package['discounted_price']) }}</span>
                                     @if ($package['price'] != $package['discounted_price'])
                                         <span
                                             class="text-lg text-gray-500 line-through ml-2">₹{{ number_format($package['price']) }}</span>
@@ -220,7 +220,7 @@
             <div class="sm:px-6 lg:px-8">
                 <div class="flex flex-col md:flex-row justify-between items-center mb-10">
                     <div>
-                        <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-2">{{ $category['name'] }} Packages
+                        <h2 class="text-3xl md:text-4xl font-2xl text-gray-900 mb-2">{{ $category['name'] }} Packages
                         </h2>
                         <p class="text-gray-600">Discover amazing {{ strtolower($category['name']) }} packages</p>
                     </div>
@@ -257,10 +257,10 @@
                                     {{-- <livewire:public.components.wishlist-button :packageId="$package['id']" /> --}}
                                 </div>
                                 <div class="p-6">
-                                    <h3 class="text-xl font-bold text-gray-900 mb-2">{{ $package['name'] }}</h3>
+                                    <h3 class="text-xl font-2xl text-gray-900 mb-2">{{ $package['name'] }}</h3>
                                     <div class="flex items-center mb-3">
                                         <span
-                                            class="text-2xl font-bold text-purple-600">₹{{ number_format($package['discounted_price']) }}</span>
+                                            class="text-2xl font-2xl text-purple-600">₹{{ number_format($package['discounted_price']) }}</span>
                                         @if ($package['price'] != $package['discounted_price'])
                                             <span
                                                 class="text-lg text-gray-500 line-through ml-2">₹{{ number_format($package['price']) }}</span>
@@ -331,7 +331,7 @@
                     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                         <div class="flex flex-col md:flex-row justify-between items-center mb-10">
                             <div>
-                                <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-2">{{ $category->name }}
+                                <h2 class="text-3xl md:text-4xl font-2xl text-gray-900 mb-2">{{ $category->name }}
                                     Packages</h2>
                                 <p class="text-gray-600">Discover amazing {{ strtolower($category->name) }} packages
                                 </p>
@@ -372,11 +372,11 @@
                                             </button>
                                         </div>
                                         <div class="p-6">
-                                            <h3 class="text-xl font-bold text-gray-900 mb-2">{{ $package['name'] }}
+                                            <h3 class="text-xl font-2xl text-gray-900 mb-2">{{ $package['name'] }}
                                             </h3>
                                             <div class="flex items-center mb-3">
                                                 <span
-                                                    class="text-2xl font-bold text-purple-600">₹{{ number_format($package['discounted_price']) }}</span>
+                                                    class="text-2xl font-2xl text-purple-600">₹{{ number_format($package['discounted_price']) }}</span>
                                                 @if ($package['price'] != $package['discounted_price'])
                                                     <span
                                                         class="text-lg text-gray-500 line-through ml-2">₹{{ number_format($package['price']) }}</span>

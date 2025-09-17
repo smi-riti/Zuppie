@@ -21,7 +21,7 @@
                 <!-- Profile Edit Form -->
                 <div
                     class="p-6 sm:p-8 space-y-6 overflow-y-scroll h-[40rem] bg-gradient-to-br from-pink-50 to-purple-50 rounded-2xl">
-                    <h2 class="text-2xl font-semibold text-purple-900">All Reviews</h2>
+                    <h2 class="text-2xl font-2xl text-purple-900">All Reviews</h2>
                     <!-- Reviews List -->
                     <div class="space-y-8 ">
                         @foreach ($reviews as $review)
@@ -33,7 +33,7 @@
                                             <span
                                                 class="text-purple-600 font-medium">{{ strtoupper(substr($review->user->name, 0, 1)) }}</span>
                                         </div>
-                                        <h3 class="font-semibold text-purple-900">{{ $review->user->name }}
+                                        <h3 class="font-2xl text-purple-900">{{ $review->user->name }}
                                         </h3>
                                     </div>
                                     <span class="text-sm text-pink-600">{{ $review->created_at->format('M d, Y') }}</span>
@@ -62,7 +62,7 @@
                         @if ($reviews->count() < $totalReviews)
                             <div class="flex items-center justify-center">
                                 <button wire:click="loadMore" wire:loading.attr="disabled"
-                                    class="text-orange-500 font-semibold text-center transition-colors">
+                                    class="text-orange-500 font-2xl text-center transition-colors">
                                     <span wire:loading.remove>Load More...</span>
                                     <span wire:loading>
                                         Loading...

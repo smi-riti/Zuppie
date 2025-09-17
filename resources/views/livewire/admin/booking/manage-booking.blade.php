@@ -173,7 +173,7 @@
                                     <div x-data="{ showStatusChangeModal: false, selectedStatus: '{{ $booking->status }}' }" class="relative">
                                         <!-- Status Badge with Change Option -->
                                         <button @click="showStatusChangeModal = true"
-                                            class="px-3 py-1 text-xs font-semibold rounded-full 
+                                            class="px-3 py-1 text-xs font-2xl rounded-full 
                                                 {{ $booking->status === 'pending' ? 'bg-yellow-100 text-yellow-800 hover:bg-yellow-200' : '' }}
                                                 {{ $booking->status === 'confirmed' ? 'bg-green-100 text-green-800 hover:bg-green-200' : '' }}
                                                 {{ $booking->status === 'cancelled' ? 'bg-red-100 text-red-800 hover:bg-red-200' : '' }}
