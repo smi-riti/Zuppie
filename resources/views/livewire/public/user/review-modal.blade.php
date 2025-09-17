@@ -81,7 +81,7 @@
                         </div>
 
                         <button type="submit" id="submitReview"
-                            class="w-full bg-pink-500 hover:bg-purple-600 text-white font-bold py-2 px-4 rounded-lg shadow transition">
+                            class="w-full bg-pink-500 hover:bg-purple-600 text-white font-2xl py-2 px-4 rounded-lg shadow transition">
                             Submit Review
                         </button>
                     </form>

@@ -49,7 +49,7 @@
         <div class="px-4 sm:px-6 lg:px-8">
             <!-- Header Section -->
             <div class="text-center mb-12">
-                <h1 class="text-3xl md:text-5xl font-bold text-gray-800 mb-4">
+                <h1 class="text-3xl md:text-5xl font-2xl text-gray-800 mb-4">
                     @if ($selectedCategory)
                         @php
                             $category = \App\Models\Category::where('slug', $selectedCategory)->first();
@@ -88,7 +88,7 @@
                             <span class="font-medium">{{ $subCategory->name ?? '' }}</span>
                         @endif
                     @endif
-                    <span class="ml-2 text-purple-600 font-bold text-lg">({{ count($packages) }} packages found)</span>
+                    <span class="ml-2 text-purple-600 font-2xl text-lg">({{ count($packages) }} packages found)</span>
                 </div>
                 <div class="flex items-center space-x-4">
                     @if($selectedCategory || $selectedSubCategory || $searchQuery)
@@ -122,12 +122,12 @@
                                 </div>
                             </div>
                             <div class="p-6">
-                                <h3 class="text-xl font-bold text-gray-900 mb-2 group-hover:text-purple-600 transition-colors">
+                                <h3 class="text-xl font-2xl text-gray-900 mb-2 group-hover:text-purple-600 transition-colors">
                                     {{ $package->name }}
                                 </h3>
                                 <div class="flex items-center mb-3">
                                     <span
-                                        class="text-2xl font-bold text-purple-600">₹{{ number_format($package->discounted_price) }}</span>
+                                        class="text-2xl font-2xl text-purple-600">₹{{ number_format($package->discounted_price) }}</span>
                                     @if($package->price != $package->discounted_price)
                                         <span
                                             class="text-lg text-gray-500 line-through ml-2">₹{{ number_format($package->price) }}</span>
@@ -193,7 +193,7 @@
                     <div class="text-6xl text-gray-300 mb-6">
                         <i class="fas fa-search"></i>
                     </div>
-                    <h3 class="text-2xl font-bold text-gray-600 mb-4">
+                    <h3 class="text-2xl font-2xl text-gray-600 mb-4">
                         No packages found
                     </h3>
                     <p class="text-gray-500 mb-8 max-w-md mx-auto">
@@ -224,7 +224,7 @@
             @if (count($similarPackages) > 0)
                 <div class="mt-20">
                     <div class="text-center mb-12">
-                        <h3 class="text-3xl md:text-4xl font-bold text-gray-800 mb-4">
+                        <h3 class="text-3xl md:text-4xl font-2xl text-gray-800 mb-4">
                             You Might Also Like
                         </h3>
                         <p class="text-lg text-gray-600">
@@ -252,12 +252,12 @@
                                 </div>
                                 <div class="p-6">
                                     <h3
-                                        class="text-xl font-bold text-gray-900 mb-2 group-hover:text-purple-600 transition-colors">
+                                        class="text-xl font-2xl text-gray-900 mb-2 group-hover:text-purple-600 transition-colors">
                                         {{ $package->name }}
                                     </h3>
                                     <div class="flex items-center mb-3">
                                         <span
-                                            class="text-2xl font-bold text-purple-600">₹{{ number_format($package->discounted_price) }}</span>
+                                            class="text-2xl font-2xl text-purple-600">₹{{ number_format($package->discounted_price) }}</span>
                                         @if($package->price != $package->discounted_price)
                                             <span
                                                 class="text-lg text-gray-500 line-through ml-2">₹{{ number_format($package->price) }}</span>

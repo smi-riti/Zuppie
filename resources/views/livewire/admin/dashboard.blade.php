@@ -182,8 +182,8 @@
                         <div wire:click="selectDate({{ $currentDate->day }})"
                              class="p-2 rounded cursor-pointer transition-all hover:bg-purple-50
                                     {{ $isCurrentMonth ? 'text-purple-800' : 'text-purple-300' }}
-                                    {{ $isToday ? 'bg-pink-100 font-bold' : '' }}
-                                    {{ $hasEvents && $isCurrentMonth ? 'bg-purple-100 font-semibold' : '' }}">
+                                    {{ $isToday ? 'bg-pink-100 font-2xl' : '' }}
+                                    {{ $hasEvents && $isCurrentMonth ? 'bg-purple-100 font-2xl' : '' }}">
                             {{ $currentDate->day }}
                             @if($hasEvents && $isCurrentMonth)
                                 <div class="w-1 h-1 bg-pink-500 rounded-full mx-auto mt-1"></div>
@@ -218,7 +218,7 @@
             <div class="space-y-4">
                 @foreach ($upComingBookings as $booking)
                     <div class="flex flex-col sm:flex-row items-start sm:items-center py-4 border-b border-purple-50 hover:bg-purple-50 transition rounded-lg px-4">
-                        <div class="flex-shrink-0 w-12 h-12 rounded-full bg-gradient-to-r from-purple-500 to-pink-500 flex items-center justify-center text-white font-bold mr-0 sm:mr-4 mb-3 sm:mb-0">
+                        <div class="flex-shrink-0 w-12 h-12 rounded-full bg-gradient-to-r from-purple-500 to-pink-500 flex items-center justify-center text-white font-2xl mr-0 sm:mr-4 mb-3 sm:mb-0">
                             {{ substr($booking->eventPackage->name ?? 'Event', 0, 1) }}
                         </div>
                         <div class="flex-grow">
@@ -264,7 +264,7 @@
             </div>
         @endif
     </div>
-
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     @script
     <script>
         // Global chart instance for updates

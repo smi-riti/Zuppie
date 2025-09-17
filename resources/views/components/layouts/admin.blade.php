@@ -98,7 +98,7 @@
                 <div class="flex items-center justify-between px-4 py-3">
                     <a href="/admin" class="flex items-center space-x-3">
                         <img src="/images/logo.jpeg" alt="Admin Logo" class="h-8 w-8 rounded-full">
-                        <span class="text-lg font-bold text-purple-600">AdminPanel</span>
+                        <span class="text-lg font-2xl text-purple-600">AdminPanel</span>
                     </a>
                     <button aria-label="Open menu" onclick="window.dispatchEvent(new Event('open-admin-mobile-menu'))" class="p-2 bg-white rounded-md shadow-md text-purple-600">
                         <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -113,15 +113,5 @@
             </main>
         </div>
     </div>
-
-    @livewireScripts
-    @stack('scripts')
-    <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" as="style"
-        onload="this.onload=null;this.rel='stylesheet'">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/trix/1.3.1/trix.min.css" />
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/trix/1.3.1/trix.min.js"></script>
-
-    <!-- Chart.js for dashboard charts -->
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </body>
 </html>

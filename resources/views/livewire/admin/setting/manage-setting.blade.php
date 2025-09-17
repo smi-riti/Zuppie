@@ -31,7 +31,7 @@
                         </svg>
                     </div>
                     <div>
-                        <h3 class="text-green-800 font-semibold">Success!</h3>
+                        <h3 class="text-green-800 font-2xl">Success!</h3>
                         <p class="text-green-700">{{ session('message') }}</p>
                     </div>
                 </div>
@@ -55,7 +55,7 @@
                         </svg>
                     </div>
                     <div>
-                        <h3 class="text-red-800 font-semibold">Error!</h3>
+                        <h3 class="text-red-800 font-2xl">Error!</h3>
                         <p class="text-red-700">{{ session('error') }}</p>
                     </div>
                 </div>
@@ -84,7 +84,7 @@
                         <div class="p-6 space-y-8">
                             <!-- Current Logo Display -->
                             <div>
-                                <label class="block text-sm font-semibold text-gray-700 mb-3">Current Logo</label>
+                                <label class="block text-sm font-2xl text-gray-700 mb-3">Current Logo</label>
                                 <div
                                     class="bg-gradient-to-br from-gray-50 to-gray-100 rounded-xl p-6 text-center border-2 border-dashed border-gray-200">
                                     <img src="{{ $current_logo }}" alt="Current Logo"
@@ -94,7 +94,7 @@
 
                             <!-- Logo Upload -->
                             <div>
-                                <label class="block text-sm font-semibold text-gray-700 mb-10">Upload New Logo</label>
+                                <label class="block text-sm font-2xl text-gray-700 mb-10">Upload New Logo</label>
                                 <div
                                     class="mt-1 flex justify-center px-6 pt-8 pb-8 border-2 border-gray-300 border-dashed rounded-xl hover:border-pink-400 transition-all duration-300 bg-gradient-to-br from-pink-50 to-pink-100 hover:from-pink-100 hover:to-pink-200">
                                     <div class="space-y-4 text-center">
@@ -121,7 +121,7 @@
                                         <div class="text-center">
                                             <label for="logo-upload" class="cursor-pointer">
                                                 <span
-                                                    class="inline-flex items-center px-6 py-3 bg-gradient-to-r from-pink-600 to-pink-500 text-white rounded-xl font-semibold hover:from-pink-700 hover:to-pink-600 transition-all duration-200 shadow-lg hover:shadow-xl transform hover:-translate-y-0.5">
+                                                    class="inline-flex items-center px-6 py-3 bg-gradient-to-r from-pink-600 to-pink-500 text-white rounded-xl font-2xl hover:from-pink-700 hover:to-pink-600 transition-all duration-200 shadow-lg hover:shadow-xl transform hover:-translate-y-0.5">
                                                     <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor"
                                                         viewBox="0 0 24 24">
                                                         <path stroke-linecap="round" stroke-linejoin="round"

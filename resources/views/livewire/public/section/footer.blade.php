@@ -5,7 +5,7 @@
             <div>
                 <div class="flex items-center space-x-2 mb-6">
                     <img src="{{ $settings['site_logo'] }}" alt="{{ $settings['site_name'] }} Logo" class="h-8 w-10">
-                    <span class="text-2xl font-bold text-white">{{ $settings['site_name'] }}</span>
+                    <span class="text-2xl font-2xl text-white">{{ $settings['site_name'] }}</span>
                 </div>
                 <p class="text-pink-100 mb-6">{{ $settings['site_description'] }}</p>
                 <div class="flex space-x-4">
@@ -29,7 +29,7 @@
             
             <!-- Column 2: Explore Links -->
             <div>
-                <h4 class="text-xl font-bold text-white mb-6 relative inline-block">
+                <h4 class="text-xl font-2xl text-white mb-6 relative inline-block">
                     <span class="relative z-10">Explore</span>
                     <span class="absolute -bottom-1 left-0 w-full h-1 bg-pink-500 z-0"></span>
                 </h4>
@@ -69,7 +69,7 @@
             
             <!-- Column 3: Contact -->
             <div>
-                <h4 class="text-xl font-bold text-white mb-6 relative inline-block">
+                <h4 class="text-xl font-2xl text-white mb-6 relative inline-block">
                     <span class="relative z-10">Contact Us</span>
                     <span class="absolute -bottom-1 left-0 w-full h-1 bg-pink-500 z-0"></span>
                 </h4>

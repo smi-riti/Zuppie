@@ -35,7 +35,7 @@
     @endif
     @if (!$package)
         <div class="text-center py-20">
-            <h2 class="text-2xl font-bold text-gray-800">Package not found</h2>
+            <h2 class="text-2xl font-2xl text-gray-800">Package not found</h2>
             <a href="{{ route('event-packages') }}"
                 class="mt-4 inline-block bg-purple-600 text-white px-6 py-3 rounded-lg">
                 Back to Packages
@@ -84,12 +84,12 @@
                             <div class="bg-gradient-to-r from-purple-600 to-pink-600 p-6 text-white">
                                 <div class="flex flex-col md:flex-row md:items-center justify-between">
                                     <div>
-                                        <h2 class="text-2xl font-bold">{{ $package->name }}</h2>
+                                        <h2 class="text-2xl font-2xl">{{ $package->name }}</h2>
                                         <p class="text-purple-100">{{ $package->category->name ?? 'Event Package' }}</p>
                                     </div>
                                     <div class="mt-4 md:mt-0 text-right">
                                         <p class="text-sm text-purple-100">Total Price</p>
-                                        <p class="text-2xl font-bold">₹{{ number_format($this->totalPrice) }}</p>
+                                        <p class="text-2xl font-2xl">₹{{ number_format($this->totalPrice) }}</p>
                                     </div>
                                 </div>
                             </div>
@@ -97,7 +97,7 @@
                             <!-- Step 1: Event Details -->
                             @if ($currentStep === 1)
                                 <div class="p-6 animate-fade-in">
-                                    <h3 class="text-xl font-bold text-gray-800 mb-6 flex items-center">
+                                    <h3 class="text-xl font-2xl text-gray-800 mb-6 flex items-center">
                                         <i class="fas fa-calendar-day text-purple-600 mr-3"></i>
                                         When & Where is Your Event?
                                     </h3>
@@ -105,7 +105,7 @@
                                     <div class="space-y-6">
                                         <div class="grid md:grid-cols-3 gap-6">
                                             <div>
-                                                <label class="block text-gray-700 font-semibold mb-2">
+                                                <label class="block text-gray-700 font-2xl mb-2">
                                                     <i class="fas fa-calendar text-purple-600 mr-2"></i>
                                                     Event Date *
                                                 </label>
@@ -117,7 +117,7 @@
                                                 @enderror
                                             </div>
                                             <div>
-                                                <label class="block text-gray-700 font-semibold mb-2">
+                                                <label class="block text-gray-700 font-2xl mb-2">
                                                     <i class="fas fa-clock text-purple-600 mr-2"></i>
                                                     Event Time
                                                 </label>
@@ -168,7 +168,7 @@
                                                     for your event</p>
                                             </div>
                                             <div>
-                                                <label class="block text-gray-700 font-semibold mb-2">
+                                                <label class="block text-gray-700 font-2xl mb-2">
                                                     <i class="fas fa-calendar-check text-purple-600 mr-2"></i>
                                                     Event End Date
                                                 </label>
@@ -190,7 +190,7 @@
                                         </div>
 
                                         <div>
-                                            <label class="block text-gray-700 font-semibold mb-2">
+                                            <label class="block text-gray-700 font-2xl mb-2">
                                                 <i class="fas fa-map-marker-alt text-purple-600 mr-2"></i>
                                                 Event Venue/Location *
                                             </label>
@@ -204,7 +204,7 @@
 
                                         <div class="pt-4">
                                             <button wire:click="validateStep1"
-                                                class="w-full bg-purple-600 text-white py-4 rounded-2xl font-bold text-lg hover:bg-purple-700 transition-all duration-300">
+                                                class="w-full bg-purple-600 text-white py-4 rounded-2xl font-2xl text-lg hover:bg-purple-700 transition-all duration-300">
                                                 Continue to Requirements <i class="fas fa-arrow-right ml-2"></i>
                                             </button>
                                         </div>
@@ -215,14 +215,14 @@
                             <!-- Step 2: Requirements -->
                             @if ($currentStep === 2)
                                 <div class="p-6 animate-fade-in">
-                                    <h3 class="text-xl font-bold text-gray-800 mb-6 flex items-center">
+                                    <h3 class="text-xl font-2xl text-gray-800 mb-6 flex items-center">
                                         <i class="fas fa-clipboard-list text-purple-600 mr-3"></i>
                                         Event Requirements
                                     </h3>
 
                                     <div class="space-y-6">
                                         <div>
-                                            <label class="block text-gray-700 font-semibold mb-2">
+                                            <label class="block text-gray-700 font-2xl mb-2">
                                                 <i class="fas fa-users text-purple-600 mr-2"></i>
                                                 Expected Guests
                                             </label>
@@ -235,7 +235,7 @@
                                         </div>
 
                                         <div>
-                                            <label class="block text-gray-700 font-semibold mb-2">
+                                            <label class="block text-gray-700 font-2xl mb-2">
                                                 <i class="fas fa-comment-dots text-purple-600 mr-2"></i>
                                                 Special Requirements (Optional)
                                             </label>
@@ -249,11 +249,11 @@
 
                                         <div class="grid grid-cols-2 gap-4 pt-4">
                                             <button wire:click="goToStep(1)"
-                                                class="bg-gray-200 text-gray-800 py-3 rounded-xl font-bold hover:bg-gray-300 transition-all duration-300">
+                                                class="bg-gray-200 text-gray-800 py-3 rounded-xl font-2xl hover:bg-gray-300 transition-all duration-300">
                                                 <i class="fas fa-arrow-left mr-2"></i> Back
                                             </button>
                                             <button wire:click="validateStep2"
-                                                class="bg-purple-600 text-white py-3 rounded-xl font-bold hover:bg-purple-700 transition-all duration-300">
+                                                class="bg-purple-600 text-white py-3 rounded-xl font-2xl hover:bg-purple-700 transition-all duration-300">
                                                 Continue <i class="fas fa-arrow-right ml-2"></i>
                                             </button>
                                         </div>
@@ -264,7 +264,7 @@
                             <!-- Step 3: Personal Info -->
                             @if ($currentStep === 3)
                                 <div class="p-6 animate-fade-in">
-                                    <h3 class="text-xl font-bold text-gray-800 mb-6 flex items-center">
+                                    <h3 class="text-xl font-2xl text-gray-800 mb-6 flex items-center">
                                         <i class="fas fa-user-circle text-purple-600 mr-3"></i>
                                         Your Information
                                     </h3>
@@ -274,7 +274,7 @@
                                             <div class="flex items-center">
                                                 <i class="fas fa-user-check text-green-500 mr-3 text-xl"></i>
                                                 <div>
-                                                    <p class="font-semibold text-green-800">Welcome back,
+                                                    <p class="font-2xl text-green-800">Welcome back,
                                                         {{ $existingUser->name }}!</p>
                                                     <p class="text-sm text-green-700">
                                                         {{ $existingUser->email ?: $existingUser->phone_no }}</p>
@@ -300,7 +300,7 @@
                                         </div>
 
                                         <div>
-                                            <label class="block text-gray-700 font-semibold mb-2">
+                                            <label class="block text-gray-700 font-2xl mb-2">
                                                 <i class="fas fa-user text-purple-600 mr-2"></i>
                                                 Full Name (for booking) *
                                             </label>
@@ -316,7 +316,7 @@
 
                                         <div class="grid md:grid-cols-2 gap-6">
                                             <div>
-                                                <label class="block text-gray-700 font-semibold mb-2">
+                                                <label class="block text-gray-700 font-2xl mb-2">
                                                     <i class="fas fa-phone text-purple-600 mr-2"></i>
                                                     Phone Number (for booking) *
                                                 </label>
@@ -330,7 +330,7 @@
                                                 </p>
                                             </div>
                                             <div>
-                                                <label class="block text-gray-700 font-semibold mb-2">
+                                                <label class="block text-gray-700 font-2xl mb-2">
                                                     <i class="fas fa-envelope text-purple-600 mr-2"></i>
                                                     Email Address (Optional)
                                                 </label>
@@ -347,11 +347,11 @@
 
                                         <div class="grid grid-cols-2 gap-4 pt-4">
                                             <button wire:click="goToStep(2)"
-                                                class="bg-gray-200 text-gray-800 py-3 rounded-xl font-bold hover:bg-gray-300 transition-all duration-300">
+                                                class="bg-gray-200 text-gray-800 py-3 rounded-xl font-2xl hover:bg-gray-300 transition-all duration-300">
                                                 <i class="fas fa-arrow-left mr-2"></i> Back
                                             </button>
                                             <button wire:click="validateStep3"
-                                                class="bg-purple-600 text-white py-3 rounded-xl font-bold hover:bg-purple-700 transition-all duration-300">
+                                                class="bg-purple-600 text-white py-3 rounded-xl font-2xl hover:bg-purple-700 transition-all duration-300">
                                                 Review Booking <i class="fas fa-arrow-right ml-2"></i>
                                             </button>
                                         </div>
@@ -362,7 +362,7 @@
                             <!-- Step 4: Confirmation -->
                             @if ($currentStep === 4)
                                 <div class="p-6 animate-fade-in">
-                                    <h3 class="text-xl font-bold text-gray-800 mb-6 flex items-center">
+                                    <h3 class="text-xl font-2xl text-gray-800 mb-6 flex items-center">
                                         <i class="fas fa-clipboard-check text-purple-600 mr-3"></i>
                                         Review Your Booking
                                     </h3>
@@ -370,7 +370,7 @@
                                     <div class="space-y-6">
                                         <!-- Booking Summary -->
                                         <div class="bg-gray-50 rounded-xl p-6">
-                                            <h4 class="font-bold text-lg text-gray-800 mb-4 border-b pb-2">Booking
+                                            <h4 class="font-2xl text-lg text-gray-800 mb-4 border-b pb-2">Booking
                                                 Summary</h4>
 
                                             <div class="space-y-4">
@@ -412,7 +412,7 @@
 
                                         <!-- Personal Info Summary -->
                                         <div class="bg-gray-50 rounded-xl p-6">
-                                            <h4 class="font-bold text-lg text-gray-800 mb-4 border-b pb-2">Your
+                                            <h4 class="font-2xl text-lg text-gray-800 mb-4 border-b pb-2">Your
                                                 Information</h4>
 
                                             <div class="space-y-4">
@@ -435,7 +435,7 @@
 
                                         <!-- Payment Options -->
                                         <div class="bg-purple-50 rounded-xl p-6">
-                                            <h4 class="font-bold text-lg text-gray-800 mb-4 border-b pb-2">Payment
+                                            <h4 class="font-2xl text-lg text-gray-800 mb-4 border-b pb-2">Payment
                                                 Method</h4>
 
                                             <div class="space-y-3">
@@ -444,7 +444,7 @@
                                                     <input type="radio" wire:model="paymentMethod" value="cash"
                                                         class="mr-3">
                                                     <div class="flex-1">
-                                                        <div class="font-semibold text-gray-800 flex items-center">
+                                                        <div class="font-2xl text-gray-800 flex items-center">
                                                             <i class="fas fa-money-bill-wave text-green-600 mr-2"></i>
                                                             Cash Payment (20% Advance Required)
                                                         </div>
@@ -458,7 +458,7 @@
                                                     <input type="radio" wire:model="paymentMethod" value="online"
                                                         class="mr-3">
                                                     <div class="flex-1">
-                                                        <div class="font-semibold text-gray-800 flex items-center">
+                                                        <div class="font-2xl text-gray-800 flex items-center">
                                                             <i class="fas fa-credit-card text-info-600 mr-2"></i>
                                                             Online Payment
                                                         </div>
@@ -500,7 +500,7 @@
 
                                         <!-- Package Price Summary -->
                                         <div class="bg-white border border-gray-200 rounded-xl p-6">
-                                            <h4 class="font-bold text-lg text-gray-800 mb-4 border-b pb-2">Price
+                                            <h4 class="font-2xl text-lg text-gray-800 mb-4 border-b pb-2">Price
                                                 Summary</h4>
 
                                             <div class="space-y-3">
@@ -524,7 +524,7 @@
                                                 @endif
 
                                                 <div class="border-t border-gray-200 pt-3 mt-3">
-                                                    <div class="flex justify-between text-lg font-bold text-gray-800">
+                                                    <div class="flex justify-between text-lg font-2xl text-gray-800">
                                                         <span>Total Amount:</span>
                                                         <span
                                                             class="text-purple-600">₹{{ number_format($this->totalPrice) }}</span>
@@ -558,11 +558,11 @@
 
                                         <div class="grid grid-cols-2 gap-4 pt-4">
                                             <button wire:click="goToStep(3)"
-                                                class="bg-gray-200 text-gray-800 py-3 rounded-xl font-bold hover:bg-gray-300 transition-all duration-300">
+                                                class="bg-gray-200 text-gray-800 py-3 rounded-xl font-2xl hover:bg-gray-300 transition-all duration-300">
                                                 <i class="fas fa-arrow-left mr-2"></i> Back
                                             </button>
                                             <button wire:click="submitBooking" wire:loading.attr="disabled"
-                                                class="bg-gradient-to-r from-purple-600 to-pink-600 text-white py-3 rounded-xl font-bold hover:from-purple-700 hover:to-pink-700 transition-all duration-300 disabled:opacity-50">
+                                                class="bg-gradient-to-r from-purple-600 to-pink-600 text-white py-3 rounded-xl font-2xl hover:from-purple-700 hover:to-pink-700 transition-all duration-300 disabled:opacity-50">
                                                 <span wire:loading.remove>
                                                     @if ($paymentMethod === 'online')
                                                         <i class="fas fa-credit-card mr-2"></i> Pay Now
@@ -593,7 +593,7 @@
                     <div class="bg-white rounded-3xl shadow-xl sticky top-8">
                         <!-- Package Header -->
                         <div class="bg-gradient-to-r from-purple-600 to-pink-600 p-6 text-white rounded-t-3xl">
-                            <h2 class="text-2xl font-bold">{{ $package->name }}</h2>
+                            <h2 class="text-2xl font-2xl">{{ $package->name }}</h2>
                             <p class="text-purple-100">{{ $package->category->name ?? 'Event Package' }}</p>
                         </div>
 
@@ -607,7 +607,7 @@
 
                         <!-- Package Description -->
                         <div class="p-6">
-                            <h3 class="font-bold text-gray-800 mb-3">Package Includes</h3>
+                            <h3 class="font-2xl text-gray-800 mb-3">Package Includes</h3>
                             <div class="prose text-gray-700">
                                 {!! $package->description !!}
                             </div>
@@ -615,7 +615,7 @@
 
                         <!-- Price Summary -->
                         <div class="p-6 bg-gray-50 rounded-b-3xl">
-                            <h3 class="font-bold text-gray-800 mb-3">Price Summary</h3>
+                            <h3 class="font-2xl text-gray-800 mb-3">Price Summary</h3>
                             <div class="space-y-2">
                                 <div class="flex justify-between">
                                     <span class="text-gray-600">Base Price:</span>
@@ -636,7 +636,7 @@
                                 @endif
 
                                 <div class="border-t border-gray-200 pt-2 mt-2">
-                                    <div class="flex justify-between font-bold text-lg text-gray-800">
+                                    <div class="flex justify-between font-2xl text-lg text-gray-800">
                                         <span>Total:</span>
                                         <span class="text-purple-600">₹{{ number_format($this->totalPrice) }}</span>
                                     </div>
