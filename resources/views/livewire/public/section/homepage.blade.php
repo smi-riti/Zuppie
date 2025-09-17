@@ -1,7 +1,7 @@
 <div>
     <livewire:public.section.hero-section />
     <section id="categories" class="sm:py-20 sm:px-10">
-        <div class="lg:px-20 p-8">
+        <div class="p-5 lg:px-8">
             <div class="text-center mb-12">
                 <h2 class="text-3xl py-2 sm:text-4xl md:text-5xl font-semibold font-display text-transparent bg-clip-text bg-gradient-to-r from-purple-600 to-pink-600 mb-6"
                     data-aos="fade-up">
