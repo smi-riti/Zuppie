@@ -454,33 +454,60 @@
             }
 
             if ('serviceWorker' in navigator) {
-                navigator.serviceWorker.register('/sw.js')
-                    .then(registration => {
-                        console.log('SW registered: ', registration);
-                    })
-                    .catch(registrationError => {
-                        console.log('SW registration failed: ', registrationError);
-                    });
+                window.addEventListener('load', () => {
+                    navigator.serviceWorker.register('/sw.js')
+                        .then(registration => {
+                            console.log('SW registered successfully:', registration.scope);
+                            
+                            // Handle service worker updates
+                            registration.addEventListener('updatefound', () => {
+                                const newWorker = registration.installing;
+                                if (newWorker) {
+                                    newWorker.addEventListener('statechange', () => {
+                                        if (newWorker.state === 'installed' && navigator.serviceWorker.controller) {
+                                            // New service worker is available
+                                            console.log('New service worker available');
+                                            // Auto-update without user intervention
+                                            newWorker.postMessage({ type: 'SKIP_WAITING' });
+                                        }
+                                    });
+                                }
+                            });
+                            
+                            // Listen for service worker controlling this page
+                            navigator.serviceWorker.addEventListener('controllerchange', () => {
+                                console.log('Service worker controller changed');
+                                window.location.reload();
+                            });
+                        })
+                        .catch(error => {
+                            console.warn('SW registration failed:', error);
+                        });
+                });
             }
+
+            // Handle Chrome extension runtime errors
+            if (typeof chrome !== 'undefined' && chrome.runtime) {
+                chrome.runtime.onMessage?.addListener?.(() => {
+                    // Prevent runtime.lastError messages
+                    if (chrome.runtime.lastError) {
+                        // Silently handle the error
+                        return;
+                    }
+                });
+            }
+
+            // Global error handler for unhandled promises
+            window.addEventListener('unhandledrejection', function(event) {
+                if (event.reason && event.reason.message && 
+                    event.reason.message.includes('message port closed')) {
+                    // Suppress Chrome extension message port errors
+                    event.preventDefault();
+                    return;
+                }
+            });
         });
 
-        // Critical resource hints
-        function preloadCriticalResources() {
-            const criticalResources = [
-                '/images/hero-bg.jpg',
-                '/images/logo.png'
-            ];
-
-            criticalResources.forEach(resource => {
-                const link = document.createElement('link');
-                link.rel = 'preload';
-                link.href = resource;
-                link.as = 'image';
-                document.head.appendChild(link);
-            });
-        }
-
-        document.addEventListener('DOMContentLoaded', preloadCriticalResources);
     </script>
 
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-PCX15ZTQQ3"></script>
@@ -501,7 +528,7 @@
             page_location: window.location.href,
             anonymize_ip: true,
             cookie_flags: 'SameSite=None;Secure',
-            custom_map: {
+             custom_map: {
                 'custom_dimension_1': 'event_type',
                 'custom_dimension_2': 'package_category',
                 'custom_dimension_3': 'location'
