@@ -5,7 +5,7 @@
         <section class="relative h-[60vh] overflow-hidden">
             <!-- Background Image with Overlay -->
             <div class="absolute inset-0">
-                <img src="https://images.unsplash.com/photo-1511578314322-379afb476865?ixlib=rb-4.0.3&auto=format&fit=crop&w=2340&q=80" 
+                <img src="{{ asset('images/newbanner.webp') }}" 
                      alt="Contact Background" 
                      class="w-full h-full object-cover">
                 <div class="absolute inset-0 bg-gradient-to-br from-purple-900/40 via-pink-800/35 to-indigo-900/40"></div>
