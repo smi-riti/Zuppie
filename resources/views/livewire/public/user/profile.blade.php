@@ -13,7 +13,7 @@
                     <!-- Profile Image -->
                     <div class="relative">
                         <div
-                            class="w-24 h-24 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full flex items-center justify-center text-white  text-3xl font-bold">
+                            class="w-24 h-24 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full flex items-center justify-center text-white  text-3xl font-2xl">
                             {{ substr(auth()->user()->name ?? 'User', 0, 1) }}
                         </div>
                         <div
@@ -24,28 +24,28 @@
 
                     <!-- Profile Info -->
                     <div class="flex-1 text-center md:text-left">
-                        <h2 class="text-2xl font-bold text-gray-800">{{ auth()->user()->name }}</h2>
+                        <h2 class="text-2xl font-2xl text-gray-800">{{ auth()->user()->name }}</h2>
                         <p class="text-gray-600">{{ auth()->user()->email }}</p>
 
                         <!-- Quick Stats -->
                         <div class="flex justify-center md:justify-start space-x-6 mt-4">
                             <div class="text-center">
-                                <div class="text-lg font-bold text-gray-800">{{ count($bookings) }}</div>
+                                <div class="text-lg font-2xl text-gray-800">{{ count($bookings) }}</div>
                                 <div class="text-xs text-gray-600">Total Bookings</div>
                             </div>
                             <div class="text-center">
-                                <div class="text-lg font-bold text-green-600">{{ count($completedBookings) ?? 0 }}</div>
+                                <div class="text-lg font-2xl text-green-600">{{ count($completedBookings) ?? 0 }}</div>
                                 <div class="text-xs text-gray-600">Completed</div>
                             </div>
                             <div class="text-center">
-                                <div class="text-lg font-bold text-green-600">{{ count($upComingBookings) ?? 0 }}</div>
+                                <div class="text-lg font-2xl text-green-600">{{ count($upComingBookings) ?? 0 }}</div>
                                 <div class="text-xs text-gray-600">Upcoming Event</div>
                             </div>
                         </div>
                     </div>
 
                     <button wire:click="openEditProfileModal({{ auth()->id() }})"
-                        class="bg-gradient-to-r from-purple-600 to-pink-600 text-white px-6 py-2 rounded-xl font-semibold hover:from-purple-700 hover:to-pink-700 transition-all duration-300">
+                        class="bg-gradient-to-r from-purple-600 to-pink-600 text-white px-6 py-2 rounded-xl font-2xl hover:from-purple-700 hover:to-pink-700 transition-all duration-300">
                         <i class="fas fa-edit mr-2"></i>
                         Edit Profile
                     </button>
@@ -63,7 +63,7 @@
                 <button @click="activeTab = tab"
                     class="px-3 sm:px-4 md:px-6 py-2 sm:py-3 text-sm sm:text-base md:text-lg focus:outline-none transition-all duration-150 whitespace-nowrap"
                     :class="{
-                        'font-semibold rounded-lg transition-all duration-300 bg-gradient-to-r from-purple-600 to-pink-600 text-white shadow-md': activeTab ===
+                        'font-2xl rounded-lg transition-all duration-300 bg-gradient-to-r from-purple-600 to-pink-600 text-white shadow-md': activeTab ===
                             tab,
                         'text-gray-800': activeTab !== tab
                     }"
@@ -85,11 +85,11 @@
                                         <div class="flex items-center justify-between mb-4">
                                             <div class="flex items-center space-x-4">
                                                 <div
-                                                    class="w-16 h-16 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full flex items-center justify-center text-white font-bold text-lg capitalize">
+                                                    class="w-16 h-16 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full flex items-center justify-center text-white font-2xl text-lg capitalize">
                                                     {{ substr($booking->eventPackage->name, 0, 1) }}
                                                 </div>
                                                 <div>
-                                                    <h3 class="text-xl font-bold text-gray-800">
+                                                    <h3 class="text-xl font-2xl text-gray-800">
                                                         {{ $booking->eventPackage->name }}
                                                     </h3>
                                                     <p class="text-gray-600">Booking ID: #000{{ $booking->id }}</p>
@@ -118,7 +118,7 @@
                                         <div class="grid md:grid-cols-5 gap-4 mb-6">
                                             <div>
                                                 <p class="text-gray-600 text-sm font-medium">Event Date & Time</p>
-                                                <p class="font-semibold text-gray-800">
+                                                <p class="font-2xl text-gray-800">
                                                     {{ \Carbon\Carbon::parse($booking->event_date)->format('M d, Y') }}
                                                 </p>
                                                 @if ($booking->event_time)
@@ -129,13 +129,13 @@
                                             </div>
                                             <div>
                                                 <p class="text-gray-600 text-sm font-medium">Guests</p>
-                                                <p class="font-semibold text-gray-800">
+                                                <p class="font-2xl text-gray-800">
                                                     {{ $booking->guest_count ?? 'not provided' }}
                                                 </p>
                                             </div>
                                             <div>
                                                 <p class="text-gray-600 text-sm font-medium">Amount Details</p>
-                                                <p class="font-semibold text-gray-800 text-sm">
+                                                <p class="font-2xl text-gray-800 text-sm">
                                                     Total: ₹{{ number_format($booking->eventPackage->price, 2) }}
                                                 </p>
                                                 <p class="text-green-600 text-sm">
@@ -146,14 +146,14 @@
                                                     Paid: ₹{{ number_format($this->getTotalPaidAmount($booking), 2) }}
                                                 </p>
                                                 @if ($this->hasUnpaidBalance($booking))
-                                                    <p class="text-orange-600 text-sm font-semibold">
+                                                    <p class="text-orange-600 text-sm font-2xl">
                                                         Due: ₹{{ number_format($this->getDueAmount($booking), 2) }}
                                                     </p>
                                                 @endif
                                             </div>
                                             <div>
                                                 <p class="text-gray-600 text-sm font-medium">Payment</p>
-                                                <p class="font-semibold text-gray-800 text-sm">
+                                                <p class="font-2xl text-gray-800 text-sm">
                                                     {{ $this->getPaymentMethod($booking) }}
                                                 </p>
                                                 <p
@@ -166,7 +166,7 @@
                                             </div>
                                             <div>
                                                 <p class="text-gray-600 text-sm font-medium">Location</p>
-                                                <p class="font-semibold text-gray-800 text-sm">{{ $booking->location }}
+                                                <p class="font-2xl text-gray-800 text-sm">{{ $booking->location }}
                                                 </p>
                                             </div>
                                         </div>
@@ -174,14 +174,14 @@
                                         <div class="flex justify-between items-center">
                                             <div class="flex space-x-3">
                                                 <button wire:click="openViewModal({{ $booking->id }})"
-                                                    class="bg-gradient-to-r from-purple-600 to-pink-600 text-white px-4 py-2 rounded-lg font-semibold hover:from-purple-700 hover:to-pink-700 transition-all duration-300">
+                                                    class="bg-gradient-to-r from-purple-600 to-pink-600 text-white px-4 py-2 rounded-lg font-2xl hover:from-purple-700 hover:to-pink-700 transition-all duration-300">
                                                     <i class="fas fa-eye mr-2"></i>
                                                     View Details
                                                 </button>
 
                                                 @if ($booking->is_completed === 1)
                                                     <button wire:click="downloadInvoice({{ $booking->id }})"
-                                                        class="bg-info-500 hover:bg-info-700 text-white font-bold py-2 px-4 rounded-lg transition-all duration-300">
+                                                        class="bg-info-500 hover:bg-info-700 text-white font-2xl py-2 px-4 rounded-lg transition-all duration-300">
                                                         <i class="fas fa-download mr-2"></i>
                                                         Download Invoice
                                                     </button>
@@ -191,13 +191,13 @@
                                             @if ($booking->is_completed == 1)
                                                 <div class="flex gap-5 items-center">
                                                     <div
-                                                        class="bg-green-500 text-white px-4 py-2 rounded-lg font-semibold hover:bg-green-600 transition-all duration-300">
+                                                        class="bg-green-500 text-white px-4 py-2 rounded-lg font-2xl hover:bg-green-600 transition-all duration-300">
                                                         <i class="fas fa-check mr-2"></i>
                                                         Completed
                                                     </div>
                                                     <button
                                                         wire:click="openReviewModal({{ $booking->eventPackage->id }})"
-                                                        class="bg-green-500 text-white px-4 py-2 rounded-lg font-semibold hover:bg-green-600 transition-all duration-300">
+                                                        class="bg-green-500 text-white px-4 py-2 rounded-lg font-2xl hover:bg-green-600 transition-all duration-300">
                                                         <i class="fas fa-star mr-2"></i>
                                                         Leave Review
                                                     </button>
@@ -205,12 +205,12 @@
                                             @else
                                                 @if ($this->hasUnpaidBalance($booking))
                                                     <div class="text-right">
-                                                        <p class="text-orange-600 font-semibold text-sm">
+                                                        <p class="text-orange-600 font-2xl text-sm">
                                                             Balance:
                                                             ₹{{ number_format($this->getBalanceAmount($booking)) }}
                                                         </p>
                                                         <button wire:click="initiatePayment({{ $booking->id }})"
-                                                            class="bg-orange-500 text-white px-4 py-1 rounded-lg text-sm font-semibold hover:bg-orange-600 transition-all duration-300 mt-1 shadow-md border-2 border-orange-600"
+                                                            class="bg-orange-500 text-white px-4 py-1 rounded-lg text-sm font-2xl hover:bg-orange-600 transition-all duration-300 mt-1 shadow-md border-2 border-orange-600"
                                                             style="background-color: #f97316 !important; color: white !important; min-height: 32px;">
                                                             <i class="fas fa-credit-card mr-1"></i>
                                                             Pay Now
@@ -237,13 +237,13 @@
                                         class="w-24 h-24 bg-purple-100 rounded-full flex items-center justify-center mx-auto mb-6">
                                         <i class="fas fa-calendar-times text-purple-600 text-3xl"></i>
                                     </div>
-                                    <h2 class="text-2xl font-bold text-gray-800 mb-4">No Bookings Found</h2>
+                                    <h2 class="text-2xl font-2xl text-gray-800 mb-4">No Bookings Found</h2>
                                     <p class="text-gray-600 mb-8">You don't have any bookings yet. Start by exploring
                                         our
                                         amazing event
                                         packages.</p>
                                     <a href="{{ route('event-packages') }}"
-                                        class="inline-block bg-gradient-to-r from-purple-600 to-pink-600 text-white py-3 px-8 rounded-xl font-semibold hover:from-purple-700 hover:to-pink-700 transition-all duration-300">
+                                        class="inline-block bg-gradient-to-r from-purple-600 to-pink-600 text-white py-3 px-8 rounded-xl font-2xl hover:from-purple-700 hover:to-pink-700 transition-all duration-300">
                                         <i class="fas fa-search mr-2"></i>
                                         Browse Packages
                                     </a>
@@ -270,11 +270,11 @@
                                         <div class="flex items-center justify-between mb-4">
                                             <div class="flex items-center space-x-4">
                                                 <div
-                                                    class="w-16 h-16 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full flex items-center justify-center text-white font-bold text-lg capitalize">
+                                                    class="w-16 h-16 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full flex items-center justify-center text-white font-2xl text-lg capitalize">
                                                     {{ substr($upBooking->eventPackage->name, 0, 1) }}
                                                 </div>
                                                 <div>
-                                                    <h3 class="text-xl font-bold text-gray-800">
+                                                    <h3 class="text-xl font-2xl text-gray-800">
                                                         {{ $upBooking->eventPackage->name }}
                                                     </h3>
                                                     <p class="text-gray-600">Booking ID: #000{{ $upBooking->id }}</p>
@@ -296,7 +296,7 @@
                                         <div class="grid md:grid-cols-5 gap-4 mb-6">
                                             <div>
                                                 <p class="text-gray-600 text-sm font-medium">Event Date & Time</p>
-                                                <p class="font-semibold text-gray-800">
+                                                <p class="font-2xl text-gray-800">
                                                     {{ \Carbon\Carbon::parse($upBooking->event_date)->format('M d, Y') }}
                                                 </p>
                                                 @if ($upBooking->event_time)
@@ -307,13 +307,13 @@
                                             </div>
                                             <div>
                                                 <p class="text-gray-600 text-sm font-medium">Guests</p>
-                                                <p class="font-semibold text-gray-800">
+                                                <p class="font-2xl text-gray-800">
                                                     {{ $upBooking->guest_count ?? 'not provided' }}
                                                 </p>
                                             </div>
                                             <div>
                                                 <p class="text-gray-600 text-sm font-medium">Amount Details</p>
-                                                <p class="font-semibold text-gray-800 text-sm">
+                                                <p class="font-2xl text-gray-800 text-sm">
                                                     Total: ₹{{ number_format($upBooking->eventPackage->price, 2) }}
                                                 </p>
                                                 <p class="text-green-600 text-sm">
@@ -325,14 +325,14 @@
                                                     ₹{{ number_format($this->getTotalPaidAmount($upBooking), 2) }}
                                                 </p>
                                                 @if ($this->hasUnpaidBalance($upBooking))
-                                                    <p class="text-orange-600 text-sm font-semibold">
+                                                    <p class="text-orange-600 text-sm font-2xl">
                                                         Due: ₹{{ number_format($this->getDueAmount($upBooking), 2) }}
                                                     </p>
                                                 @endif
                                             </div>
                                             <div>
                                                 <p class="text-gray-600 text-sm font-medium">Payment</p>
-                                                <p class="font-semibold text-gray-800 text-sm">
+                                                <p class="font-2xl text-gray-800 text-sm">
                                                     {{ $this->getPaymentMethod($upBooking) }}
                                                 </p>
                                                 <p
@@ -345,7 +345,7 @@
                                             </div>
                                             <div>
                                                 <p class="text-gray-600 text-sm font-medium">Location</p>
-                                                <p class="font-semibold text-gray-800 text-sm">
+                                                <p class="font-2xl text-gray-800 text-sm">
                                                     {{ $upBooking->location }}
                                                 </p>
                                             </div>
@@ -354,7 +354,7 @@
                                         <div class="flex justify-between items-center">
                                             <div class="flex space-x-3">
                                                 <button wire:click="openViewModal({{ $booking->id }})"
-                                                    class="bg-gradient-to-r from-purple-600 to-pink-600 text-white px-4 py-2 rounded-lg font-semibold hover:from-purple-700 hover:to-pink-700 transition-all duration-300">
+                                                    class="bg-gradient-to-r from-purple-600 to-pink-600 text-white px-4 py-2 rounded-lg font-2xl hover:from-purple-700 hover:to-pink-700 transition-all duration-300">
                                                     <i class="fas fa-eye mr-2"></i>
                                                     View Details
                                                 </button>
@@ -362,19 +362,19 @@
 
                                             @if ($upBooking->is_completed == 1)
                                                 <div
-                                                    class="bg-green-500 text-white px-4 py-2 rounded-lg font-semibold hover:bg-green-600 transition-all duration-300">
+                                                    class="bg-green-500 text-white px-4 py-2 rounded-lg font-2xl hover:bg-green-600 transition-all duration-300">
                                                     <i class="fas fa-check mr-2"></i>
                                                     Completed
                                                 </div>
                                             @else
                                                 @if ($this->hasUnpaidBalance($upBooking))
                                                     <div class="text-right">
-                                                        <p class="text-orange-600 font-semibold text-sm">
+                                                        <p class="text-orange-600 font-2xl text-sm">
                                                             Balance:
                                                             ₹{{ number_format($this->getBalanceAmount($upBooking)) }}
                                                         </p>
                                                         <button wire:click="initiatePayment({{ $upBooking->id }})"
-                                                            class="bg-orange-500 text-white px-4 py-1 rounded-lg text-sm font-semibold hover:bg-orange-600 transition-all duration-300 mt-1 shadow-md border-2 border-orange-600"
+                                                            class="bg-orange-500 text-white px-4 py-1 rounded-lg text-sm font-2xl hover:bg-orange-600 transition-all duration-300 mt-1 shadow-md border-2 border-orange-600"
                                                             style="background-color: #f97316 !important; color: white !important; min-height: 32px;">
                                                             <i class="fas fa-credit-card mr-1"></i>
                                                             Pay Now
@@ -414,11 +414,11 @@
                                         <div class="flex items-center justify-between mb-4">
                                             <div class="flex items-center space-x-4">
                                                 <div
-                                                    class="w-16 h-16 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full flex items-center justify-center text-white font-bold text-lg capitalize">
+                                                    class="w-16 h-16 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full flex items-center justify-center text-white font-2xl text-lg capitalize">
                                                     {{ substr($pastBooking->eventPackage->name, 0, 1) }}
                                                 </div>
                                                 <div>
-                                                    <h3 class="text-xl font-bold text-gray-800">
+                                                    <h3 class="text-xl font-2xl text-gray-800">
                                                         {{ $pastBooking->eventPackage->name }}
                                                     </h3>
                                                     <p class="text-gray-600">Booking ID: #000{{ $pastBooking->id }}
@@ -441,7 +441,7 @@
                                         <div class="grid md:grid-cols-5 gap-4 mb-6">
                                             <div>
                                                 <p class="text-gray-600 text-sm font-medium">Event Date & Time</p>
-                                                <p class="font-semibold text-gray-800">
+                                                <p class="font-2xl text-gray-800">
                                                     {{ \Carbon\Carbon::parse($pastBooking->event_date)->format('M d, Y') }}
                                                 </p>
                                                 @if ($pastBooking->event_time)
@@ -452,13 +452,13 @@
                                             </div>
                                             <div>
                                                 <p class="text-gray-600 text-sm font-medium">Guests</p>
-                                                <p class="font-semibold text-gray-800">
+                                                <p class="font-2xl text-gray-800">
                                                     {{ $pastBooking->guest_count ?? 'not provided' }}
                                                 </p>
                                             </div>
                                             <div>
                                                 <p class="text-gray-600 text-sm font-medium">Amount Details</p>
-                                                <p class="font-semibold text-gray-800 text-sm">
+                                                <p class="font-2xl text-gray-800 text-sm">
                                                     Total: ₹{{ number_format($pastBooking->eventPackage->price, 2) }}
                                                 </p>
                                                 <p class="text-green-600 text-sm">
@@ -470,14 +470,14 @@
                                                     ₹{{ number_format($this->getTotalPaidAmount($pastBooking), 2) }}
                                                 </p>
                                                 @if ($this->hasUnpaidBalance($pastBooking))
-                                                    <p class="text-orange-600 text-sm font-semibold">
+                                                    <p class="text-orange-600 text-sm font-2xl">
                                                         Due: ₹{{ number_format($this->getDueAmount($pastBooking), 2) }}
                                                     </p>
                                                 @endif
                                             </div>
                                             <div>
                                                 <p class="text-gray-600 text-sm font-medium">Payment</p>
-                                                <p class="font-semibold text-gray-800 text-sm">
+                                                <p class="font-2xl text-gray-800 text-sm">
                                                     {{ $this->getPaymentMethod($pastBooking) }}
                                                 </p>
                                                 <p
@@ -490,7 +490,7 @@
                                             </div>
                                             <div>
                                                 <p class="text-gray-600 text-sm font-medium">Location</p>
-                                                <p class="font-semibold text-gray-800 text-sm">
+                                                <p class="font-2xl text-gray-800 text-sm">
                                                     {{ $pastBooking->location }}
                                                 </p>
                                             </div>
@@ -499,14 +499,14 @@
                                         <div class="flex justify-between items-center">
                                             <div class="flex space-x-3">
                                                 <button wire:click="openViewModal({{ $booking->id }})"
-                                                    class="bg-gradient-to-r from-purple-600 to-pink-600 text-white px-4 py-2 rounded-lg font-semibold hover:from-purple-700 hover:to-pink-700 transition-all duration-300">
+                                                    class="bg-gradient-to-r from-purple-600 to-pink-600 text-white px-4 py-2 rounded-lg font-2xl hover:from-purple-700 hover:to-pink-700 transition-all duration-300">
                                                     <i class="fas fa-eye mr-2"></i>
                                                     View Details
                                                 </button>
 
                                                 @if ($pastBooking->is_completed == 1)
                                                     <button wire:click="downloadInvoice({{ $booking->id }})"
-                                                        class="border border-purple-300 text-purple-600 px-4 py-2 rounded-lg font-semibold hover:bg-purple-50 transition-all duration-300">
+                                                        class="border border-purple-300 text-purple-600 px-4 py-2 rounded-lg font-2xl hover:bg-purple-50 transition-all duration-300">
                                                         <i class="fas fa-download mr-2"></i>
                                                         Download Invoice
                                                     </button>
@@ -515,19 +515,19 @@
 
                                             @if ($pastBooking->is_completed == 1)
                                                 <div
-                                                    class="bg-green-500 text-white px-4 py-2 rounded-lg font-semibold hover:bg-green-600 transition-all duration-300">
+                                                    class="bg-green-500 text-white px-4 py-2 rounded-lg font-2xl hover:bg-green-600 transition-all duration-300">
                                                     <i class="fas fa-check mr-2"></i>
                                                     Completed
                                                 </div>
                                             @else
                                                 @if ($this->hasUnpaidBalance($pastBooking))
                                                     <div class="text-right">
-                                                        <p class="text-orange-600 font-semibold text-sm">
+                                                        <p class="text-orange-600 font-2xl text-sm">
                                                             Balance:
                                                             ₹{{ number_format($this->getBalanceAmount($pastBooking)) }}
                                                         </p>
                                                         <button wire:click="initiatePayment({{ $pastBooking->id }})"
-                                                            class="bg-orange-500 text-white px-4 py-1 rounded-lg text-sm font-semibold hover:bg-orange-600 transition-all duration-300 mt-1 shadow-md border-2 border-orange-600"
+                                                            class="bg-orange-500 text-white px-4 py-1 rounded-lg text-sm font-2xl hover:bg-orange-600 transition-all duration-300 mt-1 shadow-md border-2 border-orange-600"
                                                             style="background-color: #f97316 !important; color: white !important; min-height: 32px;">
                                                             <i class="fas fa-credit-card mr-1"></i>
                                                             Pay Now
@@ -567,11 +567,11 @@
                                         <div class="flex items-center justify-between mb-4">
                                             <div class="flex items-center space-x-4">
                                                 <div
-                                                    class="w-16 h-16 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full flex items-center justify-center text-white font-bold text-lg capitalize">
+                                                    class="w-16 h-16 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full flex items-center justify-center text-white font-2xl text-lg capitalize">
                                                     {{ substr($cancelBooking->eventPackage->name, 0, 1) }}
                                                 </div>
                                                 <div>
-                                                    <h3 class="text-xl font-bold text-gray-800">
+                                                    <h3 class="text-xl font-2xl text-gray-800">
                                                         {{ $cancelBooking->eventPackage->name }}
                                                     </h3>
                                                     <p class="text-gray-600">Booking ID: #000{{ $cancelBooking->id }}
@@ -600,7 +600,7 @@
                                         <div class="grid md:grid-cols-5 gap-4 mb-6">
                                             <div>
                                                 <p class="text-gray-600 text-sm font-medium">Event Date & Time</p>
-                                                <p class="font-semibold text-gray-800">
+                                                <p class="font-2xl text-gray-800">
                                                     {{ \Carbon\Carbon::parse($cancelBooking->event_date)->format('M d, Y') }}
                                                 </p>
                                                 @if ($cancelBooking->event_time)
@@ -611,13 +611,13 @@
                                             </div>
                                             <div>
                                                 <p class="text-gray-600 text-sm font-medium">Guests</p>
-                                                <p class="font-semibold text-gray-800">
+                                                <p class="font-2xl text-gray-800">
                                                     {{ $cancelBooking->guest_count ?? 'not provided' }}
                                                 </p>
                                             </div>
                                             <div>
                                                 <p class="text-gray-600 text-sm font-medium">Amount Details</p>
-                                                <p class="font-semibold text-gray-800 text-sm">
+                                                <p class="font-2xl text-gray-800 text-sm">
                                                     Total: ₹{{ number_format($cancelBooking->eventPackage->price, 2) }}
                                                 </p>
                                                 <p class="text-green-600 text-sm">
@@ -631,14 +631,14 @@
                                             </div>
                                             <div>
                                                 <p class="text-gray-600 text-sm font-medium">Payment</p>
-                                                <p class="font-semibold text-gray-800 text-sm">
+                                                <p class="font-2xl text-gray-800 text-sm">
                                                     {{ $this->getPaymentMethod($cancelBooking) }}
                                                 </p>
                                                 <p class="text-sm text-red-600">Cancelled</p>
                                             </div>
                                             <div>
                                                 <p class="text-gray-600 text-sm font-medium">Location</p>
-                                                <p class="font-semibold text-gray-800 text-sm">
+                                                <p class="font-2xl text-gray-800 text-sm">
                                                     {{ $cancelBooking->location }}
                                                 </p>
                                             </div>
@@ -647,7 +647,7 @@
                                         <div class="flex justify-between items-center">
                                             <div class="flex space-x-3">
                                                 <button wire:click="openViewModal({{ $booking->id }})"
-                                                    class="bg-gradient-to-r from-purple-600 to-pink-600 text-white px-4 py-2 rounded-lg font-semibold hover:from-purple-700 hover:to-pink-700 transition-all duration-300">
+                                                    class="bg-gradient-to-r from-purple-600 to-pink-600 text-white px-4 py-2 rounded-lg font-2xl hover:from-purple-700 hover:to-pink-700 transition-all duration-300">
                                                     <i class="fas fa-eye mr-2"></i>
                                                     View Details
                                                 </button>
@@ -682,14 +682,14 @@
                                         <!-- Price Badge -->
                                         <div class="absolute bottom-4 left-4">
                                             <span
-                                                class="bg-white/90 backdrop-blur-sm text-gray-800 px-3 py-2 rounded-full font-bold text-lg shadow-lg">
+                                                class="bg-white/90 backdrop-blur-sm text-gray-800 px-3 py-2 rounded-full font-2xl text-lg shadow-lg">
                                                 ₹{{ number_format($package->price) }}
                                             </span>
                                         </div>
                                         <!-- Category Badge -->
                                         <div class="absolute top-4 left-4">
                                             <span
-                                                class="bg-purple-600/80 text-white px-3 py-1 rounded-full text-sm font-semibold shadow-md">
+                                                class="bg-purple-600/80 text-white px-3 py-1 rounded-full text-sm font-2xl shadow-md">
                                                 {{ $package->category->name }}
                                             </span>
                                         </div>
@@ -702,7 +702,7 @@
                                     <!-- Content Section -->
                                     <div class="p-6">
                                         <h3
-                                            class="text-xl font-bold text-gray-800 mb-3 group-hover:text-purple-600 transition-colors duration-300">
+                                            class="text-xl font-2xl text-gray-800 mb-3 group-hover:text-purple-600 transition-colors duration-300">
                                             {{ $package->name }}
                                         </h3>
                                         <p class="text-gray-600 mb-4 leading-relaxed line-clamp-2">
@@ -717,7 +717,7 @@
                                         <!-- CTA Button -->
                                         <div class="flex gap-3">
                                             <a href="{{ route('package-detail', $package['slug']) }}"
-                                                class="flex-1 bg-gradient-to-r from-purple-600 to-pink-600 text-white py-3 px-6 rounded-2xl font-bold hover:from-purple-700 hover:to-pink-700 transform hover:scale-105 transition-all duration-300 shadow-lg text-center">
+                                                class="flex-1 bg-gradient-to-r from-purple-600 to-pink-600 text-white py-3 px-6 rounded-2xl font-2xl hover:from-purple-700 hover:to-pink-700 transform hover:scale-105 transition-all duration-300 shadow-lg text-center">
                                                 <i class="fas fa-eye mr-2"></i>
                                                 View Package
                                             </a>
@@ -729,7 +729,7 @@
                                     <div class="text-6xl text-gray-300 mb-6">
                                         <i class="fas fa-heart-broken"></i>
                                     </div>
-                                    <h3 class="text-2xl font-bold text-gray-600 mb-4">
+                                    <h3 class="text-2xl font-2xl text-gray-600 mb-4">
                                         Your Wishlist is Empty
                                     </h3>
                                     <p class="text-gray-500 mb-8">

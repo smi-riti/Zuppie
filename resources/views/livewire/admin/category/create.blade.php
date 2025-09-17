@@ -30,7 +30,7 @@
                     <div class="space-y-5">
                         <!-- Category Name -->
                         <div>
-                            <label for="name" class="block text-sm font-semibold text-purple-700 mb-2">
+                            <label for="name" class="block text-sm font-2xl text-purple-700 mb-2">
                                 Category Name *
                             </label>
                             <input wire:model="form.name" id="name" type="text"
@@ -47,7 +47,7 @@
 
                         <!-- Parent Category -->
                         <div>
-                            <label for="parentCategories" class="block text-sm font-semibold text-purple-700 mb-2">
+                            <label for="parentCategories" class="block text-sm font-2xl text-purple-700 mb-2">
                                 Parent Category
                             </label>
                             <select wire:model="form.parent_id" id="parentCategories"
@@ -71,7 +71,7 @@
                         <div class="bg-purple-50 p-4 rounded-xl border border-purple-100">
                             <div class="flex items-center justify-between">
                                 <div>
-                                    <label class="text-sm font-semibold text-purple-700">Special Category</label>
+                                    <label class="text-sm font-2xl text-purple-700">Special Category</label>
                                     <p class="text-xs text-purple-500 mt-1">Mark this category as special for featured display</p>
                                 </div>
                                 <label class="relative inline-flex items-center cursor-pointer">
@@ -94,7 +94,7 @@
                     <div class="space-y-5">
                         <!-- Image Upload -->
                         <div>
-                            <label class="block text-sm font-semibold text-purple-700 mb-2">Category Image</label>
+                            <label class="block text-sm font-2xl text-purple-700 mb-2">Category Image</label>
                             
                             <!-- Image Preview Area -->
                             <div class="mb-4">
@@ -142,7 +142,7 @@
                                 class="block w-full text-sm text-purple-700
                                 file:mr-4 file:py-3 file:px-4
                                 file:rounded-xl file:border-0
-                                file:text-sm file:font-semibold
+                                file:text-sm file:font-2xl
                                 file:bg-pink-50 file:text-purple-700
                                 hover:file:bg-pink-100
                                 border-2 border-purple-100 rounded-xl shadow-sm cursor-pointer transition">
@@ -164,7 +164,7 @@
 
                         <!-- Description -->
                         <div>
-                            <label for="description" class="block text-sm font-semibold text-purple-700 mb-2">
+                            <label for="description" class="block text-sm font-2xl text-purple-700 mb-2">
                                 Description
                             </label>
                             <textarea wire:model="form.description" id="description" rows="4"
@@ -178,7 +178,7 @@
             <!-- Footer -->
             <div class="bg-gray-50 px-8 py-6 flex flex-col sm:flex-row justify-end gap-3 border-t border-gray-200">
                 <button @click="show = false" type="button"
-                    class="w-full sm:w-auto px-6 py-3 text-sm font-semibold text-gray-700 bg-white border-2 border-gray-300 rounded-xl hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-gray-400 transition">
+                    class="w-full sm:w-auto px-6 py-3 text-sm font-2xl text-gray-700 bg-white border-2 border-gray-300 rounded-xl hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-gray-400 transition">
                     Cancel
                 </button>
                 <button 

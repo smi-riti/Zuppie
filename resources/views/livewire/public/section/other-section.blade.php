@@ -37,7 +37,7 @@
 
                                         <!-- Package Info Overlay -->
                                         <div class="absolute bottom-4 left-4 right-4 text-white">
-                                            <h3 class="text-lg sm:text-xl font-bold mb-1 drop-shadow-md">
+                                            <h3 class="text-lg sm:text-xl font-2xl mb-1 drop-shadow-md">
                                                 {{ $package->name }}
                                             </h3>
                                             <p class="text-sm opacity-90 flex items-center drop-shadow-sm">
@@ -50,7 +50,7 @@
                                         @if($package->category)
                                             <div class="absolute top-4 left-4">
                                                 <span
-                                                    class="bg-gradient-to-r from-purple-600 to-pink-600 text-white px-3 py-1 rounded-full text-xs font-bold shadow-lg">
+                                                    class="bg-gradient-to-r from-purple-600 to-pink-600 text-white px-3 py-1 rounded-full text-xs font-2xl shadow-lg">
                                                     {{ $package->category->name }}
                                                 </span>
                                             </div>
@@ -71,13 +71,13 @@
                                                     <span
                                                         class="text-gray-400 line-through text-lg">₹{{ number_format($package->price, 0) }}</span>
                                                     <span
-                                                        class="text-2xl sm:text-3xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-purple-600 to-pink-600">
+                                                        class="text-2xl sm:text-3xl font-2xl text-transparent bg-clip-text bg-gradient-to-r from-purple-600 to-pink-600">
                                                         ₹{{ number_format($package->discounted_price, 0) }}
                                                     </span>
                                                 </div>
                                             @else
                                                 <div
-                                                    class="text-2xl sm:text-3xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-purple-600 to-pink-600 mb-2">
+                                                    class="text-2xl sm:text-3xl font-2xl text-transparent bg-clip-text bg-gradient-to-r from-purple-600 to-pink-600 mb-2">
                                                     ₹{{ number_format($package->price, 0) }}
                                                 </div>
                                             @endif
@@ -89,12 +89,12 @@
                                         </p>
                                          
                                          <a href=" tel:{{ $settings['phone_no'] }}"
-                                            class="block w-full bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white py-3 px-4 rounded-xl text-center font-semibold transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl mt-auto">
+                                            class="block w-full bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white py-3 px-4 rounded-xl text-center font-2xl transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl mt-auto">
                                             <i class="fas fa-calendar-check mr-2"></i>Call us 
                                         </a>
                                         <!-- Action Button -->
                                         {{-- <a href="{{ route('package-detail', $package['slug']) }}"
-                                            class="block w-full bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white py-3 px-4 rounded-xl text-center font-semibold transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl mt-auto">
+                                            class="block w-full bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white py-3 px-4 rounded-xl text-center font-2xl transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl mt-auto">
                                             <i class="fas fa-calendar-check mr-2"></i>Book Now
                                         </a> --}}
                                     </div>

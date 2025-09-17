@@ -9,7 +9,7 @@
                 <div class="w-20 h-20 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-6">
                     <i class="fas fa-check text-green-600 text-4xl"></i>
                 </div>
-                <h2 class="text-2xl font-bold text-gray-800 mb-4">Booking Confirmed!</h2>
+                <h2 class="text-2xl font-2xl text-gray-800 mb-4">Booking Confirmed!</h2>
                 <p class="text-gray-600 mb-6">Your event booking has been successfully confirmed. We'll contact you soon to
                     finalize the details.</p>
                 <div class="w-full bg-gray-200 rounded-full h-2 mb-4">
@@ -17,7 +17,7 @@
                         style="width: 0%"></div>
                 </div>
                 <button wire:click="dismissSuccess"
-                    class="w-full bg-gradient-to-r from-purple-600 to-pink-600 text-white py-3 rounded-xl font-semibold">
+                    class="w-full bg-gradient-to-r from-purple-600 to-pink-600 text-white py-3 rounded-xl font-2xl">
                     Continue
                 </button>
             </div>
@@ -32,7 +32,7 @@
                 <!-- Current Booking Details -->
                 <div class="mb-12">
                     <div class="text-center mb-8">
-                        <h1 class="text-4xl font-bold text-gray-800 mb-4">Booking Management</h1>
+                        <h1 class="text-4xl font-2xl text-gray-800 mb-4">Booking Management</h1>
                         <p class="text-xl text-gray-600">Track and manage your event booking</p>
                     </div>
 
@@ -42,12 +42,12 @@
                         <div class="bg-gradient-to-r from-purple-600 to-pink-600 p-8 text-white">
                             <div class="flex flex-col md:flex-row md:items-center md:justify-between">
                                 <div>
-                                    <h2 class="text-2xl font-bold mb-2">{{ $booking->eventPackage->name }}</h2>
+                                    <h2 class="text-2xl font-2xl mb-2">{{ $booking->eventPackage->name }}</h2>
                                     <p class="text-purple-100">Booking ID:
                                         #{{ str_pad($booking->id, 6, '0', STR_PAD_LEFT) }}</p>
                                 </div>
                                 <div class="mt-4 md:mt-0">
-                                    <span class="inline-block px-4 py-2 bg-white bg-opacity-20 rounded-full font-semibold">
+                                    <span class="inline-block px-4 py-2 bg-white bg-opacity-20 rounded-full font-2xl">
                                         <i class="fas fa-calendar mr-2"></i>
                                         {{ $booking->event_date->format('M d, Y') }}
                                     </span>
@@ -60,7 +60,7 @@
                             <div class="grid lg:grid-cols-2 gap-8">
                                 <!-- Booking Details -->
                                 <div>
-                                    <h3 class="text-xl font-bold text-gray-800 mb-6 flex items-center">
+                                    <h3 class="text-xl font-2xl text-gray-800 mb-6 flex items-center">
                                         <i class="fas fa-info-circle text-purple-600 mr-3"></i>
                                         Booking Details
                                     </h3>
@@ -76,31 +76,31 @@
 
                                         <div class="flex items-center justify-between py-3 border-b border-gray-100">
                                             <span class="text-gray-600">Event Date</span>
-                                            <span class="font-semibold">{{ $booking->event_date->format('M d, Y') }}</span>
+                                            <span class="font-2xl">{{ $booking->event_date->format('M d, Y') }}</span>
                                         </div>
 
                                         @if($booking->event_end_date && $booking->event_end_date != $booking->event_date)
                                             <div class="flex items-center justify-between py-3 border-b border-gray-100">
                                                 <span class="text-gray-600">End Date</span>
                                                 <span
-                                                    class="font-semibold">{{ $booking->event_end_date->format('M d, Y') }}</span>
+                                                    class="font-2xl">{{ $booking->event_end_date->format('M d, Y') }}</span>
                                             </div>
                                         @endif
 
                                         <div class="flex items-center justify-between py-3 border-b border-gray-100">
                                             <span class="text-gray-600">Guest Count</span>
-                                            <span class="font-semibold">{{ $booking->guest_count }} guests</span>
+                                            <span class="font-2xl">{{ $booking->guest_count }} guests</span>
                                         </div>
 
                                         <div class="flex items-center justify-between py-3 border-b border-gray-100">
                                             <span class="text-gray-600">Pin Code</span>
-                                            <span class="font-semibold">{{ $booking->pin_code }}</span>
+                                            <span class="font-2xl">{{ $booking->pin_code }}</span>
                                         </div>
 
                                         <div class="flex items-center justify-between py-3 border-b border-gray-100">
                                             <span class="text-gray-600">Total Amount</span>
                                             <span
-                                                class="font-bold text-lg text-transparent bg-clip-text bg-gradient-to-r from-purple-600 to-pink-600">
+                                                class="font-2xl text-lg text-transparent bg-clip-text bg-gradient-to-r from-purple-600 to-pink-600">
                                                 ₹{{ number_format($booking->total_price) }}
                                             </span>
                                         </div>
@@ -119,7 +119,7 @@
 
                                 <!-- Event Information -->
                                 <div>
-                                    <h3 class="text-xl font-bold text-gray-800 mb-6 flex items-center">
+                                    <h3 class="text-xl font-2xl text-gray-800 mb-6 flex items-center">
                                         <i class="fas fa-map-marker-alt text-purple-600 mr-3"></i>
                                         Event Information
                                     </h3>
@@ -129,7 +129,7 @@
                                             <label class="block text-gray-600 text-sm font-medium mb-2">Customer
                                                 Information</label>
                                             <div class="bg-gray-50 p-3 rounded-lg">
-                                                <p class="font-semibold">{{ $booking->user->name }}</p>
+                                                <p class="font-2xl">{{ $booking->user->name }}</p>
                                                 @if($booking->user->email)
                                                     <p class="text-sm text-gray-600">{{ $booking->user->email }}</p>
                                                 @endif
@@ -169,12 +169,12 @@
                             <div class="mt-8 pt-8 border-t border-gray-200">
                                 <div class="flex flex-col sm:flex-row gap-4">
                                     <button wire:click="downloadInvoice"
-                                        class="flex-1 bg-gradient-to-r from-purple-600 to-pink-600 text-white py-3 px-6 rounded-xl font-semibold hover:from-purple-700 hover:to-pink-700 transition-all duration-300">
+                                        class="flex-1 bg-gradient-to-r from-purple-600 to-pink-600 text-white py-3 px-6 rounded-xl font-2xl hover:from-purple-700 hover:to-pink-700 transition-all duration-300">
                                         <i class="fas fa-download mr-2"></i>
                                         Download Invoice
                                     </button>
                                     <button wire:click="contactSupport"
-                                        class="flex-1 border-2 border-purple-600 text-purple-600 py-3 px-6 rounded-xl font-semibold hover:bg-purple-50 transition-all duration-300">
+                                        class="flex-1 border-2 border-purple-600 text-purple-600 py-3 px-6 rounded-xl font-2xl hover:bg-purple-50 transition-all duration-300">
                                         <i class="fas fa-headset mr-2"></i>
                                         Contact Support
                                     </button>
@@ -188,7 +188,7 @@
             <!-- All User Bookings -->
             @if(Auth::check() && $this->allUserBookings->count() > 1)
                 <div class="mb-12">
-                    <h2 class="text-2xl font-bold text-gray-800 mb-6">Your Booking History</h2>
+                    <h2 class="text-2xl font-2xl text-gray-800 mb-6">Your Booking History</h2>
 
                     <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
                         @foreach($this->allUserBookings as $userBooking)
@@ -201,7 +201,7 @@
                                     @endif
 
                                     <div class="p-6">
-                                        <h3 class="font-bold text-gray-800 mb-2">{{ $userBooking->eventPackage->name }}</h3>
+                                        <h3 class="font-2xl text-gray-800 mb-2">{{ $userBooking->eventPackage->name }}</h3>
                                         <p class="text-sm text-gray-600 mb-4">{{ $userBooking->event_date->format('M d, Y') }}</p>
 
                                         <div class="flex items-center justify-between">
@@ -210,11 +210,11 @@
                                                 {{ ucfirst($userBooking->status) }}
                                             </span>
                                             <span
-                                                class="font-bold text-purple-600">₹{{ number_format($userBooking->total_price) }}</span>
+                                                class="font-2xl text-purple-600">₹{{ number_format($userBooking->total_price) }}</span>
                                         </div>
 
                                         <a href="{{ route('manage-booking', ['booking_id' => $userBooking->id]) }}"
-                                            class="w-full mt-4 bg-purple-600 text-white py-2 rounded-lg font-semibold hover:bg-purple-700 transition-colors duration-300 inline-block text-center">
+                                            class="w-full mt-4 bg-purple-600 text-white py-2 rounded-lg font-2xl hover:bg-purple-700 transition-colors duration-300 inline-block text-center">
                                             View Details
                                         </a>
                                     </div>
@@ -231,11 +231,11 @@
                     <div class="w-24 h-24 bg-purple-100 rounded-full flex items-center justify-center mx-auto mb-6">
                         <i class="fas fa-calendar-times text-purple-600 text-3xl"></i>
                     </div>
-                    <h2 class="text-2xl font-bold text-gray-800 mb-4">No Bookings Found</h2>
+                    <h2 class="text-2xl font-2xl text-gray-800 mb-4">No Bookings Found</h2>
                     <p class="text-gray-600 mb-8">You don't have any bookings yet. Start by exploring our amazing event
                         packages.</p>
                     <a href="{{ route('event-packages') }}"
-                        class="inline-block bg-gradient-to-r from-purple-600 to-pink-600 text-white py-3 px-8 rounded-xl font-semibold hover:from-purple-700 hover:to-pink-700 transition-all duration-300">
+                        class="inline-block bg-gradient-to-r from-purple-600 to-pink-600 text-white py-3 px-8 rounded-xl font-2xl hover:from-purple-700 hover:to-pink-700 transition-all duration-300">
                         <i class="fas fa-search mr-2"></i>
                         Browse Packages
                     </a>
@@ -247,7 +247,7 @@
     <!-- Contact Section -->
     <section class="py-16 bg-gray-50">
         <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-            <h2 class="text-3xl font-bold text-gray-800 mb-4">Need Help with Your Booking?</h2>
+            <h2 class="text-3xl font-2xl text-gray-800 mb-4">Need Help with Your Booking?</h2>
             <p class="text-gray-600 mb-8">Our customer support team is here to help you 24/7</p>
 
             <div class="grid md:grid-cols-3 gap-6">
@@ -256,7 +256,7 @@
                     <div class="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
                         <i class="fas fa-phone text-green-600 text-xl"></i>
                     </div>
-                    <h3 class="font-bold text-gray-800 mb-2">Call Us</h3>
+                    <h3 class="font-2xl text-gray-800 mb-2">Call Us</h3>
                     <p class="text-gray-600 text-sm">+91 98765 43210</p>
                 </a>
 
@@ -265,7 +265,7 @@
                     <div class="w-12 h-12 bg-info-100 rounded-full flex items-center justify-center mx-auto mb-4">
                         <i class="fas fa-envelope text-info-600 text-xl"></i>
                     </div>
-                    <h3 class="font-bold text-gray-800 mb-2">Email Us</h3>
+                    <h3 class="font-2xl text-gray-800 mb-2">Email Us</h3>
                     <p class="text-gray-600 text-sm">support@zuppie.com</p>
                 </a>
 
@@ -273,7 +273,7 @@
                     <div class="w-12 h-12 bg-purple-100 rounded-full flex items-center justify-center mx-auto mb-4">
                         <i class="fas fa-comments text-purple-600 text-xl"></i>
                     </div>
-                    <h3 class="font-bold text-gray-800 mb-2">Live Chat</h3>
+                    <h3 class="font-2xl text-gray-800 mb-2">Live Chat</h3>
                     <p class="text-gray-600 text-sm">Available 24/7</p>
                 </a>
             </div>

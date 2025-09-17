@@ -12,7 +12,7 @@
                 <div class="bg-gradient-to-r from-purple-600 to-pink-600 px-6 py-5">
                     <div class="flex justify-between items-center">
                         <div>
-                            <h3 class="text-2xl font-bold text-white flex items-center">
+                            <h3 class="text-2xl font-2xl text-white flex items-center">
                                 <svg class="w-6 h-6 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"></path>
                                 </svg>
@@ -89,7 +89,7 @@
     <!-- Event Type (First Question) -->
     <div x-show="currentField === 'event_type'">
         <div>
-            <label class="block text-gray-800 font-semibold mb-4 text-lg">What type of event are you planning? *</label>
+            <label class="block text-gray-800 font-2xl mb-4 text-lg">What type of event are you planning? *</label>
             <div class="grid grid-cols-2 md:grid-cols-4 gap-3">
                 @foreach ($parentCategory as $category)
                     <div x-on:click="formData.event_type = '{{ $category->slug }}'; $wire.set('formData.event_type', '{{ $category->slug }}'); autoNext('budget')"
@@ -109,7 +109,7 @@
     <!-- Budget Range (Second Question) -->
     <div x-show="currentField === 'budget'" class="space-y-4">
         <div>
-            <label class="block text-gray-800 font-semibold mb-4 text-lg">What's your estimated budget range? *</label>
+            <label class="block text-gray-800 font-2xl mb-4 text-lg">What's your estimated budget range? *</label>
             <div class="px-2">
               <input wire:model="formData.budget_index" type="range"
                     x-model="formData.budget"
@@ -130,7 +130,7 @@
             </div>
             <div class="mt-4 p-3 bg-purple-50 rounded-lg">
                 <span class="text-gray-700">Selected budget: </span>
-                <span x-text="budgetDisplay" class="font-semibold text-purple-700"></span>
+                <span x-text="budgetDisplay" class="font-2xl text-purple-700"></span>
             </div>
         </div>
         <div class="flex justify-between items-center">
@@ -148,7 +148,7 @@
     <!-- Event Details -->
     <div x-show="currentField === 'message'" class="space-y-4">
         <div>
-            <label class="block text-gray-700 font-semibold mb-2">Tell Us About Your Event *</label>
+            <label class="block text-gray-700 font-2xl mb-2">Tell Us About Your Event *</label>
             <textarea wire:model="formData.message" rows="5"
                 class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all duration-300"
                 placeholder="Share your vision, requirements, theme ideas, and any special requests..."></textarea>
@@ -172,7 +172,7 @@
     <div x-show="currentField === 'contact_info'" class="space-y-6">
         <div class="grid md:grid-cols-2 gap-4">
             <div>
-                <label class="block text-gray-700 font-semibold mb-2">Full Name *</label>
+                <label class="block text-gray-700 font-2xl mb-2">Full Name *</label>
                 <input wire:model="formData.fullname" type="text"
                     class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all duration-300"
                     placeholder="Your full name">
@@ -181,7 +181,7 @@
                 @enderror
             </div>
             <div>
-                <label class="block text-gray-700 font-semibold mb-2">Email Address *</label>
+                <label class="block text-gray-700 font-2xl mb-2">Email Address *</label>
                 <input wire:model="formData.email" type="email"
                     class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all duration-300"
                     placeholder="your@email.com">
@@ -190,7 +190,7 @@
                 @enderror
             </div>
             <div class="md:col-span-2">
-                <label class="block text-gray-700 font-semibold mb-2">Phone Number</label>
+                <label class="block text-gray-700 font-2xl mb-2">Phone Number</label>
                 <input wire:model="formData.phone" type="tel"
                     class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all duration-300"
                     placeholder="(555) 123-4567">
@@ -222,7 +222,7 @@
                 ← Back
             </button>
             <button type="submit"
-                class="w-fit bg-gradient-to-r from-purple-600 to-pink-600 text-white py-3 px-4 rounded-lg font-semibold text-lg hover:shadow-lg hover:scale-[1.02] transition-all duration-300 flex items-center justify-center space-x-2">
+                class="w-fit bg-gradient-to-r from-purple-600 to-pink-600 text-white py-3 px-4 rounded-lg font-2xl text-lg hover:shadow-lg hover:scale-[1.02] transition-all duration-300 flex items-center justify-center space-x-2">
                 <i class="fas fa-paper-plane"></i>
                 <span>Send Message</span>
             </button>
