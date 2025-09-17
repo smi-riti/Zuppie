@@ -18,16 +18,16 @@
             <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 sm:gap-8">
                 @foreach ($categories as $index => $category)
                     <div class="group relative overflow-hidden rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-500 hover:scale-105 cursor-pointer"
-                        data-aos="fade-up" data-aos-delay="{{ 100 * ($index + 1) }}"
-                        @if ($category->children->count()) wire:click="$dispatch('openCategoryModal', { categorySlug: '{{ $category->slug }}' })" @else
-                            onclick="window.location.href='{{ route('event-package.filter', ['category' => $category->slug]) }}'" @endif>
+                        data-aos="fade-up" data-aos-delay="{{ 100 * ($index + 1) }}" @if ($category->children->count())
+                        wire:click="$dispatch('openCategoryModal', { categorySlug: '{{ $category->slug }}' })" @else
+                            onclick="window.location.href='{{ route('event-package.filter', ['category' => $category->slug]) }}'"
+                        @endif>
                         <div class="relative h-64 sm:h-80">
                             <!-- Category Image with fallback -->
                             @if ($category->image)
                                 <img src="{{ $category->image }}" alt="{{ $category->name }}"
                                     class="absolute inset-0 w-full h-full object-cover">
-                                <div
-                                    class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent">
+                                <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent">
                                 </div>
                             @else
                                 <!-- Dynamic Gradient Background -->
@@ -43,13 +43,11 @@
                                         <pattern id="eventPattern" x="0" y="0" width="20" height="20"
                                             patternUnits="userSpaceOnUse">
                                             <!-- Event celebration elements -->
-                                            <circle cx="5" cy="5" r="1.5" fill="white"
-                                                opacity="0.4" />
+                                            <circle cx="5" cy="5" r="1.5" fill="white" opacity="0.4" />
                                             <circle cx="15" cy="15" r="1" fill="white" opacity="0.3" />
                                             <path d="M8,8 Q10,6 12,8 Q10,10 8,8" fill="white" opacity="0.3" />
                                             <path d="M3,15 L5,13 L7,15 L5,17 Z" fill="white" opacity="0.2" />
-                                            <circle cx="18" cy="3" r="0.8" fill="white"
-                                                opacity="0.4" />
+                                            <circle cx="18" cy="3" r="0.8" fill="white" opacity="0.4" />
                                         </pattern>
                                     </defs>
                                     <rect width="100%" height="100%" fill="url(#eventPattern)" />
@@ -98,7 +96,7 @@
                 <!-- Image Section -->
                 <div data-aos="fade-right" class="relative">
                     <div class="relative rounded-3xl overflow-hidden shadow-2xl group">
-                        <img src="https://images.unsplash.com/photo-1530103862676-de8c9debad1d?w=600&h=400&fit=crop"
+                        <img src="{{ asset('images/Gemini_Generated_Image_b2vgmeb2vgmeb2vg.png') }}"
                             alt="Birthday Celebration"
                             class="w-full h-64 sm:h-80 lg:h-96 object-cover group-hover:scale-110 transition-transform duration-700">
                         <div class="absolute inset-0 bg-gradient-to-t from-purple-900/30 to-transparent"></div>
@@ -207,12 +205,12 @@
             </div>
 
             <div class="grid grid-cols-2 md:grid-cols-4 gap-4 px-20">
-                <!-- Gallery Items with Unsplash Images -->
+                <!-- Birthday Celebration -->
                 <div class="col-span-1 row-span-2" data-aos="fade-up" data-aos-delay="100">
                     <div
-                        class="relative overflow-hidden rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 hover-scale h-full">
-                        <img src="https://images.unsplash.com/photo-1530103862676-de8c9debad1d?w=400&h=600&fit=crop"
-                            alt="Birthday Party" class="w-full h-full object-cover">
+                        class="relative overflow-hidden rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 hover-scale h-[500px]">
+                        <img src="{{ asset('images/1684232520_original.avif') }}" alt="Birthday Party"
+                            class="w-full h-full object-cover">
                         <div
                             class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 hover:opacity-100 transition-opacity duration-300 flex items-end p-4">
                             <span class="text-white font-semibold">Birthday Celebration</span>
@@ -220,11 +218,12 @@
                     </div>
                 </div>
 
+                <!-- Wedding -->
                 <div class="col-span-1" data-aos="fade-up" data-aos-delay="200">
                     <div
-                        class="relative overflow-hidden rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 hover-scale h-full">
-                        <img src="https://images.unsplash.com/photo-1519225421980-715cb0215aed?w=400&h=300&fit=crop"
-                            alt="Wedding Setup" class="w-full h-full object-cover">
+                        class="relative overflow-hidden rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 hover-scale h-[240px]">
+                        <img src="{{ asset('images/RD6.jfif') }}" alt="Wedding Setup"
+                            class="w-full h-full object-cover">
                         <div
                             class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 hover:opacity-100 transition-opacity duration-300 flex items-end p-4">
                             <span class="text-white font-semibold">Wedding Magic</span>
@@ -232,11 +231,12 @@
                     </div>
                 </div>
 
+                <!-- Corporate Event -->
                 <div class="col-span-1" data-aos="fade-up" data-aos-delay="300">
                     <div
-                        class="relative overflow-hidden rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 hover-scale h-full">
-                        <img src="https://images.unsplash.com/photo-1464366400600-7168b8af9bc3?w=400&h=300&fit=crop"
-                            alt="Corporate Event" class="w-full h-full object-cover">
+                        class="relative overflow-hidden rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 hover-scale h-[240px]">
+                        <img src="{{ asset('images/OWN DECORATION 13.jpg') }}" alt="Corporate Event"
+                            class="w-full h-full object-cover">
                         <div
                             class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 hover:opacity-100 transition-opacity duration-300 flex items-end p-4">
                             <span class="text-white font-semibold">Corporate Event</span>
@@ -244,11 +244,12 @@
                     </div>
                 </div>
 
+                <!-- Anniversary -->
                 <div class="col-span-1" data-aos="fade-up" data-aos-delay="400">
                     <div
-                        class="relative overflow-hidden rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 hover-scale h-full">
-                        <img src="https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=400&h=300&fit=crop"
-                            alt="Anniversary" class="w-full h-full object-cover">
+                        class="relative overflow-hidden rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 hover-scale h-[240px]">
+                        <img src="{{ asset('images/OWN DECORATION 22.jpg') }}" alt="Anniversary"
+                            class="w-full h-full object-cover">
                         <div
                             class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 hover:opacity-100 transition-opacity duration-300 flex items-end p-4">
                             <span class="text-white font-semibold">Anniversary</span>
@@ -256,11 +257,12 @@
                     </div>
                 </div>
 
+                <!-- Baby Shower -->
                 <div class="col-span-1" data-aos="fade-up" data-aos-delay="500">
                     <div
-                        class="relative overflow-hidden rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 hover-scale h-full">
-                        <img src="https://images.unsplash.com/photo-1511795409834-ef04bbd61622?w=400&h=300&fit=crop"
-                            alt="Baby Shower" class="w-full h-full object-cover">
+                        class="relative overflow-hidden rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 hover-scale h-[240px]">
+                        <img src="{{ asset('images/1600755451_original.avif') }}" alt="Baby Shower"
+                            class="w-full h-full object-cover">
                         <div
                             class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 hover:opacity-100 transition-opacity duration-300 flex items-end p-4">
                             <span class="text-white font-semibold">Baby Shower</span>
@@ -268,11 +270,12 @@
                     </div>
                 </div>
 
+                <!-- Event Planning -->
                 <div class="col-span-2 row-span-1" data-aos="fade-up" data-aos-delay="600">
                     <div
-                        class="relative overflow-hidden rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 hover-scale h-full">
-                        <img src="https://images.unsplash.com/photo-1492684223066-81342ee5ff30?w=800&h=300&fit=crop"
-                            alt="Event Setup" class="w-full h-full object-cover">
+                        class="relative overflow-hidden rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 hover-scale h-[240px] md:h-[240px]">
+                        <img src="{{ asset('images/OWN DECORATION 17.jpg') }}" alt="Event Setup"
+                            class="w-full h-full object-cover">
                         <div
                             class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 hover:opacity-100 transition-opacity duration-300 flex items-end p-4">
                             <span class="text-white font-semibold">Event Planning</span>
@@ -280,6 +283,7 @@
                     </div>
                 </div>
             </div>
+
 
             <div class="text-center mt-12" data-aos="fade-up" data-aos-delay="700">
                 <button
@@ -459,8 +463,7 @@
                     class="bg-white rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden group"
                     data-aos="fade-up" data-aos-delay="100">
                     <div class="relative overflow-hidden">
-                        <img src="{{ $blog->image }}"
-                            alt="Blog Post"
+                        <img src="{{ $blog->image }}" alt="Blog Post"
                             class="w-full h-48 object-cover group-hover:scale-110 transition-transform duration-300">
                         <div
                             class="absolute top-4 left-4 bg-purple-600 text-white px-3 py-1 rounded-full text-sm font-semibold">
@@ -475,12 +478,13 @@
                         <p class="text-gray-600 mb-4">{{ str($blog->content)->words(25) }}</p>
                         <div class="flex items-center justify-between">
                             <span class="text-sm text-gray-500">{{ $blog->created_at->format('M D, Y') }}</span>
-                            <a href="{{ route('blog.detail', $blog->slug) }}" class="text-purple-600 font-semibold hover:underline">Read More →</a>
+                            <a href="{{ route('blog.detail', $blog->slug) }}"
+                                class="text-purple-600 font-semibold hover:underline">Read More →</a>
                         </div>
                     </div>
                 </article>
                 @endforeach
-                
+
             </div>
 
             <div class="text-center mt-12" data-aos="fade-up" data-aos-delay="400">

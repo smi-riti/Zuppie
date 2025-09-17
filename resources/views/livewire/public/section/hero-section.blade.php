@@ -6,9 +6,9 @@
     <!-- Background Image with Gradient Overlay -->
     <div 
         class="absolute inset-0 bg-cover bg-center"
-        style="background-image: url('https://images.unsplash.com/photo-1511578314322-379afb476865?auto=format&fit=crop&w=1350&q=80');"
+        style="background-image: url('{{ asset('images/zuppieventpakage.jpg') }}');"
     >
-        <div class="absolute inset-0 bg-gradient-to-br from-purple-900/70 via-purple-700/60 to-pink-600/60"></div>
+        <div class="absolute inset-0 bg-gradient-to-br from-purple-500/70 via-purple-400/60 to-pink-400/60"></div>
     </div>
 
     <!-- Floating Balloons -->
