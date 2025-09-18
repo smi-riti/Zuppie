@@ -91,8 +91,8 @@
         </section>
 
         <!-- Contact Information & Form Section -->
-        <section class="py-20 bg-gradient-to-br from-purple-50 to-pink-50">
-            <div class="px-20">
+        <section class="lg:px-20 p-6 py-20 bg-gradient-to-br from-purple-50 to-pink-50">
+            <div class="">
                 <div class="text-center mb-16">
                     <h2 class="text-4xl md:text-5xl font-2xl gradient-text mb-6">Contact Information</h2>
                     <p class="text-xl text-gray-600 max-w-3xl mx-auto">{{ $settings['site_description'] }}</p>
@@ -205,8 +205,8 @@
         </section>
 
         <!-- Social Media & Additional Contact -->
-        <section class="py-20 bg-white">
-            <div class=" px-20 text-center">
+        <section class="lg:px-20 p-6 py-20 bg-white">
+            <div class="text-center">
                 <h2 class="text-4xl font-2xl gradient-text mb-12">Follow Us & Connect</h2>
                 
                 <div class="flex flex-wrap justify-center gap-6 mb-12">

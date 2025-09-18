@@ -1,4 +1,4 @@
-<div class="bg-gradient-to-b from-gray-50 to-white relative" 
+<div class="bg-gradient-to-b from-gray-50 to-white relative lg:px-16" 
      x-data="{
         currentScrollIndex: 0,
         totalCards: 0,
@@ -102,7 +102,7 @@
         }
      }">
     <section id="packages" class="py-12 sm:py-24">
-        <div class="px-4 sm:px-8">
+        <div class="px-5">
             <!-- Header -->
             <div class="text-center mb-8 sm:mb-16 fade-in-up">
                 <h2 class="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-extrabold font-display text-transparent bg-clip-text bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600 mb-4 sm:mb-6 px-4">
@@ -167,9 +167,9 @@
                                         @endif
 
                                         <!-- Wishlist button -->
-                                        <div class="absolute top-3 sm:top-4 right-3 sm:right-4">
+                                        {{-- <div class="absolute top-3 sm:top-4 right-3 sm:right-4">
                                             <livewire:public.components.wishlist-button :packageId="$package->id" />
-                                        </div>
+                                        </div> --}}
                                     </div>
 
                                     <!-- Content -->

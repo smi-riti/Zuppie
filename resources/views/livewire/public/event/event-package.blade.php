@@ -45,8 +45,8 @@
     </section>
 
     <!-- Special Categories Section -->
-    <section class="px-20 py-12">
-        <div class="px-4 sm:px-6 lg:px-8">
+    <section class="lg:px-10 p-6 py-12">
+        <div class="">
             <div class="flex flex-col md:flex-row justify-between items-center mb-10">
                 <div>
                     <h2 class="text-3xl md:text-4xl font-2xl text-gray-900 mb-2">Browse Categories</h2>
@@ -107,8 +107,8 @@
     </section>
 
     <!-- Popular Packages Section -->
-    <section class="px-20  py-2">
-        <div class="px-4 sm:px-6 lg:px-8">
+    <section class="lg:px-10 p-6 py-2">
+        <div class="">
             <div class="flex flex-col md:flex-row justify-between items-center mb-10">
                 <div>
                     <h2 class="text-3xl md:text-4xl font-2xl text-gray-900 mb-2">Popular Packages</h2>
@@ -216,8 +216,8 @@
 
     {{-- Special Categories Packages --}}
     @foreach ($specialCategories as $category)
-        <section class="py-6 px-20 {{ $loop->even}}">
-            <div class="sm:px-6 lg:px-8">
+        <section class="lg:px-10 p-6 {{ $loop->even}}">
+            <div class="">
                 <div class="flex flex-col md:flex-row justify-between items-center mb-10">
                     <div>
                         <h2 class="text-3xl md:text-4xl font-2xl text-gray-900 mb-2">{{ $category['name'] }} Packages
