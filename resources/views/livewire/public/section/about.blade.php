@@ -31,8 +31,8 @@
         </section>
 
         <!-- Our Story Section -->
-        <section class="py-20 bg-gradient-to-br from-purple-50 to-pink-50">
-            <div class="px-20">
+        <section class="lg:px-20 p-6 py-20 bg-gradient-to-br from-purple-50 to-pink-50">
+            <div class="">
                 <div class="grid lg:grid-cols-2 gap-16 items-center">
                     <div class="space-y-6">
                         <h2 class="text-4xl md:text-5xl font-2xl font-display gradient-text mb-6">
@@ -67,7 +67,7 @@
                     </div>
                     
                     <div class="relative">
-                        <div class="relative rounded-2xl overflow-hidden shadow-2xl transform hover:scale-105 transition-transform duration-500 w-2/3 mx-auto">
+                        <div class="relative rounded-2xl overflow-hidden shadow-2xl transform hover:scale-105 transition-transform duration-500 w-3/3 mx-auto">
                             <img src="{{ asset('images/Gemini_Generated_Image_b2vgmeb2vgmeb2vg.png') }}" alt="Our Team" class="object-cover">
                             <div class="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent"></div>
                         </div>
@@ -77,8 +77,8 @@
         </section>
 
         <!-- Our Mission & Vision -->
-        <section class="py-20 bg-white">
-            <div class="px-20">
+        <section class="lg:px-20 p-6 bg-white">
+            <div class="">
                 <div class="text-center mb-16">
                     <h2 class="text-4xl md:text-5xl font-2xl font-display gradient-text mb-6">
                         Mission & Vision
@@ -123,8 +123,8 @@
         </section>
 
         <!-- Our Values -->
-        <section class="py-20 bg-gradient-to-br from-purple-50 to-pink-50">
-            <div class="px-20">
+        <section class="lg:px-20 p-6 py-20 bg-gradient-to-br from-purple-50 to-pink-50">
+            <div class="">
                 <div class="text-center mb-16">
                     <h2 class="text-4xl md:text-5xl font-2xl font-display gradient-text mb-6">
                         Our Values
@@ -193,8 +193,8 @@
         </section>
 
         <!-- Meet Our Team -->
-        <section class="py-20 bg-white">
-            <div class="px-20">
+        <section class="lg:px-20 p-6 py-20 bg-white">
+            <div class="">
                 <div class="text-center mb-16">
                     <h2 class="text-4xl md:text-5xl font-2xl font-display gradient-text mb-6">
                         Meet Our Amazing Team
@@ -248,8 +248,8 @@
         </section>
 
         <!-- Our Journey Timeline -->
-        <section class="py-20 bg-gradient-to-br from-purple-50 to-pink-50">
-            <div class="px-20">
+        <section class="lg:px-20 p-6 py-20 bg-gradient-to-br from-purple-50 to-pink-50">
+            <div class="">
                 <div class="text-center mb-16">
                     <h2 class="text-4xl md:text-5xl font-2xl font-display gradient-text mb-6">
                         Our Journey
@@ -313,9 +313,9 @@
         </section>
 
         <!-- Call to Action -->
-        <section class="py-20 bg-white">
-            <div class="px-20 text-center">
-                <div class="max-w-4xl mx-auto">
+        <section class="lg:px-20 p-6 py-20 bg-white">
+            <div class=" text-center">
+                <div class="">
                     <h2 class="text-4xl md:text-5xl font-2xl font-display gradient-text mb-6">
                         Ready to Create Magic Together?
                     </h2>
@@ -328,7 +328,7 @@
                             <i class="fas fa-calendar-plus"></i>
                             <span>Start Planning</span>
                         </a>
-                        <a href="/event-packages" class="border-2 border-purple-600 text-purple-600 px-8 py-4 rounded-full font-2xl text-lg hover:bg-purple-600 hover:text-white transition-all duration-300 flex items-center space-x-2">
+                        <a href="/event-packages" class="border-2  border-purple-600 text-purple-600 px-8 py-4 rounded-full font-2xl text-lg hover:bg-purple-600 hover:text-white transition-all duration-300 flex items-center space-x-2">
                             <i class="fas fa-eye"></i>
                             <span>View Packages</span>
                         </a>

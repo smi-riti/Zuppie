@@ -82,16 +82,9 @@
     <livewire:public.section.other-section />
 
     <!-- Enhanced Birthday Special Section -->
-    <section class="py-12 sm:py-20 relative overflow-hidden">
-        <div class="absolute inset-0 opacity-10">
-            <div class="absolute top-20 left-10 w-32 h-32 bg-pink-300 rounded-full blur-3xl"></div>
-            <div class="absolute bottom-20 right-10 w-40 h-40 bg-purple-300 rounded-full blur-3xl"></div>
-            <div
-                class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-64 h-64 bg-accent-300 rounded-full blur-3xl">
-            </div>
-        </div>
+    <section class="relative overflow-hidden lg:px-20 p-6 bg-white ">
 
-        <div class=" px-20 relative">
+        <div class="relative">
             <div class="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
                 <!-- Image Section -->
                 <div data-aos="fade-right" class="relative">
@@ -122,12 +115,6 @@
 
                 <!-- Content Section -->
                 <div data-aos="fade-left" class="space-y-6">
-                    <div
-                        class="inline-flex items-center bg-gradient-to-r from-purple-100 to-pink-100 text-purple-700 px-4 py-2 rounded-full font-medium text-sm">
-                        <i class="fas fa-star mr-2"></i>
-                        Special Birthday Packages
-                    </div>
-
                     <h2
                         class="text-3xl sm:text-4xl lg:text-5xl font-semibold font-display bg-gradient-to-r from-purple-600 via-pink-600 to-purple-700 bg-clip-text text-transparent leading-tight">
                         Make Birthdays Unforgettable
@@ -176,16 +163,12 @@
                             </div>
                         </div>
                     </div>
-
-                    <!-- Action Buttons -->
                     <div class="flex flex-col sm:flex-row gap-4 pt-4">
                         <a href="{{ route('event-packages') }}"
                             class="inline-flex items-center justify-center bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white px-8 py-4 rounded-full font-2xl text-lg transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl">
                             <i class="fas fa-gift mr-3"></i>
                             View Birthday Packages
                         </a>
-
-
                     </div>
                 </div>
             </div>
@@ -193,19 +176,15 @@
     </section>
 
     <!-- Gallery Collage Section -->
-    <section id="gallery">
+    <section id="gallery" class="lg:px-10 p-6 bg-white">
         <div class="">
-            <div class="text-center mb-16">
+            <div class="text-center mb-12">
                 <h2 class="text-4xl md:text-5xl py-2 font-semibold font-display gradient-text mb-6" data-aos="fade-up">
                     Our Magic Gallery
                 </h2>
-                <p class="text-xl text-gray-600 max-w-3xl mx-auto" data-aos="fade-up" data-aos-delay="200">
-                    Witness the joy and wonder we've created at countless celebrations
-                </p>
             </div>
 
-            <div class="grid grid-cols-2 md:grid-cols-4 gap-4 px-20">
-                <!-- Birthday Celebration -->
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
                 <div class="col-span-1 row-span-2" data-aos="fade-up" data-aos-delay="100">
                     <div
                         class="relative overflow-hidden rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 hover-scale h-[500px]">
@@ -295,7 +274,7 @@
     </section>
 
     <!-- Why Choose Us Section -->
-    <section id="about" class="py-20 bg-gradient-to-br from-purple-50 to-pink-50">
+    <section id="about" class=" p-6 lg:px-10 py-20 bg-gradient-to-br from-purple-50 to-pink-50">
         <div class="container mx-auto">
             <div class="text-center mb-16">
                 <h2 class="text-4xl md:text-5xl py-2 font-semibold font-display gradient-text mb-6" data-aos="fade-up">
@@ -372,78 +351,6 @@
             </div>
         </div>
     </section>
-
-    <!-- Testimonials Section -->
-    <section class="py-20">
-        <div class="px-20 mx-auto">
-            <div class="text-center mb-16">
-                <h2 class="text-4xl py-2 md:text-5xl font-semibold font-display gradient-text mb-6" data-aos="fade-up">
-                    Reviews from Our Satisfied Clients
-                </h2>
-                <p class="text-xl text-gray-600 max-w-3xl mx-auto" data-aos="fade-up" data-aos-delay="200">
-                    Discover why we're the <strong>trusted event planning company in Purnia</strong> - hear testimonials
-                    from our delighted clients who experienced our <strong>premium event management services</strong>
-                </p>
-            </div>
-
-            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-20 max-w-8xl mx-auto">
-                <div class="bg-gradient-to-br from-purple-50 to-pink-50 rounded-2xl p-8 shadow-lg hover:shadow-xl transition-all duration-300"
-                    data-aos="fade-up" data-aos-delay="100">
-                    <div class="flex items-center mb-4">
-                        <div class="flex text-pink-400 text-xl">
-                            ★★★★★
-                        </div>
-                    </div>
-                    <p class="text-gray-700 mb-6 italic">"Zuppie made my daughter's 5th birthday absolutely magical!
-                        Every detail was perfect, and the kids were enchanted. Highly recommended!"</p>
-                    <div class="flex items-center">
-                        <div>
-                            <div class="font-2xl text-gray-800">Bharti Gupta</div>
-                            <div class="text-sm text-gray-500">Mother of Birthday Girl</div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="bg-gradient-to-br from-purple-50 to-pink-50 rounded-2xl p-4 shadow-lg hover:shadow-xl transition-all duration-300"
-                    data-aos="fade-up" data-aos-delay="200">
-                    <div class="flex items-center mb-4">
-                        <div class="flex text-pink-400 text-xl">
-                            ★★★★★
-                        </div>
-                    </div>
-                    <p class="text-gray-700 mb-6 italic">"Our wedding was a dream come true thanks to Zuppie. They
-                        handled everything with such professionalism and creativity!"</p>
-                    <div class="flex items-center">
-                        <div>
-                            <div class="font-2xl text-gray-800">Shivam Kumar</div>
-                            <div class="text-sm text-gray-500">groom</div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="bg-gradient-to-br from-purple-50 to-pink-50 rounded-2xl p-8 shadow-lg hover:shadow-xl transition-all duration-300"
-                    data-aos="fade-up" data-aos-delay="300">
-                    <div class="flex items-center mb-4">
-                        <div class="flex text-pink-400 text-xl">
-                            ★★★★★
-                        </div>
-                    </div>
-                    <p class="text-gray-700 mb-6 italic">
-                        "The birthday event was beautifully organized. Everything was well managed,
-                        and it created unforgettable memories for our family and friends!"
-                    </p>
-                    <div class="flex items-center">
-                        <div>
-                            <div class="font-2xl text-gray-800">Ravi Sharma</div>
-                            <div class="text-sm text-gray-500">Father of Birthday Boy</div>
-                        </div>
-                    </div>
-
-                </div>
-            </div>
-        </div>
-    </section>
-
     <!-- Blog Section -->
     {{-- <section class="py-20 bg-gradient-to-br from-pink-50 to-purple-50">
         <div class="container mx-auto px-4">
