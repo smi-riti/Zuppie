@@ -183,7 +183,7 @@
                                     </ul>
                                 @endif
                                 <div class="mt-6 flex items-center justify-between gap-3">
-                                    <a href="{{ route('package-detail', ['slug' => $package['slug'] ?? ($package->slug ?? '')]) }}"
+                                    <a href="{{ route('package-detail', ['slug' => $package['slug'] ?? ($package->slug ?? '')]) }}" wire:navigate
                                         class="flex-1 text-white text-center px-4 py-3  bg-gradient-to-r from-purple-600 to-pink-600 rounded-xl font-medium hover:from-purple-700 hover:to-pink-700 transition ">
                                         View
                                     </a>
@@ -294,7 +294,7 @@
                                         </ul>
                                     @endif
                                     <div class="mt-6 flex items-center justify-between gap-3">
-                                        <a href="{{ route('package-detail', ['slug' => $package['slug'] ?? ($package->slug ?? '')]) }}"
+                                        <a href="{{ route('package-detail', ['slug' => $package['slug'] ?? ($package->slug ?? '')]) }}" wire:navigate
                                             class="flex-1 block  text-center px-4 py-3 bg-gradient-to-r from-purple-600 to-pink-600 text-white rounded-xl font-medium hover:from-purple-700 hover:to-pink-700 transition transition">
                                             View
                                         </a>
@@ -410,7 +410,7 @@
                                                 </ul>
                                             @endif
                                             <div class="mt-6 flex items-center justify-between gap-3">
-                                                <a href="{{ route('package-detail', ['slug' => $package['slug'] ?? ($package->slug ?? '')]) }}"
+                                                <a href="{{ route('package-detail', ['slug' => $package['slug'] ?? ($package->slug ?? '')]) }}" wire:navigate
                                                     class="flex-1 block  text-center px-4 py-3 bg-gradient-to-r from-purple-600 to-pink-600 text-gray-700 rounded-xl font-medium hover:from-purple-700 hover:to-pink-700 transition">
                                                     View
                                                 </a>

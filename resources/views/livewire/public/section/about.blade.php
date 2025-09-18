@@ -324,11 +324,11 @@
                     </p>
                     
                     <div class="flex flex-col sm:flex-row gap-4 justify-center items-center">
-                        <a href="/contact" class="bg-gradient-to-r from-purple-600 to-pink-600 text-white px-8 py-4 rounded-full font-2xl text-lg hover:shadow-lg hover:scale-105 transition-all duration-300 flex items-center space-x-2">
+                        <a href="{{route('contact')}}" wire:navigate class="bg-gradient-to-r from-purple-600 to-pink-600 text-white px-8 py-4 rounded-full font-2xl text-lg hover:shadow-lg hover:scale-105 transition-all duration-300 flex items-center space-x-2">
                             <i class="fas fa-calendar-plus"></i>
                             <span>Start Planning</span>
                         </a>
-                        <a href="/event-packages" class="border-2 border-purple-600 text-purple-600 px-8 py-4 rounded-full font-2xl text-lg hover:bg-purple-600 hover:text-white transition-all duration-300 flex items-center space-x-2">
+                        <a href="/event-packages" wire:navigate class="border-2 border-purple-600 text-purple-600 px-8 py-4 rounded-full font-2xl text-lg hover:bg-purple-600 hover:text-white transition-all duration-300 flex items-center space-x-2">
                             <i class="fas fa-eye"></i>
                             <span>View Packages</span>
                         </a>
