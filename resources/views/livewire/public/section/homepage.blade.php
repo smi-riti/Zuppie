@@ -164,7 +164,7 @@
                         </div>
                     </div>
                     <div class="flex flex-col sm:flex-row gap-4 pt-4">
-                        <a href="{{ route('event-packages') }}"
+                        <a href="{{ route('event-packages') }}" wire:navigate
                             class="inline-flex items-center justify-center bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white px-8 py-4 rounded-full font-2xl text-lg transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl">
                             <i class="fas fa-gift mr-3"></i>
                             View Birthday Packages

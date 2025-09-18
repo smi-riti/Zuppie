@@ -45,7 +45,7 @@
     </div>
 
     <!-- Categories Section - Mobile/Tablet: Horizontal Scroll, Desktop: Sidebar -->
-    <div class="lg:px-20 p-6 py-6 sm:py-8 lg:py-12">
+    <div class="sm:px-6 lg:px-20 py-6 sm:py-8 lg:py-12">
         <!-- Mobile & Tablet: Horizontal Scrollable Categories -->
         <div class="block lg:hidden mb-8">
             <div class="flex items-center justify-between mb-4">

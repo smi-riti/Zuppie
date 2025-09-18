@@ -32,7 +32,7 @@
 
             <!-- CTA Buttons -->
             <div class="flex flex-col sm:flex-row gap-4 justify-center">
-                <a href="{{ route('event-packages') }}"
+                <a href="{{ route('event-packages') }}" wire:navigate
                     class="inline-block px-8 py-3 bg-gradient-to-r from-purple-600 to-pink-500 text-white font-2xl rounded-full shadow-lg hover:shadow-xl transition-all hover:scale-105">
                     View Event Packages
                 </a>

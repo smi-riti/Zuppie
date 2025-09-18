@@ -2,7 +2,7 @@
     @if (!$package)
         <div class="text-center py-20">
             <h2 class="text-2xl font-2xl text-gray-800">Package not found</h2>
-            <a href="{{ route('event-packages') }}"
+            <a href="{{ route('event-packages') }}" wire:navigate
                 class="mt-4 inline-block bg-purple-600 text-white px-6 py-3 rounded-lg">
                 Back to Packages
             </a>
@@ -477,8 +477,8 @@
 
                                     <!-- CTA Button -->
                                     <div class="mt-6 flex items-center justify-between gap-3">
-                                        <a href="{{ route('package-detail', ['slug' => $package['slug'] ?? ($package->slug ?? '')]) }}"
-                                            class="flex-1 block  text-center px-4 py-3 bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-gray-700 rounded-xl font-medium hover:from-purple-700 hover:to-pink-700 transition transition">
+                                        <a href="{{ route('package-detail', ['slug' => $package['slug'] ?? ($package->slug ?? '')]) }}" wire:navigate
+                                            class="flex-1 block  text-center px-4 py-3 bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-gray-100 rounded-xl font-medium hover:from-purple-700 hover:to-pink-700 transition transition">
                                             View
                                         </a>
                                         <a href="tel:{{ $settings['phone_no'] ?? '' }}"
@@ -492,7 +492,7 @@
                     </div>
 
                     <div class="text-center mt-12 pb-4">
-                        <a href="{{ route('event-packages') }}"
+                        <a href="{{ route('event-packages') }}" wire:navigate
                             class="inline-flex items-center space-x-2 bg-white border-2 border-purple-600 text-purple-600 px-8 py-3 rounded-2xl font-2xl hover:bg-purple-600 hover:text-white transition-all duration-300">
                             <i class="fas fa-th-large"></i>
                             <span>View All Packages</span>
