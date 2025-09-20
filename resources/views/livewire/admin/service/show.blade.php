@@ -1,4 +1,4 @@
-<div class="min-h-screen bg-gradient-to-br from-purple-50 to-pink-100 p-8">
+<div class="min-h-screen p-4">
     <div class="">
         <!-- Header -->
         <div class="mb-8 text-center">
@@ -98,14 +98,14 @@
                     @if($services->hasPages())
                         <div class="bg-gray-50 px-6 py-3 border-t border-gray-200">
                             {{ $services->links() }}
-                        </div>
+                        </div>800
                     @endif
                 </div>
             </div>
             <!-- Right Panel - Service List -->
             <div class="w-full lg:w-1/3">
-                <div class="bg-white rounded-2xl shadow-lg p-6 h-full">
-                    <h2 class="text-xl text-purple-700 mb-4 pb-2 border-b border-purple-100">
+                <div class="bg-pink-200 rounded-2xl shadow-lg p-6 h-full">
+                    <h2 class="text-xl text-purple-700 mb-4 pb-2 border-b border-purple-100 ">
                         {{ $formTitle }}
                     </h2>
                     

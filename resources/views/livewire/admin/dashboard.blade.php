@@ -1,4 +1,4 @@
-<div class="p-4 lg:p-6 bg-gradient-to-br from-purple-50 to-pink-50 w-full">
+<div class="p-4 lg:p-6  w-full">
     <!-- Flash Messages -->
     @if (session('message'))
         <div class="mb-6 mx-auto max-w-7xl">

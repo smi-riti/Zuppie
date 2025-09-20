@@ -1,19 +1,5 @@
-<div class="bg-gradient-to-br from-slate-100 via-pink-20 to-pink-50">
-    <!-- Animated Background Elements -->
-    <div class="fixed inset-0 overflow-hidden pointer-events-none">
-        <div
-            class="absolute -top-40 -right-40 w-80 h-80 bg-pink-400 rounded-full mix-blend-multiply filter blur-xl opacity-20 animate-blob">
-        </div>
-        <div
-            class="absolute -bottom-40 -left-40 w-80 h-80 bg-pink-400 rounded-full mix-blend-multiply filter blur-xl opacity-20 animate-blob animation-delay-2000">
-        </div>
-        <div
-            class="absolute top-40 left-40 w-80 h-80 bg-pink-300 rounded-full mix-blend-multiply filter blur-xl opacity-20 animate-blob animation-delay-4000">
-        </div>
-    </div>
-
-    <div class="relative px-4 sm:px-6 lg:px-8 py-8">
-        <!-- Success/Error Messages -->
+<div class="">    
+    <div class="relative px-4 sm:px-6 lg:px-4 py-8">
         @if (session()->has('message'))
             <div x-data="{ show: true }" x-show="show" x-transition:enter="transition ease-out duration-300"
                 x-transition:enter-start="opacity-0 scale-90 translate-y-4"
