@@ -86,7 +86,7 @@
     <!-- tailwind script  -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- Custom CSS -->
-    <!-- @vite(['resources/css/app.css', 'resources/js/app.js']) -->
+  
 
     <!-- Livewire Styles -->
     @livewireStyles
@@ -107,7 +107,6 @@
 
     <!-- Preload JavaScript -->
     <link rel="preload" href="https://unpkg.com/aos@2.3.1/dist/aos.js" as="script">
-    <link rel="preload" href="https://cdn.jsdelivr.net/npm/chart.js" as="script">
 
     <!-- Critical CSS for performance -->
     <style>

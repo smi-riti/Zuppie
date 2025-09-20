@@ -176,7 +176,7 @@
     </section>
 
     <!-- Gallery Collage Section -->
-    <section id="gallery" class="lg:px-10 p-6 bg-white">
+    <section id="gallery" class="lg:px-20 p-6 bg-white">
         <div class="">
             <div class="text-center mb-12">
                 <h2 class="text-4xl md:text-5xl py-2 font-semibold font-display gradient-text mb-6" data-aos="fade-up">
