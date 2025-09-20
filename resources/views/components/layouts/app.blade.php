@@ -331,7 +331,9 @@
     {{ $slot }}
     <livewire:public.section.footer />
     @livewireScripts
-
+     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js" defer></script>
+    
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js" defer></script>
     <script>
         document.addEventListener('DOMContentLoaded', function () {
             if (typeof AOS !== 'undefined') {
