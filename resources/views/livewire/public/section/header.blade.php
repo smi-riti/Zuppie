@@ -15,13 +15,13 @@
 
             <!-- Desktop Navigation with Mega Menu -->
             <nav class="hidden md:flex space-x-8">
-                <a wire:navigate href="{{route('event-packages')}}"
+                <a href="{{route('event-packages')}}" wire:navigate
                     class="text-pink-700 hover:text-pink-600 font-medium transition">EventPackage</a>
-                <a wire:navigate href="{{route('blog')}}"
+                <a href="{{route('blog')}}" wire:navigate
                     class="text-pink-700 hover:text-pink-600 font-medium transition">Blog</a>
-                <a wire:navigate href="{{route('about')}}"
+                <a href="{{route('about')}}" wire:navigate
                     class="text-pink-700 hover:text-pink-600 font-medium transition">About</a>
-                <a wire:navigate href="{{route('contact')}}"
+                <a href="{{route('contact')}}" wire:navigate
                     class="text-pink-700 hover:text-pink-600 font-medium transition">Contact</a>
             </nav>
 
@@ -58,15 +58,15 @@
         <!-- Mobile menu -->
         <div x-show="open" x-transition:enter="animate__animated animate__fadeInDown"
             x-transition:leave="animate__animated animate__fadeOutUp" class="md:hidden mt-4 pb-4 space-y-3">
-            <a wire:navigate href="{{ route('home') }}"
+            <a href="{{ route('home') }}" wire:navigate
                 class="block px-3 py-2 text-pink-700 font-medium hover:bg-pink-50 rounded">Home</a>
-            <a wire:navigate href="{{ route('event-packages') }}"
+            <a href="{{ route('event-packages') }}" wire:navigate
                 class="block px-3 py-2 text-pink-700 font-medium hover:bg-pink-50 rounded">Event Packages</a>
-            <a wire:navigate href="{{ route('blog') }}"
+            <a href="{{ route('blog') }}" wire:navigate
                 class="block px-3 py-2 text-pink-700 font-medium hover:bg-pink-50 rounded">Blog</a>
-            <a wire:navigate href="{{ route('about') }}"
+            <a href="{{ route('about') }}" wire:navigate
                 class="block px-3 py-2 text-pink-700 font-medium hover:bg-pink-50 rounded">About</a>
-            <a wire:navigate href="{{ route('contact') }}"
+            <a href="{{ route('contact') }}" wire:navigate
                 class="block px-3 py-2 text-pink-700 font-medium hover:bg-pink-50 rounded">Contact</a>
             <div class="pt-2 border-t border-pink-200 space-y-2">
                 @auth
