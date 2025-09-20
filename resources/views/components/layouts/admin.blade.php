@@ -108,7 +108,7 @@
                 </div>
             </div>
             <!-- Slot section (Main content) -->
-            <main class="flex-1 overflow-y-auto bg-gradient-to-br from-purple-50 to-pink-50 p-6 pt-20 md:pt-0">
+            <main class="flex-1 overflow-y-auto bg-gradient-to-br from-purple-50 to-pink-50 lg:p-6 sm:p-2 pt-20 md:pt-0">
                 {{ $slot }}
             </main>
         </div>

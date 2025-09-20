@@ -1,5 +1,5 @@
 <div>
-    <div x-data="heroSection()" class="relative h-[75vh] flex items-center justify-center overflow-hidden bg-black">
+    <div x-data="heroSection()" class="relative h-[75vh]  flex items-center justify-center overflow-hidden bg-black">
         <!-- Background Image with Gradient Overlay -->
         <div class="absolute inset-0 bg-cover bg-center"
             style="background-image: url('{{ asset('images/zuppieventpakage.jpg') }}');">
