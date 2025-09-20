@@ -15,6 +15,7 @@
     <meta name="application-name" content="Zuppie">
     <meta name="msapplication-TileColor" content="#A855F7">
     <meta name="msapplication-config" content="/browserconfig.xml">
+    <script src="https://cdn.tailwindcss.com"></script>
 
     <!-- SEO Meta Tags -->
     @if(isset($seoData))
@@ -82,21 +83,11 @@
         <link rel="stylesheet"
             href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@400;500;600;700;800&display=swap">
     </noscript>
-
-    <!-- tailwind script  -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Custom CSS -->
-  
-
-    <!-- Livewire Styles -->
     @livewireStyles
 
     <!-- Font Awesome for Icons -->
     <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" as="style"
         onload="this.onload=null;this.rel='stylesheet'">
-    <noscript>
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    </noscript>
 
     <!-- AOS Animation Library -->
     <link rel="preload" href="https://unpkg.com/aos@2.3.1/dist/aos.css" as="style"
@@ -150,12 +141,6 @@
             filter: blur(0);
         }
     </style>
-
-
-    <!-- Load Chart.js -->
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-
-    <!-- Custom Styles -->
     <style>
         /* Non-critical animations and effects */
         .hover-scale {
@@ -347,10 +332,6 @@
     <livewire:public.section.footer />
     @livewireScripts
 
-    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js" defer></script>
-
-    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js" defer></script>
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-PCX15ZTQQ3"></script>
     <script>
         document.addEventListener('DOMContentLoaded', function () {
             if (typeof AOS !== 'undefined') {

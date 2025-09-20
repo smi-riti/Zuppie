@@ -1,4 +1,4 @@
-<div class="min-h-screen bg-gradient-to-br from-purple-50 to-pink-50 p-4 sm:p-6">
+<div class="min-h-screen p-4 sm:p-6">
     <div class="">
         <!-- Header -->
         <div class="mx-auto mb-6 justify-between items-center sm:flex">

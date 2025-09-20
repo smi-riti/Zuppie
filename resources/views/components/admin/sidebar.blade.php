@@ -62,12 +62,12 @@
           </svg>
           Reviews
         </a>
-        <a href="{{ route('admin.offers.show') }}" wire:navigate class="flex items-center px-4 py-3 text-base rounded-md {{ Route::is('admin.offers.show') ? 'bg-purple-100 text-purple-700' : 'text-purple-600' }} hover:bg-purple-100 hover:text-purple-700">
+        {{-- <a href="{{ route('admin.offers.show') }}" wire:navigate class="flex items-center px-4 py-3 text-base rounded-md {{ Route::is('admin.offers.show') ? 'bg-purple-100 text-purple-700' : 'text-purple-600' }} hover:bg-purple-100 hover:text-purple-700">
           <svg class="w-6 h-6 mr-3 {{ Route::is('admin.offers.show') ? 'text-purple-600' : 'text-purple-500' }} hover:text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 14l6-6m-5.5.5h.01m4.99 5h.01M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16l3.5-2 3.5 2 3.5-2 3.5 2zM10 8.5a.5.5 0 11-1 0 .5.5 0 011 0zm5 5a.5.5 0 11-1 0 .5.5 0 011 0z"></path>
           </svg>
           Offers
-        </a>
+        </a> --}}
         <a href="{{ route('admin.services.manage') }}" wire:navigate class="flex items-center px-4 py-3 text-base rounded-md {{ Route::is('admin.services.manage') ? 'bg-purple-100 text-purple-700' : 'text-purple-600' }} hover:bg-purple-100 hover:text-purple-700">
           <svg class="w-6 h-6 mr-3 {{ Route::is('admin.services.manage') ? 'text-purple-600' : 'text-purple-500' }} hover:text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01"></path>
@@ -202,12 +202,12 @@
           </svg>
           Reviews
         </a>
-        <a href="{{ route('admin.offers.show') }}" wire:navigate class="flex items-center px-4 py-4 text-lg rounded-md {{ Route::is('admin.offers.show') ? 'bg-purple-100 text-purple-700' : 'text-purple-600' }} hover:bg-purple-100 hover:text-purple-700">
+        {{-- <a href="{{ route('admin.offers.show') }}" wire:navigate class="flex items-center px-4 py-4 text-lg rounded-md {{ Route::is('admin.offers.show') ? 'bg-purple-100 text-purple-700' : 'text-purple-600' }} hover:bg-purple-100 hover:text-purple-700">
           <svg class="w-7 h-7 mr-4 {{ Route::is('admin.offers.show') ? 'text-purple-600' : 'text-purple-500' }} hover:text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 14l6-6m-5.5.5h.01m4.99 5h.01M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16l3.5-2 3.5 2 3.5-2 3.5 2zM10 8.5a.5.5 0 11-1 0 .5.5 0 011 0zm5 5a.5.5 0 11-1 0 .5.5 0 011 0z"></path>
           </svg>
           Offers
-        </a>
+        </a> --}}
         <a href="{{ route('admin.services.manage') }}" wire:navigate class="flex items-center px-4 py-4 text-lg rounded-md {{ Route::is('admin.services.manage') ? 'bg-purple-100 text-purple-700' : 'text-purple-600' }} hover:bg-purple-100 hover:text-purple-700">
           <svg class="w-7 h-7 mr-4 {{ Route::is('admin.services.manage') ? 'text-purple-600' : 'text-purple-500' }} hover:text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01"></path>
