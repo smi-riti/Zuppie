@@ -465,7 +465,7 @@
         }
 
         /* Enhanced backdrop blur support */
-        @supports (backdrop-filter: blur(10px)) {
+        @@supports (backdrop-filter: blur(10px)) {
             .backdrop-blur-sm {
                 backdrop-filter: blur(4px);
             }
