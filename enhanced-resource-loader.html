@@ -1,0 +1,174 @@
+<!-- Performance and Resource Hints with better error handling -->
+<script>
+    // Enhanced resource loading with fallbacks and error handling
+    function loadResourceWithFallback(url, type, fallbackUrl = null, onLoad = null, onError = null) {
+        return new Promise((resolve, reject) => {
+            let element;
+            
+            if (type === 'css') {
+                element = document.createElement('link');
+                element.rel = 'stylesheet';
+                element.href = url;
+            } else if (type === 'js') {
+                element = document.createElement('script');
+                element.src = url;
+                element.defer = true;
+            }
+            
+            element.onload = () => {
+                console.log(`✅ Loaded: ${url}`);
+                if (onLoad) onLoad();
+                resolve(element);
+            };
+            
+            element.onerror = () => {
+                console.warn(`❌ Failed to load: ${url}`);
+                if (fallbackUrl) {
+                    console.log(`🔄 Trying fallback: ${fallbackUrl}`);
+                    loadResourceWithFallback(fallbackUrl, type, null, onLoad, onError)
+                        .then(resolve)
+                        .catch(reject);
+                } else {
+                    if (onError) onError();
+                    reject(new Error(`Failed to load ${url}`));
+                }
+            };
+            
+            document.head.appendChild(element);
+        });
+    }
+
+    // Load critical external resources with fallbacks
+    document.addEventListener('DOMContentLoaded', function() {
+        const resourceLoadPromises = [];
+        
+        // Load Google Fonts with fallback
+        resourceLoadPromises.push(
+            loadResourceWithFallback(
+                'https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@400;500;600;700;800&display=swap',
+                'css',
+                null,
+                () => document.body.style.setProperty('--font-inter-loaded', '1'),
+                () => console.log('Google Fonts failed - using fallback fonts')
+            ).catch(() => {})
+        );
+        
+        // Load Font Awesome with fallback
+        resourceLoadPromises.push(
+            loadResourceWithFallback(
+                'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css',
+                'css',
+                '/vendor/css/fontawesome.min.css',
+                () => document.body.classList.add('fa-loaded'),
+                () => console.log('Font Awesome failed - icons may not display')
+            ).catch(() => {})
+        );
+        
+        // Load AOS CSS
+        resourceLoadPromises.push(
+            loadResourceWithFallback(
+                'https://unpkg.com/aos@2.3.1/dist/aos.css',
+                'css',
+                '/vendor/css/aos.css',
+                null,
+                () => console.log('AOS CSS failed - animations may not work')
+            ).catch(() => {})
+        );
+        
+        // Wait for CSS to load before loading JavaScript
+        Promise.allSettled(resourceLoadPromises).then(() => {
+            // Load AOS JavaScript
+            loadResourceWithFallback(
+                'https://unpkg.com/aos@2.3.1/dist/aos.js',
+                'js',
+                '/vendor/js/aos.js',
+                () => {
+                    if (typeof AOS !== 'undefined') {
+                        AOS.init({
+                            duration: 800,
+                            easing: 'ease-in-out',
+                            once: true,
+                            mirror: false,
+                            offset: 120,
+                            delay: 0,
+                            anchorPlacement: 'top-bottom'
+                        });
+                    }
+                },
+                () => console.log('AOS JavaScript failed - scroll animations disabled')
+            ).catch(() => {});
+            
+            // Load Canvas Confetti
+            loadResourceWithFallback(
+                'https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js',
+                'js',
+                '/vendor/js/confetti.js',
+                () => console.log('Canvas Confetti loaded'),
+                () => console.log('Canvas Confetti failed - celebration effects disabled')
+            ).catch(() => {});
+        });
+    });
+</script>
+
+<!-- Enhanced CSP Error Monitoring -->
+<script>
+    // Monitor and handle CSP violations
+    document.addEventListener('securitypolicyviolation', function(e) {
+        console.error('CSP Violation:', {
+            directive: e.violatedDirective,
+            blockedURI: e.blockedURI,
+            originalPolicy: e.originalPolicy
+        });
+        
+        // You can send CSP violations to your analytics or logging service
+        if (typeof gtag !== 'undefined') {
+            gtag('event', 'csp_violation', {
+                event_category: 'Security',
+                event_label: e.blockedURI,
+                custom_parameter: e.violatedDirective
+            });
+        }
+    });
+</script>
+
+<!-- Graceful fallback for when external resources fail -->
+<style>
+    /* Fallback fonts in case Google Fonts fail */
+    body {
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+    }
+    
+    /* Hide elements that depend on Font Awesome until it loads */
+    .fa:not(.fa-loaded *), 
+    .fas:not(.fa-loaded *), 
+    .far:not(.fa-loaded *), 
+    .fab:not(.fa-loaded *) {
+        display: none;
+    }
+    
+    /* Show fallback content when Font Awesome fails */
+    .fa-fallback {
+        display: none;
+    }
+    
+    body:not(.fa-loaded) .fa-fallback {
+        display: inline;
+    }
+    
+    body:not(.fa-loaded) .fa,
+    body:not(.fa-loaded) .fas,
+    body:not(.fa-loaded) .far,
+    body:not(.fa-loaded) .fab {
+        display: none;
+    }
+    
+    /* Smooth transitions for loaded content */
+    .resource-dependent {
+        opacity: 0;
+        transition: opacity 0.3s ease;
+    }
+    
+    .resources-loaded .resource-dependent {
+        opacity: 1;
+    }
+</style>

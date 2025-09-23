@@ -1,7 +1,7 @@
 <div>
     <livewire:public.section.hero-section />
     <section id="categories" class="sm:py-20 sm:px-10">
-        <div class="lg:px-20 p-8">
+        <div class="p-5 lg:px-10">
             <div class="text-center mb-12">
                 <h2 class="text-3xl py-2 sm:text-4xl md:text-5xl font-semibold font-display text-transparent bg-clip-text bg-gradient-to-r from-purple-600 to-pink-600 mb-6"
                     data-aos="fade-up">
@@ -18,16 +18,16 @@
             <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 sm:gap-8">
                 @foreach ($categories as $index => $category)
                     <div class="group relative overflow-hidden rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-500 hover:scale-105 cursor-pointer"
-                        data-aos="fade-up" data-aos-delay="{{ 100 * ($index + 1) }}"
-                        @if ($category->children->count()) wire:click="$dispatch('openCategoryModal', { categorySlug: '{{ $category->slug }}' })" @else
-                            onclick="window.location.href='{{ route('event-package.filter', ['category' => $category->slug]) }}'" @endif>
+                        data-aos="fade-up" data-aos-delay="{{ 100 * ($index + 1) }}" @if ($category->children->count())
+                        wire:click="$dispatch('openCategoryModal', { categorySlug: '{{ $category->slug }}' })" @else
+                            onclick="window.location.href='{{ route('event-package.filter', ['category' => $category->slug]) }}'"
+                        @endif>
                         <div class="relative h-64 sm:h-80">
                             <!-- Category Image with fallback -->
                             @if ($category->image)
                                 <img src="{{ $category->image }}" alt="{{ $category->name }}"
                                     class="absolute inset-0 w-full h-full object-cover">
-                                <div
-                                    class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent">
+                                <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent">
                                 </div>
                             @else
                                 <!-- Dynamic Gradient Background -->
@@ -43,13 +43,11 @@
                                         <pattern id="eventPattern" x="0" y="0" width="20" height="20"
                                             patternUnits="userSpaceOnUse">
                                             <!-- Event celebration elements -->
-                                            <circle cx="5" cy="5" r="1.5" fill="white"
-                                                opacity="0.4" />
+                                            <circle cx="5" cy="5" r="1.5" fill="white" opacity="0.4" />
                                             <circle cx="15" cy="15" r="1" fill="white" opacity="0.3" />
                                             <path d="M8,8 Q10,6 12,8 Q10,10 8,8" fill="white" opacity="0.3" />
                                             <path d="M3,15 L5,13 L7,15 L5,17 Z" fill="white" opacity="0.2" />
-                                            <circle cx="18" cy="3" r="0.8" fill="white"
-                                                opacity="0.4" />
+                                            <circle cx="18" cy="3" r="0.8" fill="white" opacity="0.4" />
                                         </pattern>
                                     </defs>
                                     <rect width="100%" height="100%" fill="url(#eventPattern)" />
@@ -84,21 +82,14 @@
     <livewire:public.section.other-section />
 
     <!-- Enhanced Birthday Special Section -->
-    <section class="py-12 sm:py-20 relative overflow-hidden">
-        <div class="absolute inset-0 opacity-10">
-            <div class="absolute top-20 left-10 w-32 h-32 bg-pink-300 rounded-full blur-3xl"></div>
-            <div class="absolute bottom-20 right-10 w-40 h-40 bg-purple-300 rounded-full blur-3xl"></div>
-            <div
-                class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-64 h-64 bg-accent-300 rounded-full blur-3xl">
-            </div>
-        </div>
+    <section class="relative overflow-hidden lg:px-20 p-6 bg-white ">
 
-        <div class=" px-20 relative">
+        <div class="relative">
             <div class="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
                 <!-- Image Section -->
                 <div data-aos="fade-right" class="relative">
                     <div class="relative rounded-3xl overflow-hidden shadow-2xl group">
-                        <img src="https://images.unsplash.com/photo-1530103862676-de8c9debad1d?w=600&h=400&fit=crop"
+                        <img src="{{ asset('images/Gemini_Generated_Image_b2vgmeb2vgmeb2vg.png') }}"
                             alt="Birthday Celebration"
                             class="w-full h-64 sm:h-80 lg:h-96 object-cover group-hover:scale-110 transition-transform duration-700">
                         <div class="absolute inset-0 bg-gradient-to-t from-purple-900/30 to-transparent"></div>
@@ -124,12 +115,6 @@
 
                 <!-- Content Section -->
                 <div data-aos="fade-left" class="space-y-6">
-                    <div
-                        class="inline-flex items-center bg-gradient-to-r from-purple-100 to-pink-100 text-purple-700 px-4 py-2 rounded-full font-medium text-sm">
-                        <i class="fas fa-star mr-2"></i>
-                        Special Birthday Packages
-                    </div>
-
                     <h2
                         class="text-3xl sm:text-4xl lg:text-5xl font-semibold font-display bg-gradient-to-r from-purple-600 via-pink-600 to-purple-700 bg-clip-text text-transparent leading-tight">
                         Make Birthdays Unforgettable
@@ -178,16 +163,12 @@
                             </div>
                         </div>
                     </div>
-
-                    <!-- Action Buttons -->
                     <div class="flex flex-col sm:flex-row gap-4 pt-4">
-                        <a href="{{ route('event-packages') }}"
+                        <a href="{{ route('event-packages') }}" wire:navigate
                             class="inline-flex items-center justify-center bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white px-8 py-4 rounded-full font-2xl text-lg transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl">
                             <i class="fas fa-gift mr-3"></i>
                             View Birthday Packages
                         </a>
-
-
                     </div>
                 </div>
             </div>
@@ -195,24 +176,20 @@
     </section>
 
     <!-- Gallery Collage Section -->
-    <section id="gallery">
+    <section id="gallery" class="lg:px-20 p-6 bg-white">
         <div class="">
-            <div class="text-center mb-16">
+            <div class="text-center mb-12">
                 <h2 class="text-4xl md:text-5xl py-2 font-semibold font-display gradient-text mb-6" data-aos="fade-up">
                     Our Magic Gallery
                 </h2>
-                <p class="text-xl text-gray-600 max-w-3xl mx-auto" data-aos="fade-up" data-aos-delay="200">
-                    Witness the joy and wonder we've created at countless celebrations
-                </p>
             </div>
 
-            <div class="grid grid-cols-2 md:grid-cols-4 gap-4 px-20">
-                <!-- Gallery Items with Unsplash Images -->
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
                 <div class="col-span-1 row-span-2" data-aos="fade-up" data-aos-delay="100">
                     <div
-                        class="relative overflow-hidden rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 hover-scale h-full">
-                        <img src="https://images.unsplash.com/photo-1530103862676-de8c9debad1d?w=400&h=600&fit=crop"
-                            alt="Birthday Party" class="w-full h-full object-cover">
+                        class="relative overflow-hidden rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 hover-scale h-[500px]">
+                        <img src="{{ asset('images/1684232520_original.avif') }}" alt="Birthday Party"
+                            class="w-full h-full object-cover">
                         <div
                             class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 hover:opacity-100 transition-opacity duration-300 flex items-end p-4">
                             <span class="text-white font-2xl">Birthday Celebration</span>
@@ -220,11 +197,12 @@
                     </div>
                 </div>
 
+                <!-- Wedding -->
                 <div class="col-span-1" data-aos="fade-up" data-aos-delay="200">
                     <div
-                        class="relative overflow-hidden rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 hover-scale h-full">
-                        <img src="https://images.unsplash.com/photo-1519225421980-715cb0215aed?w=400&h=300&fit=crop"
-                            alt="Wedding Setup" class="w-full h-full object-cover">
+                        class="relative overflow-hidden rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 hover-scale h-[240px]">
+                        <img src="{{ asset('images/RD6.jfif') }}" alt="Wedding Setup"
+                            class="w-full h-full object-cover">
                         <div
                             class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 hover:opacity-100 transition-opacity duration-300 flex items-end p-4">
                             <span class="text-white font-2xl">Wedding Magic</span>
@@ -232,11 +210,12 @@
                     </div>
                 </div>
 
+                <!-- Corporate Event -->
                 <div class="col-span-1" data-aos="fade-up" data-aos-delay="300">
                     <div
-                        class="relative overflow-hidden rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 hover-scale h-full">
-                        <img src="https://images.unsplash.com/photo-1464366400600-7168b8af9bc3?w=400&h=300&fit=crop"
-                            alt="Corporate Event" class="w-full h-full object-cover">
+                        class="relative overflow-hidden rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 hover-scale h-[240px]">
+                        <img src="{{ asset('images/OWN DECORATION 13.jpg') }}" alt="Corporate Event"
+                            class="w-full h-full object-cover">
                         <div
                             class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 hover:opacity-100 transition-opacity duration-300 flex items-end p-4">
                             <span class="text-white font-2xl">Corporate Event</span>
@@ -244,11 +223,12 @@
                     </div>
                 </div>
 
+                <!-- Anniversary -->
                 <div class="col-span-1" data-aos="fade-up" data-aos-delay="400">
                     <div
-                        class="relative overflow-hidden rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 hover-scale h-full">
-                        <img src="https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=400&h=300&fit=crop"
-                            alt="Anniversary" class="w-full h-full object-cover">
+                        class="relative overflow-hidden rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 hover-scale h-[240px]">
+                        <img src="{{ asset('images/OWN DECORATION 22.jpg') }}" alt="Anniversary"
+                            class="w-full h-full object-cover">
                         <div
                             class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 hover:opacity-100 transition-opacity duration-300 flex items-end p-4">
                             <span class="text-white font-2xl">Anniversary</span>
@@ -256,11 +236,12 @@
                     </div>
                 </div>
 
+                <!-- Baby Shower -->
                 <div class="col-span-1" data-aos="fade-up" data-aos-delay="500">
                     <div
-                        class="relative overflow-hidden rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 hover-scale h-full">
-                        <img src="https://images.unsplash.com/photo-1511795409834-ef04bbd61622?w=400&h=300&fit=crop"
-                            alt="Baby Shower" class="w-full h-full object-cover">
+                        class="relative overflow-hidden rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 hover-scale h-[240px]">
+                        <img src="{{ asset('images/1600755451_original.avif') }}" alt="Baby Shower"
+                            class="w-full h-full object-cover">
                         <div
                             class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 hover:opacity-100 transition-opacity duration-300 flex items-end p-4">
                             <span class="text-white font-2xl">Baby Shower</span>
@@ -268,11 +249,12 @@
                     </div>
                 </div>
 
+                <!-- Event Planning -->
                 <div class="col-span-2 row-span-1" data-aos="fade-up" data-aos-delay="600">
                     <div
-                        class="relative overflow-hidden rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 hover-scale h-full">
-                        <img src="https://images.unsplash.com/photo-1492684223066-81342ee5ff30?w=800&h=300&fit=crop"
-                            alt="Event Setup" class="w-full h-full object-cover">
+                        class="relative overflow-hidden rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 hover-scale h-[240px] md:h-[240px]">
+                        <img src="{{ asset('images/OWN DECORATION 17.jpg') }}" alt="Event Setup"
+                            class="w-full h-full object-cover">
                         <div
                             class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 hover:opacity-100 transition-opacity duration-300 flex items-end p-4">
                             <span class="text-white font-2xl">Event Planning</span>
@@ -280,6 +262,7 @@
                     </div>
                 </div>
             </div>
+
 
             <div class="text-center mt-12" data-aos="fade-up" data-aos-delay="700">
                 <button
@@ -291,7 +274,7 @@
     </section>
 
     <!-- Why Choose Us Section -->
-    <section id="about" class="py-20 bg-gradient-to-br from-purple-50 to-pink-50">
+    <section id="about" class=" p-6 lg:px-10 py-20 bg-gradient-to-br from-purple-50 to-pink-50">
         <div class="container mx-auto">
             <div class="text-center mb-16">
                 <h2 class="text-4xl md:text-5xl py-2 font-semibold font-display gradient-text mb-6" data-aos="fade-up">
@@ -368,78 +351,6 @@
             </div>
         </div>
     </section>
-
-    <!-- Testimonials Section -->
-    <section class="py-20">
-        <div class="px-20 mx-auto">
-            <div class="text-center mb-16">
-                <h2 class="text-4xl py-2 md:text-5xl font-semibold font-display gradient-text mb-6" data-aos="fade-up">
-                    Reviews from Our Satisfied Clients
-                </h2>
-                <p class="text-xl text-gray-600 max-w-3xl mx-auto" data-aos="fade-up" data-aos-delay="200">
-                    Discover why we're the <strong>trusted event planning company in Purnia</strong> - hear testimonials
-                    from our delighted clients who experienced our <strong>premium event management services</strong>
-                </p>
-            </div>
-
-            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-20 max-w-8xl mx-auto">
-                <div class="bg-gradient-to-br from-purple-50 to-pink-50 rounded-2xl p-8 shadow-lg hover:shadow-xl transition-all duration-300"
-                    data-aos="fade-up" data-aos-delay="100">
-                    <div class="flex items-center mb-4">
-                        <div class="flex text-pink-400 text-xl">
-                            ★★★★★
-                        </div>
-                    </div>
-                    <p class="text-gray-700 mb-6 italic">"Zuppie made my daughter's 5th birthday absolutely magical!
-                        Every detail was perfect, and the kids were enchanted. Highly recommended!"</p>
-                    <div class="flex items-center">
-                        <div>
-                            <div class="font-2xl text-gray-800">Bharti Gupta</div>
-                            <div class="text-sm text-gray-500">Mother of Birthday Girl</div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="bg-gradient-to-br from-purple-50 to-pink-50 rounded-2xl p-4 shadow-lg hover:shadow-xl transition-all duration-300"
-                    data-aos="fade-up" data-aos-delay="200">
-                    <div class="flex items-center mb-4">
-                        <div class="flex text-pink-400 text-xl">
-                            ★★★★★
-                        </div>
-                    </div>
-                    <p class="text-gray-700 mb-6 italic">"Our wedding was a dream come true thanks to Zuppie. They
-                        handled everything with such professionalism and creativity!"</p>
-                    <div class="flex items-center">
-                        <div>
-                            <div class="font-2xl text-gray-800">Shivam Kumar</div>
-                            <div class="text-sm text-gray-500">groom</div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="bg-gradient-to-br from-purple-50 to-pink-50 rounded-2xl p-8 shadow-lg hover:shadow-xl transition-all duration-300"
-                    data-aos="fade-up" data-aos-delay="300">
-                    <div class="flex items-center mb-4">
-                        <div class="flex text-pink-400 text-xl">
-                            ★★★★★
-                        </div>
-                    </div>
-                    <p class="text-gray-700 mb-6 italic">
-                        "The birthday event was beautifully organized. Everything was well managed,
-                        and it created unforgettable memories for our family and friends!"
-                    </p>
-                    <div class="flex items-center">
-                        <div>
-                            <div class="font-2xl text-gray-800">Ravi Sharma</div>
-                            <div class="text-sm text-gray-500">Father of Birthday Boy</div>
-                        </div>
-                    </div>
-
-                </div>
-            </div>
-        </div>
-    </section>
-
     <!-- Blog Section -->
     {{-- <section class="py-20 bg-gradient-to-br from-pink-50 to-purple-50">
         <div class="container mx-auto px-4">
@@ -459,8 +370,7 @@
                     class="bg-white rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden group"
                     data-aos="fade-up" data-aos-delay="100">
                     <div class="relative overflow-hidden">
-                        <img src="{{ $blog->image }}"
-                            alt="Blog Post"
+                        <img src="{{ $blog->image }}" alt="Blog Post"
                             class="w-full h-48 object-cover group-hover:scale-110 transition-transform duration-300">
                         <div
                             class="absolute top-4 left-4 bg-purple-600 text-white px-3 py-1 rounded-full text-sm font-2xl">
@@ -476,11 +386,13 @@
                         <div class="flex items-center justify-between">
                             <span class="text-sm text-gray-500">{{ $blog->created_at->format('M D, Y') }}</span>
                             <a href="{{ route('blog.detail', $blog->slug) }}" class="text-purple-600 font-2xl hover:underline">Read More →</a>
+                            <a href="{{ route('blog.detail', $blog->slug) }}"
+                                class="text-purple-600 font-semibold hover:underline">Read More →</a>
                         </div>
                     </div>
                 </article>
                 @endforeach
-                
+
             </div>
 
             <div class="text-center mt-12" data-aos="fade-up" data-aos-delay="400">

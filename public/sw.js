@@ -1,4 +1,4 @@
-const CACHE_NAME = 'zuppie-v2';
+const CACHE_NAME = 'zuppie-v3';
 const OFFLINE_URL = '/offline.html';
 
 // Essential resources that should exist
@@ -9,15 +9,12 @@ const CORE_CACHE_RESOURCES = [
     '/images/logo.png'
 ];
 
-// Optional resources - cache if available
+// Optional resources - cache if available (only CSP-allowed URLs)
 const OPTIONAL_CACHE_RESOURCES = [
     '/build/assets/app-BOb1W5vC.css',
-    '/build/assets/app-DNxiirP_.js',
-    'https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@400;500;600;700;800&display=swap',
-    'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css',
-    'https://unpkg.com/aos@2.3.1/dist/aos.css',
-    'https://unpkg.com/aos@2.3.1/dist/aos.js',
-    'https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js'
+    '/build/assets/app-DNxiirP_.js'
+    // Note: External CDN resources are now handled by the fetch event instead of pre-caching
+    // This prevents CSP violations during service worker installation
 ];
 
 // Helper function to cache resources with error handling
@@ -103,6 +100,11 @@ self.addEventListener('fetch', event => {
         return;
     }
     
+    // Skip POST requests and other methods that shouldn't be cached
+    if (event.request.method !== 'GET') {
+        return;
+    }
+    
     if (event.request.mode === 'navigate') {
         event.respondWith(
             fetch(event.request)
@@ -135,15 +137,34 @@ self.addEventListener('fetch', event => {
                         .then(fetchResponse => {
                             // Clone the response before caching
                             const responseClone = fetchResponse.clone();
-                            if (fetchResponse.ok && fetchResponse.type === 'basic') {
+                            if (fetchResponse.ok && (fetchResponse.type === 'basic' || fetchResponse.type === 'cors')) {
                                 caches.open(CACHE_NAME).then(cache => {
-                                    cache.put(event.request, responseClone);
+                                    // Only cache successful GET requests
+                                    if (event.request.method === 'GET') {
+                                        cache.put(event.request, responseClone);
+                                    }
+                                }).catch(cacheError => {
+                                    console.log('Cache put failed for:', event.request.url, cacheError);
                                 });
                             }
                             return fetchResponse;
                         })
                         .catch(error => {
                             console.log('Fetch failed for:', event.request.url, error);
+                            // For external resources, return a basic response instead of failing
+                            if (event.request.url.includes('cdn.') || 
+                                event.request.url.includes('fonts.') || 
+                                event.request.url.includes('unpkg.') ||
+                                event.request.url.includes('cdnjs.')) {
+                                return new Response('', { 
+                                    status: 200,
+                                    statusText: 'OK',
+                                    headers: new Headers({
+                                        'Content-Type': event.request.url.includes('.css') ? 'text/css' : 
+                                                      event.request.url.includes('.js') ? 'application/javascript' : 'text/plain'
+                                    })
+                                });
+                            }
                             // Return a basic response for failed requests
                             return new Response('Network error', { 
                                 status: 408,

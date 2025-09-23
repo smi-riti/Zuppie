@@ -6,12 +6,11 @@ use Closure;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
 
-class SEOMiddleware
+class SEOMiddlewareSelfHosted
 {
     /**
-     * Handle an incoming request.
-     *
-     * @param  \Closure(\Illuminate\Http\Request): (\Symfony\Component\HttpFoundation\Response)  $next
+     * Handle an incoming request for self-hosted resources
+     * This version uses minimal external dependencies
      */
     public function handle(Request $request, Closure $next): Response
     {
@@ -24,14 +23,14 @@ class SEOMiddleware
         $response->headers->set('Referrer-Policy', 'strict-origin-when-cross-origin');
         $response->headers->set('Permissions-Policy', 'camera=(), microphone=(), geolocation=()');
 
-        // Add CSP header
+        // Restrictive CSP for self-hosted resources
         $csp = implode('; ', [
             "default-src 'self'",
-            "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://cdn.tailwindcss.com https://cdn.jsdelivr.net https://unpkg.com https://www.googletagmanager.com https://www.google-analytics.com",
-            "style-src 'self' 'unsafe-inline' https://cdn.tailwindcss.com https://fonts.googleapis.com https://cdnjs.cloudflare.com https://unpkg.com",
+            "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://www.googletagmanager.com https://www.google-analytics.com",
+            "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com",
             "img-src 'self' data: https: blob: https://ik.imagekit.io",
-            "font-src 'self' https://fonts.gstatic.com https://cdnjs.cloudflare.com",
-            "connect-src 'self' https://cdn.tailwindcss.com https://fonts.googleapis.com https://fonts.gstatic.com https://cdnjs.cloudflare.com https://unpkg.com https://ik.imagekit.io https://cdn.jsdelivr.net https://www.google-analytics.com",
+            "font-src 'self' https://fonts.gstatic.com",
+            "connect-src 'self' https://ik.imagekit.io https://www.google-analytics.com",
             "media-src 'self'",
             "object-src 'none'",
             "base-uri 'self'",

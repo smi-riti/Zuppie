@@ -16,9 +16,10 @@
     <meta name="msapplication-TileColor" content="#A855F7">
     <meta name="msapplication-config" content="/browserconfig.xml">
     
-    <!-- Content Security Policy - Fallback if server headers fail -->
-    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://cdn.tailwindcss.com https://cdn.jsdelivr.net https://unpkg.com https://www.googletagmanager.com https://www.google-analytics.com; style-src 'self' 'unsafe-inline' https://cdn.tailwindcss.com https://fonts.googleapis.com https://cdnjs.cloudflare.com https://unpkg.com; img-src 'self' data: https: blob: https://ik.imagekit.io; font-src 'self' https://fonts.gstatic.com https://cdnjs.cloudflare.com; connect-src 'self' https://cdn.tailwindcss.com https://fonts.googleapis.com https://fonts.gstatic.com https://cdnjs.cloudflare.com https://unpkg.com https://ik.imagekit.io https://cdn.jsdelivr.net https://www.google-analytics.com; media-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'none';">
+    <!-- Restrictive CSP for self-hosted resources only -->
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://www.googletagmanager.com https://www.google-analytics.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; img-src 'self' data: https: blob: https://ik.imagekit.io; font-src 'self' https://fonts.gstatic.com; connect-src 'self' https://ik.imagekit.io https://www.google-analytics.com; media-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'none';">
     
+    <!-- Use Tailwind CDN as fallback with local build -->
     <script src="https://cdn.tailwindcss.com"></script>
 
     <!-- SEO Meta Tags -->
@@ -28,18 +29,14 @@
         {!! App\Helpers\SEOHelper::generateMeta() !!}
     @endif
 
-    <!-- Preconnect to external domains -->
+    <!-- Preconnect only to essential domains -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link rel="preconnect" href="https://cdnjs.cloudflare.com">
-    <link rel="preconnect" href="https://unpkg.com">
-    <link rel="preconnect" href="https://cdn.jsdelivr.net">
+    <link rel="preconnect" href="https://ik.imagekit.io">
 
-    <!-- DNS Prefetch -->
+    <!-- DNS Prefetch for essential services -->
     <link rel="dns-prefetch" href="//fonts.googleapis.com">
-    <link rel="dns-prefetch" href="//cdnjs.cloudflare.com">
-    <link rel="dns-prefetch" href="//unpkg.com">
-    <link rel="dns-prefetch" href="//cdn.jsdelivr.net">
+    <link rel="dns-prefetch" href="//ik.imagekit.io">
 
     <!-- Favicon and Icons -->
     <link rel="icon" type="image/x-icon" href="/favicon.ico">
@@ -78,36 +75,25 @@
         {!! App\Helpers\SEOHelper::generatePaginationMeta($paginationMeta['current'], $paginationMeta['total'], $paginationMeta['base_url']) !!}
     @endif
 
-
-    <!-- Performance and Resource Hints -->
-    <link rel="preload"
-        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@400;500;600;700;800&display=swap"
-        as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <!-- Self-hosted Google Fonts with fallback -->
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@400;500;600;700;800&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
     <noscript>
-        <link rel="stylesheet"
-            href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@400;500;600;700;800&display=swap">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@400;500;600;700;800&display=swap">
     </noscript>
+    
     @livewireStyles
 
-    <!-- Font Awesome for Icons -->
-    <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" as="style"
-        onload="this.onload=null;this.rel='stylesheet'">
+    <!-- Self-hosted Font Awesome -->
+    <link rel="stylesheet" href="/vendor/css/fontawesome.min.css">
 
-    <!-- AOS Animation Library -->
-    <link rel="preload" href="https://unpkg.com/aos@2.3.1/dist/aos.css" as="style"
-        onload="this.onload=null;this.rel='stylesheet'">
-    <noscript>
-        <link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css">
-    </noscript>
-
-    <!-- Preload JavaScript -->
-    <link rel="preload" href="https://unpkg.com/aos@2.3.1/dist/aos.js" as="script">
+    <!-- Self-hosted AOS Animation Library -->
+    <link rel="stylesheet" href="/vendor/css/aos.css">
 
     <!-- Critical CSS for performance -->
     <style>
         /* Critical CSS */
         body {
-            font-family: 'Inter', sans-serif;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
         }
 
         .gradient-bg {
@@ -335,11 +321,14 @@
     {{ $slot }}
     <livewire:public.section.footer />
     @livewireScripts
-     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js" defer></script>
     
-    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js" defer></script>
+    <!-- Self-hosted JavaScript -->
+    <script src="/vendor/js/aos.js" defer></script>
+    <script src="/vendor/js/confetti.js" defer></script>
+    
     <script>
         document.addEventListener('DOMContentLoaded', function () {
+            // Initialize AOS with error handling
             if (typeof AOS !== 'undefined') {
                 AOS.init({
                     duration: 800,
@@ -350,10 +339,13 @@
                     delay: 0,
                     anchorPlacement: 'top-bottom'
                 });
+            } else {
+                console.log('AOS not loaded - animations disabled');
             }
         });
 
         document.addEventListener('DOMContentLoaded', function () {
+            // Smooth scrolling
             document.querySelectorAll('a[href^="#"]').forEach(anchor => {
                 anchor.addEventListener('click', function (e) {
                     e.preventDefault();
@@ -366,6 +358,8 @@
                     }
                 });
             });
+            
+            // Parallax effect
             let ticking = false;
             function updateParallax() {
                 const scrolled = window.pageYOffset;
@@ -384,6 +378,7 @@
                 }
             });
 
+            // Lazy loading for images
             const images = document.querySelectorAll('img[data-src]');
             const imageObserver = new IntersectionObserver((entries, observer) => {
                 entries.forEach(entry => {
@@ -402,6 +397,7 @@
                 imageObserver.observe(img);
             });
 
+            // Package slider
             let currentSlide = 0;
             const slides = document.querySelectorAll('.package-slide');
             const totalSlides = slides.length;
@@ -420,6 +416,7 @@
                 setInterval(nextSlide, 5000);
             }
 
+            // Performance monitoring
             if ('performance' in window && 'measure' in performance) {
                 performance.mark('zuppie-load-start');
                 window.addEventListener('load', function () {
@@ -428,6 +425,7 @@
                 });
             }
 
+            // Service Worker registration with better error handling
             if ('serviceWorker' in navigator) {
                 window.addEventListener('load', () => {
                     navigator.serviceWorker.register('/sw.js')
@@ -440,16 +438,13 @@
                                 if (newWorker) {
                                     newWorker.addEventListener('statechange', () => {
                                         if (newWorker.state === 'installed' && navigator.serviceWorker.controller) {
-                                            // New service worker is available
                                             console.log('New service worker available');
-                                            // Auto-update without user intervention
                                             newWorker.postMessage({ type: 'SKIP_WAITING' });
                                         }
                                     });
                                 }
                             });
 
-                            // Listen for service worker controlling this page
                             navigator.serviceWorker.addEventListener('controllerchange', () => {
                                 console.log('Service worker controller changed');
                                 window.location.reload();
@@ -461,35 +456,21 @@
                 });
             }
 
-            // Handle Chrome extension runtime errors
-            if (typeof chrome !== 'undefined' && chrome.runtime) {
-                chrome.runtime.onMessage?.addListener?.(() => {
-                    // Prevent runtime.lastError messages
-                    if (chrome.runtime.lastError) {
-                        // Silently handle the error
-                        return;
-                    }
-                });
-            }
-
             // Global error handler for unhandled promises
             window.addEventListener('unhandledrejection', function (event) {
                 if (event.reason && event.reason.message &&
                     event.reason.message.includes('message port closed')) {
-                    // Suppress Chrome extension message port errors
                     event.preventDefault();
                     return;
                 }
             });
         });
 
-
+        // Google Analytics
         window.dataLayer = window.dataLayer || [];
         function gtag() { dataLayer.push(arguments); }
         gtag('js', new Date());
-
         gtag('config', 'G-PCX15ZTQQ3');
-
     </script>
 
     @if(config('app.env') === 'production')
@@ -507,7 +488,6 @@
                 }
             });
 
-            // Track key events
             gtag('event', 'page_view', {
                 page_title: document.title,
                 page_location: window.location.href,

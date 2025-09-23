@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CSP and Network Test - Zuppie</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        .test-section {
+            background: white;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 20px 0;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .test-item {
+            display: flex;
+            align-items: center;
+            padding: 10px 0;
+            border-bottom: 1px solid #eee;
+        }
+        .test-item:last-child {
+            border-bottom: none;
+        }
+        .status {
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            margin-right: 15px;
+            display: inline-block;
+        }
+        .status.loading {
+            background-color: #ffa500;
+            animation: pulse 1s infinite;
+        }
+        .status.success {
+            background-color: #28a745;
+        }
+        .status.error {
+            background-color: #dc3545;
+        }
+        @keyframes pulse {
+            0% { opacity: 1; }
+            50% { opacity: 0.5; }
+            100% { opacity: 1; }
+        }
+        .resource-url {
+            font-family: monospace;
+            font-size: 12px;
+            color: #666;
+            margin-left: 35px;
+            word-break: break-all;
+        }
+        h1 {
+            color: #333;
+            text-align: center;
+        }
+        h2 {
+            color: #555;
+            border-bottom: 2px solid #8B5CF6;
+            padding-bottom: 10px;
+        }
+        .summary {
+            background: linear-gradient(135deg, #8B5CF6 0%, #EC4899 100%);
+            color: white;
+            border-radius: 8px;
+            padding: 20px;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        .error-details {
+            background: #fff3cd;
+            border: 1px solid #ffeaa7;
+            border-radius: 4px;
+            padding: 10px;
+            margin-top: 10px;
+            font-size: 12px;
+        }
+    </style>
+</head>
+<body>
+    <h1>🎉 Zuppie - CSP & Network Test Dashboard</h1>
+    
+    <div class="summary">
+        <h2>Test Results Summary</h2>
+        <div id="summary-content">Running tests...</div>
+    </div>
+
+    <div class="test-section">
+        <h2>🎨 CSS Resources</h2>
+        <div id="css-tests"></div>
+    </div>
+
+    <div class="test-section">
+        <h2>📝 JavaScript Resources</h2>
+        <div id="js-tests"></div>
+    </div>
+
+    <div class="test-section">
+        <h2>🖼️ Image Resources</h2>
+        <div id="image-tests"></div>
+    </div>
+
+    <div class="test-section">
+        <h2>🔧 Fonts</h2>
+        <div id="font-tests"></div>
+    </div>
+
+    <div class="test-section">
+        <h2>🛡️ CSP Headers</h2>
+        <div id="csp-tests"></div>
+    </div>
+
+    <script>
+        const testResources = {
+            css: [
+                'https://cdn.tailwindcss.com/',
+                'https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@400;500;600;700;800&display=swap',
+                'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css',
+                'https://unpkg.com/aos@2.3.1/dist/aos.css'
+            ],
+            js: [
+                'https://unpkg.com/aos@2.3.1/dist/aos.js',
+                'https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js'
+            ],
+            images: [
+                'https://ik.imagekit.io/734vtfi5p/Zuppie/CategoryImages/68c7fad293dd0_34Yd6UKxb.jpg',
+                'https://ik.imagekit.io/734vtfi5p/Zuppie/CategoryImages/68c7fcedb669c_8CKGXvvQQu.jpg'
+            ],
+            fonts: [
+                'https://fonts.gstatic.com/s/inter/v12/UcC73FwrK3iLTeHuS_fvQtMwCp50KnMa1ZL7.woff2'
+            ]
+        };
+
+        let testResults = {
+            total: 0,
+            passed: 0,
+            failed: 0,
+            errors: []
+        };
+
+        function updateSummary() {
+            const summary = document.getElementById('summary-content');
+            const passRate = testResults.total > 0 ? Math.round((testResults.passed / testResults.total) * 100) : 0;
+            
+            summary.innerHTML = `
+                <div style="font-size: 24px; margin-bottom: 10px;">
+                    ${testResults.passed}/${testResults.total} Tests Passed (${passRate}%)
+                </div>
+                <div>
+                    ✅ Passed: ${testResults.passed} | 
+                    ❌ Failed: ${testResults.failed}
+                </div>
+            `;
+        }
+
+        function createTestItem(name, url) {
+            testResults.total++;
+            
+            const item = document.createElement('div');
+            item.className = 'test-item';
+            item.innerHTML = `
+                <span class="status loading" id="status-${testResults.total}"></span>
+                <div>
+                    <div>${name}</div>
+                    <div class="resource-url">${url}</div>
+                    <div class="error-details" id="error-${testResults.total}" style="display: none;"></div>
+                </div>
+            `;
+            return { item, id: testResults.total };
+        }
+
+        function updateTestStatus(id, success, error = null) {
+            const status = document.getElementById(`status-${id}`);
+            const errorDiv = document.getElementById(`error-${id}`);
+            
+            if (success) {
+                status.className = 'status success';
+                testResults.passed++;
+            } else {
+                status.className = 'status error';
+                testResults.failed++;
+                
+                if (error) {
+                    errorDiv.style.display = 'block';
+                    errorDiv.textContent = error;
+                    testResults.errors.push({ id, error });
+                }
+            }
+            
+            updateSummary();
+        }
+
+        async function testResource(url, type = 'fetch') {
+            try {
+                if (type === 'image') {
+                    return new Promise((resolve, reject) => {
+                        const img = new Image();
+                        img.onload = () => resolve(true);
+                        img.onerror = () => reject(new Error('Failed to load image'));
+                        img.src = url;
+                        
+                        setTimeout(() => reject(new Error('Timeout')), 10000);
+                    });
+                } else {
+                    const response = await fetch(url, {
+                        method: 'HEAD',
+                        mode: 'no-cors',
+                        cache: 'no-cache'
+                    });
+                    return true; // If we get here, no CSP error occurred
+                }
+            } catch (error) {
+                throw error;
+            }
+        }
+
+        async function runTests() {
+            // Test CSS resources
+            const cssContainer = document.getElementById('css-tests');
+            for (const url of testResources.css) {
+                const { item, id } = createTestItem('CSS Resource', url);
+                cssContainer.appendChild(item);
+                
+                try {
+                    await testResource(url);
+                    updateTestStatus(id, true);
+                } catch (error) {
+                    updateTestStatus(id, false, error.message);
+                }
+            }
+
+            // Test JS resources
+            const jsContainer = document.getElementById('js-tests');
+            for (const url of testResources.js) {
+                const { item, id } = createTestItem('JavaScript Resource', url);
+                jsContainer.appendChild(item);
+                
+                try {
+                    await testResource(url);
+                    updateTestStatus(id, true);
+                } catch (error) {
+                    updateTestStatus(id, false, error.message);
+                }
+            }
+
+            // Test Image resources
+            const imageContainer = document.getElementById('image-tests');
+            for (const url of testResources.images) {
+                const { item, id } = createTestItem('Image Resource', url);
+                imageContainer.appendChild(item);
+                
+                try {
+                    await testResource(url, 'image');
+                    updateTestStatus(id, true);
+                } catch (error) {
+                    updateTestStatus(id, false, error.message);
+                }
+            }
+
+            // Test CSP headers
+            const cspContainer = document.getElementById('csp-tests');
+            try {
+                const { item, id } = createTestItem('CSP Header Check', window.location.origin);
+                cspContainer.appendChild(item);
+                
+                // Check if CSP headers are present
+                const response = await fetch(window.location.href, { method: 'HEAD' });
+                const cspHeader = response.headers.get('Content-Security-Policy');
+                
+                if (cspHeader) {
+                    updateTestStatus(id, true);
+                    
+                    // Show CSP details
+                    const cspDetails = document.createElement('div');
+                    cspDetails.className = 'error-details';
+                    cspDetails.style.display = 'block';
+                    cspDetails.style.background = '#d4edda';
+                    cspDetails.style.borderColor = '#c3e6cb';
+                    cspDetails.innerHTML = `<strong>CSP Policy:</strong><br>${cspHeader}`;
+                    document.getElementById(`error-${id}`).parentNode.appendChild(cspDetails);
+                } else {
+                    updateTestStatus(id, false, 'No CSP header found');
+                }
+            } catch (error) {
+                updateTestStatus(id, false, error.message);
+            }
+
+            // Test Service Worker
+            if ('serviceWorker' in navigator) {
+                const { item, id } = createTestItem('Service Worker', '/sw.js');
+                cspContainer.appendChild(item);
+                
+                try {
+                    const registration = await navigator.serviceWorker.getRegistration();
+                    if (registration) {
+                        updateTestStatus(id, true);
+                    } else {
+                        updateTestStatus(id, false, 'Service Worker not registered');
+                    }
+                } catch (error) {
+                    updateTestStatus(id, false, error.message);
+                }
+            }
+
+            // Final summary
+            setTimeout(() => {
+                if (testResults.failed === 0) {
+                    document.querySelector('.summary').style.background = 'linear-gradient(135deg, #28a745 0%, #20c997 100%)';
+                } else if (testResults.passed > testResults.failed) {
+                    document.querySelector('.summary').style.background = 'linear-gradient(135deg, #ffc107 0%, #fd7e14 100%)';
+                } else {
+                    document.querySelector('.summary').style.background = 'linear-gradient(135deg, #dc3545 0%, #e83e8c 100%)';
+                }
+            }, 1000);
+        }
+
+        // Run tests when page loads
+        document.addEventListener('DOMContentLoaded', runTests);
+
+        // Monitor console for CSP violations
+        const originalConsoleError = console.error;
+        console.error = function(...args) {
+            const message = args.join(' ');
+            if (message.includes('Content Security Policy') || message.includes('CSP')) {
+                const errorItem = document.createElement('div');
+                errorItem.className = 'test-item';
+                errorItem.innerHTML = `
+                    <span class="status error"></span>
+                    <div>
+                        <div>CSP Violation Detected</div>
+                        <div class="error-details" style="display: block;">${message}</div>
+                    </div>
+                `;
+                document.getElementById('csp-tests').appendChild(errorItem);
+            }
+            originalConsoleError.apply(console, args);
+        };
+    </script>
+</body>
+</html>

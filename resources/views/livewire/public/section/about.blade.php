@@ -5,7 +5,7 @@
         <section class="relative h-[70vh] overflow-hidden">
             <!-- Background Image with Overlay -->
             <div class="absolute inset-0">
-                <img src="https://images.unsplash.com/photo-1519741497674-611481863552?ixlib=rb-4.0.3&auto=format&fit=crop&w=2340&q=80" 
+                <img src="{{ asset('images/banner.webp')}}" 
                      alt="About Us Background" 
                      class="w-full h-full object-cover">
                 <div class="absolute inset-0 bg-gradient-to-br from-purple-900/40 via-pink-800/35 to-indigo-900/40"></div>
@@ -31,8 +31,8 @@
         </section>
 
         <!-- Our Story Section -->
-        <section class="py-20 bg-gradient-to-br from-purple-50 to-pink-50">
-            <div class="px-20">
+        <section class="lg:px-20 p-6 py-20 bg-gradient-to-br from-purple-50 to-pink-50">
+            <div class="">
                 <div class="grid lg:grid-cols-2 gap-16 items-center">
                     <div class="space-y-6">
                         <h2 class="text-4xl md:text-5xl font-2xl font-display gradient-text mb-6">
@@ -67,8 +67,8 @@
                     </div>
                     
                     <div class="relative">
-                        <div class="relative rounded-2xl overflow-hidden shadow-2xl transform hover:scale-105 transition-transform duration-500 w-2/3 mx-auto">
-                            <img src="https://images.unsplash.com/photo-1522543558187-768b6df7c25c?w=600&h=600&fit=crop" alt="Our Team" class="object-cover">
+                        <div class="relative rounded-2xl overflow-hidden shadow-2xl transform hover:scale-105 transition-transform duration-500 w-3/3 mx-auto">
+                            <img src="{{ asset('images/Gemini_Generated_Image_b2vgmeb2vgmeb2vg.png') }}" alt="Our Team" class="object-cover">
                             <div class="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent"></div>
                         </div>
                     </div>
@@ -77,8 +77,8 @@
         </section>
 
         <!-- Our Mission & Vision -->
-        <section class="py-20 bg-white">
-            <div class="px-20">
+        <section class="lg:px-20 p-6 bg-white">
+            <div class="">
                 <div class="text-center mb-16">
                     <h2 class="text-4xl md:text-5xl font-2xl font-display gradient-text mb-6">
                         Mission & Vision
@@ -123,8 +123,8 @@
         </section>
 
         <!-- Our Values -->
-        <section class="py-20 bg-gradient-to-br from-purple-50 to-pink-50">
-            <div class="px-20">
+        <section class="lg:px-20 p-6 py-20 bg-gradient-to-br from-purple-50 to-pink-50">
+            <div class="">
                 <div class="text-center mb-16">
                     <h2 class="text-4xl md:text-5xl font-2xl font-display gradient-text mb-6">
                         Our Values
@@ -193,8 +193,8 @@
         </section>
 
         <!-- Meet Our Team -->
-        <section class="py-20 bg-white">
-            <div class="px-20">
+        <section class="lg:px-20 p-6 py-20 bg-white">
+            <div class="">
                 <div class="text-center mb-16">
                     <h2 class="text-4xl md:text-5xl font-2xl font-display gradient-text mb-6">
                         Meet Our Amazing Team
@@ -246,76 +246,9 @@
                 </div>
             </div>
         </section>
-
-        <!-- Our Journey Timeline -->
-        <section class="py-20 bg-gradient-to-br from-purple-50 to-pink-50">
-            <div class="px-20">
-                <div class="text-center mb-16">
-                    <h2 class="text-4xl md:text-5xl font-2xl font-display gradient-text mb-6">
-                        Our Journey
-                    </h2>
-                    <p class="text-xl text-gray-600">
-                        Milestones that shaped our story
-                    </p>
-                </div>
-                
-                <div class="relative">
-                    <!-- Timeline line -->
-                    <div class="absolute left-8 top-0 bottom-0 w-0.5 bg-gradient-to-b from-purple-400 to-pink-400"></div>
-                    
-                    <div class="space-y-12">
-                        <!-- Timeline Item 1 -->
-                        <div class="relative flex items-center">
-                            <div class="w-16 h-16 bg-gradient-to-r from-purple-600 to-pink-600 rounded-full flex items-center justify-center text-white font-2xl text-lg shadow-lg">
-                                2015
-                            </div>
-                            <div class="ml-8 bg-white rounded-lg p-6 shadow-lg flex-1">
-                                <h3 class="text-xl font-2xl text-gray-800 mb-2">The Beginning</h3>
-                                <p class="text-gray-600">Founded Zuppie with a vision to make every celebration magical.</p>
-                            </div>
-                        </div>
-                        
-                        <!-- Timeline Item 2 -->
-                        <div class="relative flex items-center">
-                            <div class="w-16 h-16 bg-gradient-to-r from-pink-600 to-purple-600 rounded-full flex items-center justify-center text-white font-2xl text-lg shadow-lg">
-                                2018
-                            </div>
-                            <div class="ml-8 bg-white rounded-lg p-6 shadow-lg flex-1">
-                                <h3 class="text-xl font-2xl text-gray-800 mb-2">First 100 Events</h3>
-                                <p class="text-gray-600">Celebrated our 100th successful event and expanded our team.</p>
-                            </div>
-                        </div>
-                        
-                        <!-- Timeline Item 3 -->
-                        <div class="relative flex items-center">
-                            <div class="w-16 h-16 bg-gradient-to-r from-purple-600 to-pink-600 rounded-full flex items-center justify-center text-white font-2xl text-lg shadow-lg">
-                                2021
-                            </div>
-                            <div class="ml-8 bg-white rounded-lg p-6 shadow-lg flex-1">
-                                <h3 class="text-xl font-2xl text-gray-800 mb-2">Award Recognition</h3>
-                                <p class="text-gray-600">Won "Best Event Management Company" for innovation and excellence.</p>
-                            </div>
-                        </div>
-                        
-                        <!-- Timeline Item 4 -->
-                        <div class="relative flex items-center">
-                            <div class="w-16 h-16 bg-gradient-to-r from-pink-600 to-purple-600 rounded-full flex items-center justify-center text-white font-2xl text-lg shadow-lg">
-                                2023
-                            </div>
-                            <div class="ml-8 bg-white rounded-lg p-6 shadow-lg flex-1">
-                                <h3 class="text-xl font-2xl text-gray-800 mb-2">500+ Events</h3>
-                                <p class="text-gray-600">Reached the milestone of 500 magical events and countless happy clients.</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Call to Action -->
-        <section class="py-20 bg-white">
-            <div class="px-20 text-center">
-                <div class="max-w-4xl mx-auto">
+        <section class="lg:px-20 p-6 py-20 bg-white">
+            <div class=" text-center">
+                <div class="">
                     <h2 class="text-4xl md:text-5xl font-2xl font-display gradient-text mb-6">
                         Ready to Create Magic Together?
                     </h2>
@@ -324,11 +257,11 @@
                     </p>
                     
                     <div class="flex flex-col sm:flex-row gap-4 justify-center items-center">
-                        <a href="/contact" class="bg-gradient-to-r from-purple-600 to-pink-600 text-white px-8 py-4 rounded-full font-2xl text-lg hover:shadow-lg hover:scale-105 transition-all duration-300 flex items-center space-x-2">
+                        <a href="{{route('contact')}}" wire:navigate class="bg-gradient-to-r from-purple-600 to-pink-600 text-white px-8 py-4 rounded-full font-2xl text-lg hover:shadow-lg hover:scale-105 transition-all duration-300 flex items-center space-x-2">
                             <i class="fas fa-calendar-plus"></i>
                             <span>Start Planning</span>
                         </a>
-                        <a href="/event-packages" class="border-2 border-purple-600 text-purple-600 px-8 py-4 rounded-full font-2xl text-lg hover:bg-purple-600 hover:text-white transition-all duration-300 flex items-center space-x-2">
+                        <a href="/event-packages" wire:navigate class="border-2  border-purple-600 text-purple-600 px-8 py-4 rounded-full font-2xl text-lg hover:bg-purple-600 hover:text-white transition-all duration-300 flex items-center space-x-2">
                             <i class="fas fa-eye"></i>
                             <span>View Packages</span>
                         </a>

@@ -104,8 +104,8 @@
             <div class="mt-6 text-center">
                 <p class="text-sm text-purple-600">
                     Already have an account?
-                    <a href="#" class="font-medium text-pink-600 hover:text-pink-500">
-                        Sign in here
+                    <a href="{{ route('login') }}" wire:navigate class="font-medium text-pink-600 hover:text-pink-500">
+                        Login here
                     </a>
                 </p>
             </div>
