@@ -33,7 +33,7 @@ use App\Livewire\Public\Event\PackageDetail;
 use App\Livewire\Public\Event\PackageBookingForm;
 use App\Livewire\Public\Event\ManageBooking as PublicManageBooking;
 use App\Livewire\Admin\Booking\ViewBooking;
-
+use Illuminate\Support\Facades\Artisan;
 use App\Livewire\Admin\Blog\ManageBlog;
 use App\Livewire\Public\Blog\BlogPage;
 use App\Livewire\Public\Blog\BlogDetailPage;
@@ -138,3 +138,8 @@ Route::get('/browserconfig.xml', function () {
 
 Route::get('/invoices/{invoice}/download', [BookingInvoice::class, 'downloadInvoice'])
      ->name('invoices.download');
+
+     Route::get('/storage-link', function () {
+    Artisan::call('storage:link');
+    return 'Storage link has been created!';
+});

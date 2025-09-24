@@ -143,7 +143,7 @@ class Setting extends Model
     {
         return [
             'site_name' => 'Zuppie',
-            'site_logo' => '/images/logo.jpeg',
+            'site_logo' => '/images/zuppie-logo.jpeg',
             'site_logo_file_id' => null,
             'email' => 'info@zuppie.com',
             'phone_no' => '+91 9999999990',
