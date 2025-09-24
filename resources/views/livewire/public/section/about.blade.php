@@ -193,7 +193,7 @@
         </section>
 
         <!-- Meet Our Team -->
-        <section class="lg:px-20 p-6 py-20 bg-white">
+        {{-- <section class="lg:px-20 p-6 py-20 bg-white">
             <div class="">
                 <div class="text-center mb-16">
                     <h2 class="text-4xl md:text-5xl font-2xl font-display gradient-text mb-6">
@@ -245,7 +245,7 @@
                     </div>
                 </div>
             </div>
-        </section>
+        </section> --}}
         <section class="lg:px-20 p-6 py-20 bg-white">
             <div class=" text-center">
                 <div class="">
