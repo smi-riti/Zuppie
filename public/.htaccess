@@ -1,3 +1,42 @@
+<IfModule mod_rewrite.c>
+    <IfModule mod_negotiation.c>
+        Options -MultiViews -Indexes
+    </IfModule>
+
+    RewriteEngine On
+
+    # Redirect Trailing Slashes...
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteRule ^(.*)/$ /$1 [L,R=301]
+
+    # Handle Front Controller...
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteRule ^ index.php [L]
+</IfModule>
+
+# ✅ Allow correct MIME types for images
+<IfModule mod_mime.c>
+    AddType image/jpeg .jpeg .jpg
+    AddType image/png .png
+    AddType image/webp .webp
+    AddType image/avif .avif
+    AddType image/gif .gif
+    AddType image/svg+xml .svg
+</IfModule>
+
+# ✅ Cache static assets (improves speed)
+<IfModule mod_expires.c>
+    ExpiresActive On
+    ExpiresByType image/jpeg "access plus 1 year"
+    ExpiresByType image/png "access plus 1 year"
+    ExpiresByType image/webp "access plus 1 year"
+    ExpiresByType image/avif "access plus 1 year"
+    ExpiresByType image/gif "access plus 1 year"
+    ExpiresByType image/svg+xml "access plus 1 year"
+</IfModule>
+
+# ✅ Content Security Policy
 <IfModule mod_headers.c>
     Header always set Content-Security-Policy "
         default-src 'self';
@@ -28,7 +67,7 @@
             https://cdnjs.cloudflare.com
             https://unpkg.com
             https://ik.imagekit.io
-            https://cdn.jsdelivr.net
+            https://cdn.jsdelivr.net    
             https://www.google-analytics.com;
         media-src 'self';
         object-src 'none';

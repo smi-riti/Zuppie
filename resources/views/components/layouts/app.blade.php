@@ -477,6 +477,35 @@
                     return;
                 }
             });
+
+            // Handle image loading errors
+            document.addEventListener('error', function(e) {
+                if (e.target.tagName === 'IMG') {
+                    console.warn('Image failed to load:', e.target.src);
+                    // You could add fallback image here if needed
+                    // e.target.src = '/images/placeholder.jpg';
+                }
+            }, true);
+
+            // Add a function to preload critical images
+            function preloadImages() {
+                const criticalImages = [
+                    '/images/zuppie-logo.jpeg',
+                    '/images/zuppie-logo.png',
+                    '/images/hero-banner.jpg',
+                    '/images/our-team.png'
+                ];
+                
+                criticalImages.forEach(src => {
+                    const img = new Image();
+                    img.onload = () => console.log('Preloaded:', src);
+                    img.onerror = () => console.warn('Failed to preload:', src);
+                    img.src = src;
+                });
+            }
+
+            // Preload critical images
+            preloadImages();
         });
 
 
