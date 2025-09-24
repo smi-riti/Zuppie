@@ -1,264 +1,115 @@
-const CACHE_NAME = 'zuppie-v3';
-const OFFLINE_URL = '/offline.html';
+const CACHE_NAME = "zuppie-v4";
+const OFFLINE_URL = "/offline.html";
 
-// Essential resources that should exist
+// Core files that must be cached
 const CORE_CACHE_RESOURCES = [
-    '/',
-    '/offline.html',
-    '/images/logo.jpeg',
-    '/images/logo.png'
+  "/",
+  "/offline.html",
+  "/images/logo.jpeg",
+  "/images/logo.png",
 ];
 
-// Optional resources - cache if available (only CSP-allowed URLs)
-const OPTIONAL_CACHE_RESOURCES = [
-    '/build/assets/app-BOb1W5vC.css',
-    '/build/assets/app-DNxiirP_.js'
-    // Note: External CDN resources are now handled by the fetch event instead of pre-caching
-    // This prevents CSP violations during service worker installation
-];
-
-// Helper function to cache resources with error handling
-async function cacheResources(cache, resources, isOptional = false) {
-    const promises = resources.map(async (resource) => {
-        try {
-            const response = await fetch(resource);
-            if (response.ok) {
-                await cache.put(resource, response);
-                console.log(`Cached: ${resource}`);
-            } else if (!isOptional) {
-                console.warn(`Failed to cache core resource: ${resource} - Status: ${response.status}`);
-            }
-        } catch (error) {
-            if (!isOptional) {
-                console.warn(`Error caching core resource: ${resource}`, error);
-            } else {
-                console.log(`Optional resource not available: ${resource}`);
-            }
-        }
-    });
-    
-    await Promise.allSettled(promises);
-}
-
-// Install event
-self.addEventListener('install', event => {
-    console.log('Service Worker installing...');
-    event.waitUntil(
-        caches.open(CACHE_NAME)
-            .then(async (cache) => {
-                try {
-                    // Cache core resources first
-                    await cacheResources(cache, CORE_CACHE_RESOURCES, false);
-                    
-                    // Cache optional resources
-                    await cacheResources(cache, OPTIONAL_CACHE_RESOURCES, true);
-                    
-                    console.log('Service Worker installation completed');
-                } catch (error) {
-                    console.error('Service Worker installation failed:', error);
-                }
-            })
-            .then(() => {
-                return self.skipWaiting();
-            })
-            .catch(error => {
-                console.error('Service Worker cache opening failed:', error);
-            })
-    );
+// Install event → pre-cache core files
+self.addEventListener("install", (event) => {
+  console.log("[SW] Installing...");
+  event.waitUntil(
+    caches.open(CACHE_NAME).then((cache) => {
+      return cache.addAll(CORE_CACHE_RESOURCES);
+    })
+  );
+  self.skipWaiting();
 });
 
-// Activate event
-self.addEventListener('activate', event => {
-    console.log('Service Worker activating...');
-    event.waitUntil(
-        Promise.all([
-            // Clean up old caches
-            caches.keys().then(cacheNames => {
-                return Promise.all(
-                    cacheNames.map(cacheName => {
-                        if (cacheName !== CACHE_NAME) {
-                            console.log('Deleting old cache:', cacheName);
-                            return caches.delete(cacheName);
-                        }
-                    })
-                );
-            }),
-            // Take control of all clients immediately
-            self.clients.claim()
-        ]).then(() => {
-            console.log('Service Worker activated and controlling all clients');
-        }).catch(error => {
-            console.error('Service Worker activation failed:', error);
+// Activate event → clear old caches
+self.addEventListener("activate", (event) => {
+  console.log("[SW] Activating...");
+  event.waitUntil(
+    caches.keys().then((keys) =>
+      Promise.all(keys.map((key) => key !== CACHE_NAME && caches.delete(key)))
+    )
+  );
+  self.clients.claim();
+});
+
+// Fetch event → network first for pages, cache first for assets
+self.addEventListener("fetch", (event) => {
+  if (event.request.method !== "GET") return;
+
+  if (event.request.mode === "navigate") {
+    // Page navigation → try network, fallback to offline
+    event.respondWith(
+      fetch(event.request)
+        .then((response) => {
+          caches.open(CACHE_NAME).then((cache) => {
+            cache.put(event.request, response.clone());
+          });
+          return response;
         })
+        .catch(() => caches.match(OFFLINE_URL))
     );
-});
-
-// Fetch event with better error handling
-self.addEventListener('fetch', event => {
-    // Skip non-http requests
-    if (!event.request.url.startsWith('http')) {
-        return;
-    }
-    
-    // Skip POST requests and other methods that shouldn't be cached
-    if (event.request.method !== 'GET') {
-        return;
-    }
-    
-    if (event.request.mode === 'navigate') {
-        event.respondWith(
-            fetch(event.request)
-                .then(response => {
-                    // Clone the response before caching
-                    const responseClone = response.clone();
-                    if (response.ok && response.type === 'basic') {
-                        caches.open(CACHE_NAME).then(cache => {
-                            cache.put(event.request, responseClone);
-                        });
-                    }
-                    return response;
-                })
-                .catch(() => {
-                    return caches.open(CACHE_NAME)
-                        .then(cache => {
-                            return cache.match(OFFLINE_URL);
-                        });
-                })
+  } else {
+    // Assets → try cache, fallback to network
+    event.respondWith(
+      caches.match(event.request).then((cached) => {
+        return (
+          cached ||
+          fetch(event.request)
+            .then((response) => {
+              if (
+                response.ok &&
+                (response.type === "basic" || response.type === "cors")
+              ) {
+                caches.open(CACHE_NAME).then((cache) => {
+                  cache.put(event.request, response.clone());
+                });
+              }
+              return response;
+            })
+            .catch(() => {
+              // fallback for images
+              if (event.request.destination === "image") {
+                return caches.match("/images/logo.png");
+              }
+              return new Response("Offline", { status: 503 });
+            })
         );
-    } else {
-        event.respondWith(
-            caches.match(event.request)
-                .then(response => {
-                    if (response) {
-                        return response;
-                    }
-                    
-                    return fetch(event.request)
-                        .then(fetchResponse => {
-                            // Clone the response before caching
-                            const responseClone = fetchResponse.clone();
-                            if (fetchResponse.ok && (fetchResponse.type === 'basic' || fetchResponse.type === 'cors')) {
-                                caches.open(CACHE_NAME).then(cache => {
-                                    // Only cache successful GET requests
-                                    if (event.request.method === 'GET') {
-                                        cache.put(event.request, responseClone);
-                                    }
-                                }).catch(cacheError => {
-                                    console.log('Cache put failed for:', event.request.url, cacheError);
-                                });
-                            }
-                            return fetchResponse;
-                        })
-                        .catch(error => {
-                            console.log('Fetch failed for:', event.request.url, error);
-                            // For external resources, return a basic response instead of failing
-                            if (event.request.url.includes('cdn.') || 
-                                event.request.url.includes('fonts.') || 
-                                event.request.url.includes('unpkg.') ||
-                                event.request.url.includes('cdnjs.')) {
-                                return new Response('', { 
-                                    status: 200,
-                                    statusText: 'OK',
-                                    headers: new Headers({
-                                        'Content-Type': event.request.url.includes('.css') ? 'text/css' : 
-                                                      event.request.url.includes('.js') ? 'application/javascript' : 'text/plain'
-                                    })
-                                });
-                            }
-                            // Return a basic response for failed requests
-                            return new Response('Network error', { 
-                                status: 408,
-                                statusText: 'Network error' 
-                            });
-                        });
-                })
-        );
-    }
+      })
+    );
+  }
 });
 
-// Background sync for form submissions
-self.addEventListener('sync', event => {
-    if (event.tag === 'background-sync') {
-        console.log('Background sync triggered');
-        event.waitUntil(doBackgroundSync());
-    }
+// Background sync placeholder
+self.addEventListener("sync", (event) => {
+  if (event.tag === "background-sync") {
+    console.log("[SW] Background sync triggered");
+    event.waitUntil(Promise.resolve());
+  }
 });
 
-function doBackgroundSync() {
-    try {
-        // Handle background sync for form submissions
-        return Promise.resolve();
-    } catch (error) {
-        console.error('Background sync failed:', error);
-        return Promise.reject(error);
-    }
-}
-
-// Push notifications with better error handling
-self.addEventListener('push', event => {
-    if (event.data) {
-        try {
-            const data = event.data.json();
-            const options = {
-                body: data.body,
-                icon: '/images/logo.png',
-                badge: '/images/logo.png',
-                vibrate: [100, 50, 100],
-                data: {
-                    dateOfArrival: Date.now(),
-                    primaryKey: data.primaryKey
-                },
-                actions: [
-                    {
-                        action: 'explore',
-                        title: 'View Details'
-                    },
-                    {
-                        action: 'close',
-                        title: 'Close'
-                    }
-                ]
-            };
-            
-            event.waitUntil(
-                self.registration.showNotification(data.title, options)
-            );
-        } catch (error) {
-            console.error('Push notification error:', error);
-        }
-    }
+// Push notifications
+self.addEventListener("push", (event) => {
+  if (!event.data) return;
+  const data = event.data.json();
+  const options = {
+    body: data.body,
+    icon: "/images/logo.png",
+    badge: "/images/logo.png",
+    vibrate: [100, 50, 100],
+  };
+  event.waitUntil(self.registration.showNotification(data.title, options));
 });
 
-// Handle notification clicks
-self.addEventListener('notificationclick', event => {
-    event.notification.close();
-    
-    if (event.action === 'explore') {
-        event.waitUntil(
-            clients.openWindow('/')
-        );
-    } else if (event.action === 'close') {
-        event.notification.close();
-    }
+// Notification clicks
+self.addEventListener("notificationclick", (event) => {
+  event.notification.close();
+  if (event.action === "explore") {
+    event.waitUntil(clients.openWindow("/"));
+  }
 });
 
-// Handle messages from clients
-self.addEventListener('message', event => {
-    if (event.data && event.data.type === 'SKIP_WAITING') {
-        self.skipWaiting();
-    }
-    
-    if (event.data && event.data.type === 'GET_VERSION') {
-        event.ports[0].postMessage({ version: CACHE_NAME });
-    }
-});
-
-// Error handling
-self.addEventListener('error', event => {
-    console.error('Service Worker error:', event.error);
-});
-
-self.addEventListener('unhandledrejection', event => {
-    console.error('Service Worker unhandled promise rejection:', event.reason);
-    event.preventDefault();
+// Force update when message received
+self.addEventListener("message", (event) => {
+  if (event.data?.type === "SKIP_WAITING") {
+    self.skipWaiting();
+  }
 });
