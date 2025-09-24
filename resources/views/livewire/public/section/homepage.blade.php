@@ -89,7 +89,7 @@
                 <!-- Image Section -->
                 <div data-aos="fade-right" class="relative">
                     <div class="relative rounded-3xl overflow-hidden shadow-2xl group">
-                        <img src="{{ asset('images/Gemini_Generated_Image_b2vgmeb2vgmeb2vg.png') }}"
+                        <img src="{{ asset('images/our-team.png') }}"
                             alt="Birthday Celebration"
                             class="w-full h-64 sm:h-80 lg:h-96 object-cover group-hover:scale-110 transition-transform duration-700">
                         <div class="absolute inset-0 bg-gradient-to-t from-purple-900/30 to-transparent"></div>
@@ -188,7 +188,7 @@
                 <div class="col-span-1 row-span-2" data-aos="fade-up" data-aos-delay="100">
                     <div
                         class="relative overflow-hidden rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 hover-scale h-[500px]">
-                        <img src="{{ asset('images/1684232520_original.avif') }}" alt="Birthday Party"
+                        <img src="{{ asset('images/birthday-party-decoration.avif') }}" alt="Birthday Party"
                             class="w-full h-full object-cover">
                         <div
                             class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 hover:opacity-100 transition-opacity duration-300 flex items-end p-4">
@@ -201,7 +201,7 @@
                 <div class="col-span-1" data-aos="fade-up" data-aos-delay="200">
                     <div
                         class="relative overflow-hidden rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 hover-scale h-[240px]">
-                        <img src="{{ asset('images/RD6.jfif') }}" alt="Wedding Setup"
+                        <img src="{{ asset('images/wedding-setup-1.jpg') }}" alt="Wedding Setup"
                             class="w-full h-full object-cover">
                         <div
                             class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 hover:opacity-100 transition-opacity duration-300 flex items-end p-4">
@@ -214,7 +214,7 @@
                 <div class="col-span-1" data-aos="fade-up" data-aos-delay="300">
                     <div
                         class="relative overflow-hidden rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 hover-scale h-[240px]">
-                        <img src="{{ asset('images/OWN DECORATION 13.jpg') }}" alt="Corporate Event"
+                        <img src="{{ asset('images/corporate-event-decoration.jpg') }}" alt="Corporate Event"
                             class="w-full h-full object-cover">
                         <div
                             class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 hover:opacity-100 transition-opacity duration-300 flex items-end p-4">
@@ -227,7 +227,7 @@
                 <div class="col-span-1" data-aos="fade-up" data-aos-delay="400">
                     <div
                         class="relative overflow-hidden rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 hover-scale h-[240px]">
-                        <img src="{{ asset('images/OWN DECORATION 22.jpg') }}" alt="Anniversary"
+                        <img src="{{ asset('images/anniversary-decoration.jpg') }}" alt="Anniversary"
                             class="w-full h-full object-cover">
                         <div
                             class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 hover:opacity-100 transition-opacity duration-300 flex items-end p-4">
@@ -240,7 +240,7 @@
                 <div class="col-span-1" data-aos="fade-up" data-aos-delay="500">
                     <div
                         class="relative overflow-hidden rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 hover-scale h-[240px]">
-                        <img src="{{ asset('images/1600755451_original.avif') }}" alt="Baby Shower"
+                        <img src="{{ asset('images/baby-shower-decoration.avif') }}" alt="Baby Shower"
                             class="w-full h-full object-cover">
                         <div
                             class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 hover:opacity-100 transition-opacity duration-300 flex items-end p-4">
@@ -253,7 +253,7 @@
                 <div class="col-span-2 row-span-1" data-aos="fade-up" data-aos-delay="600">
                     <div
                         class="relative overflow-hidden rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 hover-scale h-[240px] md:h-[240px]">
-                        <img src="{{ asset('images/OWN DECORATION 17.jpg') }}" alt="Event Setup"
+                        <img src="{{ asset('images/elegant-event-setup.jpg') }}" alt="Event Setup"
                             class="w-full h-full object-cover">
                         <div
                             class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 hover:opacity-100 transition-opacity duration-300 flex items-end p-4">

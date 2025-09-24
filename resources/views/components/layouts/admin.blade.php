@@ -16,7 +16,7 @@
             <div class="md:hidden fixed top-0 left-0 right-0 z-50 bg-white border-b border-purple-200">
                 <div class="flex items-center justify-between px-4 py-3">
                     <a href="/admin" class="flex items-center space-x-3">
-                        <img src="/images/logo.jpeg" alt="Admin Logo" class="h-8 w-8 rounded-full">
+                        <img src="/images/zuppie-logo.jpeg" alt="Admin Logo" class="h-8 w-8 rounded-full">
                         <span class="text-lg font-2xl text-purple-600">AdminPanel</span>
                     </a>
                     <button aria-label="Open menu" onclick="window.dispatchEvent(new Event('open-admin-mobile-menu'))" class="p-2 bg-white rounded-md shadow-md text-purple-600">

@@ -5,8 +5,8 @@ const OFFLINE_URL = "/offline.html";
 const CORE_CACHE_RESOURCES = [
   "/",
   "/offline.html",
-  "/images/logo.jpeg",
-  "/images/logo.png",
+  "/images/zuppie-logo.jpeg",
+  "/images/zuppie-logo.png",
 ];
 
 // Install event → pre-cache core files
@@ -68,7 +68,7 @@ self.addEventListener("fetch", (event) => {
             .catch(() => {
               // fallback for images
               if (event.request.destination === "image") {
-                return caches.match("/images/logo.png");
+                return caches.match("/images/zuppie-logo.png");
               }
               return new Response("Offline", { status: 503 });
             })
@@ -92,8 +92,8 @@ self.addEventListener("push", (event) => {
   const data = event.data.json();
   const options = {
     body: data.body,
-    icon: "/images/logo.png",
-    badge: "/images/logo.png",
+    icon: "/images/zuppie-logo.png",
+    badge: "/images/zuppie-logo.png",
     vibrate: [100, 50, 100],
   };
   event.waitUntil(self.registration.showNotification(data.title, options));

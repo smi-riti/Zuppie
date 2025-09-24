@@ -244,7 +244,7 @@
             <table class="company-info">
                 <tr>
                     <td style="width: 20%;">
-                        <img src="{{ public_path('images/logo.jpeg') }}" alt="Zuppie Logo" class="logo">
+                        <img src="{{ public_path('images/zuppie-logo.jpeg') }}" alt="Zuppie Logo" class="logo">
                     </td>
                     <td style="width: 80%;" class="company-details">
                         <div class="company-name">ZUPPIE</div>

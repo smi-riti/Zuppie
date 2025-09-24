@@ -2,7 +2,7 @@
     <div x-data="heroSection()" class="relative h-[75vh]  flex items-center justify-center overflow-hidden bg-black">
         <!-- Background Image with Gradient Overlay -->
         <div class="absolute inset-0 bg-cover bg-center"
-            style="background-image: url('{{ asset('images/zuppieventpakage.jpg') }}');">
+            style="background-image: url('{{ asset('images/hero-banner.jpg') }}');"
             <div class="absolute inset-0 bg-gradient-to-br from-purple-500/70 via-purple-400/60 to-pink-400/60"></div>
         </div>
 
