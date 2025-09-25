@@ -3,7 +3,7 @@
     :class="scrolled ? 'bg-white shadow-lg' : 'bg-gradient-to-r from-pink-100 to-purple-100 shadow-md'">
     <div class="container mx-auto px-1 py-1">
         <div class="flex justify-between items-center">
-            <a href="/" wire:navigate class="flex items-center space-x-2 group">
+            <a href="/" class="flex items-center space-x-2 group">
                 <div class="">
                     <img src="{{ $settings['site_logo'] }}" alt="{{ $settings['site_name'] }} Logo" class="h-20 w-30">
                 </div>
@@ -55,7 +55,7 @@
         <!-- Mobile menu -->
         <div x-show="open" x-transition:enter="animate__animated animate__fadeInDown"
             x-transition:leave="animate__animated animate__fadeOutUp" class="md:hidden mt-4 pb-4 space-y-3">
-            <a href="{{ route('home') }}" wire:navigate
+            <a href="{{ route('home') }}"
                 class="block px-3 py-2 text-pink-700 font-medium hover:bg-pink-50 rounded">Home</a>
             <a href="{{ route('event-packages') }}" wire:navigate
                 class="block px-3 py-2 text-pink-700 font-medium hover:bg-pink-50 rounded">Event Packages</a>
