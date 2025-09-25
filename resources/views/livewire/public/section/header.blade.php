@@ -1,16 +1,13 @@
 <header x-data="{ open: false, scrolled: false, showMegaMenu: false }" @scroll.window="scrolled = window.scrollY > 10"
     class="fixed w-full z-50 transition-all duration-500"
     :class="scrolled ? 'bg-white shadow-lg' : 'bg-gradient-to-r from-pink-100 to-purple-100 shadow-md'">
-    <div class="container mx-auto px-4 py-3">
+    <div class="container mx-auto px-1 py-1">
         <div class="flex justify-between items-center">
             <a href="/" class="flex items-center space-x-2 group">
                 <div class="">
-                    <img src="{{ $settings['site_logo'] }}" alt="{{ $settings['site_name'] }} Logo" class="h-10 w-12">
+                    <img src="{{ $settings['site_logo'] }}" alt="{{ $settings['site_name'] }} Logo" class="h-20 w-30">
                 </div>
-                <span
-                    class="text-2xl font-2xl bg-clip-text text-transparent bg-gradient-to-r from-pink-600 to-purple-600 group-hover:from-purple-700 group-hover:to-pink-700 transition">
-                    {{ $settings['site_name'] }}
-                </span>
+               
             </a>
 
             <!-- Desktop Navigation with Mega Menu -->
