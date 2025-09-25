@@ -1,5 +1,5 @@
 <div>
-    <div x-data="heroSection()" class="relative h-[75vh]  flex items-center justify-center overflow-hidden bg-black">
+    <div class="relative h-[75vh] flex items-center justify-center overflow-hidden bg-black">
         <!-- Background Image with Gradient Overlay -->
         <div class="absolute inset-0 bg-cover bg-center"
             style="background-image: url('{{ asset('images/hero-banner.jpg') }}'); background-color: #8B5CF6;">
@@ -21,14 +21,15 @@
 
         <!-- Content -->
         <div class="relative z-10 text-center px-4 sm:px-6 w-full max-w-4xl mx-auto">
-            <!-- Typewriter Heading -->
-            <h1 class="text-3xl sm:text-5xl md:text-5xl lg:text-6xl font-medium text-white leading-tight mb-6">
-                <span x-text="displayText || 'Creating Unforgettable Events'"></span>
-                <span x-show="isTyping || false" class="typewriter-cursor">|</span>
+            <!-- Main Heading with Animated Gradient -->
+            <h1 class="text-3xl sm:text-5xl md:text-5xl lg:text-6xl font-bold leading-tight mb-6">
+                <span class="animated-gradient">Creating Unforgettable Events</span>
             </h1>
 
             <!-- Subtitle -->
-            <p x-text="(subtitles && subtitles[currentIndex]) || 'Precision and Passion in Every Detail'" class="text-lg sm:text-xl md:text-2xl text-purple-100 italic mb-8"></p>
+            <p class="text-lg sm:text-xl md:text-2xl text-purple-100 italic mb-8">
+                Precision and Passion in Every Detail
+            </p>
 
             <!-- CTA Buttons -->
             <div class="flex flex-col sm:flex-row gap-4 justify-center">
@@ -44,91 +45,33 @@
         </div>
     </div>
 
-    @script
-        <script>
-            document.addEventListener('livewire:navigated', () => {
-                if (typeof Alpine !== 'undefined') {
-                    initHeroSection();
-                } else {
-                    document.addEventListener('alpine:init', initHeroSection);
-                }
-            });
-
-            document.addEventListener('alpine:init', initHeroSection);
-
-            function initHeroSection() {
-                Alpine.data('heroSection', () => ({
-                    messages: [
-                        "Creating Unforgettable Events",
-                        "Turning Moments Into Memories",
-                        "Your Vision, Our Expertise"
-                    ],
-                    subtitles: [
-                        "Precision and Passion in Every Detail",
-                        "Memorable Moments Crafted With Love",
-                        "Seamless Event Planning You Can Trust"
-                    ],
-                    displayText: '',
-                    currentIndex: 0,
-                    isTyping: false,
-                    typingSpeed: 80,
-                    pauseBetween: 2000,
-
-                    init() {
-                        this.startTyping();
-                    },
-
-                    async startTyping() {
-                        while (true) {
-                            let message = this.messages[this.currentIndex];
-                            await this.typeText(message);
-                            await this.sleep(this.pauseBetween);
-                            await this.deleteText();
-                            this.currentIndex = (this.currentIndex + 1) % this.messages.length;
-                        }
-                    },
-
-                    async typeText(text) {
-                        this.isTyping = true;
-                        this.displayText = '';
-                        for (let char of text) {
-                            this.displayText += char;
-                            await this.sleep(this.typingSpeed);
-                        }
-                        this.isTyping = false;
-                    },
-
-                    async deleteText() {
-                        this.isTyping = true;
-                        while (this.displayText.length > 0) {
-                            this.displayText = this.displayText.slice(0, -1);
-                            await this.sleep(40);
-                        }
-                        this.isTyping = false;
-                    },
-
-                    sleep(ms) {
-                        return new Promise(resolve => setTimeout(resolve, ms));
-                    }
-                }));
-            }
-        </script>
-    @endscript
-
     <style>
-        .typewriter-cursor {
-            display: inline-block;
-            margin-left: 2px;
-            animation: blink 1s step-end infinite;
-            opacity: 0.8;
+        .animated-gradient {
+            background: linear-gradient(
+                to right, 
+                #FFFFFF, 
+                #F9FAFB, 
+                #FFFFFF, 
+                #F0ABFC, 
+                #E879F9, 
+                #C084FC, 
+                #A855F7, 
+                #FFFFFF
+            );
+            background-size: 400% 100%;
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: gradient-shift 8s ease infinite;
         }
 
-        @keyframes blink {
+        @keyframes gradient-shift {
+            0%, 100% {
+                background-position: 0% 50%;
+            }
             50% {
-                opacity: 0;
+                background-position: 100% 50%;
             }
         }
     </style>
-
-
 </div>
