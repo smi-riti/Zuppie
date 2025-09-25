@@ -1,5 +1,58 @@
 <div>
-    <div class="relative h-[75vh] flex items-center justify-center overflow-hidden bg-black">
+    <div x-data="{
+        messages: [
+            'Creating Unforgettable Events',
+            'Turning Moments Into Memories',
+            'Your Vision, Our Expertise'
+        ],
+        subtitles: [
+            'Precision and Passion in Every Detail',
+            'Memorable Moments Crafted With Love',
+            'Seamless Event Planning You Can Trust'
+        ],
+        displayText: '',
+        currentIndex: 0,
+        isTyping: false,
+        typingSpeed: 80,
+        pauseBetween: 2000,
+
+        init() {
+            this.startTyping();
+        },
+
+        async startTyping() {
+            while (true) {
+                let message = this.messages[this.currentIndex];
+                await this.typeText(message);
+                await this.sleep(this.pauseBetween);
+                await this.deleteText();
+                this.currentIndex = (this.currentIndex + 1) % this.messages.length;
+            }
+        },
+
+        async typeText(text) {
+            this.isTyping = true;
+            this.displayText = '';
+            for (let char of text) {
+                this.displayText += char;
+                await this.sleep(this.typingSpeed);
+            }
+            this.isTyping = false;
+        },
+
+        async deleteText() {
+            this.isTyping = true;
+            while (this.displayText.length > 0) {
+                this.displayText = this.displayText.slice(0, -1);
+                await this.sleep(40);
+            }
+            this.isTyping = false;
+        },
+
+        sleep(ms) {
+            return new Promise(resolve => setTimeout(resolve, ms));
+        }
+    }" class="relative h-[75vh]  flex items-center justify-center overflow-hidden bg-black">
         <!-- Background Image with Gradient Overlay -->
         <div class="absolute inset-0 bg-cover bg-center"
             style="background-image: url('{{ asset('images/hero-banner.jpg') }}'); background-color: #8B5CF6;">
@@ -48,14 +101,14 @@
     <style>
         .animated-gradient {
             background: linear-gradient(
-                to right, 
-                #FFFFFF, 
-                #F9FAFB, 
-                #FFFFFF, 
-                #F0ABFC, 
-                #E879F9, 
-                #C084FC, 
-                #A855F7, 
+                to right,
+                #FFFFFF,
+                #F9FAFB,
+                #FFFFFF,
+                #F0ABFC,
+                #E879F9,
+                #C084FC,
+                #A855F7,
                 #FFFFFF
             );
             background-size: 400% 100%;

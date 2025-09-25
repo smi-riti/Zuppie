@@ -42,7 +42,6 @@
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
-    <link rel="manifest" href="/site.webmanifest">
     <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#A855F7">
 
     <!-- Structured Data -->
@@ -332,7 +331,7 @@
     <livewire:public.section.footer />
     @livewireScripts
      <script src="https://unpkg.com/aos@2.3.1/dist/aos.js" defer></script>
-    
+
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js" defer></script>
     <script>
         document.addEventListener('DOMContentLoaded', function () {
@@ -424,38 +423,7 @@
                 });
             }
 
-            if ('serviceWorker' in navigator) {
-                window.addEventListener('load', () => {
-                    navigator.serviceWorker.register('/sw.js')
-                        .then(registration => {
-                            console.log('SW registered successfully:', registration.scope);
 
-                            // Handle service worker updates
-                            registration.addEventListener('updatefound', () => {
-                                const newWorker = registration.installing;
-                                if (newWorker) {
-                                    newWorker.addEventListener('statechange', () => {
-                                        if (newWorker.state === 'installed' && navigator.serviceWorker.controller) {
-                                            // New service worker is available
-                                            console.log('New service worker available');
-                                            // Auto-update without user intervention
-                                            newWorker.postMessage({ type: 'SKIP_WAITING' });
-                                        }
-                                    });
-                                }
-                            });
-
-                            // Listen for service worker controlling this page
-                            navigator.serviceWorker.addEventListener('controllerchange', () => {
-                                console.log('Service worker controller changed');
-                                window.location.reload();
-                            });
-                        })
-                        .catch(error => {
-                            console.warn('SW registration failed:', error);
-                        });
-                });
-            }
 
             // Handle Chrome extension runtime errors
             if (typeof chrome !== 'undefined' && chrome.runtime) {
@@ -495,7 +463,7 @@
                     '/images/hero-banner.jpg',
                     '/images/our-team.png'
                 ];
-                
+
                 criticalImages.forEach(src => {
                     const img = new Image();
                     img.onload = () => console.log('Preloaded:', src);

@@ -86,7 +86,7 @@
 </head>
 <body>
     <h1>🎉 Zuppie - CSP & Network Test Dashboard</h1>
-    
+
     <div class="summary">
         <h2>Test Results Summary</h2>
         <div id="summary-content">Running tests...</div>
@@ -148,13 +148,13 @@
         function updateSummary() {
             const summary = document.getElementById('summary-content');
             const passRate = testResults.total > 0 ? Math.round((testResults.passed / testResults.total) * 100) : 0;
-            
+
             summary.innerHTML = `
                 <div style="font-size: 24px; margin-bottom: 10px;">
                     ${testResults.passed}/${testResults.total} Tests Passed (${passRate}%)
                 </div>
                 <div>
-                    ✅ Passed: ${testResults.passed} | 
+                    ✅ Passed: ${testResults.passed} |
                     ❌ Failed: ${testResults.failed}
                 </div>
             `;
@@ -162,7 +162,7 @@
 
         function createTestItem(name, url) {
             testResults.total++;
-            
+
             const item = document.createElement('div');
             item.className = 'test-item';
             item.innerHTML = `
@@ -179,21 +179,21 @@
         function updateTestStatus(id, success, error = null) {
             const status = document.getElementById(`status-${id}`);
             const errorDiv = document.getElementById(`error-${id}`);
-            
+
             if (success) {
                 status.className = 'status success';
                 testResults.passed++;
             } else {
                 status.className = 'status error';
                 testResults.failed++;
-                
+
                 if (error) {
                     errorDiv.style.display = 'block';
                     errorDiv.textContent = error;
                     testResults.errors.push({ id, error });
                 }
             }
-            
+
             updateSummary();
         }
 
@@ -205,7 +205,7 @@
                         img.onload = () => resolve(true);
                         img.onerror = () => reject(new Error('Failed to load image'));
                         img.src = url;
-                        
+
                         setTimeout(() => reject(new Error('Timeout')), 10000);
                     });
                 } else {
@@ -227,7 +227,7 @@
             for (const url of testResources.css) {
                 const { item, id } = createTestItem('CSS Resource', url);
                 cssContainer.appendChild(item);
-                
+
                 try {
                     await testResource(url);
                     updateTestStatus(id, true);
@@ -241,7 +241,7 @@
             for (const url of testResources.js) {
                 const { item, id } = createTestItem('JavaScript Resource', url);
                 jsContainer.appendChild(item);
-                
+
                 try {
                     await testResource(url);
                     updateTestStatus(id, true);
@@ -255,7 +255,7 @@
             for (const url of testResources.images) {
                 const { item, id } = createTestItem('Image Resource', url);
                 imageContainer.appendChild(item);
-                
+
                 try {
                     await testResource(url, 'image');
                     updateTestStatus(id, true);
@@ -269,14 +269,14 @@
             try {
                 const { item, id } = createTestItem('CSP Header Check', window.location.origin);
                 cspContainer.appendChild(item);
-                
+
                 // Check if CSP headers are present
                 const response = await fetch(window.location.href, { method: 'HEAD' });
                 const cspHeader = response.headers.get('Content-Security-Policy');
-                
+
                 if (cspHeader) {
                     updateTestStatus(id, true);
-                    
+
                     // Show CSP details
                     const cspDetails = document.createElement('div');
                     cspDetails.className = 'error-details';
@@ -292,22 +292,6 @@
                 updateTestStatus(id, false, error.message);
             }
 
-            // Test Service Worker
-            if ('serviceWorker' in navigator) {
-                const { item, id } = createTestItem('Service Worker', '/sw.js');
-                cspContainer.appendChild(item);
-                
-                try {
-                    const registration = await navigator.serviceWorker.getRegistration();
-                    if (registration) {
-                        updateTestStatus(id, true);
-                    } else {
-                        updateTestStatus(id, false, 'Service Worker not registered');
-                    }
-                } catch (error) {
-                    updateTestStatus(id, false, error.message);
-                }
-            }
 
             // Final summary
             setTimeout(() => {
