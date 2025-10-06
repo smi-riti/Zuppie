@@ -13,15 +13,15 @@
     @scroll.window="scrolled = window.scrollY > 10"
     @resize.window="if (window.innerWidth >= 768) open = false"
     class="fixed w-full z-50 transition-all duration-500"
-    :class="scrolled ? 'bg-white shadow-lg' : 'bg-gradient-to-r from-pink-100 to-purple-100 shadow-md'"
-    <div class="container mx-auto px-1 py-1">
-        <div class="flex justify-between items-center">
+    :class="scrolled ? 'bg-white shadow-lg' : 'bg-gradient-to-r from-pink-100 to-purple-100 shadow-md'">
+    <div class="container mx-auto px-4 lg:px-6">
+        <div class="flex justify-between items-center h-20">
             <a href="/" class="flex items-center space-x-2 group">
-                <div class="">
+                <div class="flex-shrink-0">
                     <x-imagekit-image 
                         :src="$settings['site_logo']" 
                         :alt="$settings['site_name'] . ' Logo'" 
-                        class="h-20 w-30"
+                        class="h-12 w-auto sm:h-16 md:h-18 lg:h-20 max-w-none"
                         width="120"
                         height="80"
                         :lazy="false"
@@ -32,7 +32,7 @@
             </a>
 
             <!-- Desktop Navigation with Mega Menu -->
-            <nav class="hidden md:flex space-x-8">
+            <nav class="hidden md:flex items-center space-x-4 lg:space-x-8 flex-1 justify-center">
                 <a href="{{route('event-packages')}}" wire:navigate
                     class="text-pink-700 hover:text-pink-600 font-medium transition">EventPackage</a>
                 <a href="{{route('blog')}}" wire:navigate
@@ -44,7 +44,7 @@
             </nav>
 
             <!-- Auth Buttons -->
-            <div class="hidden md:flex items-center space-x-4">
+            <div class="hidden md:flex items-center space-x-2 lg:space-x-4 flex-shrink-0">
                 @auth
                     <form method="POST" action="{{ route('logout') }}" class="inline">
                         @csrf

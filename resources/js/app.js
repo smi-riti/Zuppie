@@ -92,6 +92,20 @@ window.ImageLoader = {
             });
     },
     
+    // Handle local assets with proper URL resolution
+    resolveAssetUrl(src) {
+        if (src.startsWith('http')) {
+            return src;
+        }
+        
+        const baseUrl = window.Laravel?.assetUrl || window.Laravel?.baseUrl || '';
+        if (src.startsWith('/')) {
+            return baseUrl + src;
+        }
+        
+        return baseUrl + '/' + src;
+    },
+    
     // Generate fallback image URL
     getFallbackImage(src) {
         if (src.includes('imagekit.io')) {
@@ -102,6 +116,19 @@ window.ImageLoader = {
                 return src.replace('tr=', 'tr=f-webp,');
             } else if (!src.includes('q-')) {
                 return src.replace('tr=', 'tr=q-70,');
+            }
+        } else if (src.includes('/images/')) {
+            // For local images, try different formats
+            const baseSrc = src.replace(/\.[^/.]+$/, '');
+            const currentExt = src.split('.').pop().toLowerCase();
+            
+            // Try WebP first, then JPEG, then PNG
+            if (currentExt !== 'webp') {
+                return baseSrc + '.webp';
+            } else if (currentExt !== 'jpg' && currentExt !== 'jpeg') {
+                return baseSrc + '.jpg';
+            } else if (currentExt !== 'png') {
+                return baseSrc + '.png';
             }
         }
         return null;
@@ -135,11 +162,30 @@ window.MobileNav = {
                     menu._x_dataStack[0].open = false;
                 }
             });
+            
+            // Initialize header responsiveness
+            this.initHeaderResponsiveness();
         });
         
         // Handle resize events
         window.addEventListener('resize', this.handleResize.bind(this));
         this.handleResize();
+    },
+    
+    initHeaderResponsiveness() {
+        const header = document.querySelector('header');
+        if (!header) return;
+        
+        // Add responsive classes based on screen size
+        const updateHeaderClasses = () => {
+            const width = window.innerWidth;
+            header.classList.toggle('header-mobile', width < 768);
+            header.classList.toggle('header-tablet', width >= 768 && width < 1024);
+            header.classList.toggle('header-desktop', width >= 1024);
+        };
+        
+        updateHeaderClasses();
+        window.addEventListener('resize', updateHeaderClasses);
     },
     
     handleResize() {
@@ -160,16 +206,20 @@ document.addEventListener('DOMContentLoaded', function() {
     ImageLoader.initLazyLoading();
     MobileNav.init();
     
-    // Preload critical images
+    // Preload critical images (both ImageKit and local)
     const criticalImages = document.querySelectorAll('img[data-critical="true"]');
     criticalImages.forEach(img => {
         const src = img.dataset.src || img.src;
-        if (src && src.includes('imagekit.io')) {
-            ImageLoader.preloadImage(src).then(() => {
+        if (src) {
+            // Handle both ImageKit and local images
+            const resolvedSrc = src.includes('imagekit.io') ? src : ImageLoader.resolveAssetUrl(src);
+            ImageLoader.preloadImage(resolvedSrc).then(() => {
                 if (img.dataset.src) {
-                    img.src = src;
+                    img.src = resolvedSrc;
                     img.classList.add('loaded');
                 }
+            }).catch(() => {
+                console.warn('Failed to preload critical image:', resolvedSrc);
             });
         }
     });

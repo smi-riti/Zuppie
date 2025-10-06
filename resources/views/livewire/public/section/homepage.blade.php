@@ -95,9 +95,14 @@
                 <!-- Image Section -->
                 <div data-aos="fade-right" class="relative">
                     <div class="relative rounded-3xl overflow-hidden shadow-2xl group">
-                        <img src="{{ asset('images/our-team.png') }}"
-                            alt="Birthday Celebration"
-                            class="w-full h-64 sm:h-80 lg:h-96 object-cover group-hover:scale-110 transition-transform duration-700">
+                                            <div class="relative">
+                        <x-local-image 
+                            src="images/our-team.png" 
+                            alt="Our Team" 
+                            class="w-full h-auto object-cover rounded-lg"
+                            :lazy="false"
+                            :critical="true" />
+                    </div>
                         <div class="absolute inset-0 bg-gradient-to-t from-purple-900/30 to-transparent"></div>
 
                         <!-- Floating Elements -->
@@ -194,8 +199,10 @@
                 <div class="col-span-1 row-span-2" data-aos="fade-up" data-aos-delay="100">
                     <div
                         class="relative overflow-hidden rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 hover-scale h-[500px]">
-                        <img src="{{ asset('images/birthday-party-decoration.avif') }}" alt="Birthday Party"
-                            class="w-full h-full object-cover">
+                        <x-local-image 
+                            src="images/birthday-party-decoration.avif" 
+                            alt="Birthday Party"
+                            class="w-full h-full object-cover" />
                         <div
                             class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 hover:opacity-100 transition-opacity duration-300 flex items-end p-4">
                             <span class="text-white font-2xl">Birthday Celebration</span>
@@ -207,8 +214,10 @@
                 <div class="col-span-1" data-aos="fade-up" data-aos-delay="200">
                     <div
                         class="relative overflow-hidden rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 hover-scale h-[240px]">
-                        <img src="{{ asset('images/wedding-setup-1.jpg') }}" alt="Wedding Setup"
-                            class="w-full h-full object-cover">
+                        <x-local-image 
+                            src="images/wedding-setup-1.jpg" 
+                            alt="Wedding Setup"
+                            class="w-full h-full object-cover" />
                         <div
                             class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 hover:opacity-100 transition-opacity duration-300 flex items-end p-4">
                             <span class="text-white font-2xl">Wedding Magic</span>
@@ -220,8 +229,10 @@
                 <div class="col-span-1" data-aos="fade-up" data-aos-delay="300">
                     <div
                         class="relative overflow-hidden rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 hover-scale h-[240px]">
-                        <img src="{{ asset('images/corporate-event-decoration.jpg') }}" alt="Corporate Event"
-                            class="w-full h-full object-cover">
+                        <x-local-image 
+                            src="images/corporate-event-decoration.jpg" 
+                            alt="Corporate Event"
+                            class="w-full h-full object-cover" />
                         <div
                             class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 hover:opacity-100 transition-opacity duration-300 flex items-end p-4">
                             <span class="text-white font-2xl">Corporate Event</span>
@@ -233,8 +244,10 @@
                 <div class="col-span-1" data-aos="fade-up" data-aos-delay="400">
                     <div
                         class="relative overflow-hidden rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 hover-scale h-[240px]">
-                        <img src="{{ asset('images/anniversary-decoration.jpg') }}" alt="Anniversary"
-                            class="w-full h-full object-cover">
+                        <x-local-image 
+                            src="images/anniversary-decoration.jpg" 
+                            alt="Anniversary"
+                            class="w-full h-full object-cover" />
                         <div
                             class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 hover:opacity-100 transition-opacity duration-300 flex items-end p-4">
                             <span class="text-white font-2xl">Anniversary</span>
@@ -246,8 +259,10 @@
                 <div class="col-span-1" data-aos="fade-up" data-aos-delay="500">
                     <div
                         class="relative overflow-hidden rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 hover-scale h-[240px]">
-                        <img src="{{ asset('images/baby-shower-decoration.avif') }}" alt="Baby Shower"
-                            class="w-full h-full object-cover">
+                        <x-local-image 
+                            src="images/baby-shower-decoration.avif" 
+                            alt="Baby Shower"
+                            class="w-full h-full object-cover" />
                         <div
                             class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 hover:opacity-100 transition-opacity duration-300 flex items-end p-4">
                             <span class="text-white font-2xl">Baby Shower</span>
@@ -258,14 +273,7 @@
                 <!-- Event Planning -->
                 <div class="col-span-2 row-span-1" data-aos="fade-up" data-aos-delay="600">
                     <div
-                        class="relative overflow-hidden rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 hover-scale h-[240px] md:h-[240px]">
-                        <img src="{{ asset('images/elegant-event-setup.jpg') }}" alt="Event Setup"
-                            class="w-full h-full object-cover">
-                        <div
-                            class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 hover:opacity-100 transition-opacity duration-300 flex items-end p-4">
-                            <span class="text-white font-2xl">Event Planning</span>
-                        </div>
-                    </div>
+                    <div\n                        class=\"relative overflow-hidden rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 hover-scale h-[240px] md:h-[240px]\">\n                        <x-local-image \n                            src=\"images/elegant-event-setup.jpg\" \n                            alt=\"Event Setup\"\n                            class=\"w-full h-full object-cover\" />\n                        <div\n                            class=\"absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 hover:opacity-100 transition-opacity duration-300 flex items-end p-4\">\n                            <span class=\"text-white font-2xl\">Event Planning</span>\n                        </div>\n                    </div>
                 </div>
             </div>
 

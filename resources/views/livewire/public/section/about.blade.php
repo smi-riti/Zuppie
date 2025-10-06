@@ -5,9 +5,7 @@
         <section class="relative h-[70vh] overflow-hidden">
             <!-- Background Image with Overlay -->
             <div class="absolute inset-0">
-                <img src="{{ asset('images/about-banner.webp')}}" 
-                     alt="About Us Background" 
-                     class="w-full h-full object-cover">
+                                <x-local-image \n                    src=\"images/about-banner.webp\" \n                    alt=\"About Us Background\" \n                    class=\"w-full h-full object-cover\"\n                    :critical=\"true\" />
                 <div class="absolute inset-0 bg-gradient-to-br from-purple-900/40 via-pink-800/35 to-indigo-900/40"></div>
                 <div class="absolute inset-0 bg-black/15"></div>
             </div>
@@ -68,7 +66,10 @@
                     
                     <div class="relative">
                         <div class="relative rounded-2xl overflow-hidden shadow-2xl transform hover:scale-105 transition-transform duration-500 w-3/3 mx-auto">
-                            <img src="{{ asset('images/our-team.png') }}" alt="Our Team" class="object-cover">
+                            <x-local-image 
+                                src="images/our-team.png" 
+                                alt="Our Team" 
+                                class="object-cover" />
                             <div class="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent"></div>
                         </div>
                     </div>

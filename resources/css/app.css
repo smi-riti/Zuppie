@@ -495,3 +495,45 @@ img[data-src] {
         left: 100%;
     }
 }
+
+/* Enhanced Image Loading System */
+.lazy-image.loading,
+.imagekit-img.loading {
+    opacity: 0.7;
+    filter: blur(2px);
+}
+
+.lazy-image.loaded,
+.imagekit-img.loaded {
+    opacity: 1;
+    filter: none;
+}
+
+.lazy-image.error,
+.imagekit-img.error {
+    opacity: 0.6;
+    filter: grayscale(100%);
+}
+
+/* Header Responsiveness */
+.header-mobile {
+    padding: 0.5rem 1rem;
+}
+
+.header-tablet {
+    padding: 0.75rem 1.5rem;
+}
+
+.header-desktop {
+    padding: 1rem 2rem;
+}
+
+/* Enhanced shimmer effect */
+@keyframes shimmer {
+    0% {
+        background-position: -200% 0;
+    }
+    100% {
+        background-position: 200% 0;
+    }
+}
