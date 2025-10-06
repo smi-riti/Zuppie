@@ -139,7 +139,12 @@ Route::get('/browserconfig.xml', function () {
 Route::get('/invoices/{invoice}/download', [BookingInvoice::class, 'downloadInvoice'])
      ->name('invoices.download');
 
-     Route::get('/storage-link', function () {
-    Artisan::call('storage:link');
+          Route::get('/storage-link', function () {
+    \Illuminate\Support\Facades\Artisan::call('storage:link');
     return 'Storage link has been created!';
+});
+
+// Test route for image debugging
+Route::get('/image-test', function () {
+    return view('image-test');
 });

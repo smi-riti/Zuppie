@@ -202,7 +202,8 @@
                         <x-local-image 
                             src="images/birthday-party-decoration.avif" 
                             alt="Birthday Party"
-                            class="w-full h-full object-cover" />
+                            class="w-full h-full object-cover"
+                            :lazy="false" />
                         <div
                             class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 hover:opacity-100 transition-opacity duration-300 flex items-end p-4">
                             <span class="text-white font-2xl">Birthday Celebration</span>
@@ -217,7 +218,8 @@
                         <x-local-image 
                             src="images/wedding-setup-1.jpg" 
                             alt="Wedding Setup"
-                            class="w-full h-full object-cover" />
+                            class="w-full h-full object-cover"
+                            :lazy="false" />
                         <div
                             class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 hover:opacity-100 transition-opacity duration-300 flex items-end p-4">
                             <span class="text-white font-2xl">Wedding Magic</span>
@@ -232,7 +234,8 @@
                         <x-local-image 
                             src="images/corporate-event-decoration.jpg" 
                             alt="Corporate Event"
-                            class="w-full h-full object-cover" />
+                            class="w-full h-full object-cover"
+                            :lazy="false" />
                         <div
                             class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 hover:opacity-100 transition-opacity duration-300 flex items-end p-4">
                             <span class="text-white font-2xl">Corporate Event</span>
@@ -247,7 +250,8 @@
                         <x-local-image 
                             src="images/anniversary-decoration.jpg" 
                             alt="Anniversary"
-                            class="w-full h-full object-cover" />
+                            class="w-full h-full object-cover"
+                            :lazy="false" />
                         <div
                             class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 hover:opacity-100 transition-opacity duration-300 flex items-end p-4">
                             <span class="text-white font-2xl">Anniversary</span>

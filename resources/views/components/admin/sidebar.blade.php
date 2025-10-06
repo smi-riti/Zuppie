@@ -17,7 +17,7 @@
       <!-- Logo -->
       <div class="flex items-center h-16 px-4 border-b border-purple-200 bg-purple-100">
         <a href="/admin" class="flex items-center space-x-3">
-          <img src="/images/zuppie-logo.jpeg" alt="Admin Logo" class="h-10 w-10 rounded-full">
+          <x-local-image src="images/zuppie-logo.png" alt="Admin Logo" class="h-10 w-10 rounded-full" />
           <span class="text-2xl font-2xl text-purple-600">
             AdminPanel
           </span>
@@ -148,7 +148,7 @@
           <!-- Logo in mobile header -->
           <a href="/admin/" class="flex items-center space-x-3 group">
             <div class="relative">
-              <img src="/images/zuppie-logo.jpeg" alt="Admin Logo" class="h-10 w-10 rounded-full ring-2 ring-purple-300 group-hover:ring-purple-400 transition-all duration-300">
+              <x-local-image src="images/zuppie-logo.png" alt="Admin Logo" class="h-10 w-10 rounded-full ring-2 ring-purple-300 group-hover:ring-purple-400 transition-all duration-300" />
               <div class="absolute -top-1 -right-1 w-3 h-3 bg-purple-500 rounded-full animate-pulse group-hover:bg-purple-600"></div>
             </div>
             <span class="text-xl font-extrabold bg-clip-text text-transparent bg-gradient-to-r from-purple-500 to-purple-600 group-hover:from-purple-600 group-hover:to-purple-500 transition-all duration-300 tracking-tight">

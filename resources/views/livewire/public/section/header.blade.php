@@ -18,9 +18,9 @@
         <div class="flex justify-between items-center h-20">
             <a href="/" class="flex items-center space-x-2 group">
                 <div class="flex-shrink-0">
-                    <x-imagekit-image 
-                        :src="$settings['site_logo']" 
-                        :alt="$settings['site_name'] . ' Logo'" 
+                    <x-local-image 
+                        src="images/zuppie-logo.png" 
+                        alt="Zuppie Logo" 
                         class="h-12 w-auto sm:h-16 md:h-18 lg:h-20 max-w-none"
                         width="120"
                         height="80"

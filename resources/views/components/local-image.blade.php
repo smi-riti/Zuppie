@@ -10,70 +10,30 @@
 ])
 
 @php
-    // Handle both asset() URLs and direct paths
-    $imageSrc = $src;
-    if (!str_starts_with($src, 'http') && !str_starts_with($src, '/')) {
-        // It's a relative path, use asset() helper
-        $imageSrc = asset($src);
-    } elseif (str_starts_with($src, '/') && !str_starts_with($src, 'http')) {
-        // It's an absolute path, ensure it's properly formatted
-        $imageSrc = config('app.url') . $src;
-    }
-
-    // Determine if image should be lazy loaded
-    $shouldLazyLoad = $lazy && !$critical;
+    // Always use asset() helper for local images
+    $imageSrc = asset($src);
     
     // Build CSS classes
-    $cssClasses = trim($class . ' transition-all duration-300');
-    if ($shouldLazyLoad) {
-        $cssClasses .= ' loading';
-    }
+    $cssClasses = trim($class . ' transition-opacity duration-300');
     
     // Build attributes
     $attributes = [
         'alt' => $alt,
         'class' => $cssClasses,
-        'loading' => $shouldLazyLoad ? 'lazy' : 'eager',
+        'src' => $imageSrc,
+        'loading' => ($lazy && !$critical) ? 'lazy' : 'eager',
         'decoding' => $critical ? 'sync' : 'async',
     ];
     
     if ($width) $attributes['width'] = $width;
     if ($height) $attributes['height'] = $height;
     
-    if ($critical) {
-        $attributes['data-critical'] = 'true';
-    }
-    
-    // For lazy loading, use data-src initially
-    if ($shouldLazyLoad) {
-        $attributes['data-src'] = $imageSrc;
-        $attributes['src'] = 'data:image/svg+xml;base64,' . base64_encode('
-            <svg width="' . ($width ?: 400) . '" height="' . ($height ?: 300) . '" xmlns="http://www.w3.org/2000/svg">
-                <rect width="100%" height="100%" fill="#f3f4f6"/>
-                <circle cx="50%" cy="50%" r="20" fill="#e5e7eb"/>
-                <animate attributeName="opacity" values="0.5;1;0.5" dur="1.5s" repeatCount="indefinite"/>
-            </svg>
-        ');
-    } else {
-        $attributes['src'] = $imageSrc;
-    }
+    // Add fallback error handling
+    $fallbackUrl = $fallback ? asset($fallback) : asset('images/placeholder.jpg');
 @endphp
 
 <img {{ collect($attributes)->map(fn($value, $key) => $key . '="' . e($value) . '"')->implode(' ') }}
-     @if($fallback) 
-         onerror="this.onerror=null; this.src='{{ $fallback }}'; this.classList.add('error');"
-     @endif
->
+     onerror="console.log('Image failed to load:', this.src); this.onerror=null; this.src='{{ $fallbackUrl }}'; this.style.opacity='0.5';"
+     onload="console.log('Image loaded successfully:', this.src); this.style.opacity='1';"
+     style="opacity: 0.8;">
 
-@once
-@push('scripts')
-<script>
-document.addEventListener('DOMContentLoaded', function() {
-    // Initialize local image loading
-    if (window.ImageLoader) {
-        window.ImageLoader.initLazyLoading();
-    }
-});
-</script>
-@endpush
-@endonce
