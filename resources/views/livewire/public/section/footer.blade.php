@@ -4,7 +4,14 @@
             <!-- Column 1: About -->
             <div>
                 <div class="flex items-center space-x-2 mb-6">
-                    <img src="{{ $settings['site_logo'] }}" alt="{{ $settings['site_name'] }} Logo" class="h-8 w-10">
+                    <x-imagekit-image 
+                        :src="$settings['site_logo']" 
+                        :alt="$settings['site_name'] . ' Logo'" 
+                        class="h-8 w-10"
+                        width="40"
+                        height="32"
+                        :lazy="true"
+                    />
                     <span class="text-2xl font-2xl text-white">{{ $settings['site_name'] }}</span>
                 </div>
                 <p class="text-pink-100 mb-6">{{ $settings['site_description'] }}</p>

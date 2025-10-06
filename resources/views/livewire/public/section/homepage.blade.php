@@ -25,8 +25,14 @@
                         <div class="relative h-64 sm:h-80">
                             <!-- Category Image with fallback -->
                             @if ($category->image)
-                                <img src="{{ $category->image }}" alt="{{ $category->name }}"
-                                    class="absolute inset-0 w-full h-full object-cover">
+                                <x-imagekit-image 
+                                    :src="$category->image" 
+                                    :alt="$category->name"
+                                    class="absolute inset-0 w-full h-full object-cover"
+                                    width="400"
+                                    height="320"
+                                    :lazy="true"
+                                />
                                 <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent">
                                 </div>
                             @else
