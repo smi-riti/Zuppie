@@ -1,14 +1,29 @@
 import { defineConfig } from 'vite';
 import laravel from 'laravel-vite-plugin';
 import tailwindcss from '@tailwindcss/vite'
+
 export default defineConfig({
     plugins: [
         laravel({
             input: ['resources/css/app.css', 'resources/js/app.js'],
             refresh: true,
         }),
-           tailwindcss(),
+        tailwindcss(),
     ],
+    build: {
+        rollupOptions: {
+            output: {
+                manualChunks: undefined,
+            },
+        },
+        assetsDir: 'assets',
+    },
+    server: {
+        hmr: {
+            host: 'localhost',
+        },
+    },
+    base: process.env.VITE_APP_URL ? new URL(process.env.VITE_APP_URL).pathname : '/',
 });
 
 

@@ -15,7 +15,8 @@
     <meta name="application-name" content="Zuppie">
     <meta name="msapplication-TileColor" content="#A855F7">
     <meta name="msapplication-config" content="/browserconfig.xml">
-    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Vite Assets -->
+    @vite(['resources/css/app.css', 'resources/js/app.js'])
 
     <!-- SEO Meta Tags -->
     @if(isset($seoData))
@@ -98,19 +99,33 @@
     <!-- Preload JavaScript -->
     <link rel="preload" href="https://unpkg.com/aos@2.3.1/dist/aos.js" as="script">
 
+    <!-- Asset URLs Configuration -->
+    <script>
+        window.Laravel = {
+            csrfToken: '{{ csrf_token() }}',
+            baseUrl: '{{ config("app.url") }}',
+            assetUrl: '{{ config("app.asset_url", config("app.url")) }}'
+        };
+    </script>
+
     <!-- Critical CSS for performance -->
     <style>
-        /* Critical CSS */
+        /* Critical CSS - Inlined for faster initial paint */
+        :root {
+            --app-primary: #a855f7;
+            --app-secondary: #ec4899;
+        }
+        
         body {
             font-family: 'Inter', sans-serif;
         }
 
         .gradient-bg {
-            background: linear-gradient(135deg, #a855f7 0%, #ec4899 100%);
+            background: linear-gradient(135deg, var(--app-primary) 0%, var(--app-secondary) 100%);
         }
 
         .gradient-text {
-            background: linear-gradient(135deg, #a855f7 0%, #ec4899 100%);
+            background: linear-gradient(135deg, var(--app-primary) 0%, var(--app-secondary) 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
@@ -120,6 +135,16 @@
             background: rgba(255, 255, 255, 0.1);
             backdrop-filter: blur(10px);
             border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        /* Loading state */
+        .loading {
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        
+        .loaded {
+            opacity: 1;
         }
     </style>
 

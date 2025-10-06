@@ -117,6 +117,29 @@ return [
 
     /*
     |---------------------------------------------------------------------------
+    | Asset URL
+    |---------------------------------------------------------------------------
+    |
+    | This URL is used to serve Livewire's JavaScript and CSS assets.
+    | Set this to your CDN URL or asset URL for production environments.
+    |
+    */
+
+    'asset_url' => env('LIVEWIRE_ASSET_URL', env('ASSET_URL')),
+
+    /*
+    |---------------------------------------------------------------------------
+    | App URL
+    |---------------------------------------------------------------------------
+    |
+    | This URL is used for generating asset URLs. Should match your APP_URL.
+    |
+    */
+
+    'app_url' => env('APP_URL', 'http://localhost'),
+
+    /*
+    |---------------------------------------------------------------------------
     | Navigate (SPA mode)
     |---------------------------------------------------------------------------
     |
