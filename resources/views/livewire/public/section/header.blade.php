@@ -5,7 +5,7 @@
         <div class="flex justify-between items-center">
             <a href="/" class="flex items-center space-x-2 group">
                 <div class="">
-                    <img src="{{ $settings['site_logo'] }}" class="h-20 w-30">
+                    <img src="{{$settings['site_logo']}}" alt="Site Logo" class="h-20 w-30">
                 </div>
                
             </a>
