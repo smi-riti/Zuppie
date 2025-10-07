@@ -7,9 +7,7 @@
                 <div class="">
                     <img src="{{$settings['site_logo']}}" alt="Site Logo" class="h-20 w-30">
                 </div>
-               
             </a>
-
             <!-- Desktop Navigation with Mega Menu -->
             <nav class="hidden md:flex space-x-8">
                 <a href="{{route('event-packages')}}" wire:navigate
