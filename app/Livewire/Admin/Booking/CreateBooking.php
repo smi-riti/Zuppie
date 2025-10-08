@@ -10,7 +10,7 @@ use App\Services\RazorpayService;
 use App\Models\Payment;
 use Illuminate\Validation\ValidationException;
 use Illuminate\Support\Facades\Log;
-
+#[Title('Create Booking')]
 class CreateBooking extends Component
 {
     public $currentStep = 1;
@@ -39,6 +39,10 @@ class CreateBooking extends Component
     public $razorpaySignature = null;
     public $isSubmitting = false;
     public $payment_method = 'online'; // Use underscore consistently
+    protected $listeners = [
+        'completeRazorpayPayment', // emitted from JS when payment succeeds
+        'payment-failed' => 'handleRazorpayError', // optional: map JS failure event
+    ];
 
     protected $rules = [
         'event_package_id' => 'required',
@@ -193,6 +197,12 @@ class CreateBooking extends Component
 
             $this->razorpayOrderId = $order->id;
 
+            Log::info('Razorpay order created', [
+                'order_id' => $order->id,
+                'amount' => $order->amount,
+                'payment_method' => $this->payment_method,
+            ]);
+
             $this->dispatch('initiate-razorpay-payment', [
                 'order_id' => $order->id,
                 'amount' => $order->amount,
@@ -212,7 +222,7 @@ class CreateBooking extends Component
         } catch (\Exception $e) {
             $this->isSubmitting = false;
             session()->flash('error', 'Error: ' . $e->getMessage());
-            Log::error('Booking error: '.$e->getMessage());
+            Log::error('Booking error: '.$e->getMessage(), ['exception' => $e]);
         }
     }
 
@@ -291,6 +301,24 @@ class CreateBooking extends Component
             $this->isSubmitting = false;
             session()->flash('error', 'Payment failed: ' . $e->getMessage());
         }
+    }
+
+    public function handleRazorpayError($payload = null)
+    {
+        // JS can send a payload with error details; log and surface to user
+        
+        
+        if (is_array($payload)) {
+            $message = $payload['error']['description'] ?? json_encode($payload);
+        } else {
+            $message = (string) $payload ?: 'Payment failed';
+        }
+
+        
+        
+    session()->flash('error', 'Payment failed: ' . $message);
+    $this->isSubmitting = false;
+    Log::warning('Razorpay payment failed', ['payload' => $payload]);
     }
 
 

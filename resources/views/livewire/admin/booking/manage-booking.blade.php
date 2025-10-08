@@ -3,7 +3,7 @@
         <!-- Header -->
         <div class="flex justify-between items-center mb-6">
             <div>
-                <h1 class="text-3xl font-bold text-purple-800">Manage Bookings</h1>
+                <h1 class="text-3xl text-purple-800">Manage Bookings</h1>
                 <p class="text-purple-600">View and manage all event bookings</p>
             </div>
             <button wire:click="openCreateModal"
@@ -129,7 +129,7 @@
                                 <td class="px-6 py-4 whitespace-nowrap">
                                     <div class="flex items-center">
                                         <div
-                                            class="flex-shrink-0 h-10 w-10 rounded-full bg-gradient-to-r from-purple-400 to-pink-400 flex items-center justify-center text-white font-bold">
+                                            class="flex-shrink-0 h-10 w-10 rounded-full bg-gradient-to-r from-purple-400 to-pink-400 flex items-center justify-center text-white">
                                             {{ strtoupper(substr($booking->booking_name, 0, 1)) }}
                                         </div>
                                         <div class="ml-4">
@@ -173,7 +173,7 @@
                                     <div x-data="{ showStatusChangeModal: false, selectedStatus: '{{ $booking->status }}' }" class="relative">
                                         <!-- Status Badge with Change Option -->
                                         <button @click="showStatusChangeModal = true"
-                                            class="px-3 py-1 text-xs font-semibold rounded-full 
+                                            class="px-3 py-1 text-xs font-2xl rounded-full 
                                                 {{ $booking->status === 'pending' ? 'bg-yellow-100 text-yellow-800 hover:bg-yellow-200' : '' }}
                                                 {{ $booking->status === 'confirmed' ? 'bg-green-100 text-green-800 hover:bg-green-200' : '' }}
                                                 {{ $booking->status === 'cancelled' ? 'bg-red-100 text-red-800 hover:bg-red-200' : '' }}

@@ -6,7 +6,9 @@ use App\Models\Service;
 use Livewire\Component;
 use Livewire\WithPagination;
 use Livewire\Attributes\Layout;
- #[Layout('components.layouts.admin')]
+#[Layout('components.layouts.admin')]
+#[Title('Show Service')]
+
 class Show extends Component
 {
     use WithPagination;
@@ -17,12 +19,13 @@ class Show extends Component
     public $formTitle = 'Create New Service';
 
     protected $rules = [
-        'pin_code' => 'required|string|max:10|unique:services,pin_code',
+        'pin_code' => 'required|string|max:6|regex:/^[1-9][0-9]{5}$/|unique:services,pin_code',
+        'pin_code' => ['required', 'regex:/^[1-9][0-9]{5}$/'],
     ];
 
     protected $messages = [
-        'pin_code.required' => 'The pin code is required.',
-        'pin_code.unique' => 'This pin code already exists.',
+        'pin_code.required' => 'PIN code is required.',
+        'pin_code.regex'    => 'Enter a valid 6-digit PIN (no leading zero).',
     ];
 
     public function mount()

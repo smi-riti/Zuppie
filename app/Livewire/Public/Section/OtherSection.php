@@ -4,12 +4,20 @@ namespace App\Livewire\Public\Section;
 
 use App\Models\EventPackage;
 use Livewire\Component;
+use App\Traits\HasSettings;
+#[Title('Other Section')]
 
 class OtherSection extends Component
 {
+    use HasSettings;
+
+    public function mount()
+    {
+        $this->loadSiteSettings();
+    }
+
     public function render()
     {
-        // Get 6 event packages (first special ones, then regular ones)
         $packages = EventPackage::with(['category', 'images'])
             ->where('is_active', true)
             ->orderByDesc('is_special')

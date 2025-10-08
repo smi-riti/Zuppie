@@ -1,16 +1,16 @@
 <div class="min-h-screen bg-gradient-to-br from-slate-50 via-white to-purple-50">
     @if (!$package)
         <div class="text-center py-20">
-            <h2 class="text-2xl font-bold text-gray-800">Package not found</h2>
-            <a href="{{ route('event-packages') }}"
+            <h2 class="text-2xl font-2xl text-gray-800">Package not found</h2>
+            <a href="{{ route('event-packages') }}" wire:navigate
                 class="mt-4 inline-block bg-purple-600 text-white px-6 py-3 rounded-lg">
                 Back to Packages
             </a>
         </div>
     @else
         <!-- Main Content -->
-        <section class="py-8 md:py-20">
-            <div class="max-w-[95%] lg:max-w-[80%] mx-auto px-1 sm:px-6 lg:px-8">
+        <section class="py-8 px-20 md:py-20">
+            <div class="px-1 sm:px-6 lg:px-8">
                 <div class="flex flex-col lg:flex-row gap-5">
                     <!-- Image Gallery -->
                     <div
@@ -59,7 +59,7 @@
                         <div class="bg-white rounded-3xl p-3 md:p-8 shadow-xl">
                             <div class="flex justify-between items-start mb-6">
                                 <div>
-                                    <h1 class="text-2xl md:text-3xl font-bold text-gray-800 mb-1">{{ $package->name }}
+                                    <h1 class="text-2xl md:text-3xl font-2xl text-gray-800 mb-1">{{ $package->name }}
                                     </h1>
                                     <p class="text-gray-600 text-sm md:text-base">
                                         {{ $package->category->name ?? 'Event Package' }}
@@ -70,14 +70,14 @@
                                         </p>
                                     @endif
                                 </div>
-                                <livewire:public.components.wishlist-button :packageId="$package->id" />
+                                {{-- <livewire:public.components.wishlist-button :packageId="$package->id" /> --}}
                             </div>
 
                             <!-- Price and Offers -->
                             <div class="mb-6">
                                 <div class="flex items-baseline">
                                     <span
-                                        class="text-3xl md:text-4xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-purple-600 to-pink-600">
+                                        class="text-3xl md:text-4xl font-2xl text-transparent bg-clip-text bg-gradient-to-r from-purple-600 to-pink-600">
                                         ₹{{ number_format($package->discounted_price) }}
                                     </span>
                                     @if ($package->discount_type && $package->price != $package->discounted_price)
@@ -89,8 +89,8 @@
                             </div>
 
                             <!-- Pincode Check (Auto-check on 6 digits) -->
-                            <div class="mb-6 p-4 bg-purple-50 rounded-2xl">
-                                <h4 class="font-bold text-gray-800 mb-3 flex items-center">
+                            {{-- <div class="mb-6 p-4 bg-purple-50 rounded-2xl">
+                                <h4 class="font-2xl text-gray-800 mb-3 flex items-center">
                                     <i class="fas fa-map-marker-alt text-purple-600 mr-2"></i>
                                     Check Service Availability
                                 </h4>
@@ -131,13 +131,13 @@
                                     <i class="fas fa-info-circle mr-1"></i>
                                     We'll automatically check availability when you enter a 6-digit pincode
                                 </p>
-                            </div>
+                            </div> --}}
 
                             <!-- Book Now Button -->
-                            <button
+                            {{-- <button
                                 wire:click="{{ $isPinCodeAvailable === true ? 'bookNow' : 'checkPinCodeAvailability' }}"
                                 wire:loading.attr="disabled"
-                                class="w-full bg-gradient-to-r from-purple-600 to-pink-600 text-white px-6 py-3 md:px-8 md:py-4 rounded-2xl font-bold text-lg hover:shadow-lg transition-all duration-300 relative overflow-hidden">
+                                class="w-full bg-gradient-to-r from-purple-600 to-pink-600 text-white px-6 py-3 md:px-8 md:py-4 rounded-2xl font-2xl text-lg hover:shadow-lg transition-all duration-300 relative overflow-hidden">
 
                                 <span wire:loading.remove>
                                     <i
@@ -148,7 +148,7 @@
                                 <span wire:loading class="absolute inset-0 flex items-center justify-center">
                                     <i class="fas fa-spinner fa-spin mr-2"></i> Processing...
                                 </span>
-                            </button>
+                            </button> --}}
                         </div>
                         <!-- Features Section -->
                         <div class="bg-white rounded-3xl shadow-xl py-8 px-4">
@@ -221,7 +221,7 @@
                         </div>
                         <!-- What's Included -->
                         <div class="bg-white rounded-3xl p-3 md:p-8 shadow-xl">
-                            <h3 class="text-2xl md:text-2xl font-bold text-gray-800 mb-1 flex items-center">
+                            <h3 class="text-2xl md:text-2xl font-2xl text-gray-800 mb-1 flex items-center">
                                 <span
                                     class="w-8 h-8 rounded-full bg-green-100 flex items-center justify-center text-green-600 mr-3">
                                     <i class="fas fa-check-circle text-2xl"></i>
@@ -255,10 +255,10 @@
                         </div>
 
                         <!-- Description -->
-                        <div class="bg-white rounded-3xl p-3 md:p-8 shadow-xl border border-gray-100">
+                        {{-- <div class="bg-white rounded-3xl p-3 md:p-8 shadow-xl border border-gray-100">
                             <div class="mb-6">
                                 <h3
-                                    class="text-2xl md:text-3xl font-bold text-gray-900 mb-4 relative pb-3 after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-16 after:h-1 after:bg-gradient-to-r after:from-purple-500 after:to-pink-500">
+                                    class="text-2xl md:text-3xl font-2xl text-gray-900 mb-4 relative pb-3 after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-16 after:h-1 after:bg-gradient-to-r after:from-purple-500 after:to-pink-500">
                                     About This Package
                                 </h3>
 
@@ -277,7 +277,7 @@
                                             <i class="fas fa-clock text-lg"></i>
                                         </div>
                                         <div>
-                                            <h4 class="font-semibold text-gray-800">Duration</h4>
+                                            <h4 class="font-2xl text-gray-800">Duration</h4>
                                             <p class="text-gray-600 mt-1">{{ $package->formatted_duration }}</p>
                                         </div>
                                     </div>
@@ -290,7 +290,7 @@
                                         <i class="fas fa-users text-lg"></i>
                                     </div>
                                     <div>
-                                        <h4 class="font-semibold text-gray-800">Team Size</h4>
+                                        <h4 class="font-2xl text-gray-800">Team Size</h4>
                                         <p class="text-gray-600 mt-1">5-8 professionals</p>
                                     </div>
                                 </div>
@@ -302,7 +302,7 @@
                                         <i class="fas fa-calendar text-lg"></i>
                                     </div>
                                     <div>
-                                        <h4 class="font-semibold text-gray-800">Advance Booking</h4>
+                                        <h4 class="font-2xl text-gray-800">Advance Booking</h4>
                                         <p class="text-gray-600 mt-1">15 days minimum</p>
                                     </div>
                                 </div>
@@ -314,18 +314,18 @@
                                         <i class="fas fa-star text-lg"></i>
                                     </div>
                                     <div>
-                                        <h4 class="font-semibold text-gray-800">Category</h4>
+                                        <h4 class="font-2xl text-gray-800">Category</h4>
                                         <p class="text-gray-600 mt-1">{{ $package->category->name ?? 'General' }}</p>
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        </div> --}}
                         <!-- Review Section -->
-                        <div class="bg-white rounded-3xl p-3 md:p-8 shadow-xl border border-gray-100">
+                        {{-- <div class="bg-white rounded-3xl p-3 md:p-8 shadow-xl border border-gray-100">
                             <!-- Section Header -->
                             <div class="flex justify-between items-center mb-8">
                                 <h2
-                                    class="text-3xl font-bold bg-gradient-to-r from-purple-600 to-pink-500 bg-clip-text text-transparent">
+                                    class="text-3xl font-2xl bg-gradient-to-r from-purple-600 to-pink-500 bg-clip-text text-transparent">
                                     Customer Reviews</h2>
                             </div>
 
@@ -333,7 +333,7 @@
                             <div
                                 class="flex items-center mb-10 p-6 bg-gradient-to-r from-purple-50 to-pink-50 rounded-lg">
                                 <div
-                                    class="text-5xl font-bold mr-6 bg-gradient-to-r from-purple-600 to-pink-500 bg-clip-text text-transparent">
+                                    class="text-5xl font-2xl mr-6 bg-gradient-to-r from-purple-600 to-pink-500 bg-clip-text text-transparent">
                                     {{ number_format($average_review, 1) }}
                                 </div>
                                 <div>
@@ -368,7 +368,7 @@
                                                     <span
                                                         class="text-purple-600 font-medium">{{ strtoupper(substr($review->user->name, 0, 1)) }}</span>
                                                 </div>
-                                                <h3 class="font-semibold text-purple-900">{{ $review->user->name }}
+                                                <h3 class="font-2xl text-purple-900">{{ $review->user->name }}
                                                 </h3>
                                             </div>
                                             <span
@@ -395,7 +395,6 @@
                                         <p class="text-gray-700 mb-4">
                                             {{ $review->comment ?? 'This user did not leave a comment' }}
                                         </p>
-
                                     </div>
                                 @endforeach
                             </div>
@@ -403,13 +402,13 @@
                             <!-- View More Button -->
                             @if ($reviews->count() > 2)
                                 <div class="mt-8 text-center">
-                                    <button wire:click="$dispatch('viewAllReviews')"
+                                    <button wire:click="openAllReviewsModal({{ $package->id }})"
                                         class="px-6 py-2 bg-gradient-to-r from-purple-500 to-pink-500 text-white rounded-full hover:shadow-lg transition-all">
                                         View All Reviews
                                     </button>
                                 </div>
                             @endif
-                        </div>
+                        </div> --}}
                     </div>
                 </div>
             </div>
@@ -417,10 +416,10 @@
 
         <!-- Similar Packages Section -->
         @if ($this->similarPackages->count() > 0)
-            <section class="py-20 bg-white">
-                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <section class="bg-white px-20">
+                <div class="sm:px-6 lg:px-8">
                     <div class="text-center mb-16">
-                        <h2 class="text-4xl md:text-5xl font-bold text-gray-800 mb-6">
+                        <h2 class="text-4xl md:text-5xl font-2xl text-gray-800 mb-6">
                             Similar Packages You Might Like
                         </h2>
                         <p class="text-xl text-gray-600 max-w-3xl mx-auto">
@@ -441,7 +440,7 @@
                                     @if ($similarPackage['popular'])
                                         <div class="absolute top-4 right-4">
                                             <span
-                                                class="bg-gradient-to-r from-yellow-400 to-orange-500 text-white px-3 py-2 rounded-full text-sm font-bold shadow-lg">
+                                                class="bg-gradient-to-r from-yellow-400 to-orange-500 text-white px-3 py-2 rounded-full text-sm font-2xl shadow-lg">
                                                 <i class="fas fa-star mr-1"></i>Popular
                                             </span>
                                         </div>
@@ -449,7 +448,7 @@
 
                                     <div class="absolute bottom-4 left-4">
                                         <div
-                                            class="bg-white/90 backdrop-blur-sm text-gray-800 px-3 py-2 rounded-full font-bold text-lg">
+                                            class="bg-white/90 backdrop-blur-sm text-gray-800 px-3 py-2 rounded-full font-2xl text-lg">
                                             ₹{{ number_format($similarPackage['price']) }}
                                         </div>
                                     </div>
@@ -458,7 +457,7 @@
                                 <!-- Content -->
                                 <div class="p-6">
                                     <h3
-                                        class="text-xl font-bold text-gray-800 group-hover:text-purple-600 transition-colors duration-300 mb-3">
+                                        class="text-xl font-2xl text-gray-800 group-hover:text-purple-600 transition-colors duration-300 mb-3">
                                         {{ $similarPackage['name'] }}
                                     </h3>
 
@@ -466,7 +465,7 @@
                                     </p>
 
                                     <!-- Package Info -->
-                                    <div class="flex items-center justify-between mb-4">
+                                    {{-- <div class="flex items-center justify-between mb-4">
                                         <div class="flex items-center space-x-1">
                                             <i class="fas fa-star text-yellow-400"></i>
                                             <span class="text-sm font-medium">{{ $similarPackage['rating'] }}</span>
@@ -474,22 +473,27 @@
                                         <div class="text-sm text-gray-600">
                                             {{ $similarPackage['category'] }}
                                         </div>
-                                    </div>
+                                    </div> --}}
 
                                     <!-- CTA Button -->
-                                    <a href="{{ route('package-detail', $similarPackage['slug']) }}"
-                                        class="block w-full bg-gradient-to-r from-purple-600 to-pink-600 text-white py-3 px-6 rounded-2xl font-bold text-center hover:from-purple-700 hover:to-pink-700 transform hover:scale-105 transition-all duration-300 shadow-lg">
-                                        <i class="fas fa-eye mr-2"></i>
-                                        View Details
-                                    </a>
+                                    <div class="mt-6 flex items-center justify-between gap-3">
+                                        <a href="{{ route('package-detail', ['slug' => $package['slug'] ?? ($package->slug ?? '')]) }}" wire:navigate
+                                            class="flex-1 block  text-center px-4 py-3 bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-gray-100 rounded-xl font-medium hover:from-purple-700 hover:to-pink-700 transition transition">
+                                            View
+                                        </a>
+                                        <a href="tel:{{ $settings['phone_no'] ?? '' }}"
+                                            class="flex-1 block text-center px-4 py-3 bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white rounded-xl font-2xl hover:from-purple-700 hover:to-pink-700 transition">
+                                            Call us
+                                        </a>
+                                    </div>
                                 </div>
                             </div>
                         @endforeach
                     </div>
 
-                    <div class="text-center mt-12">
-                        <a href="{{ route('event-packages') }}"
-                            class="inline-flex items-center space-x-2 bg-white border-2 border-purple-600 text-purple-600 px-8 py-3 rounded-2xl font-bold hover:bg-purple-600 hover:text-white transition-all duration-300">
+                    <div class="text-center mt-12 pb-4">
+                        <a href="{{ route('event-packages') }}" wire:navigate
+                            class="inline-flex items-center space-x-2 bg-white border-2 border-purple-600 text-purple-600 px-8 py-3 rounded-2xl font-2xl hover:bg-purple-600 hover:text-white transition-all duration-300">
                             <i class="fas fa-th-large"></i>
                             <span>View All Packages</span>
                         </a>
@@ -501,6 +505,9 @@
 
     <livewire:public.section.enquiry-form />
     <livewire:public.components.bottom-navigation />
+    @if ($showAllReviewsModal)
+        <livewire:public.components.review-modal :packageId="$packageIdOfReview" />
+    @endif
     <style>
         /* Custom Animations */
         .animate-fade-in-right {
@@ -564,17 +571,13 @@
             const thumbnails = document.querySelectorAll('[wire\\:click^="selectImage"]');
             let autoChangeInterval;
 
-            // Function to start auto-changing images
             function startAutoChange() {
                 autoChangeInterval = setInterval(() => {
                     @this.nextImage();
                 }, 5000); // Change every 5 seconds
             }
-
-            // Initialize auto-change
             startAutoChange();
 
-            // Pause auto-change on gallery hover
             const gallery = document.querySelector('.animate-fade-in-right');
             gallery.addEventListener('mouseenter', () => {
                 clearInterval(autoChangeInterval);
@@ -598,8 +601,6 @@
                     });
                 }, 300);
             });
-
-            // Handle thumbnail clicks
             thumbnails.forEach(thumb => {
                 thumb.addEventListener('click', function() {
                     clearInterval(autoChangeInterval);

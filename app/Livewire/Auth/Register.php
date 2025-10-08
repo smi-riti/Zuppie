@@ -6,6 +6,7 @@ use Livewire\Attributes\Layout;
 use Livewire\Component;
 use Illuminate\Support\Facades\Log;
 use App\Models\User;
+#[Title('Register')]
 
 #[Layout("components.layouts.app")]
 class Register extends Component

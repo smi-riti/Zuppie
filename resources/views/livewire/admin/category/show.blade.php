@@ -14,7 +14,7 @@
     <!-- Header Section -->
     <div class="flex flex-col lg:flex-row justify-between items-start lg:items-center mb-6 gap-4">
         <div>
-            <h2 class="text-2xl font-bold text-purple-700">Categories</h2>
+            <h2 class="text-2xl text-purple-700">Categories</h2>
             <p class="text-sm text-purple-500 mt-1">
                 {{ $categories->total() }} {{ Str::plural('category', $categories->total()) }} available
             </p>
@@ -45,12 +45,12 @@
             <table class="w-full bg-white">
                 <thead class="bg-gradient-to-r from-pink-50 to-purple-50">
                     <tr>
-                        <th class="px-6 lg:px-8 py-4 text-left text-xs font-semibold text-purple-700 uppercase tracking-wider">Image</th>
-                        <th class="px-6 lg:px-8 py-4 text-left text-xs font-semibold text-purple-700 uppercase tracking-wider">Name</th>
-                        <th class="px-6 lg:px-8 py-4 text-left text-xs font-semibold text-purple-700 uppercase tracking-wider">Parent</th>
-                        <th class="px-6 lg:px-8 py-4 text-left text-xs font-semibold text-purple-700 uppercase tracking-wider">Description</th>
-                        <th class="px-6 lg:px-8 py-4 text-left text-xs font-semibold text-purple-700 uppercase tracking-wider">Special</th>
-                        <th class="px-6 lg:px-8 py-4 text-right text-xs font-semibold text-purple-700 uppercase tracking-wider">Actions</th>
+                        <th class="px-6 lg:px-8 py-4 text-left text-xs text-purple-700 uppercase">Image</th>
+                        <th class="px-6 lg:px-8 py-4 text-left text-xs text-purple-700 uppercase">Name</th>
+                        <th class="px-6 lg:px-8 py-4 text-left text-xs text-purple-700 uppercase">Parent</th>
+                        <th class="px-6 lg:px-8 py-4 text-left text-xs text-purple-700 uppercase">Description</th>
+                        <th class="px-6 lg:px-8 py-4 text-left text-xs text-purple-700 uppercase">Special</th>
+                        <th class="px-6 lg:px-8 py-4 text-right text-xs text-purple-700 uppercase">Actions</th>
                     </tr>
                 </thead>
                 <tbody class="divide-y divide-purple-100">
@@ -151,7 +151,7 @@
 
     <!-- Delete Confirmation Modal -->
     @if ($confirmingDeletion)
-        <div class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
+        <div class="fixed inset-0  flex items-center justify-center z-50 p-4">
             <div class="bg-white rounded-lg shadow-xl max-w-md w-full p-6 border-2 border-pink-300">
                 <div class="text-center">
                     <div class="mx-auto flex items-center justify-center h-12 w-12 rounded-full bg-red-100 mb-4">
@@ -159,7 +159,7 @@
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.964-.833-2.732 0L4.082 16.5c-.77.833.192 2.5 1.732 2.5z" />
                         </svg>
                     </div>
-                    <h3 class="text-lg font-bold text-gray-900 mb-2">Delete Category</h3>
+                    <h3 class="text-lg text-gray-900 mb-2">Delete Category</h3>
                     <p class="text-sm text-gray-500 mb-6">
                         Are you sure you want to delete this category? This action cannot be undone.
                     </p>

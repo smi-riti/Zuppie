@@ -1,8 +1,8 @@
-<div class="p-4 bg-gradient-to-br from-purple-50 to-pink-50 ">
+<div class="p-4">
     <div class="">
         <div class="flex justify-between items-center mb-8">
             <div>
-                <h2 class="text-3xl font-bold text-purple-800">Event Packages</h2>
+                <h2 class="text-3xl text-purple-800">Event Packages</h2>
                 <p class="text-sm text-purple-600 mt-1">Manage all your event packages</p>
             </div>
             <a href="{{ route('admin.event-packages.create') }}"
@@ -121,7 +121,7 @@
                                                     class="h-14 w-14 object-cover rounded-lg shadow-sm border border-purple-200">
                                                 @if (count($package->images) > 2)
                                                     <div
-                                                        class="absolute -top-2 -right-2 h-6 w-6 bg-purple-500 text-white rounded-full flex items-center justify-center text-xs font-semibold shadow">
+                                                        class="absolute -top-2 -right-2 h-6 w-6 bg-purple-500 text-white rounded-full flex items-center justify-center text-xs font-2xl shadow">
                                                         +{{ count($package->images) - 2 }}
                                                     </div>
                                                 @endif
@@ -240,7 +240,7 @@
                             </path>
                         </svg>
                     </div>
-                    <h3 class="text-xl font-semibold text-gray-800">Confirm Delete</h3>
+                    <h3 class="text-xl font-2xl text-gray-800">Confirm Delete</h3>
                 </div>
 
                 <div class="p-4 mb-5 bg-yellow-50 text-yellow-800 rounded-lg border border-yellow-200">

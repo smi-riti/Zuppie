@@ -3,7 +3,7 @@
     <div class="flex border-b border-gray-200 mb-6">
         <template x-for="tab in ['All Reviews', 'Approved', 'Denied']" :key="tab">
             <button @click="activeTab = tab"
-                class="px-6 py-3 font-semibold text-sm focus:outline-none transition-all duration-150" :class="{
+                class="px-6 py-3 font-2xl text-sm focus:outline-none transition-all duration-150" :class="{
                     'text-purple-700 border-b-4 border-pink-400 bg-purple-50': activeTab === tab,
                     'text-gray-500 hover:text-purple-700': activeTab !== tab
                 }" x-text="tab">
@@ -37,7 +37,7 @@
                                     {{ $review->eventPackage->name ?? '-' }}
                                 </td>
                                 <td class="px-6 py-4">
-                                    <span class="text-yellow-500 font-bold">{{ $review->rating }} &#9733;</span>
+                                    <span class="text-yellow-500">{{ $review->rating }} &#9733;</span>
                                 </td>
                                 <td class="px-6 py-4">{{ $review->comment }}</td>
                                 <td class="px-6 py-4 flex gap-2">
@@ -82,7 +82,7 @@
                                     {{ $apvr->eventPackage->name ?? '-' }}
                                 </td>
                                 <td class="px-6 py-4">
-                                    <span class="text-yellow-500 font-bold">{{ $apvr->rating }} &#9733;</span>
+                                    <span class="text-yellow-500">{{ $apvr->rating }} &#9733;</span>
                                 </td>
                                 <td class="px-6 py-4">{{ $apvr->comment }}</td>
                                 <td class="px-6 py-4 flex gap-2">

@@ -14,7 +14,7 @@
             <!-- Content -->
             <div class="relative z-10 flex items-center justify-center h-full text-center text-white px-4">
                 <div class="max-w-4xl mx-auto">
-                    <h1 class="text-4xl md:text-6xl font-bold mb-6 sparkle-text drop-shadow-2xl">Privacy Policy</h1>
+                    <h1 class="text-4xl md:text-6xl font-2xl mb-6 sparkle-text drop-shadow-2xl">Privacy Policy</h1>
                     <p class="text-xl md:text-2xl text-purple-100 max-w-2xl mx-auto leading-relaxed drop-shadow-lg">
                         How {{ $settings['site_name'] }} protects and handles your personal information
                     </p>
@@ -24,7 +24,7 @@
 
         <!-- Privacy Content -->
         <section class="py-20 bg-white">
-            <div class="container mx-auto px-4 max-w-4xl">
+            <div class="px-20">
                 <div class="prose prose-lg max-w-none">
                     <!-- Last Updated -->
                     <div class="bg-gradient-to-r from-purple-50 to-pink-50 rounded-lg p-6 mb-8">
@@ -34,16 +34,16 @@
                     </div>
 
                     <!-- Introduction -->
-                    <h2 class="text-3xl font-bold gradient-text mb-6">1. Introduction</h2>
+                    <h2 class="text-3xl font-2xl gradient-text mb-6">1. Introduction</h2>
                     <p class="text-gray-700 mb-6 leading-relaxed">
                         At {{ $settings['site_name'] }}, we are committed to protecting your privacy and ensuring the security of your personal information. This Privacy Policy explains how we collect, use, and safeguard your data when you use our event planning services.
                     </p>
 
                     <!-- Information We Collect -->
-                    <h2 class="text-3xl font-bold gradient-text mb-6">2. Information We Collect</h2>
+                    <h2 class="text-3xl font-2xl gradient-text mb-6">2. Information We Collect</h2>
                     <div class="grid md:grid-cols-2 gap-6 mb-6">
                         <div class="bg-info-50 rounded-lg p-6">
-                            <h3 class="text-xl font-bold text-info-800 mb-4">Personal Information</h3>
+                            <h3 class="text-xl font-2xl text-info-800 mb-4">Personal Information</h3>
                             <ul class="text-gray-700 space-y-2 text-sm">
                                 <li>• Full name and contact details</li>
                                 <li>• Email address and phone number</li>
@@ -54,7 +54,7 @@
                             </ul>
                         </div>
                         <div class="bg-green-50 rounded-lg p-6">
-                            <h3 class="text-xl font-bold text-green-800 mb-4">Usage Information</h3>
+                            <h3 class="text-xl font-2xl text-green-800 mb-4">Usage Information</h3>
                             <ul class="text-gray-700 space-y-2 text-sm">
                                 <li>• Website browsing behavior</li>
                                 <li>• Device and browser information</li>
@@ -67,7 +67,7 @@
                     </div>
 
                     <!-- How We Use Your Information -->
-                    <h2 class="text-3xl font-bold gradient-text mb-6">3. How We Use Your Information</h2>
+                    <h2 class="text-3xl font-2xl gradient-text mb-6">3. How We Use Your Information</h2>
                     <div class="bg-purple-50 rounded-lg p-6 mb-6">
                         <p class="text-gray-700 mb-4 leading-relaxed">
                             We use your personal information for the following purposes:
@@ -89,53 +89,53 @@
                     </div>
 
                     <!-- Information Sharing -->
-                    <h2 class="text-3xl font-bold gradient-text mb-6">4. Information Sharing and Disclosure</h2>
+                    <h2 class="text-3xl font-2xl gradient-text mb-6">4. Information Sharing and Disclosure</h2>
                     <div class="bg-yellow-50 border-l-4 border-yellow-400 p-6 mb-6">
-                        <h3 class="text-lg font-bold text-yellow-800 mb-3">We share your information only when:</h3>
+                        <h3 class="text-lg font-2xl text-yellow-800 mb-3">We share your information only when:</h3>
                         <ul class="text-gray-700 space-y-2">
                             <li><strong>Service Providers:</strong> With trusted vendors and partners for event execution</li>
                             <li><strong>Legal Requirements:</strong> When required by law or legal process</li>
                             <li><strong>Business Transfers:</strong> In case of merger, sale, or transfer of business</li>
                             <li><strong>Consent:</strong> When you explicitly authorize us to share</li>
                         </ul>
-                        <p class="text-gray-700 mt-4 font-semibold">
+                        <p class="text-gray-700 mt-4 font-2xl">
                             We never sell your personal information to third parties.
                         </p>
                     </div>
 
                     <!-- Data Security -->
-                    <h2 class="text-3xl font-bold gradient-text mb-6">5. Data Security</h2>
+                    <h2 class="text-3xl font-2xl gradient-text mb-6">5. Data Security</h2>
                     <div class="grid md:grid-cols-3 gap-6 mb-6">
                         <div class="bg-red-50 rounded-lg p-6 text-center">
                             <div class="w-16 h-16 bg-gradient-to-r from-red-500 to-red-600 rounded-full flex items-center justify-center mx-auto mb-4">
                                 <i class="fas fa-shield-alt text-white text-2xl"></i>
                             </div>
-                            <h3 class="font-bold text-red-800 mb-2">Encryption</h3>
+                            <h3 class="font-2xl text-red-800 mb-2">Encryption</h3>
                             <p class="text-gray-700 text-sm">All data transmitted is encrypted using SSL/TLS protocols</p>
                         </div>
                         <div class="bg-orange-50 rounded-lg p-6 text-center">
                             <div class="w-16 h-16 bg-gradient-to-r from-orange-500 to-orange-600 rounded-full flex items-center justify-center mx-auto mb-4">
                                 <i class="fas fa-lock text-white text-2xl"></i>
                             </div>
-                            <h3 class="font-bold text-orange-800 mb-2">Access Control</h3>
+                            <h3 class="font-2xl text-orange-800 mb-2">Access Control</h3>
                             <p class="text-gray-700 text-sm">Restricted access with authentication and authorization</p>
                         </div>
                         <div class="bg-purple-50 rounded-lg p-6 text-center">
                             <div class="w-16 h-16 bg-gradient-to-r from-purple-500 to-purple-600 rounded-full flex items-center justify-center mx-auto mb-4">
                                 <i class="fas fa-server text-white text-2xl"></i>
                             </div>
-                            <h3 class="font-bold text-purple-800 mb-2">Secure Storage</h3>
+                            <h3 class="font-2xl text-purple-800 mb-2">Secure Storage</h3>
                             <p class="text-gray-700 text-sm">Data stored on secure servers with regular backups</p>
                         </div>
                     </div>
 
                     <!-- Your Rights -->
-                    <h2 class="text-3xl font-bold gradient-text mb-6">6. Your Privacy Rights</h2>
+                    <h2 class="text-3xl font-2xl gradient-text mb-6">6. Your Privacy Rights</h2>
                     <div class="bg-gray-50 rounded-lg p-6 mb-6">
                         <p class="text-gray-700 mb-4 leading-relaxed">You have the following rights regarding your personal information:</p>
                         <div class="grid md:grid-cols-2 gap-6">
                             <div>
-                                <h4 class="font-bold text-gray-800 mb-2">Access & Portability</h4>
+                                <h4 class="font-2xl text-gray-800 mb-2">Access & Portability</h4>
                                 <ul class="text-gray-700 space-y-1 text-sm">
                                     <li>• Request copies of your data</li>
                                     <li>• Export your information</li>
@@ -143,7 +143,7 @@
                                 </ul>
                             </div>
                             <div>
-                                <h4 class="font-bold text-gray-800 mb-2">Control & Deletion</h4>
+                                <h4 class="font-2xl text-gray-800 mb-2">Control & Deletion</h4>
                                 <ul class="text-gray-700 space-y-1 text-sm">
                                     <li>• Update or correct information</li>
                                     <li>• Delete your account and data</li>
@@ -154,18 +154,18 @@
                     </div>
 
                     <!-- Cookies -->
-                    <h2 class="text-3xl font-bold gradient-text mb-6">7. Cookies and Tracking</h2>
+                    <h2 class="text-3xl font-2xl gradient-text mb-6">7. Cookies and Tracking</h2>
                     <div class="bg-pink-50 rounded-lg p-6 mb-6">
                         <p class="text-gray-700 mb-4 leading-relaxed">
                             We use cookies and similar technologies to enhance your experience:
                         </p>
                         <div class="grid md:grid-cols-2 gap-4">
                             <div>
-                                <h4 class="font-bold text-pink-800 mb-2">Essential Cookies</h4>
+                                <h4 class="font-2xl text-pink-800 mb-2">Essential Cookies</h4>
                                 <p class="text-gray-700 text-sm">Required for website functionality and security</p>
                             </div>
                             <div>
-                                <h4 class="font-bold text-pink-800 mb-2">Analytics Cookies</h4>
+                                <h4 class="font-2xl text-pink-800 mb-2">Analytics Cookies</h4>
                                 <p class="text-gray-700 text-sm">Help us understand usage patterns and improve services</p>
                             </div>
                         </div>
@@ -175,13 +175,13 @@
                     </div>
 
                     <!-- Data Retention -->
-                    <h2 class="text-3xl font-bold gradient-text mb-6">8. Data Retention</h2>
+                    <h2 class="text-3xl font-2xl gradient-text mb-6">8. Data Retention</h2>
                     <p class="text-gray-700 mb-6 leading-relaxed">
                         We retain your personal information for as long as necessary to provide our services and comply with legal obligations. Typically, we keep event-related data for 7 years for business and legal purposes, after which it is securely deleted.
                     </p>
 
                     <!-- Third-Party Services -->
-                    <h2 class="text-3xl font-bold gradient-text mb-6">9. Third-Party Services</h2>
+                    <h2 class="text-3xl font-2xl gradient-text mb-6">9. Third-Party Services</h2>
                     <div class="bg-info-50 rounded-lg p-6 mb-6">
                         <p class="text-gray-700 mb-4 leading-relaxed">
                             Our website and services may contain links to third-party websites or integrate with external services:
@@ -192,26 +192,26 @@
                             <li>Google Maps and location services</li>
                             <li>Analytics and marketing tools</li>
                         </ul>
-                        <p class="text-gray-700 mt-4 text-sm font-semibold">
+                        <p class="text-gray-700 mt-4 text-sm font-2xl">
                             These services have their own privacy policies, which we encourage you to review.
                         </p>
                     </div>
 
                     <!-- Children's Privacy -->
-                    <h2 class="text-3xl font-bold gradient-text mb-6">10. Children's Privacy</h2>
+                    <h2 class="text-3xl font-2xl gradient-text mb-6">10. Children's Privacy</h2>
                     <p class="text-gray-700 mb-6 leading-relaxed">
                         Our services are not intended for children under 13 years of age. We do not knowingly collect personal information from children under 13. If you believe we have inadvertently collected such information, please contact us immediately.
                     </p>
 
                     <!-- Policy Updates -->
-                    <h2 class="text-3xl font-bold gradient-text mb-6">11. Policy Updates</h2>
+                    <h2 class="text-3xl font-2xl gradient-text mb-6">11. Policy Updates</h2>
                     <p class="text-gray-700 mb-6 leading-relaxed">
                         We may update this Privacy Policy from time to time to reflect changes in our practices or legal requirements. We will notify you of any material changes by email or through a prominent notice on our website.
                     </p>
 
                     <!-- Contact Information -->
                     <div class="bg-gradient-to-r from-purple-50 to-pink-50 rounded-2xl p-8 mt-12">
-                        <h2 class="text-3xl font-bold gradient-text mb-6">Contact Our Privacy Team</h2>
+                        <h2 class="text-3xl font-2xl gradient-text mb-6">Contact Our Privacy Team</h2>
                         <p class="text-gray-700 mb-6 leading-relaxed">
                             If you have any questions, concerns, or requests regarding this Privacy Policy or your personal information, please contact us:
                         </p>
@@ -220,7 +220,7 @@
                                 <div class="w-12 h-12 bg-gradient-to-r from-purple-500 to-purple-600 rounded-full flex items-center justify-center mx-auto mb-3">
                                     <i class="fas fa-envelope text-white"></i>
                                 </div>
-                                <h3 class="font-bold text-gray-800 mb-1">Email</h3>
+                                <h3 class="font-2xl text-gray-800 mb-1">Email</h3>
                                 <a href="mailto:{{ $settings['email'] }}" class="text-purple-600 hover:text-purple-700">
                                     {{ $settings['email'] }}
                                 </a>
@@ -230,7 +230,7 @@
                                 <div class="w-12 h-12 bg-gradient-to-r from-pink-500 to-pink-600 rounded-full flex items-center justify-center mx-auto mb-3">
                                     <i class="fas fa-phone text-white"></i>
                                 </div>
-                                <h3 class="font-bold text-gray-800 mb-1">Phone</h3>
+                                <h3 class="font-2xl text-gray-800 mb-1">Phone</h3>
                                 <a href="tel:{{ $settings['phone_no'] }}" class="text-pink-600 hover:text-pink-700">
                                     {{ $settings['phone_no'] }}
                                 </a>
@@ -240,7 +240,7 @@
                                 <div class="w-12 h-12 bg-gradient-to-r from-info-500 to-info-600 rounded-full flex items-center justify-center mx-auto mb-3">
                                     <i class="fas fa-map-marker-alt text-white"></i>
                                 </div>
-                                <h3 class="font-bold text-gray-800 mb-1">Address</h3>
+                                <h3 class="font-2xl text-gray-800 mb-1">Address</h3>
                                 <p class="text-info-600">{{ $settings['address'] }}</p>
                                 <p class="text-xs text-gray-500 mt-1">Visit by appointment</p>
                             </div>

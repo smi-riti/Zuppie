@@ -5,7 +5,7 @@
             <div>
                 <div class="flex items-center space-x-2 mb-6">
                     <img src="{{ $settings['site_logo'] }}" alt="{{ $settings['site_name'] }} Logo" class="h-8 w-10">
-                    <span class="text-2xl font-bold text-white">{{ $settings['site_name'] }}</span>
+                    <span class="text-2xl font-2xl text-white">{{ $settings['site_name'] }}</span>
                 </div>
                 <p class="text-pink-100 mb-6">{{ $settings['site_description'] }}</p>
                 <div class="flex space-x-4">
@@ -29,36 +29,36 @@
             
             <!-- Column 2: Explore Links -->
             <div>
-                <h4 class="text-xl font-bold text-white mb-6 relative inline-block">
+                <h4 class="text-xl font-2xl text-white mb-6 relative inline-block">
                     <span class="relative z-10">Explore</span>
                     <span class="absolute -bottom-1 left-0 w-full h-1 bg-pink-500 z-0"></span>
                 </h4>
                 <ul class="space-y-3">
-                    <li><a href="{{ route('home') }}" class="text-pink-200 hover:text-white transition flex items-center group">
+                    <li><a href="{{ route('home') }}" wire:navigate class="text-pink-200 hover:text-white transition flex items-center group">
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-2 text-pink-400 group-hover:text-white transition" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
                         </svg>
                         Homepage
                     </a></li>
-                    <li><a href="{{ route('event-packages') }}" class="text-pink-200 hover:text-white transition flex items-center group">
+                    <li><a href="{{ route('event-packages') }}" wire:navigate class="text-pink-200 hover:text-white transition flex items-center group">
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-2 text-pink-400 group-hover:text-white transition" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
                         </svg>
                         Event Packages
                     </a></li>
-                    <li><a href="{{ route('blog') }}" class="text-pink-200 hover:text-white transition flex items-center group">
+                    <li><a href="{{ route('blog') }}" wire:navigate class="text-pink-200 hover:text-white transition flex items-center group">
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-2 text-pink-400 group-hover:text-white transition" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
                         </svg>
                         Blog
                     </a></li>
-                    <li><a href="{{ route('about') }}" class="text-pink-200 hover:text-white transition flex items-center group">
+                    <li><a href="{{ route('about') }}" wire:navigate class="text-pink-200 hover:text-white transition flex items-center group">
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-2 text-pink-400 group-hover:text-white transition" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
                         </svg>
                         About
                     </a></li>
-                    <li><a href="{{ route('contact') }}" class="text-pink-200 hover:text-white transition flex items-center group">
+                    <li><a href="{{ route('contact') }}" wire:navigate class="text-pink-200 hover:text-white transition flex items-center group">
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-2 text-pink-400 group-hover:text-white transition" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
                         </svg>
@@ -69,7 +69,7 @@
             
             <!-- Column 3: Contact -->
             <div>
-                <h4 class="text-xl font-bold text-white mb-6 relative inline-block">
+                <h4 class="text-xl font-2xl text-white mb-6 relative inline-block">
                     <span class="relative z-10">Contact Us</span>
                     <span class="absolute -bottom-1 left-0 w-full h-1 bg-pink-500 z-0"></span>
                 </h4>
@@ -111,8 +111,8 @@
         <div class="border-t border-pink-700 pt-8 text-center">
             <p class="text-pink-200">&copy; {{ date('Y') }} {{ $settings['site_name'] }}. All rights reserved.</p>
             <div class="mt-2 flex justify-center space-x-6">
-                <a href="{{ route('privacy-policy') }}" class="text-pink-200 hover:text-white transition text-sm">Privacy Policy</a>
-                <a href="{{ route('terms-of-service') }}" class="text-pink-200 hover:text-white transition text-sm">Terms of Service</a>
+                <a href="{{ route('privacy-policy') }}" wire:navigate class="text-pink-200 hover:text-white transition text-sm">Privacy Policy</a>
+                <a href="{{ route('terms-of-service') }}" wire:navigate class="text-pink-200 hover:text-white transition text-sm">Terms of Service</a>
                 <a href="#" class="text-pink-200 hover:text-white transition text-sm">Sitemap</a>
             </div>
         </div>

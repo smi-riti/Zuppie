@@ -6,6 +6,7 @@ use Livewire\Component;
 use App\Models\Booking;
 use App\Models\Payment;
 use Illuminate\Support\Facades\Auth;
+#[Title('Manage Booking')]
 
 class ManageBooking extends Component
 {
@@ -16,8 +17,6 @@ class ManageBooking extends Component
     public $selectedBooking = null;
     public $showBookingDetail = false;
     public $showEditProfile = false;
-    
-    // User profile fields
     public $name = '';
     public $email = '';
     public $phone = '';
@@ -25,8 +24,6 @@ class ManageBooking extends Component
     public function mount($booking_id = null)
     {
         $this->bookingId = $booking_id;
-        
-        // Show success message for new bookings
         if (session('booking_success')) {
             $this->showSuccess = true;
         }
@@ -38,7 +35,6 @@ class ManageBooking extends Component
     public function loadBooking()
     {
         if ($this->bookingId) {
-            // Load specific booking
             $this->booking = Booking::with(['eventPackage.category', 'eventPackage.images', 'payments', 'user'])
                 ->where('id', $this->bookingId)
                 ->first();
@@ -48,7 +44,6 @@ class ManageBooking extends Component
                 return redirect()->route('event-packages');
             }
         } else {
-            // Load user's latest booking if logged in
             if (Auth::check()) {
                 $this->booking = Booking::with(['eventPackage.category', 'eventPackage.images', 'payments'])
                     ->where('user_id', Auth::id())

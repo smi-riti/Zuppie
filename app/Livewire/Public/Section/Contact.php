@@ -5,6 +5,7 @@ namespace App\Livewire\Public\Section;
 use App\Models\Category;
 use App\Traits\HasSettings;
 use Livewire\Component;
+#[Title('Contact Us')]
 
 class Contact extends Component
 {

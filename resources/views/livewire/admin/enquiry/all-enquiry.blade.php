@@ -24,12 +24,12 @@
                 <table class="min-w-full divide-y divide-gray-200">
                     <thead class="bg-gradient-to-r from-purple-50 to-pink-50">
                         <tr>
-                            <th class="px-6 py-3 text-left text-xs font-semibold text-purple-700 uppercase tracking-wider">ID</th>
-                            <th class="px-6 py-3 text-left text-xs font-semibold text-purple-700 uppercase tracking-wider">User Name</th>
-                            <th class="px-6 py-3 text-left text-xs font-semibold text-purple-700 uppercase tracking-wider">Email</th>
-                            <th class="px-6 py-3 text-left text-xs font-semibold text-purple-700 uppercase tracking-wider">Phone</th>
-                            <th class="px-6 py-3 text-left text-xs font-semibold text-purple-700 uppercase tracking-wider">Message</th>
-                            <th class="px-6 py-3 text-left text-xs font-semibold text-purple-700 uppercase tracking-wider">Actions</th>
+                            <th class="px-6 py-3 text-left text-xs text-purple-700 uppercase">ID</th>
+                            <th class="px-6 py-3 text-left text-xs text-purple-700 uppercase">User Name</th>
+                            <th class="px-6 py-3 text-left text-xs text-purple-700 uppercase">Email</th>
+                            <th class="px-6 py-3 text-left text-xs text-purple-700 uppercase">Phone</th>
+                            <th class="px-6 py-3 text-left text-xs text-purple-700 uppercase">Message</th>
+                            <th class="px-6 py-3 text-left text-xs text-purple-700 uppercase">Actions</th>
                         </tr>
                     </thead>
                     <tbody class="bg-white divide-y divide-gray-200">
@@ -71,12 +71,12 @@
                 <table class="min-w-full divide-y divide-gray-200">
                     <thead class="bg-gradient-to-r from-green-50 to-emerald-50">
                         <tr>
-                            <th class="px-6 py-3 text-left text-xs font-semibold text-green-700 uppercase tracking-wider">ID</th>
-                            <th class="px-6 py-3 text-left text-xs font-semibold text-green-700 uppercase tracking-wider">User</th>
-                            <th class="px-6 py-3 text-left text-xs font-semibold text-green-700 uppercase tracking-wider">Email</th>
-                            <th class="px-6 py-3 text-left text-xs font-semibold text-green-700 uppercase tracking-wider">Phone</th>
-                            <th class="px-6 py-3 text-left text-xs font-semibold text-green-700 uppercase tracking-wider">Message</th>
-                            <th class="px-6 py-3 text-left text-xs font-semibold text-green-700 uppercase tracking-wider">Actions</th>
+                            <th class="px-6 py-3 text-left text-xs font-2xl text-green-700 uppercase tracking-wider">ID</th>
+                            <th class="px-6 py-3 text-left text-xs font-2xl text-green-700 uppercase tracking-wider">User</th>
+                            <th class="px-6 py-3 text-left text-xs font-2xl text-green-700 uppercase tracking-wider">Email</th>
+                            <th class="px-6 py-3 text-left text-xs font-2xl text-green-700 uppercase tracking-wider">Phone</th>
+                            <th class="px-6 py-3 text-left text-xs font-2xl text-green-700 uppercase tracking-wider">Message</th>
+                            <th class="px-6 py-3 text-left text-xs font-2xl text-green-700 uppercase tracking-wider">Actions</th>
                         </tr>
                     </thead>
                     <tbody class="bg-white divide-y divide-gray-200">

@@ -1,5 +1,5 @@
 <div class="min-h-screen bg-gradient-to-br from-purple-50 via-pink-50 to-indigo-50 py-6">
-    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="px-4 sm:px-6 lg:px-8">
         <!-- Header -->
         <div class="mb-8">
             <div class="flex items-center justify-between">
@@ -12,7 +12,7 @@
                         Back to Packages
                     </a>
                     <div>
-                        <h1 class="text-3xl font-bold text-gray-900">Update Package</h1>
+                        <h1 class="text-3xl text-gray-900">Update Package</h1>
                         <p class="text-gray-600 mt-1">Modify package details and settings</p>
                     </div>
                 </div>
@@ -37,7 +37,7 @@
                 <div class="bg-white rounded-xl shadow-lg border border-gray-200 overflow-hidden">
                     <!-- Basic Information Section -->
                     <div class="bg-gradient-to-r from-purple-600 to-pink-600 px-6 py-4">
-                        <h2 class="text-xl font-semibold text-white flex items-center">
+                        <h2 class="text-xl font-2xl text-white flex items-center">
                             <svg class="w-6 h-6 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
                             </svg>
@@ -128,8 +128,8 @@
 
             <!-- Description & Features Section -->
             <div class="bg-white rounded-xl shadow-lg border border-gray-200 overflow-hidden">
-                <div class="bg-gradient-to-r from-info-600 to-indigo-600 px-6 py-4">
-                    <h2 class="text-xl font-semibold text-white flex items-center">
+                <div class="bg-gradient-to-r from-pink-400 to-indigo-600 px-6 py-4">
+                    <h2 class="text-xl font-2xl text-white flex items-center">
                         <svg class="w-6 h-6 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
                         </svg>
@@ -138,7 +138,6 @@
                 </div>
                 
                 <div class="p-6 space-y-6">
-                    <!-- Description -->
                     <div>
                         <label class="block text-sm font-medium text-gray-700 mb-2">Description</label>
                         <textarea wire:model.live="description" rows="4"
@@ -147,7 +146,6 @@
                         @error('description') <p class="text-red-600 text-sm mt-1">{{ $message }}</p> @enderror
                     </div>
 
-                    <!-- Features with Rich Text Editor -->
                     <div>
                         <label class="block text-sm font-medium text-gray-700 mb-2">Features</label>
                         <div wire:ignore>
@@ -157,12 +155,51 @@
                         @error('features') <p class="text-red-600 text-sm mt-1">{{ $message }}</p> @enderror
                     </div>
                 </div>
+                <div class="p-4">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                        <!-- Active Status Toggle -->
+                        <div class="flex items-center justify-between p-4 bg-gray-50 rounded-lg">
+                            <div>
+                                <label class="text-sm font-medium text-gray-700">Active Status</label>
+                                <p class="text-xs text-gray-500">Package will be visible to customers</p>
+                            </div>
+                            <div class="relative">
+                                <input type="checkbox" wire:model.live="is_active" 
+                                       class="sr-only" id="is_active">
+                                <label for="is_active" class="flex items-center cursor-pointer">
+                                    <div class="relative">
+                                        <div class="block bg-gray-300 w-14 h-8 rounded-full transition-colors duration-200 {{ $is_active ? 'bg-green-500' : 'bg-gray-300' }}"></div>
+                                        <div class="dot absolute left-1 top-1 bg-white w-6 h-6 rounded-full transition-transform duration-200 {{ $is_active ? 'transform translate-x-6' : '' }}"></div>
+                                    </div>
+                                </label>
+                            </div>
+                        </div>
+
+                        <!-- Special Status Toggle -->
+                        <div class="flex items-center justify-between p-4 bg-gray-50 rounded-lg">
+                            <div>
+                                <label class="text-sm font-medium text-gray-700">Special Package</label>
+                                <p class="text-xs text-gray-500">Mark as featured/popular package</p>
+                            </div>
+                            <div class="relative">
+                                <input type="checkbox" wire:model.live="is_special" 
+                                       class="sr-only" id="is_special">
+                                <label for="is_special" class="flex items-center cursor-pointer">
+                                    <div class="relative">
+                                        <div class="block bg-gray-300 w-14 h-8 rounded-full transition-colors duration-200 {{ $is_special ? 'bg-purple-500' : 'bg-gray-300' }}"></div>
+                                        <div class="dot absolute left-1 top-1 bg-white w-6 h-6 rounded-full transition-transform duration-200 {{ $is_special ? 'transform translate-x-6' : '' }}"></div>
+                                    </div>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
 
             <!-- Images Section -->
             <div class="bg-white rounded-xl shadow-lg border border-gray-200 overflow-hidden">
                 <div class="bg-gradient-to-r from-green-600 to-teal-600 px-6 py-4">
-                    <h2 class="text-xl font-semibold text-white flex items-center">
+                    <h2 class="text-xl font-2xl text-white flex items-center">
                         <svg class="w-6 h-6 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
                         </svg>
@@ -215,64 +252,11 @@
                     </div>
                 </div>
             </div>
-
-            <!-- Settings Section -->
-            <div class="bg-white rounded-xl shadow-lg border border-gray-200 overflow-hidden">
-                <div class="bg-gradient-to-r from-orange-600 to-red-600 px-6 py-4">
-                    <h2 class="text-xl font-semibold text-white flex items-center">
-                        <svg class="w-6 h-6 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"></path>
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
-                        </svg>
-                        Package Settings
-                    </h2>
-                </div>
-                
-                <div class="p-6">
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                        <!-- Active Status Toggle -->
-                        <div class="flex items-center justify-between p-4 bg-gray-50 rounded-lg">
-                            <div>
-                                <label class="text-sm font-medium text-gray-700">Active Status</label>
-                                <p class="text-xs text-gray-500">Package will be visible to customers</p>
-                            </div>
-                            <div class="relative">
-                                <input type="checkbox" wire:model.live="is_active" 
-                                       class="sr-only" id="is_active">
-                                <label for="is_active" class="flex items-center cursor-pointer">
-                                    <div class="relative">
-                                        <div class="block bg-gray-300 w-14 h-8 rounded-full transition-colors duration-200 {{ $is_active ? 'bg-green-500' : 'bg-gray-300' }}"></div>
-                                        <div class="dot absolute left-1 top-1 bg-white w-6 h-6 rounded-full transition-transform duration-200 {{ $is_active ? 'transform translate-x-6' : '' }}"></div>
-                                    </div>
-                                </label>
-                            </div>
-                        </div>
-
-                        <!-- Special Status Toggle -->
-                        <div class="flex items-center justify-between p-4 bg-gray-50 rounded-lg">
-                            <div>
-                                <label class="text-sm font-medium text-gray-700">Special Package</label>
-                                <p class="text-xs text-gray-500">Mark as featured/popular package</p>
-                            </div>
-                            <div class="relative">
-                                <input type="checkbox" wire:model.live="is_special" 
-                                       class="sr-only" id="is_special">
-                                <label for="is_special" class="flex items-center cursor-pointer">
-                                    <div class="relative">
-                                        <div class="block bg-gray-300 w-14 h-8 rounded-full transition-colors duration-200 {{ $is_special ? 'bg-purple-500' : 'bg-gray-300' }}"></div>
-                                        <div class="dot absolute left-1 top-1 bg-white w-6 h-6 rounded-full transition-transform duration-200 {{ $is_special ? 'transform translate-x-6' : '' }}"></div>
-                                    </div>
-                                </label>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
         </form>
     </div>
 
     <!-- Fixed Action Buttons at Bottom -->
-    <div class="mt-6 flex justify-between items-center bg-white rounded-xl shadow-lg border border-gray-200 p-6">
+    <div class="flex justify-between items-center p-5">
         <a href="{{ route('admin.event-packages') }}" 
            class="inline-flex items-center px-6 py-3 border border-gray-300 rounded-lg text-gray-700 bg-white hover:bg-gray-50 transition-colors duration-200">
             <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">

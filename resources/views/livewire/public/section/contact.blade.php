@@ -5,7 +5,7 @@
         <section class="relative h-[60vh] overflow-hidden">
             <!-- Background Image with Overlay -->
             <div class="absolute inset-0">
-                <img src="https://images.unsplash.com/photo-1511578314322-379afb476865?ixlib=rb-4.0.3&auto=format&fit=crop&w=2340&q=80" 
+                <img src="{{ asset('images/contact-banner.webp') }}" 
                      alt="Contact Background" 
                      class="w-full h-full object-cover">
                 <div class="absolute inset-0 bg-gradient-to-br from-purple-900/40 via-pink-800/35 to-indigo-900/40"></div>
@@ -21,13 +21,13 @@
                     <div class="absolute top-1/2 right-1/4 w-16 h-16 bg-purple-300/15 rounded-full blur-xl animate-float-fast"></div>
                 </div>
 
-                <div class="max-w-5xl mx-auto relative">
+                <div class="px-20 relative">
                    
                     <!-- Enhanced Description -->
                     <div class="mb-12 animate-fade-in-up animation-delay-300">
                         <p class="text-2xl md:text-3xl text-white/90 max-w-3xl mx-auto leading-relaxed drop-shadow-lg font-light">
-                            Ready to create your <span class="font-bold bg-gradient-to-r from-yellow-300 to-orange-300 bg-clip-text text-transparent">perfect event?</span> 
-                            Let's bring your vision to life with <span class="font-bold text-pink-200">{{ $settings['site_name'] }}</span>.
+                            Ready to create your <span class="font-2xl bg-gradient-to-r from-yellow-300 to-orange-300 bg-clip-text text-transparent">perfect event?</span> 
+                            Let's bring your vision to life with <span class="font-2xl text-pink-200">{{ $settings['site_name'] }}</span>.
                         </p>
                         
                     </div>
@@ -37,7 +37,7 @@
                         <!-- Primary Actions -->
                         <div class="flex flex-col sm:flex-row gap-4 justify-center">
                             <a href="tel:{{ $settings['phone_no'] }}" 
-                               class="group relative px-10 py-5 bg-gradient-to-r from-pink-500 via-pink-600 to-purple-600 text-white rounded-2xl font-bold text-lg hover:from-pink-600 hover:via-pink-700 hover:to-purple-700 transition-all duration-300 transform hover:scale-105 hover:-translate-y-1 shadow-2xl hover:shadow-pink-500/25">
+                               class="group relative px-10 py-5 bg-gradient-to-r from-pink-500 via-pink-600 to-purple-600 text-white rounded-2xl font-2xl text-lg hover:from-pink-600 hover:via-pink-700 hover:to-purple-700 transition-all duration-300 transform hover:scale-105 hover:-translate-y-1 shadow-2xl hover:shadow-pink-500/25">
                                 <div class="absolute inset-0 bg-gradient-to-r from-pink-400 to-purple-500 rounded-2xl blur opacity-75 group-hover:opacity-100 transition-opacity"></div>
                                 <div class="relative flex items-center justify-center">
                                     <div class="w-6 h-6 bg-white/20 rounded-full flex items-center justify-center mr-3 group-hover:rotate-12 transition-transform">
@@ -51,7 +51,7 @@
                             </a>
 
                             <a href="mailto:{{ $settings['email'] }}" 
-                               class="group relative px-10 py-5 bg-white/10 backdrop-blur-xl text-white rounded-2xl font-bold text-lg hover:bg-white/20 transition-all duration-300 transform hover:scale-105 hover:-translate-y-1 border-2 border-white/30 hover:border-white/50 shadow-2xl">
+                               class="group relative px-10 py-5 bg-white/10 backdrop-blur-xl text-white rounded-2xl font-2xl text-lg hover:bg-white/20 transition-all duration-300 transform hover:scale-105 hover:-translate-y-1 border-2 border-white/30 hover:border-white/50 shadow-2xl">
                                 <div class="flex items-center justify-center">
                                     <div class="w-6 h-6 bg-white/20 rounded-full flex items-center justify-center mr-3 group-hover:rotate-12 transition-transform">
                                         <i class="fas fa-envelope text-sm"></i>
@@ -68,7 +68,7 @@
                         <div class="flex justify-center">
                             <button 
                                 wire:click="$dispatch('open-enquiry-form')"
-                                class="group relative px-12 py-6 bg-gradient-to-r from-purple-600 via-info-600 to-purple-600 text-white rounded-2xl font-bold text-xl hover:from-purple-700 hover:via-info-700 hover:to-purple-700 transition-all duration-500 transform hover:scale-110 hover:-translate-y-2 shadow-2xl hover:shadow-purple-500/30 animate-pulse-border">
+                                class="group relative px-12 py-6 bg-gradient-to-r from-purple-600 via-info-600 to-purple-600 text-white rounded-2xl font-2xl text-xl hover:from-purple-700 hover:via-info-700 hover:to-purple-700 transition-all duration-500 transform hover:scale-110 hover:-translate-y-2 shadow-2xl hover:shadow-purple-500/30 animate-pulse-border">
                                 <div class="absolute inset-0 bg-gradient-to-r from-purple-400 via-info-400 to-purple-400 rounded-2xl blur-lg opacity-75 group-hover:opacity-100 transition-opacity"></div>
                                 <div class="relative flex items-center justify-center">
                                     <div class="w-8 h-8 bg-white/20 rounded-full flex items-center justify-center mr-4 group-hover:rotate-180 transition-transform duration-500">
@@ -91,10 +91,10 @@
         </section>
 
         <!-- Contact Information & Form Section -->
-        <section class="py-20 bg-gradient-to-br from-purple-50 to-pink-50">
-            <div class="container mx-auto px-4 max-w-7xl">
+        <section class="lg:px-20 p-6 py-20 bg-gradient-to-br from-purple-50 to-pink-50">
+            <div class="">
                 <div class="text-center mb-16">
-                    <h2 class="text-4xl md:text-5xl font-bold gradient-text mb-6">Contact Information</h2>
+                    <h2 class="text-4xl md:text-5xl font-2xl gradient-text mb-6">Contact Information</h2>
                     <p class="text-xl text-gray-600 max-w-3xl mx-auto">{{ $settings['site_description'] }}</p>
                 </div>
 
@@ -108,9 +108,9 @@
                                     <i class="fas fa-phone text-white text-2xl"></i>
                                 </div>
                                 <div>
-                                    <h3 class="text-2xl font-bold text-gray-800 mb-2">Call Us</h3>
+                                    <h3 class="text-2xl font-2xl text-gray-800 mb-2">Call Us</h3>
                                     <a href="tel:{{ $settings['phone_no'] }}" 
-                                       class="text-lg text-green-600 hover:text-green-700 font-semibold transition-colors">
+                                       class="text-lg text-green-600 hover:text-green-700 font-2xl transition-colors">
                                         {{ $settings['phone_no'] }}
                                     </a>
                                     <p class="text-gray-600 mt-1">{{ $settings['business_hours'] ?? 'Mon-Sat: 9AM-6PM' }}</p>
@@ -125,9 +125,9 @@
                                     <i class="fas fa-envelope text-white text-2xl"></i>
                                 </div>
                                 <div>
-                                    <h3 class="text-2xl font-bold text-gray-800 mb-2">Email Us</h3>
+                                    <h3 class="text-2xl font-2xl text-gray-800 mb-2">Email Us</h3>
                                     <a href="mailto:{{ $settings['email'] }}" 
-                                       class="text-lg text-info-600 hover:text-info-700 font-semibold transition-colors">
+                                       class="text-lg text-info-600 hover:text-info-700 font-2xl transition-colors">
                                         {{ $settings['email'] }}
                                     </a>
                                     <p class="text-gray-600 mt-1">We'll respond within 24 hours</p>
@@ -142,10 +142,10 @@
                                     <i class="fas fa-map-marker-alt text-white text-2xl"></i>
                                 </div>
                                 <div>
-                                    <h3 class="text-2xl font-bold text-gray-800 mb-2">Visit Us</h3>
+                                    <h3 class="text-2xl font-2xl text-gray-800 mb-2">Visit Us</h3>
                                     <a href="https://maps.app.goo.gl/LdRMDfhWhcWTxKwL8" 
                                        target="_blank"
-                                       class="text-lg text-purple-600 hover:text-purple-700 font-semibold transition-colors">
+                                       class="text-lg text-purple-600 hover:text-purple-700 font-2xl transition-colors">
                                         {{ $settings['address'] }}
                                     </a>
                                     <p class="text-gray-600 mt-1">Click to open in Maps</p>
@@ -161,11 +161,11 @@
                                     <i class="fab fa-whatsapp text-white text-2xl"></i>
                                 </div>
                                 <div>
-                                    <h3 class="text-2xl font-bold text-gray-800 mb-2">WhatsApp</h3>
-                                    <a href="https://wa.me/{{ str_replace(['+', ' ', '-'], '', $settings['whatsapp_number']) }}" 
+                                    <h3 class="text-2xl font-2xl text-gray-800 mb-2">WhatsApp</h3>
+                                    <a href="https://wa.me/{{ str_replace(['+', ' ', '-'], '', $settings['phone_no']) }}" 
                                        target="_blank"
-                                       class="text-lg text-green-600 hover:text-green-700 font-semibold transition-colors">
-                                        {{ $settings['whatsapp_number'] }}
+                                       class="text-lg text-green-600 hover:text-green-700 font-2xl transition-colors">
+                                        {{ $settings['phone_no'] }}
                                     </a>
                                     <p class="text-gray-600 mt-1">Chat with us instantly</p>
                                 </div>
@@ -177,7 +177,7 @@
                     <!-- Map Section -->
                     <div class="bg-white rounded-2xl shadow-xl overflow-hidden">
                         <div class="p-6">
-                            <h3 class="text-2xl font-bold text-gray-800 mb-4">Find Us Here</h3>
+                            <h3 class="text-2xl font-2xl text-gray-800 mb-4">Find Us Here</h3>
                         </div>
                         <div class="h-96">
                             <iframe 
@@ -194,7 +194,7 @@
                         <div class="p-6 bg-gray-50">
                             <a href="https://maps.app.goo.gl/LdRMDfhWhcWTxKwL8" 
                                target="_blank"
-                               class="w-full bg-gradient-to-r from-purple-600 to-pink-600 text-white py-3 rounded-lg font-semibold hover:from-purple-700 hover:to-pink-700 transition-all flex items-center justify-center">
+                               class="w-full bg-gradient-to-r from-purple-600 to-pink-600 text-white py-3 rounded-lg font-2xl hover:from-purple-700 hover:to-pink-700 transition-all flex items-center justify-center">
                                 <i class="fas fa-external-link-alt mr-2"></i>
                                 Open in Google Maps
                             </a>
@@ -205,15 +205,15 @@
         </section>
 
         <!-- Social Media & Additional Contact -->
-        <section class="py-20 bg-white">
-            <div class="container mx-auto px-4 text-center">
-                <h2 class="text-4xl font-bold gradient-text mb-12">Follow Us & Connect</h2>
+        <section class="lg:px-20 p-6 py-20 bg-white">
+            <div class="text-center">
+                <h2 class="text-4xl font-2xl gradient-text mb-12">Follow Us & Connect</h2>
                 
                 <div class="flex flex-wrap justify-center gap-6 mb-12">
                     @if($settings['instagram_link'])
                     <a href="{{ $settings['instagram_link'] }}" 
                        target="_blank"
-                       class="group flex items-center space-x-3 bg-gradient-to-r from-pink-500 to-purple-600 text-white px-8 py-4 rounded-full font-semibold hover:from-pink-600 hover:to-purple-700 transition-all transform hover:scale-105 shadow-lg">
+                       class="group flex items-center space-x-3 bg-gradient-to-r from-pink-500 to-purple-600 text-white px-8 py-4 rounded-full font-2xl hover:from-pink-600 hover:to-purple-700 transition-all transform hover:scale-105 shadow-lg">
                         <i class="fab fa-instagram text-2xl group-hover:scale-110 transition-transform"></i>
                         <span>Instagram</span>
                     </a>
@@ -222,7 +222,7 @@
                     @if($settings['facebook_link'])
                     <a href="{{ $settings['facebook_link'] }}" 
                        target="_blank"
-                       class="group flex items-center space-x-3 bg-gradient-to-r from-info-600 to-info-700 text-white px-8 py-4 rounded-full font-semibold hover:from-info-700 hover:to-info-800 transition-all transform hover:scale-105 shadow-lg">
+                       class="group flex items-center space-x-3 bg-gradient-to-r from-info-600 to-info-700 text-white px-8 py-4 rounded-full font-2xl hover:from-info-700 hover:to-info-800 transition-all transform hover:scale-105 shadow-lg">
                         <i class="fab fa-facebook-f text-2xl group-hover:scale-110 transition-transform"></i>
                         <span>Facebook</span>
                     </a>
@@ -231,7 +231,7 @@
                     @if($settings['youtube_link'])
                     <a href="{{ $settings['youtube_link'] }}" 
                        target="_blank"
-                       class="group flex items-center space-x-3 bg-gradient-to-r from-red-600 to-red-700 text-white px-8 py-4 rounded-full font-semibold hover:from-red-700 hover:to-red-800 transition-all transform hover:scale-105 shadow-lg">
+                       class="group flex items-center space-x-3 bg-gradient-to-r from-red-600 to-red-700 text-white px-8 py-4 rounded-full font-2xl hover:from-red-700 hover:to-red-800 transition-all transform hover:scale-105 shadow-lg">
                         <i class="fab fa-youtube text-2xl group-hover:scale-110 transition-transform"></i>
                         <span>YouTube</span>
                     </a>
@@ -240,7 +240,7 @@
                     @if($settings['twitter_link'])
                     <a href="{{ $settings['twitter_link'] }}" 
                        target="_blank"
-                       class="group flex items-center space-x-3 bg-gradient-to-r from-sky-500 to-sky-600 text-white px-8 py-4 rounded-full font-semibold hover:from-sky-600 hover:to-sky-700 transition-all transform hover:scale-105 shadow-lg">
+                       class="group flex items-center space-x-3 bg-gradient-to-r from-sky-500 to-sky-600 text-white px-8 py-4 rounded-full font-2xl hover:from-sky-600 hover:to-sky-700 transition-all transform hover:scale-105 shadow-lg">
                         <i class="fab fa-twitter text-2xl group-hover:scale-110 transition-transform"></i>
                         <span>Twitter</span>
                     </a>
@@ -249,7 +249,7 @@
                     @if($settings['linkedin_link'])
                     <a href="{{ $settings['linkedin_link'] }}" 
                        target="_blank"
-                       class="group flex items-center space-x-3 bg-gradient-to-r from-info-700 to-info-800 text-white px-8 py-4 rounded-full font-semibold hover:from-info-800 hover:to-info-900 transition-all transform hover:scale-105 shadow-lg">
+                       class="group flex items-center space-x-3 bg-gradient-to-r from-info-700 to-info-800 text-white px-8 py-4 rounded-full font-2xl hover:from-info-800 hover:to-info-900 transition-all transform hover:scale-105 shadow-lg">
                         <i class="fab fa-linkedin-in text-2xl group-hover:scale-110 transition-transform"></i>
                         <span>LinkedIn</span>
                     </a>
@@ -257,17 +257,17 @@
                 </div>
 
                 <div class="bg-gradient-to-r from-purple-50 to-pink-50 rounded-2xl p-8 max-w-4xl mx-auto">
-                    <h3 class="text-2xl font-bold text-gray-800 mb-4">Ready to Plan Your Event?</h3>
+                    <h3 class="text-2xl font-2xl text-gray-800 mb-4">Ready to Plan Your Event?</h3>
                     <p class="text-gray-600 mb-6">Get in touch with our expert event planners and let's create something magical together.</p>
                     <div class="flex flex-col sm:flex-row gap-4 justify-center">
                         <button 
                             wire:click="$dispatch('open-enquiry-form')"
-                            class="bg-gradient-to-r from-purple-600 to-pink-600 text-white px-8 py-4 rounded-full font-bold text-lg hover:from-purple-700 hover:to-pink-700 transition-all transform hover:scale-105 shadow-lg flex items-center justify-center">
+                            class="bg-gradient-to-r from-purple-600 to-pink-600 text-white px-8 py-4 rounded-full font-2xl text-lg hover:from-purple-700 hover:to-pink-700 transition-all transform hover:scale-105 shadow-lg flex items-center justify-center">
                             <i class="fas fa-calendar-plus mr-2"></i>
                             Get Free Consultation
                         </button>
                         <a href="tel:{{ $settings['phone_no'] }}" 
-                           class="border-2 border-purple-600 text-purple-600 px-8 py-4 rounded-full font-bold text-lg hover:bg-purple-600 hover:text-white transition-all transform hover:scale-105 flex items-center justify-center">
+                           class="border-2 border-purple-600 text-purple-600 px-8 py-4 rounded-full font-2xl text-lg hover:bg-purple-600 hover:text-white transition-all transform hover:scale-105 flex items-center justify-center">
                             <i class="fas fa-phone mr-2"></i>
                             Call Now
                         </a>

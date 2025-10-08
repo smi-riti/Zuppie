@@ -7,7 +7,9 @@ use Livewire\WithFileUploads;
 use App\Models\Setting;
 use Livewire\Attributes\Validate;
 use Livewire\Attributes\Layout;
- #[Layout('components.layouts.admin')]
+#[Title('Manage Settings')]
+
+#[Layout('components.layouts.admin')]
 class ManageSetting extends Component
 {
     use WithFileUploads;
@@ -20,9 +22,7 @@ class ManageSetting extends Component
 
     #[Validate('nullable|image|max:2048')]
     public $logo_file;
-
     public $current_logo = '';
-
     #[Validate('required|email|max:255')]
     public $email = '';
 

@@ -61,7 +61,7 @@ class ProductionSEOOptimize extends Command
         $this->newLine();
         $this->info('✅ Production SEO Optimization Complete!');
         $this->info('🌐 Your website is now optimized for https://zuppie.in');
-        
+
         return 0;
     }
 
@@ -71,13 +71,13 @@ class ProductionSEOOptimize extends Command
     private function clearCaches()
     {
         $this->info('🗑️  Clearing SEO caches...');
-        
+
         // Clear Laravel caches
         Artisan::call('cache:clear');
         Artisan::call('route:clear');
         Artisan::call('view:clear');
         Artisan::call('config:clear');
-        
+
         // Clear SEO-specific caches
         Cache::forget('sitemap_index_production');
         Cache::forget('sitemap_static_production');
@@ -86,7 +86,7 @@ class ProductionSEOOptimize extends Command
         Cache::forget('sitemap_offers_production');
         Cache::forget('sitemap_blogs_production');
         Cache::forget('robots_txt_production');
-        
+
         $this->info('✅ Caches cleared successfully');
     }
 
@@ -96,28 +96,28 @@ class ProductionSEOOptimize extends Command
     private function validateEnvironment()
     {
         $this->info('🔍 Validating production environment...');
-        
+
         // Check environment
         if (app()->environment('production')) {
             $this->info('✅ Environment: Production');
         } else {
             $this->warn('⚠️  Environment: ' . app()->environment() . ' (Expected: production)');
         }
-        
+
         // Check APP_URL
         if (config('app.url') === 'https://zuppie.in') {
             $this->info('✅ APP_URL: https://zuppie.in');
         } else {
             $this->error('❌ APP_URL: ' . config('app.url') . ' (Expected: https://zuppie.in)');
         }
-        
+
         // Check debug mode
         if (config('app.debug') === false) {
             $this->info('✅ Debug mode: Disabled');
         } else {
             $this->warn('⚠️  Debug mode: Enabled (Should be disabled in production)');
         }
-        
+
         // Check Google verification
         if (config('seo.meta.google_site_verification')) {
             $this->info('✅ Google Site Verification: Configured');
@@ -132,11 +132,11 @@ class ProductionSEOOptimize extends Command
     private function generateSitemaps()
     {
         $this->info('🗺️  Generating production sitemaps...');
-        
+
         try {
             // Generate sitemap cache
             $baseUrl = 'https://zuppie.in';
-            
+
             // Test sitemap endpoints
             $endpoints = [
                 '/sitemap.xml',
@@ -146,7 +146,7 @@ class ProductionSEOOptimize extends Command
                 '/sitemap/offers.xml',
                 '/sitemap/blogs.xml'
             ];
-            
+
             foreach ($endpoints as $endpoint) {
                 try {
                     $response = Http::timeout(10)->get($baseUrl . $endpoint);
@@ -159,7 +159,7 @@ class ProductionSEOOptimize extends Command
                     $this->error("❌ Error generating $endpoint: " . $e->getMessage());
                 }
             }
-            
+
         } catch (\Exception $e) {
             $this->error('❌ Sitemap generation failed: ' . $e->getMessage());
         }
@@ -171,19 +171,19 @@ class ProductionSEOOptimize extends Command
     private function optimizeImages()
     {
         $this->info('🖼️  Optimizing images...');
-        
+
         $imageDir = public_path('images');
-        
+
         if (File::exists($imageDir)) {
             $images = File::files($imageDir);
             $count = 0;
-            
+
             foreach ($images as $image) {
                 if (in_array($image->getExtension(), ['jpg', 'jpeg', 'png', 'gif'])) {
                     $count++;
                 }
             }
-            
+
             $this->info("✅ Found $count images for optimization");
             $this->info("💡 Consider using WebP format for better performance");
         } else {
@@ -197,7 +197,7 @@ class ProductionSEOOptimize extends Command
     private function validateSEOConfig()
     {
         $this->info('⚙️  Validating SEO configuration...');
-        
+
         // Check essential SEO config
         $checks = [
             'Site Name' => config('seo.site_name'),
@@ -210,7 +210,7 @@ class ProductionSEOOptimize extends Command
             'Sitemap Enabled' => config('seo.sitemap.enable'),
             'Location Targeting' => config('seo.organization.geo.latitude'),
         ];
-        
+
         foreach ($checks as $name => $value) {
             if ($value) {
                 $this->info("✅ $name: Configured");
@@ -226,17 +226,16 @@ class ProductionSEOOptimize extends Command
     private function testEndpoints()
     {
         $this->info('🌐 Testing critical endpoints...');
-        
+
         $baseUrl = 'https://zuppie.in';
         $endpoints = [
             '/' => 'Homepage',
             '/robots.txt' => 'Robots.txt',
             '/sitemap.xml' => 'Sitemap Index',
             '/manifest.json' => 'PWA Manifest',
-            '/sw.js' => 'Service Worker',
             '/offline.html' => 'Offline Page',
         ];
-        
+
         foreach ($endpoints as $endpoint => $name) {
             try {
                 $response = Http::timeout(10)->get($baseUrl . $endpoint);
@@ -257,24 +256,24 @@ class ProductionSEOOptimize extends Command
     private function generateCache()
     {
         $this->info('🚀 Generating production cache...');
-        
+
         try {
             // Cache configuration
             Artisan::call('config:cache');
             $this->info('✅ Configuration cached');
-            
+
             // Cache routes
             Artisan::call('route:cache');
             $this->info('✅ Routes cached');
-            
+
             // Cache views
             Artisan::call('view:cache');
             $this->info('✅ Views cached');
-            
+
             // Cache events
             Artisan::call('event:cache');
             $this->info('✅ Events cached');
-            
+
         } catch (\Exception $e) {
             $this->error('❌ Cache generation failed: ' . $e->getMessage());
         }
@@ -286,7 +285,7 @@ class ProductionSEOOptimize extends Command
     private function finalValidation()
     {
         $this->info('🔍 Running final validation...');
-        
+
         // Check if production files exist
         $productionFiles = [
             '.htaccess.production' => 'Production .htaccess',
@@ -294,7 +293,7 @@ class ProductionSEOOptimize extends Command
             'PRODUCTION_DEPLOYMENT_CHECKLIST.md' => 'Deployment checklist',
             'seo-audit-production.sh' => 'Production SEO audit script'
         ];
-        
+
         foreach ($productionFiles as $file => $name) {
             if (File::exists(base_path($file))) {
                 $this->info("✅ $name: Available");
@@ -302,7 +301,7 @@ class ProductionSEOOptimize extends Command
                 $this->warn("⚠️  $name: Not found");
             }
         }
-        
+
         // Check critical configuration
         $criticalConfig = [
             'SSL Ready' => config('app.url') === 'https://zuppie.in',
@@ -310,7 +309,7 @@ class ProductionSEOOptimize extends Command
             'Session Secure' => config('session.secure') === true,
             'Cookie Secure' => config('session.same_site') === 'strict',
         ];
-        
+
         foreach ($criticalConfig as $name => $status) {
             if ($status) {
                 $this->info("✅ $name: Configured");

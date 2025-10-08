@@ -2,7 +2,7 @@
     class="min-h-screen flex items-center justify-center bg-gradient-to-br from-purple-100 via-pink-100 to-white py-12 px-4 sm:px-6 lg:px-8">
     <div class="max-w-md w-full space-y-8 bg-white rounded-2xl shadow-xl p-8">
         <div>
-            <h2 class="text-center text-2xl font-bold text-purple-900">Reset Your Password</h2>
+            <h2 class="text-center text-2xl font-2xl text-purple-900">Reset Your Password</h2>
             <p class="mt-2 text-center text-sm text-pink-600">Enter your new password below</p>
         </div>
 

@@ -15,7 +15,7 @@
 
                     <!-- Header -->
                     <div class="bg-gradient-to-r from-purple-600 to-pink-500 text-white p-6 rounded-t-2xl">
-                        <h2 class="text-2xl font-bold">{{ $modalCategory->name }}</h2>
+                        <h2 class="text-2xl">{{ $modalCategory->name }}</h2>
                         <p class="text-purple-100 opacity-90 mt-1">Choose a subcategory to explore our amazing packages
                         </p>
                     </div>
@@ -55,7 +55,7 @@
                     <!-- View All Option -->
                     <div class="border-t border-gray-100 p-4 bg-gray-50 rounded-b-2xl">
                         <button wire:click="selectCategory('{{ $modalCategory->slug }}')"
-                            class="group flex items-center justify-between w-full py-4 px-6 bg-white hover:bg-purple-50 rounded-xl font-semibold text-purple-700 transition-all duration-300 border-2 border-purple-100 hover:border-purple-300 shadow-sm hover:shadow-md">
+                            class="group flex items-center justify-between w-full py-4 px-6 bg-white hover:bg-purple-50 rounded-xl font-2xl text-purple-700 transition-all duration-300 border-2 border-purple-100 hover:border-purple-300 shadow-sm hover:shadow-md">
                             <span class="flex items-center">
                                 <i class="fas fa-box-open mr-3 text-purple-500"></i>
                                 View All {{ $modalCategory->name }} Packages

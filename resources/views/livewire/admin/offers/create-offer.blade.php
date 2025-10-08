@@ -1,18 +1,18 @@
 <div>
     <!-- Modal Backdrop -->
     @if($showModal)
-        <div class="fixed inset-0 bg-white/80 backdrop-blur-sm z-40 transition-opacity" wire:click="closeModal"></div>
+        <div class="fixed inset-0  backdrop-blur z-40 transition-opacity" wire:click="closeModal"></div>
     @endif
 
     <!-- Modal Container -->
     <div class="@if(!$showModal) hidden @endif fixed inset-0 z-50 flex items-start justify-center pt-16 overflow-y-auto">
-        <div class="relative mx-auto p-6 w-full max-w-2xl">
+        <div class="relative mx-auto p-6 max-w-3xl">
             <!-- Modal Content -->
             <div class="bg-white rounded-xl shadow-xl border border-purple-100 overflow-hidden transform transition-all">
                 <!-- Modal Header -->
                 <div class="bg-gradient-to-r from-pink-50 to-purple-50 px-6 py-4 border-b border-pink-100">
                     <div class="flex justify-between items-center">
-                        <h3 class="text-xl font-bold text-purple-800">Create New Offer</h3>
+                        <h3 class="text-xl text-purple-800">Create New Offer</h3>
                         <button wire:click="closeModal" class="text-pink-500 hover:text-purple-700 transition-colors">
                             <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />

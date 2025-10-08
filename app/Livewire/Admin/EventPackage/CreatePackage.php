@@ -7,18 +7,17 @@ use App\Models\Category;
 use Livewire\WithFileUploads;
 use App\Helpers\ImageKitHelper;
 use Livewire\Attributes\Layout;
+#[Title('Create Package')]
 
 class CreatePackage extends Component
 {
-  
     use WithFileUploads;
-
     public $category_id, $name, $price, $discount_type, $discount_value, $description, $features, $is_active = true, $is_special = false;
     public $duration_hours = 0;
     public $duration_minutes = 0;
     public $categories = [];
     public $newImages = [];
-
+    public $uploadedImages = [];
     protected function rules()
     {
         return [
@@ -50,6 +49,14 @@ class CreatePackage extends Component
     {
         $this->categories = Category::all();
     }
+
+    public function removeImage($key)
+    {
+        if (isset($this->newImages[$key])) {
+            unset($this->newImages[$key]);
+     }
+    }
+
 
     public function updated($propertyName)
     {

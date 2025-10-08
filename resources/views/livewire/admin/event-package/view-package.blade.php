@@ -1,5 +1,5 @@
 <div class="fixed inset-0 backdrop-blur-sm bg-opacity-75 flex items-center justify-center z-50" x-data="{ show: true }" x-show="show" x-transition wire:ignore.self>
-    <div class="relative bg-white rounded-xl shadow-2xl w-full max-w-4xl p-6 max-h-[90vh] overflow-y-auto">
+    <div class="relative bg-white rounded-xl shadow-2xl w-full max-w-6xl p-6 max-h-[90vh] overflow-y-auto">
         <!-- Header -->
         <div class="flex justify-between items-center mb-6 pb-4 border-b border-gray-200">
             <div class="flex items-center">
@@ -9,7 +9,7 @@
                     </svg>
                 </div>
                 <div>
-                    <h3 class="text-2xl font-semibold text-gray-800">Package Details</h3>
+                    <h3 class="text-2xl font-2xl text-gray-800">Package Details</h3>
                     <p class="text-sm text-gray-500">View and manage package information</p>
                 </div>
             </div>
@@ -33,7 +33,7 @@
         <!-- Package Details -->
         <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
             <div class="bg-white p-6 rounded-xl shadow-sm border border-gray-100">
-                <h4 class="font-semibold text-lg text-gray-700 mb-5 flex items-center">
+                <h4 class="font-2xl text-lg text-gray-700 mb-5 flex items-center">
                     <svg class="w-5 h-5 mr-2 text-info-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
                     </svg>
@@ -106,7 +106,7 @@
             </div>
             
             <div class="bg-white p-6 rounded-xl shadow-sm border border-gray-100">
-                <h4 class="font-semibold text-lg text-gray-700 mb-5 flex items-center">
+                <h4 class="font-2xl text-lg text-gray-700 mb-5 flex items-center">
                     <svg class="w-5 h-5 mr-2 text-info-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h7"></path>
                     </svg>
@@ -120,7 +120,7 @@
         
         <!-- Package Images -->
         <div class="bg-white p-6 rounded-xl shadow-sm border border-gray-100">
-            <h4 class="font-semibold text-lg text-gray-700 mb-5 flex items-center">
+            <h4 class="font-2xl text-lg text-gray-700 mb-5 flex items-center">
                 <svg class="w-5 h-5 mr-2 text-info-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
                 </svg>
@@ -149,14 +149,6 @@
                                         </svg>
                                         <span class="ml-1 text-xs">View</span>
                                     </a>
-                                    <button wire:click="confirmDeleteImage({{ $image->id }})" 
-                                            class="bg-red-500 hover:bg-red-600 text-white p-2 rounded-lg shadow-lg flex items-center transition-all">
-                                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" 
-                                                d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path>
-                                        </svg>
-                                        <span class="ml-1 text-xs">Delete</span>
-                                    </button>
                                 </div>
                             </div>
                         </div>
@@ -173,7 +165,7 @@
             @endif
         </div>
         <div class="bg-white p-6 rounded-xl shadow-sm border border-gray-100 mt-5">
-            <h4 class="font-semibold text-lg text-gray-700 mb-5 flex items-center">
+            <h4 class="font-2xl text-lg text-gray-700 mb-5 flex items-center">
                 <svg class="w-5 h-5 mr-2 text-info-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
                 </svg>
@@ -185,9 +177,9 @@
         
         </div>
         <!-- Footer -->
-        <div class="flex justify-end mt-8 pt-5 border-t border-gray-200 ">
+        <div class="flex justify-end mt-8 pt-5">
             <button wire:click="closeViewModal" 
-                    class="px-6 py-2 bg-info-600 text-white rounded-lg hover:bg-info-700 transition flex items-center shadow-md">
+                    class="px-6 py-2 bg-pink-500 text-white rounded-lg hover:bg-pink-700 transition flex items-center shadow-md">
                 <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
                 </svg>
@@ -201,7 +193,7 @@
                  wire:click.self="$set('showDeleteImageModal', false)">
                 <div class="relative bg-white rounded-xl shadow-2xl w-full max-w-md p-6 overflow-y-auto transform transition-all animate-fade-in">
                     <div class="flex items-center justify-between mb-6 pb-3 border-b border-gray-200">
-                        <h3 class="text-xl font-semibold text-gray-800 flex items-center">
+                        <h3 class="text-xl font-2xl text-gray-800 flex items-center">
                             <svg class="w-5 h-5 mr-2 text-red-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" 
                                     d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path>

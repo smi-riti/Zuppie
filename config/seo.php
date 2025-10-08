@@ -45,19 +45,19 @@ return [
         'name' => 'Zuppie Events Purnia',
         'legal_name' => 'Zuppie Event Management Private Limited',
         'url' => 'https://zuppie.in',
-        'logo' => 'https://zuppie.in/images/logo.png',
+        'logo' => 'https://zuppie.in/images/zuppie-logo.jpeg',
         'description' => 'Premium event management and celebration planning services in Purnia, Bihar and across Eastern India. Specializing in birthdays, anniversaries, corporate events, and luxury celebrations.',
         'address' => [
-            'street' => 'Near Purnia Court, Line Bazar',
+            'street' => 'Near Argra Chowk ,Madhubani Bazaar Purnia',
             'city' => 'Purnia',
             'state' => 'Bihar',
             'postal_code' => '854301',
             'country' => 'India'
         ],
         'contact' => [
-            'phone' => '+91-XXXXXXXXXX',
+            'phone' => '+91 70223 23470',
             'email' => 'info@zuppie.in',
-            'customer_service' => 'support@zuppie.in'
+            'customer_service' => 'zuppiepurnea@gmail.com'
         ],
         'business_hours' => [
             'monday' => '09:00-18:00',

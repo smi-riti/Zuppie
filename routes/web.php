@@ -33,7 +33,7 @@ use App\Livewire\Public\Event\PackageDetail;
 use App\Livewire\Public\Event\PackageBookingForm;
 use App\Livewire\Public\Event\ManageBooking as PublicManageBooking;
 use App\Livewire\Admin\Booking\ViewBooking;
-
+use Illuminate\Support\Facades\Artisan;
 use App\Livewire\Admin\Blog\ManageBlog;
 use App\Livewire\Public\Blog\BlogPage;
 use App\Livewire\Public\Blog\BlogDetailPage;
@@ -43,20 +43,10 @@ use App\Livewire\Public\Pages\PrivacyPolicy;
 use App\Livewire\Public\Event\EventPackageFilter;
 use Illuminate\Support\Facades\Auth;
 use App\Mail\LoginNotificationMail;
-// use App\Livewire\Auth\OtpLogin;
-// use App\Livewire\Auth\OtpVerify;
-use App\Livewire\Auth\PhoneOtpLogin;
-use App\Livewire\Auth\PhoneOtpVerify;
 
 Route::get('/', Homepage::class)->name('home');
 Route::get('/register', Register::class)->name('register');
 Route::get('/login', Login::class)->name('login');
-
-// Phone OTP Routes
-Route::get('/phone-otp-login', PhoneOtpLogin::class)->name('phone.otp.login');
-Route::get('/phone-otp-verify/{phone_no}', PhoneOtpVerify::class)->name('phone.otp.verify');
-// Route::get('/otp-login', OtpLogin::class)->name('otp.login');
-// Route::get('/otp-verify/{email}', OtpVerify::class)->name('otp.verify');
 Route::get('/forgot-password', ForgotPass::class)->name('password.request');
 Route::get('/reset-password/{token}', ResetPass::class)->name('password.reset');
 Route::post('/logout', function () {
@@ -66,7 +56,6 @@ Route::post('/logout', function () {
 
 Route::get('/about', About::class)->name('about');
 Route::get('/contact', Contact::class)->name('contact');
-Route::get('/booking', Bookingform::class)->name('booking');
 Route::get('/terms-of-service', TermsOfService::class)->name('terms-of-service');
 Route::get('/privacy-policy', PrivacyPolicy::class)->name('privacy-policy');
 
@@ -82,10 +71,9 @@ Route::get('/blog', BlogPage::class)->name('blog');
 Route::get('/blog/{slug}', BlogDetailPage::class)->name('blog.detail');
 
 // User profile routes
-Route::middleware(['auth'])->group(function () {
-    Route::get('/profile', Profile::class)->name('profile');
-});
-// Route::get('/profile/manage-booking/{booking_id?}', PublicManageBooking::class)->name('manage-booking');
+// Route::middleware(['auth'])->group(function () {
+//     Route::get('/profile', Profile::class)->name('profile');
+// });
 
 
 Route::prefix('admin')->middleware(['auth', 'admin'])->group(function () {
@@ -96,16 +84,14 @@ Route::prefix('admin')->middleware(['auth', 'admin'])->group(function () {
     Route::get('/event-packages/create', CreatePackage::class)->name('admin.event-packages.create');
     Route::get('/event-packages/edit/{packageId}', UpdatePackage::class)->name('admin.event-packages.edit');
     Route::get('/reviews', All::class)->name('admin.reviews.show');
-    Route::get('/offers', AllOffers::class)->name('admin.offers.show');
+    // Route::get('/offers', AllOffers::class)->name('admin.offers.show');
     Route::get('/enquiries', AllEnquiry::class)->name('admin.enquiries.all');
-    Route::get('/booking', ManageBooking::class)->name('admin.booking.manage');
-    Route::get('/booking/view/{bookingId}', ViewBooking::class)->name('admin.booking.view');
+    // Route::get('/booking', ManageBooking::class)->name('admin.booking.manage');
+    // Route::get('/booking/view/{bookingId}', ViewBooking::class)->name('admin.booking.view');
     Route::get('/users', ManageUser::class)->name('admin.users.manage');
     Route::get('/services', ShowService::class)->name('admin.services.manage');
     Route::get('/manage', ManageBlog::class)->name('admin.blogs.manage');
     Route::get('/settings', ManageSetting::class)->name('admin.settings');
-    Route::get('/gallery', ManageGallery::class)->name('gallery.manage');
-
 });
 
 // SEO Routes - Production Optimized
@@ -150,3 +136,8 @@ Route::get('/browserconfig.xml', function () {
 
 Route::get('/invoices/{invoice}/download', [BookingInvoice::class, 'downloadInvoice'])
      ->name('invoices.download');
+
+     Route::get('/storage-link', function () {
+    Artisan::call('storage:link');
+    return 'Storage link has been created!';
+});

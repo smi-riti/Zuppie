@@ -6,7 +6,7 @@
                 <div class="sticky top-0 bg-white p-6 border-b border-gray-200 rounded-t-lg">
                     <div class="flex justify-between items-start">
                         <div class="flex-1">
-                            <h3 class="text-2xl font-bold text-purple-700 mb-2">{{ $blog->title }}</h3>
+                            <h3 class="text-2xl text-purple-700 mb-2">{{ $blog->title }}</h3>
                             <div class="flex items-center space-x-4 text-sm text-gray-500">
                                 <span>By {{ $blog->author->name }}</span>
                                 <span>•</span>
@@ -55,7 +55,7 @@
                     <!-- Gallery Images -->
                     @if($blog->galleryImages->count() > 0)
                         <div class="mb-6">
-                            <h4 class="text-lg font-semibold text-gray-900 mb-4">Gallery Images ({{ $blog->galleryImages->count() }})</h4>
+                            <h4 class="text-lg font-2xl text-gray-900 mb-4">Gallery Images ({{ $blog->galleryImages->count() }})</h4>
                             <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
                                 @foreach($blog->galleryImages as $image)
                                     <div class="relative group cursor-pointer" onclick="openImageModal('{{ $image->image_url }}')">
@@ -77,7 +77,7 @@
                     <!-- Blog Meta Information -->
                     <div class="bg-gray-50 rounded-lg p-4 grid grid-cols-1 md:grid-cols-2 gap-4">
                         <div>
-                            <h5 class="font-semibold text-gray-900 mb-2">Blog Details</h5>
+                            <h5 class="font-2xl text-gray-900 mb-2">Blog Details</h5>
                             <div class="space-y-1 text-sm text-gray-600">
                                 <p><span class="font-medium">Slug:</span> {{ $blog->slug }}</p>
                                 <p><span class="font-medium">Author:</span> {{ $blog->author->name }}</p>
@@ -86,7 +86,7 @@
                             </div>
                         </div>
                         <div>
-                            <h5 class="font-semibold text-gray-900 mb-2">Statistics</h5>
+                            <h5 class="font-2xl text-gray-900 mb-2">Statistics</h5>
                             <div class="space-y-1 text-sm text-gray-600">
                                 <p><span class="font-medium">Created:</span> {{ $blog->created_at->format('F j, Y \a\t g:i A') }}</p>
                                 <p><span class="font-medium">Updated:</span> {{ $blog->updated_at->format('F j, Y \a\t g:i A') }}</p>

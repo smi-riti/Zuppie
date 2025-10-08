@@ -1,8 +1,8 @@
-<div class="min-h-screen bg-gradient-to-br from-purple-50 to-pink-100 p-4">
-    <div class="max-w-7xl">
+<div class="min-h-screen p-4">
+    <div class="">
         <!-- Header -->
         <div class="mb-8 text-center">
-            <h1 class="text-3xl md:text-4xl font-bold text-purple-800">Services Management</h1>
+            <h1 class="text-3xl md:text-4xl text-purple-800">Services Management</h1>
             <p class="mt-2 text-purple-600">Manage your pin code services</p>
         </div>
 
@@ -24,7 +24,7 @@
                 <div class="bg-white rounded-2xl shadow-lg overflow-hidden h-full">
                     <div class="p-4 bg-gradient-to-r from-purple-400 to-pink-400">
                         <div class="flex flex-col sm:flex-row justify-between items-center gap-3">
-                            <h2 class="text-xl font-bold text-white">Service List</h2>
+                            <h2 class="text-xl text-white">Service List</h2>
                             <div class="relative w-full sm:w-64">
                                 <input 
                                     wire:model.live.debounce.300ms="search"
@@ -98,14 +98,14 @@
                     @if($services->hasPages())
                         <div class="bg-gray-50 px-6 py-3 border-t border-gray-200">
                             {{ $services->links() }}
-                        </div>
+                        </div>800
                     @endif
                 </div>
             </div>
             <!-- Right Panel - Service List -->
             <div class="w-full lg:w-1/3">
-                <div class="bg-white rounded-2xl shadow-lg p-6 h-full">
-                    <h2 class="text-xl font-bold text-purple-700 mb-4 pb-2 border-b border-purple-100">
+                <div class="bg-pink-200 rounded-2xl shadow-lg p-6 h-full">
+                    <h2 class="text-xl text-purple-700 mb-4 pb-2 border-b border-purple-100 ">
                         {{ $formTitle }}
                     </h2>
                     

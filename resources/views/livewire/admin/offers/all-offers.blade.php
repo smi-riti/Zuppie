@@ -1,4 +1,4 @@
-<div class="p-4 lg:p-6 bg-white">
+<div class="p-4 lg:p-4">
     <!-- Flash Messages -->
     @if (session('message'))
         <div class="mb-6">
@@ -14,7 +14,7 @@
     <!-- Header Section -->
     <div class="flex flex-col lg:flex-row justify-between items-start lg:items-center mb-6 gap-4">
         <div>
-            <h2 class="text-2xl font-bold text-purple-800">All Offers</h2>
+            <h2 class="text-2xl text-purple-800">All Offers</h2>
             <p class="text-sm text-purple-500 mt-1">
                 {{ $offers->total() }} {{ Str::plural('offer', $offers->total()) }} available
             </p>
@@ -43,15 +43,15 @@
     <!-- Offers Table -->
     <div class="overflow-x-auto rounded-lg border border-purple-100 shadow-sm">
         <table class="w-full">
-            <thead class="bg-gradient-to-r from-pink-50 to-purple-50">
+            <thead class="bg-white">
                 <tr>
-                    <th class="px-4 lg:px-6 py-3 text-left text-xs font-semibold text-purple-700 uppercase tracking-wider">Image</th>
-                    <th class="px-4 lg:px-6 py-3 text-left text-xs font-semibold text-purple-700 uppercase tracking-wider">Title</th>
-                    <th class="px-4 lg:px-6 py-3 text-left text-xs font-semibold text-purple-700 uppercase tracking-wider">Code</th>
-                    <th class="px-4 lg:px-6 py-3 text-left text-xs font-semibold text-purple-700 uppercase tracking-wider">Discount</th>
-                    <th class="px-4 lg:px-6 py-3 text-left text-xs font-semibold text-purple-700 uppercase tracking-wider">Period</th>
-                    <th class="px-4 lg:px-6 py-3 text-left text-xs font-semibold text-purple-700 uppercase tracking-wider">Status</th>
-                    <th class="px-4 lg:px-6 py-3 text-right text-xs font-semibold text-purple-700 uppercase tracking-wider">Actions</th>
+                    <th class="px-4 lg:px-6 py-3 text-left text-xs font-2xl text-purple-700 uppercase tracking-wider">Image</th>
+                    <th class="px-4 lg:px-6 py-3 text-left text-xs font-2xl text-purple-700 uppercase tracking-wider">Title</th>
+                    <th class="px-4 lg:px-6 py-3 text-left text-xs font-2xl text-purple-700 uppercase tracking-wider">Code</th>
+                    <th class="px-4 lg:px-6 py-3 text-left text-xs font-2xl text-purple-700 uppercase tracking-wider">Discount</th>
+                    <th class="px-4 lg:px-6 py-3 text-left text-xs font-2xl text-purple-700 uppercase tracking-wider">Period</th>
+                    <th class="px-4 lg:px-6 py-3 text-left text-xs font-2xl text-purple-700 uppercase tracking-wider">Status</th>
+                    <th class="px-4 lg:px-6 py-3 text-right text-xs font-2xl text-purple-700 uppercase tracking-wider">Actions</th>
                 </tr>
             </thead>
             <tbody class="divide-y divide-purple-100">
@@ -167,7 +167,7 @@
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.964-.833-2.732 0L4.082 16.5c-.77.833.192 2.5 1.732 2.5z" />
                         </svg>
                     </div>
-                    <h3 class="text-lg font-bold text-gray-900 mb-2">Delete Offer</h3>
+                    <h3 class="text-lg text-gray-900 mb-2">Delete Offer</h3>
                     <p class="text-sm text-gray-500 mb-6">
                         Are you sure you want to delete this offer? This action cannot be undone.
                     </p>

@@ -5,7 +5,7 @@
         <section class="relative h-[70vh] overflow-hidden">
             <!-- Background Image with Overlay -->
             <div class="absolute inset-0">
-                <img src="https://images.unsplash.com/photo-1519741497674-611481863552?ixlib=rb-4.0.3&auto=format&fit=crop&w=2340&q=80" 
+                <img src="{{ asset('images/about-banner.webp')}}" 
                      alt="About Us Background" 
                      class="w-full h-full object-cover">
                 <div class="absolute inset-0 bg-gradient-to-br from-purple-900/40 via-pink-800/35 to-indigo-900/40"></div>
@@ -15,14 +15,14 @@
             <!-- Content -->
             <div class="relative z-10 flex items-center justify-center h-full text-center text-white px-4">
                 <div class="max-w-5xl mx-auto">
-                    <h1 class="text-5xl md:text-7xl font-bold mb-6 sparkle-text drop-shadow-2xl">About {{ $settings['site_name'] }}</h1>
+                    <h1 class="text-5xl md:text-7xl font-2xl mb-6 sparkle-text drop-shadow-2xl">About {{ $settings['site_name'] }}</h1>
                     <p class="text-xl md:text-2xl text-purple-100 max-w-3xl mx-auto leading-relaxed drop-shadow-lg">
                         {{ $settings['site_description'] ?? 'Creating unforgettable moments through exceptional event planning and coordination.' }}
                     </p>
                     <div class="mt-8">
                         <button 
                             wire:click="$dispatch('open-enquiry-form')"
-                            class="px-8 py-4 bg-gradient-to-r from-pink-500 to-purple-600 text-white rounded-full font-bold text-lg hover:from-pink-600 hover:to-purple-700 transition-all transform hover:scale-105 shadow-lg">
+                            class="px-8 py-4 bg-gradient-to-r from-pink-500 to-purple-600 text-white rounded-full font-2xl text-lg hover:from-pink-600 hover:to-purple-700 transition-all transform hover:scale-105 shadow-lg">
                             <i class="fas fa-calendar-plus mr-2"></i>Plan Your Event
                         </button>
                     </div>
@@ -31,11 +31,11 @@
         </section>
 
         <!-- Our Story Section -->
-        <section class="py-20 bg-gradient-to-br from-purple-50 to-pink-50">
-            <div class="container mx-auto px-4 max-w-6xl">
+        <section class="lg:px-20 p-6 py-20 bg-gradient-to-br from-purple-50 to-pink-50">
+            <div class="">
                 <div class="grid lg:grid-cols-2 gap-16 items-center">
                     <div class="space-y-6">
-                        <h2 class="text-4xl md:text-5xl font-bold font-display gradient-text mb-6">
+                        <h2 class="text-4xl md:text-5xl font-2xl font-display gradient-text mb-6">
                             Our Story
                         </h2>
                         <p class="text-lg text-gray-700 leading-relaxed">
@@ -56,28 +56,20 @@
                         <!-- Stats -->
                         <div class="grid grid-cols-2 gap-6 pt-8">
                             <div class="text-center">
-                                <div class="text-4xl font-bold gradient-text mb-2">500+</div>
+                                <div class="text-4xl font-2xl gradient-text mb-2">500+</div>
                                 <div class="text-gray-600">Events Created</div>
                             </div>
                             <div class="text-center">
-                                <div class="text-4xl font-bold gradient-text mb-2">8</div>
+                                <div class="text-4xl font-2xl gradient-text mb-2">8</div>
                                 <div class="text-gray-600">Years Experience</div>
                             </div>
                         </div>
                     </div>
                     
                     <div class="relative">
-                        <div class="relative rounded-2xl overflow-hidden shadow-2xl transform hover:scale-105 transition-transform duration-500">
-                            <img src="https://images.unsplash.com/photo-1522543558187-768b6df7c25c?w=600&h=600&fit=crop" alt="Our Team" class="w-full h-full object-cover">
+                        <div class="relative rounded-2xl overflow-hidden shadow-2xl transform hover:scale-105 transition-transform duration-500 w-3/3 mx-auto">
+                            <img src="{{ asset('images/our-team.png') }}" alt="Our Team" class="object-cover">
                             <div class="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent"></div>
-                        </div>
-                        
-                        <!-- Floating decorative elements -->
-                        <div class="absolute -top-6 -right-6 w-20 h-20 bg-yellow-400 rounded-full flex items-center justify-center animate-bounce-slow">
-                            ✨
-                        </div>
-                        <div class="absolute -bottom-4 -left-4 w-16 h-16 bg-pink-400 rounded-full flex items-center justify-center animate-pulse-slow">
-                            🎉
                         </div>
                     </div>
                 </div>
@@ -85,10 +77,10 @@
         </section>
 
         <!-- Our Mission & Vision -->
-        <section class="py-20 bg-white">
-            <div class="container mx-auto px-4 max-w-6xl">
+        <section class="lg:px-20 p-6 bg-white">
+            <div class="">
                 <div class="text-center mb-16">
-                    <h2 class="text-4xl md:text-5xl font-bold font-display gradient-text mb-6">
+                    <h2 class="text-4xl md:text-5xl font-2xl font-display gradient-text mb-6">
                         Mission & Vision
                     </h2>
                     <p class="text-xl text-gray-600 max-w-3xl mx-auto">
@@ -103,7 +95,7 @@
                             <i class="fas fa-heart text-white text-2xl"></i>
                         </div>
                         <div class="pt-8">
-                            <h3 class="text-2xl font-bold text-gray-800 mb-4">Our Mission</h3>
+                            <h3 class="text-2xl font-2xl text-gray-800 mb-4">Our Mission</h3>
                             <p class="text-gray-700 leading-relaxed">
                                 To create extraordinary experiences that bring people together, celebrate life's precious 
                                 moments, and leave lasting memories. We strive to exceed expectations through innovative 
@@ -118,7 +110,7 @@
                             <i class="fas fa-star text-white text-2xl"></i>
                         </div>
                         <div class="pt-8">
-                            <h3 class="text-2xl font-bold text-gray-800 mb-4">Our Vision</h3>
+                            <h3 class="text-2xl font-2xl text-gray-800 mb-4">Our Vision</h3>
                             <p class="text-gray-700 leading-relaxed">
                                 To be the leading event management company that transforms ordinary celebrations into 
                                 magical experiences. We envision a world where every special moment is celebrated with 
@@ -131,10 +123,10 @@
         </section>
 
         <!-- Our Values -->
-        <section class="py-20 bg-gradient-to-br from-purple-50 to-pink-50">
-            <div class="container mx-auto px-4 max-w-6xl">
+        <section class="lg:px-20 p-6 py-20 bg-gradient-to-br from-purple-50 to-pink-50">
+            <div class="">
                 <div class="text-center mb-16">
-                    <h2 class="text-4xl md:text-5xl font-bold font-display gradient-text mb-6">
+                    <h2 class="text-4xl md:text-5xl font-2xl font-display gradient-text mb-6">
                         Our Values
                     </h2>
                     <p class="text-xl text-gray-600 max-w-3xl mx-auto">
@@ -148,7 +140,7 @@
                         <div class="w-20 h-20 bg-gradient-to-r from-purple-600 to-pink-600 rounded-full flex items-center justify-center mx-auto mb-6 group-hover:shadow-lg transition-shadow duration-300">
                             <i class="fas fa-crown text-white text-3xl"></i>
                         </div>
-                        <h3 class="text-xl font-bold text-gray-800 mb-4">Excellence</h3>
+                        <h3 class="text-xl font-2xl text-gray-800 mb-4">Excellence</h3>
                         <p class="text-gray-600">We pursue perfection in every detail, ensuring your event exceeds expectations.</p>
                     </div>
                     
@@ -157,7 +149,7 @@
                         <div class="w-20 h-20 bg-gradient-to-r from-pink-600 to-purple-600 rounded-full flex items-center justify-center mx-auto mb-6 group-hover:shadow-lg transition-shadow duration-300">
                             <i class="fas fa-palette text-white text-3xl"></i>
                         </div>
-                        <h3 class="text-xl font-bold text-gray-800 mb-4">Creativity</h3>
+                        <h3 class="text-xl font-2xl text-gray-800 mb-4">Creativity</h3>
                         <p class="text-gray-600">Innovation and imagination drive us to create unique, memorable experiences.</p>
                     </div>
                     
@@ -166,7 +158,7 @@
                         <div class="w-20 h-20 bg-gradient-to-r from-purple-600 to-pink-600 rounded-full flex items-center justify-center mx-auto mb-6 group-hover:shadow-lg transition-shadow duration-300">
                             <i class="fas fa-handshake text-white text-3xl"></i>
                         </div>
-                        <h3 class="text-xl font-bold text-gray-800 mb-4">Integrity</h3>
+                        <h3 class="text-xl font-2xl text-gray-800 mb-4">Integrity</h3>
                         <p class="text-gray-600">Honest communication and transparent practices build lasting relationships.</p>
                     </div>
                     
@@ -175,7 +167,7 @@
                         <div class="w-20 h-20 bg-gradient-to-r from-pink-600 to-purple-600 rounded-full flex items-center justify-center mx-auto mb-6 group-hover:shadow-lg transition-shadow duration-300">
                             <i class="fas fa-fire text-white text-3xl"></i>
                         </div>
-                        <h3 class="text-xl font-bold text-gray-800 mb-4">Passion</h3>
+                        <h3 class="text-xl font-2xl text-gray-800 mb-4">Passion</h3>
                         <p class="text-gray-600">Our love for what we do shines through in every event we create.</p>
                     </div>
                     
@@ -184,7 +176,7 @@
                         <div class="w-20 h-20 bg-gradient-to-r from-purple-600 to-pink-600 rounded-full flex items-center justify-center mx-auto mb-6 group-hover:shadow-lg transition-shadow duration-300">
                             <i class="fas fa-users text-white text-3xl"></i>
                         </div>
-                        <h3 class="text-xl font-bold text-gray-800 mb-4">Collaboration</h3>
+                        <h3 class="text-xl font-2xl text-gray-800 mb-4">Collaboration</h3>
                         <p class="text-gray-600">Working together with clients and partners to achieve extraordinary results.</p>
                     </div>
                     
@@ -193,7 +185,7 @@
                         <div class="w-20 h-20 bg-gradient-to-r from-pink-600 to-purple-600 rounded-full flex items-center justify-center mx-auto mb-6 group-hover:shadow-lg transition-shadow duration-300">
                             <i class="fas fa-lightbulb text-white text-3xl"></i>
                         </div>
-                        <h3 class="text-xl font-bold text-gray-800 mb-4">Innovation</h3>
+                        <h3 class="text-xl font-2xl text-gray-800 mb-4">Innovation</h3>
                         <p class="text-gray-600">Embracing new ideas and technologies to enhance our event experiences.</p>
                     </div>
                 </div>
@@ -201,10 +193,10 @@
         </section>
 
         <!-- Meet Our Team -->
-        <section class="py-20 bg-white">
-            <div class="container mx-auto px-4 max-w-6xl">
+        {{-- <section class="lg:px-20 p-6 py-20 bg-white">
+            <div class="">
                 <div class="text-center mb-16">
-                    <h2 class="text-4xl md:text-5xl font-bold font-display gradient-text mb-6">
+                    <h2 class="text-4xl md:text-5xl font-2xl font-display gradient-text mb-6">
                         Meet Our Amazing Team
                     </h2>
                     <p class="text-xl text-gray-600 max-w-3xl mx-auto">
@@ -220,8 +212,8 @@
                             <div class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                         </div>
                         <div class="p-6 text-center">
-                            <h3 class="text-xl font-bold text-gray-800 mb-2">Sarah Johnson</h3>
-                            <p class="text-purple-600 font-semibold mb-3">Founder & Creative Director</p>
+                            <h3 class="text-xl font-2xl text-gray-800 mb-2">Sarah Johnson</h3>
+                            <p class="text-purple-600 font-2xl mb-3">Founder & Creative Director</p>
                             <p class="text-gray-600 text-sm">Passionate about creating magical moments that last a lifetime.</p>
                         </div>
                     </div>
@@ -233,8 +225,8 @@
                             <div class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                         </div>
                         <div class="p-6 text-center">
-                            <h3 class="text-xl font-bold text-gray-800 mb-2">Michael Chen</h3>
-                            <p class="text-purple-600 font-semibold mb-3">Event Operations Manager</p>
+                            <h3 class="text-xl font-2xl text-gray-800 mb-2">Michael Chen</h3>
+                            <p class="text-purple-600 font-2xl mb-3">Event Operations Manager</p>
                             <p class="text-gray-600 text-sm">Ensures every detail is perfectly executed with precision and care.</p>
                         </div>
                     </div>
@@ -246,85 +238,18 @@
                             <div class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                         </div>
                         <div class="p-6 text-center">
-                            <h3 class="text-xl font-bold text-gray-800 mb-2">Emily Rodriguez</h3>
-                            <p class="text-purple-600 font-semibold mb-3">Design Specialist</p>
+                            <h3 class="text-xl font-2xl text-gray-800 mb-2">Emily Rodriguez</h3>
+                            <p class="text-purple-600 font-2xl mb-3">Design Specialist</p>
                             <p class="text-gray-600 text-sm">Brings creative visions to life with stunning visual designs.</p>
                         </div>
                     </div>
                 </div>
             </div>
-        </section>
-
-        <!-- Our Journey Timeline -->
-        <section class="py-20 bg-gradient-to-br from-purple-50 to-pink-50">
-            <div class="container mx-auto px-4 max-w-4xl">
-                <div class="text-center mb-16">
-                    <h2 class="text-4xl md:text-5xl font-bold font-display gradient-text mb-6">
-                        Our Journey
-                    </h2>
-                    <p class="text-xl text-gray-600">
-                        Milestones that shaped our story
-                    </p>
-                </div>
-                
-                <div class="relative">
-                    <!-- Timeline line -->
-                    <div class="absolute left-8 top-0 bottom-0 w-0.5 bg-gradient-to-b from-purple-400 to-pink-400"></div>
-                    
-                    <div class="space-y-12">
-                        <!-- Timeline Item 1 -->
-                        <div class="relative flex items-center">
-                            <div class="w-16 h-16 bg-gradient-to-r from-purple-600 to-pink-600 rounded-full flex items-center justify-center text-white font-bold text-lg shadow-lg">
-                                2015
-                            </div>
-                            <div class="ml-8 bg-white rounded-lg p-6 shadow-lg flex-1">
-                                <h3 class="text-xl font-bold text-gray-800 mb-2">The Beginning</h3>
-                                <p class="text-gray-600">Founded Zuppie with a vision to make every celebration magical.</p>
-                            </div>
-                        </div>
-                        
-                        <!-- Timeline Item 2 -->
-                        <div class="relative flex items-center">
-                            <div class="w-16 h-16 bg-gradient-to-r from-pink-600 to-purple-600 rounded-full flex items-center justify-center text-white font-bold text-lg shadow-lg">
-                                2018
-                            </div>
-                            <div class="ml-8 bg-white rounded-lg p-6 shadow-lg flex-1">
-                                <h3 class="text-xl font-bold text-gray-800 mb-2">First 100 Events</h3>
-                                <p class="text-gray-600">Celebrated our 100th successful event and expanded our team.</p>
-                            </div>
-                        </div>
-                        
-                        <!-- Timeline Item 3 -->
-                        <div class="relative flex items-center">
-                            <div class="w-16 h-16 bg-gradient-to-r from-purple-600 to-pink-600 rounded-full flex items-center justify-center text-white font-bold text-lg shadow-lg">
-                                2021
-                            </div>
-                            <div class="ml-8 bg-white rounded-lg p-6 shadow-lg flex-1">
-                                <h3 class="text-xl font-bold text-gray-800 mb-2">Award Recognition</h3>
-                                <p class="text-gray-600">Won "Best Event Management Company" for innovation and excellence.</p>
-                            </div>
-                        </div>
-                        
-                        <!-- Timeline Item 4 -->
-                        <div class="relative flex items-center">
-                            <div class="w-16 h-16 bg-gradient-to-r from-pink-600 to-purple-600 rounded-full flex items-center justify-center text-white font-bold text-lg shadow-lg">
-                                2023
-                            </div>
-                            <div class="ml-8 bg-white rounded-lg p-6 shadow-lg flex-1">
-                                <h3 class="text-xl font-bold text-gray-800 mb-2">500+ Events</h3>
-                                <p class="text-gray-600">Reached the milestone of 500 magical events and countless happy clients.</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Call to Action -->
-        <section class="py-20 bg-white">
-            <div class="container mx-auto px-4 text-center">
-                <div class="max-w-4xl mx-auto">
-                    <h2 class="text-4xl md:text-5xl font-bold font-display gradient-text mb-6">
+        </section> --}}
+        <section class="lg:px-20 p-6 py-20 bg-white">
+            <div class=" text-center">
+                <div class="">
+                    <h2 class="text-4xl md:text-5xl font-2xl font-display gradient-text mb-6">
                         Ready to Create Magic Together?
                     </h2>
                     <p class="text-xl text-gray-600 mb-8 leading-relaxed">
@@ -332,11 +257,11 @@
                     </p>
                     
                     <div class="flex flex-col sm:flex-row gap-4 justify-center items-center">
-                        <a href="/contact" class="bg-gradient-to-r from-purple-600 to-pink-600 text-white px-8 py-4 rounded-full font-semibold text-lg hover:shadow-lg hover:scale-105 transition-all duration-300 flex items-center space-x-2">
+                        <a href="{{route('contact')}}" wire:navigate class="bg-gradient-to-r from-purple-600 to-pink-600 text-white px-8 py-4 rounded-full font-2xl text-lg hover:shadow-lg hover:scale-105 transition-all duration-300 flex items-center space-x-2">
                             <i class="fas fa-calendar-plus"></i>
                             <span>Start Planning</span>
                         </a>
-                        <a href="/packages" class="border-2 border-purple-600 text-purple-600 px-8 py-4 rounded-full font-semibold text-lg hover:bg-purple-600 hover:text-white transition-all duration-300 flex items-center space-x-2">
+                        <a href="/event-packages" wire:navigate class="border-2  border-purple-600 text-purple-600 px-8 py-4 rounded-full font-2xl text-lg hover:bg-purple-600 hover:text-white transition-all duration-300 flex items-center space-x-2">
                             <i class="fas fa-eye"></i>
                             <span>View Packages</span>
                         </a>

@@ -5,10 +5,10 @@ namespace App\Livewire\Admin\Booking;
 use Livewire\Component;
 use App\Models\Booking;
 use Livewire\Attributes\Layout;
-
-class ViewBooking extends Component   
-{ 
-     public function closeModal()
+#[Title('View Booking')]
+class ViewBooking extends Component
+{
+    public function closeModal()
     {
         $this->dispatch('closeModal');
     }

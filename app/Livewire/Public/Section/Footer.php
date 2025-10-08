@@ -4,6 +4,7 @@ namespace App\Livewire\Public\Section;
 
 use Livewire\Component;
 use App\Traits\HasSettings;
+#[Title('Footer')]
 
 class Footer extends Component
 {

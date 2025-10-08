@@ -1,7 +1,7 @@
 <div x-data="{ show: @entangle('showModal') }" x-show="show" class="fixed z-50 inset-0 top-28 overflow-y-auto">
     <div class="flex items-center justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
         <!-- Backdrop -->
-        <div x-show="show" class="fixed inset-0 bg-black/40 backdrop-blur-sm transition-opacity" @click="show = false">
+        <div x-show="show" class="fixed inset-0  backdrop-blur-sm transition-opacity" @click="show = false">
         </div>
 
         <!-- Modal panel -->
@@ -16,7 +16,7 @@
             
             <!-- Header -->
             <div class="bg-gradient-to-r from-pink-500 to-purple-600 px-8 py-6">
-                <h3 class="text-2xl font-bold text-white text-center">
+                <h3 class="text-2xl  text-white text-center">
                     {{ $editingId ? 'Edit Category' : 'Create New Category' }}
                 </h3>
                 <p class="text-pink-100 text-center mt-1">
@@ -30,7 +30,7 @@
                     <div class="space-y-5">
                         <!-- Category Name -->
                         <div>
-                            <label for="name" class="block text-sm font-semibold text-purple-700 mb-2">
+                            <label for="name" class="block text-sm font-2xl text-purple-700 mb-2">
                                 Category Name *
                             </label>
                             <input wire:model="form.name" id="name" type="text"
@@ -47,7 +47,7 @@
 
                         <!-- Parent Category -->
                         <div>
-                            <label for="parentCategories" class="block text-sm font-semibold text-purple-700 mb-2">
+                            <label for="parentCategories" class="block text-sm font-2xl text-purple-700 mb-2">
                                 Parent Category
                             </label>
                             <select wire:model="form.parent_id" id="parentCategories"
@@ -71,7 +71,7 @@
                         <div class="bg-purple-50 p-4 rounded-xl border border-purple-100">
                             <div class="flex items-center justify-between">
                                 <div>
-                                    <label class="text-sm font-semibold text-purple-700">Special Category</label>
+                                    <label class="text-sm font-2xl text-purple-700">Special Category</label>
                                     <p class="text-xs text-purple-500 mt-1">Mark this category as special for featured display</p>
                                 </div>
                                 <label class="relative inline-flex items-center cursor-pointer">
@@ -94,7 +94,7 @@
                     <div class="space-y-5">
                         <!-- Image Upload -->
                         <div>
-                            <label class="block text-sm font-semibold text-purple-700 mb-2">Category Image</label>
+                            <label class="block text-sm font-2xl text-purple-700 mb-2">Category Image</label>
                             
                             <!-- Image Preview Area -->
                             <div class="mb-4">
@@ -106,10 +106,21 @@
                                             Current
                                         </div>
                                     </div>
-                                @elseif ($image && is_object($image))
+                                @elseif ($image)
                                     <div class="relative">
-                                        <img src="{{ $image->temporaryUrl() }}" alt="New image preview"
-                                             class="w-full h-32 object-cover rounded-xl border-2 border-pink-200 shadow-sm">
+                                        @if(method_exists($image, 'temporaryUrl'))
+                                            <img src="{{ $image->temporaryUrl() }}" alt="New image preview"
+                                                 class="w-full h-32 object-cover rounded-xl border-2 border-pink-200 shadow-sm">
+                                        @else
+                                            <div class="w-full h-32 flex items-center justify-center bg-pink-50 rounded-xl border-2 border-pink-200 shadow-sm">
+                                                <div class="text-center px-4">
+                                                    <svg class="w-8 h-8 text-pink-400 mx-auto mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12"/>
+                                                    </svg>
+                                                    <p class="text-sm text-pink-600">Image selected (preview not available in production)</p>
+                                                </div>
+                                            </div>
+                                        @endif
                                         <div class="absolute top-2 right-2 bg-blue-100 text-blue-800 px-2 py-1 rounded-full text-xs font-medium">
                                             New
                                         </div>
@@ -131,7 +142,7 @@
                                 class="block w-full text-sm text-purple-700
                                 file:mr-4 file:py-3 file:px-4
                                 file:rounded-xl file:border-0
-                                file:text-sm file:font-semibold
+                                file:text-sm file:font-2xl
                                 file:bg-pink-50 file:text-purple-700
                                 hover:file:bg-pink-100
                                 border-2 border-purple-100 rounded-xl shadow-sm cursor-pointer transition">
@@ -146,18 +157,14 @@
                             @enderror
 
                             <!-- Upload Progress -->
-                            <div wire:loading wire:target="image" class="mt-3 flex items-center text-pink-600">
-                                <svg class="animate-spin -ml-1 mr-2 h-4 w-4 text-pink-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-                                    <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
-                                    <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
-                                </svg>
+                            <div wire:loading wire:key="image-loading" class="mt-3 flex items-center text-pink-600">
                                 <span class="text-sm font-medium">Processing image...</span>
                             </div>
                         </div>
 
                         <!-- Description -->
                         <div>
-                            <label for="description" class="block text-sm font-semibold text-purple-700 mb-2">
+                            <label for="description" class="block text-sm font-2xl text-purple-700 mb-2">
                                 Description
                             </label>
                             <textarea wire:model="form.description" id="description" rows="4"
@@ -171,21 +178,26 @@
             <!-- Footer -->
             <div class="bg-gray-50 px-8 py-6 flex flex-col sm:flex-row justify-end gap-3 border-t border-gray-200">
                 <button @click="show = false" type="button"
-                    class="w-full sm:w-auto px-6 py-3 text-sm font-semibold text-gray-700 bg-white border-2 border-gray-300 rounded-xl hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-gray-400 transition">
+                    class="w-full sm:w-auto px-6 py-3 text-sm font-2xl text-gray-700 bg-white border-2 border-gray-300 rounded-xl hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-gray-400 transition">
                     Cancel
                 </button>
-                <button wire:click="saveCategory" wire:loading.attr="disabled" type="button"
-                    class="w-full sm:w-auto px-6 py-3 text-sm font-bold text-white bg-gradient-to-r from-pink-500 to-purple-600 hover:from-pink-600 hover:to-purple-700 rounded-xl focus:outline-none focus:ring-2 focus:ring-pink-300 transition disabled:opacity-50 shadow-lg">
-                    <span wire:loading.remove>
+                <button 
+                    type="button"
+                    wire:click="saveCategory"
+                    wire:loading.attr="disabled"
+                    wire:target="saveCategory"
+                    class="w-full sm:w-auto px-6 py-3 text-sm text-white bg-gradient-to-r from-pink-500 to-purple-600 hover:from-pink-600 hover:to-purple-700 rounded-xl focus:outline-none focus:ring-2 focus:ring-pink-300 transition disabled:opacity-50 shadow-lg"
+                >
+                    <div wire:loading.remove wire:target="saveCategory">
                         {{ $editingId ? 'Update Category' : 'Create Category' }}
-                    </span>
-                    <span wire:loading class="flex items-center justify-center">
-                        <svg class="animate-spin -ml-1 mr-2 h-4 w-4 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                    </div>
+                    <div wire:loading wire:target="saveCategory" class="inline-flex items-center">
+                        <svg class="animate-spin w-4 h-4 mr-2" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
                             <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
                             <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
                         </svg>
-                        Processing...
-                    </span>
+                        Saving...
+                    </div>
                 </button>
             </div>
         </div>

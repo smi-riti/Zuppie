@@ -5,7 +5,7 @@ namespace App\Livewire\Admin\Blog;
 use App\Models\Blog;
 use Livewire\Component;
 use Livewire\Attributes\On;
-
+#[Title('View Blog')]
 class ViewBlog extends Component
 {
     public $showModal = false;

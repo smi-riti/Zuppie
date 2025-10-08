@@ -7,6 +7,7 @@ use App\Models\Category;
 use Livewire\Attributes\On;
 use Livewire\Component;
 use Livewire\WithFileUploads;
+#[Title('Create Category')]
 
 class Create extends Component
 {
@@ -29,7 +30,7 @@ class Create extends Component
         'form.description' => 'nullable|string',
         'form.parent_id' => 'nullable|exists:categories,id',
         'form.is_special' => 'boolean', 
-        'image' => 'nullable|image|max:2048',
+        'image' => 'required|image|max:2048',
     ];
 
     protected $messages = [
@@ -75,27 +76,41 @@ class Create extends Component
         if ($this->editingId) {
             $this->rules['form.name'] = 'required|string|max:255|unique:categories,name,' . $this->editingId;
         }
-        
-        $this->validate();
+
+        // Validate before proceeding
+        try {
+            $this->validate();
+        } catch (\Illuminate\Validation\ValidationException $e) {
+            return;
+        }
 
         $data = $this->form;
         $message = '';
 
         if ($this->image) {
-            $imageData = ImageKitHelper::uploadImage($this->image, '/Zuppie/CategoryImages');
-            
-            if ($imageData) {
-                if ($this->editingId) {
-                    $oldCategory = Category::find($this->editingId);
-                    if ($oldCategory && $oldCategory->image_file_id) {
-                        ImageKitHelper::deleteImage($oldCategory->image_file_id);
-                    }
-                }
+            try {
+                $imageData = ImageKitHelper::uploadImage($this->image, '/Zuppie/CategoryImages');
                 
-                $data['image'] = $imageData['url'];
-                $data['image_file_id'] = $imageData['fileId'];
-            } else {
-                session()->flash('error', 'Failed to upload image. Please try again.');
+                if ($imageData) {
+                    if ($this->editingId) {
+                        $oldCategory = Category::find($this->editingId);
+                        if ($oldCategory && $oldCategory->image_file_id) {
+                            try {
+                                ImageKitHelper::deleteImage($oldCategory->image_file_id);
+                            } catch (\Exception $e) {
+                                \Log::error('Failed to delete old image: ' . $e->getMessage());
+                            }
+                        }
+                    }
+                    
+                    $data['image'] = $imageData['url'];
+                    $data['image_file_id'] = $imageData['fileId'];
+                } else {
+                    session()->flash('error', 'Failed to upload image. Please try again.');
+                    return;
+                }
+            } catch (\Exception $e) {
+                session()->flash('error', 'Failed to process image: ' . $e->getMessage());
                 return;
             }
         }
@@ -121,6 +136,30 @@ class Create extends Component
         }
     }
 
+    public function updatedImage()
+    {
+        if (!$this->image) {
+            return;
+        }
+
+        try {
+            $this->validate([
+                'image' => 'image|max:2048'
+            ]);
+            
+            if (method_exists($this->image, 'temporaryUrl')) {
+                $this->currentImageUrl = $this->image->temporaryUrl();
+            } else {
+                $this->currentImageUrl = null;
+                session()->flash('warning', 'Image preview not available in production. Image will be uploaded when saved.');
+            }
+        } catch (\Exception $e) {
+            $this->currentImageUrl = null;
+            $this->image = null;
+            session()->flash('error', 'Error processing image: ' . $e->getMessage());
+        }
+    }
+
     public function resetForm()
     {
         $this->form = [
@@ -133,6 +172,29 @@ class Create extends Component
         $this->currentImageUrl = null;
         $this->editingId = null;
         $this->resetValidation();
+    }
+
+    #[On('delete-category')]
+    public function deleteCategory($categoryId)
+    {
+        try {
+            $category = Category::find($categoryId);
+            
+            if ($category) {
+                // Delete image from ImageKit if exists
+                if ($category->image_file_id) {
+                    ImageKitHelper::deleteImage($category->image_file_id);
+                }
+                
+                // Delete the category
+                $category->delete();
+                
+                session()->flash('message', 'Category deleted successfully!');
+                $this->dispatch('category-deleted');
+            }
+        } catch (\Exception $e) {
+            session()->flash('error', 'Error deleting category: ' . $e->getMessage());
+        }
     }
 
     public function render()
