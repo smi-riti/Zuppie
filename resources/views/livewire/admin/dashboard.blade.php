@@ -116,7 +116,7 @@
                     Quick Links
                 </h3>
                 <div class="grid grid-cols-2 gap-3">
-                    <a href="{{ route('admin.booking.manage') }}" class="flex items-center p-3 rounded-lg bg-purple-50 hover:bg-purple-100 transition-colors text-sm font-medium text-purple-700">
+                    <a href="#" class="flex items-center p-3 rounded-lg bg-purple-50 hover:bg-purple-100 transition-colors text-sm font-medium text-purple-700">
                         <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
                         </svg>
@@ -128,11 +128,11 @@
                         </svg>
                         Categories
                     </a>
-                    <a href="{{ route('admin.offers.show') }}" class="flex items-center p-3 rounded-lg bg-green-50 hover:bg-green-100 transition-colors text-sm font-medium text-purple-700">
+                    <a href="{{ route('admin.enquiries.all') }}" class="flex items-center p-3 rounded-lg bg-green-50 hover:bg-green-100 transition-colors text-sm font-medium text-purple-700">
                         <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A1.994 1.994 0 013 12V7a4 4 0 014-4z" />
                         </svg>
-                        Offers
+                        Enquiries
                     </a>
                     <a href="{{ route('admin.event-packages') }}" class="flex items-center p-3 rounded-lg bg-blue-50 hover:bg-blue-100 transition-colors text-sm font-medium text-purple-700">
                         <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -205,65 +205,6 @@
         </div>
     </div>
 
-    <!-- Latest Upcoming Events -->
-    <div class="mt-8 bg-white rounded-xl shadow-sm p-4 lg:p-6 hover:shadow-md transition-shadow">
-        <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center border-b border-purple-100 pb-4 mb-6">
-            <div>
-                <h2 class="text-lg lg:text-xl text-purple-800">Latest Upcoming Events</h2>
-                <p class="text-sm text-purple-500 mt-1">Next {{ $perPage }} events scheduled</p>
-            </div>
-        </div>
-
-        @if($upComingBookings->count() > 0)
-            <div class="space-y-4">
-                @foreach ($upComingBookings as $booking)
-                    <div class="flex flex-col sm:flex-row items-start sm:items-center py-4 border-b border-purple-50 hover:bg-purple-50 transition rounded-lg px-4">
-                        <div class="flex-shrink-0 w-12 h-12 rounded-full bg-gradient-to-r from-purple-500 to-pink-500 flex items-center justify-center text-white font-2xl mr-0 sm:mr-4 mb-3 sm:mb-0">
-                            {{ substr($booking->eventPackage->name ?? 'Event', 0, 1) }}
-                        </div>
-                        <div class="flex-grow">
-                            <div class=" text-purple-800 text-lg">{{ $booking->eventPackage->name ?? 'N/A' }}</div>
-                            <div class="text-sm text-purple-500 mt-1">
-                                <span class="inline-flex items-center">
-                                    <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
-                                    </svg>
-                                    {{ $booking->event_date->format('M d, Y') }}
-                                </span>
-                                <span class="mx-2">•</span>
-                                <span class="inline-flex items-center">
-                                    <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
-                                    </svg>
-                                    {{ $booking->guest_count ?? 'N/A' }} Guests
-                                </span>
-                            </div>
-                        </div>
-                        <div class="flex space-x-2 mt-3 sm:mt-0">
-                            <button class="px-4 py-2 rounded-lg bg-purple-100 flex items-center justify-center text-purple-600 hover:bg-purple-200 transition font-medium text-sm">
-                                View Details
-                            </button>
-                        </div>
-                    </div>
-                @endforeach
-            </div>
-
-            <!-- Pagination -->
-            <div class="mt-6">
-                {{ $upComingBookings->links() }}
-            </div>
-        @else
-            <div class="text-center py-12">
-                <div class="mx-auto w-24 h-24 bg-purple-100 rounded-full flex items-center justify-center mb-4">
-                    <svg class="w-12 h-12 text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
-                    </svg>
-                </div>
-                <h3 class="text-lg font-medium text-purple-700 mb-2">No Upcoming Events</h3>
-                <p class="text-purple-500">There are no upcoming events scheduled at the moment.</p>
-            </div>
-        @endif
-    </div>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     @script
     <script>

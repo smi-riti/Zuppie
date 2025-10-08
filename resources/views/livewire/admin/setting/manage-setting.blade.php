@@ -82,8 +82,8 @@
                             <div>
                                 <label class="block text-sm font-2xl text-gray-700 mb-10">Upload New Logo</label>
                                 <div
-                                    class="mt-1 flex justify-center px-6 pt-8 pb-8 border-2 border-gray-300 border-dashed rounded-xl hover:border-pink-400 transition-all duration-300 bg-gradient-to-br from-pink-50 to-pink-100 hover:from-pink-100 hover:to-pink-200">
-                                    <div class="space-y-4 text-center">
+                                    class="mt-1 flex justify-center px-6  pt-8 border-2 border-gray-300 border-dashed rounded-xl hover:border-pink-400 transition-all duration-300 bg-gradient-to-br from-pink-50 to-pink-100 hover:from-pink-100 hover:to-pink-200">
+                                    <div class="space-y-4 text-center pb-20">
                                         @if ($preview_logo)
                                             <div class="mb-6">
                                                 <img src="{{ $preview_logo }}" alt="Logo Preview"
@@ -153,7 +153,7 @@
                                 information</p>
                         </div>
 
-                        <div class="p-6 max-h-[calc(100vh-300px)] overflow-y-auto custom-scrollbar">
+                        <div class="p-5 max-h-[calc(100vh-300px)] overflow-y-auto custom-scrollbar">
                             <div class="space-y-8">
 
                                 <!-- Basic Information Section -->
