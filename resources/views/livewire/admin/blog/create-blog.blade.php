@@ -96,12 +96,14 @@
                     <!-- Rich Text Editor for Content -->
                     <div class="mb-6">
                         <label for="content" class="block text-sm font-medium text-gray-700 mb-2">Content *</label>
-                        <div wire:ignore>
-                            <div id="editor" style="height: 300px;"></div>
-                        </div>
+                            <!-- Plain textarea for blog content (saved as plain text like title) -->
+                            <textarea id="content" wire:model.lazy="form.content" rows="8"
+                                      class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-purple-500 transition-colors"
+                                      placeholder="Enter blog content here (plain text)"></textarea>
                         @error('form.content') 
                             <p class="mt-1 text-sm text-red-600">{{ $message }}</p> 
                         @enderror
+                        
                     </div>
                     
                     <!-- Action Buttons -->
@@ -121,61 +123,5 @@
         </div>
     @endif
 
-    @push('scripts')
-    <script src="https://cdn.quilljs.com/1.3.6/quill.min.js"></script>
-    <script>
-        document.addEventListener('livewire:init', function () {
-            let quill = null;
-            
-            // Initialize editor when modal opens
-            Livewire.on('initQuill', () => {
-                // Cleanup previous instance
-                if (quill) {
-                    quill.off('text-change');
-                    try { quill.destroy(); } catch(e) {}
-                    quill = null;
-                }
-                
-                // Initialize new editor
-                setTimeout(() => {
-                    if (document.getElementById('editor')) {
-                        quill = new Quill('#editor', {
-                            theme: 'snow',
-                            placeholder: 'Write your blog content here...',
-                            modules: {
-                                toolbar: [
-                                    [{ 'header': [1, 2, 3, 4, 5, 6, false] }],
-                                    ['bold', 'italic', 'underline', 'strike'],
-                                    [{ 'color': [] }, { 'background': [] }],
-                                    [{ 'align': [] }],
-                                    [{ 'list': 'ordered'}, { 'list': 'bullet' }],
-                                    ['blockquote', 'code-block'],
-                                    ['link', 'image'],
-                                    ['clean']
-                                ]
-                            }
-                        });
-
-                        // Set existing content
-                        quill.root.innerHTML = @this.form.content || '';
-                        
-                        // Sync changes to Livewire
-                        quill.on('text-change', function() {
-                            @this.set('form.content', quill.root.innerHTML);
-                        });
-                    }
-                }, 100);
-            });
-
-            // Clear editor when modal closes
-            Livewire.on('destroyQuill', () => {
-                if (quill) {
-                    quill.off('text-change');
-                    try { quill.destroy(); } catch(e) {}
-                    quill = null;
-                }
-            });
-        });
-    </script>
-    @endpush
+    
 </div>

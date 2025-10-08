@@ -87,10 +87,18 @@ class CreateBlog extends Component
         $this->validate();
         
         try {
+            // Prepare plain text content (strip HTML and trim)
+            $content = isset($this->form['content']) ? trim(strip_tags($this->form['content'])) : '';
+
+            // Debug log if content empty
+            if (empty($content)) {
+                \Log::info('Creating blog with empty content', ['title' => $this->form['title']]);
+            }
+
             // Create the blog
             $blog = Blog::create([
                 'title' => $this->form['title'],
-                'content' => $this->form['content'],
+                'content' => $content,
                 'status' => $this->form['status'],
                 'user_id' => auth()->id(),
                 'category_id' => $this->form['category_id'] ?: null,
