@@ -98,7 +98,7 @@
                     @if($services->hasPages())
                         <div class="bg-gray-50 px-6 py-3 border-t border-gray-200">
                             {{ $services->links() }}
-                        </div>800
+                        </div>
                     @endif
                 </div>
             </div>
